@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-navy-950: #071326;
+        --color-navy-900: #0b1c3d;
+        --color-gold: #c6a45a;
+        --color-blue-accent: #4ea2ff;
+    }
+
+    body {
+        @apply bg-slate-50 text-slate-900 font-sans antialiased;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+/* Custom scrollbars */
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #071326;
+}
+::-webkit-scrollbar-thumb {
+    background: #1b3f82;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #4ea2ff;
+}
+
+/* Utilitários para rolagem horizontal limpa sem barras nativas cinzas */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+.no-scrollbar,
+.scrollbar-none {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+/* Corporate gradients and animations */
+.bg-rachi-gradient {
+    background: linear-gradient(135deg, #071326 0%, #0b1c3d 50%, #0d224a 100%);
+}
+
+.bg-rachi-gold-gradient {
+    background: linear-gradient(135deg, #c6a45a 0%, #d4b56f 50%, #b8944a 100%);
+}
+
+.text-gold-gradient {
+    background: linear-gradient(135deg, #f5d085 0%, #c6a45a 50%, #e2b963 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-blue-gradient {
+    background: linear-gradient(135deg, #93c5fd 0%, #4ea2ff 50%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism */
+.glass-panel {
+    background: rgba(11, 28, 61, 0.75);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.glass-card-light {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(11, 26, 46, 0.08);
+}
