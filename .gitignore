@@ -1,1 +1,17 @@
 node_modules
+/vendor/
+/.env
+/.env.*
+!/.env.example
+/database/*.sqlite*
+/storage/
+/bootstrap/cache/*.php
+/public/hot
+/public/storage
+/supabase/.temp/
+/.env.supabase
+/storage/app/supabase-transfer/
+/.wrangler/
+/.dev.vars*
+/.env.cloudflare*
+/storage/app/deploy/
