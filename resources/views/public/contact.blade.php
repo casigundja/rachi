@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto — Fale Connosco — RACHI Soluções Inteligentes</title>
@@ -10,33 +14,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        rachiNavy: '#071326',
-                        rachiNavyLight: '#0d1f3d',
-                        rachiGold: '#f5a800',
-                        rachiGoldDark: '#d59b2d',
-                        rachiBlue: '#00a3e0',
-                        rachiBlueDark: '#0b4ea8',
-                        rachiAccent: '#4ea2ff',
-                        rachiDarkText: '#0b1a2e',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="/libs/lucide.js"></script>
+    
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
         (function() {
@@ -1073,7 +1056,7 @@
                         <div class="lg:col-span-7 contact-form-card p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between h-full"
                              x-data="{ 
                                  isSubmitting: false, 
-                                 formSent: false,
+                                 formSent: new URLSearchParams(window.location.search).get('enviado') === '1',
                                  charCount: 0,
                                  formData: {
                                      nome: '',
@@ -1094,18 +1077,43 @@
                                      }
                                  },
                                  async handleFormSubmit() {
-                                     this.isSubmitting = true;
-                                     await new Promise(r => setTimeout(r, 600));
-                                     this.isSubmitting = false;
-                                     this.formSent = true;
-                                     showToast('A sua mensagem foi registada com sucesso! A equipa entrará em contacto em breve.', 'Mensagem Enviada!', 'success', 4500);
-                                     this.formData.nome = '';
-                                     this.formData.email = '';
-                                     this.formData.telefone = '';
-                                     this.formData.unidade = 'Geral';
-                                     this.formData.mensagem = '';
-                                     this.charCount = 0;
-                                     $nextTick(() => { if (window.lucide) lucide.createIcons(); });
+                                    this.isSubmitting = true;
+                                    try {
+                                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                                        const res = await fetch('/contacto', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'X-CSRF-TOKEN': token || ''
+                                            },
+                                            body: JSON.stringify(this.formData)
+                                        });
+                                        const data = await res.json();
+                                        if (!res.ok || data.success === false) {
+                                            throw new Error(data.message || 'Erro ao enviar a mensagem.');
+                                        }
+                                        this.formSent = true;
+                                        if (typeof showToast === 'function') {
+                                            showToast(data.message || 'A sua mensagem foi registada com sucesso! A equipa entrará em contacto em breve.', 'Mensagem Enviada!', 'success', 4500);
+                                        }
+                                        this.formData.nome = '';
+                                        this.formData.email = '';
+                                        this.formData.telefone = '';
+                                        this.formData.unidade = 'Geral';
+                                        this.formData.mensagem = '';
+                                        this.charCount = 0;
+                                        $nextTick(() => { if (window.lucide) lucide.createIcons(); });
+                                    } catch (err) {
+                                        if (typeof showToast === 'function') {
+                                            showToast(err.message, 'Atenção', 'error', 4500);
+                                        } else {
+                                            alert(err.message);
+                                        }
+                                    } finally {
+                                        this.isSubmitting = false;
+                                    }
+                                });
                                  }
                              }">
 
@@ -1368,37 +1376,13 @@
                 init() {
                     window.showToast = (msg, title, type, dur) => this.showToast(msg, title, type, dur);
                     this.restoreUserSession();
-                    window.addEventListener('storage', (e) => {
-                        if (e.key === 'rachi_user_session') {
-                            this.restoreUserSession();
-                        }
-                    });
+
                     this.$nextTick(() => {
                         if (window.lucide) lucide.createIcons();
                     });
                 },
-                restoreUserSession() {
-                    try {
-                        const stored = localStorage.getItem('rachi_user_session');
-                        if (stored) {
-                            const data = JSON.parse(stored);
-                            if (data.email && data.email.toLowerCase() === 'casimirogundja@outlook.com') {
-                                data.has_matricula = true;
-                            }
-                            this.currentUser = data;
-                        } else {
-                            this.currentUser = null;
-                        }
-                    } catch (e) {
-                        console.error('Erro ao restaurar sessão RACHI:', e);
-                        this.currentUser = null;
-                    }
-                },
-                logout() {
-                    localStorage.removeItem('rachi_user_session');
-                    this.currentUser = null;
-                    this.showToast('Sessão terminada com sucesso em todo o ecossistema RACHI.', 'Sessão Encerrada', 'info', 3200);
-                },
+                async restoreUserSession() { this.currentUser = await window.RachiSession.session(); this.isLoggedIn = !!this.currentUser; },
+                async logout() { await window.RachiSession.logout(); },
                 copyText(text, label = 'Item') {
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(text).then(() => {
@@ -1419,19 +1403,7 @@
                     document.body.removeChild(el);
                     this.showToast(`${label} copiado: ${text}`, 'Copiado!', 'success', 2800);
                 },
-                showToast(message, title = 'Notificação', type = 'success', duration = 3800) {
-                    if (this.toast.timer) clearTimeout(this.toast.timer);
-                    this.toast.title = title;
-                    this.toast.message = message;
-                    this.toast.type = type;
-                    this.toast.show = true;
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                    this.toast.timer = setTimeout(() => {
-                        this.toast.show = false;
-                    }, duration);
-                },
+                showToast(message, title = 'Notificação', type = 'success', duration = 6000) { return RachiToast.show(message, { title, type, duration }); },
                 submitContactForm(e) {
                     const form = e.target;
                     this.showToast(
@@ -1491,5 +1463,5 @@
             <div class="bg-gradient-to-r from-[#0050f0] to-[#00a3e0] h-full w-full animate-[shrink_3.5s_linear_forwards]"></div>
         </div>
     </div>
-</body>
+<script src="/worker-public.js"></script></body>
 </html>

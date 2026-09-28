@@ -2,9 +2,13 @@
 <html lang="pt">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <meta name="admin-session-authenticated" content="{{ auth()->check() && auth()->user()->isAdmin() ? 'true' : 'false' }}">
     <title>RACHI — Soluções inteligentes</title>
     <meta name="description" content="RACHI — soluções inteligentes em tecnologia, educação e serviços empresariais.">
@@ -14,33 +18,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        rachiNavy: '#071326',
-                        rachiNavyLight: '#0d1f3d',
-                        rachiGold: '#f5a800',
-                        rachiGoldDark: '#d59b2d',
-                        rachiBlue: '#00a3e0',
-                        rachiBlueDark: '#0b4ea8',
-                        rachiAccent: '#4ea2ff',
-                        rachiDarkText: '#0b1a2e',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="/libs/lucide.js"></script>
+    
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
         (function() {
@@ -141,6 +124,7 @@
         /* ------------------------------------------------------------ */
         /* STATE 1: AT TOP (DARK LUXURY GLASS)                          */
         /* ------------------------------------------------------------ */
+        html.dark .site-header,
         .site-header.header-top-dark {
             background: rgba(7, 19, 38, 0.94) !important;
             backdrop-filter: blur(24px) saturate(190%) !important;
@@ -149,15 +133,18 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
         }
 
+        html.dark .site-header .logo-light,
         .site-header.header-top-dark .logo-light {
             display: block !important;
         }
 
+        html.dark .site-header .logo-dark,
         .site-header.header-top-dark .logo-dark {
             display: none !important;
         }
 
         /* Dark Nav Capsule */
+        html.dark .site-header .main-nav-capsule,
         .site-header.header-top-dark .main-nav-capsule {
             display: flex;
             align-items: center;
@@ -172,18 +159,20 @@
         }
 
         @media (min-width: 1280px) {
+            html.dark .site-header .main-nav-capsule,
             .site-header.header-top-dark .main-nav-capsule {
                 gap: 0.3rem;
                 padding: 0.3rem 0.55rem;
             }
         }
 
+        html.dark .site-header .main-nav-capsule .nav-link,
         .site-header.header-top-dark .main-nav-capsule .nav-link {
             position: relative;
             font-size: 0.79rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.015em;
-            color: rgba(255, 255, 255, 0.82) !important;
+            color: rgba(255, 255, 255, 0.85) !important;
             padding: 0.38rem 0.72rem !important;
             border-radius: 9999px;
             white-space: nowrap;
@@ -192,18 +181,22 @@
         }
 
         @media (min-width: 1280px) {
+            html.dark .site-header .main-nav-capsule .nav-link,
             .site-header.header-top-dark .main-nav-capsule .nav-link {
                 font-size: 0.835rem;
                 padding: 0.42rem 0.95rem !important;
             }
         }
 
+        html.dark .site-header .main-nav-capsule .nav-link:hover,
+        html.dark .site-header .main-nav-capsule .nav-link.nav-link-open,
         .site-header.header-top-dark .main-nav-capsule .nav-link:hover,
         .site-header.header-top-dark .main-nav-capsule .nav-link.nav-link-open {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.12);
         }
 
+        html.dark .site-header .main-nav-capsule .nav-link.active,
         .site-header.header-top-dark .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: linear-gradient(135deg, #0077c2 0%, #00a3e0 100%);
@@ -212,6 +205,7 @@
             font-weight: 600;
         }
 
+        html.dark .site-header .btn-entrar-nav,
         .site-header.header-top-dark .btn-entrar-nav {
             display: inline-flex;
             align-items: center;
@@ -232,6 +226,7 @@
             box-shadow: 0 2px 10px rgba(0, 163, 224, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
+        html.dark .site-header .btn-entrar-nav:hover,
         .site-header.header-top-dark .btn-entrar-nav:hover {
             background: linear-gradient(135deg, #00a3e0 0%, #0077c2 100%);
             border-color: #00a3e0;
@@ -240,6 +235,7 @@
             box-shadow: 0 4px 20px rgba(0, 163, 224, 0.45);
         }
 
+        html.dark .site-header .mobile-menu-btn,
         .site-header.header-top-dark .mobile-menu-btn {
             display: inline-flex;
             align-items: center;
@@ -253,6 +249,7 @@
             transition: all 0.2s ease;
         }
 
+        html.dark .site-header .mobile-menu-btn:hover,
         .site-header.header-top-dark .mobile-menu-btn:hover {
             background: rgba(255, 255, 255, 0.12) !important;
             border-color: rgba(0, 163, 224, 0.5) !important;
@@ -262,6 +259,7 @@
         /* ------------------------------------------------------------ */
         /* STATE 2: SCROLLED DOWN (LIGHT / WHITE GLASS - KLASSE.AO STYLE)*/
         /* ------------------------------------------------------------ */
+        html:not(.dark) .site-header,
         .site-header.header-scrolled-light {
             background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
@@ -270,15 +268,18 @@
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
         }
 
+        html:not(.dark) .site-header .logo-light,
         .site-header.header-scrolled-light .logo-light {
             display: none !important;
         }
 
+        html:not(.dark) .site-header .logo-dark,
         .site-header.header-scrolled-light .logo-dark {
             display: block !important;
         }
 
         /* Light Nav Capsule */
+        html:not(.dark) .site-header .main-nav-capsule,
         .site-header.header-scrolled-light .main-nav-capsule {
             display: flex;
             align-items: center;
@@ -291,12 +292,14 @@
         }
 
         @media (min-width: 1280px) {
+            html:not(.dark) .site-header .main-nav-capsule,
             .site-header.header-scrolled-light .main-nav-capsule {
                 gap: 0.3rem;
                 padding: 0.3rem 0.55rem;
             }
         }
 
+        html:not(.dark) .site-header .main-nav-capsule .nav-link,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link {
             position: relative;
             font-size: 0.79rem;
@@ -311,18 +314,22 @@
         }
 
         @media (min-width: 1280px) {
+            html:not(.dark) .site-header .main-nav-capsule .nav-link,
             .site-header.header-scrolled-light .main-nav-capsule .nav-link {
                 font-size: 0.835rem;
                 padding: 0.42rem 0.95rem !important;
             }
         }
 
+        html:not(.dark) .site-header .main-nav-capsule .nav-link:hover,
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.nav-link-open,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link.nav-link-open {
             color: #0077c2 !important;
             background: rgba(0, 163, 224, 0.08);
         }
 
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.active,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: linear-gradient(135deg, #0077c2 0%, #00a3e0 100%);
@@ -331,6 +338,7 @@
             font-weight: 700;
         }
 
+        html:not(.dark) .site-header .nav-link svg,
         .site-header.header-scrolled-light .nav-link svg {
             color: #475569;
         }
@@ -359,6 +367,7 @@
             color: #64748b !important;
         }
 
+        html:not(.dark) .site-header .btn-entrar-nav,
         .site-header.header-scrolled-light .btn-entrar-nav {
             display: inline-flex;
             align-items: center;
@@ -379,12 +388,14 @@
             box-shadow: 0 4px 15px rgba(0, 163, 224, 0.35);
         }
 
+        html:not(.dark) .site-header .btn-entrar-nav:hover,
         .site-header.header-scrolled-light .btn-entrar-nav:hover {
             background: linear-gradient(135deg, #0092c8 0%, #0065a5 100%);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(0, 163, 224, 0.45);
         }
 
+        html:not(.dark) .site-header .mobile-menu-btn,
         .site-header.header-scrolled-light .mobile-menu-btn {
             display: inline-flex;
             align-items: center;
@@ -2066,7 +2077,7 @@
             color: #ffffff !important;
         }
     </style>
-    <link rel="stylesheet" href="/css/site.css?v={{ time() }}">
+    <link rel="stylesheet" href="/css/site.css?v=1790340043">
 </head>
 
 <body x-data="rachiApp()" class="min-h-screen flex flex-col justify-between">
@@ -2079,10 +2090,10 @@
     <div x-show="currentView === 'public'">
 
         <!-- HEADER DUAL-THEME: ESCURO NO TOPO, CLARO AO ROLAR (ESTILO KLASSE.AO) -->
-        <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 lg:py-4.5 transition-all duration-300">
+        <header id="main-site-header" class="site-header px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 lg:py-4.5">
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-4 xl:gap-6">
                 <!-- Coluna 1 (Esquerda): Logótipo RACHI -->
-                <div class="flex-shrink-0 flex items-center justify-start z-10">
+                <div class="w-auto lg:w-[220px] xl:w-[240px] flex-shrink-0 flex items-center justify-start z-10">
                     <a href="#home" @click.prevent="goToHome()"
                         class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
@@ -2098,7 +2109,7 @@
                 </div>
 
                 <!-- Coluna 2 (Centro): Navegação em Cápsula (Centralizada e Protegida) -->
-                <div class="flex-1 hidden lg:flex items-center justify-center min-w-0 px-2 xl:px-4">
+                <div class="flex-1 hidden lg:flex items-center justify-center min-w-0 px-1">
                     <nav class="flex items-center main-nav-capsule">
                         <a href="#home" @click.prevent="goToHome()" class="nav-link cursor-pointer"
                             :class="currentTab === 'home' ? 'active' : ''">
@@ -2262,7 +2273,7 @@
                 </div>
 
                 <!-- Coluna 3 (Direita): Autenticação, Perfil e Ações Rápidas -->
-                <div class="flex-shrink-0 flex items-center justify-end gap-2 sm:gap-3 z-10">
+                <div class="w-auto lg:w-[220px] xl:w-[240px] flex-shrink-0 flex items-center justify-end gap-2 sm:gap-3 z-10">
                     <!-- Botão Padronizado de Alternância de Tema (Dark / Light Mode) -->
                     <button type="button"
                         onclick="window.toggleRachiTheme()"
@@ -2280,29 +2291,26 @@
                         </svg>
                     </button>
 
-                    <!-- Entrar / Perfil do Usuário Autenticado -->
-                    <template x-if="!currentUser">
-                        <button @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-                                class="group-hover:translate-x-0.5 transition-transform">
-                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                                <polyline points="10 17 15 12 10 7" />
-                                <line x1="15" y1="12" x2="3" y2="12" />
-                            </svg>
-                            <span>ENTRAR</span>
-                        </button>
-                    </template>
+                    <!-- Entrar / Perfil do Usuário Autenticado (Renderizado estaticamente para zero layout shift) -->
+                    <button x-show="!currentUser" @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                            class="group-hover:translate-x-0.5 transition-transform">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                            <polyline points="10 17 15 12 10 7" />
+                            <line x1="15" y1="12" x2="3" y2="12" />
+                        </svg>
+                        <span>ENTRAR</span>
+                    </button>
 
-                    <template x-if="currentUser">
-                        <div class="relative" x-data="{ userMenuDropdown: false }" @click.away="userMenuDropdown = false">
+                    <div x-show="currentUser" x-cloak class="relative" x-data="{ userMenuDropdown: false }" @click.away="userMenuDropdown = false">
                             <button @click="userMenuDropdown = !userMenuDropdown"
                                 class="flex items-center gap-2 sm:gap-2.5 py-1.5 pl-2 pr-3 sm:pr-3.5 rounded-full bg-white hover:bg-slate-50 dark:bg-slate-900/85 dark:hover:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 hover:border-[#0050f0]/40 dark:hover:border-amber-400/80 text-slate-800 dark:text-white transition-all shadow-sm hover:shadow-md cursor-pointer group">
                                 <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs shrink-0"
-                                     x-text="currentUser.avatar || 'U'"></div>
+                                     x-text="currentUser?.avatar || 'U'"></div>
                                 <div class="text-left hidden sm:block">
-                                    <div class="text-xs font-bold leading-tight max-w-[110px] xl:max-w-[145px] truncate text-slate-800 dark:text-slate-100 group-hover:text-[#0050f0] dark:group-hover:text-amber-300 transition" x-text="currentUser.nome"></div>
-                                    <div class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold leading-none truncate max-w-[110px] xl:max-w-[145px]" x-text="currentUser.roleLabel || 'Autenticado'"></div>
+                                    <div class="text-xs font-bold leading-tight max-w-[110px] xl:max-w-[145px] truncate text-slate-800 dark:text-slate-100 group-hover:text-[#0050f0] dark:group-hover:text-amber-300 transition" x-text="currentUser?.nome"></div>
+                                    <div class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold leading-none truncate max-w-[110px] xl:max-w-[145px]" x-text="currentUser?.roleLabel || 'Autenticado'"></div>
                                 </div>
                                 <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-transform duration-200 shrink-0" :class="userMenuDropdown ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -2313,24 +2321,19 @@
                             <div x-show="userMenuDropdown" x-cloak
                                  class="absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-700 shadow-2xl py-2 z-50 text-xs text-slate-800 dark:text-white transition-colors">
                                 <div class="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
-                                    <div class="font-bold text-slate-900 dark:text-slate-100 truncate" x-text="currentUser.nome"></div>
-                                    <div class="text-[10px] text-slate-500 dark:text-slate-400 truncate" x-text="currentUser.email"></div>
+                                    <div class="font-bold text-slate-900 dark:text-slate-100 truncate" x-text="currentUser?.nome"></div>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400 truncate" x-text="currentUser?.email"></div>
                                 </div>
 
                                 <div class="p-1 space-y-0.5">
                                     <!-- Permissão 1: Área do Cliente -->
-                                    <button @click="currentView = 'customer'; customerTab = 'dashboard'; userMenuDropdown = false"
-                                            class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
-                                        <svg class="w-4 h-4 text-[#0050f0] dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                        <span>Painel do Cliente</span>
-                                    </button>
-
-                                    <!-- Permissão 2: Solicitar Produtos & Serviços -->
-                                    <button @click="currentView = 'customer'; customerTab = 'new_request'; userMenuDropdown = false"
-                                            class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
-                                        <svg class="w-4 h-4 text-[#0050f0] dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                        <span>Solicitar Produtos / Serviços</span>
-                                    </button>
+                                    <template x-if="canAccessCustomerPortal()">
+                                        <button @click="currentView = 'customer'; customerTab = 'dashboard'; userMenuDropdown = false"
+                                                class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
+                                            <svg class="w-4 h-4 text-[#0050f0] dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                            <span>Painel do Cliente</span>
+                                        </button>
+                                    </template>
 
                                     <!-- Permissão 2.5: Loja Online Integrada (Sessão Sincronizada) -->
                                     <a href="/loja"
@@ -2342,23 +2345,23 @@
                                         <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 font-bold">Conectado</span>
                                     </a>
 
-                                    <!-- Permissão 3: Academy (Perfil de Aluno) com validação de matrícula -->
+                                    <!-- Permissão 3: Academy (Perfil de Aluno) - Acesso por Matrícula Ativa -->
                                     <button @click="openAcademyAluno(); userMenuDropdown = false"
                                             class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
                                         <div class="flex items-center gap-2.5">
                                             <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
                                             <span>Perfil Aluno (Academy)</span>
                                         </div>
-                                        <template x-if="currentUser && currentUser.has_matricula">
-                                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 font-bold">Ativa</span>
+                                        <template x-if="canAccessStudentPortal()">
+                                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 font-bold">Matrícula Ativa</span>
                                         </template>
-                                        <template x-if="!currentUser || !currentUser.has_matricula">
-                                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/20 dark:text-amber-400 font-bold">Bloqueado</span>
+                                        <template x-if="!canAccessStudentPortal()">
+                                            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/20 dark:text-amber-400 font-bold">Sem Matrícula</span>
                                         </template>
                                     </button>
 
-                                    <!-- Se for Admin: Atalho para Admin Dashboard -->
-                                    <template x-if="currentUser && (currentUser.role === 'admin' || currentUser.role === 'super_admin' || currentUser.role_slug === 'super_admin' || currentUser.tipo === 'admin')">
+                                    <!-- Apenas Administrador ou Super Administrador: Atalho para Admin Dashboard -->
+                                    <template x-if="isAdminUser()">
                                         <a href="/admin-dashboard" @click="openAdminDashboard()"
                                            class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-amber-700 dark:text-amber-300 hover:text-amber-900 font-semibold transition">
                                             <svg class="w-4 h-4 text-amber-500 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -2377,7 +2380,7 @@
                                 </div>
                             </div>
                         </div>
-                    </template>
+                    </div>
 
                     <!-- Mobile Menu Button -->
                     <button @click="mobileMenuOpen = !mobileMenuOpen"
@@ -2441,19 +2444,13 @@
                     function updateHeaderScroll() {
                         var header = document.getElementById('main-site-header') || document.querySelector('.site-header');
                         if (!header) return;
-                        var isDark = document.documentElement.classList.contains('dark');
-                        if (isDark) {
-                            header.classList.remove('header-scrolled-light');
-                            header.classList.add('header-top-dark');
-                            return;
+                        if (window.scrollY > 20) {
+                            header.classList.add('header-scrolled');
+                        } else {
+                            header.classList.remove('header-scrolled');
                         }
-                        // No modo claro: o cabeçalho adapta-se perfeitamente ao fundo claro com visual cristalino
-                        header.classList.remove('header-top-dark');
-                        header.classList.add('header-scrolled-light');
                     }
                     window.addEventListener('scroll', updateHeaderScroll, { passive: true });
-                    window.addEventListener('DOMContentLoaded', updateHeaderScroll);
-                    window.addEventListener('rachi-theme-changed', updateHeaderScroll);
                     updateHeaderScroll();
                 })();
         </script>
@@ -6683,11 +6680,11 @@
                      class="flex items-center gap-2.5 pl-3 border-l">
                     <div class="text-right hidden lg:block">
                         <span :class="customerDarkMode ? 'text-slate-100' : 'text-slate-900'"
-                              class="text-xs font-bold block leading-tight" x-text="currentUser ? currentUser.nome : 'Cliente Corporativo'"></span>
-                        <span class="text-[10px] text-blue-600 dark:text-blue-400 font-bold block" x-text="currentUser && currentUser.has_matricula ? 'Matrícula Academy Ativa' : 'Acesso VIP Autorizado'"></span>
+                              class="text-xs font-bold block leading-tight" x-text="currentUser ? currentUser?.nome : 'Cliente Corporativo'"></span>
+                        <span class="text-[10px] text-blue-600 dark:text-blue-400 font-bold block" x-text="currentUser && currentUser?.has_matricula ? 'Matrícula Academy Ativa' : 'Acesso VIP Autorizado'"></span>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-md shadow-blue-500/20"
-                         x-text="currentUser ? (currentUser.avatar || 'C') : 'C'">
+                         x-text="currentUser ? (currentUser?.avatar || 'C') : 'C'">
                     </div>
                     <button @click="logout()" title="Terminar Sessão" class="text-slate-400 hover:text-rose-500 p-1.5 rounded-xl hover:bg-rose-500/10 transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -6709,7 +6706,7 @@
                             <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
                         </div>
                         <div :class="customerDarkMode ? 'text-slate-100' : 'text-slate-900'"
-                             class="font-bold text-sm truncate" x-text="currentUser ? (currentUser.empresa || currentUser.nome) : 'Inovquimua Angola'"></div>
+                             class="font-bold text-sm truncate" x-text="currentUser ? (currentUser?.empresa || currentUser?.nome) : 'Inovquimua Angola'"></div>
                         <div class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5">
                             <span>ID: CLI-AO-9204</span>
                             <span>•</span>
@@ -6799,7 +6796,7 @@
                         <!-- Perfil Aluno (Academy) com validação de matrícula -->
                         <button @click="openAcademyAluno()"
                                 class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition"
-                                :class="currentUser && currentUser.has_matricula ? (customerDarkMode ? 'text-emerald-300 hover:bg-emerald-950/40 border border-emerald-500/30' : 'text-emerald-700 hover:bg-emerald-50 border border-emerald-200 font-bold') : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 border border-transparent' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')">
+                                :class="currentUser && currentUser?.has_matricula ? (customerDarkMode ? 'text-emerald-300 hover:bg-emerald-950/40 border border-emerald-500/30' : 'text-emerald-700 hover:bg-emerald-50 border border-emerald-200 font-bold') : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 border border-transparent' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')">
                             <span class="flex items-center gap-2.5">
                                 <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
                                 <span>RACHI Academy</span>
@@ -6879,7 +6876,7 @@
                                 </div>
                                 <h1 :class="customerDarkMode ? 'text-white' : 'text-slate-900'"
                                     class="text-2xl sm:text-3xl font-black tracking-tight">
-                                    Olá, <span class="text-blue-600 dark:text-blue-400 font-black" x-text="currentUser ? currentUser.nome : 'Cliente Corporativo'"></span>!
+                                    Olá, <span class="text-blue-600 dark:text-blue-400 font-black" x-text="currentUser ? currentUser?.nome : 'Cliente Corporativo'"></span>!
                                 </h1>
                                 <p :class="customerDarkMode ? 'text-slate-300' : 'text-slate-600'"
                                    class="text-sm leading-relaxed">
@@ -6982,12 +6979,12 @@
                             </div>
                             <div class="mt-3">
                                 <div class="text-base font-bold text-slate-900 dark:text-white truncate"
-                                     x-text="currentUser && currentUser.has_matricula ? (currentUser.cursoMatriculado || 'Gestão Prática MPMEs') : 'Capacitação Executiva'"></div>
+                                     x-text="currentUser && currentUser?.has_matricula ? (currentUser?.cursoMatriculado || 'Gestão Prática MPMEs') : 'Capacitação Executiva'"></div>
                             </div>
                             <div class="mt-3 text-xs flex items-center justify-between">
                                 <span class="font-bold"
-                                      :class="currentUser && currentUser.has_matricula ? 'text-emerald-500' : 'text-amber-500'"
-                                      x-text="currentUser && currentUser.has_matricula ? 'Matrícula Ativa' : 'Matrícula Disponível'"></span>
+                                      :class="currentUser && currentUser?.has_matricula ? 'text-emerald-500' : 'text-amber-500'"
+                                      x-text="currentUser && currentUser?.has_matricula ? 'Matrícula Ativa' : 'Matrícula Disponível'"></span>
                                 <span class="text-indigo-500 font-bold hover:underline">Aceder &rarr;</span>
                             </div>
                         </div>
@@ -7698,14 +7695,14 @@
                                 <div class="flex items-center justify-between pb-4 border-b"
                                      :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
                                     <span class="font-mono font-black text-lg text-blue-600 dark:text-blue-400"
-                                          x-text="selectedRequest.protocol"></span>
+                                          x-text="selectedRequest?.protocol"></span>
                                     <span class="px-3 py-1 rounded-full text-xs font-bold"
-                                          :class="getStatusBadgeClass(selectedRequest.status)"
-                                          x-text="selectedRequest.statusLabel"></span>
+                                          :class="getStatusBadgeClass(selectedRequest?.status)"
+                                          x-text="selectedRequest?.statusLabel"></span>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-4" x-text="selectedRequest.title"></h3>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-4" x-text="selectedRequest?.title"></h3>
                                 <p class="text-slate-600 dark:text-slate-300 text-xs mt-2 leading-relaxed"
-                                   x-text="selectedRequest.description"></p>
+                                   x-text="selectedRequest?.description"></p>
                             </div>
 
                             <!-- Chat Interativo com Técnico -->
@@ -7727,7 +7724,7 @@
 
                                 <!-- Mensagens -->
                                 <div class="space-y-3 mb-4 max-h-72 overflow-y-auto pr-2">
-                                    <template x-for="m in selectedRequest.messages" :key="m.id">
+                                    <template x-for="m in selectedRequest?.messages" :key="m.id">
                                         <div class="p-3.5 rounded-2xl text-xs max-w-lg shadow-sm"
                                              :class="m.fromUser ? 'bg-blue-50 dark:bg-blue-950/50 ml-auto border border-blue-200/80 dark:border-blue-800 text-blue-950 dark:text-blue-100' : 'bg-slate-100 dark:bg-slate-800 mr-auto border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'">
                                             <div class="text-[10px] font-bold mb-1"
@@ -7755,7 +7752,7 @@
                              :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
                             <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-4">Linha do Tempo de Execução</h4>
                             <div class="space-y-4 relative before:absolute before:inset-0 before:left-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
-                                <template x-for="step in selectedRequest.timeline" :key="step.title">
+                                <template x-for="step in selectedRequest?.timeline" :key="step.title">
                                     <div class="flex items-start gap-3 relative z-10">
                                         <div class="w-4 h-4 mt-0.5 rounded-full bg-blue-600 ring-4 ring-blue-100 dark:ring-blue-950 shrink-0 shadow"></div>
                                         <div>
@@ -7804,7 +7801,7 @@
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left bg-blue-600 text-white font-bold shadow-md shadow-blue-600/20">
                     <i data-lucide="inbox" class="w-4 h-4"></i> Fila de Chamados
                 </button>
-                <button @click="alert('Módulo de estoque: 6 itens monitorados.')"
+                <button @click="RachiToast.info('Módulo de estoque: 6 itens monitorados.')"
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
                     <i data-lucide="boxes" class="w-4 h-4"></i> Movimentação Estoque
                 </button>
@@ -7895,15 +7892,15 @@
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left bg-amber-500 text-slate-950 font-bold">
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Dashboard Executivo
                 </button>
-                <button @click="alert('Visualização de 4 unidades cadastradas.')"
+                <button @click="RachiToast.info('Visualização de 4 unidades cadastradas.')"
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
                     <i data-lucide="building" class="w-4 h-4"></i> Unidades de Negócio
                 </button>
-                <button @click="alert('Controle de estoque sincronizado.')"
+                <button @click="RachiToast.info('Controle de estoque sincronizado.')"
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
                     <i data-lucide="package" class="w-4 h-4"></i> Produtos e Estoque
                 </button>
-                <button @click="alert('Módulo de Auditoria: todas as operações gravadas em activity_logs.')"
+                <button @click="RachiToast.info('Módulo de Auditoria: todas as operações gravadas em activity_logs.')"
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
                     <i data-lucide="shield" class="w-4 h-4"></i> Logs de Auditoria
                 </button>
@@ -7997,8 +7994,11 @@
     <script>
         function rachiApp() {
             return {
+                currentUser: null,
+                isLoggedIn: false,
                 currentView: 'public',
                 currentTab: 'home',
+                matriculaModalOpen: false,
                 mobileMenuOpen: false,
                 customerTab: 'dashboard',
                 authTab: 'login',
@@ -8033,35 +8033,7 @@
                     timer: null,
                     progressKey: 0
                 },
-                showLoginToast(title, message, type = 'success', duration = 4500) {
-                    if (this.loginToast.timer) {
-                        clearTimeout(this.loginToast.timer);
-                        this.loginToast.timer = null;
-                    }
-                    this.loginToast.title = title;
-                    this.loginToast.message = message;
-                    this.loginToast.type = type;
-                    if (type === 'success') {
-                        this.loginToast.badge = 'Conectado';
-                    } else if (type === 'logout') {
-                        this.loginToast.badge = 'Desconectado';
-                    } else if (type === 'error') {
-                        this.loginToast.badge = 'Erro';
-                    } else if (type === 'warning') {
-                        this.loginToast.badge = 'Atenção';
-                    } else {
-                        this.loginToast.badge = 'Info';
-                    }
-                    this.loginToast.progressKey = Date.now();
-                    this.loginToast.show = true;
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                    this.loginToast.timer = setTimeout(() => {
-                        this.loginToast.show = false;
-                        this.loginToast.timer = null;
-                    }, duration);
-                },
+                showLoginToast(title, message, type = 'success', duration = 6000) { return RachiToast.show(message, { title, type, duration }); },
                 closeLoginToast() {
                     if (this.loginToast.timer) {
                         clearTimeout(this.loginToast.timer);
@@ -8096,38 +8068,10 @@
                         }
                     });
                     // Sincronização em tempo real entre todas as abas e sub-páginas
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            this.authChannel = new BroadcastChannel('rachi_auth_channel');
-                            this.authChannel.onmessage = (event) => {
-                                const data = event.data;
-                                if (!data) return;
-                                if (data.action === 'logout') {
-                                    const name = data.name || (this.currentUser && (this.currentUser.nome || this.currentUser.name)) || '';
-                                    this.currentUser = null;
-                                    if (this.currentView === 'customer') {
-                                        this.currentView = 'public';
-                                        this.currentTab = 'home';
-                                    }
-                                    this.showLoginToast(
-                                        'Sessão Encerrada!',
-                                        name ? `A sessão de ${name} foi encerrada com segurança em outra aba.` : 'A sessão foi terminada com segurança em todo o ecossistema.',
-                                        'logout',
-                                        4500
-                                    );
-                                } else if (data.action === 'login') {
-                                    this.restoreUserSession();
-                                }
-                            };
-                        }
-                    } catch(e) {}
+
 
                     // Ouvinte de evento storage (para compatibilidade total entre abas e janelas)
-                    window.addEventListener('storage', (event) => {
-                        if (event.key === 'rachi_user_session' || event.key === 'rachi_auth_sync') {
-                            this.restoreUserSession();
-                        }
-                    });
+
 
                     const urlParams = new URLSearchParams(window.location.search);
                     if (urlParams.get('login') === '1') {
@@ -8152,67 +8096,9 @@
                             };
                         }
                     } catch(e) {}
-
-                    setInterval(() => {
-                        if (!this.featuredPaused && this.currentTab === 'home') {
-                            this.nextFeaturedProduct();
-                        }
-                    }, 4500);
                 },
-                restoreUserSession() {
-                    try {
-                        const savedUser = localStorage.getItem('rachi_user_session');
-                        const isAcademyAuth = localStorage.getItem('rachi_academy_auth') === 'true';
-                        if (savedUser) {
-                            const parsed = JSON.parse(savedUser);
-                            if (parsed.loggedIn === false) {
-                                this.currentUser = null;
-                            } else {
-                                const u = parsed.user || (parsed.email ? parsed : null);
-                                if (u && (u.nome || u.name || u.email)) {
-                                    const userEmail = (u.email || '').toLowerCase().trim();
 
-                                    let hasConfirmedMatricula = false;
-                                    const regRaw = localStorage.getItem('rachi_registered_users');
-                                    if (regRaw) {
-                                        try {
-                                            const regList = JSON.parse(regRaw);
-                                            if (Array.isArray(regList)) {
-                                                const foundReg = regList.find(r => r.email && r.email.toLowerCase() === userEmail);
-                                                if (foundReg && foundReg.has_matricula === true) {
-                                                    hasConfirmedMatricula = true;
-                                                }
-                                            }
-                                        } catch(e) {}
-                                    }
-
-                                    // Matrícula ativa somente para contas oficiais de alunos ou matrícula comprovada
-                                    let hasMatricula = false;
-                                    if (userEmail === 'aluno@rachi.ao' || userEmail === 'casimirogundja@outlook.com') {
-                                        hasMatricula = true;
-                                    } else if (u.has_matricula === true || hasConfirmedMatricula) {
-                                        hasMatricula = true;
-                                    }
-
-                                    this.currentUser = {
-                                        ...u,
-                                        nome: u.nome || u.name,
-                                        name: u.nome || u.name,
-                                        has_matricula: hasMatricula
-                                    };
-                                    // Sincronizar liberação da Academy apenas se tiver matrícula ativa
-                                    if (this.currentUser.has_matricula || this.currentUser.role === 'admin' || this.currentUser.tipo === 'admin') {
-                                        localStorage.setItem('rachi_academy_auth', 'true');
-                                    } else {
-                                        localStorage.removeItem('rachi_academy_auth');
-                                    }
-                                }
-                            }
-                        } else {
-                            this.currentUser = null;
-                        }
-                    } catch (e) { }
-                },
+                async restoreUserSession() { this.currentUser = await window.RachiSession.session(); this.isLoggedIn = !!this.currentUser; if (this.currentUser) this.loginModal = false; },
                 goToHome() {
                     this.currentView = 'public';
                     this.currentTab = 'home';
@@ -8846,7 +8732,7 @@
                     this.cart.splice(idx, 1);
                 },
                 checkoutSimulated() {
-                    alert('Pedido realizado com sucesso! Gerada fatura proforma para pagamento via Multicaixa.');
+                    RachiToast.info('Pedido realizado com sucesso! Gerada fatura proforma para pagamento via Multicaixa.');
                     this.cart = [];
                     this.cartDrawer = false;
                 },
@@ -8875,7 +8761,7 @@
                 },
                 async submitRequest() {
                     if (!this.newRequest.title || !this.newRequest.description) {
-                        alert('Por favor, preencha o título e a descrição da solicitação.');
+                        RachiToast.info('Por favor, preencha o título e a descrição da solicitação.');
                         return;
                     }
 
@@ -8902,7 +8788,7 @@
                             this.customerRequests.unshift(data.request);
                             this.selectedRequest = data.request;
                             this.customerTab = 'view_request';
-                            alert(data.message || `Solicitação ${data.request.protocol} criada com sucesso!`);
+                            RachiToast.info(data.message || `Solicitação ${data.request.protocol} criada com sucesso!`);
                             this.newRequest = { unit: '', title: '', description: '', priority: 'normal', date: '' };
 
                             try {
@@ -8942,7 +8828,7 @@
                     this.customerRequests.unshift(newReq);
                     this.selectedRequest = newReq;
                     this.customerTab = 'view_request';
-                    alert(`Solicitação ${protocol} criada com sucesso!`);
+                    RachiToast.info(`Solicitação ${protocol} criada com sucesso!`);
                     this.newRequest = { unit: '', title: '', description: '', priority: 'normal', date: '' };
                 },
                 openRequestWithPreselection(unitId, title) {
@@ -9014,7 +8900,7 @@
                             title: `Orçamento ${q.number} aprovado. Serviço em execução.`
                         });
                     }
-                    alert('Orçamento aprovado com sucesso! A equipa iniciou a execução do serviço.');
+                    RachiToast.info('Orçamento aprovado com sucesso! A equipa iniciou a execução do serviço.');
                 },
                 updateRequestStatus(r, newStatus) {
                     r.status = newStatus;
@@ -9043,7 +8929,7 @@
                         };
                         this.customerQuotes.push(newQ);
                         this.updateRequestStatus(r, 'quoted');
-                        alert(`Orçamento ${newQ.number} emitido para a solicitação ${r.protocol}!`);
+                        RachiToast.info(`Orçamento ${newQ.number} emitido para a solicitação ${r.protocol}!`);
                     }
                 },
                 activeFaq: null,
@@ -9064,7 +8950,7 @@
                     return list;
                 },
                 mockDownloadDoc(docName) {
-                    alert(`O download do documento "${docName}" foi iniciado em formato PDF oficial com carimbo do Grupo RACHI.`);
+                    RachiToast.info(`O download do documento "${docName}" foi iniciado em formato PDF oficial com carimbo do Grupo RACHI.`);
                 },
                 getStatusBadgeClass(status) {
                     switch (status) {
@@ -9079,235 +8965,19 @@
                 },
                 quickFillAuth(type) {
                     this.authError = '';
-                    if (type === 'aluno_matriculado') {
+                    if (!this.authForm) this.authForm = { email: '', password: '' };
+                    if (type === 'admin' || type === 'aluno_matriculado') {
                         this.authForm.email = 'casimirogundja@outlook.com';
+                        this.authForm.password = 'Admin@2026';
+                    } else if (type === 'cliente_sem_matricula' || type === 'cliente') {
+                        this.authForm.email = 'cliente@empresa.ao';
+                        this.authForm.password = 'Cliente@2026';
+                    } else if (type === 'funcionario' || type === 'aluno') {
+                        this.authForm.email = 'pedro@email.com';
                         this.authForm.password = '123456';
-                    } else if (type === 'cliente_sem_matricula') {
-                        this.authForm.email = 'cliente@inovquimua.ao';
-                        this.authForm.password = '123';
-                    } else if (type === 'admin') {
-                        this.authForm.email = 'admin@rachi.ao';
-                        this.authForm.password = 'admin123';
-                    } else if (type === 'funcionario') {
-                        this.authForm.email = 'atendente@rachi.ao';
-                        this.authForm.password = '123';
                     }
                 },
-                async submitUnifiedLogin() {
-                    this.authError = '';
-                    const email = (this.authForm.email || '').trim().toLowerCase();
-                    const password = (this.authForm.password || '').trim();
-
-                    if (!email) {
-                        this.authError = 'Por favor, informe o seu e-mail de acesso.';
-                        return;
-                    }
-
-                    if (!email.includes('@') || !email.includes('.')) {
-                        this.authError = 'Formato de e-mail inválido. Utilize nome@empresa.com';
-                        return;
-                    }
-
-                    if (!password) {
-                        this.authError = 'Por favor, digite a sua palavra-passe de acesso.';
-                        return;
-                    }
-
-                    this.authLoading = true;
-                    const serverLogin = await this.authenticateServerSession(email, password);
-                    this.authLoading = false;
-
-                    if (!serverLogin.success) {
-                        this.authError = serverLogin.message || 'As credenciais fornecidas não conferem com os nossos registos.';
-                        return;
-                    }
-
-                    // Base de usuários e controle de permissões do ecossistema RACHI
-                    const ecosystemUsers = [
-                        {
-                            id: 25,
-                            aluno_id: 104,
-                            nome: 'Casimiro Gundja',
-                            email: 'casimirogundja@outlook.com',
-                            password: '123456',
-                            role: 'customer',
-                            roleLabel: 'Cliente Corporativo & Aluno',
-                            empresa: 'Gundja Tech & Soluções',
-                            avatar: 'CG',
-                            has_matricula: true,
-                            cursoMatriculado: 'Cibersegurança e Proteção de Dados',
-                            tipo: 'cliente'
-                        },
-                        {
-                            id: 101,
-                            nome: 'Casimiro Gundja',
-                            email: 'aluno@rachi.ao',
-                            password: '123456',
-                            role: 'customer',
-                            roleLabel: 'Cliente & Aluno',
-                            empresa: 'Gundja Tech',
-                            avatar: 'CG',
-                            has_matricula: true,
-                            cursoMatriculado: 'Desenvolvimento Web Fullstack & IA',
-                            tipo: 'cliente'
-                        },
-                        {
-                            id: 102,
-                            nome: 'Inov Quimua Consultoria',
-                            email: 'cliente@inovquimua.ao',
-                            password: '123',
-                            role: 'customer',
-                            roleLabel: 'Cliente Corporativo',
-                            empresa: 'Inov Quimua',
-                            avatar: 'IQ',
-                            has_matricula: false,
-                            cursoMatriculado: null,
-                            tipo: 'cliente'
-                        },
-                        {
-                            id: 1,
-                            nome: 'Super Administrador RACHI',
-                            email: 'admin@rachi.ao',
-                            password: 'admin123',
-                            role: 'admin',
-                            roleLabel: 'Super Administrador',
-                            empresa: 'RACHI S.A.',
-                            avatar: 'AD',
-                            has_matricula: true,
-                            modulos: ['todos'],
-                            tipo: 'admin'
-                        },
-                        {
-                            id: 201,
-                            nome: 'Casimiro Gundja (Técnico)',
-                            email: 'atendente@rachi.ao',
-                            password: '123',
-                            role: 'employee',
-                            roleLabel: 'Equipe de Atendimento',
-                            empresa: 'RACHI Operações',
-                            avatar: 'AT',
-                            has_matricula: false,
-                            tipo: 'funcionario'
-                        }
-                    ];
-
-                    let user = ecosystemUsers.find(u => u.email.toLowerCase() === email);
-
-                    // Se não estiver na lista base, busca nos utilizadores registados localmente ou nos dados do servidor
-                    if (!user) {
-                        try {
-                            const regUsersRaw = localStorage.getItem('rachi_registered_users');
-                            if (regUsersRaw) {
-                                const regUsers = JSON.parse(regUsersRaw);
-                                if (Array.isArray(regUsers)) {
-                                    const regUser = regUsers.find(ru => ru.email && ru.email.toLowerCase() === email);
-                                    if (regUser) {
-                                        user = { ...regUser };
-                                    }
-                                }
-                            }
-                        } catch(e) {}
-                    }
-
-                    if (!user && serverLogin.user) {
-                        const sUser = serverLogin.user;
-                        const sName = sUser.name || sUser.nome || 'Utilizador';
-                        const initials = sName.trim().split(/\s+/).filter(Boolean).map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'CL';
-                        user = {
-                            id: sUser.id,
-                            nome: sName,
-                            name: sName,
-                            email: sUser.email,
-                            role: sUser.role || 'customer',
-                            roleLabel: sUser.tipo === 'admin' ? 'Super Administrador' : (sUser.tipo === 'funcionario' ? 'Equipe de Atendimento' : 'Cliente'),
-                            empresa: sUser.empresa || 'Cliente RACHI',
-                            avatar: initials,
-                            has_matricula: !!sUser.has_matricula,
-                            tipo: sUser.tipo || 'cliente'
-                        };
-                    }
-
-                    // Se o utilizador NÃO foi encontrado
-                    if (!user) {
-                        this.authError = 'Nenhum utilizador encontrado com este e-mail. Por favor, verifique os dados ou crie uma conta.';
-                        return;
-                    }
-
-                    // Validação de palavra-passe para contas puramente locais
-                    if (!serverLogin.success && user.password && user.password !== password) {
-                        this.authError = 'Palavra-passe incorreta. Por favor, tente novamente.';
-                        return;
-                    }
-
-                    // Validação de acesso à Academy: clientes criados no site são estritamente do Portal do Cliente
-                    if (email === 'aluno@rachi.ao' || email === 'casimirogundja@outlook.com') {
-                        user.has_matricula = true;
-                        if (!user.cursoMatriculado) {
-                            user.cursoMatriculado = 'Desenvolvimento Web Fullstack & IA';
-                        }
-                    } else if (user.tipo === 'cliente' || user.role === 'customer') {
-                        // Clientes do site nunca recebem acesso à Academy sem matrícula explícita
-                        user.has_matricula = false;
-                        user.cursoMatriculado = null;
-                        delete user.aluno_id;
-                    }
-
-                    // Salvar sessão global unificada
-                    user.nome = user.nome || user.name;
-                    user.name = user.nome || user.name;
-                    this.currentUser = user;
-
-                    const unifiedSession = {
-                        ...user,
-                        nome: user.nome,
-                        name: user.name,
-                        loggedIn: true,
-                        user: user
-                    };
-
-                    localStorage.setItem('rachi_user_session', JSON.stringify(unifiedSession));
-
-                    // Se tiver matrícula ativa, libera automaticamente na Academy e Dashboard do Aluno
-                    if (user.has_matricula || user.role === 'admin' || user.tipo === 'admin') {
-                        localStorage.setItem('rachi_academy_auth', 'true');
-                    } else {
-                        localStorage.removeItem('rachi_academy_auth');
-                    }
-
-                    // Transmissão em tempo real para sincronizar loja, academy e todas as janelas abertas
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            const bc = new BroadcastChannel('rachi_auth_channel');
-                            bc.postMessage({ action: 'login', user: unifiedSession, timestamp: Date.now() });
-                            bc.close();
-                        }
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                    } catch(e) {}
-
-                    const wasHeadingToAdmin = (this.authError && this.authError.includes('painel')) || this.redirectAfterLogin === '/admin-dashboard';
-                    if (this.redirectAfterLogin) this.redirectAfterLogin = null;
-                    if (wasHeadingToAdmin && (user.role === 'admin' || user.tipo === 'admin' || user.role === 'super_admin')) {
-                        this.loginModal = false;
-                        window.location.assign('/admin-dashboard');
-                        return;
-                    }
-
-                    // Fechar modal de login
-                    this.loginModal = false;
-
-                    // Permanecer na mesma página atual e apresentar alerta visual de confirmação
-                    const displayName = user.nome || user.name || 'Utilizador';
-                    this.showLoginToast(
-                        'Autenticado com Sucesso!',
-                        `Bem-vindo(a), ${displayName}! Sessão iniciada com sucesso no ecossistema RACHI.`,
-                        'success',
-                        4500
-                    );
-
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                },
+                async submitUnifiedLogin() { this.authLoading = true; this.authError = ''; try { this.currentUser = await RachiSession.login(this.authForm.email.trim(), this.authForm.password); this.loginModal = false; } catch(e) { RachiToast.error(e.message); } finally { this.authLoading = false; } },
                 async authenticateServerSession(email, password) {
                     try {
                         const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
@@ -9335,162 +9005,62 @@
                         return { success: false, message: 'Não foi possível contactar o serviço de autenticação.' };
                     }
                 },
+                isAdminUser() {
+                    if (!this.currentUser) return false;
+                    const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
+                    const role = String(this.currentUser.role || '').toLowerCase().trim();
+                    const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
+                    const allowedSlugs = ['admin', 'super_admin', 'super-admin'];
+                    if (allowedSlugs.includes(roleSlug)) return true;
+                    if (tipo === 'admin' || tipo === 'super_admin' || tipo === 'super-admin') return true;
+                    const allowedNames = ['admin', 'super admin', 'super_admin', 'super-admin', 'administrador', 'super administrador'];
+                    return allowedNames.includes(role);
+                },
+                isStudentUser() {
+                    if (!this.currentUser) return false;
+                    const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
+                    const role = String(this.currentUser.role || '').toLowerCase().trim();
+                    const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
+                    return roleSlug === 'student' || roleSlug === 'aluno' || tipo === 'aluno' || role === 'aluno' || role === 'student';
+                },
+                isCustomerUser() {
+                    if (!this.currentUser) return false;
+                    const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
+                    const role = String(this.currentUser.role || '').toLowerCase().trim();
+                    const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
+                    return roleSlug === 'customer' || roleSlug === 'cliente' || tipo === 'cliente' || role === 'cliente' || role === 'customer';
+                },
+                hasActiveEnrollment() {
+                    if (!this.currentUser) return false;
+                    return !!(this.currentUser.has_matricula === true || this.currentUser.has_matricula === 'true' || this.currentUser.has_active_enrollment === true);
+                },
+                canAccessStudentPortal() {
+                    return this.isAdminUser() || this.hasActiveEnrollment();
+                },
+                canAccessCustomerPortal() {
+                    return !!this.currentUser;
+                },
                 openAdminDashboard() {
                     this.userMenuDropdown = false;
+                    if (!this.isAdminUser()) {
+                        if (typeof this.showLoginToast === 'function') {
+                            this.showLoginToast('Acesso Restrito', 'Apenas utilizadores com permissão de Administrador ou Super Administrador podem aceder ao Painel Administrativo.', 'warning', 4500);
+                        }
+                        return;
+                    }
                     window.location.assign('/admin-dashboard');
                 },
-                async submitRegister() {
-                    this.authError = '';
-                    const nome = (this.registerForm.nome || '').trim();
-                    const email = (this.registerForm.email || '').trim().toLowerCase();
-                    const nif = (this.registerForm.nif || '').trim();
-                    const telefone = (this.registerForm.telefone || '').trim();
-                    const whatsapp = (this.registerForm.whatsapp || '').trim();
-                    const tipo_cliente = this.registerForm.tipo_cliente || 'particular';
-                    const provincia = (this.registerForm.provincia || '').trim();
-                    const municipio = (this.registerForm.municipio || '').trim();
-                    const bairro = (this.registerForm.bairro || '').trim();
-                    const rua = (this.registerForm.rua || '').trim();
-                    const numero = (this.registerForm.numero || '').trim();
-                    const referencia = (this.registerForm.referencia || '').trim();
-
-                    if (!nome) {
-                        this.authError = 'Por favor, informe o seu nome completo.';
-                        return;
-                    }
-                    if (!email || !email.includes('@') || !email.includes('.')) {
-                        this.authError = 'Por favor, informe um endereço de e-mail válido.';
-                        return;
-                    }
-
-                    // Se preencher o endereço, indique pelo menos a província e o município.
-                    const hasAddress = provincia || municipio || bairro || rua || numero || referencia;
-                    if (hasAddress && (!provincia || !municipio)) {
-                        this.authError = 'Se preencher o endereço, indique pelo menos a província e o município.';
-                        return;
-                    }
-
-                    this.authLoading = true;
-                    await new Promise(r => setTimeout(r, 600));
-                    this.authLoading = false;
-
-                    // Verificar se e-mail já existe
-                    let regUsers = [];
-                    const regUsersRaw = localStorage.getItem('rachi_registered_users');
-                    if (regUsersRaw) {
-                        try {
-                            regUsers = JSON.parse(regUsersRaw) || [];
-                        } catch(e) {
-                            regUsers = [];
-                        }
-                    }
-
-                    if (regUsers.some(u => u.email && u.email.toLowerCase() === email)) {
-                        this.authError = 'Este e-mail já está cadastrado. Faça login para continuar.';
-                        return;
-                    }
-
-                    // Iniciais do Avatar
-                    const parts = nome.split(' ').filter(p => p.length > 0);
-                    const initials = parts.length >= 2 
-                        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
-                        : nome.substring(0, 2).toUpperCase();
-
-                    // Gerar automaticamente palavra-passe temporária e código de activação de 6 dígitos
-                    const randomNum = Math.floor(100000 + Math.random() * 900000);
-                    const tempPassword = 'Rachi' + randomNum;
-                    const activationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
-                    const newUser = {
-                        id: Date.now(),
-                        nome: nome,
-                        name: nome,
-                        nif: nif,
-                        email: email,
-                        password: tempPassword,
-                        telefone: telefone,
-                        whatsapp: whatsapp,
-                        tipo_cliente: tipo_cliente,
-                        role: 'customer',
-                        roleLabel: tipo_cliente === 'empresa' ? 'Cliente Empresa' : 'Cliente Particular',
-                        empresa: tipo_cliente === 'empresa' ? nome : 'Conta Particular',
-                        avatar: initials,
-                        has_matricula: false,
-                        cursoMatriculado: null,
-                        tipo: 'cliente',
-                        status: 'ativo',
-                        activation_code: activationCode,
-                        endereco: {
-                            provincia: provincia,
-                            municipio: municipio,
-                            bairro: bairro,
-                            rua: rua,
-                            numero: numero,
-                            referencia: referencia
-                        },
-                        createdAt: new Date().toISOString()
-                    };
-
-                    regUsers.push(newUser);
-                    localStorage.setItem('rachi_registered_users', JSON.stringify(regUsers));
-                    localStorage.removeItem('rachi_academy_auth');
-
-                    // Preenche o formulário de login para permitir acesso imediato
-                    this.authForm.email = email;
-                    this.authForm.password = tempPassword;
-                    this.authTab = 'login';
-                    this.authError = '';
-
-                    this.showLoginToast(
-                        'Conta Criada com Sucesso!',
-                        `Palavra-passe temporária (${tempPassword}) e código (${activationCode}) enviados para ${email}.`,
-                        'success',
-                        9000
-                    );
-
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                },
+                submitRegister() { window.location.href = '/registro'; },
                 openAcademyAluno() {
-                    if (this.currentUser && this.currentUser.has_matricula) {
-                        localStorage.setItem('rachi_academy_auth', 'true');
+                    this.userMenuDropdown = false;
+                    if (this.canAccessStudentPortal()) {
+
                         window.location.href = '/aluno-dashboard';
                     } else {
                         this.matriculaModalOpen = true;
                     }
                 },
-                logout() {
-                    const prevName = (this.currentUser && (this.currentUser.nome || this.currentUser.name)) || 'Utilizador';
-                    this.currentUser = null;
-                    localStorage.removeItem('rachi_user_session');
-                    localStorage.removeItem('rachi_academy_auth');
-                    localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: false, user: null }));
-
-                    // Transmissão imediata para deslogar em tempo real todas as telas abertas (Loja, Academy, etc.)
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            const bc = new BroadcastChannel('rachi_auth_channel');
-                            bc.postMessage({ action: 'logout', name: prevName, timestamp: Date.now() });
-                            bc.close();
-                        }
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                    } catch(e) {}
-
-                    this.currentView = 'public';
-                    this.currentTab = 'home';
-
-                    this.showLoginToast(
-                        'Sessão Encerrada com Sucesso!',
-                        `Até breve, ${prevName}! A sua sessão foi terminada com segurança em todo o ecossistema RACHI.`,
-                        'logout',
-                        4500
-                    );
-
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                },
+                async logout() { await window.RachiSession.logout(); },
                 loginAs(role) {
                     if (role === 'customer') {
                         this.quickFillAuth('cliente_sem_matricula');
@@ -9571,6 +9141,6 @@
 
         window.addEventListener('hashchange', handleUrlHash);
     </script>
-</body>
+<script src="/worker-public.js"></script></body>
 
 </html>

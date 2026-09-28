@@ -78,16 +78,36 @@ class CustomerRequestController extends Controller
         return view('customer.requests.show', ['request' => $serviceRequest]);
     }
 
-    public function sendMessage(Request $request, ServiceRequest $serviceRequest): RedirectResponse
+    public function sendMessage(Request $request, ServiceRequest $serviceRequest)
     {
-        abort_unless((int) $serviceRequest->customer_id === (int) (auth()->user()->customer?->id ?? 0), 403);
-        $request->validate(['message' => 'required|string|max:2000']);
+        $user = auth()->user();
+        $isOwner = (int) $serviceRequest->customer_id === (int) ($user->customer?->id ?? 0);
+        $isStaff = $user->isAdmin() || $user->isEmployee();
+        abort_unless($isOwner || $isStaff, 403);
+        $request->validate(['message' => 'required|string|max:3000']);
 
-        Message::create([
+        $msg = Message::create([
             'service_request_id' => $serviceRequest->id,
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'message' => $request->message,
         ]);
+
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'success' => true,
+                'message' => [
+                    'id' => $msg->id,
+                    'user_id' => $msg->user_id,
+                    'message' => $msg->message,
+                    'text' => $msg->message,
+                    'sender' => $user->name,
+                    'nome' => $user->name,
+                    'data' => $msg->created_at->format('d/m/Y H:i'),
+                    'is_staff' => $isStaff,
+                    'fromUser' => !$isStaff,
+                ]
+            ]);
+        }
 
         return back()->with('success', 'Mensagem enviada com sucesso.');
     }
