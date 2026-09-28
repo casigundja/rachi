@@ -19,6 +19,8 @@ class SolicitacaoApiController extends Controller
      */
     public function index(): JsonResponse
     {
+        if (!auth()->check()) return response()->json(['success'=>true,'requests'=>[]]);
+        $viewer = auth()->user();
         $requests = ServiceRequest::with([
             'customer.user',
             'businessUnit',
@@ -27,6 +29,14 @@ class SolicitacaoApiController extends Controller
             'statusHistories' => fn($q) => $q->orderBy('created_at', 'asc'),
             'messages.user.role',
         ])
+            ->when(!$viewer->isAdmin(), function ($query) use ($viewer) {
+                $query->where(function ($scope) use ($viewer) {
+                    $scope->whereHas('customer', fn ($q) => $q->where('user_id',$viewer->id));
+                    if ($viewer->isEmployee() && $viewer->employee) {
+                        $scope->orWhere('assigned_to',$viewer->employee->id)->orWhere('business_unit_id',$viewer->employee->business_unit_id);
+                    }
+                });
+            })
             ->latest('id')
             ->get()
             ->map(fn($sr) => $this->formatRequest($sr));

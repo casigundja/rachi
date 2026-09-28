@@ -11,18 +11,34 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->encryptCookies(except: [
+            'rachi_session',
+        ]);
+        $middleware->web(append: [
+            \App\Http\Middleware\SyncRachiSession::class,
+        ]);
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
         $middleware->validateCsrfTokens(except: [
             'login',
             'logout',
+            'contacto',
+            'contacto/*',
+            'checkout',
             'solicitacoes',
             'solicitacoes/*',
+            'cliente/solicitacoes',
+            'cliente/solicitacoes/*',
+            'funcionario/solicitacoes',
+            'funcionario/solicitacoes/*',
+            'admin/solicitacoes',
+            'admin/solicitacoes/*',
             'admin/academy',
             'admin/academy/*',
             'admin/users',
             'admin/users/*',
+            'api/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

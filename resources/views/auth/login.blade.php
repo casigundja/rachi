@@ -1,173 +1,851 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html lang="pt-AO" class="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sessão - RACHI</title>
-    <link rel="icon" type="image/x-icon" href="https://hom.rachi.ao/assets/img/logo-rachi-light.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f1f4f9;
-            background-image: 
-                radial-gradient(at 15% 15%, rgba(0, 163, 224, 0.04) 0px, transparent 50%),
-                radial-gradient(at 85% 85%, rgba(235, 167, 45, 0.04) 0px, transparent 50%);
-        }
-        .login-card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 45px -10px rgba(7, 19, 38, 0.08), 0 0 0 1px rgba(7, 19, 38, 0.04);
-        }
-        .form-input {
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            color: #0f172a;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #071326;
-            box-shadow: 0 0 0 3px rgba(7, 19, 38, 0.08);
-        }
-        .form-input::placeholder {
-            color: #94a3b8;
-            font-size: 0.92rem;
-        }
-        .btn-submit {
-            background-color: #071326;
-            transition: all 0.2s ease;
-        }
-        .btn-submit:hover {
-            background-color: #0f2444;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px -4px rgba(7, 19, 38, 0.3);
-        }
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-    </style>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel Administrativo · RACHI</title>
+  <meta name="description" content="Autenticação segura e gestão integrada das unidades TEC, PRINT, ACADEMY e HUMAN CAPITAL — RACHI.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-rachi-light.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/toast.css">
+  <script src="/toast.js"></script>
+  <script src="/auth-session.js"></script>
+
+  <!-- Script Anti-Flash de Tema -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('rachi_theme');
+      if (t === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+
+    window.toggleRachiTheme = function() {
+      var isDark = document.documentElement.classList.toggle('dark');
+      var t = isDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('rachi_theme', t);
+      var label = document.getElementById('theme-toggle-label');
+      if (label) label.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+      window.dispatchEvent(new CustomEvent('rachi-theme-changed', { detail: { dark: isDark } }));
+      return isDark;
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      
+      --brand-blue: #0050f0;
+      --brand-blue-hover: #0041c4;
+      --brand-cyan: #00a3e0;
+      --brand-gold: #f5a800;
+      
+      /* Modo Escuro (Padrão) */
+      --bg-page: #060b17;
+      --bg-sidebar: #091122;
+      --bg-card: rgba(14, 24, 46, 0.95);
+      --bg-input: rgba(6, 12, 24, 0.9);
+      
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-card: rgba(255, 255, 255, 0.09);
+      --border-hover: rgba(0, 163, 224, 0.4);
+      --border-input: rgba(255, 255, 255, 0.14);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --input-focus-border: #00a3e0;
+      --input-focus-ring: rgba(0, 163, 224, 0.25);
+      
+      --badge-admin-bg: rgba(0, 80, 240, 0.15);
+      --badge-admin-border: rgba(0, 163, 224, 0.35);
+      --badge-admin-text: #38bdf8;
+      
+      --badge-showcase-bg: rgba(245, 168, 0, 0.12);
+      --badge-showcase-border: rgba(245, 168, 0, 0.3);
+      --badge-showcase-text: #fbbf24;
+      
+      --shadow-sidebar: 15px 0 45px rgba(0, 0, 0, 0.35);
+      --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+      
+      --toggle-bg: rgba(255, 255, 255, 0.06);
+      --toggle-border: rgba(255, 255, 255, 0.12);
+      --toggle-text: #cbd5e1;
+    }
+
+    html:not(.dark) {
+      /* Modo Claro */
+      --bg-page: #f4f6fa;
+      --bg-sidebar: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #ffffff;
+      
+      --border-subtle: #e2e8f0;
+      --border-card: #e5e9f2;
+      --border-hover: rgba(0, 80, 240, 0.35);
+      --border-input: #cbd5e1;
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      
+      --input-focus-border: #0050f0;
+      --input-focus-ring: rgba(0, 80, 240, 0.18);
+      
+      --badge-admin-bg: rgba(0, 80, 240, 0.08);
+      --badge-admin-border: rgba(0, 80, 240, 0.22);
+      --badge-admin-text: #0050f0;
+      
+      --badge-showcase-bg: rgba(245, 168, 0, 0.1);
+      --badge-showcase-border: rgba(245, 168, 0, 0.25);
+      --badge-showcase-text: #b45309;
+      
+      --shadow-sidebar: 10px 0 35px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      
+      --toggle-bg: #f1f5f9;
+      --toggle-border: #cbd5e1;
+      --toggle-text: #334155;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 80, 240, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 163, 224, 0.09) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Container Principal */
+    .admin-login-layout {
+      display: grid;
+      grid-template-columns: minmax(380px, 470px) 1fr;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* COLUNA ESQUERDA: AUTENTICAÇÃO ADMINISTRATIVA */
+    .auth-col {
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.75rem 2.75rem 2.25rem;
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow-sidebar);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .auth-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.65rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .back-link:hover {
+      color: var(--brand-cyan);
+      background: rgba(0, 163, 224, 0.08);
+    }
+    .back-link svg {
+      transition: transform 0.2s ease;
+    }
+    .back-link:hover svg {
+      transform: translateX(-3px);
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      color: var(--toggle-text);
+      padding: 0.45rem 0.85rem;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--brand-cyan);
+      color: var(--text-main);
+      background: rgba(0, 163, 224, 0.1);
+    }
+
+    html:not(.dark) .icon-sun { display: none; }
+    html.dark .icon-moon { display: none; }
+
+    /* Logo & Marca */
+    .brand-wrap {
+      margin-bottom: 2rem;
+    }
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      max-width: 190px;
+      display: block;
+      object-fit: contain;
+    }
+    /* Regra do Logotipo Conforme o Tema:
+       - No Modo Escuro (fundo escuro): exibe o logotipo claro/branco (.logo-for-dark)
+       - No Modo Claro (fundo claro): exibe o logotipo escuro (.logo-for-light) */
+    html.dark .logo-for-light { display: none !important; }
+    html.dark .logo-for-dark { display: block !important; }
+    html:not(.dark) .logo-for-light { display: block !important; }
+    html:not(.dark) .logo-for-dark { display: none !important; }
+
+    .auth-title {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-top: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .auth-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    /* Formulário */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.45rem;
+    }
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      width: 18px;
+      height: 18px;
+      color: var(--text-dim);
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.825rem 1rem 0.825rem 2.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      background-color: var(--bg-input);
+      border: 1.5px solid var(--border-input);
+      border-radius: 11px;
+      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--input-focus-border);
+      box-shadow: 0 0 0 3px var(--input-focus-ring);
+    }
+    .form-control::placeholder {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .toggle-pass-btn {
+      position: absolute;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 0.4rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .toggle-pass-btn:hover {
+      color: var(--text-main);
+    }
+
+    /* Opções Extras */
+    .form-extras {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+    }
+    .remember-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      user-select: none;
+    }
+    .remember-wrap input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      accent-color: var(--brand-blue);
+      cursor: pointer;
+    }
+    .forgot-link {
+      color: var(--brand-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Botão Primário */
+    .btn-submit {
+      width: 100%;
+      padding: 0.95rem 1.25rem;
+      font-family: var(--font-sans);
+      font-size: 0.925rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--brand-blue) 0%, #0077e6 100%);
+      border: none;
+      border-radius: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 80, 240, 0.35);
+    }
+    .btn-submit:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--brand-blue-hover) 0%, #0066cc 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 80, 240, 0.45);
+    }
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Mensagem de Feedback */
+    .feedback-msg {
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.825rem;
+      display: none;
+      line-height: 1.4;
+    }
+    .feedback-msg.error {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #ef4444;
+    }
+    html.dark .feedback-msg.error {
+      color: #f87171;
+    }
+    .feedback-msg.success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #10b981;
+    }
+    html.dark .feedback-msg.success {
+      color: #34d399;
+    }
+
+    .auth-footer {
+      margin-top: 2.5rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* COLUNA DIREITA: APRESENTAÇÃO DO PROJETO RACHI */
+    .showcase-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 5rem;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .showcase-header {
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+    .showcase-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--badge-showcase-bg);
+      color: var(--badge-showcase-text);
+      border: 1px solid var(--badge-showcase-border);
+      margin-bottom: 1.25rem;
+    }
+    .showcase-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 2.7vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.15rem;
+    }
+    .showcase-heading span {
+      background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    html.dark .showcase-heading span {
+      background: linear-gradient(135deg, var(--brand-cyan) 0%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .showcase-lead {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Grid das 4 Unidades RACHI */
+    .units-section-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .units-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.35rem;
+      max-width: 900px;
+    }
+
+    .unit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .unit-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hover);
+      box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.15);
+    }
+    html.dark .unit-card:hover {
+      box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.4), 0 0 20px -5px rgba(0, 163, 224, 0.15);
+    }
+
+    .unit-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+    .unit-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .unit-icon-box.tec { background: rgba(0, 163, 224, 0.12); color: #00a3e0; border: 1px solid rgba(0, 163, 224, 0.25); }
+    .unit-icon-box.print { background: rgba(245, 168, 0, 0.12); color: #f5a800; border: 1px solid rgba(245, 168, 0, 0.25); }
+    .unit-icon-box.academy { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25); }
+    .unit-icon-box.capital { background: rgba(147, 51, 234, 0.12); color: #a855f7; border: 1px solid rgba(147, 51, 234, 0.25); }
+
+    .unit-name-wrap h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .unit-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+    .unit-card p {
+      font-size: 0.835rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 1024px) {
+      .admin-login-layout {
+        grid-template-columns: 1fr;
+      }
+      .auth-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 2.5rem 1.75rem;
+      }
+      .showcase-col {
+        padding: 3rem 1.75rem;
+      }
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 text-[#0f172a]">
+<body>
 
-    <main class="w-full max-w-[460px]">
-        <div class="login-card p-7 sm:p-10">
-            <!-- Header Label -->
-            <div class="text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#b5893a] uppercase mb-2">
-                ACESSO RACHI
-            </div>
+  <div class="admin-login-layout">
+    
+    <!-- ========================================== -->
+    <!-- COLUNA ESQUERDA: AUTENTICAÇÃO ADMINISTRATIVA -->
+    <!-- ========================================== -->
+    <aside class="auth-col">
+      <div>
+        <!-- Barra Superior: Voltar ao Site & Alternador de Tema -->
+        <div class="auth-header-bar">
+          <a href="/" class="back-link" title="Voltar à página inicial">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span>Voltar ao site</span>
+          </a>
 
-            <!-- Heading -->
-            <h1 class="text-2xl sm:text-[28px] font-bold text-[#071326] tracking-tight leading-tight mb-2.5">
-                Iniciar sessão
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="text-[13px] sm:text-[13.5px] text-[#475569] leading-relaxed mb-6 font-normal">
-                Todos os utilizadores acedem pelo mesmo login. Use o e-mail e a palavra-passe da sua conta RACHI.
-            </p>
-
-            @if ($errors->any())
-                <div class="mb-5 bg-red-50 border border-red-200 text-red-700 p-3.5 rounded-xl text-xs sm:text-sm">
-                    <ul class="list-disc list-inside space-y-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            @if (session('status'))
-                <div class="mb-5 bg-emerald-50 border border-emerald-200 text-emerald-700 p-3.5 rounded-xl text-xs sm:text-sm">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <!-- Dica de Acesso Rápido -->
-            <div class="mb-5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 flex items-center justify-between gap-2">
-                <div>
-                    <span class="font-bold text-[#071326] block">Acesso Administrador:</span>
-                    <span class="text-slate-500 font-mono text-[11px]">admin@rachi.ao • admin123</span>
-                </div>
-                <button type="button" onclick="document.getElementById('email').value='admin@rachi.ao';document.getElementById('password').value='admin123';" class="px-2.5 py-1.5 bg-[#071326] text-white rounded-lg font-semibold hover:bg-slate-800 transition text-[11px] shrink-0">
-                    Preencher
-                </button>
-            </div>
-
-            <!-- Form -->
-            <form method="POST" action="{{ route('login.post') }}" class="space-y-4">
-                @csrf
-                <div>
-                    <label for="email" class="block text-[13px] font-semibold text-[#071326] mb-1.5">
-                        E-mail
-                    </label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        value="{{ old('email') }}" 
-                        placeholder="o.seu@email.com" 
-                        required 
-                        autofocus
-                        class="w-full px-4 py-3 form-input"
-                    >
-                </div>
-
-                <div>
-                    <label for="password" class="block text-[13px] font-semibold text-[#071326] mb-1.5">
-                        Palavra-passe
-                    </label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Introduza a sua palavra-passe" 
-                        required 
-                        class="w-full px-4 py-3 form-input"
-                    >
-                    <div class="mt-2 text-left">
-                        <a href="#" class="text-xs text-[#1d4ed8] hover:underline font-medium">
-                            Esqueceu a palavra-passe?
-                        </a>
-                    </div>
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="w-full py-3.5 px-6 btn-submit text-white font-bold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center gap-2">
-                        <span>ENTRAR</span>
-                        <span class="text-base leading-none">&rarr;</span>
-                    </button>
-                </div>
-            </form>
-
-            <!-- Footer Links -->
-            <div class="mt-8 text-center space-y-4 text-xs sm:text-[13px]">
-                <p class="text-[#475569]">
-                    Ainda não tem conta? 
-                    <a href="{{ route('register') }}" class="font-bold text-[#1d4ed8] hover:underline">
-                        Criar conta
-                    </a>
-                </p>
-
-                <p class="text-[#475569] leading-relaxed">
-                    Recebeu o e-mail de activação? 
-                    <a href="#" class="font-bold text-[#1d4ed8] hover:underline">
-                        Activar conta e definir palavra-passe
-                    </a>
-                </p>
-
-                <div class="pt-1">
-                    <a href="{{ route('home') }}" class="inline-block font-bold text-[#1d4ed8] hover:underline">
-                        Voltar à loja
-                    </a>
-                </div>
-            </div>
+          <button type="button" class="theme-toggle-btn" onclick="toggleRachiTheme()" aria-label="Alternar Tema Claro/Escuro" title="Alternar tema">
+            <svg class="icon-sun" width="16" height="16" fill="none" stroke="#f5a800" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <svg class="icon-moon" width="16" height="16" fill="none" stroke="#0050f0" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            <span id="theme-toggle-label">Modo Claro</span>
+          </button>
         </div>
+
+        <!-- Marca -->
+        <div class="brand-wrap">
+          <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'" alt="RACHI" class="brand-logo-img logo-for-light">
+          <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="brand-logo-img logo-for-dark">
+        </div>
+
+        <h1 class="auth-title">Painel Administrativo</h1>
+        <p class="auth-desc">Introduza as suas credenciais para aceder ao sistema corporativo.</p>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="admin-login-form" method="POST" action="/login" onsubmit="handleAdminLogin(event)">
+          @csrf
+          <div class="form-group">
+            <label for="login-email" class="form-label">E-mail</label>
+            <div class="input-wrap">
+              <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/></svg>
+              <input type="email" id="login-email" name="email" class="form-control" required autocomplete="username" placeholder="admin@rachi.ao" autofocus>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password" class="form-label">Palavra-passe</label>
+            <div class="input-wrap">
+              <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              <input type="password" id="login-password" name="password" class="form-control" required autocomplete="current-password" placeholder="Palavra-passe">
+              <button type="button" class="toggle-pass-btn" onclick="togglePassVisibility('login-password', this)" aria-label="Mostrar ou ocultar palavra-passe">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-extras">
+            <label class="remember-wrap">
+              <input type="checkbox" name="remember" checked>
+              <span>Manter conectado</span>
+            </label>
+            <a href="#" class="forgot-link" onclick="handleForgotPassword(event)">Recuperar acesso</a>
+          </div>
+
+          <button type="submit" id="btn-login-submit" class="btn-submit">
+            <span class="spinner" id="login-spinner"></span>
+            <span class="btn-text">Entrar</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+
+          <div id="login-feedback" class="feedback-msg" role="alert"></div>
+        </form>
+      </div>
+
+      <!-- Rodapé da Barra Esquerda -->
+      <footer class="auth-footer">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span>Sessão Encriptada TLS 1.3 &bull; Cloudflare Hyperdrive</span>
+      </footer>
+    </aside>
+
+    <!-- ======================================================== -->
+    <!-- COLUNA DIREITA: INFORMAÇÕES DO PROJETO RACHI             -->
+    <!-- ======================================================== -->
+    <main class="showcase-col">
+      <div>
+        <!-- Cabeçalho do Showcase -->
+        <header class="showcase-header">
+          <h2 class="showcase-heading">
+            Tecnologia, Indústria Gráfica, Formação e <span>Capital Humano</span>
+          </h2>
+          <p class="showcase-lead">
+            A <strong>RACHI — Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
+          </p>
+        </header>
+
+        <!-- As 4 Unidades de Negócio -->
+        <div class="units-section-title">
+          <span>Unidades de Negócio do Projeto RACHI</span>
+        </div>
+
+        <div class="units-grid">
+          <!-- UNIDADE 1: TEC -->
+          <article class="unit-card">
+            <div>
+              <div class="unit-card-header">
+                <div class="unit-icon-box tec">💻</div>
+                <div class="unit-name-wrap">
+                  <h3>RACHI TEC</h3>
+                  <span class="unit-tag">Tecnologia & Infraestrutura</span>
+                </div>
+              </div>
+              <p>Soluções completas de TI: desenvolvimento de software, infraestruturas cloud de alta disponibilidade, cibersegurança, redes estruturadas e suporte corporativo gerido.</p>
+            </div>
+          </article>
+
+          <!-- UNIDADE 2: PRINT -->
+          <article class="unit-card">
+            <div>
+              <div class="unit-card-header">
+                <div class="unit-icon-box print">🖨️</div>
+                <div class="unit-name-wrap">
+                  <h3>RACHI PRINT</h3>
+                  <span class="unit-tag">Indústria Gráfica & Merchandising</span>
+                </div>
+              </div>
+              <p>Comunicação visual e produção gráfica profissional: impressão digital e offset de alta precisão, grandes formatos, sinalética, brindes personalizados e branding corporativo.</p>
+            </div>
+          </article>
+
+          <!-- UNIDADE 3: ACADEMY -->
+          <article class="unit-card">
+            <div>
+              <div class="unit-card-header">
+                <div class="unit-icon-box academy">🎓</div>
+                <div class="unit-name-wrap">
+                  <h3>RACHI ACADEMY</h3>
+                  <span class="unit-tag">Formação Profissional & LMS</span>
+                </div>
+              </div>
+              <p>Centro de excelência em capacitação executiva e tecnológica: cursos avançados, plataforma LMS interativa, emissão de certificados e programas in-company sob medida.</p>
+            </div>
+          </article>
+
+          <!-- UNIDADE 4: HUMAN CAPITAL -->
+          <article class="unit-card">
+            <div>
+              <div class="unit-card-header">
+                <div class="unit-icon-box capital">👥</div>
+                <div class="unit-name-wrap">
+                  <h3>RACHI HUMAN CAPITAL</h3>
+                  <span class="unit-tag">Gestão Estratégica de Talentos</span>
+                </div>
+              </div>
+              <p>Recrutamento executivo especializado, outsourcing de especialistas em tecnologia, avaliação de competências e consultoria de recursos humanos para empresas.</p>
+            </div>
+          </article>
+        </div>
+      </div>
     </main>
 
+  </div>
+
+  <!-- Scripts de Interatividade e Autenticação -->
+  <script>
+    (function updateThemeButtonLabel() {
+      var isDark = document.documentElement.classList.contains('dark');
+      var label = document.getElementById('theme-toggle-label');
+      if (label) label.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+    })();
+
+    function togglePassVisibility(inputId, btn) {
+      var input = document.getElementById(inputId);
+      if (!input) return;
+      var isPass = input.type === 'password';
+      input.type = isPass ? 'text' : 'password';
+      btn.setAttribute('aria-label', isPass ? 'Ocultar palavra-passe' : 'Mostrar palavra-passe');
+      btn.innerHTML = isPass 
+        ? '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>'
+        : '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>';
+    }
+
+    function handleForgotPassword(e) {
+      e.preventDefault();
+      if (window.RachiToast) {
+        RachiToast.info('Para redefinição de palavra-passe corporativa, contacte a equipa de TI: it@rachi.co.ao');
+      } else {
+        alert('Para redefinição de palavra-passe corporativa, contacte a equipa de TI: it@rachi.co.ao');
+      }
+    }
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      var btn = document.getElementById('btn-login-submit');
+      var btnText = btn.querySelector('.btn-text');
+      var spinner = document.getElementById('login-spinner');
+      var feedback = document.getElementById('login-feedback');
+      
+      var email = document.getElementById('login-email').value.trim();
+      var password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        if (window.RachiToast) RachiToast.error('Por favor, informe o e-mail e a palavra-passe.');
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.textContent = 'A autenticar...';
+      spinner.style.display = 'inline-block';
+      feedback.style.display = 'none';
+      feedback.textContent = '';
+
+      try {
+        var response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ email: email, password: password }),
+          credentials: 'same-origin'
+        });
+
+        var data = await response.json().catch(function() {
+          return { success: false, message: 'Resposta inválida do servidor.' };
+        });
+
+        if (!response.ok || !data.success) {
+          var msg = data.message || 'Credenciais incorretas ou utilizador inativo.';
+          if (window.RachiToast) RachiToast.error(msg);
+          feedback.className = 'feedback-msg error';
+          feedback.textContent = msg;
+          feedback.style.display = 'block';
+          return;
+        }
+
+        if (window.RachiToast) RachiToast.success('Autenticação bem-sucedida! A redirecionar...');
+        
+        if (window.RachiSession) {
+          try { await window.RachiSession.session(); } catch(err) {}
+        }
+
+        var role = data.user ? data.user.role_slug : null;
+        var isAdmin = ['admin', 'super_admin'].indexOf(role) !== -1;
+        var urlParams = new URLSearchParams(window.location.search);
+        var redirectParam = urlParams.get('redirect');
+
+        setTimeout(function() {
+          if (redirectParam) {
+            window.location.href = redirectParam;
+          } else if (isAdmin) {
+            window.location.href = '/admin-dashboard';
+          } else if (data.redirect) {
+            window.location.href = data.redirect;
+          } else {
+            window.location.href = '/portal';
+          }
+        }, 350);
+
+      } catch (err) {
+        var msg = err.message || 'Falha na ligação com o servidor.';
+        if (window.RachiToast) RachiToast.error(msg);
+        feedback.className = 'feedback-msg error';
+        feedback.textContent = msg;
+        feedback.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btnText.textContent = 'Entrar';
+        spinner.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>

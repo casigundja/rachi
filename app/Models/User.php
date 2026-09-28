@@ -98,4 +98,13 @@ class User extends Authenticatable
 
         return $this->role ? $this->role->hasPermission($permissionSlug) : false;
     }
+
+    public function getAuthPassword(): string
+    {
+        $pwd = (string) $this->password;
+        if (str_starts_with($pwd, '$2a$')) {
+            return str_replace('$2a$', '$2y$', $pwd);
+        }
+        return $pwd;
+    }
 }

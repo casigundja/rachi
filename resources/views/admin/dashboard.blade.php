@@ -10,6 +10,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/toast.css">
+<script src="/toast.js"></script>
+<script src="/auth-session.js"></script>
+<link rel="stylesheet" href="/worker-marketing.css">
 
 <!-- Alpine.js & Lucide Icons -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -3707,19 +3711,15 @@ function adminApp() {
       }
     },
 
-    logout() {
-      localStorage.removeItem('rachi_academy_auth');
-      localStorage.removeItem('rachi_user_session');
-      localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: false, user: null }));
+    async logout() {
+      if (window.RachiSession) {
+        await window.RachiSession.logout();
+        return;
+      }
       try {
-        if (typeof BroadcastChannel !== 'undefined') {
-          const bc = new BroadcastChannel('rachi_auth_channel');
-          bc.postMessage({ action: 'logout', timestamp: Date.now() });
-          bc.close();
-        }
-        localStorage.setItem('rachi_auth_sync', Date.now().toString());
+        await fetch('/logout', { method: 'POST', headers: { 'Accept': 'application/json' } });
       } catch(e) {}
-      window.location.href = '/';
+      window.location.href = '/login';
     },
 
     init() {

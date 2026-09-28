@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -84,6 +88,7 @@
         /* ------------------------------------------------------------ */
         /* STATE 1: AT TOP (DARK LUXURY GLASS)                          */
         /* ------------------------------------------------------------ */
+        html.dark .site-header,
         .site-header.header-top-dark {
             background: rgba(7, 19, 38, 0.94) !important;
             backdrop-filter: blur(24px) saturate(190%) !important;
@@ -91,10 +96,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
         }
+        html.dark .site-header .logo-light,
         .site-header.header-top-dark .logo-light { display: block !important; }
+        html.dark .site-header .logo-dark,
         .site-header.header-top-dark .logo-dark { display: none !important; }
 
         /* Dark Nav Capsule */
+        html.dark .site-header .main-nav-capsule,
         .site-header.header-top-dark .main-nav-capsule {
             display: flex;
             align-items: center;
@@ -107,6 +115,7 @@
             -webkit-backdrop-filter: blur(16px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
+        html.dark .site-header .main-nav-capsule .nav-link,
         .site-header.header-top-dark .main-nav-capsule .nav-link {
             position: relative;
             font-size: 0.835rem;
@@ -119,11 +128,14 @@
             text-decoration: none;
             transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        html.dark .site-header .main-nav-capsule .nav-link:hover,
+        html.dark .site-header .main-nav-capsule .nav-link.nav-link-open,
         .site-header.header-top-dark .main-nav-capsule .nav-link:hover,
         .site-header.header-top-dark .main-nav-capsule .nav-link.nav-link-open {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.12);
         }
+        html.dark .site-header .main-nav-capsule .nav-link.active,
         .site-header.header-top-dark .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: linear-gradient(135deg, #0077c2 0%, #00a3e0 100%);
@@ -132,6 +144,7 @@
             font-weight: 600;
         }
 
+        html.dark .site-header .btn-entrar-nav,
         .site-header.header-top-dark .btn-entrar-nav {
             display: inline-flex;
             align-items: center;
@@ -151,6 +164,7 @@
             cursor: pointer;
             box-shadow: 0 2px 10px rgba(0, 163, 224, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
+        html.dark .site-header .btn-entrar-nav:hover,
         .site-header.header-top-dark .btn-entrar-nav:hover {
             background: linear-gradient(135deg, #00a3e0 0%, #0077c2 100%);
             border-color: #00a3e0;
@@ -158,6 +172,7 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 20px rgba(0, 163, 224, 0.45);
         }
+        html.dark .site-header .mobile-menu-btn,
         .site-header.header-top-dark .mobile-menu-btn {
             display: inline-flex;
             align-items: center;
@@ -170,6 +185,7 @@
             color: #ffffff !important;
             transition: all 0.2s ease;
         }
+        html.dark .site-header .mobile-menu-btn:hover,
         .site-header.header-top-dark .mobile-menu-btn:hover {
             background: rgba(255, 255, 255, 0.12) !important;
             border-color: rgba(0, 163, 224, 0.5) !important;
@@ -179,6 +195,7 @@
         /* ------------------------------------------------------------ */
         /* STATE 2: SCROLLED DOWN (LIGHT / WHITE GLASS - KLASSE.AO STYLE)*/
         /* ------------------------------------------------------------ */
+        html:not(.dark) .site-header,
         .site-header.header-scrolled-light {
             background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
@@ -186,10 +203,13 @@
             border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
         }
+        html:not(.dark) .site-header .logo-light,
         .site-header.header-scrolled-light .logo-light { display: none !important; }
+        html:not(.dark) .site-header .logo-dark,
         .site-header.header-scrolled-light .logo-dark { display: block !important; }
 
         /* Light Nav Capsule */
+        html:not(.dark) .site-header .main-nav-capsule,
         .site-header.header-scrolled-light .main-nav-capsule {
             display: flex;
             align-items: center;
@@ -200,6 +220,7 @@
             padding: 0.3rem 0.55rem;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
         }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link {
             position: relative;
             font-size: 0.835rem;
@@ -212,11 +233,14 @@
             text-decoration: none;
             transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link:hover,
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.nav-link-open,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link.nav-link-open {
             color: #0077c2 !important;
             background: rgba(0, 163, 224, 0.08);
         }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.active,
         .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: linear-gradient(135deg, #0077c2 0%, #00a3e0 100%);
@@ -224,30 +248,37 @@
             box-shadow: 0 2px 10px rgba(0, 163, 224, 0.35);
             font-weight: 700;
         }
+        html:not(.dark) .site-header .nav-link svg,
         .site-header.header-scrolled-light .nav-link svg {
             color: #475569;
         }
 
         /* Light Dropdowns */
+        html:not(.dark) .site-header .header-dropdown,
         .site-header.header-scrolled-light .header-dropdown {
             background: rgba(255, 255, 255, 0.98) !important;
             border: 1px solid rgba(11, 26, 46, 0.1) !important;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06) !important;
         }
+        html:not(.dark) .site-header .header-dropdown a,
         .site-header.header-scrolled-light .header-dropdown a {
             color: #334155 !important;
         }
+        html:not(.dark) .site-header .header-dropdown a:hover,
         .site-header.header-scrolled-light .header-dropdown a:hover {
             background: #f1f5f9 !important;
             color: #0077c2 !important;
         }
+        html:not(.dark) .site-header .header-dropdown .dropdown-title,
         .site-header.header-scrolled-light .header-dropdown .dropdown-title {
             color: #0f172a !important;
         }
+        html:not(.dark) .site-header .header-dropdown .dropdown-desc,
         .site-header.header-scrolled-light .header-dropdown .dropdown-desc {
             color: #64748b !important;
         }
 
+        html:not(.dark) .site-header .btn-entrar-nav,
         .site-header.header-scrolled-light .btn-entrar-nav {
             display: inline-flex;
             align-items: center;
@@ -267,11 +298,13 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 163, 224, 0.35);
         }
+        html:not(.dark) .site-header .btn-entrar-nav:hover,
         .site-header.header-scrolled-light .btn-entrar-nav:hover {
             background: linear-gradient(135deg, #0092c8 0%, #0065a5 100%);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(0, 163, 224, 0.45);
         }
+        html:not(.dark) .site-header .mobile-menu-btn,
         .site-header.header-scrolled-light .mobile-menu-btn {
             display: inline-flex;
             align-items: center;
@@ -284,6 +317,7 @@
             color: #0b1a2e !important;
             transition: all 0.2s ease;
         }
+        html:not(.dark) .site-header .mobile-menu-btn:hover,
         .site-header.header-scrolled-light .mobile-menu-btn:hover {
             background: rgba(0, 163, 224, 0.08) !important;
             border-color: #00a3e0 !important;
@@ -589,6 +623,7 @@
     <script>
         lucide.createIcons();
     </script>
+    <script src="/worker-public.js"></script>
     @stack('scripts')
 </body>
 </html>

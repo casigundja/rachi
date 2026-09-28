@@ -224,16 +224,22 @@ if (!function_exists('formatAdminUserRecord')) {
             $statusKey = 'wait';
         }
 
+        $phone = $u->phone ?? $u->customer?->phone ?? $u->employee?->phone ?? '';
+
         return [
             'id' => $u->id,
+            'name' => $u->name,
             'nome' => $u->name,
             'email' => $u->email,
-            'telefone' => $u->phone ?? $u->customer?->phone ?? $u->employee?->phone ?? '',
+            'phone' => $phone,
+            'telefone' => $phone,
             'tipo' => $cfg['tipo'],
+            'role' => $cfg['tipo'],
             'role_id' => $u->role_id,
             'role_slug' => $roleSlug,
             'tc' => $cfg['tc'],
             'status' => $statusLabel,
+            'statusLabel' => $statusLabel,
             'raw_status' => $isDeleted ? 'deleted' : ($u->status ?? 'active'),
             'sk' => $statusKey,
             'is_deleted' => $isDeleted,
@@ -242,7 +248,8 @@ if (!function_exists('formatAdminUserRecord')) {
             'mod' => $cfg['mod'],
             'av' => $isDeleted ? 'bg-gradient-to-br from-slate-400 to-slate-500' : $cfg['av'],
             'ini' => $ini ?: 'US',
-            'created_at' => $u->created_at ? $u->created_at->format('d/m/Y') : 'Recente'
+            'created_at' => $u->created_at ? $u->created_at->format('d/m/Y') : 'Recente',
+            'data' => $u->created_at ? $u->created_at->format('d/m/Y') : 'Recente'
         ];
     }
 }
@@ -619,3 +626,4 @@ require __DIR__.'/auth.php';
 require __DIR__.'/customer.php';
 require __DIR__.'/employee.php';
 require __DIR__.'/admin.php';
+require __DIR__.'/cloud.php';

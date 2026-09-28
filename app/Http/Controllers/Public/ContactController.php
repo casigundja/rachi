@@ -14,9 +14,21 @@ class ContactController extends Controller
         return view('public.contact');
     }
 
-    public function send(Request $request): RedirectResponse
+    public function send(Request $request)
     {
-        $request->validate([
+        $raw = json_decode($request->getContent(), true);
+        if (is_array($raw)) {
+            $request->merge($raw);
+        }
+
+        $request->merge([
+            'name' => $request->input('name', $request->input('nome')),
+            'phone' => $request->input('phone', $request->input('telefone')),
+            'subject' => $request->input('subject', $request->input('assunto', $request->input('unidade', 'Contacto Geral'))),
+            'message' => $request->input('message', $request->input('mensagem')),
+        ]);
+
+        $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:30',
@@ -24,6 +36,18 @@ class ContactController extends Controller
             'message' => 'required|string|max:3000',
         ]);
 
-        return back()->with('success', 'Obrigado pelo seu contacto! A nossa equipa responderá em breve.');
+        \Illuminate\Support\Facades\DB::table('worker_contacts')->insert(array_merge($data, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]));
+
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Mensagem recebida. A nossa equipa responderá em breve.',
+            ]);
+        }
+
+        return redirect('/contacto?enviado=1')->with('success', 'Obrigado pelo seu contacto! A nossa equipa responderá em breve.');
     }
 }

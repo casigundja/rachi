@@ -1,0 +1,16 @@
+{
+  "source": "https://rachi.casimirogundja.workers.dev",
+  "importedAt": "2026-09-27T22:20:44.854Z",
+  "workerSha256": "b3e47af2a2449131307499240e95330feef1ab4f9bdbabf2bc6d3b97c56623bc",
+  "pages": [
+    "login",
+    "register",
+    "portal",
+    "cart",
+    "courses",
+    "products",
+    "services",
+    "academy-login"
+  ],
+  "protectedPages": "The publication folder contains login snapshots for admin and student dashboards; existing local dashboards are retained pending verification."
+}

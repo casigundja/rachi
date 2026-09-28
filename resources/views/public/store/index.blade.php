@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt" class="scroll-smooth">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja RACHI Tec — Informática, Equipamentos &amp; Tecnologia em Angola</title>
@@ -22,49 +26,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/libs/lucide.js"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        rachi: {
-                            gold: '#f5a800',       // Amarelo padrão oficial RACHI
-                            goldDark: '#d59b2d',   // Amarelo escuro / hover
-                            goldLight: '#fef3c7',  // Fundo suave amarelo
-                            navy: '#071326',       // Azul marinho profundo institucional RACHI
-                            navyLight: '#0d1f3d',  // Marinho médio
-                            navyBorder: '#1a2f52', // Borda sutil marinho
-                            blue: '#00a3e0',       // Azul ciano RACHI
-                            darkText: '#071326',
-                        },
-                        boti: {
-                            dark: '#071326',       // Marinho Oficial RACHI
-                            green: '#f5a800',      // Amarelo Oficial RACHI
-                            lightGreen: '#e09900', // Amarelo de ação / botão
-                            accent: '#00a3e0',     // Azul assinatura RACHI Tec
-                            gold: '#f5a800',       // Dourado/Amarelo RACHI
-                            amber: '#f5a800',
-                            rose: '#f43f5e',
-                            bgLight: '#f7f8fa',
-                            cardBg: '#ffffff',
-                            border: '#e8ecef',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
         (function() {
@@ -94,7 +62,7 @@
             }
         });
     </script>
-    <link rel="stylesheet" href="/css/site.css?v={{ time() }}">
+    <link rel="stylesheet" href="/css/site.css?v=1790352714796">
 
     <style>
         [x-cloak] { display: none !important; }
@@ -2599,6 +2567,7 @@
                 discountPercent: 0,
                 favorites: [],
                 cart: [],
+                get cartCount() { return this.cart.reduce((sum, item) => sum + Number(item.quantity || item.qty || 1), 0); },
                 
                 orderForm: {
                     name: '',
@@ -2924,44 +2893,9 @@
                     return this.favorites.includes(p.slug);
                 },
 
-                showToast(message, title = 'Notificação', type = 'success', duration = 3500) {
-                    if (this.toast.timer) clearTimeout(this.toast.timer);
-                    this.toast.title = title;
-                    this.toast.message = message;
-                    this.toast.type = type;
-                    this.toast.duration = duration;
-                    this.toast.show = true;
-                    this.$nextTick(() => {
-                        if (window.lucide) lucide.createIcons();
-                    });
-                    this.toast.timer = setTimeout(() => {
-                        this.toast.show = false;
-                    }, duration);
-                },
+                showToast(message, title = 'Notificação', type = 'success', duration = 6000) { return RachiToast.show(message, { title, type, duration }); },
 
-                logout() {
-                    this.userLoggedIn = false;
-                    this.currentUser = { name: '', email: '' };
-                    this.userMenuOpen = false;
-                    this.accountModalOpen = false;
-
-                    // 1. Sincronizar no localStorage para todas as janelas/abas existentes e futuras
-                    try {
-                        localStorage.removeItem('rachi_user_session');
-                        localStorage.removeItem('rachi_academy_auth');
-                        localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: false, user: null }));
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                    } catch (e) {}
-
-                    // 2. Transmissão imediata via BroadcastChannel para deslogar em tempo real em todas as telas abertas
-                    try {
-                        if (this.authChannel) {
-                            this.authChannel.postMessage({ action: 'logout', timestamp: Date.now() });
-                        }
-                    } catch (e) {}
-
-                    this.showToast('Terminou a sessão com sucesso em todas as telas do ecossistema.', 'Sessão Encerrada', 'info', 3000);
-                },
+                async logout() { await window.RachiSession.logout(); },
 
                 applyCoupon() {
                     const code = this.couponCode.trim().toUpperCase();
@@ -2997,95 +2931,9 @@
                     );
                 },
 
-                submitLogin() {
-                    const identifier = this.loginForm.email.trim() || 'casimirogundja@outlook.com';
-                    this.userLoggedIn = true;
-                    this.currentUser = {
-                        name: 'Casimiro Custódio',
-                        email: identifier,
-                        phone: '+244 923 000 000',
-                        nif: '5001239840',
-                        address: 'Edifício Kilamba, Luanda, Angola',
-                        balance: '0,00 AOA',
-                        level: 'Corporativo',
-                        has_matricula: identifier.toLowerCase().includes('aluno') || identifier.toLowerCase().includes('casimiro'),
-                        role: 'customer',
-                        tipo: 'cliente'
-                    };
-                    this.loginModalOpen = false;
-                    this.userMenuOpen = false;
+                async submitLogin() { try { this.currentUser = await RachiSession.login(this.loginForm.email.trim(), this.loginForm.password); this.userLoggedIn = true; this.loginModalOpen = false; } catch(e) { this.showToast(e.message, 'Falha no login', 'warning', 3500); } },
 
-                    const unified = {
-                        ...this.currentUser,
-                        nome: this.currentUser.name,
-                        name: this.currentUser.name,
-                        loggedIn: true,
-                        user: this.currentUser
-                    };
-
-                    // Sincronizar login em todas as telas
-                    try {
-                        localStorage.setItem('rachi_user_session', JSON.stringify(unified));
-                        if (unified.has_matricula) {
-                            localStorage.setItem('rachi_academy_auth', 'true');
-                        }
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                        if (this.authChannel) {
-                            this.authChannel.postMessage({ action: 'login', user: unified, timestamp: Date.now() });
-                        }
-                    } catch (e) {}
-
-                    this.showToast(
-                        'Sessão iniciada com sucesso! Bem-vindo(a) à RACHI: ' + identifier,
-                        'Autenticado com Sucesso',
-                        'success',
-                        3500
-                    );
-                },
-
-                submitRegister() {
-                    const empName = this.registerForm.name.trim() || 'Casimiro Custódio';
-                    const empEmail = this.registerForm.email.trim() || 'casimirogundja@outlook.com';
-                    this.userLoggedIn = true;
-                    this.currentUser = {
-                        name: empName,
-                        email: empEmail,
-                        phone: this.registerForm.phone || '+244 923 000 000',
-                        nif: this.registerForm.nif || '5001239840',
-                        address: 'Luanda, Angola',
-                        balance: '0,00 AOA',
-                        level: 'Corporativo',
-                        has_matricula: false,
-                        role: 'customer',
-                        tipo: 'cliente'
-                    };
-                    this.loginModalOpen = false;
-                    this.userMenuOpen = false;
-
-                    const unified = {
-                        ...this.currentUser,
-                        nome: this.currentUser.name,
-                        name: this.currentUser.name,
-                        loggedIn: true,
-                        user: this.currentUser
-                    };
-
-                    // Sincronizar registro em todas as telas
-                    try {
-                        localStorage.setItem('rachi_user_session', JSON.stringify(unified));
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                        if (this.authChannel) {
-                            this.authChannel.postMessage({ action: 'login', user: unified, timestamp: Date.now() });
-                        }
-                    } catch (e) {}
-
-                    this.showToast(
-                        'Registo criado com sucesso para a empresa ' + empName + '! NIF: ' + (this.registerForm.nif || 'Registado'),
-                        'Conta Corporativa Criada',
-                        'success',
-                        4000
-                    );
-                },
+                submitRegister() { location.href = '/registro'; },
 
                 openChatModal() {
                     this.chatModalOpen = true;
@@ -3169,8 +3017,8 @@
 
                 saveUserData() {
                     try {
-                        localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: true, user: this.currentUser }));
-                        localStorage.setItem('rachi_auth_sync', JSON.stringify({ action: 'update', user: this.currentUser, timestamp: Date.now() }));
+
+
                         if (this.authChannel) {
                             this.authChannel.postMessage({ action: 'update', user: this.currentUser, timestamp: Date.now() });
                         }
@@ -3196,77 +3044,17 @@
                     });
                 },
 
-                syncSessionFromStorage() {
-                    try {
-                        const raw = localStorage.getItem('rachi_user_session');
-                        if (!raw) {
-                            this.userLoggedIn = false;
-                            this.currentUser = { name: '', email: '' };
-                            return;
-                        }
-                        const parsed = JSON.parse(raw);
-                        if (parsed.loggedIn === false) {
-                            this.userLoggedIn = false;
-                            this.currentUser = { name: '', email: '' };
-                            return;
-                        }
-                        const u = parsed.user || (parsed.email ? parsed : null);
-                        if (u && (u.name || u.nome || u.email)) {
-                            this.userLoggedIn = true;
-                            this.currentUser = {
-                                name: u.name || u.nome || 'Cliente RACHI',
-                                email: u.email || '',
-                                phone: u.phone || '+244 923 000 000',
-                                nif: u.nif || '5001239840',
-                                address: u.address || 'Luanda, Angola',
-                                balance: u.balance || '0,00 AOA',
-                                level: u.level || 'Corporativo',
-                                has_matricula: !!u.has_matricula,
-                                role: u.role || 'customer'
-                            };
-                        } else {
-                            this.userLoggedIn = false;
-                            this.currentUser = { name: '', email: '' };
-                        }
-                    } catch(e) {
-                        this.userLoggedIn = false;
-                        this.currentUser = { name: '', email: '' };
-                    }
-                },
+                async syncSessionFromStorage() { const user = await RachiSession.session(); this.currentUser = user || { name: '', email: '' }; this.userLoggedIn = !!user; },
 
                 init() {
                     // 1. Inicializar e restaurar sessão sincronizada entre todas as telas
                     this.syncSessionFromStorage();
 
                     // 2. BroadcastChannel para sincronização instantânea em tempo real entre todas as telas
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            this.authChannel = new BroadcastChannel('rachi_auth_channel');
-                            this.authChannel.onmessage = (event) => {
-                                const data = event.data;
-                                if (!data) return;
-                                if (data.action === 'logout') {
-                                    this.userLoggedIn = false;
-                                    this.currentUser = { name: '', email: '' };
-                                    this.accountModalOpen = false;
-                                    this.userMenuOpen = false;
-                                    this.showToast('A sessão foi encerrada noutro ecrã ou separador.', 'Sessão Encerrada', 'info', 3500);
-                                } else if (data.action === 'login') {
-                                    this.syncSessionFromStorage();
-                                    this.showToast('Sessão conectada: ' + (this.currentUser.name || 'Cliente'), 'Sessão Sincronizada', 'success', 3500);
-                                } else if (data.action === 'update' && data.user) {
-                                    this.syncSessionFromStorage();
-                                }
-                            };
-                        }
-                    } catch (e) {}
+
 
                     // 3. Ouvinte de evento storage (para compatibilidade total com todas as abas e janelas do navegador)
-                    window.addEventListener('storage', (event) => {
-                        if (event.key === 'rachi_user_session' || event.key === 'rachi_auth_sync') {
-                            this.syncSessionFromStorage();
-                        }
-                    });
+
 
                     // Watchers do Alpine
                     this.$watch('userMenuOpen', (val) => {

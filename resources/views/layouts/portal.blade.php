@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Painel') - RACHI</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -19,7 +23,7 @@
             <div class="w-full px-6 sm:px-8 lg:px-12 min-h-[80px] flex items-center justify-between">
                 <div class="flex items-center gap-5">
                     <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                        <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" alt="RACHI" class="h-10 sm:h-11 w-auto transition group-hover:scale-105">
+                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 sm:h-11 w-auto transition group-hover:scale-105">
                     </a>
                     <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[#f5a800]/20 text-[#f5a800] font-bold border border-[#f5a800]/40">
                         @yield('portal-type', 'Portal')
@@ -99,31 +103,16 @@
     <script>
         lucide.createIcons();
 
-        function syncPortalLogout() {
-            try {
-                localStorage.removeItem('rachi_user_session');
-                localStorage.removeItem('rachi_academy_auth');
-                localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: false, user: null }));
-                if (typeof BroadcastChannel !== 'undefined') {
-                    const bc = new BroadcastChannel('rachi_auth_channel');
-                    bc.postMessage({ action: 'logout', timestamp: Date.now() });
-                    bc.close();
-                }
-                localStorage.setItem('rachi_auth_sync', Date.now().toString());
-            } catch(e) {}
-        }
-
-        try {
-            if (typeof BroadcastChannel !== 'undefined') {
-                const bc = new BroadcastChannel('rachi_auth_channel');
-                bc.onmessage = (event) => {
-                    if (event.data && event.data.action === 'logout') {
-                        const logoutForm = document.querySelector('form[action="{{ route("logout") }}"]');
-                        if (logoutForm) logoutForm.submit();
-                    }
-                };
+        function syncPortalLogout(event) {
+            if (event) {
+                event.preventDefault();
             }
-        } catch(e) {}
+            if (window.RachiSession) {
+                window.RachiSession.logout();
+            } else {
+                window.location.href = '/logout';
+            }
+        }
     </script>
     @stack('scripts')
 </body>

@@ -40,14 +40,19 @@ class CourseController extends Controller
         return view('public.courses.show', compact('course', 'relatedCourses', 'totalLessons'));
     }
 
-    public function enroll(Request $request, string $slug): RedirectResponse
+    public function enroll(Request $request, string $slug)
     {
         $course = Course::where('slug', $slug)->firstOrFail();
+
+        if ($request->user()) {
+            $request->merge(['name'=>$request->user()->name,'email'=>$request->user()->email,
+                'phone'=>$request->input('phone') ?: $request->user()->phone ?: $request->user()->customer?->phone]);
+        }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:30',
+            'phone' => 'nullable|string|max:30',
             'modality' => 'nullable|string|max:50',
             'notes' => 'nullable|string|max:1000',
         ]);
@@ -66,14 +71,14 @@ class CourseController extends Controller
         $customer = Customer::firstOrCreate(
             ['user_id' => $user->id],
             [
-                'phone' => $validated['phone'],
-                'whatsapp' => $validated['phone'],
+                'phone' => $validated['phone'] ?? null,
+                'whatsapp' => $validated['phone'] ?? null,
                 'status' => 'active',
             ]
         );
         $customer->update([
-            'phone' => $validated['phone'],
-            'whatsapp' => $validated['phone'],
+            'phone' => $validated['phone'] ?? $customer->phone,
+            'whatsapp' => $validated['phone'] ?? $customer->whatsapp,
         ]);
 
         // Registrar solicitação de matrícula com status PENDENTE para aprovação no Admin Dashboard
@@ -101,11 +106,21 @@ class CourseController extends Controller
         $whatsappMsg = urlencode("Olá! Fiz minha solicitação de matrícula na RACHI Academy para a formação: {$course->name}.\nNome: {$validated['name']}\nCódigo: {$matriculaCode}\nGostaria de confirmar a vaga.");
         $whatsappUrl = "https://wa.me/244923000000?text={$whatsappMsg}";
 
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Solicitação de matrícula recebida.',
+                'enrollment' => $enrollment,
+                'code' => $matriculaCode,
+                'whatsappUrl' => $whatsappUrl,
+            ]);
+        }
+
         return redirect()->route('academy.course.show', $course->slug)
             ->with('matricula_sucesso', [
                 'name' => $validated['name'],
                 'email' => $validated['email'],
-                'phone' => $validated['phone'],
+                'phone' => $validated['phone'] ?? null,
                 'code' => $matriculaCode,
                 'course' => $course->name,
                 'whatsappUrl' => $whatsappUrl,

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt" class="scroll-smooth">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RACHI Human Capital — Serviços Empresariais, Recursos Humanos &amp; Contabilidade</title>
@@ -12,33 +16,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/libs/lucide.js"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        rachiNavy: '#071326',
-                        rachiNavyLight: '#0d1f3d',
-                        rachiEmerald: '#10b981',
-                        rachiEmeraldDark: '#059669',
-                        rachiGold: '#f5a800',
-                        rachiBlue: '#00a3e0',
-                    }
-                }
-            }
-        }
-    </script>
+    
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
         (function() {
@@ -68,7 +52,7 @@
             }
         });
     </script>
-    <link rel="stylesheet" href="/css/site.css?v={{ time() }}">
+    <link rel="stylesheet" href="/css/site.css?v=1790340043">
     <style>
         [x-cloak] { display: none !important; }
         html { scroll-behavior: smooth; }
@@ -902,5 +886,5 @@
             }
         });
     </script>
-</body>
+<script src="/worker-public.js"></script></body>
 </html>

@@ -2,6 +2,10 @@
 <html lang="pt-AO" data-theme="dark" class="scroll-smooth">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/toast.css">
+    <script src="/toast.js"></script>
+    <script src="/auth-session.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Planos RACHI Academy: matricule-se nos melhores cursos de tecnologia, IA e negócios em Angola</title>
@@ -47,40 +51,13 @@
     </style>
 
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/worker-marketing.css">
     <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/libs/lucide.js"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Inter"', '"Roboto Flex"', 'sans-serif'],
-                        heading: ['"Encode Sans"', '"Montserrat"', 'sans-serif'],
-                    },
-                    colors: {
-                        rachi: {
-                            navy: '#071326',
-                            navyLight: '#0d1f3d',
-                            blue: '#00a3e0',
-                            blueDark: '#052fd3',
-                            blueHover: '#0042c7',
-                            gold: '#f5a800',
-                            goldDark: '#eba72d',
-                            surface: '#0b1629',
-                            surfaceDark: '#070f1e',
-                            border: '#162744',
-                            borderLight: '#1f355c',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
         (function() {
@@ -110,7 +87,7 @@
             }
         });
     </script>
-    <link rel="stylesheet" href="/css/site.css?v={{ time() }}">
+    <link rel="stylesheet" href="/css/site.css?v=1790340043">
     <style>
         [x-cloak] {
             display: none !important;
@@ -297,8 +274,13 @@
         class="w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-4 sm:px-6 lg:px-8 py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
 
-            <!-- Logo Oficial -->
-            <div class="flex items-center gap-3 shrink-0">
+            <!-- Logo Oficial & Voltar para Início -->
+            <div class="flex items-center gap-3 sm:gap-5 shrink-0">
+                <a href="/" class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] text-xs sm:text-sm font-semibold transition-colors group" title="Voltar para a página inicial">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+                    <span class="hidden sm:inline">Voltar para Início</span>
+                </a>
+                <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
                 <a href="/"
                     class="flex items-center gap-2.5 group cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
                     title="Ir para a página inicial (Portal RACHI)">
@@ -319,13 +301,13 @@
                 </a>
             </div>
 
+            
             @php
                 $catalogCourses = (isset($courses) && $courses->count() > 0)
                     ? $courses
                     : \App\Models\Course::where('status', 'published')->with('category')->get();
             @endphp
-
-            <!-- Menu Central Cápsula Escura Premium -->
+<!-- Menu Central Cápsula Escura Premium -->
             <nav
                 class="hidden lg:flex items-center justify-center bg-slate-900 dark:bg-white/[0.08] border border-slate-800/90 dark:border-white/15 rounded-full p-1 shadow-md shadow-slate-950/20 gap-0.5 text-[13px] tracking-tight transition-all">
                 <a href="#home" class="px-4 py-1.5 rounded-full bg-white text-slate-900 font-bold transition-all shadow-sm">Home</a>
@@ -425,7 +407,6 @@
                                 class="flex gap-3 overflow-x-auto scroll-smooth py-1 no-scrollbar select-none cursor-grab active:cursor-grabbing"
                                 style="scrollbar-width: none; -ms-overflow-style: none;">
 
-                                <!-- Lote 1 e Lote 2 para efeito de rolagem contínua sem quebras -->
                                 @for($copy = 0; $copy < 2; $copy++)
                                     <div class="grid grid-rows-2 grid-flow-col auto-cols-[270px] sm:auto-cols-[305px] gap-3 shrink-0">
                                         @foreach($catalogCourses as $course)
@@ -471,9 +452,8 @@
                                         @endforeach
                                     </div>
                                 @endfor
-                            </div>
-
-                            <!-- Gradientes de fade nas extremidades para suavizar a rolagem contínua -->
+</div>
+<!-- Gradientes de fade nas extremidades para suavizar a rolagem contínua -->
                             <div class="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-white dark:from-[#0b162a] to-transparent pointer-events-none"></div>
                             <div class="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white dark:from-[#0b162a] to-transparent pointer-events-none"></div>
                         </div>
@@ -496,8 +476,14 @@
                 <a href="/loja" class="px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 font-semibold transition-all">Loja</a>
             </nav>
 
-            <!-- Botões da Direita (Tema, Busca, CTA, Menu Mobile) -->
+            <!-- Botões da Direita (Portal do Aluno, Tema, Busca, CTA, Menu Mobile) -->
             <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+                <!-- Botão Portal do Aluno (Padrão Unificado RACHI Academy) -->
+                <a href="/academy/login" class="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 hover:bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/20 dark:border-[#00a3e0]/30 transition inline-flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Portal do Aluno</span>
+                </a>
+
                 <!-- Botão de Alternância de Tema -->
                 <button type="button"
                     onclick="window.toggleRachiTheme()"
@@ -571,6 +557,17 @@
             </template>
         </div>
     </header>
+
+    <!-- BREADCRUMBS (Padrão Corporativo Unificado RACHI) -->
+    <nav class="bg-slate-100/60 dark:bg-[#0c1527]/50 border-b border-slate-200/80 dark:border-white/5 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ol class="flex items-center flex-wrap gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+                <li><a href="/" class="hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors">Início</a></li>
+                <li><i data-lucide="chevron-right" class="w-3 h-3 text-slate-400"></i></li>
+                <li class="text-slate-900 dark:text-white font-semibold">RACHI Academy</li>
+            </ol>
+        </div>
+    </nav>
 
     <!-- ============================================================== -->
     <!-- 2. HERO CAMPAIGN BANNER: CIBERSEGURANÇA (100% FULL BLEED)       -->
@@ -1722,43 +1719,7 @@
                 currentUser: null,
                 userMenuOpen: false,
 
-                checkAuth() {
-                    const storedUser = localStorage.getItem('rachi_user_session');
-                    const isAuth = localStorage.getItem('rachi_academy_auth');
-                    let userObj = null;
-
-                    if (storedUser) {
-                        try {
-                            const parsed = JSON.parse(storedUser);
-                            if (parsed.loggedIn !== false) {
-                                userObj = parsed.user || (parsed.email ? parsed : null);
-                            }
-                        } catch(e) {}
-                    }
-
-                    if (userObj && (userObj.nome || userObj.name || userObj.email)) {
-                        // Se tiver matrícula ativa, sincroniza autorização da academy
-                        if (userObj.has_matricula || isAuth === 'true') {
-                            localStorage.setItem('rachi_academy_auth', 'true');
-                        }
-                        this.isLoggedIn = true;
-                        this.currentUser = {
-                            ...userObj,
-                            nome: userObj.nome || userObj.name,
-                            name: userObj.nome || userObj.name
-                        };
-                        return;
-                    }
-
-                    if (isAuth === 'true') {
-                        this.isLoggedIn = true;
-                        this.currentUser = { nome: 'Aluno RACHI', email: 'aluno@rachi.ao', has_matricula: true };
-                        return;
-                    }
-
-                    this.isLoggedIn = false;
-                    this.currentUser = null;
-                },
+                async checkAuth() { this.currentUser = await window.RachiSession.session(); this.isLoggedIn = !!this.currentUser; },
 
                 getUserInitials(name) {
                     if (!name) return 'AL';
@@ -1767,47 +1728,13 @@
                     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
                 },
 
-                logout() {
-                    localStorage.removeItem('rachi_academy_auth');
-                    localStorage.removeItem('rachi_user_session');
-                    localStorage.setItem('rachi_user_session', JSON.stringify({ loggedIn: false, user: null }));
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            const bc = new BroadcastChannel('rachi_auth_channel');
-                            bc.postMessage({ action: 'logout', timestamp: Date.now() });
-                            bc.close();
-                        }
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                    } catch(e) {}
-
-                    this.isLoggedIn = false;
-                    this.currentUser = null;
-                    this.userMenuOpen = false;
-                    window.location.reload();
-                },
+                async logout() { await window.RachiSession.logout(); },
 
                 init() {
                     this.checkAuth();
-                    try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            this.authChannel = new BroadcastChannel('rachi_auth_channel');
-                            this.authChannel.onmessage = (event) => {
-                                if (!event.data) return;
-                                if (event.data.action === 'logout') {
-                                    this.isLoggedIn = false;
-                                    this.currentUser = null;
-                                } else if (event.data.action === 'login') {
-                                    this.checkAuth();
-                                }
-                            };
-                        }
-                    } catch(e) {}
 
-                    window.addEventListener('storage', (event) => {
-                        if (event.key === 'rachi_user_session' || event.key === 'rachi_auth_sync' || event.key === 'rachi_academy_auth') {
-                            this.checkAuth();
-                        }
-                    });
+
+
 
                     if (window.lucide) {
                         this.$nextTick(() => lucide.createIcons());
@@ -1890,6 +1817,6 @@
 
 
 
-</body>
+<script src="/worker-public.js"></script></body>
 
 </html>
