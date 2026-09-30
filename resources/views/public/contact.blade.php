@@ -380,151 +380,7 @@
         }
 
 
-        /* ------------------------------------------------------------ */
-        /* STATE 2: SCROLLED DOWN (LIGHT / WHITE GLASS - KLASSE.AO STYLE)*/
-        /* ------------------------------------------------------------ */
-        .site-header.header-scrolled-light {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-        }
-        .site-header.header-scrolled-light .logo-light { display: none !important; }
-        .site-header.header-scrolled-light .logo-dark { display: block !important; }
 
-        /* Light Nav Capsule */
-        .site-header.header-scrolled-light .main-nav-capsule {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            background: rgba(11, 26, 46, 0.04);
-            border: 1px solid rgba(11, 26, 46, 0.08);
-            border-radius: 9999px;
-            padding: 0.3rem 0.5rem;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link {
-            position: relative;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #0b1a2e !important;
-            padding: 0.45rem 0.9rem !important;
-            border-radius: 9999px;
-            white-space: nowrap;
-            text-decoration: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover,
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link.nav-link-open {
-            color: #0077c2 !important;
-            background: rgba(0, 163, 224, 0.08);
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
-            color: #0077c2 !important;
-            background: rgba(0, 163, 224, 0.12);
-            border: 1px solid rgba(0, 163, 224, 0.3);
-            box-shadow: 0 2px 8px rgba(0, 163, 224, 0.15);
-            font-weight: 700;
-        }
-        .site-header.header-scrolled-light .nav-link svg {
-            color: #475569;
-        }
-
-        /* Light Dropdowns */
-        .site-header.header-scrolled-light .header-dropdown {
-            background: rgba(255, 255, 255, 0.98) !important;
-            border: 1px solid rgba(11, 26, 46, 0.1) !important;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06) !important;
-        }
-        .site-header.header-scrolled-light .header-dropdown a {
-            color: #334155 !important;
-        }
-        .site-header.header-scrolled-light .header-dropdown a:hover {
-            background: #f1f5f9 !important;
-            color: #0077c2 !important;
-        }
-        .site-header.header-scrolled-light .header-dropdown .dropdown-title {
-            color: #0f172a !important;
-        }
-        .site-header.header-scrolled-light .header-dropdown .dropdown-desc {
-            color: #64748b !important;
-        }
-
-        /* Light Action Buttons */
-        .site-header.header-scrolled-light .lang-toggle-btn {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            border-radius: 50%;
-            border: 1.5px solid #00a3e0 !important;
-            background: #ffffff;
-            color: #0b1a2e;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-        .site-header.header-scrolled-light .lang-toggle-btn:hover {
-            border-color: #00a3e0;
-            background: rgba(0, 163, 224, 0.08);
-            color: #0077c2;
-            box-shadow: 0 0 12px rgba(0, 163, 224, 0.25);
-        }
-        .site-header.header-scrolled-light .cart-icon-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 1px solid rgba(11, 26, 46, 0.12);
-            background: rgba(11, 26, 46, 0.04);
-            color: #0b1a2e;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        .site-header.header-scrolled-light .cart-icon-btn svg {
-            color: #0b1a2e !important;
-        }
-        .site-header.header-scrolled-light .cart-icon-btn:hover {
-            border-color: rgba(235, 167, 45, 0.7);
-            background: rgba(235, 167, 45, 0.12);
-            transform: translateY(-1px);
-            box-shadow: 0 0 12px rgba(235, 167, 45, 0.25);
-        }
-        .site-header.header-scrolled-light .btn-entrar-nav {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            height: 38px;
-            padding: 0 1.25rem;
-            border-radius: 9999px;
-            border: 1px solid #00a3e0;
-            background: linear-gradient(135deg, #00a3e0 0%, #0077c2 100%);
-            color: #ffffff;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 163, 224, 0.35);
-        }
-        .site-header.header-scrolled-light .btn-entrar-nav:hover {
-            background: linear-gradient(135deg, #0092c8 0%, #0065a5 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 163, 224, 0.45);
-        }
-        .site-header.header-scrolled-light .mobile-menu-btn {
-            background: rgba(11, 26, 46, 0.05) !important;
-            border: 1px solid rgba(11, 26, 46, 0.1) !important;
-            color: #0b1a2e !important;
-        }
 
         /* ============================================================ */
         /* CONTACT PAGE ENHANCEMENTS (LIGHT & DARK MODE LUXURY)         */
@@ -660,7 +516,7 @@
                     </a>
                     
                     <!-- Sobre Nós Dropdown -->
-                    <div class="relative" x-data="{ open: false }" @mouseleave="open = false">
+                    <div class="relative" x-data="{ open: false , solutionsOpen: false}" @mouseleave="open = false">
                         <button @mouseover="open = true" @click="open = !open" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="open ? 'nav-link-open' : ''">
                             <span>Sobre Nós</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="open ? 'rotate-180 text-[#00a3e0]' : ''">
@@ -702,85 +558,34 @@
                         </div>
                     </div>
 
-                    <!-- Soluções (4 Unidades) -->
-                    <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                        <button @mouseover="openSol = true" @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="['capital','academy','tec','print'].includes(currentTab) || openSol ? 'active' : ''">
-                            <span>Soluções</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div x-show="openSol" 
-                             x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave="transition ease-in duration-150"
-                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                             class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5">
-                            
-                            <a href="/capital" @click="openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-500/15 text-slate-300 hover:text-emerald-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-black text-xs">
-                                        01
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Human Capital</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Pessoas &amp; Gestão</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
+                    <!-- Soluções (Mega Menu Ecossistema RACHI) -->
+                    <button type="button"
+                        @click="solutionsOpen = !solutionsOpen"
+                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        :class="solutionsOpen ? 'text-[#0077c2] dark:text-white font-semibold' : ''">
+                        <span class="relative py-1">
+                            Soluções
+                            <!-- Linha ciano brilhante sob a palavra Soluções (idêntica à imagem) -->
+                            <span x-show="solutionsOpen"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-x-0"
+                                x-transition:enter-end="opacity-100 scale-x-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 scale-x-100"
+                                x-transition:leave-end="opacity-0 scale-x-0"
+                                class="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-[#00a3e0] rounded-full shadow-[0_0_8px_rgba(0,163,224,0.85)]"
+                                style="display: none;"
+                                x-cloak></span>
+                        </span>
+                    </button>
 
-                            <a href="/academy" @click="openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-300 hover:text-indigo-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-black text-xs">
-                                        02
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/tec" @click="openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-300 hover:text-sky-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">
-                                        03
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Tecnologia &amp; TI</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/print" @click="openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-500/15 text-slate-300 hover:text-amber-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">
-                                        04
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Print</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                        </div>
-                    </div>
-
-                    <a href="/#etica" class="nav-link">
+                    <a href="/#etica" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
-                    <a href="/loja" class="nav-link">
+                    <a href="/loja" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
                         <span>Loja</span>
                     </a>
-                    <a href="/contacto" class="nav-link active">
+                    <a href="/contacto" class="nav-link active" :class="currentTab === 'contacto' ? 'active' : ''">
                         <span>Contacto</span>
                     </a>
                 </nav>
@@ -904,6 +709,9 @@
             </div>
         </header>
 
+        <!-- MEGA PAINEL DE SOLUÇÕES (ECOSSISTEMA RACHI) -->
+        @include('components.solutions-mega-menu')
+
         <!-- Script de Rolagem Inteligente: Claro no modo claro, Escuro no modo escuro -->
         <script>
             (function() {
@@ -982,7 +790,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
                         
                         <!-- Coluna da Esquerda: Canais Oficiais & Unidades -->
-                        <div class="lg:col-span-5 flex flex-col justify-between h-full space-y-6 lg:space-y-0">
+                        <div class="lg:col-span-5 flex flex-col justify-start space-y-5">
                             <div>
                                 <span class="text-xs font-bold uppercase tracking-wider text-[#0050f0] dark:text-sky-400 bg-blue-50 dark:bg-blue-500/15 px-3.5 py-1 rounded-full border border-blue-100 dark:border-blue-500/30">
                                     Canais Oficiais
@@ -995,8 +803,8 @@
                                 </p>
                             </div>
 
-                            <!-- Cards de Contacto Interativos perfeitamente alinhados -->
-                            <div class="space-y-3.5 pt-2">
+                            <!-- Cards de Contacto Interativos logo abaixo do título -->
+                            <div class="space-y-3">
                                 <!-- E-mail -->
                                 <div class="contact-channel-card flex items-center justify-between p-4 sm:p-5 rounded-2xl group transition-all">
                                     <div class="flex items-center gap-3.5 min-w-0">
@@ -1054,68 +862,7 @@
 
                         <!-- Coluna da Direita: Formulário Executivo de Alto Padrão & Dinâmico -->
                         <div class="lg:col-span-7 contact-form-card p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between h-full"
-                             x-data="{ 
-                                 isSubmitting: false, 
-                                 formSent: new URLSearchParams(window.location.search).get('enviado') === '1',
-                                 charCount: 0,
-                                 formData: {
-                                     nome: '',
-                                     email: '',
-                                     telefone: '',
-                                     unidade: 'Geral',
-                                     mensagem: ''
-                                 },
-                                 getPlaceholder() {
-                                     switch(this.formData.unidade) {
-                                         case 'RACHI Tec': return 'Descreva a necessidade em infraestrutura de TI, redes estruturadas, suporte ou servidores...';
-                                         case 'RACHI Print': return 'Indique os materiais gráficos, tiragens pretendidas, formatos ou brindes corporativos...';
-                                         case 'RACHI Academy': return 'Qual o programa executivo ou necessidade de formação corporativa da sua equipa?';
-                                         case 'RACHI Human Capital': return 'Descreva a necessidade em recrutamento especializado, consultoria de RH ou gestão...';
-                                         case 'Loja': return 'Quais os equipamentos de informática ou produtos homologados que pretende orçamentar?';
-                                         case 'Parcerias': return 'Apresente a sua proposta de parceria institucional ou representação comercial...';
-                                         default: return 'Descreva sucintamente a sua necessidade corporativa ou pedido de cotação...';
-                                     }
-                                 },
-                                 async handleFormSubmit() {
-                                    this.isSubmitting = true;
-                                    try {
-                                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                                        const res = await fetch('/contacto', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                                'Accept': 'application/json',
-                                                'X-CSRF-TOKEN': token || ''
-                                            },
-                                            body: JSON.stringify(this.formData)
-                                        });
-                                        const data = await res.json();
-                                        if (!res.ok || data.success === false) {
-                                            throw new Error(data.message || 'Erro ao enviar a mensagem.');
-                                        }
-                                        this.formSent = true;
-                                        if (typeof showToast === 'function') {
-                                            showToast(data.message || 'A sua mensagem foi registada com sucesso! A equipa entrará em contacto em breve.', 'Mensagem Enviada!', 'success', 4500);
-                                        }
-                                        this.formData.nome = '';
-                                        this.formData.email = '';
-                                        this.formData.telefone = '';
-                                        this.formData.unidade = 'Geral';
-                                        this.formData.mensagem = '';
-                                        this.charCount = 0;
-                                        $nextTick(() => { if (window.lucide) lucide.createIcons(); });
-                                    } catch (err) {
-                                        if (typeof showToast === 'function') {
-                                            showToast(err.message, 'Atenção', 'error', 4500);
-                                        } else {
-                                            alert(err.message);
-                                        }
-                                    } finally {
-                                        this.isSubmitting = false;
-                                    }
-                                });
-                                 }
-                             }">
+                             x-data="contactForm()">
 
                             <!-- Linha de Destaque Superior Corporativa RACHI -->
                             <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#00a3e0] via-[#0050f0] to-[#f5a800]"></div>
@@ -1358,11 +1105,76 @@
 
     <!-- Script Implementation -->
     <script>
+        function contactForm() {
+            return {
+                isSubmitting: false,
+                formSent: new URLSearchParams(window.location.search).get('enviado') === '1',
+                charCount: 0,
+                formData: {
+                    nome: '',
+                    email: '',
+                    telefone: '',
+                    unidade: 'Geral',
+                    mensagem: ''
+                },
+                getPlaceholder() {
+                    switch(this.formData.unidade) {
+                        case 'RACHI Tec': return 'Descreva a necessidade em infraestrutura de TI, redes estruturadas, suporte ou servidores...';
+                        case 'RACHI Print': return 'Indique os materiais gráficos, tiragens pretendidas, formatos ou brindes corporativos...';
+                        case 'RACHI Academy': return 'Qual o programa executivo ou necessidade de formação corporativa da sua equipa?';
+                        case 'RACHI Human Capital': return 'Descreva a necessidade em recrutamento especializado, consultoria de RH ou gestão...';
+                        case 'Loja': return 'Quais os equipamentos de informática ou produtos homologados que pretende orçamentar?';
+                        case 'Parcerias': return 'Apresente a sua proposta de parceria institucional ou representação comercial...';
+                        default: return 'Descreva sucintamente a sua necessidade corporativa ou pedido de cotação...';
+                    }
+                },
+                async handleFormSubmit() {
+                    this.isSubmitting = true;
+                    try {
+                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                        const res = await fetch('/contacto', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': token || ''
+                            },
+                            body: JSON.stringify(this.formData)
+                        });
+                        const data = await res.json();
+                        if (!res.ok || data.success === false) {
+                            throw new Error(data.message || 'Erro ao enviar a mensagem.');
+                        }
+                        this.formSent = true;
+                        if (typeof showToast === 'function') {
+                            showToast(data.message || 'A sua mensagem foi registada com sucesso! A equipa entrará em contacto em breve.', 'Mensagem Enviada!', 'success', 4500);
+                        }
+                        this.formData.nome = '';
+                        this.formData.email = '';
+                        this.formData.telefone = '';
+                        this.formData.unidade = 'Geral';
+                        this.formData.mensagem = '';
+                        this.charCount = 0;
+                        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+                    } catch (err) {
+                        if (typeof showToast === 'function') {
+                            showToast(err.message, 'Atenção', 'error', 4500);
+                        } else {
+                            alert(err.message);
+                        }
+                    } finally {
+                        this.isSubmitting = false;
+                    }
+                }
+            };
+        }
+
         function rachiApp() {
             return {
                 currentView: 'public',
                 currentTab: 'contacto',
                 mobileMenuOpen: false,
+                solutionsOpen: false,
                 customerTab: 'dashboard',
                 currentUser: null,
                 contactSubject: 'Orçamento de Projeto',

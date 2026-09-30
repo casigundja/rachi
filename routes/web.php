@@ -38,7 +38,8 @@ Route::post('/checkout', [ProductController::class, 'processCheckout'])->name('c
 Route::prefix('tec')->name('tec.')->group(function () {
     Route::get('/', [BusinessUnitController::class, 'tec'])->name('index');
     Route::get('/produtos', [ProductController::class, 'byUnit'])->defaults('unit', 'tec')->name('products');
-    Route::get('/servicos', [ServiceController::class, 'byUnit'])->defaults('unit', 'tec')->name('services');
+    Route::get('/servicos', [BusinessUnitController::class, 'tec'])->name('services');
+    Route::get('/servicos/{slug}', [BusinessUnitController::class, 'tecService'])->name('service.show');
 });
 
 Route::prefix('print')->name('print.')->group(function () {
@@ -611,7 +612,8 @@ Route::post('/admin/academy/enrollments/create', function (\Illuminate\Http\Requ
 
 Route::prefix('capital')->name('capital.')->group(function () {
     Route::get('/', [BusinessUnitController::class, 'capital'])->name('index');
-    Route::get('/servicos', [ServiceController::class, 'byUnit'])->defaults('unit', 'capital')->name('services');
+    Route::get('/servicos', [BusinessUnitController::class, 'capital'])->name('services');
+    Route::get('/servicos/{slug}', [BusinessUnitController::class, 'capitalService'])->name('service.show');
 });
 
 Route::get('/solucoes/{unit}', [BusinessUnitController::class, 'show'])->name('unit.show');

@@ -189,11 +189,216 @@
             flex-col: justify-between;
         }
         .service-card:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-            box-shadow: 0 20px 35px -10px rgba(0, 163, 224, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-6px);
+        }
+
+        /* Hover Accents Individualized per Service */
+        .card-accent-sky:hover {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 20px 35px -10px rgba(0, 163, 224, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-indigo:hover {
+            border-color: #6366f1 !important;
+            box-shadow: 0 20px 35px -10px rgba(99, 102, 241, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-amber:hover {
+            border-color: #f59e0b !important;
+            box-shadow: 0 20px 35px -10px rgba(245, 158, 11, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-emerald:hover {
+            border-color: #10b981 !important;
+            box-shadow: 0 20px 35px -10px rgba(16, 185, 129, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-cyan:hover {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 20px 35px -10px rgba(6, 182, 212, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Category Badges */
+        .badge-category {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border-width: 1px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .badge-cat-sky     { background-color: #f0f9ff; color: #0284c7; border-color: #bae6fd; }
+        .badge-cat-indigo  { background-color: #eef2ff; color: #4f46e5; border-color: #c7d2fe; }
+        .badge-cat-amber   { background-color: #fffbeb; color: #b45309; border-color: #fde68a; }
+        .badge-cat-emerald { background-color: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+        .badge-cat-cyan    { background-color: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+
+        html.dark .badge-cat-sky     { background-color: rgba(2, 132, 199, 0.4); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+        html.dark .badge-cat-indigo  { background-color: rgba(79, 70, 229, 0.4); color: #818cf8; border-color: rgba(129, 140, 248, 0.3); }
+        html.dark .badge-cat-amber   { background-color: rgba(180, 83, 9, 0.4); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+        html.dark .badge-cat-emerald { background-color: rgba(6, 78, 59, 0.4); color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+        html.dark .badge-cat-cyan    { background-color: rgba(14, 116, 144, 0.4); color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); }
+
+        /* Bullets */
+        .card-bullet {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .bullet-sky     { background-color: #e0f2fe; color: #0284c7; }
+        .bullet-indigo  { background-color: #e0e7ff; color: #4f46e5; }
+        .bullet-amber   { background-color: #fef3c7; color: #d97706; }
+        .bullet-emerald { background-color: #d1fae5; color: #059669; }
+        .bullet-cyan    { background-color: #cffafe; color: #0891b2; }
+
+        html.dark .bullet-sky     { background-color: rgba(2, 132, 199, 0.35); color: #38bdf8; }
+        html.dark .bullet-indigo  { background-color: rgba(79, 70, 229, 0.35); color: #818cf8; }
+        html.dark .bullet-amber   { background-color: rgba(217, 119, 6, 0.35); color: #fbbf24; }
+        html.dark .bullet-emerald { background-color: rgba(5, 150, 105, 0.35); color: #34d399; }
+        html.dark .bullet-cyan    { background-color: rgba(8, 145, 178, 0.35); color: #22d3ee; }
+
+        /* Suporte Dark Mode & Light Mode RACHI Tec */
+        html.dark body {
+            background-color: #030814 !important;
+            color: #f8fafc !important;
+        }
+        
+        /* Breadcrumbs bar */
+        .breadcrumb-nav-bar {
+            background-color: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .breadcrumb-nav-bar {
+            background-color: #030d1c !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: #94a3b8 !important;
+        }
+
+        /* Hero Carousel Aspect Ratio */
+        .hero-carousel-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 2048 / 710;
+            overflow: hidden;
+            background-color: #030d1c;
+        }
+        @supports not (aspect-ratio: 2048 / 710) {
+            .hero-carousel-container {
+                padding-top: 34.66%;
+            }
+        }
+
+        /* 4 Feature Cards Strip */
+        .feature-cards-strip {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .feature-cards-strip {
+            background-color: #071326 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        .feature-card-title {
+            color: #0f172a;
+            transition: color 0.3s ease;
+        }
+        html.dark .feature-card-title {
+            color: #ffffff !important;
+        }
+        .feature-card-desc {
+            color: #64748b;
+            transition: color 0.3s ease;
+        }
+        html.dark .feature-card-desc {
+            color: #94a3b8 !important;
+        }
+        .feature-card-divider {
+            border-color: #e2e8f0;
+        }
+        html.dark .feature-card-divider {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Services Section */
+        html.dark #servicos-tec {
+            background-color: #030814 !important;
+        }
+        html.dark #servicos-tec h2 {
+            color: #ffffff !important;
+        }
+        html.dark #servicos-tec p {
+            color: #94a3b8 !important;
+        }
+        html.dark .tag-services-pill {
+            background-color: rgba(0, 163, 224, 0.15) !important;
+            border-color: rgba(0, 163, 224, 0.35) !important;
+            color: #38bdf8 !important;
+        }
+        html.dark .badge-trust-emerald {
+            background-color: rgba(6, 78, 59, 0.4) !important;
+            color: #34d399 !important;
+            border-color: rgba(52, 211, 153, 0.3) !important;
+        }
+        html.dark .badge-trust-amber {
+            background-color: rgba(180, 83, 9, 0.4) !important;
+            color: #fbbf24 !important;
+            border-color: rgba(251, 191, 36, 0.3) !important;
+        }
+        html.dark .badge-trust-sky {
+            background-color: rgba(2, 132, 199, 0.4) !important;
+            color: #38bdf8 !important;
+            border-color: rgba(56, 189, 248, 0.3) !important;
+        }
+
+        html.dark .service-card {
+            background: #071326 !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: #f8fafc !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+        }
+        html.dark .card-accent-sky:hover {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 20px 45px -10px rgba(0, 163, 224, 0.35), 0 0 25px rgba(0, 163, 224, 0.15) !important;
+        }
+        html.dark .card-accent-indigo:hover {
+            border-color: #818cf8 !important;
+            box-shadow: 0 20px 45px -10px rgba(99, 102, 241, 0.35), 0 0 25px rgba(99, 102, 241, 0.15) !important;
+        }
+        html.dark .card-accent-amber:hover {
+            border-color: #f59e0b !important;
+            box-shadow: 0 20px 45px -10px rgba(245, 158, 11, 0.35), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+        }
+        html.dark .card-accent-emerald:hover {
+            border-color: #10b981 !important;
+            box-shadow: 0 20px 45px -10px rgba(16, 185, 129, 0.35), 0 0 25px rgba(16, 185, 129, 0.15) !important;
+        }
+        html.dark .card-accent-cyan:hover {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 20px 45px -10px rgba(6, 182, 212, 0.35), 0 0 25px rgba(6, 182, 212, 0.15) !important;
+        }
+        html.dark .service-card h3 {
+            color: #ffffff !important;
+        }
+        html.dark .service-card p {
+            color: #94a3b8 !important;
+        }
+        html.dark .service-card .text-slate-700 {
+            color: #cbd5e1 !important;
+        }
+        html.dark .service-card .border-slate-100 {
+            border-color: rgba(255, 255, 255, 0.08) !important;
         }
     </style>
+
 </head>
 <body x-data="{ mobileMenuOpen: false }">
 
@@ -390,87 +595,252 @@
     <main class="flex-1" style="padding-top: 75px;">
         
         <!-- ======================================================== -->
-        <!-- 1. HERO BANNER: RACHI Tec                                -->
+        <!-- 1. HERO BANNER: RACHI TEC — TECNOLOGIA PARA CRESCER     -->
         <!-- ======================================================== -->
-        <section class="bg-[#071326] text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-            <!-- Ambient Glow Gradients -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(0,163,224,0.25),transparent_70%)] pointer-events-none"></div>
-            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="max-w-7xl mx-auto relative z-10">
-                
-                <!-- Breadcrumbs -->
-                <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                    <a href="/" class="hover:text-white transition cursor-pointer">Início</a>
-                    <span>/</span>
-                    <span class="text-slate-500">Soluções</span>
-                    <span>/</span>
-                    <span class="text-[#00a3e0] font-semibold">RACHI Tec</span>
+        <!-- Breadcrumbs Navigation Bar (Theme Adaptive) -->
+        <div class="breadcrumb-nav-bar py-3 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <nav class="flex items-center gap-2 text-xs font-medium">
+                    <a href="/" class="hover:text-sky-500 transition cursor-pointer">Início</a>
+                    <span class="opacity-50">/</span>
+                    <span class="opacity-70">Soluções</span>
+                    <span class="opacity-50">/</span>
+                    <span class="text-[#00a3e0] font-bold">RACHI Tec</span>
                 </nav>
+                <div class="hidden sm:inline-flex items-center gap-2 text-[11px] font-semibold opacity-85">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Loja Oficial &amp; Soluções Corporativas</span>
+                </div>
+            </div>
+        </div>
 
-                <div class="max-w-4xl">
-                    <!-- Pill Tag -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-bold uppercase tracking-wider mb-5">
-                        <span class="w-2 h-2 rounded-full bg-[#00a3e0] animate-pulse"></span>
-                        Tecnologia &amp; Transformação Digital
-                    </div>
+        <!-- ======================================================== -->
+        <!-- 1. HERO CAROUSEL: SLIDE 1 & SLIDE 2 (LIGHT & DARK MODES)-->
+        <!-- ======================================================== -->
+        <section id="tec-hero-carousel" class="relative w-full bg-[#030d1c] overflow-hidden select-none"
+                 x-data="{
+                     currentSlide: 0,
+                     totalSlides: 2,
+                     autoplayTimer: null,
+                     startAutoplay() {
+                         this.stopAutoplay();
+                         this.autoplayTimer = setInterval(() => {
+                             this.nextSlide();
+                         }, 6000);
+                     },
+                     stopAutoplay() {
+                         if (this.autoplayTimer) clearInterval(this.autoplayTimer);
+                     },
+                     nextSlide() {
+                         this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                     },
+                     prevSlide() {
+                         this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                     },
+                     goToSlide(index) {
+                         this.currentSlide = index;
+                     }
+                 }"
+                 x-init="startAutoplay()"
+                 @mouseenter="stopAutoplay()"
+                 @mouseleave="startAutoplay()">
 
-                    <!-- Main H1 -->
-                    <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-                        RACHI Tec
-                    </h1>
+            <!-- 2048 x 710 Aspect Ratio Container -->
+            <div class="hero-carousel-container w-full" style="aspect-ratio: 2048 / 710;">
+                
+                <!-- ============================================== -->
+                <!-- SLIDE 1: TECNOLOGIA PARA CRESCER (LOJA TEC)    -->
+                <!-- ============================================== -->
+                <div x-show="currentSlide === 0"
+                     x-transition:enter="transition-opacity duration-700 ease-in-out"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition-opacity duration-700 ease-in-out"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0"
+                     class="absolute inset-0 w-full h-full">
+                    
+                    <!-- Dark Mode Artwork (Default & Dark) -->
+                    <img src="{{ asset('images/tec-hero-banner@2x.png') }}"
+                         alt="TECNOLOGIA PARA CRESCER — AS MELHORES SOLUÇÕES PASSAM PELA RACHI TEC"
+                         class="w-full h-full object-cover hidden dark:block select-none pointer-events-none">
+                    
+                    <!-- Light Mode Artwork -->
+                    <img src="{{ asset('images/tec-hero-banner-light@2x.png') }}"
+                         alt="TECNOLOGIA PARA CRESCER — AS MELHORES SOLUÇÕES PASSAM PELA RACHI TEC"
+                         class="w-full h-full object-cover block dark:hidden select-none pointer-events-none">
 
-                    <!-- Main Subtitle requested by user -->
-                    <p class="text-lg sm:text-2xl text-slate-200 mt-4 leading-relaxed font-normal">
-                        Digitalização, sistemas de gestão, websites, transformação digital e suporte técnico.
-                    </p>
-
-                    <!-- CTAs -->
-                    <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <a href="/contacto" class="btn-cta-blue text-sm px-6 py-3.5 shadow-lg shadow-sky-500/20">
-                            <i data-lucide="message-square" class="w-4 h-4"></i>
-                            <span>Falar com um Consultor de TI</span>
-                        </a>
-                        <a href="#servicos-tec" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-sm transition">
-                            <i data-lucide="layers" class="w-4 h-4 text-sky-400"></i>
-                            <span>Explorar os Nossos Serviços</span>
-                        </a>
-                    </div>
+                    <!-- Hotspot: VER LOJA RACHI TEC -->
+                    <a href="/loja"
+                       class="absolute z-20 group rounded-2xl transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+                       style="left: 8.0%; top: 82.6%; width: 15.1%; height: 8.0%; outline: none !important; border: none !important; box-shadow: none !important; -webkit-tap-highlight-color: transparent;"
+                       title="Explorar Loja RACHI Tec"
+                       aria-label="Ver Loja RACHI Tec">
+                        <span class="absolute inset-0 rounded-2xl transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(212,238,48,0.7)] pointer-events-none"></span>
+                    </a>
                 </div>
 
-                <!-- 3 Pilares Oficiais Solicitados: Segurança Garantida, Processo Rápido, Suporte Especializado -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-800">
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
-                            <i data-lucide="shield-check" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold text-sm text-white">Segurança Garantida</div>
-                            <div class="text-xs text-slate-400">Proteção de dados e conformidade</div>
-                        </div>
-                    </div>
+                <!-- ============================================== -->
+                <!-- SLIDE 2: TRANSFORMAÇÃO DIGITAL & ERP (SOLUÇÕES)-->
+                <!-- ============================================== -->
+                <div x-show="currentSlide === 1"
+                     x-transition:enter="transition-opacity duration-700 ease-in-out"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition-opacity duration-700 ease-in-out"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0"
+                     x-cloak
+                     class="absolute inset-0 w-full h-full">
+                    
+                    <!-- Dark Mode Artwork -->
+                    <img src="{{ asset('images/tec-hero-banner-slide2@2x.png') }}"
+                         alt="TRANSFORMAÇÃO DIGITAL & ERP — SOLUÇÕES SOB MEDIDA PARA EMPRESAS"
+                         class="w-full h-full object-cover hidden dark:block select-none pointer-events-none">
+                    
+                    <!-- Light Mode Artwork -->
+                    <img src="{{ asset('images/tec-hero-banner-slide2-light@2x.png') }}"
+                         alt="TRANSFORMAÇÃO DIGITAL & ERP — SOLUÇÕES SOB MEDIDA PARA EMPRESAS"
+                         class="w-full h-full object-cover block dark:hidden select-none pointer-events-none">
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
-                            <i data-lucide="zap" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold text-sm text-white">Processo Rápido</div>
-                            <div class="text-xs text-slate-400">Implementação ágil e sem atritos</div>
-                        </div>
-                    </div>
+                    <!-- Hotspot 1: PEDIR PROPOSTA DE TI -->
+                    <a href="/contacto"
+                       class="absolute z-20 group rounded-2xl transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+                       style="left: 51.7%; top: 68.3%; width: 16.8%; height: 8.2%; outline: none !important; border: none !important; box-shadow: none !important; -webkit-tap-highlight-color: transparent;"
+                       title="Pedir Proposta de TI"
+                       aria-label="Pedir Proposta de TI">
+                        <span class="absolute inset-0 rounded-2xl transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(0,163,224,0.7)] pointer-events-none"></span>
+                    </a>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0">
-                            <i data-lucide="headphones" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold text-sm text-white">Suporte Especializado</div>
-                            <div class="text-xs text-slate-400">Equipa técnica pronta para ajudar</div>
-                        </div>
-                    </div>
+                    <!-- Hotspot 2: VER OS SERVIÇOS -->
+                    <a href="#servicos-tec"
+                       class="absolute z-20 group rounded-2xl transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+                       style="left: 69.8%; top: 68.3%; width: 14.2%; height: 8.2%; outline: none !important; border: none !important; box-shadow: none !important; -webkit-tap-highlight-color: transparent;"
+                       title="Ver Serviços de Tecnologia"
+                       aria-label="Ver Serviços">
+                        <span class="absolute inset-0 rounded-2xl transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] pointer-events-none"></span>
+                    </a>
                 </div>
 
+                <!-- ============================================== -->
+                <!-- SHARED INTERACTIVE CONTROLS OVER ARTWORK       -->
+                <!-- ============================================== -->
+                <!-- Bottom Pagination Hotspot Clickers -->
+                <div class="absolute z-25 flex items-center gap-2 cursor-pointer"
+                     style="left: 46.5%; top: 93.6%; height: 3.0%;">
+                    <!-- Slide 1 Indicator -->
+                    <button type="button" 
+                            @click="goToSlide(0)" 
+                            class="h-full px-2 flex items-center justify-center cursor-pointer transition-transform hover:scale-125 focus:outline-none"
+                            title="Slide 1: Loja e Equipamentos"
+                            aria-label="Ir para Slide 1">
+                        <span class="h-2 rounded-full transition-all duration-300"
+                              :class="currentSlide === 0 ? 'bg-[#f5a800] w-8 shadow-sm' : 'bg-slate-400/50 hover:bg-slate-300 w-2.5'"></span>
+                    </button>
+                    <!-- Slide 2 Indicator -->
+                    <button type="button" 
+                            @click="goToSlide(1)" 
+                            class="h-full px-2 flex items-center justify-center cursor-pointer transition-transform hover:scale-125 focus:outline-none"
+                            title="Slide 2: Transformação Digital & ERP"
+                            aria-label="Ir para Slide 2">
+                        <span class="h-2 rounded-full transition-all duration-300"
+                              :class="currentSlide === 1 ? 'bg-[#f5a800] w-8 shadow-sm' : 'bg-slate-400/50 hover:bg-slate-300 w-2.5'"></span>
+                    </button>
+                </div>
+
+                <!-- Bottom Right Arrow Hotspots -->
+                <button type="button" 
+                        @click="prevSlide()"
+                        class="absolute z-25 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-125 active:scale-95 cursor-pointer focus:outline-none"
+                        style="left: 95.4%; top: 93.6%; width: 2.1%; aspect-ratio: 1; outline: none !important; -webkit-tap-highlight-color: transparent;"
+                        title="Slide Anterior"
+                        aria-label="Slide Anterior">
+                    <span class="sr-only">Anterior</span>
+                </button>
+                <button type="button" 
+                        @click="nextSlide()"
+                        class="absolute z-25 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-125 active:scale-95 cursor-pointer focus:outline-none"
+                        style="left: 97.1%; top: 93.6%; width: 2.1%; aspect-ratio: 1; outline: none !important; -webkit-tap-highlight-color: transparent;"
+                        title="Próximo Slide"
+                        aria-label="Próximo Slide">
+                    <span class="sr-only">Próximo</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- 4 FEATURE CARDS: Suporte, Instalação, Entrega, Garantia -->
+        <!-- ======================================================== -->
+        <section class="feature-cards-strip w-full shadow-xs">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x feature-card-divider">
+                    
+                    <!-- 1. Suporte Técnico -->
+                    <div class="flex items-center gap-4 px-4 sm:px-6 py-3.5 sm:py-2 group">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105"
+                             style="background-color: #d97706;">
+                            <span style="display: block; width: 14px; height: 14px; border-radius: 9999px; border: 2.5px solid #ffffff;"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="font-extrabold text-[15px] sm:text-base leading-tight font-heading feature-card-title">
+                                Suporte Técnico
+                            </div>
+                            <div class="text-xs mt-1 truncate feature-card-desc">
+                                Equipa RACHI Tec dedicada
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Instalação Incluída -->
+                    <div class="flex items-center gap-4 px-4 sm:px-6 py-3.5 sm:py-2 group">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105"
+                             style="background-color: #00a3e0;">
+                            <span style="display: block; width: 14px; height: 14px; border-radius: 9999px; border: 2.5px solid #ffffff;"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="font-extrabold text-[15px] sm:text-base leading-tight font-heading feature-card-title">
+                                Instalação Incluída
+                            </div>
+                            <div class="text-xs mt-1 truncate feature-card-desc">
+                                Configuração no local
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Entrega em Luanda -->
+                    <div class="flex items-center gap-4 px-4 sm:px-6 py-3.5 sm:py-2 group">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105"
+                             style="background-color: #d90466;">
+                            <span style="display: block; width: 14px; height: 14px; border-radius: 9999px; border: 2.5px solid #ffffff;"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="font-extrabold text-[15px] sm:text-base leading-tight font-heading feature-card-title">
+                                Entrega em Luanda
+                            </div>
+                            <div class="text-xs mt-1 truncate feature-card-desc">
+                                Em dias úteis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Garantia RACHI -->
+                    <div class="flex items-center gap-4 px-4 sm:px-6 py-3.5 sm:py-2 group">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105"
+                             style="background-color: #16a34a;">
+                            <span style="display: block; width: 14px; height: 14px; border-radius: 9999px; border: 2.5px solid #ffffff;"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="font-extrabold text-[15px] sm:text-base leading-tight font-heading feature-card-title">
+                                Garantia RACHI
+                            </div>
+                            <div class="text-xs mt-1 truncate feature-card-desc">
+                                Assistência pós-venda
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
@@ -480,7 +850,7 @@
         <section id="servicos-tec" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#00a3e0] font-bold text-xs uppercase tracking-widest bg-sky-50 px-3.5 py-1.5 rounded-full border border-sky-200">
+                <span class="tag-services-pill text-[#00a3e0] font-bold text-xs uppercase tracking-widest bg-sky-50 px-3.5 py-1.5 rounded-full border border-sky-200">
                     Os nossos serviços
                 </span>
                 
@@ -494,248 +864,293 @@
 
                 <!-- 3 Badges de Destaque -->
                 <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
+                    <span class="badge-trust-emerald inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
                         <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
                         Segurança Garantida
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
+                    <span class="badge-trust-amber inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
                         <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600"></i>
                         Processo Rápido
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-50 text-sky-800 text-xs font-bold border border-sky-200">
+                    <span class="badge-trust-sky inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-50 text-sky-800 text-xs font-bold border border-sky-200">
                         <i data-lucide="check" class="w-3.5 h-3.5 text-sky-600"></i>
                         Suporte Especializado
-                    </span>
                 </div>
             </div>
 
-            <!-- Grade de Serviços (5 Serviços Oficiais) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Grade de Serviços (5 Serviços Oficiais com Imagens e Personagens RACHI) -->
+            <!-- Linha 1: 3 Serviços -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
 
                 <!-- SERVIÇO 1: Consultoria em transformação digital -->
-                <div class="service-card flex flex-col justify-between group">
+                <a href="{{ route('tec.service.show', 'consultoria-transformacao-digital') }}" class="service-card card-accent-sky group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-sky-50 text-[#00a3e0] flex items-center justify-center border border-sky-100 group-hover:scale-110 group-hover:bg-[#00a3e0] group-hover:text-white transition-all duration-300">
-                                <i data-lucide="compass" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                        <!-- Imagem Oficial do Serviço com Logótipo RACHI no Fundo -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-consultoria-transformacao-digital.jpg') }}" alt="Consultoria em transformação digital" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-sky absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 01 • Estratégia
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-[#00a3e0] transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#00a3e0] transition-colors">
                             Consultoria em transformação digital
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
                             Apoio estratégico para modernizar a empresa com tecnologia, processos e cultura digital.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
                                 <span>Roteiro de transformação</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
                                 <span>Priorização de investimentos</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
                                 <span>Acompanhamento da implementação</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#00a3e0] text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Solicitar Consultoria</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">120.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">projeto base</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#00a3e0] group-hover:shadow-lg group-hover:shadow-sky-500/25">
+                            <span>Ver Detalhes &amp; Aderir</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 2: Criação de websites -->
-                <div class="service-card flex flex-col justify-between group">
+                <a href="{{ route('tec.service.show', 'criacao-websites') }}" class="service-card card-accent-indigo group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="globe" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        <!-- Imagem Oficial do Serviço com Logótipo RACHI no Fundo -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-criacao-websites.jpg') }}" alt="Criação de websites" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-indigo absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 02 • Presença Online
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-indigo-500 transition-colors">
                             Criação de websites
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
                             Desenvolvimento de websites institucionais, páginas comerciais e lojas online responsivas.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-indigo">✓</span>
                                 <span>Design moderno e responsivo</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-indigo">✓</span>
                                 <span>SEO e performance</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-indigo">✓</span>
                                 <span>Gestão de conteúdos simples</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Criar Meu Website</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">95.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">taxa única</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#6366f1] group-hover:shadow-lg group-hover:shadow-indigo-500/25">
+                            <span>Ver Detalhes &amp; Aderir</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 3: Digitalização de processos empresariais -->
-                <div class="service-card flex flex-col justify-between group">
+                <a href="{{ route('tec.service.show', 'digitalizacao-processos') }}" class="service-card card-accent-amber group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="workflow" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                        <!-- Imagem Oficial do Serviço com Logótipo RACHI no Fundo -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-digitalizacao-processos.jpg') }}" alt="Digitalização de processos empresariais" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-amber absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 03 • Automação
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-amber-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-amber-500 transition-colors">
                             Digitalização de processos empresariais
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
                             Mapeamos e digitalizamos processos internos para reduzir papel, erros e tempos de operação.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
                                 <span>Diagnóstico de processos</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
                                 <span>Automação de fluxos</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
                                 <span>Ganho de eficiência operacional</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-amber-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Digitalizar Processos</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">140.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">projeto base</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#f59e0b] group-hover:shadow-lg group-hover:shadow-amber-500/25">
+                            <span>Ver Detalhes &amp; Aderir</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
+
+            </div>
+
+            <!-- Linha 2: 2 Serviços Centralizados e Harmonizados -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8 items-stretch">
 
                 <!-- SERVIÇO 4: Implementação de sistemas de gestão -->
-                <div class="service-card flex flex-col justify-between group">
+                <a href="{{ route('tec.service.show', 'implementacao-sistemas-gestao') }}" class="service-card card-accent-emerald group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="database" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <!-- Imagem Oficial do Serviço com Logótipo RACHI no Fundo -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-implementacao-sistemas-gestao.jpg') }}" alt="Implementação de sistemas de gestão" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-emerald absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 04 • ERP &amp; Gestão
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-emerald-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-emerald-500 transition-colors">
                             Implementação de sistemas de gestão
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
                             Implementação e configuração de sistemas de gestão adaptados à realidade da sua empresa.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
                                 <span>Sistemas sob medida</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
                                 <span>Integração com processos actuais</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
                                 <span>Formação da equipa utilizadora</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Implementar Sistema</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">160.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">implantação base</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#10b981] group-hover:shadow-lg group-hover:shadow-emerald-500/25">
+                            <span>Ver Detalhes &amp; Aderir</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 5: Suporte técnico especializado -->
-                <div class="service-card flex flex-col justify-between group md:col-span-2 lg:col-span-2">
+                <a href="{{ route('tec.service.show', 'suporte-tecnico-especializado') }}" class="service-card card-accent-cyan group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center border border-cyan-100 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="headphones" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
+                        <!-- Imagem Oficial do Serviço com Logótipo RACHI no Fundo -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-suporte-tecnico-especializado.jpg') }}" alt="Suporte técnico especializado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-cyan absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 05 • Helpdesk &amp; Manutenção
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-cyan-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-cyan-500 transition-colors">
                             Suporte técnico especializado
                         </h3>
 
-                        <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
                             Assistência técnica contínua a sistemas, equipamentos e utilizadores para manter a operação estável.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-cyan">✓</span>
                                 <span>Atendimento remoto e presencial</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Resolução rápida de incidentes</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-cyan">✓</span>
+                                <span>Manutenção preventiva e corretiva</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Manutenção preventiva</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-cyan">✓</span>
+                                <span>Segurança e cópias de segurança</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-slate-900 hover:bg-cyan-600 text-white font-bold text-xs transition duration-200">
-                            <span>Contratar Suporte Técnico Especializado</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">75.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">/ mês</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#06b6d4] group-hover:shadow-lg group-hover:shadow-cyan-500/25">
+                            <span>Ver Detalhes &amp; Aderir</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
             </div>
 

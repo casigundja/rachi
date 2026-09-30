@@ -177,23 +177,138 @@
         }
 
         /* Card Service */
+        /* Card Service Modern Styling */
         .service-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 1.5rem;
-            padding: 2rem;
+            padding: 1.85rem;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-decoration: none !important;
+            box-shadow: 0 2px 10px -2px rgba(11, 26, 46, 0.05);
         }
         .service-card:hover {
-            transform: translateY(-5px);
-            border-color: #34d399;
-            box-shadow: 0 20px 35px -10px rgba(16, 185, 129, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-6px);
         }
+
+        /* Hover Accents Individualized per Service */
+        .card-accent-emerald:hover {
+            border-color: #10b981 !important;
+            box-shadow: 0 20px 35px -10px rgba(16, 185, 129, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-blue:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 20px 35px -10px rgba(59, 130, 246, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-purple:hover {
+            border-color: #a855f7 !important;
+            box-shadow: 0 20px 35px -10px rgba(168, 85, 247, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-amber:hover {
+            border-color: #f59e0b !important;
+            box-shadow: 0 20px 35px -10px rgba(245, 158, 11, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-sky:hover {
+            border-color: #0ea5e9 !important;
+            box-shadow: 0 20px 35px -10px rgba(14, 165, 233, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .card-accent-teal:hover {
+            border-color: #14b8a6 !important;
+            box-shadow: 0 20px 35px -10px rgba(20, 184, 166, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Suporte Dark Mode RACHI Human Capital */
+        html.dark body {
+            background-color: #030813;
+            color: #f8fafc;
+        }
+        html.dark .service-card {
+            background: #071326;
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        html.dark .card-accent-emerald:hover {
+            border-color: #10b981 !important;
+            box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.28), 0 0 25px rgba(16, 185, 129, 0.12);
+        }
+        html.dark .card-accent-blue:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.28), 0 0 25px rgba(59, 130, 246, 0.12);
+        }
+        html.dark .card-accent-purple:hover {
+            border-color: #a855f7 !important;
+            box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.28), 0 0 25px rgba(168, 85, 247, 0.12);
+        }
+        html.dark .card-accent-amber:hover {
+            border-color: #f59e0b !important;
+            box-shadow: 0 20px 40px -10px rgba(245, 158, 11, 0.28), 0 0 25px rgba(245, 158, 11, 0.12);
+        }
+        html.dark .card-accent-sky:hover {
+            border-color: #0ea5e9 !important;
+            box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.28), 0 0 25px rgba(14, 165, 233, 0.12);
+        }
+        html.dark .card-accent-teal:hover {
+            border-color: #14b8a6 !important;
+            box-shadow: 0 20px 40px -10px rgba(20, 184, 166, 0.28), 0 0 25px rgba(20, 184, 166, 0.12);
+        }
+
+        /* Category Badges */
+        .badge-category {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border-width: 1px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .badge-cat-emerald { background-color: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+        .badge-cat-blue    { background-color: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+        .badge-cat-purple  { background-color: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
+        .badge-cat-amber   { background-color: #fffbeb; color: #b45309; border-color: #fde68a; }
+        .badge-cat-sky     { background-color: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
+        .badge-cat-teal    { background-color: #f0fdf4; color: #0f766e; border-color: #99f6e4; }
+
+        html.dark .badge-cat-emerald { background-color: rgba(6, 78, 59, 0.4); color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+        html.dark .badge-cat-blue    { background-color: rgba(30, 58, 138, 0.4); color: #60a5fa; border-color: rgba(96, 165, 250, 0.3); }
+        html.dark .badge-cat-purple  { background-color: rgba(88, 28, 135, 0.4); color: #c084fc; border-color: rgba(192, 132, 252, 0.3); }
+        html.dark .badge-cat-amber   { background-color: rgba(120, 53, 15, 0.4); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+        html.dark .badge-cat-sky     { background-color: rgba(12, 74, 110, 0.4); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+        html.dark .badge-cat-teal    { background-color: rgba(19, 78, 74, 0.4); color: #2dd4bf; border-color: rgba(45, 212, 191, 0.3); }
+
+        /* Bullet Points */
+        .card-bullet {
+            width: 1.15rem;
+            height: 1.15rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .bullet-emerald { background-color: #d1fae5; color: #059669; }
+        .bullet-blue    { background-color: #dbeafe; color: #2563eb; }
+        .bullet-purple  { background-color: #f3e8ff; color: #9333ea; }
+        .bullet-amber   { background-color: #fef3c7; color: #d97706; }
+        .bullet-sky     { background-color: #e0f2fe; color: #0284c7; }
+        .bullet-teal    { background-color: #ccfbf1; color: #0d9488; }
+
+        html.dark .bullet-emerald { background-color: rgba(6, 78, 59, 0.6); color: #34d399; }
+        html.dark .bullet-blue    { background-color: rgba(30, 58, 138, 0.6); color: #60a5fa; }
+        html.dark .bullet-purple  { background-color: rgba(88, 28, 135, 0.6); color: #c084fc; }
+        html.dark .bullet-amber   { background-color: rgba(120, 53, 15, 0.6); color: #fbbf24; }
+        html.dark .bullet-sky     { background-color: rgba(12, 74, 110, 0.6); color: #38bdf8; }
+        html.dark .bullet-teal    { background-color: rgba(19, 78, 74, 0.6); color: #2dd4bf; }
     </style>
 </head>
 <body x-data="{ mobileMenuOpen: false }">
@@ -490,298 +605,346 @@
                 </h2>
 
                 <p class="text-slate-600 text-base sm:text-lg mt-3.5 leading-relaxed">
-                    Soluções completas e especializadas para apoiar todas as etapas da sua empresa.
+                    Soluções completas e especializadas para apoiar todas as etapas da sua empresa. Selecione qualquer serviço para consultar a página com informações completas, preços e meios de solicitação.
                 </p>
 
-                <!-- 3 Badges de Destaque -->
-                <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-                        Segurança Garantida
+                <!-- Capsule de Garantias Oficiais -->
+                <div class="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs mt-6">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 text-xs font-bold">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"></i>
+                        <span>Segurança Garantida</span>
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600"></i>
-                        Processo Rápido
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-400 text-xs font-bold">
+                        <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400"></i>
+                        <span>Processo Rápido</span>
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-50 text-sky-800 text-xs font-bold border border-sky-200">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-sky-600"></i>
-                        Suporte Especializado
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-sky-500/10 text-sky-800 dark:text-sky-400 text-xs font-bold">
+                        <i data-lucide="headphones" class="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"></i>
+                        <span>Suporte Especializado</span>
                     </span>
                 </div>
             </div>
 
-            <!-- Grade de 6 Serviços Oficiais -->
+            <!-- Grade de 6 Serviços Oficiais Interativos -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- SERVIÇO 1: Cedência temporária de trabalhadores -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'cedencia-temporaria') }}" class="service-card card-accent-emerald group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-[#10b981] flex items-center justify-center border border-emerald-100 group-hover:scale-110 group-hover:bg-[#10b981] group-hover:text-white transition-all duration-300">
-                                <i data-lucide="users" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-cedencia-temporaria.jpg') }}" alt="Cedência temporária de trabalhadores" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-emerald absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 01 • Gestão de Talentos
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-[#10b981] transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#10b981] transition-colors">
                             Cedência temporária de trabalhadores
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Disponibilização temporária de trabalhadores qualificados para a sua empresa.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Disponibilização de trabalhadores qualificados com gestão salarial, fiscal e jurídica assegurada.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Profissionais qualificados</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
+                                <span>Profissionais pré-avaliados</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
                                 <span>Processo ágil e flexível</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-emerald">✓</span>
                                 <span>Conformidade legal garantida</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-[#10b981] text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Solicitar Cedência</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">85.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">/ mês</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-[#10b981] group-hover:shadow-lg group-hover:shadow-emerald-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 2: Constituição e legalização de empresas -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'constituicao-legalizacao-empresas') }}" class="service-card card-accent-blue group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="building-2" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-constituicao-empresas.jpg') }}" alt="Constituição e legalização de empresas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-blue absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 02 • Legalização
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                             Constituição e legalização de empresas
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Apoio completo na constituição e legalização da sua empresa.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Apoio completo na abertura de sociedades comerciais, registo no GUE e enquadramento fiscal na AGT.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Acompanhamento completo</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-blue">✓</span>
+                                <span>Acompanhamento integral</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Documentação incluída</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-blue">✓</span>
+                                <span>Documentação e estatutos inclusos</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Prazos reduzidos</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-blue">✓</span>
+                                <span>Prazos reduzidos e sem burocracia</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Legalizar Empresa</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">185.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">taxa única</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-blue-600 group-hover:shadow-lg group-hover:shadow-blue-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 3: Consultoria em recursos humanos -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'consultoria-recursos-humanos') }}" class="service-card card-accent-purple group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="briefcase" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-consultoria-rh.jpg') }}" alt="Consultoria em recursos humanos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-purple absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 03 • Estratégia RH
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-purple-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white mt-5 tracking-tight leading-snug group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                             Consultoria em recursos humanos
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Consultoria especializada em gestão de pessoas e organizações.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Diagnóstico organizacional, planos de carreira (PCR), políticas internas e avaliação de desempenho.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Diagnóstico personalizado</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-purple">✓</span>
+                                <span>Diagnóstico e auditoria de RH</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Estratégias eficazes</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-purple">✓</span>
+                                <span>Plano de cargos e remunerações</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Melhoria contínua</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-purple">✓</span>
+                                <span>Políticas internas e metas (KPIs)</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-purple-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Consultoria em RH</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">150.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">projeto base</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-purple-600 group-hover:shadow-lg group-hover:shadow-purple-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 4: Organização de contabilidade -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'organizacao-contabilidade') }}" class="service-card card-accent-amber group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="calculator" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-organizacao-contabilidade.jpg') }}" alt="Organização de contabilidade" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-amber absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 04 • Finanças &amp; Contas
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-amber-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white mt-5 tracking-tight leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                             Organização de contabilidade
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Organização documental e apoio completo à gestão contabilística.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Contabilidade geral e analítica, apuramento mensal de impostos e fecho anual de contas.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Contabilidade organizada</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
+                                <span>Apuramento mensal de IVA e IRT</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Relatórios precisos</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
+                                <span>Balancetes e demonstrações financeiras</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Apoio contínuo</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-amber">✓</span>
+                                <span>Supervisão por contabilista certificado</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-amber-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Organizar Contabilidade</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">95.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">/ mês</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-amber-600 group-hover:shadow-lg group-hover:shadow-amber-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 5: Registo no INSS -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'registo-inss') }}" class="service-card card-accent-sky group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center border border-sky-100 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="shield-check" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-registo-inss.jpg') }}" alt="Registo no INSS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-sky absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 05 • Segurança Social
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-sky-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white mt-5 tracking-tight leading-snug group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                             Registo no INSS
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Apoio no registo de empresas e trabalhadores no INSS.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Inscrição de empresas e trabalhadores, submissão de declarações e emissão de guias de pagamento.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Registo simplificado</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
+                                <span>Inscrição da empresa e funcionários</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Conformidade assegurada</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
+                                <span>Geração de guias mensais (8% + 3%)</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Acompanhamento dedicado</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-sky">✓</span>
+                                <span>Certidões de não devedor oficiais</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Registar no INSS</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">65.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">taxa única</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-sky-600 group-hover:shadow-lg group-hover:shadow-sky-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- SERVIÇO 6: Regularização documental empresarial -->
-                <div class="service-card group">
+                <a href="{{ route('capital.service.show', 'regularizacao-documental') }}" class="service-card card-accent-teal group text-decoration-none">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300">
-                                <i data-lucide="file-check-2" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200">
+                        <!-- Imagem do Serviço -->
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 shadow-xs">
+                            <img src="{{ asset('images/services/service-regularizacao-documental.jpg') }}" alt="Regularização documental empresarial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                            <span class="badge-category badge-cat-teal absolute top-3 right-3 shadow-md backdrop-blur-md">
                                 06 • Compliance &amp; Arquivo
                             </span>
                         </div>
 
-                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-teal-600 transition">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white mt-5 tracking-tight leading-snug group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                             Regularização documental empresarial
                         </h3>
 
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Apoio na organização e regularização documental da sua empresa.
+                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed min-h-[44px]">
+                            Auditoria de licenças, emissão/renovação de Alvará Comercial pelo SILAC e organização documental.
                         </p>
 
                         <!-- 3 Bullets Oficiais -->
-                        <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Documentação completa</span>
+                        <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-teal">✓</span>
+                                <span>Emissão e renovação de Alvará Comercial</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Regularização rápida</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-teal">✓</span>
+                                <span>Certidões de não devedor AGT / INSS</span>
                             </div>
-                            <div class="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
-                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>
-                                <span>Evite complicações legais</span>
+                            <div class="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <span class="card-bullet bullet-teal">✓</span>
+                                <span>Organização física e digital do arquivo</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 border-t border-slate-100">
-                        <a href="/contacto" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-teal-600 text-white font-bold text-xs transition duration-200 flex items-center justify-center gap-2">
-                            <span>Regularizar Documentos</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">A partir de</span>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-slate-900 dark:text-white">120.000 Kz</span>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">taxa base</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group-hover:bg-teal-600 group-hover:shadow-lg group-hover:shadow-teal-500/25">
+                            <span>Ver Detalhes &amp; Preços</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
             </div>
 
