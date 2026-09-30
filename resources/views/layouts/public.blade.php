@@ -326,7 +326,7 @@
 </style>
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between" x-data="{ solutionsOpen: false, mobileMenuOpen: false, currentTab: '' }">
     <!-- EXACT NAV BAR -->
     <!-- HEADER DUAL-THEME: ESCURO NO TOPO, CLARO AO ROLAR (ESTILO KLASSE.AO) -->
         <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-5 lg:py-6 transition-all duration-300">
@@ -397,77 +397,25 @@
                         </div>
                     </div>
 
-                    <!-- Soluções (4 Unidades) -->
-                    <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                        <button @mouseover="openSol = true" @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="['capital','academy','tec','print'].includes(currentTab) || openSol ? 'active' : ''">
-                            <span>Soluções</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div x-show="openSol" 
-                             x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave="transition ease-in duration-150"
-                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                             x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                             class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5">
-                            
-                            <a href="/capital" @click.prevent="openUnitPage('capital'); openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-500/15 text-slate-300 hover:text-emerald-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-black text-xs">
-                                        01
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Human Capital</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Pessoas &amp; Gestão</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/academy" @click.prevent="openUnitPage('academy'); openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-300 hover:text-indigo-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-black text-xs">
-                                        02
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/tec" @click.prevent="openUnitPage('tec'); openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-300 hover:text-sky-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">
-                                        03
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Tecnologia &amp; TI</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/print" @click.prevent="openUnitPage('print'); openSol = false" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-500/15 text-slate-300 hover:text-amber-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">
-                                        04
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Print</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                        </div>
-                    </div>
+                    <!-- Soluções (Mega Menu Ecossistema RACHI) -->
+                    <button type="button"
+                        @click="solutionsOpen = !solutionsOpen"
+                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        :class="solutionsOpen ? 'text-white font-semibold' : ''">
+                        <span class="relative py-1 inline-block">
+                            Soluções
+                            <!-- Linha ciano brilhante sob a palavra Soluções (idêntica à imagem de referência) -->
+                            <span x-show="solutionsOpen"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-x-0"
+                                x-transition:enter-end="opacity-100 scale-x-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 scale-x-100"
+                                x-transition:leave-end="opacity-0 scale-x-0"
+                                style="position: absolute; bottom: -8px; left: 0; right: 0; height: 3px; background-color: #00a3e0; border-radius: 9999px; box-shadow: 0 0 10px rgba(0, 163, 224, 0.9);"
+                                x-cloak></span>
+                        </span>
+                    </button>
 
                     <a href="#etica" @click.prevent="scrollToSection('etica')" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
@@ -547,6 +495,9 @@
                 </div>
             </div>
         </header>
+
+        <!-- MEGA PAINEL DE SOLUÇÕES (ECOSSISTEMA RACHI) -->
+        @include('components.solutions-mega-menu')
 
         <!-- Script de Rolagem Inteligente (Estilo Klasse.ao): Escuro em cima, Claro ao rolar -->
         <script>

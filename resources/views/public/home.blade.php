@@ -453,6 +453,7 @@
             background-color: #030813 !important;
             background-image:
                 radial-gradient(ellipse 95% 65% at 50% 10%, rgba(0, 163, 224, 0.22) 0%, transparent 65%),
+                radial-gradient(ellipse 75% 55% at 50% 52%, rgba(0, 163, 224, 0.22) 0%, rgba(245, 168, 0, 0.08) 45%, transparent 72%),
                 radial-gradient(circle at 18% 35%, rgba(11, 78, 168, 0.35) 0%, transparent 42rem),
                 radial-gradient(circle at 82% 30%, rgba(245, 168, 0, 0.18) 0%, transparent 40rem),
                 radial-gradient(ellipse 85% 45% at 50% 90%, rgba(0, 163, 224, 0.15) 0%, transparent 60%),
@@ -1047,19 +1048,54 @@
             filter: drop-shadow(0 22px 34px rgba(7, 19, 38, 0.20));
         }
 
+        /* Alternância Dinâmica de Imagem do Hero (Claro vs Escuro) */
+        .hero-visual-light,
+        picture.hero-visual-light {
+            display: block !important;
+        }
+
+        .hero-visual-dark,
+        picture.hero-visual-dark {
+            display: none !important;
+        }
+
+        html.dark .hero-visual-light,
+        html.dark picture.hero-visual-light {
+            display: none !important;
+        }
+
+        html.dark .hero-visual-dark,
+        html.dark picture.hero-visual-dark {
+            display: block !important;
+        }
+
+        /* Ambient ground shadow beneath characters in Dark Mode */
+        html.dark .hero-visual-wrap::after {
+            content: "";
+            position: absolute;
+            bottom: 3%;
+            left: 6%;
+            right: 6%;
+            height: 28px;
+            background: radial-gradient(ellipse 55% 100% at 50% 100%, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+            filter: blur(10px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
         html.dark .hero-visual {
-            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.85));
+            filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.65));
         }
 
         html.dark .hero-visual-wrap:hover .hero-visual {
-            filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.95));
+            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.75));
         }
 
         /* Video Link Overlay - Conheça a RACHI (Dual Theme) */
         .hero-video-link {
             position: absolute;
-            right: 1.5rem;
-            bottom: 2.2rem;
+            right: 1.2rem;
+            bottom: 1.2rem;
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
@@ -1088,10 +1124,12 @@
         }
 
         html.dark .hero-video-link {
-            background: rgba(8, 24, 52, 0.88) !important;
-            border: 1px solid rgba(56, 189, 248, 0.45) !important;
+            background: rgba(7, 22, 48, 0.85) !important;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(56, 189, 248, 0.5) !important;
             color: #ffffff !important;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 163, 224, 0.25) !important;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 163, 224, 0.3) !important;
         }
 
         html.dark .hero-video-link span,
@@ -1857,31 +1895,31 @@
 
         /* Logo Containers & Contour Illumination */
         html.dark #solucoes .grid > div:nth-child(1) .h-28 {
-            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 72%) !important;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.32) 0%, rgba(16, 185, 129, 0.14) 45%, transparent 72%) !important;
         }
         html.dark #solucoes .grid > div:nth-child(1) img {
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 18px rgba(16, 185, 129, 0.4)) !important;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(16, 185, 129, 0.35)) !important;
         }
 
         html.dark #solucoes .grid > div:nth-child(2) .h-28 {
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.18) 0%, transparent 72%) !important;
+            background: radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.35) 0%, rgba(99, 102, 241, 0.15) 45%, transparent 72%) !important;
         }
         html.dark #solucoes .grid > div:nth-child(2) img {
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 18px rgba(99, 102, 241, 0.4)) !important;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(99, 102, 241, 0.35)) !important;
         }
 
         html.dark #solucoes .grid > div:nth-child(3) .h-28 {
-            background: radial-gradient(circle at center, rgba(0, 163, 224, 0.18) 0%, transparent 72%) !important;
+            background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.38) 0%, rgba(2, 132, 199, 0.15) 45%, transparent 72%) !important;
         }
         html.dark #solucoes .grid > div:nth-child(3) img {
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 18px rgba(0, 163, 224, 0.4)) !important;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(0, 163, 224, 0.35)) !important;
         }
 
         html.dark #solucoes .grid > div:nth-child(4) .h-28 {
-            background: radial-gradient(circle at center, rgba(245, 168, 0, 0.18) 0%, transparent 72%) !important;
+            background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.38) 0%, rgba(217, 119, 6, 0.15) 45%, transparent 72%) !important;
         }
         html.dark #solucoes .grid > div:nth-child(4) img {
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 18px rgba(245, 168, 0, 0.4)) !important;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(245, 168, 0, 0.35)) !important;
         }
 
         /* Watermarks 01, 02, 03, 04 */
@@ -2112,7 +2150,7 @@
                 <div class="flex-1 hidden lg:flex items-center justify-center min-w-0 px-1">
                     <nav class="flex items-center main-nav-capsule">
                         <a href="#home" @click.prevent="goToHome()" class="nav-link cursor-pointer"
-                            :class="currentTab === 'home' ? 'active' : ''">
+                            :class="(!solutionsOpen && currentTab === 'home') ? 'active' : ''">
                             <span>Home</span>
                         </a>
 
@@ -2170,94 +2208,25 @@
                         </div>
                     </div>
 
-                    <!-- Soluções (4 Unidades) -->
-                    <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                        <button @mouseover="openSol = true" @click="openSol = !openSol"
-                            class="nav-link flex items-center gap-1.5 focus:outline-none"
-                            :class="['capital','academy','tec','print'].includes(currentTab) || openSol ? 'active' : ''">
-                            <span>Soluções</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" class="opacity-70 transition-transform duration-200"
-                                :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div x-show="openSol" x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                            class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5">
-
-                            <a href="/capital" @click="openSol = false"
-                                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-500/15 text-slate-300 hover:text-emerald-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span
-                                        class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-black text-xs">
-                                        01
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Human Capital</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Pessoas &amp; Gestão</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right"
-                                    class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/academy" @click="openSol = false"
-                                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-300 hover:text-indigo-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span
-                                        class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-black text-xs">
-                                        02
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Capacitação &amp; Ensino
-                                        </div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right"
-                                    class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/tec" @click="openSol = false"
-                                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-300 hover:text-sky-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span
-                                        class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">
-                                        03
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Tecnologia &amp; TI</div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right"
-                                    class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                            <a href="/print" @click="openSol = false"
-                                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-500/15 text-slate-300 hover:text-amber-300 transition group">
-                                <div class="flex items-center gap-3">
-                                    <span
-                                        class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">
-                                        04
-                                    </span>
-                                    <div>
-                                        <div class="font-bold text-xs dropdown-title">RACHI Print</div>
-                                        <div class="text-[11px] text-slate-400 dropdown-desc">Gráfica &amp; Produção
-                                        </div>
-                                    </div>
-                                </div>
-                                <i data-lucide="arrow-right"
-                                    class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
-                            </a>
-
-                        </div>
-                    </div>
+                    <!-- Soluções (Mega Menu Ecossistema RACHI) -->
+                    <button type="button"
+                        @click="solutionsOpen = !solutionsOpen"
+                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        :class="solutionsOpen ? 'text-white font-semibold' : (['capital','academy','tec','print'].includes(currentTab) ? 'active' : '')">
+                        <span class="relative py-1 inline-block">
+                            Soluções
+                            <!-- Linha ciano brilhante sob a palavra Soluções (idêntica à imagem de referência) -->
+                            <span x-show="solutionsOpen"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-x-0"
+                                x-transition:enter-end="opacity-100 scale-x-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 scale-x-100"
+                                x-transition:leave-end="opacity-0 scale-x-0"
+                                style="position: absolute; bottom: -8px; left: 0; right: 0; height: 3px; background-color: #00a3e0; border-radius: 9999px; box-shadow: 0 0 10px rgba(0, 163, 224, 0.9);"
+                                x-cloak></span>
+                        </span>
+                    </button>
 
                     <a href="#etica" @click.prevent="scrollToSection('etica')" class="nav-link"
                         :class="currentTab === 'etica' ? 'active' : ''">
@@ -2438,6 +2407,9 @@
             </div>
         </header>
 
+        <!-- MEGA PAINEL DE SOLUÇÕES (ECOSSISTEMA RACHI) -->
+        @include('components.solutions-mega-menu')
+
         <!-- Script de Rolagem Inteligente (Estilo Klasse.ao): Adaptável ao Tema -->
         <script>
                 (function () {
@@ -2508,10 +2480,20 @@
                     </div>
 
                     <div class="hero-visual-wrap reveal delay-2">
-                        <picture>
-                            <source srcset="/images/hero-home-ecosystem.png" type="image/png">
-                            <img class="hero-visual"
-                                src="/images/hero-home-ecosystem.png"
+                        <!-- Imagem Hero para Modo Claro -->
+                        <picture class="hero-visual-light">
+                            <source srcset="/images/hero-ecosystem-transparent.png" type="image/png">
+                            <img class="hero-visual hero-visual-light"
+                                src="/images/hero-ecosystem-transparent.png"
+                                alt="Profissionais RACHI junto ao símbolo da marca" width="1600" height="975"
+                                fetchpriority="high" decoding="async">
+                        </picture>
+
+                        <!-- Imagem Hero para Modo Escuro -->
+                        <picture class="hero-visual-dark">
+                            <source srcset="/images/hero-ecosystem-transparent.png" type="image/png">
+                            <img class="hero-visual hero-visual-dark"
+                                src="/images/hero-ecosystem-transparent.png"
                                 alt="Profissionais RACHI junto ao símbolo da marca" width="1600" height="975"
                                 fetchpriority="high" decoding="async">
                         </picture>
@@ -8000,6 +7982,7 @@
                 currentTab: 'home',
                 matriculaModalOpen: false,
                 mobileMenuOpen: false,
+                solutionsOpen: false,
                 customerTab: 'dashboard',
                 authTab: 'login',
                 authForm: {

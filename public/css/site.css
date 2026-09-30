@@ -9977,3 +9977,35 @@ html.dark #solucoes .grid > div:nth-child(4) button[title*="Pedir"]:hover {
     color: #fbbf24 !important;
     box-shadow: 0 0 14px rgba(245, 168, 0, 0.3) !important;
 }
+
+/* ============================================================ */
+/* UNIVERSAL FORM CONTROLS & CARDS DARK MODE ELEVATION          */
+/* ============================================================ */
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]),
+html.dark textarea,
+html.dark select {
+    background-color: #0b1a30 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease !important;
+}
+
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]):focus,
+html.dark textarea:focus,
+html.dark select:focus {
+    background-color: #0f2444 !important;
+    border-color: #00a3e0 !important;
+    box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.25) !important;
+    outline: none !important;
+    color: #ffffff !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+    color: #64748b !important;
+}
+
+html.dark select option {
+    background-color: #0b1a30 !important;
+    color: #ffffff !important;
+}
