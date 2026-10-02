@@ -84,3 +84,64 @@ html {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(11, 26, 46, 0.08);
 }
+
+
+/* Header Dropdown - Light & Dark Modes */
+html:not(.dark) .header-dropdown,
+html:not(.dark) .site-header .header-dropdown,
+.site-header.header-scrolled-light .header-dropdown {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(11, 26, 46, 0.12) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) .header-dropdown a,
+html:not(.dark) .site-header .header-dropdown a,
+.site-header.header-scrolled-light .header-dropdown a {
+    color: #334155 !important;
+}
+
+html:not(.dark) .header-dropdown a:hover,
+html:not(.dark) .site-header .header-dropdown a:hover,
+.site-header.header-scrolled-light .header-dropdown a:hover {
+    background: #f1f5f9 !important;
+    color: #0077c2 !important;
+}
+
+html:not(.dark) .header-dropdown .dropdown-title,
+html:not(.dark) .site-header .header-dropdown .dropdown-title,
+.site-header.header-scrolled-light .header-dropdown .dropdown-title {
+    color: #0f172a !important;
+}
+
+html:not(.dark) .header-dropdown .dropdown-desc,
+html:not(.dark) .site-header .header-dropdown .dropdown-desc,
+.site-header.header-scrolled-light .header-dropdown .dropdown-desc {
+    color: #64748b !important;
+}
+
+html.dark .header-dropdown,
+html.dark .site-header .header-dropdown {
+    background: rgba(7, 19, 38, 0.98) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark .header-dropdown a,
+html.dark .site-header .header-dropdown a {
+    color: #cbd5e1 !important;
+}
+
+html.dark .header-dropdown a:hover,
+html.dark .site-header .header-dropdown a:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .header-dropdown .dropdown-title,
+html.dark .site-header .header-dropdown .dropdown-title {
+    color: #f8fafc !important;
+}
+
+html.dark .header-dropdown .dropdown-desc,
+html.dark .site-header .header-dropdown .dropdown-desc {
+    color: #94a3b8 !important;
+}

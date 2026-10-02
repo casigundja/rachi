@@ -333,7 +333,7 @@
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
                 <!-- Coluna 1 (Esquerda): Logótipo RACHI -->
                 <div class="flex-1 flex items-center justify-start min-w-0">
-                    <a href="#home" @click.prevent="goToHome()" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
+                    <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png" 
                              onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'"
@@ -350,13 +350,13 @@
                 <!-- Coluna 2 (Centro): Navegação em Cápsula (Perfeitamente Centralizada) -->
                 <div class="flex-shrink-0 flex items-center justify-center">
                     <nav class="hidden lg:flex items-center main-nav-capsule">
-                    <a href="#home" @click.prevent="goToHome()" class="nav-link cursor-pointer" :class="currentTab === 'home' ? 'active' : ''">
+                    <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="nav-link cursor-pointer" :class="currentTab === 'home' ? 'active' : ''">
                         <span>Home</span>
                     </a>
                     
                     <!-- Sobre Nós Dropdown -->
-                    <div class="relative" x-data="{ open: false }" @mouseleave="open = false">
-                        <button @mouseover="open = true" @click="open = !open" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="open ? 'nav-link-open' : ''">
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false; solutionsOpen = false" @keydown.escape.window="open = false; solutionsOpen = false" >
+                        <button type="button" @click="open = !open; solutionsOpen = false" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="open ? 'nav-link-open' : ''">
                             <span>Sobre Nós</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="open ? 'rotate-180 text-[#00a3e0]' : ''">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -369,26 +369,26 @@
                              x-transition:leave="transition ease-in duration-150"
                              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                              x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                             class="header-dropdown absolute top-full left-0 mt-3 w-56 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2 z-50 text-sm space-y-1">
-                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                             class="header-dropdown absolute top-full left-0 mt-2 w-56 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-xl dark:shadow-2xl p-2 z-50 text-sm space-y-1 before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="info" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Quem somos</span>
                             </a>
-                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="handshake" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Parceiros</span>
                             </a>
-                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
                                 </span>
@@ -399,8 +399,9 @@
 
                     <!-- Soluções (Mega Menu Ecossistema RACHI) -->
                     <button type="button"
-                        @click="solutionsOpen = !solutionsOpen"
-                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        id="btn-nav-solutions"
+                        @click.stop="solutionsOpen = !solutionsOpen"
+                        class="nav-link solutions-trigger-btn relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
                         :class="solutionsOpen ? 'text-white font-semibold' : ''">
                         <span class="relative py-1 inline-block">
                             Soluções
@@ -417,13 +418,13 @@
                         </span>
                     </button>
 
-                    <a href="#etica" @click.prevent="scrollToSection('etica')" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
-                    <a href="#loja" @click.prevent="openStore()" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
+                    <a href="#loja" @click.prevent="openStore(); solutionsOpen = false" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
                         <span>Loja</span>
                     </a>
-                    <a href="/contacto" @click.prevent="openContacto()" class="nav-link" :class="currentTab === 'contacto' ? 'active' : ''">
+                    <a href="/contacto" @click.prevent="openContacto(); solutionsOpen = false" class="nav-link" :class="currentTab === 'contacto' ? 'active' : ''">
                         <span>Contacto</span>
                     </a>
                 </nav>
@@ -469,7 +470,7 @@
 
             <!-- Mobile Menu Dropdown -->
             <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-[#071326]/95 backdrop-blur-2xl border-t border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
-                <a href="#home" @click.prevent="goToHome()" class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
+                <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
                 <div class="border-t border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Sobre Nós</span>
                     <div class="pl-3 mt-1 space-y-1.5">
@@ -489,7 +490,7 @@
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2 space-y-2">
-                    <a href="#etica" @click.prevent="scrollToSection('etica')" class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
                     <a href="#loja" @click.prevent="openStore(); mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Loja</a>
                     <a href="/contacto" @click.prevent="openContacto(); mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]" :class="currentTab === 'contacto' ? 'text-[#00a3e0]' : ''">Contacto</a>
                 </div>
@@ -531,13 +532,11 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-[#071326] text-white border-t border-slate-800 py-12 px-6">
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 border-t border-slate-200 dark:border-slate-800 py-12 px-6 transition-colors duration-300">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-                <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" 
-                     onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"
-                     alt="RACHI" 
-                     class="h-10 mb-4">
+                <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
                 <p class="text-sm text-slate-400">
                     Soluções inteligentes em tecnologia, comunicação visual, formação profissional e recursos humanos.
                 </p>
@@ -545,28 +544,28 @@
             <div>
                 <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Unidades</h4>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li><a href="{{ route('unit.show', 'tec') }}" class="hover:text-white">RACHI Tec — Loja de TI</a></li>
-                    <li><a href="{{ route('unit.show', 'print') }}" class="hover:text-white">RACHI Print — Artes &amp; Logótipos</a></li>
-                    <li><a href="{{ route('unit.show', 'academy') }}" class="hover:text-white">RACHI Academy — Cursos</a></li>
-                    <li><a href="{{ route('unit.show', 'capital') }}" class="hover:text-white">RACHI Capital — Sites &amp; Suporte TI</a></li>
+                    <li><a href="{{ route('unit.show', 'tec') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec — Loja de TI</a></li>
+                    <li><a href="{{ route('unit.show', 'print') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print — Artes &amp; Logótipos</a></li>
+                    <li><a href="{{ route('unit.show', 'academy') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy — Cursos</a></li>
+                    <li><a href="{{ route('unit.show', 'capital') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Capital — Sites &amp; Suporte TI</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Links Úteis</h4>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li><a href="{{ route('store.index') }}" class="hover:text-white">Loja Online</a></li>
-                    <li><a href="#etica" class="hover:text-white">Ética e Compliance</a></li>
-                    <li><a href="{{ route('contact') }}" class="hover:text-white">Contactos</a></li>
+                    <li><a href="{{ route('store.index') }}" class="hover:text-slate-900 dark:hover:text-white transition">Loja Online</a></li>
+                    <li><a href="#etica" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-slate-900 dark:hover:text-white transition">Contactos</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Contacto</h4>
                 <p class="text-sm text-slate-400">Luanda, Angola</p>
                 <p class="text-sm text-slate-400 mt-1">geral@rachi.ao</p>
-                <p class="text-sm text-slate-400 mt-1">+244 923 000 000</p>
+                <p class="text-sm text-slate-400 mt-1">+244 972 888 585</p>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-800/80 text-xs text-slate-500 text-center">
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 text-center">
             &copy; 2026 RACHI — Soluções Inteligentes. Todos os direitos reservados.
         </div>
     </footer>

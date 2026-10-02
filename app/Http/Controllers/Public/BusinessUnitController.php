@@ -41,8 +41,24 @@ class BusinessUnitController extends Controller
         $unit = BusinessUnit::where('slug', 'print')->firstOrFail();
         $services = Service::where('business_unit_id', $unit->id)->where('status', 'active')->get();
         $products = Product::where('business_unit_id', $unit->id)->where('status', 'active')->get();
+        $printServices = self::getPrintServices();
 
-        return view('public.units.print', compact('unit', 'services', 'products'));
+        return view('public.units.print', compact('unit', 'services', 'products', 'printServices'));
+    }
+
+    public function printService(string $slug): View
+    {
+        $unit = BusinessUnit::where('slug', 'print')->firstOrFail();
+        $printServices = self::getPrintServices();
+
+        $service = collect($printServices)->firstWhere('slug', $slug);
+        if (!$service) {
+            abort(404);
+        }
+
+        $otherServices = collect($printServices)->where('slug', '!=', $slug)->values()->all();
+
+        return view('public.units.print-service', compact('unit', 'service', 'otherServices', 'printServices'));
     }
 
     public function academy(): View
@@ -548,6 +564,268 @@ class BusinessUnitController extends Controller
                     ['name' => 'Infraestrutura Total / SLA VIP', 'price' => 'Sob Cotação', 'period' => 'contrato personalizado', 'desc' => 'Para empresas com mais de 20 postos de trabalho, servidores locais e operação crítica.', 'popular' => false, 'features' => ['Técnico residente ou visitas semanais', 'Monitoramento 24/7 de servidores e rede', 'Gestão de fornecedores de internet e telefonia', 'SLA de resposta em até 1 hora']]
                 ],
                 'whatsapp_msg' => 'Olá! Gostaria de cotar o serviço de Suporte Técnico Especializado / Gestão de TI da RACHI Tec.'
+            ]
+        ];
+    }
+
+    public static function getPrintServices(): array
+    {
+        return [
+            [
+                'id' => 1,
+                'slug' => 'documentos-institucionais',
+                'num' => '01',
+                'tag' => '01 • DOCUMENTOS OFICIAIS',
+                'title' => 'Impressão de documentos institucionais',
+                'short_desc' => 'Impressão de relatórios, brochuras, manuais, propostas e documentos oficiais com qualidade institucional.',
+                'full_desc' => 'Produção gráfica de excelência para documentos executivos, relatórios de gestão e contas, propostas para concursos públicos, manuais operacionais e livros corporativos. Oferecemos opções completas de encadernação em capa dura, wire-o metálico, lombada colada PUR ou agrafamento, com verificação prévia de pré-impressão (preflight) e prova de cor para fidelidade absoluta.',
+                'icon' => 'file-text',
+                'image' => 'images/services/service-print-documentos-institucionais.jpg',
+                'color' => 'blue',
+                'starting_price' => '18.500 Kz',
+                'price_period' => 'preço base por lote',
+                'cta_label' => 'Solicitar Cotação de Documentos',
+                'prazo' => '24h a 72h úteis (conforme tiragem)',
+                'garantia' => 'Prova de cor prévia & reimpressão garantida contra defeitos',
+                'bullets' => [
+                    'Impressão a cores e P&B de alta definição',
+                    'Acabamentos e encadernações executivas variadas',
+                    'Tiragens flexíveis: de pequenos lotes a milhares de cópias'
+                ],
+                'applications' => 'Relatórios de Gestão & Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais, Catálogos e Certificados Oficiais.',
+                'includes' => [
+                    'Verificação técnica pré-impressão (pre-flight) de curvas de cores CMYK e margens de corte',
+                    'Envio de boneca ou prova digital de pré-visualização para aprovação formal da sua administração',
+                    'Seleção de papéis certificados de 80g a 350g (Couché brilho/mate, Offset e Papéis especiais)',
+                    'Acabamentos nobres: Laminação Soft Touch, Verniz UV Localizado, Hot Stamping e Capa Dura',
+                    'Embalamento térmico protegido e selado contra humidade para transporte seguro',
+                    'Entrega rápida e pontual no escritório da sua empresa em Luanda e envio para todas as províncias'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Envio do Ficheiro & Briefing', 'desc' => 'Recebemos o ficheiro em PDF e alinhamos o número de páginas, tipo de papel, encadernação e tiragem.'],
+                    ['num' => '02', 'title' => 'Validação Técnica & Prova', 'desc' => 'Nossa equipa pré-visualiza a geometria e cores, emitindo a prova digital de confirmação.'],
+                    ['num' => '03', 'title' => 'Impressão em Alta Resolução', 'desc' => 'Produção em maquinário de alta precisão com calibração contínua e controlo densitométrico.'],
+                    ['num' => '04', 'title' => 'Acabamento & Entrega', 'desc' => 'Corte, encadernação, controlo de qualidade e entrega direta nas instalações do cliente.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Lote Expresso / Tiragem Curta',
+                        'price' => '18.500 Kz',
+                        'period' => 'a partir de / lote inicial',
+                        'desc' => 'Ideal para apresentações de conselho de administração, reuniões urgentes e concursos pontuais.',
+                        'popular' => false,
+                        'features' => ['Tiragem de 5 a 50 exemplares', 'Impressão digital laser HD imediata', 'Acabamento em espiral ou wire-o metálico', 'Prazo expresso de 24h a 48h']
+                    ],
+                    [
+                        'name' => 'Corporativo & Relatórios de Gestão',
+                        'price' => '75.000 Kz',
+                        'period' => 'lote médio institucional',
+                        'desc' => 'Para relatórios anuais de contas, manuais de compliance e publicações de grande prestígio.',
+                        'popular' => true,
+                        'features' => ['50 a 300 exemplares com desconto', 'Capa dura ou couché 300g plastificado mate', 'Lombada colada PUR ou wire-o nobre', 'Prova física de verificação incluída', 'Entrega gratuita na zona corporativa de Luanda']
+                    ],
+                    [
+                        'name' => 'Grande Tiragem / Escala Offset',
+                        'price' => 'Sob Cotação',
+                        'period' => 'orçamento por escala',
+                        'desc' => 'Milhares de manuais ou brochuras com custo unitário ultra competitivo.',
+                        'popular' => false,
+                        'features' => ['Acima de 500 exemplares', 'Impressão offset industrial com fidelidade Pantone', 'Verniz UV localizado ou Hot Stamping', 'Logística de distribuição fracionada', 'Condições de pagamento facilitadas']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação e especificações para o serviço de Impressão de Documentos Institucionais da RACHI Print.'
+            ],
+            [
+                'id' => 2,
+                'slug' => 'materiais-promocionais',
+                'num' => '02',
+                'tag' => '02 • BRINDES & ATIVAÇÃO',
+                'title' => 'Materiais promocionais & Brindes',
+                'short_desc' => 'Criação e produção de brindes e materiais promocionais para campanhas, activações e fidelização.',
+                'full_desc' => 'Soluções personalizadas em brindes corporativos, merchandising de marca e kits de boas-vindas para clientes e colaboradores. Desenvolvemos desde itens de escritório e vestuário técnico a artigos tecnológicos gravados a laser, transmitindo sofisticação e perpetuando a presença da sua marca em momentos decisivos.',
+                'icon' => 'gift',
+                'image' => 'images/services/service-print-materiais-promocionais.jpg',
+                'color' => 'amber',
+                'starting_price' => '24.000 Kz',
+                'price_period' => 'preço base por lote',
+                'cta_label' => 'Solicitar Cotação de Brindes',
+                'prazo' => '3 a 7 dias úteis',
+                'garantia' => 'Mockup 3D prévio aprovado e teste de gravação de cor',
+                'bullets' => [
+                    'Brindes personalizados com gravação durável',
+                    'Campanhas, feiras e activações corporativas',
+                    'Opções flexíveis para diferentes orçamentos'
+                ],
+                'applications' => 'Agendas Executivas, Cadernos Corporativos, T-Shirts & Polos bordados, Garrafas Térmicas, Canecas, Pen Drives, Mochilas e Kits Onboarding.',
+                'includes' => [
+                    'Criação de mockup digital tridimensional gratuito com o logótipo aplicado no brinde',
+                    'Tecnologias modernas de gravação: Gravação a Laser, Serigrafia, DTF Têxtil, UV e Tampografia',
+                    'Catálogo alargado com opções ecológicas (cortiça, bambu), metálicas e tecidos respiráveis',
+                    'Composição e personalização de caixas rígidas personalizadas para kits onboarding VIP',
+                    'Controlo de qualidade minucioso e teste de abrasão nas gravações antes da embalagem final',
+                    'Emissão de fatura comercial com dedução de IVA e entrega corporativa direta'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Escolha do Item no Catálogo', 'desc' => 'Selecione os artigos promocionais pretendidos, quantidade e paleta de cores corporativa.'],
+                    ['num' => '02', 'title' => 'Mockup Digital de Aprovação', 'desc' => 'Nossa equipa de design cria a visualização do produto com a aplicação do seu logótipo.'],
+                    ['num' => '03', 'title' => 'Produção & Gravação em Oficina', 'desc' => 'Personalização com máquinas a laser, bordados de precisão ou impressão UV de alta durabilidade.'],
+                    ['num' => '04', 'title' => 'Embalagem & Expedição', 'desc' => 'Acondicionamento seguro individual ou em kits temáticos e expedição rápida.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Kit Onboarding / Boas-Vindas',
+                        'price' => '24.000 Kz',
+                        'period' => 'por kit / lote mín. 10 un.',
+                        'desc' => 'Acolhimento de novos funcionários com itens essenciais da marca corporativa.',
+                        'popular' => false,
+                        'features' => ['Caderno tipo Moleskine com elástico', 'Caneta metálica com gravação a laser', 'Garrafa térmica inox personalizada', 'Saco de tecido ecológico institucional']
+                    ],
+                    [
+                        'name' => 'Campanha & Feiras de Negócios',
+                        'price' => '120.000 Kz',
+                        'period' => 'lote promocional (50 a 100 un.)',
+                        'desc' => 'Materiais de grande impacto visual para distribuição em congressos e feiras setoriais.',
+                        'popular' => true,
+                        'features' => ['Polos ou T-Shirts com bordado/estampa de alta definição', 'Canetas promocionais e blocos de notas pautados', 'Fitas lanyard com porta-cartões', 'Embalamento prático para distribuição no evento']
+                    ],
+                    [
+                        'name' => 'Linha Executiva VIP / Fim de Ano',
+                        'price' => 'Sob Cotação',
+                        'period' => 'orçamento personalizado',
+                        'desc' => 'Presentes de prestígio para membros de administração, sócios e clientes estratégicos.',
+                        'popular' => false,
+                        'features' => ['Agendas em pele sintética nobre com fecho magnético', 'Kits tecnológicos: Powerbank 10.000mAh + Pen Drive 64GB', 'Caixas de luxo com berço em espuma moldada', 'Cartão personalizado com mensagem da gerência']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Materiais Promocionais e Brindes Corporativos da RACHI Print.'
+            ],
+            [
+                'id' => 3,
+                'slug' => 'producao-grafica-corporativa',
+                'num' => '03',
+                'tag' => '03 • PAPELARIA & IDENTIDADE',
+                'title' => 'Produção gráfica corporativa',
+                'short_desc' => 'Produção de materiais gráficos e papelaria corporativa alinhados à identidade visual da sua organização.',
+                'full_desc' => 'Material de escritório institucional que consolida a credibilidade e seriedade do seu negócio. Produzimos cartões de visita de alto padrão, pastas porta-documentos com bolsa e orelha, papel timbrado, envelopes timbrados e carimbos automáticos com rigorosa fidelidade cromática e acabamentos táteis diferenciados.',
+                'icon' => 'briefcase',
+                'image' => 'images/services/service-print-producao-corporativa.jpg',
+                'color' => 'emerald',
+                'starting_price' => '15.000 Kz',
+                'price_period' => 'preço base por lote',
+                'cta_label' => 'Solicitar Cotação Corporativa',
+                'prazo' => '2 a 5 dias úteis',
+                'garantia' => 'Corte milimétrico & fidelidade cromática aos manuais de marca',
+                'bullets' => [
+                    'Identidade visual consistente em todos os pontos de contacto',
+                    'Acabamento profissional de alto nível (Verniz UV, Soft Touch)',
+                    'Prazos e qualidade rigorosamente controlados'
+                ],
+                'applications' => 'Cartões de Visita (soft touch, cantos redondos), Pastas com bolsa e orelha, Papel Timbrado, Envelopes Timbrados e Carimbos automáticos.',
+                'includes' => [
+                    'Padronização cromática baseada nas cores corporativas oficiais da sua instituição',
+                    'Papéis executivos nobres: Couché fosco 350g, Offset 90g e papéis texturados de alta gama',
+                    'Acabamentos táteis modernos: Plastificação Mate, Soft Touch aveludado e Verniz Localizado',
+                    'Pastas com bolsa interna reforçada e ranhura de encaixe para cartão de visita',
+                    'Carimbos automáticos autoentintados de longa duração com texto e logótipo nítidos',
+                    'Embalagem por lotes protegidos para manter o material impecável no arquivo do seu escritório'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Levantamento de Itens', 'desc' => 'Definição dos itens de expediente necessários (cartões, pastas, envelopes, timbrados ou carimbos).'],
+                    ['num' => '02', 'title' => 'Adequação ao Manual de Marca', 'desc' => 'Conferência de normas gráficas, fontes e vetores para garantir proporções e cores exatas.'],
+                    ['num' => '03', 'title' => 'Impressão & Troquelagem', 'desc' => 'Impressão de alta precisão, laminação e cortes de precisão em matrizes computadorizadas.'],
+                    ['num' => '04', 'title' => 'Conferência & Entrega', 'desc' => 'Revisão lote a lote e entrega organizada nas suas instalações em Luanda.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Kit Escritório Inicial',
+                        'price' => '28.000 Kz',
+                        'period' => 'pacote essencial de arranque',
+                        'desc' => 'Para novas empresas, advogados, consultores e escritórios em expansão.',
+                        'popular' => false,
+                        'features' => ['200 Cartões de visita com plastificação mate', '50 Pastas executivas com bolsa interior', '100 Folhas de papel timbrado institucional A4', '1 Carimbo automático oficial']
+                    ],
+                    [
+                        'name' => 'Pacote Corporativo Total',
+                        'price' => '85.000 Kz',
+                        'period' => 'pacote completo para equipas',
+                        'desc' => 'Ideal para empresas consolidadas com fluxo regular de reuniões e documentos contratuais.',
+                        'popular' => true,
+                        'features' => ['500 Cartões de visita com verniz localizado ou toque aveludado', '150 Pastas corporativas laminadas de alta resistência', '500 Folhas de papel timbrado offset 100g de alta absorção', '200 Envelopes saco C4 + 300 Envelopes de carta DL timbrados', '2 Carimbos automáticos de expediente']
+                    ],
+                    [
+                        'name' => 'Gestão Anual de Papelaria / Grandes Lotes',
+                        'price' => 'Sob Cotação',
+                        'period' => 'contrato corporativo com reposição',
+                        'desc' => 'Abastecimento contínuo para bancos, seguradoras, petrolíferas e órgãos públicos.',
+                        'popular' => false,
+                        'features' => ['Produção em grande escala com desconto de volume', 'Garantia de reposição de stock em 48h úteis', 'Linha de atendimento corporativo dedicada', 'Faturação com prazos de crédito negociados']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Produção Gráfica Corporativa e Papelaria da RACHI Print.'
+            ],
+            [
+                'id' => 4,
+                'slug' => 'grafica-eventos',
+                'num' => '04',
+                'tag' => '04 • GRANDES FORMATOS & EVENTOS',
+                'title' => 'Produção gráfica para eventos & sinalética',
+                'short_desc' => 'Produção de banners, convites, credenciais, sinalética e materiais para eventos corporativos.',
+                'full_desc' => 'Estruturas de grande impacto e sinalética completa para conferências, workshops, feiras internacionais e celebrações institucionais. Criamos roll-up banners autoportantes, lonas de palco (backdrops) com acabamento fosco anti-reflexo para câmaras de TV, credenciais em PVC rígido com fitas personalizadas e totens de orientação.',
+                'icon' => 'calendar-range',
+                'image' => 'images/services/service-print-grafica-eventos.jpg',
+                'color' => 'purple',
+                'starting_price' => '22.000 Kz',
+                'price_period' => 'preço base unitário',
+                'cta_label' => 'Solicitar Cotação para Eventos',
+                'prazo' => '24h a 48h úteis (regime de urgência disponível)',
+                'garantia' => 'Estruturas de alumínio reforçado e lona anti-reflexo com nitidez fotográfica',
+                'bullets' => [
+                    'Materiais para todos os formatos e cenografias',
+                    'Entrega perfeitamente alinhada ao cronograma do seu evento',
+                    'Elevado impacto visual, contraste e legibilidade'
+                ],
+                'applications' => 'Roll-up Banners (85x200cm, 120x200cm), Backdrops de Palco, Credenciais em PVC com fita personalizada, Totens e Sinalética Direcional.',
+                'includes' => [
+                    'Impressão digital em grande formato solvente e UV de secagem instantânea e cores vivas',
+                    'Lonas foscas especiais de alta densidade sem reflexo em fotografias ou iluminação de palco',
+                    'Fornecimento de estruturas completas de alumínio com hastes reforçadas e estojo almofadado',
+                    'Credenciamento seguro: cartões em PVC com furo ovóide e fitas lanyard sublimadas com logótipo',
+                    'Sinalética direcional e placas de mesa de oradores em acrílico ou PVC espumado',
+                    'Disponibilidade de apoio técnico presencial para montagem e desmontagem das estruturas em Luanda'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Briefing do Evento & Medidas', 'desc' => 'Alinhamos a tipologia do evento, dimensões do espaço, número de credenciais e data da montagem.'],
+                    ['num' => '02', 'title' => 'Design & Proporções de Escala', 'desc' => 'Adaptação dos ficheiros para dimensões reais garantindo máxima resolução sem granulação.'],
+                    ['num' => '03', 'title' => 'Impressão em Grande Formato', 'desc' => 'Execução com maquinário industrial, costura de bainhas e aplicação de ilhós metálicos.'],
+                    ['num' => '04', 'title' => 'Montagem & Entrega Pontual', 'desc' => 'Entrega antecipada das estruturas no recinto do evento ou nas instalações do cliente.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Kit Orador / Expositor Básico',
+                        'price' => '22.000 Kz',
+                        'period' => 'a partir de / unidade',
+                        'desc' => 'Solução rápida e prática para quem participa como patrocinador ou orador convidado.',
+                        'popular' => false,
+                        'features' => ['1 Roll-up Banner completo 85x200cm em alumínio anodizado', 'Lona fotográfica fosca de alta resolução', 'Saco de transporte almofadado com fecho', 'Produção rápida em até 24h']
+                    ],
+                    [
+                        'name' => 'Conferência / Seminário Executivo',
+                        'price' => '145.000 Kz',
+                        'period' => 'pacote de evento (até 100 pax)',
+                        'desc' => 'Cenografia visual completa para fóruns, conferências ministeriais e reuniões de empresas.',
+                        'popular' => true,
+                        'features' => ['1 Backdrop fotográfico de palco / receção (3x2m com acabamento anti-reflexo)', '2 Roll-up Banners institucionais para receção e auditório', '100 Credenciais em PVC com fitas sublimadas personalizadas', 'Sinalética de púlpito e mesa de honra']
+                    ],
+                    [
+                        'name' => 'Grande Feira / Cimeira Internacional',
+                        'price' => 'Sob Cotação',
+                        'period' => 'projeto cenográfico customizado',
+                        'desc' => 'Estandes personalizados, painéis autoportantes e montagem completa de grandes fóruns.',
+                        'popular' => false,
+                        'features' => ['Decoração completa de estande ou pavilhão', 'Pórticos de entrada e balcões de credenciamento', 'Equipa de montagem e suporte no dia do evento', 'SLA prioritário para urgências de última hora']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Produção Gráfica de Eventos e Sinalética da RACHI Print.'
             ]
         ];
     }

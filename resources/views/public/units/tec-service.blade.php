@@ -77,111 +77,155 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* DUAL THEME HEADER */
+        /* HEADER THEME SYSTEM (LIGHT & DARK MODES) */
         .site-header {
             position: fixed !important;
             top: 0 !important; left: 0 !important; right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-        .site-header.header-top-dark {
+
+        /* 1. DARK MODE (html.dark) */
+        html.dark .site-header {
             background: rgba(7, 19, 38, 0.94) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
         }
-        .site-header.header-top-dark .main-nav-capsule {
+        html.dark .site-header.header-scrolled {
+            background: rgba(7, 19, 38, 0.98) !important;
+            box-shadow: 0 6px 35px rgba(0, 0, 0, 0.5) !important;
+        }
+        html.dark .site-header .brand-logo-box {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+        html.dark .site-header .brand-logo-text {
+            color: #ffffff !important;
+        }
+        html.dark .site-header .brand-subtitle {
+            color: #94a3b8 !important;
+        }
+        html.dark .site-header .main-nav-capsule {
             display: flex; align-items: center; gap: 0.25rem;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 9999px; padding: 0.3rem 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link {
-            color: #cbd5e1; font-size: 0.8125rem; font-weight: 500;
-            padding: 0.45rem 1rem; border-radius: 9999px;
+        html.dark .site-header .main-nav-capsule .nav-link {
+            position: relative; font-size: 0.88rem; font-weight: 500;
+            color: rgba(255, 255, 255, 0.8) !important;
+            padding: 0.45rem 0.9rem !important; border-radius: 9999px;
+            white-space: nowrap; text-decoration: none;
             transition: all 0.2s ease;
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link:hover {
-            color: #ffffff; background: rgba(255, 255, 255, 0.08);
+        html.dark .site-header .main-nav-capsule .nav-link:hover {
+            color: #ffffff !important; background: rgba(255, 255, 255, 0.08);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link.active {
-            color: #ffffff; background: rgba(0, 163, 224, 0.20);
-            border: 1px solid rgba(0, 163, 224, 0.35);
+        html.dark .site-header .main-nav-capsule .nav-link.active {
+            color: #00a3e0 !important;
+            background: rgba(0, 163, 224, 0.2);
+            border: 1px solid rgba(0, 163, 224, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 163, 224, 0.2);
+            font-weight: 700;
         }
-
-        .site-header.header-scrolled-light {
-            background: rgba(255, 255, 255, 0.96) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border-bottom: 1px solid #e2e8f0 !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+        html.dark .site-header .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            color: #f8fafc !important;
         }
-        .site-header.header-scrolled-light .brand-logo-text { color: #071326 !important; }
-        .site-header.header-scrolled-light .main-nav-capsule {
-            display: flex; align-items: center; gap: 0.25rem;
-            background: #f1f5f9; border: 1px solid #e2e8f0;
-            border-radius: 9999px; padding: 0.3rem 0.5rem;
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link {
-            color: #475569; font-size: 0.8125rem; font-weight: 500;
-            padding: 0.45rem 1rem; border-radius: 9999px;
-            transition: all 0.2s ease;
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover {
-            color: #071326; background: rgba(255, 255, 255, 0.8);
-        }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
-            color: #00a3e0; background: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .site-header.header-scrolled-light .theme-toggle-btn {
-            background: #f1f5f9; border-color: #cbd5e1; color: #071326;
-        }
-        .site-header.header-scrolled-light .mobile-menu-btn { color: #071326; }
-
-        html.dark .site-header.header-scrolled-light {
-            background: rgba(7, 19, 38, 0.94) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45) !important;
-        }
-        html.dark .site-header.header-scrolled-light .brand-logo-text { color: #ffffff !important; }
-        html.dark .site-header.header-scrolled-light .main-nav-capsule {
-            background: rgba(255, 255, 255, 0.04) !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
-        }
-        html.dark .site-header.header-scrolled-light .main-nav-capsule .nav-link {
-            color: #cbd5e1 !important;
-        }
-        html.dark .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover {
+        html.dark .site-header .mobile-menu-btn {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
         }
-        html.dark .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
-            color: #ffffff !important;
-            background: rgba(0, 163, 224, 0.20) !important;
-            border: 1px solid rgba(0, 163, 224, 0.35) !important;
+
+        /* 2. LIGHT MODE (html:not(.dark)) */
+        html:not(.dark) .site-header {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06) !important;
         }
-        html.dark .site-header.header-scrolled-light .theme-toggle-btn {
-            background: rgba(255, 255, 255, 0.05) !important;
+        html:not(.dark) .site-header.header-scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-box {
+            background: rgba(11, 26, 46, 0.04) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-text {
+            color: #071326 !important;
+        }
+        html:not(.dark) .site-header .brand-subtitle {
+            color: #64748b !important;
+        }
+        html:not(.dark) .site-header .main-nav-capsule {
+            display: flex; align-items: center; gap: 0.25rem;
+            background: rgba(11, 26, 46, 0.04);
+            border: 1px solid rgba(11, 26, 46, 0.08);
+            border-radius: 9999px; padding: 0.3rem 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link {
+            font-size: 0.88rem; font-weight: 600;
+            color: #0b1a2e !important;
+            padding: 0.45rem 0.9rem !important; border-radius: 9999px;
+            white-space: nowrap; text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link:hover {
+            color: #0089c2 !important; background: rgba(0, 163, 224, 0.08);
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.active {
+            color: #0077c2 !important;
+            background: rgba(0, 163, 224, 0.12);
+            border: 1px solid rgba(0, 163, 224, 0.3);
+            font-weight: 700;
+        }
+        html:not(.dark) .site-header .theme-toggle-btn {
+            background: rgba(11, 26, 46, 0.04) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+            color: #0b1a2e !important;
+        }
+        html:not(.dark) .site-header .mobile-menu-btn {
+            color: #0b1a2e !important;
+            background: rgba(11, 26, 46, 0.05) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+        }
+
+        /* HEADER DROPDOWN */
+        .header-dropdown {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+        }
+        html.dark .header-dropdown {
+            background-color: rgba(7, 19, 38, 0.98) !important;
             border-color: rgba(255, 255, 255, 0.12) !important;
-            color: #ffffff !important;
-        }
-        html.dark .site-header.header-scrolled-light .mobile-menu-btn { color: #ffffff !important; }
-
-        .theme-toggle-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 38px; height: 38px; border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff; cursor: pointer; transition: all 0.25s ease;
-        }
-        .theme-toggle-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6) !important;
         }
 
+        /* FOOTER */
+        .site-footer {
+            background-color: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            padding: 3rem 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .site-footer {
+            background-color: #050912 !important;
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
+        }
+        
         .btn-cta-blue {
             display: inline-flex; align-items: center; justify-content: center;
             gap: 0.5rem; padding: 0.5rem 1.25rem; font-size: 0.8125rem; font-weight: 700;
@@ -311,43 +355,30 @@
     </style>
 
 </head>
-<body x-data="{ 
-    mobileMenuOpen: false, 
-    selectedPlan: '{{ $service['plans'][1]['name'] ?? $service['plans'][0]['name'] }}',
-    clientName: '',
-    clientPhone: '',
-    clientEmail: '',
-    clientCompany: '',
-    clientMsg: '',
-    isSubmitting: false,
-    selectPlan(planName) {
-        this.selectedPlan = planName;
-        document.getElementById('solicitar').scrollIntoView({ behavior: 'smooth' });
-    }
-}">
+<body x-data="rachiServicePage()" class="antialiased">
 
     <!-- ============================================================ -->
     <!-- DUAL THEME HEADER (Dark top -> Light scrolled)               -->
     <!-- ============================================================ -->
-    <header id="main-site-header" class="site-header header-top-dark py-3.5 px-4 sm:px-6 lg:px-8">
+    <header id="navbar" class="site-header py-3.5 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo -->
-            <a href="/tec" class="flex items-center gap-3 group focus:outline-none">
-                <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-[#00a3e0]/20 to-[#071326] p-1.5 flex items-center justify-center border border-[#00a3e0]/30 shadow-md group-hover:scale-105 transition-transform duration-300">
+            <a href="/tec" class="flex items-center gap-3 group focus:outline-none" title="RACHI Tec">
+                <div class="brand-logo-box h-10 w-10 rounded-xl p-1.5 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
                     <picture>
                         <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
                         <img src="/images/areas/rachi-tec.png" 
                              onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-tec.png'" 
                              alt="RACHI Tec" 
-                             class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
+                             class="h-7 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-black text-lg tracking-wider text-white brand-logo-text flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#00a3e0] text-xs font-bold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">TEC</span>
+                    <span class="font-display font-black text-lg tracking-wider brand-logo-text flex items-center gap-1.5 transition-colors">
+                        RACHI <span class="text-[#0077c2] dark:text-[#00a3e0] text-xs font-bold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">TEC</span>
                     </span>
-                    <span class="text-[10px] text-slate-400 tracking-widest uppercase font-medium">Tecnologia &amp; Sistemas</span>
+                    <span class="text-[10px] brand-subtitle tracking-widest uppercase font-medium">Tecnologia &amp; Sistemas</span>
                 </div>
             </a>
 
@@ -358,8 +389,8 @@
                 </a>
                 
                 <!-- Soluções Dropdown -->
-                <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                    <button @mouseover="openSol = true" @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false" >
+                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
                         <span>Soluções</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -438,12 +469,14 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 <button type="button"
                     onclick="window.toggleRachiTheme()"
-                    class="theme-toggle-btn"
+                    class="theme-toggle-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer"
                     aria-label="Alternar Modo Escuro / Claro"
                     title="Alternar Modo Escuro / Claro">
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-300 hover:text-white dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <!-- Lua (Visível no modo claro -> ao clicar ativa escuro) -->
+                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-700 hover:text-slate-900 dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                     </svg>
+                    <!-- Sol (Visível no modo escuro -> ao clicar ativa claro) -->
                     <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="4"/>
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
@@ -465,20 +498,20 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-[#071326]/98 backdrop-blur-2xl border-t border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
-            <a href="/" class="block font-medium py-1.5 text-white hover:text-[#00a3e0]">Home</a>
-            <div class="border-t border-white/10 pt-2">
-                <span class="text-xs uppercase font-bold text-[#00a3e0] tracking-wider">Soluções</span>
+        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+            <a href="/" class="block font-medium py-1.5 text-slate-700 dark:text-white hover:text-[#00a3e0]">Home</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2">
+                <span class="text-xs uppercase font-bold text-[#0077c2] dark:text-[#00a3e0] tracking-wider">Soluções</span>
                 <div class="pl-3 mt-1 space-y-1.5">
-                    <a href="/capital" class="block text-sm text-slate-400 hover:text-emerald-400">01 RACHI Human Capital</a>
-                    <a href="/academy" class="block text-sm text-slate-400 hover:text-indigo-400">02 RACHI Academy</a>
-                    <a href="/tec" class="block text-sm text-sky-400 font-bold">03 RACHI Tec</a>
-                    <a href="/print" class="block text-sm text-slate-400 hover:text-amber-400">04 RACHI Print</a>
+                    <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500">01 RACHI Human Capital</a>
+                    <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-500">02 RACHI Academy</a>
+                    <a href="/tec" class="block text-sm text-[#0077c2] dark:text-sky-400 font-bold">03 RACHI Tec</a>
+                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-500">04 RACHI Print</a>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-2 space-y-1">
-                <a href="/tec#servicos-tec" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-300 hover:text-white">Os nossos serviços</a>
-                <a href="/contacto" class="block font-medium py-1 text-[#00a3e0] font-bold">Pedir Proposta / Contacto</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2 space-y-1">
+                <a href="/tec#servicos-tec" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Os nossos serviços</a>
+                <a href="/contacto" class="block font-medium py-1 text-[#0077c2] dark:text-[#00a3e0] font-bold">Pedir Proposta / Contacto</a>
             </div>
         </div>
     </header>
@@ -563,7 +596,7 @@
                                 <i data-lucide="send" class="w-4 h-4"></i>
                                 <span>Aderir / Solicitar Proposta</span>
                             </a>
-                            <a href="https://wa.me/244923000000?text={{ urlencode($service['whatsapp_msg']) }}" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm transition shadow-lg shadow-green-500/20">
+                            <a href="https://wa.me/244972888585?text={{ urlencode($service['whatsapp_msg']) }}" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm transition shadow-lg shadow-green-500/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
                                 <span>Falar no WhatsApp Directo</span>
                             </a>
@@ -804,7 +837,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">Telefone / WhatsApp *</label>
-                                    <input type="tel" name="telefone" required placeholder="+244 923 000 000" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#0a1a33] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00a3e0]">
+                                    <input type="tel" name="telefone" required placeholder="+244 972 888 585" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#0a1a33] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00a3e0]">
                                 </div>
                             </div>
 
@@ -836,7 +869,7 @@
                             </p>
 
                             <!-- WhatsApp Directo -->
-                            <a href="https://wa.me/244923000000?text={{ urlencode($service['whatsapp_msg']) }}" target="_blank" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-green-500 transition group">
+                            <a href="https://wa.me/244972888585?text={{ urlencode($service['whatsapp_msg']) }}" target="_blank" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-green-500 transition group">
                                 <div class="w-10 h-10 rounded-xl bg-[#25D366]/15 text-[#25D366] flex items-center justify-center shrink-0">
                                     <i data-lucide="message-circle" class="w-5 h-5"></i>
                                 </div>
@@ -848,13 +881,13 @@
                             </a>
 
                             <!-- Telefone Directo -->
-                            <a href="tel:+244923000000" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition group">
+                            <a href="tel:+244972888585" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition group">
                                 <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-[#00a3e0] flex items-center justify-center shrink-0">
                                     <i data-lucide="phone-call" class="w-5 h-5"></i>
                                 </div>
                                 <div class="flex-1">
                                     <div class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#00a3e0] transition">Linha Telefónica Direta</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400">+244 923 000 000 / Luanda, Angola</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400">+244 972 888 585 / Luanda, Angola</div>
                                 </div>
                                 <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-[#00a3e0] transition"></i>
                             </a>
@@ -927,21 +960,43 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#030813] text-slate-400 py-12 border-t border-white/10 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-400">
             <div class="flex items-center gap-3">
-                <span class="font-bold text-white tracking-wider">RACHI TEC</span>
+                <span class="font-bold text-slate-900 dark:text-white tracking-wider">RACHI TEC</span>
                 <span>•</span>
                 <span>Tecnologia, Sistemas &amp; Infraestrutura em Angola</span>
             </div>
             <div>
-                &copy; {{ date('Y') }} RACHI. Todos os direitos reservados.
+                &copy; {{ date("Y") }} RACHI. Todos os direitos reservados.
             </div>
         </div>
     </footer>
 
     <!-- Inicialização Lucide Icons -->
     <script>
+        
+        function rachiServicePage() {
+            return {
+                mobileMenuOpen: false,
+                openSol: false,
+                init() {
+                    const handleScroll = () => {
+                        const nav = document.getElementById('navbar');
+                        if (nav) {
+                            if (window.scrollY > 30) {
+                                nav.classList.add('header-scrolled');
+                            } else {
+                                nav.classList.remove('header-scrolled');
+                            }
+                        }
+                    };
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    handleScroll();
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             if (window.lucide) {
                 window.lucide.createIcons();

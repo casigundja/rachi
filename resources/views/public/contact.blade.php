@@ -280,21 +280,31 @@
         }
 
         /* Light Dropdowns */
+        html:not(.dark) .site-header .header-dropdown,
+        html:not(.dark) .header-dropdown,
         .site-header.header-scrolled-light .header-dropdown {
             background: rgba(255, 255, 255, 0.98) !important;
             border: 1px solid rgba(11, 26, 46, 0.1) !important;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06) !important;
         }
+        html:not(.dark) .site-header .header-dropdown a,
+        html:not(.dark) .header-dropdown a,
         .site-header.header-scrolled-light .header-dropdown a {
             color: #334155 !important;
         }
+        html:not(.dark) .site-header .header-dropdown a:hover,
+        html:not(.dark) .header-dropdown a:hover,
         .site-header.header-scrolled-light .header-dropdown a:hover {
             background: #f1f5f9 !important;
             color: #0077c2 !important;
         }
+        html:not(.dark) .site-header .header-dropdown .dropdown-title,
+        html:not(.dark) .header-dropdown .dropdown-title,
         .site-header.header-scrolled-light .header-dropdown .dropdown-title {
             color: #0f172a !important;
         }
+        html:not(.dark) .site-header .header-dropdown .dropdown-desc,
+        html:not(.dark) .header-dropdown .dropdown-desc,
         .site-header.header-scrolled-light .header-dropdown .dropdown-desc {
             color: #64748b !important;
         }
@@ -494,7 +504,7 @@
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-4 xl:gap-6">
                 <!-- Brand Logo (Automated Switch: White Logo on Top, Dark Logo on Scrolled) -->
                 <div class="flex-shrink-0 flex items-center justify-start z-10">
-                    <a href="#home" @click.prevent="goToHome()" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
+                    <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png" 
                              onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'"
@@ -511,13 +521,13 @@
                 <!-- Main Navigation Links in Capsule -->
                 <div class="flex-1 hidden lg:flex items-center justify-center min-w-0 px-2 xl:px-4">
                     <nav class="flex items-center main-nav-capsule">
-                        <a href="#home" @click.prevent="goToHome()" class="nav-link cursor-pointer" :class="currentTab === 'home' ? 'active' : ''">
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="nav-link cursor-pointer" :class="currentTab === 'home' ? 'active' : ''">
                         <span>Home</span>
                     </a>
                     
                     <!-- Sobre Nós Dropdown -->
-                    <div class="relative" x-data="{ open: false , solutionsOpen: false}" @mouseleave="open = false">
-                        <button @mouseover="open = true" @click="open = !open" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="open ? 'nav-link-open' : ''">
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false; solutionsOpen = false" @keydown.escape.window="open = false; solutionsOpen = false" >
+                        <button type="button" @click="open = !open; solutionsOpen = false" class="nav-link flex items-center gap-1.5 focus:outline-none" :class="open ? 'nav-link-open' : ''">
                             <span>Sobre Nós</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="open ? 'rotate-180 text-[#00a3e0]' : ''">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -530,26 +540,26 @@
                              x-transition:leave="transition ease-in duration-150"
                              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                              x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                             class="header-dropdown absolute top-full left-0 mt-3 w-56 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2 z-50 text-sm space-y-1">
-                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                             class="header-dropdown absolute top-full left-0 mt-2 w-56 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-xl dark:shadow-2xl p-2 z-50 text-sm space-y-1 before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="info" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Quem somos</span>
                             </a>
-                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="handshake" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Parceiros</span>
                             </a>
-                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
                                 </span>
@@ -560,8 +570,9 @@
 
                     <!-- Soluções (Mega Menu Ecossistema RACHI) -->
                     <button type="button"
-                        @click="solutionsOpen = !solutionsOpen"
-                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        id="btn-nav-solutions"
+                        @click.stop="solutionsOpen = !solutionsOpen"
+                        class="nav-link solutions-trigger-btn relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
                         :class="solutionsOpen ? 'text-[#0077c2] dark:text-white font-semibold' : ''">
                         <span class="relative py-1">
                             Soluções
@@ -582,10 +593,10 @@
                     <a href="/#etica" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
-                    <a href="/loja" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
+                    <a href="/loja" @click="solutionsOpen = false" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
                         <span>Loja</span>
                     </a>
-                    <a href="/contacto" class="nav-link active" :class="currentTab === 'contacto' ? 'active' : ''">
+                    <a href="/contacto" @click="solutionsOpen = false" class="nav-link active" :class="currentTab === 'contacto' ? 'active' : ''">
                         <span>Contacto</span>
                     </a>
                 </nav>
@@ -643,17 +654,6 @@
                                  x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                                  x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
                                  class="header-dropdown absolute right-0 mt-2 w-64 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 text-xs text-slate-800 dark:text-slate-200 space-y-1">
-                                <a href="/?view=customer" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 transition">
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                    <span>Painel do Cliente</span>
-                                </a>
-                                <a href="/loja" class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 transition">
-                                    <div class="flex items-center gap-2.5">
-                                        <svg class="w-4 h-4 text-[#00a3e0] dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                                        <span>Loja</span>
-                                    </div>
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-600 dark:text-blue-400 font-bold">Conectado</span>
-                                </a>
                                 <a href="/aluno-dashboard" class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 transition">
                                     <div class="flex items-center gap-2.5">
                                         <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
@@ -765,10 +765,10 @@
 
                         <!-- Pílulas de Acesso Rápido -->
                         <div class="mt-7 flex flex-wrap items-center gap-3">
-                            <a href="https://wa.me/244923000000" target="_blank" rel="noopener noreferrer"
+                            <a href="https://wa.me/244972888585" target="_blank" rel="noopener noreferrer"
                                class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100/90 dark:bg-emerald-500/20 dark:hover:bg-emerald-500/30 border border-emerald-300/80 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold transition-all shadow-sm cursor-pointer hover:-translate-y-0.5 transform">
                                 <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.173.086.275.072.376-.044.101-.115.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"/></svg>
-                                <span>WhatsApp Directo (+244 923 000 000)</span>
+                                <span>WhatsApp Directo (+244 972 888 585)</span>
                             </a>
                             <a href="mailto:geral@rachi.ao"
                                class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100/90 dark:bg-blue-500/20 dark:hover:bg-blue-500/30 border border-blue-300/80 dark:border-blue-500/40 text-blue-800 dark:text-blue-300 text-xs font-bold transition-all shadow-sm cursor-pointer hover:-translate-y-0.5 transform">
@@ -830,11 +830,11 @@
                                         </div>
                                         <div class="min-w-0">
                                             <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Telefone &amp; WhatsApp</div>
-                                            <a href="tel:+244923000000" class="text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-500 transition truncate block">+244 923 000 000</a>
+                                            <a href="tel:+244972888585" class="text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-500 transition truncate block">+244 972 888 585</a>
                                             <div class="text-[11px] text-slate-500 dark:text-slate-400 truncate">Atendimento telefónico e mensagens</div>
                                         </div>
                                     </div>
-                                    <a href="https://wa.me/244923000000" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-all shadow-sm cursor-pointer shrink-0 ml-2 hover:scale-105 flex items-center gap-1.5">
+                                    <a href="https://wa.me/244972888585" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-all shadow-sm cursor-pointer shrink-0 ml-2 hover:scale-105 flex items-center gap-1.5">
                                         <span>WhatsApp</span>
                                         <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
                                     </a>
@@ -935,7 +935,7 @@
                                                 <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-[#00a3e0] transition-colors">
                                                     <i data-lucide="phone" class="w-4 h-4"></i>
                                                 </span>
-                                                <input type="tel" x-model="formData.telefone" required placeholder="+244 923 000 000" class="contact-input w-full pl-10 pr-3.5 py-2.5 rounded-xl text-xs sm:text-sm placeholder:text-slate-400">
+                                                <input type="tel" x-model="formData.telefone" required placeholder="+244 972 888 585" class="contact-input w-full pl-10 pr-3.5 py-2.5 rounded-xl text-xs sm:text-sm placeholder:text-slate-400">
                                             </div>
                                         </div>
 
@@ -948,13 +948,10 @@
                                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                                 </span>
                                                 <select x-model="formData.unidade" class="contact-input w-full pl-10 pr-9 py-2.5 rounded-xl text-xs sm:text-sm appearance-none cursor-pointer">
-                                                    <option value="Geral">Orçamento Geral / Informações</option>
                                                     <option value="RACHI Tec">🌐 RACHI Tec — Tecnologia, Redes e TI</option>
                                                     <option value="RACHI Print">🖨️ RACHI Print — Produção Gráfica e Brindes</option>
                                                     <option value="RACHI Academy">🎓 RACHI Academy — Formação Executiva</option>
                                                     <option value="RACHI Human Capital">👥 RACHI Human Capital — RH &amp; Gestão</option>
-                                                    <option value="Loja">🛍️ Loja de Equipamentos e Produtos</option>
-                                                    <option value="Parcerias">🤝 Parcerias Estratégicas</option>
                                                 </select>
                                                 <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                                                     <i data-lucide="chevron-down" class="w-4 h-4"></i>
@@ -1057,42 +1054,43 @@
         </div>
 
         <!-- FOOTER EXACT TO RACHI -->
-        <footer class="bg-[#071326] text-white pt-16 pb-8 border-t border-slate-800 mt-20">
+        <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" alt="RACHI" class="h-10 mb-4">
-                        <p class="text-xs text-slate-400 leading-relaxed">
+                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                             Um ecossistema de soluções inteligentes para impulsionar negócios e pessoas em Angola e no mundo.
                         </p>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Áreas de Negócio</h4>
-                        <ul class="space-y-2 text-xs text-slate-300">
-                            <li><a href="/tec" class="hover:text-white">RACHI Tec</a></li>
-                            <li><a href="/print" class="hover:text-white">RACHI Print</a></li>
-                            <li><a href="/academy" class="hover:text-white">RACHI Academy</a></li>
-                            <li><a href="/capital" class="hover:text-white">RACHI Human Capital</a></li>
+                        <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a></li>
+                            <li><a href="/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print</a></li>
+                            <li><a href="/academy" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy</a></li>
+                            <li><a href="/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Human Capital</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Sobre Nós</h4>
-                        <ul class="space-y-2 text-xs text-slate-300">
-                            <li><a href="/#sobre" class="hover:text-white">Quem somos</a></li>
-                            <li><a href="/#o-que-fazemos" class="hover:text-white">O que fazemos</a></li>
-                            <li><a href="/#parceiros" class="hover:text-white">Parceiros</a></li>
-                            <li><a href="/#etica" class="hover:text-white">Ética e Compliance</a></li>
+                        <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Quem somos</a></li>
+                            <li><a href="/#o-que-fazemos" class="hover:text-slate-900 dark:hover:text-white transition">O que fazemos</a></li>
+                            <li><a href="/#parceiros" class="hover:text-slate-900 dark:hover:text-white transition">Parceiros</a></li>
+                            <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
                             <li><a href="/contacto" class="text-amber-400 font-bold hover:text-white">Contacto</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Localização</h4>
-                        <p class="text-xs text-slate-400">Luanda — Angola</p>
-                        <p class="text-xs text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
                     </div>
                 </div>
-                <div class="border-t border-slate-800/80 pt-6 flex justify-between items-center text-xs text-slate-500">
-                    <div>&copy; 2026 RACHI. Todos os direitos reservados.</div>
+                <div class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                    <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong>. Todos os direitos reservados.</div>
                     <div class="flex gap-4">
                         <span class="text-amber-400 font-bold">PT</span>
                         <span class="text-slate-600">|</span>
@@ -1114,7 +1112,12 @@
                     nome: '',
                     email: '',
                     telefone: '',
-                    unidade: 'Geral',
+                    unidade: (function() {
+                        const p = new URLSearchParams(window.location.search);
+                        const val = p.get('unidade') || p.get('area');
+                        const valid = ['RACHI Tec', 'RACHI Print', 'RACHI Academy', 'RACHI Human Capital'];
+                        return valid.includes(val) ? val : 'RACHI Tec';
+                    })(),
                     mensagem: ''
                 },
                 getPlaceholder() {
@@ -1123,8 +1126,6 @@
                         case 'RACHI Print': return 'Indique os materiais gráficos, tiragens pretendidas, formatos ou brindes corporativos...';
                         case 'RACHI Academy': return 'Qual o programa executivo ou necessidade de formação corporativa da sua equipa?';
                         case 'RACHI Human Capital': return 'Descreva a necessidade em recrutamento especializado, consultoria de RH ou gestão...';
-                        case 'Loja': return 'Quais os equipamentos de informática ou produtos homologados que pretende orçamentar?';
-                        case 'Parcerias': return 'Apresente a sua proposta de parceria institucional ou representação comercial...';
                         default: return 'Descreva sucintamente a sua necessidade corporativa ou pedido de cotação...';
                     }
                 },
@@ -1152,7 +1153,7 @@
                         this.formData.nome = '';
                         this.formData.email = '';
                         this.formData.telefone = '';
-                        this.formData.unidade = 'Geral';
+                        this.formData.unidade = 'RACHI Tec';
                         this.formData.mensagem = '';
                         this.charCount = 0;
                         this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });

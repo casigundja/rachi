@@ -28,41 +28,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap toast styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- App Compiled CSS -->
+    <link rel="stylesheet" href="/build/assets/app-BmeisZIV.css">
 
+    <!-- Tailwind Config (MUST BE BEFORE TAILWIND CDN SCRIPT) -->
+    <script>
+        tailwind = {
+            config: {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Inter"', 'sans-serif'],
+                            heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
+                        },
+                        colors: {
+                            rachi: {
+                                navy: '#071326',
+                                navyLight: '#0d1f3d',
+                                blue: '#00a3e0',
+                                blueDark: '#0050f0',
+                                blueHover: '#0042c7',
+                                surface: '#0c1527',
+                                surfaceDark: '#070f1e',
+                                border: '#162744',
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
-                        heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
-                    },
-                    colors: {
-                        rachi: {
-                            navy: '#071326',
-                            navyLight: '#0d1f3d',
-                            blue: '#00a3e0',
-                            blueDark: '#0050f0',
-                            blueHover: '#0042c7',
-                            surface: '#0c1527',
-                            surfaceDark: '#070f1e',
-                            border: '#162744',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
     <!-- Anti-Flash Dark Mode Script -->
     <script>
@@ -94,14 +96,50 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         html.dark body {
-            background-color: #070f1e;
-            color: #ffffff;
+            background-color: #070f1e !important;
+            color: #ffffff !important;
         }
         .font-heading {
             font-family: 'Encode Sans', sans-serif;
         }
         .glow-rachi {
             box-shadow: 0 0 35px -8px rgba(0, 163, 224, 0.35);
+        }
+
+        /* Dark Mode High-Performance Theme Safeguards */
+        html.dark .bg-white {
+            background-color: #0c1527 !important;
+        }
+        html.dark .bg-slate-50,
+        html.dark .bg-slate-50\/50,
+        html.dark .bg-slate-50\/70 {
+            background-color: #081020 !important;
+        }
+        html.dark .bg-slate-100 {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        html.dark .border-slate-200,
+        html.dark .border-slate-200\/80,
+        html.dark .border-slate-200\/90,
+        html.dark .border-slate-100 {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        html.dark input,
+        html.dark select,
+        html.dark textarea {
+            background-color: rgba(7, 15, 30, 0.95) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        html.dark input::placeholder,
+        html.dark textarea::placeholder {
+            color: #64748b !important;
+        }
+        html.dark input:focus,
+        html.dark select:focus,
+        html.dark textarea:focus {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 0 0 2px rgba(0, 163, 224, 0.25) !important;
         }
     </style>
 </head>
@@ -128,6 +166,10 @@
 
             <!-- Botões de Ação Header -->
             <div class="flex items-center gap-3">
+                <a href="/academy/login" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 hover:bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/20 transition hidden sm:inline-flex items-center gap-1.5">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Portal do Aluno</span>
+                </a>
                 <!-- Toggle Dark Mode -->
                 <button type="button" onclick="toggleRachiTheme()" aria-label="Alternar Tema" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center justify-center transition-colors">
                     <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
@@ -159,16 +201,12 @@
     <!-- ============================================================ -->
     @if(session('matricula_sucesso'))
     @php $mat = session('matricula_sucesso'); @endphp
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100; padding-top: 5.5rem !important;">
-        <div id="enrollment-success-toast" class="toast text-bg-success border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="7000">
-            <div class="d-flex align-items-center">
-                <div class="toast-body d-flex align-items-center gap-2 fw-semibold">
-                    <i data-lucide="circle-check" class="w-5 h-5 flex-shrink-0"></i>
-                    <span>Recebemos a sua solicitação de matrícula com sucesso e retornaremos em breve.</span>
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
-            </div>
-        </div>
+    <div x-data="{ showToast: true }" x-show="showToast" x-init="setTimeout(() => showToast = false, 7000)" class="fixed top-24 right-4 z-50 max-w-md p-4 rounded-2xl bg-emerald-600 text-white shadow-2xl flex items-center gap-3 border border-emerald-400/40 backdrop-blur-md transition-all">
+        <i data-lucide="circle-check" class="w-5 h-5 shrink-0 text-emerald-200"></i>
+        <span class="text-xs sm:text-sm font-semibold">Recebemos a sua solicitação de matrícula com sucesso e retornaremos em breve.</span>
+        <button type="button" @click="showToast = false" aria-label="Fechar" class="ml-auto text-emerald-200 hover:text-white">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
     </div>
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0c1527] to-[#070f1e] border-2 border-[#00a3e0] text-white shadow-2xl relative overflow-hidden">
@@ -375,7 +413,7 @@
                                 <span>Fazer Matrícula Agora</span>
                             </button>
 
-                            <a href="https://wa.me/244923000000?text={{ urlencode('Olá! Gostaria de obter informações sobre a formação: ' . $course->name) }}" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-2xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-800 dark:text-slate-200 font-bold text-sm border border-slate-200 dark:border-white/10 transition-colors flex items-center justify-center gap-2">
+                            <a href="https://wa.me/244972888585?text={{ urlencode('Olá! Gostaria de obter informações sobre a formação: ' . $course->name) }}" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-2xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-800 dark:text-slate-200 font-bold text-sm border border-slate-200 dark:border-white/10 transition-colors flex items-center justify-center gap-2">
                                 <i data-lucide="message-square" class="w-4 h-4 text-emerald-500"></i>
                                 <span>Tirar Dúvidas no WhatsApp</span>
                             </a>
@@ -544,7 +582,7 @@
         <div x-show="openMatriculaModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="openMatriculaModal = false" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md"></div>
 
         <!-- Modal Container -->
-        <div x-show="openMatriculaModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95 translate-y-4" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-4" class="relative w-full max-w-lg bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden z-10">
+        <div x-show="openMatriculaModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95 translate-y-4" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-4" class="relative w-full max-w-lg bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl dark:shadow-[0_0_50px_rgba(0,163,224,0.2)] overflow-hidden z-10">
             <!-- Top Line Gradient -->
             <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0]"></div>
 
@@ -587,7 +625,7 @@
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                         Telefone / WhatsApp (Angola) <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" name="phone" required placeholder="+244 923 000 000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
+                    <input type="tel" name="phone" required placeholder="+244 972 888 585" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
                 </div>
 
 
@@ -605,7 +643,7 @@
     <!-- FOOTER INSTITUCIONAL RACHI                                  -->
     <!-- ============================================================ -->
     <footer class="bg-white dark:bg-[#070f1e] border-t border-slate-200 dark:border-white/10 py-10 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">
             <div class="flex items-center gap-2">
                 <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-6 w-auto dark:block hidden">
                 <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-6 w-auto dark:hidden block">
@@ -620,15 +658,7 @@
     </footer>
 
     @if(session('matricula_sucesso'))
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toastElement = document.getElementById('enrollment-success-toast');
-            if (toastElement && window.bootstrap?.Toast) {
-                window.bootstrap.Toast.getOrCreateInstance(toastElement).show();
-            }
-        });
-    </script>
+    
     @endif
 
     <!-- Lucide init -->

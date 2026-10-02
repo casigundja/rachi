@@ -30,7 +30,7 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
   const priceFormatted = formatKz(course.price);
   const isConsultation = priceFormatted === "Sob Consulta";
   const defaultWaText = encodeURIComponent(`Ol\xE1! Gostaria de obter informa\xE7\xF5es sobre a forma\xE7\xE3o: ${course.name}`);
-  const whatsappInquiry = `https://wa.me/244923000000?text=${defaultWaText}`;
+  const whatsappInquiry = `https://wa.me/244972888585?text=${defaultWaText}`;
   return `<!DOCTYPE html>
 <html lang="pt-AO" data-theme="dark" class="scroll-smooth">
 <head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script>
@@ -57,42 +57,43 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5.3.3 CSS & JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer><\/script>
+    <!-- App Compiled CSS -->
+    <link rel="stylesheet" href="/build/assets/app-BmeisZIV.css">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"><\/script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"><\/script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"><\/script>
-
+    <!-- Tailwind Config (MUST BE BEFORE TAILWIND CDN SCRIPT) -->
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
-                        heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
-                    },
-                    colors: {
-                        rachi: {
-                            navy: '#071326',
-                            navyLight: '#0d1f3d',
-                            blue: '#00a3e0',
-                            blueDark: '#0050f0',
-                            blueHover: '#0042c7',
-                            surface: '#0c1527',
-                            surfaceDark: '#070f1e',
-                            border: '#162744',
+        tailwind = {
+            config: {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Inter"', 'sans-serif'],
+                            heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
+                        },
+                        colors: {
+                            rachi: {
+                                navy: '#071326',
+                                navyLight: '#0d1f3d',
+                                blue: '#00a3e0',
+                                blueDark: '#0050f0',
+                                blueHover: '#0042c7',
+                                surface: '#0c1527',
+                                surfaceDark: '#070f1e',
+                                border: '#162744',
+                            }
                         }
                     }
                 }
             }
         };
     <\/script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"><\/script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"><\/script>
 
     <!-- Anti-Flash Dark Mode Script -->
     <script>
@@ -124,14 +125,50 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         html.dark body {
-            background-color: #070f1e;
-            color: #ffffff;
+            background-color: #070f1e !important;
+            color: #ffffff !important;
         }
         .font-heading {
             font-family: 'Encode Sans', sans-serif;
         }
         .glow-rachi {
             box-shadow: 0 0 35px -8px rgba(0, 163, 224, 0.35);
+        }
+
+        /* Dark Mode High-Performance Theme Safeguards */
+        html.dark .bg-white {
+            background-color: #0c1527 !important;
+        }
+        html.dark .bg-slate-50,
+        html.dark .bg-slate-50\/50,
+        html.dark .bg-slate-50\/70 {
+            background-color: #081020 !important;
+        }
+        html.dark .bg-slate-100 {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        html.dark .border-slate-200,
+        html.dark .border-slate-200\/80,
+        html.dark .border-slate-200\/90,
+        html.dark .border-slate-100 {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        html.dark input,
+        html.dark select,
+        html.dark textarea {
+            background-color: rgba(7, 15, 30, 0.95) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        html.dark input::placeholder,
+        html.dark textarea::placeholder {
+            color: #64748b !important;
+        }
+        html.dark input:focus,
+        html.dark select:focus,
+        html.dark textarea:focus {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 0 0 2px rgba(0, 163, 224, 0.25) !important;
         }
     </style>
 </head>
@@ -587,7 +624,7 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                         Telefone / WhatsApp (Angola) <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" name="phone" required placeholder="+244 923 000 000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
+                    <input type="tel" name="phone" required placeholder="+244 972 888 585" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
                 </div>
 
                 <div class="pt-2">

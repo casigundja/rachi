@@ -109,7 +109,7 @@ class SolicitacaoApiController extends Controller
                 'type' => 'company',
                 'company_name' => $user->name,
                 'trade_name' => 'RACHI Cliente',
-                'phone' => '+244 923 000 000',
+                'phone' => '+244 972 888 585',
                 'status' => 'active',
             ]);
         }

@@ -8325,7 +8325,7 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
   const priceFormatted = formatKz(course.price);
   const isConsultation = priceFormatted === "Sob Consulta";
   const defaultWaText = encodeURIComponent(`Ol\xE1! Gostaria de obter informa\xE7\xF5es sobre a forma\xE7\xE3o: ${course.name}`);
-  const whatsappInquiry = `https://wa.me/244923000000?text=${defaultWaText}`;
+  const whatsappInquiry = `https://wa.me/244972888585?text=${defaultWaText}`;
   return `<!DOCTYPE html>
 <html lang="pt-AO" data-theme="dark" class="scroll-smooth">
 <head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script>
@@ -8352,42 +8352,43 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5.3.3 CSS & JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer><\/script>
+    <!-- App Compiled CSS -->
+    <link rel="stylesheet" href="/build/assets/app-BmeisZIV.css">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"><\/script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"><\/script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"><\/script>
-
+    <!-- Tailwind Config (MUST BE BEFORE TAILWIND CDN SCRIPT) -->
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
-                        heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
-                    },
-                    colors: {
-                        rachi: {
-                            navy: '#071326',
-                            navyLight: '#0d1f3d',
-                            blue: '#00a3e0',
-                            blueDark: '#0050f0',
-                            blueHover: '#0042c7',
-                            surface: '#0c1527',
-                            surfaceDark: '#070f1e',
-                            border: '#162744',
+        tailwind = {
+            config: {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Inter"', 'sans-serif'],
+                            heading: ['"Encode Sans"', '"Inter"', 'sans-serif'],
+                        },
+                        colors: {
+                            rachi: {
+                                navy: '#071326',
+                                navyLight: '#0d1f3d',
+                                blue: '#00a3e0',
+                                blueDark: '#0050f0',
+                                blueHover: '#0042c7',
+                                surface: '#0c1527',
+                                surfaceDark: '#070f1e',
+                                border: '#162744',
+                            }
                         }
                     }
                 }
             }
         };
     <\/script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"><\/script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"><\/script>
 
     <!-- Anti-Flash Dark Mode Script -->
     <script>
@@ -8419,14 +8420,50 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         html.dark body {
-            background-color: #070f1e;
-            color: #ffffff;
+            background-color: #070f1e !important;
+            color: #ffffff !important;
         }
         .font-heading {
             font-family: 'Encode Sans', sans-serif;
         }
         .glow-rachi {
             box-shadow: 0 0 35px -8px rgba(0, 163, 224, 0.35);
+        }
+
+        /* Dark Mode High-Performance Theme Safeguards */
+        html.dark .bg-white {
+            background-color: #0c1527 !important;
+        }
+        html.dark .bg-slate-50,
+        html.dark .bg-slate-50\/50,
+        html.dark .bg-slate-50\/70 {
+            background-color: #081020 !important;
+        }
+        html.dark .bg-slate-100 {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        html.dark .border-slate-200,
+        html.dark .border-slate-200\/80,
+        html.dark .border-slate-200\/90,
+        html.dark .border-slate-100 {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        html.dark input,
+        html.dark select,
+        html.dark textarea {
+            background-color: rgba(7, 15, 30, 0.95) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        html.dark input::placeholder,
+        html.dark textarea::placeholder {
+            color: #64748b !important;
+        }
+        html.dark input:focus,
+        html.dark select:focus,
+        html.dark textarea:focus {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 0 0 2px rgba(0, 163, 224, 0.25) !important;
         }
     </style>
 </head>
@@ -8882,7 +8919,7 @@ function renderCourseShow(course, modules = [], relatedCourses = [], matriculaSu
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                         Telefone / WhatsApp (Angola) <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" name="phone" required placeholder="+244 923 000 000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
+                    <input type="tel" name="phone" required placeholder="+244 972 888 585" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:border-[#00a3e0]">
                 </div>
 
                 <div class="pt-2">
@@ -8955,7 +8992,7 @@ catalog.get("/academy/cursos/:slug", async (c) => {
   if (!course) return c.redirect("/academy");
   const modules = await db.query(`SELECT m.id,m.title,m.description,m.sort_order,COALESCE(json_agg(json_build_object('id',l.id,'title',l.title,'duration_minutes',l.duration_minutes) ORDER BY l.sort_order) FILTER(WHERE l.id IS NOT NULL),'[]') lessons FROM course_modules m LEFT JOIN course_lessons l ON l.course_module_id=m.id AND l.status='active' WHERE m.course_id=$1 AND m.status='active' GROUP BY m.id,m.title,m.description,m.sort_order ORDER BY m.sort_order`, [course.id]);
   const related = await db.query("SELECT id,name,slug,duration_hours FROM courses WHERE id!=$1 AND status='published' AND deleted_at IS NULL ORDER BY id DESC LIMIT 4", [course.id]);
-  const matSuccess = c.req.query("matricula_sucesso") ? { name: c.req.query("nome") || "Aluno", course: course.name, code: c.req.query("codigo") || "RAC-00001", whatsappUrl: c.req.query("wa") || `https://wa.me/244923000000?text=${encodeURIComponent("Ol\xE1! Gostaria de confirmar minha matr\xEDcula.")}` } : null;
+  const matSuccess = c.req.query("matricula_sucesso") ? { name: c.req.query("nome") || "Aluno", course: course.name, code: c.req.query("codigo") || "RAC-00001", whatsappUrl: c.req.query("wa") || `https://wa.me/244972888585?text=${encodeURIComponent("Ol\xE1! Gostaria de confirmar minha matr\xEDcula.")}` } : null;
   return c.html(renderCourseShow(course, modules, related, matSuccess));
 });
 catalog.post("/academy/cursos/:slug/matricula", async (c) => {
@@ -8996,7 +9033,7 @@ catalog.post("/academy/cursos/:slug/matricula", async (c) => {
 Nome: ${studentName}
 C\xF3digo: ${matriculaCode}
 Gostaria de confirmar a vaga.`);
-  const waUrl = `https://wa.me/244923000000?text=${waMsg}`;
+  const waUrl = `https://wa.me/244972888585?text=${waMsg}`;
   const contentType = c.req.header("content-type") || "";
   if (contentType.includes("form") && !c.req.header("accept")?.includes("application/json")) {
     return c.redirect(`/academy/cursos/${course.slug}?matricula_sucesso=1&nome=${encodeURIComponent(studentName)}&codigo=${matriculaCode}&wa=${encodeURIComponent(waUrl)}`);
@@ -10438,7 +10475,23 @@ app.onError((error, c) => {
   return c.json({ success: false, message: "Servi\xE7o temporariamente indispon\xEDvel." }, 503);
 });
 app.notFound((c) => c.json({ success: false, message: "P\xE1gina n\xE3o encontrada." }, 404));
-var pages = { "/": "home", "/sobre": "about", "/sobre-nos": "about", "/o-que-fazemos": "what-we-do", "/parceiros": "partners", "/depoimentos": "testimonials", "/etica": "ethics", "/contacto": "contact", "/contato": "contact", "/tec": "tec", "/print": "print", "/academy": "academy", "/capital": "capital", "/academy/login": "academy-login", "/academy-login": "academy-login", "/academy/matricula": "academy-login", "/aluno-dashboard": "aluno-dashboard", "/dashboard-aluno": "aluno-dashboard", "/aluno": "aluno-dashboard", "/academy/dashboard": "aluno-dashboard", "/admin-dashboard": "admin-dashboard", "/admin/dashboard": "admin-dashboard", "/admin-dashboard.html": "admin-dashboard", "/loja": "loja", "/loja.html": "loja" };
+var pages = { 
+  "/": "home", "/home": "home", "/home.html": "home", "/index.html": "home",
+  "/sobre": "about", "/sobre.html": "about", "/about": "about", "/about.html": "about", "/sobre-nos": "about", "/sobre-nos.html": "about",
+  "/o-que-fazemos": "what-we-do", "/o-que-fazemos.html": "what-we-do", "/what-we-do": "what-we-do", "/what-we-do.html": "what-we-do",
+  "/parceiros": "partners", "/parceiros.html": "partners", "/partners": "partners", "/partners.html": "partners",
+  "/depoimentos": "testimonials", "/depoimentos.html": "testimonials", "/testimonials": "testimonials", "/testimonials.html": "testimonials",
+  "/etica": "ethics", "/etica.html": "ethics", "/ethics": "ethics", "/ethics.html": "ethics",
+  "/contacto": "contact", "/contacto.html": "contact", "/contato": "contact", "/contato.html": "contact", "/contact": "contact", "/contact.html": "contact",
+  "/tec": "tec", "/tec.html": "tec",
+  "/print": "print", "/print.html": "print",
+  "/academy": "academy", "/academy.html": "academy",
+  "/capital": "capital", "/capital.html": "capital",
+  "/academy/login": "academy-login", "/academy-login": "academy-login", "/academy-login.html": "academy-login", "/academy/matricula": "academy-login",
+  "/aluno-dashboard": "aluno-dashboard", "/aluno-dashboard.html": "aluno-dashboard", "/dashboard-aluno": "aluno-dashboard", "/aluno": "aluno-dashboard", "/academy/dashboard": "aluno-dashboard",
+  "/admin-dashboard": "admin-dashboard", "/admin/dashboard": "admin-dashboard", "/admin-dashboard.html": "admin-dashboard",
+  "/loja": "loja", "/loja.html": "loja"
+};
 var portals = { "/cliente/dashboard": "requests", "/funcionario/dashboard": "requests", "/cliente/cursos": "courses", "/cliente/pedidos": "orders", "/funcionario/pedidos": "orders", "/cliente/orcamentos": "quotes", "/admin/utilizadores": "usuarios", "/admin/funcionarios": "usuarios", "/admin/clientes": "clientes", "/admin/produtos": "loja-produtos", "/admin/servicos": "grafica-produtos", "/admin/cursos": "academy-cursos", "/admin/pedidos": "loja-pedidos", "/admin/solicitacoes": "requests", "/admin/relatorios": "relatorios", "/funcionario/estoque": "stock", "/cliente/solicitacoes": "requests", "/cliente/solicitacoes/nova": "requests", "/funcionario/solicitacoes": "requests" };
 function html(value) {
   return new Response(value, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "X-Frame-Options": "SAMEORIGIN" } });
@@ -10450,12 +10503,32 @@ var index_default = {
     if (get) {
       if (["/toast.js", "/toast.css"].includes(path)) return env.ASSETS.fetch(request);
       if (path === "/up") return Response.json({ status: "ok", runtime: "cloudflare-worker" });
+      if (path.startsWith("/pages/")) {
+        const clean = path.slice(7).replace(/\.html$/, "");
+        if (["home", "index"].includes(clean)) return Response.redirect(new URL("/", url).toString(), 301);
+        if (clean === "about") return Response.redirect(new URL("/sobre", url).toString(), 301);
+        if (clean === "what-we-do") return Response.redirect(new URL("/o-que-fazemos", url).toString(), 301);
+        if (clean === "partners") return Response.redirect(new URL("/parceiros", url).toString(), 301);
+        if (clean === "ethics") return Response.redirect(new URL("/etica", url).toString(), 301);
+        if (clean === "testimonials") return Response.redirect(new URL("/depoimentos", url).toString(), 301);
+        if (["contact", "contacto", "contato"].includes(clean)) return Response.redirect(new URL("/contacto", url).toString(), 301);
+        if (clean.startsWith("tec-service-")) return Response.redirect(new URL("/tec/servicos/" + clean.slice(12), url).toString(), 301);
+        if (clean.startsWith("capital-service-")) return Response.redirect(new URL("/capital/servicos/" + clean.slice(16), url).toString(), 301);
+        if (clean.startsWith("print-service-")) return Response.redirect(new URL("/print/servicos/" + clean.slice(14), url).toString(), 301);
+        return Response.redirect(new URL("/" + clean, url).toString(), 301);
+      }
+      if (/^\/(tec|capital|print)-service-[^/]+(\.html)?$/.test(path)) {
+        const m = path.match(/^\/(tec|capital|print)-service-([^/]+?)(\.html)?$/);
+        if (m) {
+          return Response.redirect(new URL(`/${m[1]}/servicos/${m[2]}`, url).toString(), 301);
+        }
+      }
       if (["admin-dashboard", "aluno-dashboard"].includes(pages[path])) {
         url.pathname = "/_session-page/" + pages[path];
         return app.fetch(new Request(url, request), env, ctx);
       }
       if (pages[path]) return env.ASSETS.fetch(new Request(new URL("/pages/" + pages[path] + ".html", url), request));
-      if (/^\/(tec|capital)\/servicos\/[^/]+$/.test(path)) {
+      if (/^\/(tec|capital|print)\/servicos\/[^/]+$/.test(path)) {
         const parts = path.split("/");
         return env.ASSETS.fetch(new Request(new URL("/pages/" + parts[1] + "-service-" + parts[3] + ".html", url), request));
       }

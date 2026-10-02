@@ -2046,7 +2046,7 @@ a { text-decoration: none !important; }
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI — Soluções Inteligentes Lda." class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">NIF / Identificação Fiscal</label><input type="text" value="5417000000" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">E-mail Corporativo</label><input type="email" value="geral@rachi.ao" class="ia"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label><input type="text" value="+244 923 000 000" class="ia"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label><input type="text" value="+244 972 888 585" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Endereço Principal</label><input type="text" value="Luanda, Angola" class="ia"></div>
           <button class="bap w-full justify-center mt-2">Gravar Alterações</button>
         </div>
@@ -2144,7 +2144,7 @@ a { text-decoration: none !important; }
 
           <div>
             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Telefone / WhatsApp *</label>
-            <input type="tel" x-model="newStudentForm.phone" required placeholder="+244 923 000 000"
+            <input type="tel" x-model="newStudentForm.phone" required placeholder="+244 972 888 585"
               class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0050f0]">
           </div>
 
@@ -2277,7 +2277,7 @@ a { text-decoration: none !important; }
 
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Telefone / WhatsApp</label>
-              <input type="tel" x-model="userForm.telefone" placeholder="+244 923 000 000"
+              <input type="tel" x-model="userForm.telefone" placeholder="+244 972 888 585"
                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0050f0]">
             </div>
           </div>
@@ -2362,7 +2362,7 @@ a { text-decoration: none !important; }
 
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Telefone / WhatsApp</label>
-              <input type="tel" x-model="userForm.telefone" placeholder="+244 923 000 000"
+              <input type="tel" x-model="userForm.telefone" placeholder="+244 972 888 585"
                 class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0050f0]">
             </div>
           </div>

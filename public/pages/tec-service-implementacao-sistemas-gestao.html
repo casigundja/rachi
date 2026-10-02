@@ -358,8 +358,8 @@
                 </a>
                 
                 <!-- Soluções Dropdown -->
-                <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                    <button @mouseover="openSol = true" @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false" >
+                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
                         <span>Soluções</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -563,7 +563,7 @@
                                 <i data-lucide="send" class="w-4 h-4"></i>
                                 <span>Aderir / Solicitar Proposta</span>
                             </a>
-                            <a href="https://wa.me/244923000000?text=Ol%C3%A1%21+Gostaria+de+solicitar+informa%C3%A7%C3%B5es+sobre+a+Implementa%C3%A7%C3%A3o+de+Sistema+de+Gest%C3%A3o+%2F+Fatura%C3%A7%C3%A3o+AGT+com+a+RACHI+Tec." target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm transition shadow-lg shadow-green-500/20">
+                            <a href="https://wa.me/244972888585?text=Ol%C3%A1%21+Gostaria+de+solicitar+informa%C3%A7%C3%B5es+sobre+a+Implementa%C3%A7%C3%A3o+de+Sistema+de+Gest%C3%A3o+%2F+Fatura%C3%A7%C3%A3o+AGT+com+a+RACHI+Tec." target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm transition shadow-lg shadow-green-500/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
                                 <span>Falar no WhatsApp Directo</span>
                             </a>
@@ -924,7 +924,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">Telefone / WhatsApp *</label>
-                                    <input type="tel" name="telefone" required placeholder="+244 923 000 000" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#0a1a33] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00a3e0]">
+                                    <input type="tel" name="telefone" required placeholder="+244 972 888 585" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#0a1a33] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00a3e0]">
                                 </div>
                             </div>
 
@@ -956,7 +956,7 @@
                             </p>
 
                             <!-- WhatsApp Directo -->
-                            <a href="https://wa.me/244923000000?text=Ol%C3%A1%21+Gostaria+de+solicitar+informa%C3%A7%C3%B5es+sobre+a+Implementa%C3%A7%C3%A3o+de+Sistema+de+Gest%C3%A3o+%2F+Fatura%C3%A7%C3%A3o+AGT+com+a+RACHI+Tec." target="_blank" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-green-500 transition group">
+                            <a href="https://wa.me/244972888585?text=Ol%C3%A1%21+Gostaria+de+solicitar+informa%C3%A7%C3%B5es+sobre+a+Implementa%C3%A7%C3%A3o+de+Sistema+de+Gest%C3%A3o+%2F+Fatura%C3%A7%C3%A3o+AGT+com+a+RACHI+Tec." target="_blank" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-green-500 transition group">
                                 <div class="w-10 h-10 rounded-xl bg-[#25D366]/15 text-[#25D366] flex items-center justify-center shrink-0">
                                     <i data-lucide="message-circle" class="w-5 h-5"></i>
                                 </div>
@@ -968,13 +968,13 @@
                             </a>
 
                             <!-- Telefone Directo -->
-                            <a href="tel:+244923000000" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition group">
+                            <a href="tel:+244972888585" class="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition group">
                                 <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-[#00a3e0] flex items-center justify-center shrink-0">
                                     <i data-lucide="phone-call" class="w-5 h-5"></i>
                                 </div>
                                 <div class="flex-1">
                                     <div class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#00a3e0] transition">Linha Telefónica Direta</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400">+244 923 000 000 / Luanda, Angola</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400">+244 972 888 585 / Luanda, Angola</div>
                                 </div>
                                 <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-[#00a3e0] transition"></i>
                             </a>
@@ -1087,10 +1087,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#030813] text-slate-400 py-12 border-t border-white/10 text-xs">
+    <footer class="bg-slate-100 dark:bg-[#050912] text-slate-600 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-white/10 text-xs transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <span class="font-bold text-white tracking-wider">RACHI TEC</span>
+                <span class="font-bold text-slate-900 dark:text-white tracking-wider">RACHI TEC</span>
                 <span>•</span>
                 <span>Tecnologia, Sistemas &amp; Infraestrutura em Angola</span>
             </div>

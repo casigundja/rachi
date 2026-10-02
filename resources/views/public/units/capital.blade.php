@@ -345,8 +345,8 @@
                 </a>
                 
                 <!-- Soluções Dropdown -->
-                <div class="relative" x-data="{ openSol: false }" @mouseleave="openSol = false">
-                    <button @mouseover="openSol = true" @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false" >
+                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
                         <span>Soluções</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#10b981]' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -973,7 +973,7 @@
                             <i data-lucide="mail" class="w-4 h-4"></i>
                             <span>Falar Connosco / Pedir Proposta</span>
                         </a>
-                        <a href="https://wa.me/244923000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20proposta%20de%20servi%C3%A7os%20com%20a%20RACHI%20Human%20Capital." target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm transition">
+                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20proposta%20de%20servi%C3%A7os%20com%20a%20RACHI%20Human%20Capital." target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm transition">
                             <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
                             <span>WhatsApp Direto</span>
                         </a>
@@ -987,7 +987,7 @@
     <!-- ============================================================ -->
     <!-- FOOTER                                                       -->
     <!-- ============================================================ -->
-    <footer class="bg-[#071326] text-white pt-16 pb-8 border-t border-slate-800">
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
@@ -1000,15 +1000,15 @@
                                  alt="RACHI Human Capital" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(255,255,255,0.35)] group-hover:scale-105 transition-all">
                         </picture>
-                        <span class="font-display font-bold text-base text-white">RACHI <span class="text-[#10b981]">Human Capital</span></span>
+                        <span class="font-display font-bold text-base text-slate-900 dark:text-white">RACHI <span class="text-[#10b981]">Human Capital</span></span>
                     </a>
-                    <p class="text-xs text-slate-400 leading-relaxed">
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         Serviços empresariais, recursos humanos, contabilidade e regularização documental com rigor institucional.
                     </p>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#10b981] mb-3">Soluções RACHI</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
                         <li><a href="/capital" class="hover:text-emerald-400 transition text-emerald-400 font-bold">01 RACHI Human Capital</a></li>
                         <li><a href="/academy" class="hover:text-indigo-400 transition">02 RACHI Academy</a></li>
                         <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
@@ -1017,22 +1017,22 @@
                 </div>
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#10b981] mb-3">Navegação</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="/" class="hover:text-white transition">Portal RACHI</a></li>
-                        <li><a href="#servicos-capital" class="hover:text-white transition">Os nossos serviços</a></li>
-                        <li><a href="/#sobre" class="hover:text-white transition">Sobre a RACHI</a></li>
-                        <li><a href="/contacto" class="hover:text-white transition">Contacto</a></li>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Portal RACHI</a></li>
+                        <li><a href="#servicos-capital" class="hover:text-slate-900 dark:hover:text-white transition">Os nossos serviços</a></li>
+                        <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a RACHI</a></li>
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#10b981] mb-3">Contacto</h4>
-                    <p class="text-xs text-slate-400">Luanda — Angola</p>
-                    <p class="text-xs text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
-                    <p class="text-xs text-slate-400 mt-2">Consultoria presencial e suporte corporativo contínuo.</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Consultoria presencial e suporte corporativo contínuo.</p>
                 </div>
             </div>
-            <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
-                <div>&copy; 2026 <strong class="text-white">RACHI Human Capital</strong>. Todos os direitos reservados.</div>
+            <div class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
+                <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI Human Capital</strong>. Todos os direitos reservados.</div>
                 <div class="flex gap-4">
                     <span class="text-[#10b981] font-bold">PT</span>
                     <span class="text-slate-600">|</span>

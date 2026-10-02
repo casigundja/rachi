@@ -522,7 +522,7 @@ class CloudApiController extends Controller
 
         $name = $data['name'] ?? $data['nome'] ?? null;
         $email = $data['email'] ?? null;
-        $phone = $data['phone'] ?? $data['telefone'] ?? '+244 923 000 000';
+        $phone = $data['phone'] ?? $data['telefone'] ?? '+244 972 888 585';
         $courseId = $data['course_id'] ?? null;
         $status = $data['status'] ?? 'active';
 

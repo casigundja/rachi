@@ -825,7 +825,7 @@
             <!-- Esquerda: Acessibilidade, Ecossistema RACHI, Ajuda, B2B -->
             <div class="flex items-center gap-4 sm:gap-6 flex-wrap">
                 <!-- Acessibilidade Dropdown -->
-                <div class="relative" x-data="{ openAcess: false }" @mouseleave="openAcess = false">
+                <div class="relative" x-data="{ openAcess: false }" @click.outside="openAcess = false" @keydown.escape.window="openAcess = false" >
                     <button @click="openAcess = !openAcess; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
                             :class="openAcess ? 'text-[#071326] dark:text-white' : 'text-slate-600 hover:text-[#071326] dark:text-slate-300 dark:hover:text-white'"
                             class="flex items-center gap-1.5 transition cursor-pointer font-medium py-0.5">
@@ -869,7 +869,7 @@
                 </div>
 
                 <!-- Ecossistema RACHI (Dropdown Moderno & Elegante) -->
-                <div class="relative" x-data="{ openGrupo: false }" @mouseleave="openGrupo = false">
+                <div class="relative" x-data="{ openGrupo: false }" @click.outside="openGrupo = false" @keydown.escape.window="openGrupo = false" >
                     <button @click="openGrupo = !openGrupo; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
                             :class="openGrupo ? 'text-[#071326] dark:text-white' : 'text-slate-600 hover:text-[#071326] dark:text-slate-300 dark:hover:text-white'"
                             class="flex items-center gap-1.5 transition cursor-pointer font-medium py-0.5">
@@ -984,7 +984,7 @@
                 
                 <!-- Logótipo da Loja RACHI Tec -->
                 <div class="shrink-0">
-                    <a href="/loja" class="flex items-center gap-2 focus:outline-none" title="RACHI Tec — Loja Oficial">
+                    <a href="/" class="flex items-center gap-2 focus:outline-none" title="RACHI — Ir para a página inicial">
                         <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain dark:hidden" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'">
                         <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
                         <span class="store-brand-text hidden sm:inline-block font-black text-xs uppercase tracking-widest text-[#071326] dark:text-white border-l-2 border-[#f5a800] pl-2.5 py-0.5">
@@ -1416,7 +1416,7 @@
 
                 <!-- Botão Flutuante de Compre pelo WhatsApp (Exato ao Print no Canto Inferior Direito) -->
                 <div class="absolute bottom-4 right-4 sm:right-8 z-30 flex items-center gap-1.5" x-data="{ showWpp: true }" x-show="showWpp">
-                    <a href="https://wa.me/244923000000?text=Olá!%20Gostaria%20de%20comprar%20pelo%20WhatsApp%20da%20RACHI%20Tec." target="_blank"
+                    <a href="https://wa.me/244972888585?text=Olá!%20Gostaria%20de%20comprar%20pelo%20WhatsApp%20da%20RACHI%20Tec." target="_blank"
                        class="inline-flex items-center gap-2 px-3.5 py-2 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-lg shadow-lg font-bold text-xs transition duration-200 hover:scale-105">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.13.564 4.129 1.545 5.86l-1.645 6.012 6.168-1.618c1.674.912 3.593 1.438 5.632 1.438 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
                         <span>Compre pelo WhatsApp</span>
@@ -1879,7 +1879,7 @@
                     </p>
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
-                    <a href="https://wa.me/244923000000" target="_blank"
+                    <a href="https://wa.me/244972888585" target="_blank"
                         class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#071326] hover:bg-[#0d1f3d] text-[#f5a800] border border-[#f5a800]/40 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-black/15">
                         <i data-lucide="message-circle" class="w-4 h-4 text-[#cda851]"></i>
                         <span>Falar com Consultor no WhatsApp</span>
@@ -2370,10 +2370,10 @@
                 <!-- ABA 4: ATENDIMENTO -->
                 <div x-show="accountTab === 'atendimento'" class="space-y-4 text-xs">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <a href="https://wa.me/244923000000" target="_blank" class="p-3.5 rounded-2xl bg-amber-50 hover:bg-amber-100/80 border border-amber-200 text-center transition flex flex-col items-center">
+                        <a href="https://wa.me/244972888585" target="_blank" class="p-3.5 rounded-2xl bg-amber-50 hover:bg-amber-100/80 border border-amber-200 text-center transition flex flex-col items-center">
                             <i data-lucide="message-circle" class="w-6 h-6 text-[#f5a800] mb-1.5"></i>
                             <strong class="font-bold text-slate-900">WhatsApp Oficial</strong>
-                            <span class="text-[10px] text-slate-600 mt-0.5">+244 923 000 000</span>
+                            <span class="text-[10px] text-slate-600 mt-0.5">+244 972 888 585</span>
                         </a>
                         <a href="tel:+244222000000" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-center transition flex flex-col items-center">
                             <i data-lucide="phone-call" class="w-6 h-6 text-slate-700 mb-1.5"></i>
@@ -2412,61 +2412,62 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- 13. RODAPÉ E-COMMERCE COMPLETO (ESTILO BOTICÁRIO)              -->
+    <!-- 13. RODAPÉ E-COMMERCE COMPLETO (DUAL-THEME: LIGHT & DARK)       -->
     <!-- ============================================================== -->
-    <footer class="bg-[#071326] text-white pt-14 pb-10 border-t border-amber-500/20 mt-12">
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-14 pb-10 border-t border-slate-200 dark:border-white/10 transition-colors duration-300 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-200 dark:border-white/10">
                 
                 <div class="lg:col-span-2">
-                    <a href="/" class="inline-block mb-3">
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 w-auto" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
+                    <a href="/" class="inline-block mb-3" title="RACHI — Ir para a página inicial">
+                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-10 w-auto object-contain dark:hidden" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'">
+                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 w-auto object-contain hidden dark:block" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
                     </a>
-                    <p class="text-xs text-slate-300 leading-relaxed max-w-sm">
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
                         A Loja RACHI Tec é o canal oficial de suprimentos corporativos, equipamentos de informática, cabos, redes e acessórios de tecnologia da RACHI em Angola.
                     </p>
-                    <div class="mt-4 text-xs text-slate-300 space-y-1">
-                        <p>📍 <strong>Localização:</strong> Luanda, Angola</p>
-                        <p>📧 <strong>Email de Vendas:</strong> tec@rachi.ao / loja@rachi.ao</p>
-                        <p>🕒 <strong>Atendimento:</strong> Segunda a Sexta, 08h às 17h</p>
+                    <div class="mt-4 text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
+                        <p>📍 <strong class="text-slate-800 dark:text-slate-200">Localização:</strong> Luanda, Angola</p>
+                        <p>📧 <strong class="text-slate-800 dark:text-slate-200">Email de Vendas:</strong> tec@rachi.ao / loja@rachi.ao</p>
+                        <p>🕒 <strong class="text-slate-800 dark:text-slate-200">Atendimento:</strong> Segunda a Sexta, 08h às 17h</p>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#f5a800] mb-4 font-black">Departamentos</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="#catalogo" @click="selectCategory('informatica')" class="hover:text-white transition">Laptops &amp; Computadores</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('conectividade')" class="hover:text-white transition">Cabos Console &amp; Redes</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('gadgets')" class="hover:text-white transition">Smartwatches &amp; TV Box</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('audio')" class="hover:text-white transition">Áudio &amp; Consumíveis</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('promocional')" class="hover:text-white transition">Material Promocional</a></li>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Departamentos</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="#catalogo" @click="selectCategory('informatica')" class="hover:text-slate-900 dark:hover:text-white transition">Laptops &amp; Computadores</a></li>
+                        <li><a href="#catalogo" @click="selectCategory('conectividade')" class="hover:text-slate-900 dark:hover:text-white transition">Cabos Console &amp; Redes</a></li>
+                        <li><a href="#catalogo" @click="selectCategory('gadgets')" class="hover:text-slate-900 dark:hover:text-white transition">Smartwatches &amp; TV Box</a></li>
+                        <li><a href="#catalogo" @click="selectCategory('audio')" class="hover:text-slate-900 dark:hover:text-white transition">Áudio &amp; Consumíveis</a></li>
+                        <li><a href="#catalogo" @click="selectCategory('promocional')" class="hover:text-slate-900 dark:hover:text-white transition">Material Promocional</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#f5a800] mb-4 font-black">Atendimento ao Cliente</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="/contacto" class="hover:text-white transition">Falar Connosco</a></li>
-                        <li><a href="/contacto" class="hover:text-white transition">Pedir Cotação em Lote</a></li>
-                        <li><a href="/#etica" class="hover:text-white transition">Termos &amp; Condições</a></li>
-                        <li><a href="/#etica" class="hover:text-white transition">Política de Privacidade</a></li>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Atendimento ao Cliente</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Falar Connosco</a></li>
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Pedir Cotação em Lote</a></li>
+                        <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Termos &amp; Condições</a></li>
+                        <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Política de Privacidade</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#f5a800] mb-4 font-black">Formas de Pagamento</h4>
-                    <div class="space-y-2 text-xs text-slate-300">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Formas de Pagamento</h4>
+                    <div class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="credit-card" class="w-4 h-4 text-[#f5a800]"></i>
+                            <i data-lucide="credit-card" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
                             <span>Multicaixa Express / TPA</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="arrow-left-right" class="w-4 h-4 text-[#f5a800]"></i>
+                            <i data-lucide="arrow-left-right" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
                             <span>Transferência Bancária (IBAN)</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="file-check" class="w-4 h-4 text-[#f5a800]"></i>
+                            <i data-lucide="file-check" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
                             <span>Facturação a 30 dias (Empresas)</span>
                         </div>
                     </div>
@@ -2474,14 +2475,14 @@
 
             </div>
 
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
                 <p>&copy; 2026 RACHI Tec — Loja Corporativa Oficial. Todos os direitos reservados.</p>
                 <div class="flex items-center gap-3">
-                    <a href="/" class="hover:text-white">Ecossistema RACHI</a>
+                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Ecossistema RACHI</a>
                     <span>•</span>
-                    <a href="/tec" class="hover:text-white">RACHI Tec</a>
+                    <a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a>
                     <span>•</span>
-                    <a href="/contacto" class="hover:text-white">Suporte</a>
+                    <a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Suporte</a>
                 </div>
             </div>
 
@@ -2985,9 +2986,9 @@
                         } else if (lower.includes('laptop') || lower.includes('computador') || lower.includes('cabo') || lower.includes('tv box') || lower.includes('equipamento') || lower.includes('produto')) {
                             reply = 'Todos os nossos equipamentos informáticos contam com garantia oficial corporativa RACHI. Se desejar uma cotação para lotes empresariais, podemos preparar uma proposta formal de imediato.';
                         } else if (lower.includes('humano') || lower.includes('atendente') || lower.includes('falar') || lower.includes('whatsapp') || lower.includes('ligar')) {
-                            reply = 'Com certeza! Pode falar diretamente com um dos nossos consultores pelo WhatsApp: +244 923 000 000 ou por telefone: +244 222 000 000. Estamos disponíveis de Seg. a Sex. das 08h às 17h.';
+                            reply = 'Com certeza! Pode falar diretamente com um dos nossos consultores pelo WhatsApp: +244 972 888 585 ou por telefone: +244 222 000 000. Estamos disponíveis de Seg. a Sex. das 08h às 17h.';
                         } else {
-                            reply = 'Obrigado pelo seu contacto! A sua solicitação foi registada na nossa central RACHI. Se preferir atendimento imediato em tempo real com o consultor de plantão, pode utilizar o nosso WhatsApp: +244 923 000 000.';
+                            reply = 'Obrigado pelo seu contacto! A sua solicitação foi registada na nossa central RACHI. Se preferir atendimento imediato em tempo real com o consultor de plantão, pode utilizar o nosso WhatsApp: +244 972 888 585.';
                         }
 
                         this.chatMessages.push({

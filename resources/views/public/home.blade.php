@@ -344,25 +344,35 @@
         }
 
         /* Light Dropdowns */
+        html:not(.dark) .site-header .header-dropdown,
+        html:not(.dark) .header-dropdown,
         .site-header.header-scrolled-light .header-dropdown {
             background: rgba(255, 255, 255, 0.98) !important;
             border: 1px solid rgba(11, 26, 46, 0.1) !important;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06) !important;
         }
 
+        html:not(.dark) .site-header .header-dropdown a,
+        html:not(.dark) .header-dropdown a,
         .site-header.header-scrolled-light .header-dropdown a {
             color: #334155 !important;
         }
 
+        html:not(.dark) .site-header .header-dropdown a:hover,
+        html:not(.dark) .header-dropdown a:hover,
         .site-header.header-scrolled-light .header-dropdown a:hover {
             background: #f1f5f9 !important;
             color: #0077c2 !important;
         }
 
+        html:not(.dark) .site-header .header-dropdown .dropdown-title,
+        html:not(.dark) .header-dropdown .dropdown-title,
         .site-header.header-scrolled-light .header-dropdown .dropdown-title {
             color: #0f172a !important;
         }
 
+        html:not(.dark) .site-header .header-dropdown .dropdown-desc,
+        html:not(.dark) .header-dropdown .dropdown-desc,
         .site-header.header-scrolled-light .header-dropdown .dropdown-desc {
             color: #64748b !important;
         }
@@ -2132,7 +2142,7 @@
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-4 xl:gap-6">
                 <!-- Coluna 1 (Esquerda): Logótipo RACHI -->
                 <div class="w-auto lg:w-[220px] xl:w-[240px] flex-shrink-0 flex items-center justify-start z-10">
-                    <a href="#home" @click.prevent="goToHome()"
+                    <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                         class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png"
@@ -2149,14 +2159,14 @@
                 <!-- Coluna 2 (Centro): Navegação em Cápsula (Centralizada e Protegida) -->
                 <div class="flex-1 hidden lg:flex items-center justify-center min-w-0 px-1">
                     <nav class="flex items-center main-nav-capsule">
-                        <a href="#home" @click.prevent="goToHome()" class="nav-link cursor-pointer"
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="nav-link cursor-pointer"
                             :class="(!solutionsOpen && currentTab === 'home') ? 'active' : ''">
                             <span>Home</span>
                         </a>
 
                     <!-- Sobre Nós Dropdown -->
-                    <div class="relative" x-data="{ open: false }" @mouseleave="open = false">
-                        <button @mouseover="open = true" @click="open = !open"
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false; solutionsOpen = false" @keydown.escape.window="open = false; solutionsOpen = false" >
+                        <button type="button" @click="open = !open; solutionsOpen = false"
                             class="nav-link flex items-center gap-1.5 focus:outline-none"
                             :class="open ? 'nav-link-open' : ''">
                             <span>Sobre Nós</span>
@@ -2172,33 +2182,33 @@
                             x-transition:leave="transition ease-in duration-150"
                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                             x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                            class="header-dropdown absolute top-full left-0 mt-3 w-56 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2 z-50 text-sm space-y-1">
-                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false"
-                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            class="header-dropdown absolute top-full left-0 mt-2 w-56 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-xl dark:shadow-2xl p-2 z-50 text-sm space-y-1 before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+                            <a href="#sobre" @click.prevent="scrollToSection('sobre'); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span
                                     class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="info" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Quem somos</span>
                             </a>
-                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false"
-                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span
                                     class="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false"
-                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span
                                     class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="handshake" class="w-4 h-4"></i>
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">Parceiros</span>
                             </a>
-                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false"
-                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-blue-600/20 transition">
+                            <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span
                                     class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
@@ -2210,8 +2220,9 @@
 
                     <!-- Soluções (Mega Menu Ecossistema RACHI) -->
                     <button type="button"
-                        @click="solutionsOpen = !solutionsOpen"
-                        class="nav-link relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
+                        id="btn-nav-solutions"
+                        @click.stop="solutionsOpen = !solutionsOpen"
+                        class="nav-link solutions-trigger-btn relative flex items-center gap-1.5 focus:outline-none cursor-pointer transition-all duration-200"
                         :class="solutionsOpen ? 'text-white font-semibold' : (['capital','academy','tec','print'].includes(currentTab) ? 'active' : '')">
                         <span class="relative py-1 inline-block">
                             Soluções
@@ -2228,14 +2239,14 @@
                         </span>
                     </button>
 
-                    <a href="#etica" @click.prevent="scrollToSection('etica')" class="nav-link"
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="nav-link"
                         :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
-                    <a href="/loja" class="nav-link">
+                    <a href="/loja" @click="solutionsOpen = false" class="nav-link">
                         <span>Loja</span>
                     </a>
-                    <a href="/contacto" class="nav-link">
+                    <a href="/contacto" @click="solutionsOpen = false" class="nav-link">
                         <span>Contacto</span>
                     </a>
                 </nav>
@@ -2295,25 +2306,6 @@
                                 </div>
 
                                 <div class="p-1 space-y-0.5">
-                                    <!-- Permissão 1: Área do Cliente -->
-                                    <template x-if="canAccessCustomerPortal()">
-                                        <button @click="currentView = 'customer'; customerTab = 'dashboard'; userMenuDropdown = false"
-                                                class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
-                                            <svg class="w-4 h-4 text-[#0050f0] dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                            <span>Painel do Cliente</span>
-                                        </button>
-                                    </template>
-
-                                    <!-- Permissão 2.5: Loja Online Integrada (Sessão Sincronizada) -->
-                                    <a href="/loja"
-                                       class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition">
-                                        <div class="flex items-center gap-2.5">
-                                            <svg class="w-4 h-4 text-sky-500 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                                            <span>Loja</span>
-                                        </div>
-                                        <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 font-bold">Conectado</span>
-                                    </a>
-
                                     <!-- Permissão 3: Academy (Perfil de Aluno) - Acesso por Matrícula Ativa -->
                                     <button @click="openAcademyAluno(); userMenuDropdown = false"
                                             class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition cursor-pointer">
@@ -2366,7 +2358,7 @@
             <!-- Mobile Menu Dropdown -->
             <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak
                 class="header-dropdown lg:hidden bg-white/95 dark:bg-[#071326]/95 text-slate-800 dark:text-white backdrop-blur-2xl border-t border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
-                <a href="#home" @click.prevent="goToHome()"
+                <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                     class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
                 <div class="border-t border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Sobre Nós</span>
@@ -2399,7 +2391,7 @@
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2 space-y-2">
-                    <a href="#etica" @click.prevent="scrollToSection('etica')"
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false"
                         class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
                     <a href="/loja" class="block font-medium py-1 hover:text-[#00a3e0]">Loja</a>
                     <a href="/contacto" class="block font-medium py-1 hover:text-[#00a3e0]">Contacto</a>
@@ -3006,23 +2998,8 @@
                                             class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-[#071326] border-4 border-white shadow-2xl flex flex-col items-center justify-center text-center p-3 transition-transform duration-300 group-hover:scale-105">
 
                                             <!-- Brand Graphic Emblem -->
-                                            <div
-                                                class="w-10 h-10 sm:w-12 sm:h-12 mb-1 flex items-center justify-center">
-                                                <svg viewBox="0 0 60 60" fill="none"
-                                                    class="w-9 h-9 sm:w-11 sm:h-11 drop-shadow">
-                                                    <path
-                                                        d="M14 10H32C39.732 10 46 16.268 46 24C46 31.732 39.732 38 32 38H24V50H14V10Z"
-                                                        fill="url(#rachiHubGrad)" />
-                                                    <path d="M30 36L44 50H32L22 38H30Z" fill="#eba72d" />
-                                                    <circle cx="28" cy="24" r="6" fill="#071326" />
-                                                    <defs>
-                                                        <linearGradient id="rachiHubGrad" x1="14" y1="10" x2="46"
-                                                            y2="38" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#00a3e0" />
-                                                            <stop offset="1" stop-color="#eba72d" />
-                                                        </linearGradient>
-                                                    </defs>
-                                                </svg>
+                                            <div class="w-10 h-10 sm:w-12 sm:h-12 mb-1 flex items-center justify-center">
+                                                <img src="/images/rachi-symbol-official.png" alt="RACHI" class="w-9 h-9 sm:w-11 sm:h-11 object-contain drop-shadow">
                                             </div>
 
                                             <span
@@ -3169,7 +3146,7 @@
                             <div class="mt-8 p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-4">
                                 <div class="flex items-center gap-3.5">
                                     <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-sm">
-                                        02
+                                        05
                                     </div>
                                     <div>
                                         <div class="text-xs font-black text-[#071326] uppercase tracking-wider">Parceiros Oficiais</div>
@@ -3193,128 +3170,101 @@
                             </div>
                         </div>
 
-                        <!-- Right Column: Stacked High-End Partner Cards (lg:col-span-7) -->
-                        <div class="lg:col-span-7 space-y-6">
+                        <!-- Right Column: Refined Logo Grid — Proporcional & Equilibrado (lg:col-span-7) -->
+                        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-stretch">
                             
                             <!-- CARD 1: INOV QUIMUA -->
-                            <article class="group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-slate-200/90 hover:border-[#00a3e0]/60 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-                                <!-- Left Accent Border Strip -->
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#00a3e0] to-[#0b4ea8]"></div>
-
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6 pl-2">
-                                    <!-- Partner Logo Container -->
-                                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-center p-3 shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                                        <img src="/images/inov-quimua-clean.png"
-                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/uploads/parceiros/whatsapp-image-2026-08-10-at-16-42-34-1-39cfc040.jpg?v=1786648331'"
-                                             alt="INOV QUIMUA" 
-                                             class="max-h-14 max-w-full object-contain dark:hidden"
-                                             loading="lazy">
-                                        <img src="/images/inov-quimua-dark.png"
-                                             onerror="this.onerror=null; this.src='/images/inov-quimua-clean.png'"
-                                             alt="INOV QUIMUA" 
-                                             class="max-h-14 max-w-full object-contain hidden dark:block"
-                                             loading="lazy">
-                                    </div>
-
-                                    <!-- Card Body -->
-                                    <div class="flex-1 min-w-0">
-                                        <!-- Top Tag & Index -->
-                                        <div class="flex items-center justify-between gap-2 mb-1.5">
-                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-100">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-[#00a3e0]"></span>
-                                                Consultoria &amp; Liderança
-                                            </span>
-                                            <span class="text-xs font-black text-slate-300 tracking-widest">01</span>
-                                        </div>
-
-                                        <!-- Partner Name -->
-                                        <h3 class="text-xl font-[850] text-[#071326] group-hover:text-[#0077c2] transition-colors flex items-center gap-2">
-                                            INOV QUIMUA
-                                            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                        </h3>
-
-                                        <!-- Description -->
-                                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1.5">
-                                            Empresa de consultoria em Angola liderada por Pedro Ivanov, amplamente reconhecida pela organização de fóruns corporativos de alto nível como o conceituado <strong class="text-slate-800 font-semibold">Cacuaco Business &amp; Leadership Summit</strong>.
-                                        </p>
-
-                                        <!-- Bottom Row: Tags & Link -->
-                                        <div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                                            <div class="flex flex-wrap gap-1.5">
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Consultoria</span>
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Liderança</span>
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Cimeiras</span>
-                                            </div>
-                                            <a href="https://ticket.ao/author/inov-quimua-consultoria/" target="_blank" rel="noopener noreferrer"
-                                               class="inline-flex items-center gap-1.5 text-xs font-bold text-[#00a3e0] hover:text-[#0b4ea8] transition-colors group/link"
-                                               title="Visitar website da Inov Quimua">
-                                                <span>Visitar site</span>
-                                                <span class="transform group-hover/link:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
+                            <div class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-blue-400/50 dark:hover:border-blue-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[120px] sm:min-h-[140px] overflow-hidden">
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#00a3e0] to-[#0b4ea8] opacity-70"></div>
+                                <img src="/images/inov-quimua-tight.png"
+                                     onerror="this.onerror=null; this.src='/images/inov-quimua-clean.png'"
+                                     alt="INOV QUIMUA"
+                                     class="max-h-11 sm:max-h-12 max-w-[80%] object-contain dark:hidden group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                                <img src="/images/inov-quimua-dark-tight.png"
+                                     onerror="this.onerror=null; this.src='/images/inov-quimua-dark.png'"
+                                     alt="INOV QUIMUA"
+                                     class="max-h-11 sm:max-h-12 max-w-[80%] object-contain hidden dark:block group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                            </div>
 
                             <!-- CARD 2: HELTON PLUS -->
-                            <article class="group relative bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-slate-200/90 hover:border-amber-500/60 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-                                <!-- Left Accent Border Strip -->
-                                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#f5a800] to-amber-600"></div>
+                            <div class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-amber-400/50 dark:hover:border-amber-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[120px] sm:min-h-[140px] overflow-hidden">
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#f5a800] to-amber-600 opacity-70"></div>
+                                <img src="/images/helton-plus-tight.png"
+                                     onerror="this.onerror=null; this.src='/images/helton-plus-clean.png'"
+                                     alt="HELTON PLUS"
+                                     class="max-h-14 sm:max-h-16 max-w-[80%] object-contain dark:hidden group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                                <img src="/images/helton-plus-dark.png"
+                                     onerror="this.onerror=null; this.src='/images/helton-plus-clean.png'"
+                                     alt="HELTON PLUS"
+                                     class="max-h-14 sm:max-h-16 max-w-[80%] object-contain hidden dark:block group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                            </div>
 
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6 pl-2">
-                                    <!-- Partner Logo Container -->
-                                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-center p-3 shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                                        <img src="/images/helton-plus-clean.png"
-                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/uploads/parceiros/whatsapp-image-2026-08-10-at-16-42-35-32d82eaa.jpg?v=1786648596'"
-                                             alt="HELTON PLUS" 
-                                             class="max-h-14 max-w-full object-contain dark:hidden"
-                                             loading="lazy">
-                                        <img src="/images/helton-plus-dark.png"
-                                             onerror="this.onerror=null; this.src='/images/helton-plus-clean.png'"
-                                             alt="HELTON PLUS" 
-                                             class="max-h-14 max-w-full object-contain hidden dark:block"
+                            <!-- CARD 3: REPALANGA -->
+                            <div class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-cyan-400/50 dark:hover:border-cyan-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[120px] sm:min-h-[140px] overflow-hidden">
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#00a3e0] to-cyan-600 opacity-70"></div>
+                                <img src="/images/repalanga-clean.png"
+                                     onerror="this.onerror=null; this.src='/images/repalanga-tight.png'"
+                                     alt="REPALANGA"
+                                     class="max-h-10 sm:max-h-11 max-w-[85%] object-contain dark:hidden group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                                <img src="/images/repalanga-dark.png"
+                                     onerror="this.onerror=null; this.src='/images/repalanga-clean.png'"
+                                     alt="REPALANGA"
+                                     class="max-h-10 sm:max-h-11 max-w-[85%] object-contain hidden dark:block group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                            </div>
+
+                            <!-- CARD 4: REDE DO REINO -->
+                            <div class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-green-400/50 dark:hover:border-green-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[120px] sm:min-h-[140px] overflow-hidden">
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-green-500 to-emerald-700 opacity-70"></div>
+                                <img src="/images/rede-do-reino-clean.png"
+                                     onerror="this.onerror=null; this.src='/images/rede-do-reino.png'"
+                                     alt="REDE DO REINO"
+                                     class="max-h-14 sm:max-h-15 max-w-[85%] object-contain dark:hidden group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                                <img src="/images/rede-do-reino-dark.png"
+                                     onerror="this.onerror=null; this.src='/images/rede-do-reino-clean.png'"
+                                     alt="REDE DO REINO"
+                                     class="max-h-14 sm:max-h-15 max-w-[85%] object-contain hidden dark:block group-hover:scale-105 transition-transform duration-300"
+                                     loading="lazy">
+                            </div>
+
+                            <!-- CARD 5: KLASSE (DESTAQUE COM LINK OFICIAL EXCLUSIVO) — sm:col-span-2 -->
+                            <a href="https://klasse.ao/" target="_blank" rel="noopener noreferrer"
+                               class="sm:col-span-2 group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-emerald-400/40 dark:border-emerald-500/30 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-between overflow-hidden min-h-[120px] sm:min-h-[135px]">
+                                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600"></div>
+
+                                <!-- Logo + Marca Lockup -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-800/50 flex items-center justify-center p-2.5 shrink-0 group-hover:scale-105 transition-transform">
+                                        <img src="/images/logo-klasse-clean.png"
+                                             alt="KLASSE"
+                                             class="max-h-full max-w-full object-contain"
                                              loading="lazy">
                                     </div>
-
-                                    <!-- Card Body -->
-                                    <div class="flex-1 min-w-0">
-                                        <!-- Top Tag & Index -->
-                                        <div class="flex items-center justify-between gap-2 mb-1.5">
-                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-50 text-amber-800 border border-amber-200/70">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                                                Soluções Ambientais
+                                    <div>
+                                        <div class="text-xl sm:text-2xl font-[900] tracking-tight text-slate-900 dark:text-white leading-none flex items-center gap-2">
+                                            <span>KLASSE</span>
+                                            <span class="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100/70 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                                Plataforma
                                             </span>
-                                            <span class="text-xs font-black text-slate-300 tracking-widest">02</span>
                                         </div>
-
-                                        <!-- Partner Name -->
-                                        <h3 class="text-xl font-[850] text-[#071326] group-hover:text-amber-600 transition-colors flex items-center gap-2">
-                                            HELTON PLUS
-                                            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                        </h3>
-
-                                        <!-- Description -->
-                                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1.5">
-                                            Líder consolidada em soluções de higienização profissional e controlo de pragas, mantendo compromisso rigoroso com a saúde corporativa e a conformidade ambiental de ambientes corporativos e industriais.
-                                        </p>
-
-                                        <!-- Bottom Row: Tags & Link -->
-                                        <div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                                            <div class="flex flex-wrap gap-1.5">
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Saúde Ambiental</span>
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Higienização</span>
-                                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium">Certificações</span>
-                                            </div>
-                                            <a href="https://heltonplus.ao/" target="_blank" rel="noopener noreferrer"
-                                               class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors group/link"
-                                               title="Visitar website da Helton Plus">
-                                                <span>Visitar site</span>
-                                                <span class="transform group-hover/link:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
-                                            </a>
+                                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                                            Sistema de Gestão Escolar &bull; Angola
                                         </div>
                                     </div>
                                 </div>
-                            </article>
+
+                                <!-- Ação e Link -->
+                                <div class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform shrink-0">
+                                    <span>klasse.ao</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </div>
+                            </a>
 
                         </div>
 
@@ -3444,17 +3394,17 @@
                     <div class="text-center max-w-3xl mx-auto mb-16">
                         <span
                             class="text-xs font-black uppercase tracking-[0.2em] text-[#00a3e0] bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 shadow-sm">
-                            Ecossistema de Soluções
+                            ECOSSISTEMA RACHI
                         </span>
                         <h2
                             class="text-3xl sm:text-4xl lg:text-5xl font-[900] text-[#071326] mt-4 uppercase tracking-tight">
-                            Soluções integradas para o seu crescimento
+                            CONSTRUÍMOS O NEGÓCIO QUE AINDA NÃO EXISTE.
                         </h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-[#00a3e0] to-[#eba72d] rounded-full mx-auto my-4">
                         </div>
                         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                            Quatro áreas de actuação que unem pessoas, tecnologia, formação e comunicação num único
-                            parceiro de excelência.
+                            Um ecossistema completo de soluções para criar, estruturar, modernizar e impulsionar empresas com mais eficiência, inovação e sustentabilidade.
+
                         </p>
                     </div>
 
@@ -3485,8 +3435,8 @@
                                 <div
                                     class="h-28 flex items-center justify-center my-3 group-hover:scale-105 transition-transform duration-300">
                                     <picture>
-                                        <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
-                                        <img src="/images/areas/rachi-human-capital.png"
+                                        <source srcset="/images/areas/rachi-human-capital.webp?v={{ time() }}" type="image/webp">
+                                        <img src="/images/areas/rachi-human-capital.png?v={{ time() }}"
                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'"
                                             alt="RACHI Human Capital"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
@@ -3502,6 +3452,8 @@
                                     Serviços empresariais, recursos humanos, contabilidade e regularização documental.
                                 </p>
 
+                                
+                            
                                 <div class="mt-5 space-y-2 pt-4 border-t border-slate-100">
                                     <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                         <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
@@ -3553,8 +3505,8 @@
                                 <div
                                     class="h-28 flex items-center justify-center my-3 group-hover:scale-105 transition-transform duration-300">
                                     <picture>
-                                        <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
-                                        <img src="/images/areas/rachi-academy.png"
+                                        <source srcset="/images/areas/rachi-academy.webp?v={{ time() }}" type="image/webp">
+                                        <img src="/images/areas/rachi-academy.png?v={{ time() }}"
                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-academy.png'"
                                             alt="RACHI Academy"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
@@ -3571,6 +3523,8 @@
                                     competências digitais.
                                 </p>
 
+                                
+                            
                                 <div class="mt-5 space-y-2 pt-4 border-t border-slate-100">
                                     <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                         <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500 shrink-0"></i>
@@ -3621,8 +3575,8 @@
                                 <div
                                     class="h-28 flex items-center justify-center my-3 group-hover:scale-105 transition-transform duration-300">
                                     <picture>
-                                        <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
-                                        <img src="/images/areas/rachi-tec.png"
+                                        <source srcset="/images/areas/rachi-tec.webp?v={{ time() }}" type="image/webp">
+                                        <img src="/images/areas/rachi-tec.png?v={{ time() }}"
                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-tec.png'"
                                             alt="RACHI Tec"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
@@ -3639,6 +3593,8 @@
                                     técnico.
                                 </p>
 
+                                
+                            
                                 <div class="mt-5 space-y-2 pt-4 border-t border-slate-100">
                                     <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                         <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-500 shrink-0"></i>
@@ -3690,8 +3646,8 @@
                                 <div
                                     class="h-28 flex items-center justify-center my-3 group-hover:scale-105 transition-transform duration-300">
                                     <picture>
-                                        <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                                        <img src="/images/areas/rachi-print.png"
+                                        <source srcset="/images/areas/rachi-print.webp?v={{ time() }}" type="image/webp">
+                                        <img src="/images/areas/rachi-print.png?v={{ time() }}"
                                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'"
                                             alt="RACHI Print"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
@@ -3707,6 +3663,8 @@
                                     Produção gráfica, impressão institucional, materiais promocionais e eventos.
                                 </p>
 
+                                
+                            
                                 <div class="mt-5 space-y-2 pt-4 border-t border-slate-100">
                                     <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                         <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-500 shrink-0"></i>
@@ -4130,7 +4088,7 @@
                 <div class="max-w-7xl mx-auto relative z-10">
                     <!-- Breadcrumbs -->
                     <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome()"
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                             class="hover:text-white transition cursor-pointer">Início</a>
                         <span>/</span>
                         <span class="text-slate-500">Soluções</span>
@@ -4305,7 +4263,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <!-- Breadcrumbs -->
                     <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome()"
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                             class="hover:text-white transition cursor-pointer">Início</a>
                         <span>/</span>
                         <span class="text-slate-500">Soluções</span>
@@ -4861,7 +4819,7 @@
                                 text += '🎨 *Estilo:* ' + this.preferredStyle + '\n';
                                 if(this.colorPreferences) text += '🌈 *Cores:* ' + this.colorPreferences + '\n';
                                 if(this.details) text += '📝 *Detalhes:* ' + this.details + '\n';
-                                const url = 'https://wa.me/244923000000?text=' + encodeURIComponent(text);
+                                const url = 'https://wa.me/244972888585?text=' + encodeURIComponent(text);
                                 window.open(url, '_blank');
                             }
                          }">
@@ -4976,7 +4934,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <!-- Breadcrumbs -->
                     <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome()"
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                             class="hover:text-white transition cursor-pointer">Início</a>
                         <span>/</span>
                         <span class="text-slate-500">Soluções</span>
@@ -5580,7 +5538,7 @@
                                 text += '💻 *Dimensão / Postos:* ' + this.workstationCount + '\n';
                                 text += '⏱️ *Urgência:* ' + this.urgency + '\n';
                                 if(this.messageText) text += '📝 *Mensagem:* ' + this.messageText + '\n';
-                                const url = 'https://wa.me/244923000000?text=' + encodeURIComponent(text);
+                                const url = 'https://wa.me/244972888585?text=' + encodeURIComponent(text);
                                 window.open(url, '_blank');
                             }
                          }">
@@ -5686,7 +5644,7 @@
                 <div class="max-w-7xl mx-auto">
                     <!-- Breadcrumb -->
                     <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome()"
+                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                             class="hover:text-white transition cursor-pointer">Início</a>
                         <span class="text-slate-600">/</span>
                         <span class="text-amber-400 font-bold">Loja</span>
@@ -5942,43 +5900,44 @@
 
 
         <!-- FOOTER EXACT TO RACHI -->
-        <footer class="bg-[#071326] text-white pt-16 pb-8 border-t border-slate-800 mt-20">
+        <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 mb-4">
-                        <p class="text-xs text-slate-400 leading-relaxed">
+                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                             Um ecossistema de soluções inteligentes para impulsionar negócios e pessoas em Angola e no
                             mundo.
                         </p>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Áreas de Negócio</h4>
-                        <ul class="space-y-2 text-xs text-slate-400">
-                            <li><a href="/tec" class="hover:text-white transition">RACHI Tec</a></li>
-                            <li><a href="/print" class="hover:text-white transition">RACHI Print</a></li>
-                            <li><a href="/academy" class="hover:text-white transition">RACHI Academy</a></li>
-                            <li><a href="/capital" class="hover:text-white transition">RACHI Human Capital</a></li>
+                        <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a></li>
+                            <li><a href="/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print</a></li>
+                            <li><a href="/academy" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy</a></li>
+                            <li><a href="/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Human Capital</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Sobre Nós</h4>
-                        <ul class="space-y-2 text-xs text-slate-400">
-                            <li><a href="#sobre" @click.prevent="scrollToSection('sobre')" class="hover:text-white transition">Quem somos</a></li>
-                            <li><a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos')" class="hover:text-white transition">O que fazemos</a></li>
-                            <li><a href="#parceiros" @click.prevent="scrollToSection('parceiros')" class="hover:text-white transition">Parceiros</a></li>
-                            <li><a href="#etica" @click.prevent="currentTab = 'etica'" class="hover:text-white transition">Ética e Compliance</a></li>
-                            <li><a href="/contacto" class="hover:text-white transition">Contacto</a></li>
+                        <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a href="#sobre" @click.prevent="scrollToSection('sobre')" class="hover:text-slate-900 dark:hover:text-white transition">Quem somos</a></li>
+                            <li><a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos')" class="hover:text-slate-900 dark:hover:text-white transition">O que fazemos</a></li>
+                            <li><a href="#parceiros" @click.prevent="scrollToSection('parceiros')" class="hover:text-slate-900 dark:hover:text-white transition">Parceiros</a></li>
+                            <li><a href="#etica" @click.prevent="currentTab = 'etica'" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
+                            <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Localização</h4>
-                        <p class="text-xs text-slate-400">Luanda — Angola</p>
-                        <p class="text-xs text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
                     </div>
                 </div>
-                <div class="border-t border-slate-800 pt-6 flex justify-between items-center text-xs text-slate-500">
-                    <div>&copy; 2026 RACHI. Todos os direitos reservados.</div>
+                <div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                    <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong>. Todos os direitos reservados.</div>
                     <div class="flex gap-4 items-center">
                         <span class="text-amber-500 font-bold">PT</span>
                         <span class="text-slate-600">|</span>
@@ -6118,7 +6077,7 @@
                          alt="RACHI" class="h-8 object-contain hidden dark:block">
                 </div>
                 <button @click="loginModal = false" 
-                        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 dark:bg-slate-800/80 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center justify-center transition text-xl font-bold cursor-pointer"
+                        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:bg-slate-800/80 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center justify-center transition text-xl font-bold cursor-pointer"
                         title="Fechar">
                     &times;
                 </button>
@@ -6131,7 +6090,7 @@
                         <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
                             <span>Iniciar sessão</span>
                         </h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1 leading-relaxed">
                             Todos os utilizadores acedem pelo mesmo login. Use o e-mail e a palavra-passe da sua conta RACHI.
                         </p>
                     </div>
@@ -6141,7 +6100,7 @@
                         <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2 mb-1">
                             <span>Criar conta</span>
                         </h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 leading-relaxed">
                             Cadastre-se como particular ou empresa. Enviaremos a palavra-passe temporária e o código de activação para o seu e-mail.
                         </p>
                     </div>
@@ -6176,7 +6135,7 @@
                         E-mail
                     </label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500 dark:text-slate-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
                             </svg>
@@ -6195,7 +6154,7 @@
                         </label>
                     </div>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500 dark:text-slate-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
@@ -6234,7 +6193,7 @@
                 </button>
 
                 <!-- Footer Link -->
-                <p class="text-center text-xs text-slate-500 dark:text-slate-400 pt-1">
+                <p class="text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 pt-1">
                     Ainda não tem conta?
                     <button type="button" @click="authTab = 'register'; authError = ''"
                             class="font-bold text-[#0050f0] dark:text-amber-400 hover:underline cursor-pointer ml-1">
@@ -6324,7 +6283,7 @@
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                             Endereço (opcional)
                         </label>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">
                             Se preencher o endereço, indique pelo menos a província e o município.
                         </p>
                     </div>
@@ -6433,7 +6392,7 @@
                 </button>
 
                 <!-- Footer Link -->
-                <p class="text-center text-xs text-slate-500 dark:text-slate-400 pt-1">
+                <p class="text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 pt-1">
                     Já tem uma conta registada?
                     <button type="button" @click="authTab = 'login'; authError = ''"
                             class="font-bold text-[#0050f0] dark:text-amber-400 hover:underline cursor-pointer ml-1">
@@ -6457,7 +6416,7 @@
             <!-- Botão Fechar -->
             <div class="flex justify-end mb-1 relative z-10">
                 <button @click="matriculaModalOpen = false" 
-                        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 dark:bg-slate-800/80 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center justify-center transition text-xl font-bold cursor-pointer"
+                        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:bg-slate-800/80 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white flex items-center justify-center transition text-xl font-bold cursor-pointer"
                         title="Fechar">
                     &times;
                 </button>
@@ -6515,7 +6474,7 @@
                             <img :src="item.image" class="w-12 h-12 object-contain rounded bg-slate-50 p-1 border">
                             <div>
                                 <h5 class="text-sm font-bold text-slate-800" x-text="item.name"></h5>
-                                <span class="text-xs text-slate-500"
+                                <span class="text-xs text-slate-500 dark:text-slate-400"
                                     x-text="item.price.toLocaleString('pt-AO') + ' AOA'"></span>
                             </div>
                         </div>
@@ -6552,7 +6511,7 @@
                 class="h-[68px] flex items-center justify-between px-4 sm:px-6 lg:px-8 border-b sticky top-0 z-40 transition-colors duration-200">
             <!-- Esquerda: Logótipo, Divisor e Badges de Status -->
             <div class="flex items-center gap-3 sm:gap-4">
-                <a href="#home" @click.prevent="goToHome()" class="flex items-center group cursor-pointer">
+                <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer">
                     <img :src="customerDarkMode ? '/images/logo-rachi-light.png' : '/images/logo-rachi-dark.png'" 
                          onerror="this.onerror=null; this.src='/images/logo-rachi.png'"
                          alt="RACHI" class="h-8 sm:h-9 w-auto object-contain">
@@ -6640,7 +6599,7 @@
                                                   class="font-bold" x-text="n.title"></span>
                                             <span class="text-[10px] text-slate-400" x-text="n.time"></span>
                                         </div>
-                                        <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500'"
+                                        <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'"
                                            class="text-[11px] mt-0.5 leading-snug" x-text="n.text"></p>
                                     </div>
                                 </div>
@@ -6821,7 +6780,7 @@
                             <div class="text-[10px] text-blue-600 dark:text-blue-400 font-bold">Gestor de Atendimento VIP</div>
                         </div>
                     </div>
-                    <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500'"
+                    <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'"
                        class="text-[11px] leading-tight">
                         Disponível para suporte prioritário e alinhamento executivo.
                     </p>
@@ -6905,7 +6864,7 @@
                                 <span class="text-3xl font-black text-slate-900 dark:text-white" x-text="customerRequests.length"></span>
                                 <span class="text-xs font-bold text-blue-600 dark:text-blue-400">em andamento</span>
                             </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
                                 <span>1 Análise • 1 Execução</span>
                                 <span class="text-blue-600 dark:text-blue-400 font-bold hover:underline">Ver todas &rarr;</span>
                             </div>
@@ -6924,7 +6883,7 @@
                             <div class="flex items-baseline gap-2 mt-3">
                                 <span class="text-2xl font-black text-amber-500">450.000 AOA</span>
                             </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
                                 <span class="text-amber-600 dark:text-amber-400 font-bold">Aguardando Aprovação</span>
                                 <span class="text-amber-600 font-bold hover:underline">Aprovar &rarr;</span>
                             </div>
@@ -6943,7 +6902,7 @@
                             <div class="flex items-baseline gap-2 mt-3">
                                 <span class="text-3xl font-black text-emerald-500">2 Ativos</span>
                             </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
                                 <span>SLA Técnico: 4 Horas</span>
                                 <span class="text-emerald-500 font-bold">100% Operacional</span>
                             </div>
@@ -6988,22 +6947,22 @@
                                             <span>Projetos &amp; Solicitações em Andamento</span>
                                             <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold" x-text="filteredCustomerRequests().length"></span>
                                         </h2>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Acompanhe a esteira de atendimento técnico e prazos de entrega.</p>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-0.5">Acompanhe a esteira de atendimento técnico e prazos de entrega.</p>
                                     </div>
 
                                     <!-- Filtro de Status em Abas Rápidas -->
                                     <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
                                         <button @click="customerFilterStatus = 'all'"
-                                                :class="customerFilterStatus === 'all' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'"
+                                                :class="customerFilterStatus === 'all' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
                                                 class="px-2.5 py-1 rounded-lg transition">Todas</button>
                                         <button @click="customerFilterStatus = 'in_analysis'"
-                                                :class="customerFilterStatus === 'in_analysis' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'"
+                                                :class="customerFilterStatus === 'in_analysis' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
                                                 class="px-2.5 py-1 rounded-lg transition">Análise</button>
                                         <button @click="customerFilterStatus = 'in_progress'"
-                                                :class="customerFilterStatus === 'in_progress' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'"
+                                                :class="customerFilterStatus === 'in_progress' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
                                                 class="px-2.5 py-1 rounded-lg transition">Execução</button>
                                         <button @click="customerFilterStatus = 'completed'"
-                                                :class="customerFilterStatus === 'completed' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'"
+                                                :class="customerFilterStatus === 'completed' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
                                                 class="px-2.5 py-1 rounded-lg transition">Concluídas</button>
                                     </div>
                                 </div>
@@ -7034,14 +6993,14 @@
                                             <div class="mt-3">
                                                 <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
                                                     x-text="req.title"></h3>
-                                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed"
+                                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1 leading-relaxed"
                                                    x-text="req.description"></p>
                                             </div>
 
                                             <!-- Esteira Visual de Progresso (5 Fases) -->
                                             <div class="mt-4 pt-4 border-t"
                                                  :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200/60'">
-                                                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-2">
+                                                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-2">
                                                     <span class="flex items-center gap-1.5">
                                                         <span class="w-2 h-2 rounded-full"
                                                               :class="req.status === 'completed' ? 'bg-emerald-500' : 'bg-blue-600 animate-pulse'"></span>
@@ -7067,7 +7026,7 @@
                                             <!-- Rodapé do Card: Técnico Designado e Ações -->
                                             <div class="mt-4 pt-3 flex flex-wrap items-center justify-between gap-3 text-xs border-t"
                                                  :class="customerDarkMode ? 'border-slate-800/80' : 'border-slate-200/50'">
-                                                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-[11px]">
+                                                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px]">
                                                     <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                                     <span x-text="'Técnico: ' + (req.technician || 'Equipe Técnica RACHI')"></span>
                                                 </div>
@@ -7100,7 +7059,7 @@
                                             <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                             <span>Faturas Proforma &amp; Recibos Recentes</span>
                                         </h3>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Consulte comprovativos e referências para pagamento bancário via Multicaixa.</p>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-0.5">Consulte comprovativos e referências para pagamento bancário via Multicaixa.</p>
                                     </div>
                                     <button @click="customerTab = 'documents'" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">Ver todas &rarr;</button>
                                 </div>
@@ -7181,7 +7140,7 @@
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                                        <span>+244 923 000 000 (Linha Direta VIP)</span>
+                                        <span>+244 972 888 585 (Linha Direta VIP)</span>
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -7195,7 +7154,7 @@
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                                         <span>Chat Direto</span>
                                     </button>
-                                    <a href="https://wa.me/244923000000" target="_blank"
+                                    <a href="https://wa.me/244972888585" target="_blank"
                                        class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow">
                                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                                         <span>WhatsApp</span>
@@ -7207,7 +7166,7 @@
                             <div class="p-6 rounded-3xl border shadow-sm"
                                  :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
                                 <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Status nas 4 Unidades RACHI</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Serviços ativos e disponíveis para sua empresa.</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-4">Serviços ativos e disponíveis para sua empresa.</p>
 
                                 <div class="space-y-3 text-xs">
                                     <!-- RACHI Tec -->
@@ -7216,7 +7175,7 @@
                                             <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-500 font-bold flex items-center justify-center text-[10px]">TEC</div>
                                             <div>
                                                 <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Tec</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Portal Web • Em Execução</div>
+                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Portal Web • Em Execução</div>
                                             </div>
                                         </div>
                                         <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400">75% Concluído</span>
@@ -7228,7 +7187,7 @@
                                             <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-500 font-bold flex items-center justify-center text-[10px]">PRT</div>
                                             <div>
                                                 <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Print</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400">1.000 Catálogos em Acabamento</div>
+                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">1.000 Catálogos em Acabamento</div>
                                             </div>
                                         </div>
                                         <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400">Entrega: 24/09</span>
@@ -7240,7 +7199,7 @@
                                             <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-500 font-bold flex items-center justify-center text-[10px]">ACD</div>
                                             <div>
                                                 <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Academy</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Cursos Executivos &amp; Alunos</div>
+                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Cursos Executivos &amp; Alunos</div>
                                             </div>
                                         </div>
                                         <button @click="openAcademyAluno()" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Aceder &rarr;</button>
@@ -7252,7 +7211,7 @@
                                             <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-500 font-bold flex items-center justify-center text-[10px]">CAP</div>
                                             <div>
                                                 <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Capital</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400">Dossiê RH Homologado</div>
+                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Dossiê RH Homologado</div>
                                             </div>
                                         </div>
                                         <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Finalizado</span>
@@ -7264,7 +7223,7 @@
                             <div class="p-6 rounded-3xl border shadow-sm"
                                  :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
                                 <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Dúvidas Frequentes</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Respostas rápidas para sua operação corporativa.</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-3">Respostas rápidas para sua operação corporativa.</p>
 
                                 <div class="space-y-2 text-xs">
                                     <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
@@ -7273,7 +7232,7 @@
                                             <span>Como aprovar uma proposta comercial?</span>
                                             <span x-text="activeFaq === 1 ? '−' : '+'" class="font-bold text-slate-400"></span>
                                         </div>
-                                        <div x-show="activeFaq === 1" class="mt-2 text-slate-500 dark:text-slate-400 text-[11px] leading-relaxed">
+                                        <div x-show="activeFaq === 1" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
                                             Basta clicar na aba "Orçamentos &amp; Propostas" e pressionar o botão "Aprovar Orçamento". A equipe técnica receberá a notificação instantaneamente.
                                         </div>
                                     </div>
@@ -7284,7 +7243,7 @@
                                             <span>Como pagar via Multicaixa / Referência?</span>
                                             <span x-text="activeFaq === 2 ? '−' : '+'" class="font-bold text-slate-400"></span>
                                         </div>
-                                        <div x-show="activeFaq === 2" class="mt-2 text-slate-500 dark:text-slate-400 text-[11px] leading-relaxed">
+                                        <div x-show="activeFaq === 2" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
                                             Na seção de faturas, copie a Entidade e Referência geradas na sua fatura proforma para pagamento no ATM, Multicaixa Express ou Internet Banking.
                                         </div>
                                     </div>
@@ -7295,7 +7254,7 @@
                                             <span>Como matricular colaboradores na Academy?</span>
                                             <span x-text="activeFaq === 3 ? '−' : '+'" class="font-bold text-slate-400"></span>
                                         </div>
-                                        <div x-show="activeFaq === 3" class="mt-2 text-slate-500 dark:text-slate-400 text-[11px] leading-relaxed">
+                                        <div x-show="activeFaq === 3" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
                                             Acesse o menu "RACHI Academy" ou solicite uma turma corporativa personalizada in-company pelo botão "Nova Solicitação".
                                         </div>
                                     </div>
@@ -7313,7 +7272,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Minhas Solicitações &amp; Chamados</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Histórico completo de projetos, orçamentos e serviços abertos com o Grupo RACHI.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Histórico completo de projetos, orçamentos e serviços abertos com o Grupo RACHI.</p>
                         </div>
                         <button @click="customerTab = 'new_request'"
                                 class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition flex items-center gap-2">
@@ -7334,18 +7293,18 @@
                                         <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border"
                                               :class="req.unitBadge || 'bg-slate-100 text-slate-700'"
                                               x-text="req.unit"></span>
-                                        <span class="text-xs font-semibold text-slate-500" x-text="'Aberto em ' + req.date"></span>
+                                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" x-text="'Aberto em ' + req.date"></span>
                                     </div>
                                     <span class="text-xs font-bold px-3 py-1 rounded-full"
                                           :class="getStatusBadgeClass(req.status)"
                                           x-text="req.statusLabel"></span>
                                 </div>
                                 <h3 class="font-bold text-lg text-slate-900 dark:text-white mt-3" x-text="req.title"></h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed" x-text="req.description"></p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1 leading-relaxed" x-text="req.description"></p>
 
                                 <div class="mt-4 pt-4 border-t flex items-center justify-between"
                                      :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div class="text-xs text-slate-500 flex items-center gap-2">
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2">
                                         <span>Responsável:</span>
                                         <span class="font-semibold text-slate-800 dark:text-slate-200" x-text="req.technician || 'Equipe Técnica'"></span>
                                     </div>
@@ -7369,7 +7328,7 @@
                         <div class="pb-5 border-b mb-6"
                              :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
                             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Solicitar Novo Produto / Serviço</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">
                                 Escolha a unidade de negócio desejada e preencha as especificações para receber proposta técnica imediata.
                             </p>
                         </div>
@@ -7385,28 +7344,28 @@
                                      class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
                                      :class="newRequest.unit === '1' ? 'border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-blue-300'">
                                     <div class="font-extrabold text-sm">RACHI Tec</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Websites, Software &amp; TI</p>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Websites, Software &amp; TI</p>
                                 </div>
                                 <!-- Opção 2: RACHI Print -->
                                 <div @click="newRequest.unit = '2'"
                                      class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
                                      :class="newRequest.unit === '2' ? 'border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-amber-300'">
                                     <div class="font-extrabold text-sm">RACHI Print</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Gráfica, Banners &amp; Brindes</p>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Gráfica, Banners &amp; Brindes</p>
                                 </div>
                                 <!-- Opção 3: RACHI Academy -->
                                 <div @click="newRequest.unit = '3'"
                                      class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
                                      :class="newRequest.unit === '3' ? 'border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-indigo-300'">
                                     <div class="font-extrabold text-sm">RACHI Academy</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Treinamento &amp; Cursos</p>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Treinamento &amp; Cursos</p>
                                 </div>
                                 <!-- Opção 4: RACHI Capital -->
                                 <div @click="newRequest.unit = '4'"
                                      class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
                                      :class="newRequest.unit === '4' ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-emerald-300'">
                                     <div class="font-extrabold text-sm">RACHI Capital</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Gestão de RH &amp; Consultoria</p>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Gestão de RH &amp; Consultoria</p>
                                 </div>
                             </div>
                         </div>
@@ -7478,7 +7437,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Orçamentos &amp; Propostas Comerciais</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Revise os itens técnicos, valores em Kwanzas e aprove propostas em 1 clique.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Revise os itens técnicos, valores em Kwanzas e aprove propostas em 1 clique.</p>
                         </div>
                     </div>
 
@@ -7491,7 +7450,7 @@
                                     <div class="flex items-center gap-3">
                                         <span class="font-mono font-black text-base text-slate-900 dark:text-white" x-text="q.number"></span>
                                         <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400" x-text="q.unit"></span>
-                                        <span class="text-xs text-slate-400" x-text="'Ref: ' + q.protocol + ' • Validade: ' + q.validUntil"></span>
+                                        <span class="text-xs text-slate-600 dark:text-slate-400" x-text="'Ref: ' + q.protocol + ' • Validade: ' + q.validUntil"></span>
                                     </div>
                                     <span class="text-xs px-3 py-1 rounded-full font-bold"
                                           :class="q.status === 'approved' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
@@ -7518,7 +7477,7 @@
                                             <template x-for="(item, idx) in (q.items || [])" :key="idx">
                                                 <tr>
                                                     <td class="py-2.5 text-slate-700 dark:text-slate-300" x-text="item.desc"></td>
-                                                    <td class="py-2.5 text-center font-bold text-slate-500" x-text="item.qty"></td>
+                                                    <td class="py-2.5 text-center font-bold text-slate-500 dark:text-slate-400" x-text="item.qty"></td>
                                                     <td class="py-2.5 text-right font-semibold text-slate-900 dark:text-white" x-text="item.price.toLocaleString('pt-AO') + ' AOA'"></td>
                                                 </tr>
                                             </template>
@@ -7566,7 +7525,7 @@
                 <div x-show="customerTab === 'contracts'" class="space-y-6">
                     <div>
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Serviços &amp; Contratos Ativos</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Acordos de nível de serviço (SLA), manutenções programadas e contratos recorrentes.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Acordos de nível de serviço (SLA), manutenções programadas e contratos recorrentes.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -7575,11 +7534,11 @@
                                  :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
                                 <div class="flex items-center justify-between pb-3 border-b"
                                      :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <span class="font-mono font-bold text-xs text-slate-500" x-text="c.id"></span>
+                                    <span class="font-mono font-bold text-xs text-slate-500 dark:text-slate-400" x-text="c.id"></span>
                                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-500" x-text="c.status"></span>
                                 </div>
                                 <h3 class="font-bold text-base text-slate-900 dark:text-white mt-3" x-text="c.name"></h3>
-                                <div class="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400">
+                                <div class="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">
                                     <div class="flex justify-between">
                                         <span>Unidade:</span>
                                         <span class="font-bold text-slate-700 dark:text-slate-200" x-text="c.unit"></span>
@@ -7613,7 +7572,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Central de Faturas &amp; Documentos</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Acesse proformas, termos de aceitação e comprovativos oficiais.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Acesse proformas, termos de aceitação e comprovativos oficiais.</p>
                         </div>
                     </div>
 
@@ -7639,7 +7598,7 @@
                                         <td class="py-3.5 px-4 font-mono font-bold text-blue-600 dark:text-blue-400" x-text="inv.id"></td>
                                         <td class="py-3.5 px-4 font-semibold" x-text="inv.unit"></td>
                                         <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium" x-text="inv.desc"></td>
-                                        <td class="py-3.5 px-4 text-slate-500" x-text="inv.date"></td>
+                                        <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400" x-text="inv.date"></td>
                                         <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="inv.value.toLocaleString('pt-AO') + ' AOA'"></td>
                                         <td class="py-3.5 px-4">
                                             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold"
@@ -7897,42 +7856,42 @@
                 <!-- 8 KPIs (Section 48) -->
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Vendas Totais</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Vendas Totais</span>
                         <div class="text-2xl font-black text-emerald-600 mt-2">1.504.000,29 AOA</div>
                         <span class="text-xs text-emerald-500 mt-1 block">&uarr; +14% esse mês</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Pedidos</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Pedidos</span>
                         <div class="text-2xl font-black text-slate-900 mt-2">14</div>
                         <span class="text-xs text-slate-400 mt-1 block">Na loja virtual</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Solicitações</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Solicitações</span>
                         <div class="text-2xl font-black text-amber-500 mt-2" x-text="customerRequests.length"></div>
                         <span class="text-xs text-slate-400 mt-1 block">Entre as 4 unidades</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Estoque Crítico</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Estoque Crítico</span>
                         <div class="text-2xl font-black text-rose-600 mt-2">1</div>
                         <span class="text-xs text-rose-400 mt-1 block">Produtos &lt; 5 unid.</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Clientes</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Clientes</span>
                         <div class="text-2xl font-black text-slate-900 mt-2">42</div>
                         <span class="text-xs text-slate-400 mt-1 block">Particulares / Empresas</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Funcionários</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Funcionários</span>
                         <div class="text-2xl font-black text-slate-900 mt-2">12</div>
                         <span class="text-xs text-slate-400 mt-1 block">Com acesso a tickets</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Cursos Vendidos</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Cursos Vendidos</span>
                         <div class="text-2xl font-black text-purple-600 mt-2">89</div>
                         <span class="text-xs text-purple-400 mt-1 block">RACHI Academy</span>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 uppercase font-bold">Serviços Cadastrados</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Serviços Cadastrados</span>
                         <div class="text-2xl font-black text-slate-900 mt-2" x-text="services.length"></div>
                         <span class="text-xs text-slate-400 mt-1 block">Ativos no catálogo</span>
                     </div>
@@ -8083,8 +8042,10 @@
 
                 async restoreUserSession() { this.currentUser = await window.RachiSession.session(); this.isLoggedIn = !!this.currentUser; if (this.currentUser) this.loginModal = false; },
                 goToHome() {
+                    this.solutionsOpen = false;
                     this.currentView = 'public';
                     this.currentTab = 'home';
+                    this.solutionsOpen = false;
                     if (this.mobileMenuOpen) this.mobileMenuOpen = false;
                     try {
                         if (window.location.hash) {
@@ -8516,6 +8477,7 @@
                     }
                     this.currentView = 'public';
                     this.currentTab = 'home';
+                    this.solutionsOpen = false;
                     if (this.mobileMenuOpen) this.mobileMenuOpen = false;
                     if (id === 'home' || id === 'inicio' || !id) {
                         this.goToHome();

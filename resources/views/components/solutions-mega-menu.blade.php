@@ -217,8 +217,8 @@
         z-index: 1;
     }
     .solutions-card-visual img {
-        max-height: 85px;
-        max-width: 130px;
+        max-height: 110px;
+        max-width: 140px;
         object-fit: contain;
         position: relative;
         z-index: 2;
@@ -507,7 +507,8 @@
      x-transition:leave-start="opacity-100 translate-y-0 scale-100"
      x-transition:leave-end="opacity-0 -translate-y-3 scale-[0.99]"
      @keydown.escape.window="solutionsOpen = false"
-     class="solutions-mega-panel"
+     @click.window="if (solutionsOpen && !($event.target.closest && $event.target.closest('#btn-nav-solutions, .solutions-trigger-btn, .solutions-unit-card'))) { solutionsOpen = false; }"
+     @click="if (!$event.target.closest('.solutions-unit-card, .solutions-close-btn')) { solutionsOpen = false; }" class="solutions-mega-panel"
      x-cloak>
 
     <!-- ============================================================== -->
@@ -585,7 +586,7 @@
                         <!-- Gráfico 3D com Aura Radial -->
                         <div class="solutions-card-visual">
                             <div class="solutions-visual-glow solutions-glow-capital"></div>
-                            <img src="/images/areas/rachi-3d-capital-trans.png?v=9"
+                            <img src="/images/areas/rachi-3d-capital-trans.png?v=11"
                                  alt="RACHI Human Capital"
                                  loading="lazy">
                         </div>
@@ -598,24 +599,7 @@
                             Serviços empresariais, recursos humanos, contabilidade e regularização documental.
                         </p>
 
-                        <!-- Checklist de Recursos / Especialidades -->
-                        <div class="solutions-card-checklist">
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-capital" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Recursos Humanos &amp; Recrutamento</span>
-                            </div>
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-capital" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Contabilidade &amp; Apoio Legal</span>
-                            </div>
                         </div>
-                    </div>
 
                     <!-- Botões de Ação Inferiores -->
                     <div class="solutions-card-actions">
@@ -658,7 +642,7 @@
                         <!-- Gráfico 3D com Aura Radial -->
                         <div class="solutions-card-visual">
                             <div class="solutions-visual-glow solutions-glow-academy"></div>
-                            <img src="/images/areas/rachi-3d-academy-trans.png?v=9"
+                            <img src="/images/areas/rachi-3d-academy-trans.png?v=11"
                                  alt="RACHI Academy"
                                  loading="lazy">
                         </div>
@@ -671,24 +655,7 @@
                             Formação profissional e corporativa em gestão, liderança, cibersegurança e competências digitais.
                         </p>
 
-                        <!-- Checklist de Recursos / Especialidades -->
-                        <div class="solutions-card-checklist">
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-academy" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Certificação Digital com QR Code</span>
-                            </div>
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-academy" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Treinamento Corporativo In-Company</span>
-                            </div>
                         </div>
-                    </div>
 
                     <!-- Botões de Ação Inferiores -->
                     <div class="solutions-card-actions">
@@ -731,7 +698,7 @@
                         <!-- Gráfico 3D com Aura Radial -->
                         <div class="solutions-card-visual">
                             <div class="solutions-visual-glow solutions-glow-tec"></div>
-                            <img src="/images/areas/rachi-3d-tec-trans.png?v=9"
+                            <img src="/images/areas/rachi-3d-tec-trans.png?v=11"
                                  alt="RACHI Tec"
                                  loading="lazy">
                         </div>
@@ -744,24 +711,7 @@
                             Digitalização, sistemas de gestão, websites, transformação digital e suporte técnico.
                         </p>
 
-                        <!-- Checklist de Recursos / Especialidades -->
-                        <div class="solutions-card-checklist">
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-tec" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Sistemas de Gestão &amp; Infraestrutura</span>
-                            </div>
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-tec" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Suporte Técnico &amp; Transformação Digital</span>
-                            </div>
                         </div>
-                    </div>
 
                     <!-- Botões de Ação Inferiores -->
                     <div class="solutions-card-actions">
@@ -808,7 +758,7 @@
                         <!-- Gráfico 3D com Aura Radial -->
                         <div class="solutions-card-visual">
                             <div class="solutions-visual-glow solutions-glow-print"></div>
-                            <img src="/images/areas/rachi-3d-print-trans.png?v=9"
+                            <img src="/images/areas/rachi-3d-print-trans.png?v=11"
                                  alt="RACHI Print"
                                  loading="lazy">
                         </div>
@@ -821,24 +771,7 @@
                             Produção gráfica, impressão institucional, materiais promocionais e eventos.
                         </p>
 
-                        <!-- Checklist de Recursos / Especialidades -->
-                        <div class="solutions-card-checklist">
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-print" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Impressão Offset &amp; Digital Premium</span>
-                            </div>
-                            <div class="solutions-check-item">
-                                <svg class="solutions-check-print" style="width: 15px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <span>Brindes Corporativos &amp; Sinalização</span>
-                            </div>
                         </div>
-                    </div>
 
                     <!-- Botões de Ação Inferiores -->
                     <div class="solutions-card-actions">

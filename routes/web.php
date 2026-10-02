@@ -27,6 +27,24 @@ Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
 Route::get('/contato', [ContactController::class, 'index'])->name('contact.alt');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
 
+// Aliases para Serviços e Formações
+Route::get('/servicos/{slug}', function (string $slug) {
+    $tec = collect(\App\Http\Controllers\Public\BusinessUnitController::getTecServices())->firstWhere('slug', $slug);
+    if ($tec) return redirect()->route('tec.service.show', $slug);
+
+    $print = collect(\App\Http\Controllers\Public\BusinessUnitController::getPrintServices())->firstWhere('slug', $slug);
+    if ($print) return redirect()->route('print.service.show', $slug);
+
+    $capital = collect(\App\Http\Controllers\Public\BusinessUnitController::getCapitalServices())->firstWhere('slug', $slug);
+    if ($capital) return redirect()->route('capital.service.show', $slug);
+
+    abort(404);
+});
+Route::redirect('/formacoes', '/academy');
+Route::redirect('/formacao', '/academy');
+Route::redirect('/cursos', '/academy');
+Route::redirect('/curso', '/academy');
+
 // Loja / Produtos
 Route::get('/loja', [ProductController::class, 'index'])->name('store.index');
 Route::get('/loja/{slug}', [ProductController::class, 'show'])->name('store.show');
@@ -45,6 +63,7 @@ Route::prefix('tec')->name('tec.')->group(function () {
 Route::prefix('print')->name('print.')->group(function () {
     Route::get('/', [BusinessUnitController::class, 'print'])->name('index');
     Route::get('/servicos', [ServiceController::class, 'byUnit'])->defaults('unit', 'print')->name('services');
+    Route::get('/servicos/{slug}', [BusinessUnitController::class, 'printService'])->name('service.show');
 });
 
 Route::prefix('academy')->name('academy.')->group(function () {
@@ -124,14 +143,68 @@ Route::get('/academy-login', function () {
 
 // Redirecionamentos de compatibilidade para links .html
 Route::redirect('/index.html', '/');
-Route::redirect('/loja.html', '/loja');
+Route::redirect('/home.html', '/');
+Route::redirect('/about.html', '/sobre');
+Route::redirect('/sobre.html', '/sobre');
+Route::redirect('/sobre-nos.html', '/sobre');
+Route::redirect('/what-we-do.html', '/o-que-fazemos');
+Route::redirect('/o-que-fazemos.html', '/o-que-fazemos');
+Route::redirect('/partners.html', '/parceiros');
+Route::redirect('/parceiros.html', '/parceiros');
+Route::redirect('/ethics.html', '/etica');
+Route::redirect('/etica.html', '/etica');
+Route::redirect('/testimonials.html', '/depoimentos');
+Route::redirect('/depoimentos.html', '/depoimentos');
+Route::redirect('/contact.html', '/contacto');
 Route::redirect('/contacto.html', '/contacto');
 Route::redirect('/contato.html', '/contacto');
+Route::redirect('/loja.html', '/loja');
+Route::redirect('/carrinho.html', '/carrinho');
+Route::redirect('/checkout.html', '/checkout');
 Route::redirect('/tec.html', '/tec');
 Route::redirect('/print.html', '/print');
 Route::redirect('/academy.html', '/academy');
 Route::redirect('/capital.html', '/capital');
+Route::redirect('/academy-login.html', '/academy/login');
 Route::redirect('/aluno-dashboard.html', '/aluno-dashboard');
+Route::redirect('/admin-dashboard.html', '/admin-dashboard');
+
+// Services .html redirects
+Route::redirect('/tec-service-consultoria-transformacao-digital.html', '/tec/servicos/consultoria-transformacao-digital');
+Route::redirect('/tec-service-criacao-websites.html', '/tec/servicos/criacao-websites');
+Route::redirect('/tec-service-digitalizacao-processos.html', '/tec/servicos/digitalizacao-processos');
+Route::redirect('/tec-service-implementacao-sistemas-gestao.html', '/tec/servicos/implementacao-sistemas-gestao');
+Route::redirect('/tec-service-suporte-tecnico-especializado.html', '/tec/servicos/suporte-tecnico-especializado');
+
+Route::redirect('/capital-service-cedencia-temporaria.html', '/capital/servicos/cedencia-temporaria');
+Route::redirect('/capital-service-constituicao-legalizacao-empresas.html', '/capital/servicos/constituicao-legalizacao-empresas');
+Route::redirect('/capital-service-consultoria-recursos-humanos.html', '/capital/servicos/consultoria-recursos-humanos');
+Route::redirect('/capital-service-organizacao-contabilidade.html', '/capital/servicos/organizacao-contabilidade');
+Route::redirect('/capital-service-registo-inss.html', '/capital/servicos/registo-inss');
+Route::redirect('/capital-service-regularizacao-documental.html', '/capital/servicos/regularizacao-documental');
+
+Route::redirect('/print-service-documentos-institucionais.html', '/print/servicos/documentos-institucionais');
+Route::redirect('/print-service-materiais-promocionais.html', '/print/servicos/materiais-promocionais');
+Route::redirect('/print-service-producao-grafica-corporativa.html', '/print/servicos/producao-grafica-corporativa');
+Route::redirect('/print-service-grafica-eventos.html', '/print/servicos/grafica-eventos');
+
+// Dynamic fallbacks for any .html requests and /pages/*.html requests
+Route::get('/tec-service-{slug}.html', fn(string $slug) => redirect('/tec/servicos/' . $slug, 301));
+Route::get('/capital-service-{slug}.html', fn(string $slug) => redirect('/capital/servicos/' . $slug, 301));
+Route::get('/print-service-{slug}.html', fn(string $slug) => redirect('/print/servicos/' . $slug, 301));
+Route::get('/pages/{file}.html', function (string $file) {
+    if (in_array($file, ['home', 'index'])) return redirect('/', 301);
+    if ($file === 'about') return redirect('/sobre', 301);
+    if ($file === 'what-we-do') return redirect('/o-que-fazemos', 301);
+    if ($file === 'partners') return redirect('/parceiros', 301);
+    if ($file === 'ethics') return redirect('/etica', 301);
+    if ($file === 'testimonials') return redirect('/depoimentos', 301);
+    if (in_array($file, ['contact', 'contacto'])) return redirect('/contacto', 301);
+    if (str_starts_with($file, 'tec-service-')) return redirect('/tec/servicos/' . substr($file, 12), 301);
+    if (str_starts_with($file, 'capital-service-')) return redirect('/capital/servicos/' . substr($file, 16), 301);
+    if (str_starts_with($file, 'print-service-')) return redirect('/print/servicos/' . substr($file, 14), 301);
+    return redirect('/' . $file, 301);
+});
 // Helper para formatar utilizadores para o painel admin
 if (!function_exists('formatAdminUserRecord')) {
     function formatAdminUserRecord($u) {

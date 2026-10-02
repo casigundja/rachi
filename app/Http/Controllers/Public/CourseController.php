@@ -104,7 +104,7 @@ class CourseController extends Controller
         $matriculaCode = 'RAC-' . str_pad($enrollment->id, 5, '0', STR_PAD_LEFT);
 
         $whatsappMsg = urlencode("Olá! Fiz minha solicitação de matrícula na RACHI Academy para a formação: {$course->name}.\nNome: {$validated['name']}\nCódigo: {$matriculaCode}\nGostaria de confirmar a vaga.");
-        $whatsappUrl = "https://wa.me/244923000000?text={$whatsappMsg}";
+        $whatsappUrl = "https://wa.me/244972888585?text={$whatsappMsg}";
 
         if ($request->expectsJson() || $request->is('api/*')) {
             return response()->json([
