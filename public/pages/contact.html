@@ -604,22 +604,7 @@
 
                 <!-- Header Actions (Entrar / Perfil de Usuário Conectado) -->
                 <div class="flex-shrink-0 flex items-center justify-end gap-2.5 sm:gap-3 z-10">
-                    <!-- Botão Padronizado de Alternância de Tema (Dark / Light Mode) -->
-                    <button type="button"
-                        onclick="window.toggleRachiTheme()"
-                        class="theme-toggle-btn flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer border border-slate-300/80 dark:border-white/10 bg-slate-100/90 hover:bg-slate-200/90 dark:bg-white/5 dark:hover:bg-white/15 text-slate-700 dark:text-amber-400 shadow-sm"
-                        aria-label="Alternar Modo Escuro / Claro"
-                        title="Alternar Modo Escuro / Claro">
-                        <!-- Lua (Visível no modo claro -> ao clicar ativa escuro) -->
-                        <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-700 dark:hidden transition-transform duration-300 hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                        <!-- Sol (Visível no modo escuro -> ao clicar ativa claro) -->
-                        <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hidden dark:block transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="4"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                        </svg>
-                    </button>
+                    
 
                     <template x-if="!currentUser">
                         <a href="/?login=1" class="btn-entrar-nav group">
@@ -635,39 +620,68 @@
                     <template x-if="currentUser">
                         <div class="relative" x-data="{ userMenuDropdown: false }" @click.outside="userMenuDropdown = false">
                             <button @click="userMenuDropdown = !userMenuDropdown"
-                                    class="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/80 dark:hover:bg-slate-800 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700/80 transition shadow-sm cursor-pointer">
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#0050f0] to-[#00a3e0] text-white font-black text-xs flex items-center justify-center shadow">
+                                    class="flex items-center gap-2 sm:gap-2.5 py-1.5 pl-2 pr-3 sm:pr-3.5 rounded-full bg-white hover:bg-slate-50 dark:bg-[#0c1829] dark:hover:bg-[#112240] border border-slate-200/90 dark:border-white/10 hover:border-[#00a3e0]/50 dark:hover:border-[#00a3e0]/50 text-slate-800 dark:text-white transition-all duration-200 shadow-xs hover:shadow-md cursor-pointer group focus:outline-none focus:ring-2 focus:ring-[#00a3e0]/30"
+                                    aria-label="Menu do Utilizador"
+                                    :aria-expanded="userMenuDropdown">
+                                <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs shrink-0 ring-1 ring-black/5 dark:ring-white/10">
                                     <span x-text="currentUser.avatar || 'CG'"></span>
                                 </div>
-                                <div class="text-left hidden sm:block">
-                                    <div class="text-xs font-bold leading-tight max-w-[130px] truncate" x-text="currentUser.nome || currentUser.name || 'Minha Conta'"></div>
-                                    <div class="text-[10px] text-blue-600 dark:text-blue-300 font-semibold" x-text="currentUser.roleLabel || 'Conectado'"></div>
-                                </div>
-                                <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 transition-transform duration-200" :class="userMenuDropdown ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                <span class="text-xs font-bold leading-none max-w-[130px] truncate text-slate-800 dark:text-slate-100 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors hidden sm:inline-block" x-text="currentUser.nome || currentUser.name || 'Minha Conta'"></span>
+                                <svg class="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-white transition-transform duration-200 shrink-0" :class="userMenuDropdown ? 'rotate-180 text-[#00a3e0] dark:text-[#00a3e0]' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/></svg>
                             </button>
 
-                            <div x-show="userMenuDropdown"
-                                 x-transition:enter="transition ease-out duration-150"
-                                 x-transition:enter-start="opacity-0 scale-95 -translate-y-1"
-                                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                                 x-transition:leave="transition ease-in duration-100"
-                                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-                                 x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
-                                 class="header-dropdown absolute right-0 mt-2 w-64 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 text-xs text-slate-800 dark:text-slate-200 space-y-1">
-                                <a href="/aluno-dashboard" class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-left text-slate-700 dark:text-slate-200 transition">
-                                    <div class="flex items-center gap-2.5">
-                                        <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
-                                        <span>Perfil Aluno (Academy)</span>
+                            <!-- Menu Dropdown com Permissões & Design Premium -->
+                            <div x-show="userMenuDropdown" x-cloak
+                                 x-transition:enter="transition ease-out duration-200"
+                                 x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                                 x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                                 x-transition:leave="transition ease-in duration-150"
+                                 x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                                 x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                                 class="header-dropdown absolute right-0 mt-2.5 w-72 sm:w-80 bg-white/95 dark:bg-[#0c1829]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 rounded-2xl shadow-2xl shadow-slate-900/15 dark:shadow-black/60 p-2.5 z-50 text-xs text-slate-800 dark:text-white space-y-1">
+                                
+                                <!-- Header do Utilizador -->
+                                <div class="px-3.5 py-3 rounded-xl bg-slate-50/80 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 mb-1.5 flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 font-black text-sm flex items-center justify-center shadow-xs shrink-0 ring-2 ring-white dark:ring-slate-800"
+                                         x-text="currentUser.avatar || 'CG'"></div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate" x-text="currentUser.nome || currentUser.name || 'Minha Conta'"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="Ativo"></span>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5" x-text="currentUser.email"></div>
                                     </div>
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold" x-text="currentUser.has_matricula ? 'Ativa' : 'Cursos'"></span>
+                                </div>
+
+                                <a href="/aluno-dashboard" class="group w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 text-left transition-all duration-150 cursor-pointer border border-transparent hover:border-emerald-200/60 dark:hover:border-emerald-800/40">
+                                    <div class="flex items-center gap-3 min-w-0">
+                                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <div class="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">Perfil Aluno (Academy)</div>
+                                            <div class="text-[10px] text-slate-400 dark:text-slate-500">Portal e cursos</div>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 whitespace-nowrap shrink-0" x-text="currentUser.has_matricula ? 'Matrícula Ativa' : 'Cursos'"></span>
                                 </a>
-                                <div class="pt-1 mt-1 border-t border-slate-200 dark:border-slate-800">
-                                    <button @click="logout(); userMenuDropdown = false" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-rose-500/10 text-left text-rose-500 transition font-medium cursor-pointer">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                                        <span>Terminar Sessão</span>
+
+                                <div class="pt-1.5 mt-1.5 border-t border-slate-100 dark:border-white/5">
+                                    <button @click="logout(); userMenuDropdown = false" class="group w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-rose-50/80 dark:hover:bg-rose-950/30 text-left transition-all duration-150 cursor-pointer border border-transparent hover:border-rose-200/60 dark:hover:border-rose-800/40">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-semibold text-rose-600 dark:text-rose-400">Terminar Sessão</div>
+                                                <div class="text-[10px] text-slate-400 dark:text-slate-500">Sair com segurança</div>
+                                            </div>
+                                        </div>
+                                        <svg class="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-rose-500 group-hover:translate-x-0.5 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                     </button>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </template>
 
@@ -2077,5 +2091,121 @@
             <div class="bg-gradient-to-r from-[#0050f0] to-[#00a3e0] h-full w-full animate-[shrink_3.5s_linear_forwards]"></div>
         </div>
     </div>
-<script src="/worker-public.js"></script></body>
+<script src="/worker-public.js"></script>    <!-- Botão Flutuante (FAB) de Alternância de Modo Claro / Escuro com Legenda -->
+<button type="button"
+    id="rachi-theme-toggle-fab"
+    onclick="if(typeof toggleRachiTheme==='function'){toggleRachiTheme()}else if(typeof window.toggleRachiTheme==='function'){window.toggleRachiTheme()}else{var d=document.documentElement.classList.toggle('dark');localStorage.setItem('rachi_theme',d?'dark':'light');window.dispatchEvent(new CustomEvent('rachi-theme-changed',{detail:{dark:d}}));}"
+    class="rachi-theme-fab group"
+    aria-label="Alternar entre Modo Claro e Modo Escuro"
+    title="Alternar entre Modo Claro e Modo Escuro">
+    
+    <!-- MODO CLARO ATIVO -> Exibe Lua + "Modo Escuro" -->
+    <span class="fab-light-content">
+        <svg class="w-4 h-4 text-slate-700 group-hover:text-[#0050f0] transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+        <span class="fab-label text-slate-800 group-hover:text-slate-950 font-bold text-xs tracking-wide">Modo Escuro</span>
+    </span>
+
+    <!-- MODO ESCURO ATIVO -> Exibe Sol + "Modo Claro" -->
+    <span class="fab-dark-content">
+        <svg class="w-4 h-4 text-amber-400 group-hover:text-amber-300 transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <span class="fab-label text-amber-100 group-hover:text-white font-bold text-xs tracking-wide">Modo Claro</span>
+    </span>
+</button>
+
+<style>
+/* RACHI FLOATING ACTION BUTTON (FAB) - WITH THEME LABEL (LEGENDA) */
+.rachi-theme-fab {
+    position: fixed !important;
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
+    z-index: 9999 !important;
+    width: auto !important;
+    min-width: unset !important;
+    height: 2.75rem !important;
+    padding: 0 1.15rem !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    outline: none !important;
+}
+
+.rachi-theme-fab:active {
+    transform: translateY(0) scale(0.97) !important;
+}
+
+.rachi-theme-fab .fab-label {
+    line-height: 1 !important;
+    white-space: nowrap !important;
+}
+
+/* LIGHT MODE */
+html:not(.dark) .rachi-theme-fab {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(203, 213, 225, 0.95) !important;
+    box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06) !important;
+    color: #1e293b !important;
+}
+html:not(.dark) .rachi-theme-fab:hover {
+    background: #ffffff !important;
+    border-color: rgba(0, 80, 240, 0.45) !important;
+    box-shadow: 0 14px 32px -4px rgba(0, 80, 240, 0.22), 0 6px 12px -2px rgba(15, 23, 42, 0.1) !important;
+    transform: translateY(-2px) scale(1.03) !important;
+}
+html:not(.dark) .rachi-theme-fab .fab-light-content {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+html:not(.dark) .rachi-theme-fab .fab-dark-content {
+    display: none !important;
+}
+
+/* DARK MODE */
+html.dark .rachi-theme-fab {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px rgba(245, 158, 11, 0.18) !important;
+    color: #fef08a !important;
+}
+html.dark .rachi-theme-fab:hover {
+    background: rgba(30, 41, 59, 0.98) !important;
+    border-color: rgba(245, 158, 11, 0.55) !important;
+    box-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.3) !important;
+    transform: translateY(-2px) scale(1.03) !important;
+    color: #ffffff !important;
+}
+html.dark .rachi-theme-fab .fab-light-content {
+    display: none !important;
+}
+html.dark .rachi-theme-fab .fab-dark-content {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+@media (max-width: 640px) {
+    .rachi-theme-fab {
+        bottom: 1.25rem !important;
+        right: 1.25rem !important;
+        height: 2.5rem !important;
+        padding: 0 0.95rem !important;
+    }
+}
+</style>
+</body>
 </html>

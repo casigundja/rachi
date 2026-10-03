@@ -275,21 +275,7 @@
                     </a>
 
                     <!-- Botão Alternador Modo Claro / Escuro -->
-                    <button type="button" 
-                            onclick="toggleRachiTheme()" 
-                            aria-label="Alternar Tema Claro / Escuro" 
-                            title="Alternar Tema Claro / Escuro"
-                            class="theme-toggle-btn w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs">
-                        <!-- Sol no modo escuro (clicar muda para claro) -->
-                        <svg class="theme-icon-sun w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="4"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                        </svg>
-                        <!-- Lua no modo claro (clicar muda para escuro) -->
-                        <svg class="theme-icon-moon w-5 h-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                    </button>
+                    
                 </div>
 
                 <!-- Logotipo RACHI Academy -->
@@ -1943,5 +1929,6 @@
             }
         }
     </script>
+    @include('components.theme-toggle-fab')
 </body>
 </html>

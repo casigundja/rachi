@@ -77,42 +77,111 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* DUAL THEME HEADER */
+                /* HEADER THEME SYSTEM (LIGHT & DARK MODES) */
         .site-header {
             position: fixed !important;
             top: 0 !important; left: 0 !important; right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-        .site-header.header-top-dark {
+
+        /* 1. DARK MODE (html.dark) */
+        html.dark .site-header {
             background: rgba(7, 19, 38, 0.94) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
         }
-        .site-header.header-top-dark .main-nav-capsule {
+        html.dark .site-header.header-scrolled {
+            background: rgba(7, 19, 38, 0.98) !important;
+            box-shadow: 0 6px 35px rgba(0, 0, 0, 0.5) !important;
+        }
+        html.dark .site-header .brand-logo-box {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+        html.dark .site-header .brand-logo-text {
+            color: #ffffff !important;
+        }
+        html.dark .site-header .brand-subtitle {
+            color: #94a3b8 !important;
+        }
+        html.dark .site-header .main-nav-capsule {
             display: flex; align-items: center; gap: 0.25rem;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 9999px; padding: 0.3rem 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link {
-            font-size: 0.88rem; font-weight: 500;
+        html.dark .site-header .main-nav-capsule .nav-link {
+            position: relative; font-size: 0.88rem; font-weight: 500;
             color: rgba(255, 255, 255, 0.8) !important;
             padding: 0.45rem 0.9rem !important; border-radius: 9999px;
-            text-decoration: none; transition: all 0.2s ease;
+            white-space: nowrap; text-decoration: none;
+            transition: all 0.2s ease;
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link:hover {
+        html.dark .site-header .main-nav-capsule .nav-link:hover {
             color: #ffffff !important; background: rgba(255, 255, 255, 0.08);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link.active {
+        html.dark .site-header .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: rgba(16, 185, 129, 0.2);
             border: 1px solid rgba(16, 185, 129, 0.4);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
             font-weight: 700;
         }
+
+        /* 2. LIGHT MODE (html:not(.dark)) */
+        html:not(.dark) .site-header {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06) !important;
+        }
+        html:not(.dark) .site-header.header-scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-box {
+            background: rgba(11, 26, 46, 0.04) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-text {
+            color: #071326 !important;
+        }
+        html:not(.dark) .site-header .brand-subtitle {
+            color: #64748b !important;
+        }
+        html:not(.dark) .site-header .main-nav-capsule {
+            display: flex; align-items: center; gap: 0.25rem;
+            background: rgba(11, 26, 46, 0.04);
+            border: 1px solid rgba(11, 26, 46, 0.08);
+            border-radius: 9999px; padding: 0.3rem 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link {
+            font-size: 0.88rem; font-weight: 600;
+            color: #0b1a2e !important;
+            padding: 0.45rem 0.9rem !important; border-radius: 9999px;
+            white-space: nowrap; text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link:hover {
+            color: #059669 !important; background: rgba(16, 185, 129, 0.08);
+        }
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.active {
+            color: #059669 !important;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-weight: 700;
+        }
+
 
         .btn-cta-emerald {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -280,12 +349,12 @@
     <!-- ============================================================ -->
     <!-- DUAL THEME HEADER                                            -->
     <!-- ============================================================ -->
-    <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-5 lg:py-6 transition-all duration-300">
+    <header id="main-site-header" class="site-header px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo Oficial RACHI Human Capital -->
             <a href="/capital" class="flex items-center gap-3 group text-decoration-none" title="Voltar à página de Human Capital">
-                <div class="h-12 px-2 py-1 rounded-xl bg-white/[0.08] border border-white/10 group-hover:border-emerald-400/40 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
+                <div class="brand-logo-box h-12 px-2 py-1 rounded-xl group-hover:border-emerald-400/40 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                         <img src="/images/areas/rachi-human-capital.png" 
@@ -295,10 +364,10 @@
                     </picture>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-black text-lg tracking-wider text-white brand-logo-text flex items-center gap-1.5 transition-colors">
+                    <span class="font-display font-black text-lg tracking-wider text-slate-900 dark:text-white brand-logo-text flex items-center gap-1.5 transition-colors">
                         RACHI <span class="text-[#10b981] text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">HUMAN CAPITAL</span>
                     </span>
-                    <span class="text-[10px] text-slate-400 tracking-widest uppercase font-medium">Recursos Humanos &amp; Gestão</span>
+                    <span class="brand-subtitle text-[10px] text-slate-500 dark:text-slate-400 tracking-widest uppercase font-medium">Recursos Humanos &amp; Gestão</span>
                 </div>
             </a>
 
@@ -324,21 +393,7 @@
             <!-- Header Actions -->
             <div class="flex items-center gap-2.5 sm:gap-3">
                 <!-- Theme Toggle Button -->
-                <button type="button"
-                    onclick="window.toggleRachiTheme()"
-                    class="theme-toggle-btn"
-                    aria-label="Alternar Modo Escuro / Claro"
-                    title="Alternar Modo Escuro / Claro">
-                    <!-- Lua -->
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-300 hover:text-white dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                    <!-- Sol -->
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                    </svg>
-                </button>
+                
 
                 <a href="#solicitar" class="btn-cta-emerald group">
                     <i data-lucide="send" class="w-4 h-4"></i>
@@ -932,5 +987,6 @@
             }
         });
     </script>
-<script src="/worker-public.js"></script></body>
+<script src="/worker-public.js"></script>    @include('components.theme-toggle-fab')
+</body>
 </html>

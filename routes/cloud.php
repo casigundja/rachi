@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
 foreach (Route::getRoutes() as $route) {
     $uri = $route->uri();
     if ($uri === 'admin-dashboard' || str_starts_with($uri,'admin/')) $route->middleware(['auth','role:admin|super_admin']);
-    if (in_array($uri,['aluno-dashboard','dashboard','aluno','academy/dashboard'],true)) {
+    if (in_array($uri,['dashboard','aluno','academy/dashboard'],true)) {
         $route->middleware(['auth', \App\Http\Middleware\RequireAcademyAccess::class]);
     }
 }

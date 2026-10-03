@@ -71,86 +71,158 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* DUAL THEME HEADER (Dark top -> Crisp on scroll) */
+        /* HEADER THEME SYSTEM (LIGHT & DARK MODES) */
         .site-header {
             position: fixed !important;
             top: 0 !important; left: 0 !important; right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
-            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                        border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                        backdrop-filter 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
-        /* STATE 1: TOP (DARK) */
-        .site-header.header-top-dark {
+        /* 1. DARK MODE (html.dark) */
+        html.dark .site-header {
             background: rgba(7, 19, 38, 0.94) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
         }
-        .site-header.header-top-dark .main-nav-capsule {
+        html.dark .site-header.header-scrolled {
+            background: rgba(7, 19, 38, 0.98) !important;
+            box-shadow: 0 6px 35px rgba(0, 0, 0, 0.5) !important;
+        }
+        html.dark .site-header .brand-logo-box {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+        html.dark .site-header .brand-logo-text {
+            color: #ffffff !important;
+        }
+        html.dark .site-header .brand-subtitle {
+            color: #94a3b8 !important;
+        }
+        html.dark .site-header .main-nav-capsule {
             display: flex; align-items: center; gap: 0.25rem;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 9999px; padding: 0.3rem 0.5rem;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link {
+        html.dark .site-header .main-nav-capsule .nav-link {
             position: relative; font-size: 0.88rem; font-weight: 500;
             color: rgba(255, 255, 255, 0.8) !important;
             padding: 0.45rem 0.9rem !important; border-radius: 9999px;
             white-space: nowrap; text-decoration: none;
             transition: all 0.2s ease;
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link:hover {
+        html.dark .site-header .main-nav-capsule .nav-link:hover {
             color: #ffffff !important; background: rgba(255, 255, 255, 0.08);
         }
-        .site-header.header-top-dark .main-nav-capsule .nav-link.active {
+        html.dark .site-header .main-nav-capsule .nav-link.active {
             color: #ffffff !important;
             background: rgba(16, 185, 129, 0.2);
             border: 1px solid rgba(16, 185, 129, 0.4);
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
             font-weight: 700;
         }
+        html.dark .site-header .mobile-menu-btn {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
 
-        /* STATE 2: SCROLLED (LIGHT) */
-        .site-header.header-scrolled-light {
-            background: rgba(255, 255, 255, 0.96) !important;
+        /* 2. LIGHT MODE (html:not(.dark)) */
+        html:not(.dark) .site-header {
+            background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07) !important;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06) !important;
         }
-        .site-header.header-scrolled-light .main-nav-capsule {
+        html:not(.dark) .site-header.header-scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-box {
+            background: rgba(11, 26, 46, 0.04) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+        }
+        html:not(.dark) .site-header .brand-logo-text {
+            color: #071326 !important;
+        }
+        html:not(.dark) .site-header .brand-subtitle {
+            color: #64748b !important;
+        }
+        html:not(.dark) .site-header .main-nav-capsule {
             display: flex; align-items: center; gap: 0.25rem;
             background: rgba(11, 26, 46, 0.04);
             border: 1px solid rgba(11, 26, 46, 0.08);
             border-radius: 9999px; padding: 0.3rem 0.5rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
         }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link {
+        html:not(.dark) .site-header .main-nav-capsule .nav-link {
             font-size: 0.88rem; font-weight: 600;
             color: #0b1a2e !important;
             padding: 0.45rem 0.9rem !important; border-radius: 9999px;
+            white-space: nowrap; text-decoration: none;
             transition: all 0.2s ease;
         }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link:hover {
+        html:not(.dark) .site-header .main-nav-capsule .nav-link:hover {
             color: #059669 !important; background: rgba(16, 185, 129, 0.08);
         }
-        .site-header.header-scrolled-light .main-nav-capsule .nav-link.active {
+        html:not(.dark) .site-header .main-nav-capsule .nav-link.active {
             color: #059669 !important;
             background: rgba(16, 185, 129, 0.12);
             border: 1px solid rgba(16, 185, 129, 0.3);
             font-weight: 700;
         }
-        .site-header.header-scrolled-light .brand-logo-text {
-            color: #071326 !important;
-        }
-        .site-header.header-scrolled-light .mobile-menu-btn {
+        html:not(.dark) .site-header .mobile-menu-btn {
             color: #0b1a2e !important;
             background: rgba(11, 26, 46, 0.05) !important;
+            border: 1px solid rgba(11, 26, 46, 0.08) !important;
+        }
+
+        /* LIGHT MODE DROPDOWN SYSTEM */
+        html:not(.dark) .header-dropdown {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+        }
+        html:not(.dark) .header-dropdown a {
+            color: #334155 !important;
+        }
+        html:not(.dark) .header-dropdown a:hover {
+            background-color: #f8fafc !important;
+        }
+        html:not(.dark) .header-dropdown .dropdown-title {
+            color: #0f172a !important;
+        }
+        html:not(.dark) .header-dropdown .dropdown-desc {
+            color: #64748b !important;
+        }
+
+        /* Card Shimmer */
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.75s ease;
+            pointer-events: none;
+        }
+        html.dark .service-card::after {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        }
+        .service-card:hover::after {
+            left: 160%;
         }
 
         /* Action Buttons */
@@ -316,12 +388,12 @@
     <!-- ============================================================ -->
     <!-- DUAL THEME HEADER                                            -->
     <!-- ============================================================ -->
-    <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-5 lg:py-6 transition-all duration-300">
+    <header id="main-site-header" class="site-header px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo Oficial RACHI Human Capital -->
             <a href="/" class="flex items-center gap-3 group text-decoration-none" title="Ir para a página inicial (Portal RACHI)">
-                <div class="h-12 px-2 py-1 rounded-xl bg-white/[0.08] border border-white/10 group-hover:border-emerald-400/40 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
+                <div class="brand-logo-box h-12 px-2 py-1 rounded-xl group-hover:border-emerald-400/40 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                         <img src="/images/areas/rachi-human-capital.png" 
@@ -331,10 +403,10 @@
                     </picture>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-black text-lg tracking-wider text-white brand-logo-text flex items-center gap-1.5 transition-colors">
+                    <span class="font-display font-black text-lg tracking-wider text-slate-900 dark:text-white brand-logo-text flex items-center gap-1.5 transition-colors">
                         RACHI <span class="text-[#10b981] text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">HUMAN CAPITAL</span>
                     </span>
-                    <span class="text-[10px] text-slate-400 tracking-widest uppercase font-medium">Recursos Humanos &amp; Gestão</span>
+                    <span class="brand-subtitle text-[10px] text-slate-500 dark:text-slate-400 tracking-widest uppercase font-medium">Recursos Humanos &amp; Gestão</span>
                 </div>
             </a>
 
@@ -362,45 +434,45 @@
                          x-cloak
                          class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5">
                         
-                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 transition group">
+                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/15 text-emerald-800 dark:text-emerald-400 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
+                                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
                                 <div>
-                                    <div class="font-bold text-xs dropdown-title text-emerald-300">RACHI Human Capital</div>
-                                    <div class="text-[11px] text-emerald-400/80 dropdown-desc">Pessoas &amp; Gestão</div>
+                                    <div class="font-bold text-xs dropdown-title text-emerald-700 dark:text-emerald-300">RACHI Human Capital</div>
+                                    <div class="text-[11px] text-emerald-600/90 dark:text-emerald-400/80 dropdown-desc">Pessoas &amp; Gestão</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-100 transition"></i>
                         </a>
 
-                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-300 hover:text-indigo-300 transition group">
+                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-500/15 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
 
-                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-300 hover:text-sky-300 transition group">
+                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-50 dark:hover:bg-sky-500/15 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">03</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
 
-                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-500/15 text-slate-300 hover:text-amber-300 transition group">
+                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-500/15 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">04</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Print</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
@@ -423,22 +495,7 @@
 
             <!-- Header Actions -->
             <div class="flex items-center gap-2.5 sm:gap-3">
-                <!-- Botão Padronizado de Alternância de Tema (Dark / Light Mode) -->
-                <button type="button"
-                    onclick="window.toggleRachiTheme()"
-                    class="theme-toggle-btn"
-                    aria-label="Alternar Modo Escuro / Claro"
-                    title="Alternar Modo Escuro / Claro">
-                    <!-- Lua (Visível no modo claro -> ao clicar ativa escuro) -->
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-300 hover:text-white dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                    <!-- Sol (Visível no modo escuro -> ao clicar ativa claro) -->
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                    </svg>
-                </button>
+                
 
                 <a href="/contacto" class="btn-cta-emerald group">
                     <i data-lucide="users" class="w-4 h-4"></i>
@@ -455,19 +512,19 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-[#071326]/98 backdrop-blur-2xl border-t border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
-            <a href="/" class="block font-medium py-1.5 text-white hover:text-[#10b981]">Home</a>
-            <div class="border-t border-white/10 pt-2">
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl border-t border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+            <a href="/" class="block font-medium py-1.5 text-slate-900 dark:text-white hover:text-[#10b981]">Home</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-[#10b981] tracking-wider">Soluções</span>
                 <div class="pl-3 mt-1 space-y-1.5">
-                    <a href="/capital" class="block text-sm text-emerald-400 font-bold">01 RACHI Human Capital</a>
-                    <a href="/academy" class="block text-sm text-slate-400 hover:text-indigo-400">02 RACHI Academy</a>
-                    <a href="/tec" class="block text-sm text-slate-400 hover:text-sky-400">03 RACHI Tec</a>
-                    <a href="/print" class="block text-sm text-slate-400 hover:text-amber-400">04 RACHI Print</a>
+                    <a href="/capital" class="block text-sm text-emerald-600 dark:text-emerald-400 font-bold">01 RACHI Human Capital</a>
+                    <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">02 RACHI Academy</a>
+                    <a href="/tec" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">03 RACHI Tec</a>
+                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400">04 RACHI Print</a>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-2 space-y-1">
-                <a href="#servicos-capital" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-300 hover:text-white">Os nossos serviços</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2 space-y-1">
+                <a href="#servicos-capital" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Os nossos serviços</a>
                 <a href="/contacto" class="block font-medium py-1 text-[#10b981] font-bold">Pedir Proposta / Contacto</a>
             </div>
         </div>
@@ -508,36 +565,36 @@
         <!-- ======================================================== -->
         <!-- 1. HERO BANNER: RACHI Human Capital                      -->
         <!-- ======================================================== -->
-        <section class="bg-[#071326] text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <section class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
             <!-- Ambient Glow Gradients -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.22),transparent_70%)] pointer-events-none"></div>
-            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.22),transparent_70%)] pointer-events-none"></div>
+            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto relative z-10">
                 
                 <!-- Breadcrumbs -->
-                <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                    <a href="/" class="hover:text-white transition cursor-pointer">Início</a>
+                <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">
+                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition cursor-pointer">Início</a>
                     <span>/</span>
-                    <span class="text-slate-500">Soluções</span>
+                    <span class="text-slate-400 dark:text-slate-500">Soluções</span>
                     <span>/</span>
-                    <span class="text-[#10b981] font-semibold">RACHI Human Capital</span>
+                    <span class="text-emerald-700 dark:text-[#10b981] font-semibold">RACHI Human Capital</span>
                 </nav>
 
                 <div class="max-w-4xl">
                     <!-- Pill Tag -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-5">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-5">
                         <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
                         Pessoas, Gestão &amp; Apoio Empresarial
                     </div>
 
                     <!-- Main H1 -->
-                    <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                         RACHI Human Capital
                     </h1>
 
                     <!-- Main Subtitle requested by user -->
-                    <p class="text-lg sm:text-2xl text-slate-200 mt-4 leading-relaxed font-normal">
+                    <p class="text-lg sm:text-2xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
                         Serviços empresariais, recursos humanos, contabilidade e regularização documental.
                     </p>
 
@@ -547,42 +604,42 @@
                             <i data-lucide="message-square" class="w-4 h-4"></i>
                             <span>Falar com um Consultor</span>
                         </a>
-                        <a href="#servicos-capital" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-sm transition">
-                            <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i>
+                        <a href="#servicos-capital" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300/80 dark:border-white/15 text-slate-800 dark:text-white font-semibold text-sm transition shadow-xs">
+                            <i data-lucide="layers" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
                             <span>Explorar os Nossos Serviços</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- 3 Pilares Oficiais: Segurança Garantida, Processo Rápido, Suporte Especializado -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-800">
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-white">Segurança Garantida</div>
-                            <div class="text-xs text-slate-400">Rigor jurídico e fiscal para sua empresa</div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Segurança Garantida</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Rigor jurídico e fiscal para sua empresa</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                             <i data-lucide="zap" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-white">Processo Rápido</div>
-                            <div class="text-xs text-slate-400">Tramitação célere e prazos reduzidos</div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Processo Rápido</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Tramitação célere e prazos reduzidos</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0">
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
                             <i data-lucide="headphones" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-white">Suporte Especializado</div>
-                            <div class="text-xs text-slate-400">Consultores dedicados em Angola</div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Suporte Especializado</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Consultores dedicados em Angola</div>
                         </div>
                     </div>
                 </div>
@@ -1049,5 +1106,6 @@
             }
         });
     </script>
-<script src="/worker-public.js"></script></body>
+<script src="/worker-public.js"></script>    @include('components.theme-toggle-fab')
+</body>
 </html>

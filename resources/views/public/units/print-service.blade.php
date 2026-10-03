@@ -303,19 +303,7 @@
 
             <!-- Header Actions -->
             <div class="flex items-center gap-2.5 sm:gap-3">
-                <button type="button"
-                    onclick="window.toggleRachiTheme()"
-                    class="theme-toggle-btn"
-                    aria-label="Alternar Modo Escuro / Claro"
-                    title="Alternar Modo Escuro / Claro">
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-300 hover:text-white dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                    <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                    </svg>
-                </button>
+                
 
                 <a href="#solicitar" class="btn-cta-amber group">
                     <i data-lucide="printer" class="w-4 h-4"></i>
@@ -831,16 +819,60 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-100 dark:bg-[#050912] text-slate-600 dark:text-slate-400 py-12 border-t border-slate-200 dark:border-white/10 text-xs transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <span class="font-bold text-slate-900 dark:text-white tracking-wider">RACHI PRINT</span>
-                <span>•</span>
-                <span>Gráfica Digital, Offset &amp; Merchandising Corporativo em Angola</span>
+        <!-- ============================================================ -->
+    <!-- FOOTER                                                       -->
+    <!-- ============================================================ -->
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <!-- Footer Logo Oficial RACHI Print -->
+                    <a href="/print" class="inline-flex items-center gap-2.5 mb-4 group text-decoration-none">
+                        <picture class="flex items-center">
+                            <source srcset="/images/areas/rachi-print.webp" type="image/webp">
+                            <img src="/images/areas/rachi-print.png" 
+                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
+                                 alt="RACHI Print" 
+                                 class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(245,168,0,0.35)] group-hover:scale-105 transition-all">
+                        </picture>
+                        <span class="font-display font-bold text-base text-slate-900 dark:text-white">RACHI <span class="text-[#f5a800]">Print</span></span>
+                    </a>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Gráfica digital, impressão offset, merchandising e produção corporativa premium com acabamento industrial nobre.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Soluções RACHI</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/capital" class="hover:text-emerald-400 transition">01 RACHI Human Capital</a></li>
+                        <li><a href="/academy" class="hover:text-indigo-400 transition">02 RACHI Academy</a></li>
+                        <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
+                        <li><a href="/print" class="hover:text-amber-400 transition text-[#d97706] dark:text-[#f5a800] font-bold">04 RACHI Print</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Navegação</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Portal RACHI</a></li>
+                        <li><a href="/print#catalogo" class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Produtos</a></li>
+                        <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a RACHI</a></li>
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto &amp; Propostas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Contacto</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Produção sob encomenda e entregas em todo o país.</p>
+                </div>
             </div>
-            <div>
-                &copy; {{ date('Y') }} RACHI. Todos os direitos reservados.
+            <div class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
+                <div>&copy; {{ date('Y') }} <strong class="text-slate-900 dark:text-white">RACHI Print</strong>. Todos os direitos reservados.</div>
+                <div class="flex gap-4">
+                    <span class="text-[#d97706] dark:text-[#f5a800] font-bold">PT</span>
+                    <span class="text-slate-600">|</span>
+                    <span>EN</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -853,5 +885,6 @@
             }
         });
     </script>
+    @include('components.theme-toggle-fab')
 </body>
 </html>

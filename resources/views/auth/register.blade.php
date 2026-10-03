@@ -593,11 +593,7 @@
             <span>Voltar ao site</span>
           </a>
 
-          <button type="button" class="theme-toggle-btn" onclick="toggleRachiTheme()" aria-label="Alternar Tema Claro/Escuro" title="Alternar tema">
-            <svg class="icon-sun" width="16" height="16" fill="none" stroke="#f5a800" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-            <svg class="icon-moon" width="16" height="16" fill="none" stroke="#0050f0" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-            <span id="theme-toggle-label">Modo Claro</span>
-          </button>
+          
         </div>
 
         <!-- Marca -->
@@ -847,5 +843,6 @@
       }
     }
   </script>
+    @include('components.theme-toggle-fab')
 </body>
 </html>

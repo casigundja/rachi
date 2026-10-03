@@ -1010,22 +1010,7 @@
 
                 <!-- Ações Direitas: Headphone/Ajuda + Localização + Usuário + Sacola -->
                 <div class="flex items-center gap-2 sm:gap-3.5 shrink-0">
-                    <!-- Botão Padronizado de Alternância de Tema (Dark / Light Mode) -->
-                    <button type="button"
-                        onclick="window.toggleRachiTheme()"
-                        class="theme-toggle-btn w-9 h-9 rounded-full flex items-center justify-center transition cursor-pointer hover:bg-slate-100 dark:hover:bg-white/10"
-                        aria-label="Alternar Modo Escuro / Claro"
-                        title="Alternar Modo Escuro / Claro">
-                        <!-- Lua (Visível no modo claro -> ao clicar ativa escuro) -->
-                        <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-slate-600 hover:text-[#071326] dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                        <!-- Sol (Visível no modo escuro -> ao clicar ativa claro) -->
-                        <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px] text-amber-400 hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="4"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                        </svg>
-                    </button>
+                    
 
                     <!-- Ícone Headphone Atendimento com Pulse -->
                     <button type="button" @click="openChatModal()" class="w-9 h-9 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-[#071326] dark:hover:text-white flex items-center justify-center transition cursor-pointer relative" title="Ajuda &amp; Chat Online">
@@ -3153,5 +3138,6 @@
             enableFriendlyScroll(document.getElementById('bubble-track-row'));
         });
     </script>
+    @include('components.theme-toggle-fab')
 </body>
 </html>

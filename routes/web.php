@@ -100,22 +100,12 @@ Route::prefix('academy')->name('academy.')->group(function () {
     Route::get('/matricula', function () {
         return view('auth.academy-login');
     })->name('enroll');
-    Route::get('/dashboard', function () {
-        return view('public.aluno-dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [CourseController::class, 'dashboard'])->name('dashboard');
 });
 
-Route::get('/aluno-dashboard', function () {
-    return view('public.aluno-dashboard');
-})->name('aluno.dashboard');
-
-Route::get('/dashboard', function () {
-    return view('public.aluno-dashboard');
-});
-
-Route::get('/aluno', function () {
-    return view('public.aluno-dashboard');
-});
+Route::get('/aluno-dashboard', [CourseController::class, 'dashboard'])->name('aluno.dashboard');
+Route::get('/dashboard', [CourseController::class, 'dashboard']);
+Route::get('/aluno', [CourseController::class, 'dashboard']);
 
 Route::get('/dashboard-aluno', function () {
     return redirect('/aluno-dashboard');

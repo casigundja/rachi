@@ -1428,22 +1428,7 @@
                     <span>Portal do Aluno</span>
                 </a>
 
-                <!-- Botão de Alternância de Tema -->
-                <button type="button"
-                    onclick="window.toggleRachiTheme()"
-                    class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] border border-slate-200/80 hover:border-[#0050f0]/40 dark:border-white/[0.12] dark:hover:border-[#00a3e0]/40 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md hover:shadow-[#0050f0]/15 dark:hover:shadow-[#00a3e0]/15 hover:-translate-y-0.5 group"
-                    aria-label="Alternar Modo Escuro / Claro"
-                    title="Alternar Modo Escuro / Claro">
-                    <!-- Lua (visível no Modo Claro) -->
-                    <svg class="w-4 h-4 text-slate-700 group-hover:text-slate-950 dark:hidden transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                    <!-- Sol (visível no Modo Escuro) -->
-                    <svg class="w-4 h-4 text-amber-400 group-hover:text-amber-300 hidden dark:block transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                    </svg>
-                </button>
+                
 
                 <!-- Botão Busca Circular -->
                 <a href="#cursos"
@@ -2586,40 +2571,59 @@
         </div>
     </section>
 
-    <!-- ============================================================== -->
-    <!-- 9. RODAPÉ INSTITUCIONAL RACHI ACADEMY                         -->
-    <!-- ============================================================== -->
-    <footer class="bg-slate-100 dark:bg-[#071326] py-10 sm:py-12 border-t border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">
+        <!-- ============================================================ -->
+    <!-- FOOTER INSTITUCIONAL RACHI ACADEMY                          -->
+    <!-- ============================================================ -->
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-5 pb-6 border-b border-slate-200 dark:border-white/10">
-                <a href="/" class="flex items-center gap-3 group transition hover:opacity-90" title="Ir para a página inicial (Portal RACHI)">
-                    <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI Academy" class="h-7 w-auto object-contain hidden dark:block">
-                    <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI Academy" class="h-7 w-auto object-contain block dark:hidden">
-                    <span
-                        class="text-[10px] font-heading font-black tracking-widest text-[#0050f0] dark:text-[#00a3e0] uppercase px-2 py-0.5 rounded bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 border border-[#0050f0]/20 dark:border-[#00a3e0]/30">
-                        ACADEMY
-                    </span>
-                </a>
-                <div class="flex flex-wrap items-center gap-6 text-slate-600 dark:text-slate-400">
-                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Início</a>
-                    <a href="/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Human Capital</a>
-                    <a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a>
-                    <a href="/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print</a>
-                    <a href="#cursos" class="hover:text-slate-900 dark:hover:text-white transition">Cursos</a>
-                    <a href="/academy/login" class="hover:text-slate-900 dark:hover:text-white transition">Área do Aluno</a>
-                    <a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto</a>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <!-- Footer Logo Oficial RACHI Academy -->
+                    <a href="/academy" class="inline-flex items-center gap-2.5 mb-4 group text-decoration-none">
+                        <picture class="flex items-center">
+                            <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
+                            <img src="/images/areas/rachi-academy.png" 
+                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-academy.png'" 
+                                 alt="RACHI Academy" 
+                                 class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(99,102,241,0.35)] group-hover:scale-105 transition-all">
+                        </picture>
+                        <span class="font-display font-bold text-base text-slate-900 dark:text-white">RACHI <span class="text-[#0050f0] dark:text-[#00a3e0]">Academy</span></span>
+                    </a>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Formação executiva, tecnologia, inteligência artificial e programas corporativos para profissionais e empresas em Angola.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#00a3e0] mb-3">Soluções RACHI</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/capital" class="hover:text-emerald-400 transition">01 RACHI Human Capital</a></li>
+                        <li><a href="/academy" class="hover:text-indigo-400 transition text-[#0050f0] dark:text-[#00a3e0] font-bold">02 RACHI Academy</a></li>
+                        <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
+                        <li><a href="/print" class="hover:text-amber-400 transition">04 RACHI Print</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#00a3e0] mb-3">Navegação</h4>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Portal RACHI</a></li>
+                        <li><a href="/academy#cursos" class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Cursos</a></li>
+                        <li><a href="/aluno-dashboard" class="hover:text-slate-900 dark:hover:text-white transition">Área do Aluno</a></li>
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto &amp; Matrículas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#00a3e0] mb-3">Contacto</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Formações presenciais e à distância com certificação oficial.</p>
                 </div>
             </div>
-
-            <div
-                class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] text-slate-500 dark:text-slate-400">
-                <p>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> — Soluções Inteligentes. Todos os direitos reservados. Luanda, Angola.</p>
-                <div class="flex items-center gap-4">
-                    <a href="#" class="hover:underline">Termos de Uso</a>
-                    <span>&bull;</span>
-                    <a href="#" class="hover:underline">Privacidade</a>
-                    <span>&bull;</span>
-                    <span>Pagamentos em Kwanzas (Multicaixa Express)</span>
+            <div class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
+                <div>&copy; {{ date('Y') }} <strong class="text-slate-900 dark:text-white">RACHI Academy</strong>. Todos os direitos reservados.</div>
+                <div class="flex gap-4">
+                    <span class="text-[#0050f0] dark:text-[#00a3e0] font-bold">PT</span>
+                    <span class="text-slate-600">|</span>
+                    <span>EN</span>
                 </div>
             </div>
         </div>
@@ -2736,6 +2740,7 @@
 
 
 
-<script src="/worker-public.js"></script></body>
+<script src="/worker-public.js"></script>    @include('components.theme-toggle-fab')
+</body>
 
 </html>
