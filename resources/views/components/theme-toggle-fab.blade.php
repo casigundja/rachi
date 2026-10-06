@@ -19,7 +19,7 @@
         </div>
         <div class="rachi-lang-menu-list">
             <!-- Português -->
-            <button type="button" @click="changeLang('pt')" class="rachi-lang-item" :class="currentLang === 'pt' ? 'active' : ''">
+            <button type="button" @click="changeLang('pt')" onclick="setRachiLanguage('pt')" class="rachi-lang-item" :class="currentLang === 'pt' ? 'active' : ''" data-lang-option="pt">
                 <span class="rachi-lang-flag">🇦🇴</span>
                 <div class="rachi-lang-text">
                     <strong class="text-xs">Português</strong>
@@ -29,7 +29,7 @@
             </button>
 
             <!-- English -->
-            <button type="button" @click="changeLang('en')" class="rachi-lang-item" :class="currentLang === 'en' ? 'active' : ''">
+            <button type="button" @click="changeLang('en')" onclick="setRachiLanguage('en')" class="rachi-lang-item" :class="currentLang === 'en' ? 'active' : ''" data-lang-option="en">
                 <span class="rachi-lang-flag">🇬🇧</span>
                 <div class="rachi-lang-text">
                     <strong class="text-xs">English</strong>
@@ -39,7 +39,7 @@
             </button>
 
             <!-- Mandarim (中文) -->
-            <button type="button" @click="changeLang('zh-CN')" class="rachi-lang-item" :class="currentLang === 'zh-CN' ? 'active' : ''">
+            <button type="button" @click="changeLang('zh-CN')" onclick="setRachiLanguage('zh-CN')" class="rachi-lang-item" :class="currentLang === 'zh-CN' ? 'active' : ''" data-lang-option="zh-CN">
                 <span class="rachi-lang-flag">🇨🇳</span>
                 <div class="rachi-lang-text">
                     <strong class="text-xs">中文 (Mandarim)</strong>
@@ -52,10 +52,11 @@
 
     <!-- 2. BOTÃO DO TRADUTOR FLUTUANTE -->
     <button type="button"
+            id="rachi-lang-fab-btn"
             @click="langMenuOpen = !langMenuOpen"
             class="rachi-lang-fab group"
             aria-label="Alterar Idioma (Português, English, 中文)"
-            title="Alterar Idioma / Change Language">
+            title="Alterar Idioma / Change Language / 更改语言">
         <svg class="w-4 h-4 text-[#00a3e0] group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"/>
             <path stroke-linecap="round" stroke-linejoin="round" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
@@ -98,107 +99,178 @@
 <div id="google_translate_element" style="display:none !important;" aria-hidden="true"></div>
 
 <!-- ============================================================================== -->
-<!-- MOTOR JAVASCRIPT DO TRADUTOR RACHI                                             -->
+<!-- MOTOR JAVASCRIPT DO TRADUTOR RACHI (PT / EN / ZH - MANDARIM)                    -->
 <!-- ============================================================================== -->
 <script>
     (function() {
-        // 1. Obter idioma salvo
+        // 1. Obter idioma salvo (localStorage ou Cookie)
         function getStoredLanguage() {
-            var cookieMatch = document.cookie.match(/(^|;)\s*googtrans=([^;]+)/);
-            if (cookieMatch) {
-                var val = decodeURIComponent(cookieMatch[2]);
-                if (val.indexOf('/zh-CN') !== -1 || val.indexOf('/zh') !== -1) return 'zh-CN';
-                if (val.indexOf('/en') !== -1) return 'en';
-                if (val.indexOf('/pt') !== -1) return 'pt';
-            }
-            var local = localStorage.getItem('rachi_lang');
-            return local || 'pt';
-        }
-
-        // 2. Gravar cookies em todos os domínios possíveis
-        function setGoogleTranslateCookie(lang) {
-            var cookieVal = (lang === 'pt') ? '/pt/pt' : '/pt/' + lang;
-            var maxAge = 31536000;
-            var host = window.location.hostname;
-            
-            document.cookie = 'googtrans=' + cookieVal + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
-            document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + host + '; max-age=' + maxAge + '; SameSite=Lax';
-            
-            var parts = host.split('.');
-            if (parts.length >= 2) {
-                var rootDomain = '.' + parts.slice(-2).join('.');
-                document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
-            }
-        }
-
-        // 3. Função global para troca de idioma
-        window.setRachiLanguage = function(lang) {
-            if (!lang) lang = 'pt';
-            localStorage.setItem('rachi_lang', lang);
-            setGoogleTranslateCookie(lang);
-
-            // Atualiza botões estáticos no DOM se existirem
-            document.querySelectorAll('[data-rachi-lang]').forEach(function(el) {
-                if (el.getAttribute('data-rachi-lang') === lang) {
-                    el.classList.add('text-[#00a3e0]', 'font-bold');
-                    el.classList.remove('opacity-70');
-                } else {
-                    el.classList.remove('text-[#00a3e0]', 'font-bold');
-                    el.classList.add('opacity-70');
+            try {
+                var cookieMatch = document.cookie.match(/(^|;)\s*googtrans=([^;]+)/);
+                if (cookieMatch) {
+                    var val = decodeURIComponent(cookieMatch[2]);
+                    if (val.indexOf('/zh-CN') !== -1 || val.indexOf('/zh') !== -1) return 'zh-CN';
+                    if (val.indexOf('/en') !== -1) return 'en';
+                    if (val.indexOf('/pt') !== -1) return 'pt';
                 }
-            });
+                var local = localStorage.getItem('rachi_lang');
+                if (local === 'zh-CN' || local === 'zh') return 'zh-CN';
+                if (local === 'en') return 'en';
+                return 'pt';
+            } catch (e) {
+                return 'pt';
+            }
+        }
 
-            // Disparar evento para componentes Alpine ou JS
-            window.dispatchEvent(new CustomEvent('rachi-lang-changed', { detail: { lang: lang } }));
+        // 2. Gravar cookies para Google Translate
+        function setGoogleTranslateCookie(lang) {
+            try {
+                var host = window.location.hostname;
+                var isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(host) || host === 'localhost' || host === '127.0.0.1';
 
-            // Tentar aplicar diretamente no elemento combo do Google Translate
+                if (lang === 'pt') {
+                    // Ao voltar para Português, limpa cookies de tradução e define /pt/pt
+                    var exp = 'expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+                    document.cookie = 'googtrans=; ' + exp;
+                    document.cookie = 'googtrans=; ' + exp + ' domain=' + host + ';';
+                    document.cookie = 'googtrans=/pt/pt; path=/; max-age=31536000; SameSite=Lax';
+                    if (!isIp) {
+                        var parts = host.split('.');
+                        if (parts.length >= 2) {
+                            var rootDomain = '.' + parts.slice(-2).join('.');
+                            document.cookie = 'googtrans=; ' + exp + ' domain=' + rootDomain + ';';
+                            document.cookie = 'googtrans=/pt/pt; path=/; domain=' + rootDomain + '; max-age=31536000; SameSite=Lax';
+                        }
+                    }
+                    return;
+                }
+
+                var cookieVal = '/pt/' + lang;
+                var maxAge = 31536000;
+                
+                document.cookie = 'googtrans=' + cookieVal + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
+                document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + host + '; max-age=' + maxAge + '; SameSite=Lax';
+                document.cookie = 'googtrans=/auto/' + lang + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
+
+                if (!isIp) {
+                    var parts = host.split('.');
+                    if (parts.length >= 2) {
+                        var rootDomain = '.' + parts.slice(-2).join('.');
+                        document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
+                        document.cookie = 'googtrans=/auto/' + lang + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
+                    }
+                }
+            } catch(e) {}
+        }
+
+        // 3. Atualizar indicadores visuais no DOM (FAB, Menu e Rodapé)
+        function updateVisualLangIndicators(lang) {
+            try {
+                document.documentElement.lang = (lang === 'zh-CN') ? 'zh-CN' : lang;
+
+                // Atualizar texto do FAB
+                var fabLabels = { 'pt': 'PT', 'en': 'EN', 'zh-CN': '中文' };
+                document.querySelectorAll('.rachi-lang-fab-label').forEach(function(el) {
+                    el.textContent = fabLabels[lang] || 'PT';
+                });
+
+                // Atualizar itens do menu dropdown
+                document.querySelectorAll('[data-lang-option]').forEach(function(btn) {
+                    var isSelected = btn.getAttribute('data-lang-option') === lang;
+                    btn.classList.toggle('active', isSelected);
+                    var check = btn.querySelector('.rachi-lang-check');
+                    if (check) check.style.display = isSelected ? 'inline' : 'none';
+                });
+
+                // Atualizar botões de idioma no rodapé de todas as páginas
+                document.querySelectorAll('[data-rachi-lang]').forEach(function(el) {
+                    var elLang = el.getAttribute('data-rachi-lang');
+                    if (elLang === lang) {
+                        el.classList.add('text-amber-500', 'dark:text-amber-400', 'font-black');
+                        el.classList.remove('opacity-60', 'opacity-70');
+                    } else {
+                        el.classList.remove('text-amber-500', 'dark:text-amber-400', 'font-black');
+                        el.classList.add('opacity-70');
+                    }
+                });
+            } catch(e) {}
+        }
+
+        // 4. Aplicar idioma no select do Google Translate (.goog-te-combo)
+        function applyComboLanguage(lang) {
             var combo = document.querySelector('.goog-te-combo');
             if (combo) {
-                combo.value = lang;
-                combo.dispatchEvent(new Event('change'));
-            } else {
-                // Se ainda não carregou o widget, recarrega a página para o cookie ter efeito
-                window.location.reload();
+                var targetVal = (lang === 'pt') ? 'pt' : lang;
+                if (combo.value !== targetVal) {
+                    combo.value = targetVal;
+                    combo.dispatchEvent(new Event('change'));
+                }
+                return true;
+            }
+            return false;
+        }
+
+        // 5. Função global para troca de idioma
+        window.setRachiLanguage = function(lang) {
+            if (!lang) lang = 'pt';
+            try { localStorage.setItem('rachi_lang', lang); } catch(e) {}
+            setGoogleTranslateCookie(lang);
+            updateVisualLangIndicators(lang);
+
+            window.dispatchEvent(new CustomEvent('rachi-lang-changed', { detail: { lang: lang } }));
+
+            var applied = applyComboLanguage(lang);
+            if (!applied) {
+                var attempts = 0;
+                var interval = setInterval(function() {
+                    attempts++;
+                    if (applyComboLanguage(lang) || attempts > 15) {
+                        clearInterval(interval);
+                        if (!document.querySelector('.goog-te-combo')) {
+                            window.location.reload();
+                        }
+                    }
+                }, 100);
             }
         };
 
-        // 4. Inicializador oficial chamado pela API do Google
+        // 6. Callback oficial do Google Translate
         window.googleTranslateElementInit = function() {
             try {
                 new google.translate.TranslateElement({
                     pageLanguage: 'pt',
                     includedLanguages: 'pt,en,zh-CN',
-                    autoDisplay: false,
-                    multilanguagePage: true
+                    autoDisplay: false
                 }, 'google_translate_element');
 
-                // Sincronizar após carregamento
                 var saved = getStoredLanguage();
+                updateVisualLangIndicators(saved);
+
                 if (saved && saved !== 'pt') {
-                    setTimeout(function() {
-                        var combo = document.querySelector('.goog-te-combo');
-                        if (combo && combo.value !== saved) {
-                            combo.value = saved;
-                            combo.dispatchEvent(new Event('change'));
+                    var attempts = 0;
+                    var pollInterval = setInterval(function() {
+                        attempts++;
+                        if (applyComboLanguage(saved) || attempts >= 40) {
+                            clearInterval(pollInterval);
                         }
-                    }, 600);
+                    }, 150);
                 }
             } catch(e) {
                 console.warn('Google Translate initialization:', e);
             }
         };
 
-        // 5. Inserir script do Google Translate de forma segura e assíncrona
+        // 7. Inserir script do Google Translate de forma segura (HTTPS)
         if (!document.getElementById('google-translate-script')) {
             var s = document.createElement('script');
             s.id = 'google-translate-script';
-            s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
             s.async = true;
             s.defer = true;
             document.head.appendChild(s);
         }
 
-        // 6. Componente Alpine para o Dock
+        // 8. Alpine.js Component + Fallback Vanilla JS
         window.rachiFloatingDock = function() {
             return {
                 langMenuOpen: false,
@@ -212,6 +284,7 @@
                     window.addEventListener('rachi-lang-changed', (e) => {
                         this.currentLang = e.detail.lang;
                     });
+                    updateVisualLangIndicators(this.currentLang);
                 },
                 changeLang(lang) {
                     this.langMenuOpen = false;
@@ -220,6 +293,28 @@
                 }
             };
         };
+
+        // Vanilla JS Fallback para abrir/fechar menu de idiomas
+        document.addEventListener('DOMContentLoaded', function() {
+            var current = getStoredLanguage();
+            updateVisualLangIndicators(current);
+
+            var fabBtn = document.getElementById('rachi-lang-fab-btn');
+            var menu = document.getElementById('rachi-lang-menu');
+            if (fabBtn && menu) {
+                fabBtn.addEventListener('click', function(e) {
+                    if (!window.Alpine) {
+                        e.stopPropagation();
+                        menu.classList.toggle('hidden');
+                    }
+                });
+                document.addEventListener('click', function(e) {
+                    if (!window.Alpine && menu && !menu.contains(e.target) && !fabBtn.contains(e.target)) {
+                        menu.classList.add('hidden');
+                    }
+                });
+            }
+        });
     })();
 </script>
 
