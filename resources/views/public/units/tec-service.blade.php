@@ -475,7 +475,7 @@
                 </a>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-white hover:text-[#00a3e0] focus:outline-none" aria-label="Menu Principal">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-slate-800 dark:text-white hover:text-[#00a3e0] focus:outline-none" aria-label="Menu Principal">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -523,55 +523,55 @@
         <!-- 1. HERO DO SERVIÇO                                       -->
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-            <div class="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-br from-[#071326] via-[#092244] to-[#071326] border border-sky-500/25 overflow-hidden shadow-2xl text-white">
+            <div class="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-br from-white via-sky-50/40 to-slate-50 border border-slate-200/90 shadow-2xl shadow-sky-950/5 text-slate-900 dark:from-[#071326] dark:via-[#092244] dark:to-[#071326] dark:border-sky-500/25 dark:text-white overflow-hidden transition-colors duration-300">
                 <div class="absolute -top-24 -right-24 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div class="{{ !empty($service['image']) ? 'lg:col-span-7' : 'lg:col-span-8' }} space-y-6">
                         <div class="flex flex-wrap items-center gap-3">
-                            <span class="text-xs font-bold uppercase tracking-widest text-[#00a3e0] px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/30">
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#0077c2] dark:text-[#00a3e0] px-3.5 py-1.5 rounded-full bg-sky-500/10 dark:bg-sky-500/15 border border-sky-500/20 dark:border-sky-500/30">
                                 {{ $service['tag'] }}
                             </span>
-                            <span class="text-xs font-bold uppercase tracking-widest text-slate-300 px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                            <span class="text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/15">
                                 RACHI Tec • Sistemas &amp; TI
                             </span>
                         </div>
 
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                             {{ $service['title'] }}
                         </h1>
 
-                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
                             {{ $service['full_desc'] }}
                         </p>
 
                         <!-- Destaques Rápidos: Prazo, Garantia, Preço Base -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
-                            <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
-                                <div class="text-[11px] uppercase tracking-wider text-sky-400 font-bold flex items-center gap-1.5 mb-1">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200/80 dark:border-white/10">
+                            <div class="p-4 rounded-2xl bg-white/90 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 shadow-xs">
+                                <div class="text-[11px] uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold flex items-center gap-1.5 mb-1">
                                     <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                                     <span>Prazo de Execução</span>
                                 </div>
-                                <div class="font-bold text-sm text-white">{{ $service['prazo'] }}</div>
+                                <div class="font-bold text-sm text-slate-900 dark:text-white">{{ $service['prazo'] }}</div>
                             </div>
 
-                            <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
-                                <div class="text-[11px] uppercase tracking-wider text-sky-400 font-bold flex items-center gap-1.5 mb-1">
+                            <div class="p-4 rounded-2xl bg-white/90 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 shadow-xs">
+                                <div class="text-[11px] uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold flex items-center gap-1.5 mb-1">
                                     <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
                                     <span>Garantia &amp; SLA</span>
                                 </div>
-                                <div class="font-bold text-sm text-white">{{ $service['garantia'] }}</div>
+                                <div class="font-bold text-sm text-slate-900 dark:text-white">{{ $service['garantia'] }}</div>
                             </div>
 
-                            <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10">
-                                <div class="text-[11px] uppercase tracking-wider text-sky-400 font-bold flex items-center gap-1.5 mb-1">
+                            <div class="p-4 rounded-2xl bg-white/90 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 shadow-xs">
+                                <div class="text-[11px] uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold flex items-center gap-1.5 mb-1">
                                     <i data-lucide="tag" class="w-3.5 h-3.5"></i>
                                     <span>Investimento Base</span>
                                 </div>
-                                <div class="font-bold text-sm text-white">
-                                    <strong class="text-xl text-[#00a3e0]">{{ $service['starting_price'] }}</strong> 
-                                    <span class="text-xs text-slate-300 font-normal">{{ $service['price_period'] }}</span>
+                                <div class="font-bold text-sm text-slate-900 dark:text-white">
+                                    <strong class="text-xl text-[#0077c2] dark:text-[#00a3e0]">{{ $service['starting_price'] }}</strong> 
+                                    <span class="text-xs text-slate-500 dark:text-slate-300 font-normal">{{ $service['price_period'] }}</span>
                                 </div>
                             </div>
                         </div>
@@ -586,7 +586,7 @@
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
                                 <span>Falar no WhatsApp Directo</span>
                             </a>
-                            <a href="/tec#servicos-tec" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1 py-2">
+                            <a href="/tec#servicos-tec" class="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition flex items-center gap-1 py-2">
                                 <span>&larr; Ver outros serviços</span>
                             </a>
                         </div>
@@ -595,37 +595,37 @@
                     <!-- Imagem Oficial ou Card Visual em Destaque -->
                     @if(!empty($service['image']))
                         <div class="lg:col-span-5">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-white/5 group">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 dark:border-white/15 bg-white dark:bg-white/5 group">
                                 <img src="{{ asset($service['image']) }}" alt="{{ $service['title'] }}" class="w-full h-72 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#071326]/85 via-transparent to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent dark:from-[#071326]/85"></div>
                                 <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-300">
-                                    <span class="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 font-bold text-white flex items-center gap-1.5">
-                                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#00a3e0]"></i>
+                                    <span class="px-3 py-1.5 rounded-full bg-white/95 text-slate-900 dark:bg-black/60 dark:text-white backdrop-blur-md border border-slate-200/80 dark:border-white/10 font-bold flex items-center gap-1.5 shadow-sm">
+                                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#0077c2] dark:text-[#00a3e0]"></i>
                                         Serviço Oficial RACHI Tec
                                     </span>
-                                    <span class="text-[11px] text-sky-400 font-semibold tracking-wider uppercase">Garantia Ativa</span>
+                                    <span class="text-[11px] text-sky-300 dark:text-sky-400 font-semibold tracking-wider uppercase drop-shadow-sm">Garantia Ativa</span>
                                 </div>
                             </div>
                         </div>
                     @else
                         <div class="lg:col-span-4">
-                            <div class="relative rounded-3xl p-8 bg-gradient-to-b from-white/10 to-white/5 border border-white/15 backdrop-blur-xl shadow-2xl flex flex-col items-center text-center">
-                                <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00a3e0] to-[#071326] p-5 flex items-center justify-center shadow-xl border border-sky-400/30 mb-6 group-hover:scale-110 transition-transform">
+                            <div class="relative rounded-3xl p-8 bg-white/90 dark:bg-gradient-to-b dark:from-white/10 dark:to-white/5 border border-slate-200/80 dark:border-white/15 backdrop-blur-xl shadow-xl flex flex-col items-center text-center">
+                                <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00a3e0] to-[#0077c2] p-5 flex items-center justify-center shadow-lg border border-sky-400/30 mb-6 group-hover:scale-110 transition-transform">
                                     <i data-lucide="{{ $service['icon'] }}" class="w-12 h-12 text-white"></i>
                                 </div>
 
-                                <span class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-1">Tecnologia Certificada</span>
-                                <h3 class="text-xl font-bold text-white mb-3">{{ $service['title'] }}</h3>
-                                <p class="text-xs text-slate-300 leading-relaxed mb-6">
+                                <span class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest mb-1">Tecnologia Certificada</span>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">{{ $service['title'] }}</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
                                     Suporte corporativo sob medida para empresas em Luanda e em todo o território nacional angolano.
                                 </p>
 
-                                <div class="w-full py-3 px-4 rounded-2xl bg-white/[0.06] border border-white/10 flex items-center justify-between text-xs text-slate-200">
+                                <div class="w-full py-3 px-4 rounded-2xl bg-slate-50 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs text-slate-700 dark:text-slate-200">
                                     <span class="flex items-center gap-1.5 font-semibold">
-                                        <i data-lucide="shield-check" class="w-4 h-4 text-[#00a3e0]"></i>
+                                        <i data-lucide="shield-check" class="w-4 h-4 text-[#0077c2] dark:text-[#00a3e0]"></i>
                                         Atendimento Especializado
                                     </span>
-                                    <span class="text-[#00a3e0] font-bold">100% Garantido</span>
+                                    <span class="text-[#0077c2] dark:text-[#00a3e0] font-bold">100% Garantido</span>
                                 </div>
                             </div>
                         </div>
@@ -684,7 +684,7 @@
                     <div class="space-y-4 pt-2 relative">
                         @foreach($service['steps'] as $st)
                             <div class="flex items-start gap-3.5">
-                                <div class="w-8 h-8 rounded-xl bg-slate-900 dark:bg-sky-500/15 text-[#00a3e0] font-black text-xs flex items-center justify-center shrink-0 border border-sky-500/25">
+                                <div class="w-8 h-8 rounded-xl bg-sky-50 dark:bg-sky-500/15 text-[#0077c2] dark:text-[#00a3e0] font-black text-xs flex items-center justify-center shrink-0 border border-sky-200 dark:border-sky-500/25 shadow-xs">
                                     {{ $st['num'] }}
                                 </div>
                                 <div class="flex-1">

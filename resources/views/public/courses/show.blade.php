@@ -29,7 +29,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- App Compiled CSS -->
-    <link rel="stylesheet" href="/build/assets/app-BmeisZIV.css">
+    @if (file_exists(public_path('build/manifest.json')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
+    <link rel="stylesheet" href="/worker-marketing.css">
 
     <!-- Tailwind Config (MUST BE BEFORE TAILWIND CDN SCRIPT) -->
     <script>

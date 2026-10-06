@@ -16,7 +16,7 @@ foreach (['login' => 'login', 'registro' => 'register', 'academy/login' => 'acad
         'tec/produtos'=>'tec.products','tec/servicos'=>'tec.services','print/servicos'=>'print.services','capital/servicos'=>'capital.services'];
     if (isset($names[$path])) $route->name($names[$path]);
 }
-Route::get('/academy/cursos/{slug}', [CloudPageController::class, 'course'])->name('academy.course.show');
+Route::get('/academy/cursos/{slug}', [\App\Http\Controllers\Public\CourseController::class, 'show'])->name('academy.course.show');
 Route::get('/loja/{slug}', fn () => redirect('/loja'));
 Route::get('/solucoes/{unit}', fn (string $unit) => in_array($unit, ['tec', 'print', 'academy', 'capital'], true) ? redirect('/'.$unit) : abort(404));
 Route::get('/portal', fn () => app(CloudPageController::class)->page('portal'))->middleware('auth');

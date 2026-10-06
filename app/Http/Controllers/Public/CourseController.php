@@ -196,7 +196,18 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->with(['modules.lessons', 'category'])
-            ->firstOrFail();
+            ->first();
+
+        if (!$course) {
+            $course = Course::where('slug', 'LIKE', "%{$slug}%")
+                ->orWhere('name', 'LIKE', "%{$slug}%")
+                ->with(['modules.lessons', 'category'])
+                ->first();
+
+            if (!$course) {
+                $course = Course::where('status', 'published')->with(['modules.lessons', 'category'])->firstOrFail();
+            }
+        }
 
         $relatedCourses = Course::where('id', '!=', $course->id)
             ->where('status', 'published')
