@@ -482,7 +482,135 @@ Route::get('/admin-dashboard', function () {
         'dist_print' => $distPrint,
     ];
 
-    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList'));
+    // 1. Academy Cursos sincronizados com a base de dados
+    $academyCourses = \App\Models\Course::with('category')
+        ->latest()
+        ->get()
+        ->map(function ($c) {
+            $levelMap = ['beginner' => 'Iniciante', 'intermediate' => 'Intermédio', 'advanced' => 'Avançado'];
+            return [
+                'id' => $c->id,
+                'titulo' => $c->name,
+                'slug' => $c->slug,
+                'cat' => $c->category?->name ?? 'Tecnologia & Gestão',
+                'preco' => 'AOA ' . number_format($c->price, 2, ',', '.'),
+                'dur' => $c->duration_hours ? $c->duration_hours . 'h' : '20h',
+                'nivel' => $levelMap[$c->level] ?? 'Todos',
+                'status' => in_array(strtolower($c->status), ['published', 'publicado', 'ativo', 'active']) ? 'Ativo' : 'Rascunho',
+                'alunos' => (int)\App\Models\CourseEnrollment::where('course_id', $c->id)->count(),
+                'taxa' => 88,
+                'modulos' => (int)\App\Models\CourseModule::where('course_id', $c->id)->count() ?: 4,
+                'prof' => 'Corpo Docente RACHI',
+            ];
+        });
+
+    // 2. RACHI Tec (Produtos e Estoque sincronizados)
+    $tecProducts = \App\Models\Product::with('category')
+        ->where('business_unit_id', 1)
+        ->latest()
+        ->get()
+        ->map(function ($p) {
+            return [
+                'id' => $p->id,
+                'nome' => $p->name,
+                'marca' => 'RACHI Tec',
+                'sku' => $p->sku,
+                'cat' => $p->category?->name ?? 'Equipamentos TI',
+                'preco' => 'AOA ' . number_format($p->price, 2, ',', '.'),
+                'preco_raw' => (float)$p->price,
+                'est' => (int)$p->stock_quantity,
+                'min_est' => (int)$p->minimum_stock,
+                'vendas' => (int)\App\Models\OrderItem::where('product_id', $p->id)->sum('quantity'),
+                'status' => in_array(strtolower($p->status), ['active', 'ativo']) ? 'Ativo' : 'Inativo',
+            ];
+        });
+
+    $tecOrders = \App\Models\Order::with(['customer.user', 'items.product'])
+        ->where('business_unit_id', 1)
+        ->latest()
+        ->get()
+        ->map(function ($o) {
+            return [
+                'id' => $o->id,
+                'numero' => 'PED-' . str_pad($o->id, 5, '0', STR_PAD_LEFT),
+                'cliente' => $o->customer?->display_name ?? 'Cliente',
+                'total' => 'AOA ' . number_format($o->total, 2, ',', '.'),
+                'status' => ucfirst($o->status),
+                'data' => $o->created_at ? $o->created_at->format('d/m/Y H:i') : '—',
+            ];
+        });
+
+    // 3. RACHI Human Capital (Vagas & Soluções sincronizados)
+    $capitalServices = \App\Models\Service::with('category')
+        ->where('business_unit_id', 4)
+        ->latest()
+        ->get()
+        ->map(function ($s) {
+            return [
+                'id' => $s->id,
+                'cargo' => $s->name,
+                'empresa' => 'RACHI Human Capital',
+                'local' => 'Luanda / Nacional',
+                'mod' => 'Presencial / Híbrido',
+                'sal' => $s->base_price ? 'AOA ' . number_format($s->base_price, 2, ',', '.') : 'Sob Proposta',
+                'cands' => 0,
+                'prazo' => $s->estimated_days ? $s->estimated_days . ' dias' : 'Imediato',
+                'req' => $s->short_description ?? 'Consultoria & Alocação Especializada',
+                'status' => in_array(strtolower($s->status), ['active', 'ativo']) ? 'Aberta' : 'Encerrada',
+            ];
+        });
+
+    // 4. RACHI Print (Produtos, Serviços Gráficos & Orçamentos)
+    $printProducts = \App\Models\Product::where('business_unit_id', 2)
+        ->get()
+        ->map(function ($p) {
+            return [
+                'id' => 'p_' . $p->id,
+                'nome' => $p->name,
+                'desc' => $p->short_description ?? 'Material Gráfico & Personalização',
+                'mat' => 'Acabamento Premium',
+                'tam' => 'Personalizado',
+                'qtm' => (int)$p->stock_quantity ?: 1,
+                'preco' => 'AOA ' . number_format($p->price, 2, ',', '.'),
+                'prazo' => '2-3 dias úteis',
+                'status' => in_array(strtolower($p->status), ['active', 'ativo']) ? 'Ativo' : 'Inativo',
+            ];
+        });
+
+    $printServices = \App\Models\Service::where('business_unit_id', 2)
+        ->get()
+        ->map(function ($s) {
+            return [
+                'id' => 's_' . $s->id,
+                'nome' => $s->name,
+                'desc' => $s->short_description ?? 'Produção Gráfica Especializada',
+                'mat' => 'Impressão Digital / UV',
+                'tam' => 'A definir',
+                'qtm' => 1,
+                'preco' => $s->base_price ? 'AOA ' . number_format($s->base_price, 2, ',', '.') : 'Sob Orçamento',
+                'prazo' => $s->estimated_days ? $s->estimated_days . ' dias' : '3-5 dias',
+                'status' => in_array(strtolower($s->status), ['active', 'ativo']) ? 'Ativo' : 'Inativo',
+            ];
+        });
+
+    $printItems = $printProducts->concat($printServices)->values();
+
+    $printQuotes = \App\Models\Quote::with(['customer.user', 'items'])
+        ->where('business_unit_id', 2)
+        ->latest()
+        ->get()
+        ->map(function ($q) {
+            return [
+                'id' => $q->id,
+                'numero' => 'ORC-' . str_pad($q->id, 5, '0', STR_PAD_LEFT),
+                'cliente' => $q->customer?->display_name ?? 'Cliente',
+                'total' => 'AOA ' . number_format($q->total, 2, ',', '.'),
+                'status' => ucfirst($q->status),
+                'data' => $q->created_at ? $q->created_at->format('d/m/Y H:i') : '—',
+            ];
+        });
+
+    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList', 'academyCourses', 'tecProducts', 'tecOrders', 'capitalServices', 'printItems', 'printQuotes'));
 })->middleware(['auth', 'role:admin|super_admin'])->name('admin.dashboard.view');
 
 Route::get('/admin-dashboard.html', function () {

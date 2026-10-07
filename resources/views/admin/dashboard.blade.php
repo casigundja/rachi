@@ -173,7 +173,80 @@ html.dark body {
 #admin-sidebar.collapsed .site-back-btn i.ms-auto {
   display: none !important;
 }
-#admin-sidebar.collapsed .sub-menu { display: none !important; }
+#admin-sidebar.collapsed .sub-menu,
+#admin-sidebar.collapsed .sidebar-sub-menu { display: none !important; }
+
+.sidebar-sub-menu {
+  margin-left: 28px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-sidebar);
+  margin-top: 3px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 11px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.sidebar-sub-item:hover {
+  color: #0050f0;
+  background-color: rgba(0, 80, 240, 0.06);
+  transform: translateX(2px);
+}
+html.dark .sidebar-sub-item:hover {
+  color: #38bdf8;
+  background-color: rgba(0, 80, 240, 0.12);
+}
+.sidebar-sub-item.active {
+  color: #0050f0;
+  font-weight: 700;
+  background-color: rgba(0, 80, 240, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 80, 240, 0.05);
+}
+html.dark .sidebar-sub-item.active {
+  color: #38bdf8;
+  background-color: rgba(0, 80, 240, 0.22);
+  box-shadow: 0 1px 6px rgba(0, 80, 240, 0.15);
+}
+.sidebar-sub-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: #cbd5e1;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+html.dark .sidebar-sub-dot {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.sidebar-sub-item:hover .sidebar-sub-dot {
+  background-color: #0050f0;
+  transform: scale(1.2);
+}
+html.dark .sidebar-sub-item:hover .sidebar-sub-dot {
+  background-color: #38bdf8;
+}
+.sidebar-sub-item.active .sidebar-sub-dot {
+  background-color: #0050f0;
+  box-shadow: 0 0 0 3px rgba(0, 80, 240, 0.25);
+  transform: scale(1.3);
+}
+html.dark .sidebar-sub-item.active .sidebar-sub-dot {
+  background-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+}
 
 .sidebar-item {
   display: flex;
@@ -546,58 +619,98 @@ a { text-decoration: none !important; }
     </div>
 
     <div class="sg">Unidades</div>
+    <!-- RACHI Academy -->
     <div>
-      <div @click="toggleMenu('academy')" :class="currentPage.startsWith('academy')?'active':''" class="sidebar-item">
+      <div @click="toggleMenu('academy')" 
+        :class="openMenus.academy ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('academy') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
+        class="sidebar-item">
         <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Academy</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.academy?'open':''"></i>
       </div>
-      <div class="sub-menu pl-2" x-show="openMenus.academy">
-        <div @click="setPage('academy-cursos')" :class="currentPage==='academy-cursos'?'active':''" class="sidebar-item pl-10"><span class="sl">Cursos & Trilhas</span></div>
-        <div @click="setPage('academy-alunos')" :class="currentPage==='academy-alunos'?'active':''" class="sidebar-item pl-10 flex items-center justify-between">
-          <span class="sl">Alunos Matriculados</span>
-          <span x-show="pendingEnrollmentsCount > 0" class="badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full ms-auto animate-pulse" x-text="pendingEnrollmentsCount"></span>
+      <div class="sidebar-sub-menu" x-show="openMenus.academy" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+        <div @click="setPage('academy-cursos')" :class="currentPage==='academy-cursos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Cursos & Trilhas</span>
         </div>
-        <div @click="setPage('academy-matriculas')" :class="currentPage==='academy-matriculas'?'active':''" class="sidebar-item pl-10 flex items-center justify-between">
+        <div @click="setPage('academy-alunos')" :class="currentPage==='academy-alunos'?'active':''" class="sidebar-sub-item justify-between">
+          <div class="flex items-center gap-2">
+            <span class="sidebar-sub-dot"></span>
+            <span class="sl">Alunos Matriculados</span>
+          </div>
+          <span x-show="pendingEnrollmentsCount > 0" class="badge bg-amber-500 text-slate-950 font-bold text-[9px] px-1.5 py-0.5 rounded-full animate-pulse" x-text="pendingEnrollmentsCount"></span>
+        </div>
+        <div @click="setPage('academy-matriculas')" :class="currentPage==='academy-matriculas'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
           <span class="sl">Inscrições & Turmas</span>
         </div>
       </div>
     </div>
 
+    <!-- RACHI Tec -->
     <div>
-      <div @click="toggleMenu('loja')" :class="currentPage.startsWith('loja')?'active':''" class="sidebar-item">
+      <div @click="toggleMenu('loja')" 
+        :class="openMenus.loja ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('loja') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
+        class="sidebar-item">
         <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Tec</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.loja?'open':''"></i>
       </div>
-      <div class="sub-menu pl-2" x-show="openMenus.loja">
-        <div @click="setPage('loja-produtos')" :class="currentPage==='loja-produtos'?'active':''" class="sidebar-item pl-10"><span class="sl">Catálogo de Produtos</span></div>
-        <div @click="setPage('loja-pedidos')" :class="currentPage==='loja-pedidos'?'active':''" class="sidebar-item pl-10"><span class="sl">Pedidos de Venda</span></div>
-        <div @click="setPage('loja-estoque')" :class="currentPage==='loja-estoque'?'active':''" class="sidebar-item pl-10"><span class="sl">Controlo de Estoque</span></div>
+      <div class="sidebar-sub-menu" x-show="openMenus.loja" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+        <div @click="setPage('loja-produtos')" :class="currentPage==='loja-produtos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Catálogo de Produtos</span>
+        </div>
+        <div @click="setPage('loja-pedidos')" :class="currentPage==='loja-pedidos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Pedidos de Venda</span>
+        </div>
+        <div @click="setPage('loja-estoque')" :class="currentPage==='loja-estoque'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Controlo de Estoque</span>
+        </div>
       </div>
     </div>
 
+    <!-- RACHI Human Capital -->
     <div>
-      <div @click="toggleMenu('rh')" :class="currentPage.startsWith('rh')?'active':''" class="sidebar-item">
+      <div @click="toggleMenu('rh')" 
+        :class="openMenus.rh ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('rh') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
+        class="sidebar-item">
         <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Human Capital</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.rh?'open':''"></i>
       </div>
-      <div class="sub-menu pl-2" x-show="openMenus.rh">
-        <div @click="setPage('rh-vagas')" :class="currentPage==='rh-vagas'?'active':''" class="sidebar-item pl-10"><span class="sl">Vagas Corporativas</span></div>
-        <div @click="setPage('rh-candidatos')" :class="currentPage==='rh-candidatos'?'active':''" class="sidebar-item pl-10"><span class="sl">Banco de Talentos</span></div>
+      <div class="sidebar-sub-menu" x-show="openMenus.rh" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+        <div @click="setPage('rh-vagas')" :class="currentPage==='rh-vagas'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Vagas Corporativas</span>
+        </div>
+        <div @click="setPage('rh-candidatos')" :class="currentPage==='rh-candidatos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Banco de Talentos</span>
+        </div>
       </div>
     </div>
 
+    <!-- RACHI Print -->
     <div>
-      <div @click="toggleMenu('grafica')" :class="currentPage.startsWith('grafica')?'active':''" class="sidebar-item">
+      <div @click="toggleMenu('grafica')" 
+        :class="openMenus.grafica ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('grafica') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
+        class="sidebar-item">
         <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Print</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.grafica?'open':''"></i>
       </div>
-      <div class="sub-menu pl-2" x-show="openMenus.grafica">
-        <div @click="setPage('grafica-produtos')" :class="currentPage==='grafica-produtos'?'active':''" class="sidebar-item pl-10"><span class="sl">Serviços Gráficos</span></div>
-        <div @click="setPage('grafica-orcamentos')" :class="currentPage==='grafica-orcamentos'?'active':''" class="sidebar-item pl-10"><span class="sl">Orçamentos & Produção</span></div>
+      <div class="sidebar-sub-menu" x-show="openMenus.grafica" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+        <div @click="setPage('grafica-produtos')" :class="currentPage==='grafica-produtos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Serviços Gráficos</span>
+        </div>
+        <div @click="setPage('grafica-orcamentos')" :class="currentPage==='grafica-orcamentos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Orçamentos & Produção</span>
+        </div>
       </div>
     </div>
 
@@ -2076,15 +2189,196 @@ a { text-decoration: none !important; }
       </div>
     </section>
 
-    <!-- EM DESENVOLVIMENTO -->
-    <section x-show="['academy-alunos','academy-matriculas','loja-pedidos','loja-estoque','rh-candidatos','grafica-orcamentos'].includes(currentPage)" x-cloak>
-      <div class="sc2 text-center py-20">
-        <div class="text-5xl mb-4">🚀</div>
-        <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2" style="font-family:Outfit" x-text="pageTitle"></h2>
-        <p class="text-slate-500 text-sm max-w-md mx-auto">Este submódulo está ativo e conectado em sincronia direta com os registros da base de dados.</p>
-        <button @click="setPage('dashboard')" class="bap mt-5 inline-flex items-center gap-2">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar à Visão Geral
-        </button>
+    <!-- LOJA PEDIDOS -->
+    <section x-show="currentPage==='loja-pedidos'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos de Venda</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Registo e acompanhamento de compras de equipamentos e hardware de TI.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
+      </div>
+
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="overflow-x-auto min-h-[280px]">
+          <table class="at">
+            <thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
+            <tbody>
+              <template x-for="o in tecOrders" :key="o.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="o.numero"></td>
+                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="o.cliente"></div></td>
+                  <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="o.total"></td>
+                  <td class="text-slate-500 text-xs" x-text="o.data"></td>
+                  <td><span class="badge2 s-ativo" x-text="o.status"></span></td>
+                </tr>
+              </template>
+              <tr x-show="!tecOrders || tecOrders.length === 0">
+                <td colspan="5" class="text-center py-12">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum pedido de venda registado</h4>
+                  <p class="text-xs text-slate-500 mt-1">Os pedidos da loja RACHI Tec aparecerão listados aqui automaticamente.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOJA ESTOQUE -->
+    <section x-show="currentPage==='loja-estoque'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo & Alertas de Estoque</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Níveis de inventário, reposição, alertas de estoque crítico e saldos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="sProducts.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Linhas de Produto</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="sProducts.reduce((acc, p) => acc + (p.est || 0), 0)"></div><div class="text-xs text-slate-500 mt-1 font-bold">Unidades em Depósito</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="sProducts.filter(p => (p.est || 0) <= (p.min_est || 5)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico / Reposição</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Acuracidade do Inventário</div></div>
+      </div>
+
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="overflow-x-auto min-h-[280px]">
+          <table class="at">
+            <thead><tr><th>Produto</th><th>SKU</th><th>Estoque Atual</th><th>Mínimo Exigido</th><th>Nível de Estoque</th><th>Situação</th></tr></thead>
+            <tbody>
+              <template x-for="p in sProducts" :key="p.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="p.nome"></div><div class="text-xs text-slate-500" x-text="p.cat"></div></td>
+                  <td class="font-mono text-xs font-bold text-slate-500" x-text="p.sku"></td>
+                  <td><span class="font-black text-sm" :class="p.est <= (p.min_est || 5) ? 'text-amber-500' : 'text-slate-900 dark:text-white'" x-text="p.est + ' un.'"></span></td>
+                  <td class="text-slate-500 text-xs font-semibold" x-text="(p.min_est || 5) + ' un.'"></td>
+                  <td class="w-48">
+                    <div class="flex items-center gap-2">
+                      <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden">
+                        <div class="h-full rounded-full transition-all" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'" :style="'width: ' + Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></div>
+                      </div>
+                      <span class="text-[11px] font-bold text-slate-400" x-text="Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="px-2.5 py-1 rounded-full text-xs font-bold" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'" x-text="p.est <= (p.min_est || 5) ? 'Estoque Baixo' : 'Normal'"></span>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- RH CANDIDATOS / BANCO DE TALENTOS -->
+    <section x-show="currentPage==='rh-candidatos'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Banco de Talentos</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Perfis qualificados, banco curricular e candidatos a oportunidades corporativas.</p>
+          </div>
+        </div>
+        <button @click="openCreateUserModalWithRole('customer')" class="bap"><i data-lucide="user-plus" class="w-4 h-4"></i> Adicionar Candidato</button>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos Cadastrados</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Disponíveis Imediatos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['capital_services'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Processos em Aberto</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Taxa de Conformidade</div></div>
+      </div>
+
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="overflow-x-auto min-h-[280px]">
+          <table class="at">
+            <thead><tr><th>Candidato / Perfil</th><th>Área de Especialidade</th><th>Nível de Carreira</th><th>Contacto</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="text-center py-12">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum candidato registado no Banco de Talentos</h4>
+                  <p class="text-xs text-slate-500 mt-1">Os profissionais inscritos nos processos seletivos da RACHI serão exibidos aqui.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRÁFICA ORÇAMENTOS -->
+    <section x-show="currentPage==='grafica-orcamentos'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Orçamentos & Ordens de Produção</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Gestão de orçamentos gráficos solicitados por empresas e aprovações de tiragem.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="printQuotes.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['print_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção Gráfica</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
+      </div>
+
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="overflow-x-auto min-h-[280px]">
+          <table class="at">
+            <thead><tr><th>Nº Orçamento</th><th>Cliente / Empresa</th><th>Valor Previsto</th><th>Data</th><th>Status</th></tr></thead>
+            <tbody>
+              <template x-for="q in printQuotes" :key="q.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="q.numero"></td>
+                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="q.cliente"></div></td>
+                  <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="q.total"></td>
+                  <td class="text-slate-500 text-xs" x-text="q.data"></td>
+                  <td><span class="badge2 s-ativo" x-text="q.status"></span></td>
+                </tr>
+              </template>
+              <tr x-show="!printQuotes || printQuotes.length === 0">
+                <td colspan="5" class="text-center py-12">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <i data-lucide="printer" class="w-6 h-6"></i>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum orçamento gráfico registado</h4>
+                  <p class="text-xs text-slate-500 mt-1">Os orçamentos emitidos pela RACHI Print serão exibidos aqui.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -3908,31 +4202,12 @@ function adminApp() {
       });
     },
 
-    aCourses: [
-      { id: 1, titulo: 'Cibersegurança e Proteção de Dados', cat: 'TI & Segurança', prof: 'Dr. Luís Costa', alunos: 47, modulos: 3, dur: '40h', preco: 'AOA 12.000', taxa: 68, status: 'Ativo' },
-      { id: 2, titulo: 'Competências Digitais & IA para Negócios', cat: 'Tecnologia', prof: 'Eng. Fábio Neto', alunos: 62, modulos: 4, dur: '30h', preco: 'AOA 8.500', taxa: 45, status: 'Ativo' },
-      { id: 3, titulo: 'Liderança e Gestão de Equipas Ágeis', cat: 'Gestão', prof: 'Dra. Ana Lima', alunos: 35, modulos: 5, dur: '25h', preco: 'AOA 10.000', taxa: 88, status: 'Ativo' },
-      { id: 4, titulo: 'Excel Avançado e Power BI Corporativo', cat: 'Produtividade', prof: 'Eng. Carlos Mendes', alunos: 91, modulos: 6, dur: '20h', preco: 'AOA 5.000', taxa: 72, status: 'Ativo' }
-    ],
-
-    sProducts: [
-      { id: 1, nome: 'Notebook Lenovo ThinkPad E15', marca: 'Lenovo', sku: 'LEN-TP-E15', cat: 'Notebooks', preco: 'AOA 185.000', est: 8, vendas: 23, status: 'Ativo' },
-      { id: 2, nome: 'Impressora HP LaserJet Pro', marca: 'HP', sku: 'HP-LJP-400', cat: 'Impressoras', preco: 'AOA 95.000', est: 4, vendas: 11, status: 'Ativo' },
-      { id: 3, nome: 'Mouse Logitech MX Master 3', marca: 'Logitech', sku: 'LOG-MX3', cat: 'Periféricos', preco: 'AOA 18.500', est: 22, vendas: 48, status: 'Ativo' },
-      { id: 4, nome: 'Monitor LG 27" 4K IPS', marca: 'LG', sku: 'LG-27UK850', cat: 'Monitores', preco: 'AOA 145.000', est: 3, vendas: 7, status: 'Ativo' }
-    ],
-
-    rhJobs: [
-      { id: 1, cargo: 'Engenheiro de Software Full Stack', empresa: 'Alpha Consultoria', local: 'Luanda', mod: 'Híbrido', sal: 'AOA 250k+', cands: 18, prazo: '30/09/2026', req: '3+ anos de experiência', status: 'Aberta' },
-      { id: 2, cargo: 'Analista de Recursos Humanos Sênior', empresa: 'Beta Corp.', local: 'Luanda', mod: 'Presencial', sal: 'AOA 120k+', cands: 11, prazo: '15/10/2026', req: 'Formação em RH/Psicologia', status: 'Aberta' },
-      { id: 3, cargo: 'Designer Gráfico e UI/UX', empresa: 'RACHI Tec', local: 'Luanda', mod: 'Remoto', sal: 'AOA 90k+', cands: 24, prazo: '01/10/2026', req: 'Portfólio comprovado', status: 'Aberta' }
-    ],
-
-    gProducts: [
-      { id: 1, nome: 'Cartão de Visita Premium', desc: 'Frente e verso, 4 cores, verniz localizado', mat: 'Couché 300g Laminação Fosca', tam: '90x50mm', qtm: 100, preco: 'AOA 4.500', prazo: '3 dias úteis', status: 'Ativo' },
-      { id: 2, nome: 'Panfletos e Flyers Promocionais', desc: 'Impressão digital CMYK alta definição', mat: 'Couché 150g Brilho', tam: 'A5 (148x210mm)', qtm: 50, preco: 'AOA 3.000', prazo: '2 dias úteis', status: 'Ativo' },
-      { id: 3, nome: 'Banner com Ilhoses Reforçados', desc: 'Impressão UV de alta resistência solar', mat: 'Lona 440g Fosca', tam: '1x2m / 2x3m', qtm: 1, preco: 'AOA 8.000', prazo: '5 dias úteis', status: 'Ativo' }
-    ],
+    aCourses: @json($academyCourses ?? []),
+    sProducts: @json($tecProducts ?? []),
+    tecOrders: @json($tecOrders ?? []),
+    rhJobs: @json($capitalServices ?? []),
+    gProducts: @json($printItems ?? []),
+    printQuotes: @json($printQuotes ?? []),
 
     finMods: [
       { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
