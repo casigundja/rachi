@@ -1657,7 +1657,7 @@ a { text-decoration: none !important; }
             <p class="text-slate-500 text-sm mt-0.5">Gestão do catálogo de formações presenciais e online em Angola.</p>
           </div>
         </div>
-        <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Criar Novo Curso</button>
+        <button type="button" @click="openCreateCourseModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Criar Novo Curso</button>
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -3275,6 +3275,82 @@ a { text-decoration: none !important; }
             </button>
           </div>
         </form>
+    </div>
+
+    <!-- MODAL 13: CRIAR NOVO CURSO / FORMAÇÃO (ACADEMY) -->
+    <div x-show="showCreateCourseModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showCreateCourseModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Criar Nova Formação</h3>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Academy — Cadastrar novo curso ou trilha no catálogo.</p>
+            </div>
+          </div>
+          <button @click="showCreateCourseModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitCreateCourse()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Título da Formação *</label>
+            <input type="text" x-model="newCourse.nome" placeholder="Ex: Cibersegurança & Governança de Dados" class="ia w-full" required>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Área / Categoria</label>
+              <input type="text" x-model="newCourse.cat" placeholder="Tecnologia & TI, Gestão, Redes..." class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nível da Formação</label>
+              <select x-model="newCourse.level" class="ia w-full">
+                <option value="beginner">Iniciante</option>
+                <option value="intermediate">Intermédio</option>
+                <option value="advanced">Avançado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço (AOA) *</label>
+              <input type="number" step="0.01" x-model="newCourse.preco" placeholder="65000" class="ia w-full font-bold" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Carga Horária (h)</label>
+              <input type="number" x-model.number="newCourse.dur" placeholder="40" class="ia w-full font-bold">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Módulos</label>
+              <input type="number" x-model.number="newCourse.modulos" placeholder="4" class="ia w-full font-bold">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Formador / Docente Responsável</label>
+            <input type="text" x-model="newCourse.prof" placeholder="Corpo Docente RACHI ou Especialista" class="ia w-full">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Resumo / Conteúdo Programático</label>
+            <textarea x-model="newCourse.desc" rows="2" placeholder="Objetivos pedagógicos e competências desenvolvidas..." class="ia w-full"></textarea>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showCreateCourseModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="newCourse.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!newCourse.isSubmitting"></i>
+              <span x-text="newCourse.isSubmitting ? 'A registar...' : 'Cadastrar Curso'"></span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -3487,6 +3563,8 @@ function adminApp() {
     newProduct: { nome: '', sku: '', cat: 'Hardware & Equipamentos', preco: '', est: 10, min_est: 3, marca: 'RACHI Tec', isSubmitting: false },
     showCreatePrintModal: false,
     newPrint: { nome: '', mat: 'Couché 300g Laminação Fosca', tam: '90x50mm', qtm: 100, preco: '', prazo: '3 dias úteis', desc: '', isSubmitting: false },
+    showCreateCourseModal: false,
+    newCourse: { nome: '', cat: 'Tecnologia & TI', dur: 40, level: 'intermediate', preco: '', prof: 'Corpo Docente RACHI', modulos: 4, desc: '', isSubmitting: false },
     alerts: [],
     adminReplyDraft: '',
     isSendingAdminReply: false,
@@ -4667,6 +4745,45 @@ function adminApp() {
         this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
       } finally {
         this.newPrint.isSubmitting = false;
+      }
+    },
+
+    openCreateCourseModal() {
+      this.newCourse = { nome: '', cat: 'Tecnologia & TI', dur: 40, level: 'intermediate', preco: '', prof: 'Corpo Docente RACHI', modulos: 4, desc: '', isSubmitting: false };
+      this.showCreateCourseModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitCreateCourse() {
+      if (!this.newCourse.nome.trim()) {
+        this.showAlert('warning', 'Atenção', 'O título da formação/curso é obrigatório.');
+        return;
+      }
+      this.newCourse.isSubmitting = true;
+      try {
+        const res = await fetch('/admin/academy/courses/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          body: JSON.stringify(this.newCourse)
+        });
+        const data = await res.json();
+        if (data.success && data.course) {
+          this.aCourses.unshift(data.course);
+          this.coursesList.unshift(data.course);
+          this.showCreateCourseModal = false;
+          this.showAlert('success', 'Formação Criada', data.message || 'Curso cadastrado com sucesso na RACHI Academy!');
+          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível cadastrar o curso.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
+      } finally {
+        this.newCourse.isSubmitting = false;
       }
     },
 

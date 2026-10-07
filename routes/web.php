@@ -889,6 +889,77 @@ Route::post('/admin/print/orders/create', function (\Illuminate\Http\Request $re
     ]);
 })->middleware(['auth', 'role:admin|super_admin']);
 
+Route::post('/admin/academy/courses/create', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $nome = trim($data['nome'] ?? '');
+    $cat = trim($data['cat'] ?? '') ?: 'Tecnologia & Gestão';
+    $dur = (int)($data['dur'] ?? 40) ?: 40;
+    $preco = (float)($data['preco'] ?? 0);
+    $level = in_array($data['level'] ?? '', ['beginner', 'intermediate', 'advanced']) ? $data['level'] : 'intermediate';
+    $prof = trim($data['prof'] ?? '') ?: 'Corpo Docente RACHI';
+    $modulos = (int)($data['modulos'] ?? 4) ?: 4;
+    $desc = trim($data['desc'] ?? '');
+
+    if (!$nome) {
+        return response()->json(['success' => false, 'message' => 'O título da formação/curso é obrigatório.'], 422);
+    }
+
+    $category = \App\Models\Category::firstOrCreate(
+        ['name' => $cat],
+        ['slug' => \Illuminate\Support\Str::slug($cat)]
+    );
+
+    $course = \App\Models\Course::create([
+        'business_unit_id' => 3, // RACHI Academy
+        'category_id' => $category->id,
+        'name' => $nome,
+        'slug' => \Illuminate\Support\Str::slug($nome . '-' . rand(100, 999)),
+        'description' => $desc ?: $nome,
+        'short_description' => $desc ?: $nome,
+        'price' => $preco,
+        'duration_hours' => $dur,
+        'level' => $level,
+        'status' => 'published',
+        'published_at' => now(),
+    ]);
+
+    if ($modulos > 0) {
+        for ($i = 1; $i <= $modulos; $i++) {
+            \App\Models\CourseModule::create([
+                'course_id' => $course->id,
+                'title' => "Módulo {$i}: Fundamentos e Prática",
+                'description' => "Conteúdo programático do módulo {$i}",
+                'sort_order' => $i,
+            ]);
+        }
+    }
+
+    $levelMap = ['beginner' => 'Iniciante', 'intermediate' => 'Intermédio', 'advanced' => 'Avançado'];
+
+    $formattedCourse = [
+        'id' => $course->id,
+        'titulo' => $course->name,
+        'slug' => $course->slug,
+        'cat' => $cat,
+        'preco' => 'AOA ' . number_format($course->price, 2, ',', '.'),
+        'dur' => $dur . 'h',
+        'nivel' => $levelMap[$course->level] ?? 'Intermédio',
+        'status' => 'Ativo',
+        'alunos' => 0,
+        'taxa' => 100,
+        'modulos' => $modulos,
+        'prof' => $prof,
+    ];
+
+    return response()->json([
+        'success' => true,
+        'message' => "Curso '{$nome}' cadastrado com sucesso na Academy!",
+        'course' => $formattedCourse,
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
 // ROTAS DE GESTÃO DE UTILIZADORES
 Route::get('/admin/users', function () {
     $users = \App\Models\User::withTrashed()->with('role')->latest()->get()->map(fn($u) => formatAdminUserRecord($u));
