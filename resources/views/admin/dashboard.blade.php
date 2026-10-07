@@ -809,34 +809,47 @@ a { text-decoration: none !important; }
     <!-- DASHBOARD GERAL / HOME -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- BANNER DE BOAS-VINDAS ILUSTRATIVO & AMIGÁVEL -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white p-6 sm:p-7 shadow-xl shadow-blue-500/15">
+      <!-- BANNER DE BOAS-VINDAS EXECUTIVO SINCRONIZADO -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0038b8] via-[#0050f0] to-[#1e40af] dark:from-[#081b3b] dark:via-[#0c2856] dark:to-[#040e20] text-white p-6 sm:p-7 shadow-xl shadow-blue-500/10 border border-blue-400/20 dark:border-blue-500/20">
         <!-- Detalhes de arte e reflexos no fundo -->
-        <div class="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
-        <div class="absolute right-32 -top-10 w-48 h-48 rounded-full bg-cyan-400/20 blur-xl pointer-events-none"></div>
+        <div class="absolute -right-10 -bottom-10 w-72 h-72 rounded-full bg-cyan-400/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute right-40 -top-12 w-56 h-56 rounded-full bg-blue-300/15 blur-2xl pointer-events-none"></div>
         
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div class="space-y-2 max-w-2xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold uppercase tracking-wider text-cyan-200 border border-white/20">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Operacional 100% Online
-            </div>
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white" style="font-family:Outfit">
-              Olá, <span x-text="adminUser.nome"></span>! 👋
+          <div class="space-y-3 max-w-2xl">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight" style="font-family:Outfit">
+              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! 👋
             </h1>
             <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
-              Bem-vindo ao centro integrado da RACHI. Você tem <strong class="text-white underline decoration-amber-400 decoration-2"><span x-text="allRequests.length"></span> solicitações</strong> na Central e <strong class="text-white underline decoration-emerald-400 decoration-2">154 pedidos</strong> em processamento hoje.
+              Bem-vindo ao centro integrado da RACHI. Você tem <strong class="text-white underline decoration-amber-400 decoration-2"><span x-text="requests ? requests.length : {{ $stats['total_requests'] ?? 0 }}"></span> solicitações</strong> na Central e <strong class="text-white underline decoration-emerald-400 decoration-2"><span x-text="tecOrders ? tecOrders.length : {{ $stats['total_orders'] ?? 0 }}"></span> pedidos</strong> em processamento hoje.
             </p>
+
+            <!-- Micro-indicadores sincronizados em tempo real com a base de dados -->
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span>Solicitações: <strong class="text-white font-black" x-text="requests ? requests.length : {{ $stats['total_requests'] ?? 0 }}"></strong></span>
+              </div>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Pedidos Loja: <strong class="text-white font-black" x-text="tecOrders ? tecOrders.length : {{ $stats['total_orders'] ?? 0 }}"></strong></span>
+              </div>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span>Clientes Ativos: <strong class="text-white font-black">{{ $stats['active_customers'] ?? 0 }}</strong></span>
+              </div>
+            </div>
           </div>
 
-          <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
-            <button @click="setPage('solicitacoes')" class="px-5 py-3 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-extrabold text-xs shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2">
-              <i data-lucide="clipboard-check" class="w-4 h-4 text-blue-600"></i>
+          <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0">
+            <button @click="openCreateOrderModal()" class="px-4 py-3 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-black text-xs backdrop-blur-md border border-white/20 transition transform hover:-translate-y-0.5 flex items-center gap-1.5 cursor-pointer shadow-sm">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              Nova Ordem
+            </button>
+            <button @click="setPage('solicitacoes')" class="px-5 py-3 rounded-2xl bg-white text-[#0050f0] hover:bg-blue-50 font-black text-xs shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer">
+              <i data-lucide="clipboard-check" class="w-4 h-4 text-[#0050f0]"></i>
               Revisar Solicitações
             </button>
-            <a href="/" class="px-5 py-3 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-extrabold text-xs backdrop-blur-md border border-white/25 transition transform hover:-translate-y-0.5 flex items-center gap-2">
-              <i data-lucide="globe" class="w-4 h-4"></i>
-              Abrir Site RACHI
-            </a>
           </div>
         </div>
       </div>
