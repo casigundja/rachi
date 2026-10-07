@@ -1286,23 +1286,23 @@ a { text-decoration: none !important; }
           <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Base de Clientes & Parceiros</h1>
           <p class="text-slate-500 text-sm mt-0.5">Empresas e particulares com histórico de contratação de serviços.</p>
         </div>
-        <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Registar Cliente</button>
+        <button @click="openCreateUserModalWithRole('customer')" class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Registar Cliente</button>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['total_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['active_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['total_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['pending_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['company_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto min-h-[320px]">
           <table class="at">
             <thead><tr><th>Nome</th><th>Segmento</th><th>Telefone</th><th>Ordens</th><th>Estado</th><th>Cliente Desde</th></tr></thead>
             <tbody>
               <template x-for="c in clients" :key="c.id">
-                <tr>
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
                   <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="c.nome"></div><div class="text-xs text-slate-500" x-text="c.email"></div></td>
                   <td class="text-slate-500 text-xs font-semibold" x-text="c.tipo"></td>
                   <td class="text-slate-700 dark:text-slate-300 font-mono text-xs font-bold" x-text="c.tel"></td>
@@ -1311,6 +1311,15 @@ a { text-decoration: none !important; }
                   <td class="text-slate-500 text-xs font-medium" x-text="c.desde"></td>
                 </tr>
               </template>
+              <tr x-show="!clients || clients.length === 0">
+                <td colspan="6" class="text-center py-12">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum cliente registado</h4>
+                  <p class="text-xs text-slate-500 mt-1">Registe novos clientes ou aguarde solicitações do portal de clientes.</p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -2853,6 +2862,7 @@ function adminApp() {
     coursesList: @json($coursesList ?? []),
     users: @json($systemUsers ?? []),
     rolesList: @json($systemRoles ?? []),
+    clients: @json($clientsList ?? []),
     userSearch: '',
     userFilterRole: 'all',
     userFilterStatus: 'all',
@@ -3195,6 +3205,21 @@ function adminApp() {
         email: '',
         telefone: '',
         role_id: (this.rolesList && this.rolesList[0] ? this.rolesList[0].id : 1),
+        status: 'active',
+        password: 'Rachi' + Math.floor(100000 + Math.random() * 900000)
+      };
+      this.showCreateUserModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    openCreateUserModalWithRole(slug) {
+      const role = (this.rolesList || []).find(r => r.slug === slug);
+      this.userForm = {
+        id: null,
+        nome: '',
+        email: '',
+        telefone: '',
+        role_id: role ? role.id : (this.rolesList && this.rolesList[0] ? this.rolesList[0].id : 1),
         status: 'active',
         password: 'Rachi' + Math.floor(100000 + Math.random() * 900000)
       };
@@ -3882,14 +3907,6 @@ function adminApp() {
         return true;
       });
     },
-
-
-    clients: [
-      { id: 1, nome: 'Inov Quimua Consultoria', email: 'geral@inovquimua.ao', tipo: 'Empresa', tel: '+244 923 000 001', tr: 12, status: 'Ativo', sk: 'ativo', desde: 'Jan/2026' },
-      { id: 2, nome: 'Empresa Alpha Lda.', email: 'admin@alpha.ao', tipo: 'Empresa', tel: '+244 923 000 003', tr: 8, status: 'Ativo', sk: 'ativo', desde: 'Mar/2026' },
-      { id: 3, nome: 'Pedro Alves', email: 'pedro@email.com', tipo: 'Particular', tel: '+244 923 000 004', tr: 2, status: 'Ativo', sk: 'ativo', desde: 'Set/2026' },
-      { id: 4, nome: 'Beta Corp. Internacional', email: 'info@beta.ao', tipo: 'Empresa', tel: '+244 923 000 005', tr: 6, status: 'Ativo', sk: 'ativo', desde: 'Jun/2026' }
-    ],
 
     aCourses: [
       { id: 1, titulo: 'Cibersegurança e Proteção de Dados', cat: 'TI & Segurança', prof: 'Dr. Luís Costa', alunos: 47, modulos: 3, dur: '40h', preco: 'AOA 12.000', taxa: 68, status: 'Ativo' },

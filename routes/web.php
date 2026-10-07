@@ -349,9 +349,51 @@ Route::get('/admin-dashboard', function () {
     $systemUsers = \App\Models\User::withTrashed()->with('role')->latest()->get()->map(fn($u) => formatAdminUserRecord($u));
     $systemRoles = \App\Models\Role::all(['id', 'name', 'slug', 'description']);
 
+    // Clientes e parceiros sincronizados com a base de dados
+    $clientsList = \App\Models\Customer::with('user')
+        ->withCount(['orders', 'serviceRequests'])
+        ->latest()
+        ->get()
+        ->map(function ($c) {
+            $isCompany = $c->type === 'company';
+            $nome = $isCompany && !empty($c->company_name)
+                ? $c->company_name
+                : ($c->user?->name ?? 'Cliente #' . $c->id);
+            $email = $c->user?->email ?? '';
+            $tipo = $isCompany ? 'Empresa' : 'Particular';
+            $tel = $c->phone ?? $c->whatsapp ?? $c->user?->phone ?? '—';
+            $tr = (int)($c->orders_count + $c->service_requests_count);
+            $rawStatus = strtolower($c->status ?? 'active');
+            $status = match($rawStatus) {
+                'active', 'ativo' => 'Ativo',
+                'pending', 'pendente' => 'Pendente',
+                default => 'Inativo'
+            };
+            $sk = match($rawStatus) {
+                'active', 'ativo' => 'ativo',
+                'pending', 'pendente' => 'pendente',
+                default => 'inativo'
+            };
+            $desde = $c->created_at ? $c->created_at->format('M/Y') : 'Jan/2026';
+
+            return [
+                'id' => $c->id,
+                'nome' => $nome,
+                'email' => $email,
+                'tipo' => $tipo,
+                'tel' => $tel,
+                'tr' => $tr,
+                'status' => $status,
+                'sk' => $sk,
+                'desde' => $desde,
+            ];
+        });
+
     // Métricas dinâmicas sincronizadas com a base de dados
     $activeCustomersCount = \App\Models\Customer::where('status', 'active')->whereNull('deleted_at')->count();
     $totalCustomersCount = \App\Models\Customer::whereNull('deleted_at')->count();
+    $pendingCustomersCount = \App\Models\Customer::where('status', 'pending')->whereNull('deleted_at')->count();
+    $companyCustomersCount = \App\Models\Customer::where('type', 'company')->whereNull('deleted_at')->count();
     $monthRequestsCount = \App\Models\ServiceRequest::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
     $totalRequestsCount = \App\Models\ServiceRequest::count();
     $totalOrdersCount = \App\Models\Order::count();
@@ -397,6 +439,8 @@ Route::get('/admin-dashboard', function () {
     $stats = [
         'active_customers' => $activeCustomersCount,
         'total_customers' => $totalCustomersCount,
+        'pending_customers' => $pendingCustomersCount,
+        'company_customers' => $companyCustomersCount,
         'month_requests' => $monthRequestsCount,
         'total_requests' => $totalRequestsCount,
         'total_orders' => $totalOrdersCount,
@@ -438,7 +482,7 @@ Route::get('/admin-dashboard', function () {
         'dist_print' => $distPrint,
     ];
 
-    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats'));
+    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList'));
 })->middleware(['auth', 'role:admin|super_admin'])->name('admin.dashboard.view');
 
 Route::get('/admin-dashboard.html', function () {
@@ -492,6 +536,18 @@ Route::post('/admin/users', function (\Illuminate\Http\Request $request) {
 
     $user->load('role');
 
+    if (in_array($user->role?->slug, ['customer', 'student'])) {
+        \App\Models\Customer::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'type' => 'company',
+                'company_name' => $user->name,
+                'phone' => $user->phone,
+                'status' => 'active',
+            ]
+        );
+    }
+
     return response()->json([
         'success' => true,
         'message' => 'Utilizador ' . $user->name . ' criado com sucesso!',
@@ -499,6 +555,38 @@ Route::post('/admin/users', function (\Illuminate\Http\Request $request) {
         'temp_password' => $password
     ]);
 });
+
+Route::get('/admin/clients', function () {
+    $clients = \App\Models\Customer::with('user')
+        ->withCount(['orders', 'serviceRequests'])
+        ->latest()
+        ->get()
+        ->map(function ($c) {
+            $isCompany = $c->type === 'company';
+            return [
+                'id' => $c->id,
+                'nome' => $isCompany && !empty($c->company_name) ? $c->company_name : ($c->user?->name ?? 'Cliente #' . $c->id),
+                'email' => $c->user?->email ?? '',
+                'tipo' => $isCompany ? 'Empresa' : 'Particular',
+                'tel' => $c->phone ?? $c->whatsapp ?? $c->user?->phone ?? '—',
+                'tr' => (int)($c->orders_count + $c->service_requests_count),
+                'status' => in_array(strtolower($c->status ?? 'active'), ['active', 'ativo']) ? 'Ativo' : 'Inativo',
+                'sk' => in_array(strtolower($c->status ?? 'active'), ['active', 'ativo']) ? 'ativo' : 'inativo',
+                'desde' => $c->created_at ? $c->created_at->format('M/Y') : 'Jan/2026',
+            ];
+        });
+
+    return response()->json([
+        'success' => true,
+        'clients' => $clients,
+        'stats' => [
+            'total' => \App\Models\Customer::whereNull('deleted_at')->count(),
+            'active' => \App\Models\Customer::where('status', 'active')->whereNull('deleted_at')->count(),
+            'pending' => \App\Models\Customer::where('status', 'pending')->whereNull('deleted_at')->count(),
+            'company' => \App\Models\Customer::where('type', 'company')->whereNull('deleted_at')->count(),
+        ]
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
 
 Route::post('/admin/users/{id}/update', function (\Illuminate\Http\Request $request, $id) {
     $user = \App\Models\User::findOrFail($id);
