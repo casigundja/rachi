@@ -1053,7 +1053,7 @@ a { text-decoration: none !important; }
 
       <!-- TABELA DE UTILIZADORES -->
       <div class="sc2 p-0">
-        <div class="overflow-x-auto min-h-[380px] pb-6">
+        <div class="overflow-x-auto min-h-[460px] pb-52">
           <table class="at">
             <thead>
               <tr>
@@ -1100,9 +1100,9 @@ a { text-decoration: none !important; }
                   </td>
 
                   <!-- PERFIL DE ACESSO -->
-                  <td class="relative">
+                  <td class="relative" :class="open ? 'z-40' : 'z-auto'" x-data="{ open: false }" @click.outside="open = false">
                     <template x-if="!u.is_deleted">
-                      <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block text-left w-full max-w-[210px]">
+                      <div class="relative inline-block text-left w-full max-w-[210px]">
                         <button type="button" 
                           @click="open = !open; $nextTick(() => { if (window.lucide) lucide.createIcons(); })"
                           class="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs hover:shadow-xs group cursor-pointer"
@@ -1120,14 +1120,13 @@ a { text-decoration: none !important; }
                           x-transition:leave="transition ease-in duration-100"
                           x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                           x-transition:leave-end="opacity-0 translate-y-1 scale-95"
-                          :class="userIndex >= (filteredUsers.length - 2) ? 'bottom-full mb-1.5' : 'top-full mt-1.5'"
-                          class="absolute left-0 w-64 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 shadow-2xl p-1.5 z-50 overflow-hidden"
+                          class="absolute left-0 top-full mt-1.5 w-64 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 shadow-2xl p-1.5 z-50 overflow-hidden"
                           style="display: none;">
                           <div class="px-2.5 py-1.5 mb-1 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
                             <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Atribuir Perfil</span>
                             <span class="text-[10px] text-blue-500 font-bold" x-text="rolesList.length + ' opções'"></span>
                           </div>
-                          <div class="space-y-0.5 max-h-60 overflow-y-auto pr-0.5 custom-role-scroll">
+                          <div class="space-y-0.5 max-h-56 overflow-y-auto pr-0.5 custom-role-scroll">
                             <template x-for="r in rolesList" :key="r.id">
                               <button type="button" 
                                 @click="quickChangeRoleDirect(u, r.id); open = false; $nextTick(() => { if (window.lucide) lucide.createIcons(); });"
@@ -1142,6 +1141,14 @@ a { text-decoration: none !important; }
                                 </template>
                               </button>
                             </template>
+                          </div>
+                          <div class="mt-1 pt-1 border-t border-slate-100 dark:border-white/5 px-0.5">
+                            <button type="button" 
+                              @click="openQuickRoleChange(u); open = false; $nextTick(() => { if (window.lucide) lucide.createIcons(); });"
+                              class="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition cursor-pointer">
+                              <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                              <span>Ver todos os detalhes</span>
+                            </button>
                           </div>
                         </div>
                       </div>
