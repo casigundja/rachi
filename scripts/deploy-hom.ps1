@@ -18,7 +18,7 @@ try {
     Write-Host "Enviando pacote para a VPS via SCP..." -ForegroundColor DarkGray
     scp -i "$key" deploy-pack.tar.gz "${server}:/opt/rachi/hom/deploy-pack.tar.gz"
     Write-Host "Extraindo arquivos no servidor..." -ForegroundColor DarkGray
-    ssh -i "$key" $server "tar -xzf /opt/rachi/hom/deploy-pack.tar.gz -C /opt/rachi/hom && rm -f /opt/rachi/hom/deploy-pack.tar.gz"
+    ssh -n -i "$key" $server "tar -xzf /opt/rachi/hom/deploy-pack.tar.gz -C /opt/rachi/hom && rm -f /opt/rachi/hom/deploy-pack.tar.gz"
 }
 finally {
     if (Test-Path "$projectRoot\deploy-pack.tar.gz") {
