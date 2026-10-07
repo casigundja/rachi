@@ -953,12 +953,6 @@ a { text-decoration: none !important; }
       <!-- HEADER -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-              <span>Segurança & Controlo de Acessos</span>
-            </span>
-          </div>
           <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Perfis</h1>
           <p class="text-slate-500 text-sm mt-0.5">Gestão de perfis, permissões, formadores, clientes e utilizadores do ecossistema.</p>
         </div>
