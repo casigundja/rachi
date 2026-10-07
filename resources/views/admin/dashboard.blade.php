@@ -1549,7 +1549,7 @@ a { text-decoration: none !important; }
               <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Central de Solicitações & Ordens</h1>
               <p class="text-slate-500 text-sm mt-0.5">Gestão ponta a ponta dos atendimentos de todas as 4 unidades.</p>
             </div>
-            <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Nova Ordem</button>
+            <button type="button" @click="openCreateOrderModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Nova Ordem</button>
           </div>
 
           <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
@@ -1907,7 +1907,7 @@ a { text-decoration: none !important; }
             <p class="text-slate-500 text-sm mt-0.5">Equipamentos, computadores, consumíveis e suprimentos de TI.</p>
           </div>
         </div>
-        <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Adicionar Produto</button>
+        <button type="button" @click="openCreateProductModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Adicionar Produto</button>
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1951,7 +1951,7 @@ a { text-decoration: none !important; }
             <p class="text-slate-500 text-sm mt-0.5">Processos de atração, seleção e consultoria de recursos humanos.</p>
           </div>
         </div>
-        <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Publicar Vaga</button>
+        <button type="button" @click="openCreateJobModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Publicar Vaga</button>
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1996,7 +1996,7 @@ a { text-decoration: none !important; }
             <p class="text-slate-500 text-sm mt-0.5">Controlo de tiragens, acabamentos, prazos e entregas gráficas.</p>
           </div>
         </div>
-        <button class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Novo Pedido Gráfico</button>
+        <button type="button" @click="openCreatePrintModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Novo Pedido Gráfico</button>
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -2067,7 +2067,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="sc2">
-        <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-4">Últimas Transações Registadas</h3>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Últimas Transações Registadas</h3>
+          <span class="text-xs text-slate-500 font-semibold" x-text="(txs ? txs.length : 0) + ' transações no histórico'"></span>
+        </div>
         <div class="space-y-3">
           <template x-for="t in txs" :key="t.id">
             <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
@@ -2084,33 +2087,44 @@ a { text-decoration: none !important; }
               </div>
             </div>
           </template>
+
+          <div x-show="!txs || txs.length === 0" class="text-center py-10">
+            <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+              <i data-lucide="receipt" class="w-6 h-6"></i>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhuma transação financeira registada até ao momento</h4>
+            <p class="text-xs text-slate-500 mt-1">Os recebimentos de vendas, cursos e orçamentos aprovados da RACHI serão exibidos aqui em tempo real.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- RELATÓRIOS -->
     <section x-show="currentPage==='relatorios'" x-cloak class="space-y-6">
-      <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">📈 Central de Relatórios Executivos</h1>
-        <p class="text-slate-500 text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade.</p>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">📈 Central de Relatórios Executivos</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade de negócio.</p>
+        </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <template x-for="r in reports" :key="r.label">
-          <div class="sc2 hover:border-blue-500/50 transition cursor-pointer group">
-            <div class="flex items-start justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-sm" :class="r.bg" x-text="r.icon"></div>
-                <div>
-                  <div class="font-extrabold text-slate-900 dark:text-white text-base" x-text="r.label"></div>
-                  <div class="text-xs text-slate-500 font-medium mt-0.5" x-text="r.desc"></div>
+          <div class="sc2 hover:border-blue-500/50 transition group flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-sm shrink-0" :class="r.bg" x-text="r.icon"></div>
+                  <div>
+                    <div class="font-extrabold text-slate-900 dark:text-white text-base" x-text="r.label"></div>
+                    <div class="text-xs text-slate-500 font-medium mt-0.5" x-text="r.desc"></div>
+                  </div>
                 </div>
               </div>
-              <i data-lucide="arrow-right" class="text-slate-400 group-hover:text-blue-500 transition w-4 h-4 mt-1"></i>
             </div>
             <div class="flex gap-2 mt-5 pt-3.5 border-t border-slate-100 dark:border-white/5">
-              <button class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold">Excel (.xlsx)</button>
-              <button class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold">CSV</button>
-              <button class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-slate-700 dark:text-slate-300 hover:text-rose-600 transition font-bold">PDF</button>
+              <button type="button" @click="exportReport(r.key, 'excel')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold cursor-pointer" title="Descarregar folha de cálculo Excel">Excel (.xlsx)</button>
+              <button type="button" @click="exportReport(r.key, 'csv')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold cursor-pointer" title="Descarregar ficheiro CSV">CSV</button>
+              <button type="button" @click="exportReport(r.key, 'pdf')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-slate-700 dark:text-slate-300 hover:text-rose-600 transition font-bold cursor-pointer" title="Imprimir / Guardar como PDF">PDF</button>
             </div>
           </div>
         </template>
@@ -2970,6 +2984,287 @@ a { text-decoration: none !important; }
       </div>
     </div>
 
+    <!-- MODAL 9: NOVA ORDEM DE SERVIÇO / SOLICITAÇÃO -->
+    <div x-show="showCreateOrderModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showCreateOrderModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Nova Ordem de Serviço</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Registo de atendimento para uma das 4 unidades.</p>
+            </div>
+          </div>
+          <button @click="showCreateOrderModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitCreateOrder()" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Unidade de Negócio *</label>
+              <select x-model.number="newOrder.business_unit_id" class="ia w-full" required>
+                <option value="1">💻 RACHI Tec</option>
+                <option value="2">🖨️ RACHI Print</option>
+                <option value="3">🎓 RACHI Academy</option>
+                <option value="4">👥 RACHI Human Capital</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Prioridade *</label>
+              <select x-model="newOrder.priority" class="ia w-full" required>
+                <option value="normal">Normal</option>
+                <option value="high">Alta</option>
+                <option value="urgent">Urgente</option>
+                <option value="low">Baixa</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Título / Demanda Solicitada *</label>
+            <input type="text" x-model="newOrder.title" placeholder="Ex: Manutenção de Servidor ou Criação de Identidade" class="ia w-full" required>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nome do Cliente</label>
+              <input type="text" x-model="newOrder.customer_name" placeholder="Nome do cliente" class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">E-mail</label>
+              <input type="email" x-model="newOrder.customer_email" placeholder="cliente@exemplo.ao" class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Telefone</label>
+              <input type="text" x-model="newOrder.customer_phone" placeholder="+244 ..." class="ia w-full">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Descrição / Detalhes da Ordem</label>
+            <textarea x-model="newOrder.description" rows="3" placeholder="Descreva os requisitos ou orientações para a equipa..." class="ia w-full"></textarea>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showCreateOrderModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="newOrder.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!newOrder.isSubmitting"></i>
+              <span x-text="newOrder.isSubmitting ? 'A criar ordem...' : 'Registar Ordem'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 10: PUBLICAR VAGA CORPORATIVA (HUMAN CAPITAL) -->
+    <div x-show="showCreateJobModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showCreateJobModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <i data-lucide="briefcase" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Publicar Vaga Corporativa</h3>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Human Capital — Gestão de Oportunidades & Recrutamento.</p>
+            </div>
+          </div>
+          <button @click="showCreateJobModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitCreateJob()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Título do Cargo / Posição *</label>
+            <input type="text" x-model="newJob.cargo" placeholder="Ex: Engenheiro de Software Full Stack" class="ia w-full" required>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Empresa Contratante</label>
+              <input type="text" x-model="newJob.empresa" placeholder="RACHI Human Capital ou Empresa Parceira" class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Localização</label>
+              <input type="text" x-model="newJob.local" placeholder="Luanda / Nacional" class="ia w-full">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Modalidade</label>
+              <select x-model="newJob.mod" class="ia w-full">
+                <option value="Presencial">Presencial</option>
+                <option value="Híbrido">Híbrido</option>
+                <option value="Remoto">Remoto</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Faixa Salarial / Honorários</label>
+              <input type="text" x-model="newJob.sal" placeholder="Ex: AOA 250k+ ou Sob Proposta" class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Prazo do Processo</label>
+              <input type="text" x-model="newJob.prazo" placeholder="30 dias" class="ia w-full">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Requisitos & Perfil Desejado</label>
+            <textarea x-model="newJob.req" rows="3" placeholder="Requisitos, qualificações e competências exigidas..." class="ia w-full"></textarea>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showCreateJobModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="newJob.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!newJob.isSubmitting"></i>
+              <span x-text="newJob.isSubmitting ? 'A publicar...' : 'Publicar Vaga'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 11: ADICIONAR PRODUTO TEC -->
+    <div x-show="showCreateProductModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showCreateProductModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <i data-lucide="package-plus" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto TI</h3>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Cadastro de Hardware, Equipamentos & Suprimentos.</p>
+            </div>
+          </div>
+          <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitCreateProduct()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nome do Produto *</label>
+            <input type="text" x-model="newProduct.nome" placeholder="Ex: Notebook Lenovo ThinkPad E15" class="ia w-full" required>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Código SKU (Opcional)</label>
+              <input type="text" x-model="newProduct.sku" placeholder="Auto-gerado se vazio (ex: TEC-001)" class="ia w-full font-mono">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Categoria</label>
+              <input type="text" x-model="newProduct.cat" placeholder="Notebooks, Periféricos, Redes..." class="ia w-full">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Unitário (AOA) *</label>
+              <input type="number" step="0.01" x-model="newProduct.preco" placeholder="185000" class="ia w-full font-bold" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Inicial</label>
+              <input type="number" x-model.number="newProduct.est" class="ia w-full font-bold">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Mínimo</label>
+              <input type="number" x-model.number="newProduct.min_est" class="ia w-full font-bold">
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showCreateProductModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="newProduct.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!newProduct.isSubmitting"></i>
+              <span x-text="newProduct.isSubmitting ? 'A guardar...' : 'Guardar Produto'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 12: NOVO PEDIDO GRÁFICO (PRINT) -->
+    <div x-show="showCreatePrintModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showCreatePrintModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+              <i data-lucide="printer" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Novo Item / Ordem Gráfica</h3>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Print — Cadastrar tiragem gráfica, material ou acabamento.</p>
+            </div>
+          </div>
+          <button @click="showCreatePrintModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitCreatePrint()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Serviço / Produto Gráfico *</label>
+            <input type="text" x-model="newPrint.nome" placeholder="Ex: Cartões de Visita Premium ou Banners Lona" class="ia w-full" required>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Material & Acabamento</label>
+              <input type="text" x-model="newPrint.mat" placeholder="Couché 300g Laminação Fosca..." class="ia w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Formato / Tamanho</label>
+              <input type="text" x-model="newPrint.tam" placeholder="90x50mm, A4, A5..." class="ia w-full font-mono">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Tiragem Mínima</label>
+              <input type="number" x-model.number="newPrint.qtm" class="ia w-full font-bold">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço (AOA) *</label>
+              <input type="number" step="0.01" x-model="newPrint.preco" placeholder="4500" class="ia w-full font-bold" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Prazo de Produção</label>
+              <input type="text" x-model="newPrint.prazo" placeholder="3 dias úteis" class="ia w-full">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Especificações Adicionais</label>
+            <textarea x-model="newPrint.desc" rows="2" placeholder="Cores, verniz, corte vinco ou orientações..." class="ia w-full"></textarea>
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showCreatePrintModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="newPrint.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!newPrint.isSubmitting"></i>
+              <span x-text="newPrint.isSubmitting ? 'A registar...' : 'Registar Item Gráfico'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- TOAST ALERTS FLUTUANTES (FEEDBACK VISUAL PARA TODAS AS AÇÕES) -->
     <div class="fixed top-5 right-5 z-[999999] flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0" x-cloak>
       <template x-for="al in alerts" :key="al.id">
@@ -3171,6 +3466,14 @@ function adminApp() {
     userToDelete: null,
     quickRoleUser: null,
     resetPassData: { user: null, newPassword: '', copied: false },
+    showCreateOrderModal: false,
+    newOrder: { business_unit_id: 1, title: '', customer_name: '', customer_email: '', customer_phone: '', priority: 'normal', description: '', isSubmitting: false },
+    showCreateJobModal: false,
+    newJob: { cargo: '', empresa: 'RACHI Human Capital', local: 'Luanda', mod: 'Presencial', sal: '', prazo: '30 dias', req: '', isSubmitting: false },
+    showCreateProductModal: false,
+    newProduct: { nome: '', sku: '', cat: 'Hardware & Equipamentos', preco: '', est: 10, min_est: 3, marca: 'RACHI Tec', isSubmitting: false },
+    showCreatePrintModal: false,
+    newPrint: { nome: '', mat: 'Couché 300g Laminação Fosca', tam: '90x50mm', qtm: 100, preco: '', prazo: '3 dias úteis', desc: '', isSubmitting: false },
     alerts: [],
     adminReplyDraft: '',
     isSendingAdminReply: false,
@@ -4202,6 +4505,204 @@ function adminApp() {
       });
     },
 
+    openCreateOrderModal() {
+      this.newOrder = { business_unit_id: 1, title: '', customer_name: '', customer_email: '', customer_phone: '', priority: 'normal', description: '', isSubmitting: false };
+      this.showCreateOrderModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitCreateOrder() {
+      if (!this.newOrder.title.trim()) {
+        this.showAlert('warning', 'Atenção', 'Por favor informe o título ou serviço solicitado.');
+        return;
+      }
+      this.newOrder.isSubmitting = true;
+      try {
+        const res = await fetch('/admin/requests/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          body: JSON.stringify(this.newOrder)
+        });
+        const data = await res.json();
+        if (data.success && data.request) {
+          this.requests.unshift(data.request);
+          this.showCreateOrderModal = false;
+          this.showAlert('success', 'Ordem Criada', data.message || 'Nova ordem de serviço cadastrada com sucesso!');
+          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível registar a ordem.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro de Conexão', 'Falha ao comunicar com o servidor.');
+      } finally {
+        this.newOrder.isSubmitting = false;
+      }
+    },
+
+    openCreateJobModal() {
+      this.newJob = { cargo: '', empresa: 'RACHI Human Capital', local: 'Luanda', mod: 'Presencial', sal: '', prazo: '30 dias', req: '', isSubmitting: false };
+      this.showCreateJobModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitCreateJob() {
+      if (!this.newJob.cargo.trim()) {
+        this.showAlert('warning', 'Atenção', 'O título da vaga/posição é obrigatório.');
+        return;
+      }
+      this.newJob.isSubmitting = true;
+      try {
+        const res = await fetch('/admin/capital/jobs/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          body: JSON.stringify(this.newJob)
+        });
+        const data = await res.json();
+        if (data.success && data.job) {
+          this.rhJobs.unshift(data.job);
+          this.showCreateJobModal = false;
+          this.showAlert('success', 'Vaga Publicada', data.message || 'Vaga corporativa adicionada ao Human Capital!');
+          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível publicar a vaga.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
+      } finally {
+        this.newJob.isSubmitting = false;
+      }
+    },
+
+    openCreateProductModal() {
+      this.newProduct = { nome: '', sku: '', cat: 'Hardware & Equipamentos', preco: '', est: 10, min_est: 3, marca: 'RACHI Tec', isSubmitting: false };
+      this.showCreateProductModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitCreateProduct() {
+      if (!this.newProduct.nome.trim()) {
+        this.showAlert('warning', 'Atenção', 'O nome do produto é obrigatório.');
+        return;
+      }
+      this.newProduct.isSubmitting = true;
+      try {
+        const res = await fetch('/admin/tec/products/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          body: JSON.stringify(this.newProduct)
+        });
+        const data = await res.json();
+        if (data.success && data.product) {
+          this.sProducts.unshift(data.product);
+          this.showCreateProductModal = false;
+          this.showAlert('success', 'Produto Adicionado', data.message || 'Produto adicionado ao catálogo RACHI Tec!');
+          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível adicionar o produto.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
+      } finally {
+        this.newProduct.isSubmitting = false;
+      }
+    },
+
+    openCreatePrintModal() {
+      this.newPrint = { nome: '', mat: 'Couché 300g Laminação Fosca', tam: '90x50mm', qtm: 100, preco: '', prazo: '3 dias úteis', desc: '', isSubmitting: false };
+      this.showCreatePrintModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitCreatePrint() {
+      if (!this.newPrint.nome.trim()) {
+        this.showAlert('warning', 'Atenção', 'O nome do serviço ou produto gráfico é obrigatório.');
+        return;
+      }
+      this.newPrint.isSubmitting = true;
+      try {
+        const res = await fetch('/admin/print/orders/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          body: JSON.stringify(this.newPrint)
+        });
+        const data = await res.json();
+        if (data.success && data.item) {
+          this.gProducts.unshift(data.item);
+          this.showCreatePrintModal = false;
+          this.showAlert('success', 'Ordem Gráfica', data.message || 'Item adicionado à produção da RACHI Print!');
+          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível adicionar o item gráfico.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
+      } finally {
+        this.newPrint.isSubmitting = false;
+      }
+    },
+
+    exportReport(type, format) {
+      if (format === 'pdf') {
+        window.print();
+        return;
+      }
+      let rows = [];
+      let filename = 'relatorio_' + type + '_' + new Date().toISOString().slice(0, 10) + '.csv';
+
+      if (type === 'clientes') {
+        rows.push(['ID', 'Nome', 'Email', 'Telefone', 'Tipo', 'Status', 'Desde']);
+        (this.clients || []).forEach(c => {
+          rows.push([c.id, c.nome, c.email, c.tel || '', c.tipo, c.status, c.desde || '']);
+        });
+      } else if (type === 'solicitacoes') {
+        rows.push(['Protocolo', 'Cliente', 'Unidade', 'Título', 'Status', 'Prioridade', 'Data']);
+        (this.requests || []).forEach(r => {
+          rows.push([r.protocol, r.cliente, r.unit || r.servico, r.title, r.status, r.priority, r.data]);
+        });
+      } else if (type === 'pedidos') {
+        rows.push(['ID', 'Número', 'Cliente', 'Total', 'Status', 'Data']);
+        (this.tecOrders || []).forEach(o => {
+          rows.push([o.id, o.numero, o.cliente, o.total, o.status, o.data]);
+        });
+      } else if (type === 'academy') {
+        rows.push(['ID', 'Título', 'Categoria', 'Carga', 'Preço', 'Alunos', 'Status']);
+        (this.aCourses || []).forEach(c => {
+          rows.push([c.id, c.titulo, c.cat, c.dur, c.preco, c.alunos, c.status]);
+        });
+      } else {
+        rows.push(['Unidade', 'Faturamento AOA', 'Percentual']);
+        (this.finMods || []).forEach(f => {
+          rows.push([f.label, f.value, f.pct + '%']);
+        });
+      }
+
+      const csvContent = '\uFEFF' + rows.map(e => e.map(x => '"' + ('' + (x ?? '')).replace(/"/g, '""') + '"').join(';')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      this.showAlert('success', 'Relatório Exportado', 'Download do ficheiro ' + filename + ' concluído com sucesso!');
+    },
+
     aCourses: @json($academyCourses ?? []),
     sProducts: @json($tecProducts ?? []),
     tecOrders: @json($tecOrders ?? []),
@@ -4211,25 +4712,20 @@ function adminApp() {
 
     finMods: [
       { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
-      { label: 'RACHI Academy', icon: '🎓', value: '0,00', pct: 0, bc: 'bg-indigo-600' },
+      { label: 'RACHI Academy', icon: '🎓', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
       { label: 'RACHI Print', icon: '🖨️', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
-      { label: 'Human Capital', icon: '👥', value: '0,00', pct: 0, bc: 'bg-emerald-600' }
+      { label: 'Human Capital', icon: '👥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
     ],
 
-    txs: [
-      { id: 1, icon: '🎓', desc: 'Matrícula em Cibersegurança', cli: 'Pedro Alves', data: '21/09/2026', tipo: 'entrada', valor: '12.000', mod: 'Academy' },
-      { id: 2, icon: '🛒', desc: 'Pedido #154 - 10 Notebooks ThinkPad', cli: 'Inov Quimua', data: '21/09/2026', tipo: 'entrada', valor: '185.000', mod: 'Loja' },
-      { id: 3, icon: '🖨️', desc: 'Ordem Gráfica #1024 - 500 Cartões', cli: 'Beta Corp.', data: '20/09/2026', tipo: 'entrada', valor: '4.500', mod: 'Gráfica' },
-      { id: 4, icon: '👥', desc: 'Consultoria de Recrutamento RH', cli: 'Alpha Consultoria', data: '20/09/2026', tipo: 'entrada', valor: '25.000', mod: 'RH' }
-    ],
+    txs: @json($recentTransactions ?? []),
 
     reports: [
-      { icon: '👤', label: 'Clientes & Contactos', desc: 'Cadastros, histórico de serviços e contactos', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
-      { icon: '💰', label: 'Faturamento & Vendas', desc: 'Relatório financeiro por período e unidade', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
-      { icon: '📦', label: 'Pedidos da Loja', desc: 'Status de entregas e histórico de compras', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
-      { icon: '📋', label: 'Ordens & Solicitações', desc: 'Métricas de atendimento e tempo de resposta', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
-      { icon: '🎓', label: 'Academy & Cursos', desc: 'Desempenho dos alunos, taxas e matrículas', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
-      { icon: '👥', label: 'Recrutamento & RH', desc: 'Funil de candidatos, entrevistas e vagas', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
+      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} cadastros sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
+      { key: 'financeiro', icon: '💰', label: 'Faturamento & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} faturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
+      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
+      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
+      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
+      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
     ],
 
     notifs: [

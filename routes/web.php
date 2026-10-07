@@ -420,6 +420,8 @@ Route::get('/admin-dashboard', function () {
     $printRequestsCount = \App\Models\ServiceRequest::where('business_unit_id', 2)->count();
     $printQuotesCount = \App\Models\Quote::where('business_unit_id', 2)->count();
     $printRevenue = (float)\App\Models\Order::where('business_unit_id', 2)->where('payment_status', 'paid')->sum('total');
+    $academyRevenue = (float)\App\Models\Order::where('business_unit_id', 3)->where('payment_status', 'paid')->sum('total');
+    $capitalRevenue = (float)\App\Models\Order::where('business_unit_id', 4)->where('payment_status', 'paid')->sum('total');
 
     // Distribuição de solicitações por unidade
     $distAcademy = \App\Models\ServiceRequest::where('business_unit_id', 3)->count();
@@ -458,6 +460,8 @@ Route::get('/admin-dashboard', function () {
         'academy_students' => $academyActiveStudents,
         'academy_enrollments' => $academyTotalEnrollments,
         'academy_certificates' => 0,
+        'academy_revenue' => $academyRevenue,
+        'academy_revenue_formatted' => $formatRevenue($academyRevenue),
         // Tec
         'tec_items' => $tecItemsCount,
         'tec_orders' => $tecOrdersCount,
@@ -469,6 +473,8 @@ Route::get('/admin-dashboard', function () {
         'capital_requests' => $capitalRequestsCount,
         'capital_in_progress' => $capitalInProgress,
         'capital_completed' => $capitalCompleted,
+        'capital_revenue' => $capitalRevenue,
+        'capital_revenue_formatted' => $formatRevenue($capitalRevenue),
         // Print
         'print_products' => $printProductsCount,
         'print_requests' => $printRequestsCount,
@@ -610,12 +616,278 @@ Route::get('/admin-dashboard', function () {
             ];
         });
 
-    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList', 'academyCourses', 'tecProducts', 'tecOrders', 'capitalServices', 'printItems', 'printQuotes'));
+    // 5. Transações financeiras recentes reais
+    $recentOrders = \App\Models\Order::with(['customer.user', 'businessUnit'])
+        ->latest()
+        ->limit(10)
+        ->get()
+        ->map(function ($o) {
+            $unitMap = [1 => 'Tec', 2 => 'Print', 3 => 'Academy', 4 => 'Capital'];
+            $iconMap = [1 => '🛒', 2 => '🖨️', 3 => '🎓', 4 => '👥'];
+            $uId = $o->business_unit_id;
+            return [
+                'id' => 'ord_' . $o->id,
+                'icon' => $iconMap[$uId] ?? '💳',
+                'desc' => 'Pedido #' . ($o->number ?? $o->id),
+                'cli' => $o->customer?->display_name ?? 'Cliente',
+                'data' => $o->created_at ? $o->created_at->format('d/m/Y') : '',
+                'tipo' => 'entrada',
+                'valor' => number_format($o->total, 2, ',', '.'),
+                'mod' => $unitMap[$uId] ?? 'Geral',
+            ];
+        });
+
+    $recentQuotes = \App\Models\Quote::with(['customer.user', 'businessUnit'])
+        ->where('status', 'approved')
+        ->latest()
+        ->limit(10)
+        ->get()
+        ->map(function ($q) {
+            return [
+                'id' => 'qt_' . $q->id,
+                'icon' => '🖨️',
+                'desc' => 'Orçamento #' . ($q->number ?? $q->id),
+                'cli' => $q->customer?->display_name ?? 'Cliente',
+                'data' => $q->created_at ? $q->created_at->format('d/m/Y') : '',
+                'tipo' => 'entrada',
+                'valor' => number_format($q->total, 2, ',', '.'),
+                'mod' => 'Print',
+            ];
+        });
+
+    $recentTransactions = $recentOrders->concat($recentQuotes)->values();
+
+    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList', 'academyCourses', 'tecProducts', 'tecOrders', 'capitalServices', 'printItems', 'printQuotes', 'recentTransactions'));
 })->middleware(['auth', 'role:admin|super_admin'])->name('admin.dashboard.view');
 
 Route::get('/admin-dashboard.html', function () {
     return redirect('/admin-dashboard');
 });
+
+// AÇÕES ADMINISTRATIVAS DE CRIAÇÃO (ORDENS, VAGAS, PRODUTOS, IMPRESSÕES)
+Route::post('/admin/requests/create', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $unitId = (int)($data['business_unit_id'] ?? 1);
+    $title = trim($data['title'] ?? '');
+    $description = trim($data['description'] ?? '');
+    $priority = in_array($data['priority'] ?? '', ['low', 'normal', 'high', 'urgent']) ? $data['priority'] : 'normal';
+    $clientName = trim($data['customer_name'] ?? '');
+    $clientEmail = trim($data['customer_email'] ?? '');
+    $clientPhone = trim($data['customer_phone'] ?? '');
+
+    if (!$title) {
+        return response()->json(['success' => false, 'message' => 'O título da ordem/solicitação é obrigatório.'], 422);
+    }
+
+    $customer = null;
+    if ($clientEmail) {
+        $user = \App\Models\User::firstOrCreate(
+            ['email' => $clientEmail],
+            [
+                'name' => $clientName ?: 'Cliente ' . explode('@', $clientEmail)[0],
+                'password' => bcrypt(\Illuminate\Support\Str::random(12)),
+                'role_id' => 3,
+            ]
+        );
+        $customer = \App\Models\Customer::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'type' => 'individual',
+                'phone' => $clientPhone,
+                'status' => 'active',
+            ]
+        );
+    } else {
+        $customer = \App\Models\Customer::first();
+    }
+
+    $count = \App\Models\ServiceRequest::withTrashed()->count() + 1;
+    $protocol = '#SOL-2026-' . str_pad($count, 6, '0', STR_PAD_LEFT);
+
+    $serviceRequest = \App\Models\ServiceRequest::create([
+        'protocol' => $protocol,
+        'customer_id' => $customer?->id ?? 1,
+        'business_unit_id' => $unitId,
+        'title' => $title,
+        'description' => $description ?: $title,
+        'priority' => $priority,
+        'status' => 'new',
+        'requested_date' => now(),
+    ]);
+
+    \App\Models\ServiceRequestStatusHistory::create([
+        'service_request_id' => $serviceRequest->id,
+        'user_id' => auth()->id() ?? 1,
+        'old_status' => null,
+        'new_status' => 'new',
+        'comment' => 'Ordem criada no painel administrativo',
+        'created_at' => now(),
+    ]);
+
+    $ctrl = app(\App\Http\Controllers\Admin\AdminRequestController::class);
+    $reflection = new \ReflectionMethod($ctrl, 'present');
+    $reflection->setAccessible(true);
+    $formatted = $reflection->invoke($ctrl, $serviceRequest->fresh(['customer.user', 'businessUnit', 'service', 'assignedEmployee.user', 'statusHistories.user', 'messages.user.role']));
+
+    return response()->json([
+        'success' => true,
+        'message' => "Ordem {$protocol} registada com sucesso!",
+        'request' => $formatted,
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
+Route::post('/admin/capital/jobs/create', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $cargo = trim($data['cargo'] ?? '');
+    $empresa = trim($data['empresa'] ?? '') ?: 'RACHI Human Capital';
+    $local = trim($data['local'] ?? '') ?: 'Luanda';
+    $mod = trim($data['mod'] ?? '') ?: 'Presencial';
+    $sal = trim($data['sal'] ?? '') ?: 'Sob Proposta';
+    $req = trim($data['req'] ?? '') ?: 'Consultoria & Alocação Especializada';
+    $prazo = trim($data['prazo'] ?? '') ?: '30 dias';
+
+    if (!$cargo) {
+        return response()->json(['success' => false, 'message' => 'O título do cargo/vaga é obrigatório.'], 422);
+    }
+
+    $numPrice = preg_replace('/[^0-9.]/', '', str_replace(',', '.', $sal));
+
+    $service = \App\Models\Service::create([
+        'business_unit_id' => 4,
+        'name' => $cargo,
+        'slug' => \Illuminate\Support\Str::slug($cargo . '-' . rand(100, 999)),
+        'short_description' => $req,
+        'base_price' => is_numeric($numPrice) ? (float)$numPrice : null,
+        'estimated_days' => 30,
+        'status' => 'active',
+    ]);
+
+    $formattedJob = [
+        'id' => $service->id,
+        'cargo' => $cargo,
+        'empresa' => $empresa,
+        'local' => $local,
+        'mod' => $mod,
+        'sal' => $sal,
+        'cands' => 0,
+        'prazo' => $prazo,
+        'req' => $req,
+        'status' => 'Aberta',
+    ];
+
+    return response()->json([
+        'success' => true,
+        'message' => "Vaga '{$cargo}' publicada com sucesso no Human Capital!",
+        'job' => $formattedJob,
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
+Route::post('/admin/tec/products/create', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $nome = trim($data['nome'] ?? '');
+    $sku = trim($data['sku'] ?? '');
+    $cat = trim($data['cat'] ?? '') ?: 'Equipamentos TI';
+    $preco = (float)($data['preco'] ?? 0);
+    $est = (int)($data['est'] ?? 0);
+    $minEst = (int)($data['min_est'] ?? 3);
+    $marca = trim($data['marca'] ?? '') ?: 'RACHI Tec';
+
+    if (!$nome) {
+        return response()->json(['success' => false, 'message' => 'O nome do produto é obrigatório.'], 422);
+    }
+
+    if (!$sku) {
+        $sku = 'TEC-' . strtoupper(\Illuminate\Support\Str::random(6));
+    }
+
+    $category = \App\Models\Category::firstOrCreate(
+        ['name' => $cat],
+        ['slug' => \Illuminate\Support\Str::slug($cat)]
+    );
+
+    $product = \App\Models\Product::create([
+        'business_unit_id' => 1,
+        'category_id' => $category->id,
+        'name' => $nome,
+        'slug' => \Illuminate\Support\Str::slug($nome . '-' . rand(100, 999)),
+        'sku' => $sku,
+        'price' => $preco,
+        'stock_quantity' => $est,
+        'minimum_stock' => $minEst,
+        'status' => 'active',
+    ]);
+
+    $formatted = [
+        'id' => $product->id,
+        'nome' => $product->name,
+        'marca' => $marca,
+        'sku' => $product->sku,
+        'cat' => $cat,
+        'preco' => 'AOA ' . number_format($product->price, 2, ',', '.'),
+        'preco_raw' => (float)$product->price,
+        'est' => (int)$product->stock_quantity,
+        'min_est' => (int)$product->minimum_stock,
+        'vendas' => 0,
+        'status' => 'Ativo',
+    ];
+
+    return response()->json([
+        'success' => true,
+        'message' => "Produto '{$nome}' adicionado ao catálogo com sucesso!",
+        'product' => $formatted,
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
+Route::post('/admin/print/orders/create', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $nome = trim($data['nome'] ?? '');
+    $desc = trim($data['desc'] ?? '');
+    $mat = trim($data['mat'] ?? '') ?: 'Couché 300g Laminação Fosca';
+    $tam = trim($data['tam'] ?? '') ?: 'Personalizado';
+    $qtm = (int)($data['qtm'] ?? 1) ?: 1;
+    $preco = (float)($data['preco'] ?? 0);
+    $prazo = trim($data['prazo'] ?? '') ?: '2-3 dias úteis';
+
+    if (!$nome) {
+        return response()->json(['success' => false, 'message' => 'O nome do serviço/produto gráfico é obrigatório.'], 422);
+    }
+
+    $product = \App\Models\Product::create([
+        'business_unit_id' => 2,
+        'name' => $nome,
+        'slug' => \Illuminate\Support\Str::slug($nome . '-' . rand(100, 999)),
+        'short_description' => $desc ?: $mat,
+        'price' => $preco,
+        'stock_quantity' => $qtm,
+        'status' => 'active',
+    ]);
+
+    $formatted = [
+        'id' => 'p_' . $product->id,
+        'nome' => $product->name,
+        'desc' => $desc ?: 'Material Gráfico & Personalização',
+        'mat' => $mat,
+        'tam' => $tam,
+        'qtm' => $qtm,
+        'preco' => 'AOA ' . number_format($product->price, 2, ',', '.'),
+        'prazo' => $prazo,
+        'status' => 'Ativo',
+    ];
+
+    return response()->json([
+        'success' => true,
+        'message' => "Item gráfico '{$nome}' adicionado com sucesso!",
+        'item' => $formatted,
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
 
 // ROTAS DE GESTÃO DE UTILIZADORES
 Route::get('/admin/users', function () {
