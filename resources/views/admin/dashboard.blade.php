@@ -751,7 +751,7 @@ a { text-decoration: none !important; }
             </div>
             <p class="text-xs text-slate-500 mt-1">Capacitação, Cursos & Ensino Executivo</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">24 Cursos • 342 Alunos</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['academy_courses'] ?? 0 }} {{ ($stats['academy_courses'] ?? 0) == 1 ? 'Curso' : 'Cursos' }} • {{ $stats['academy_students'] ?? 0 }} {{ ($stats['academy_students'] ?? 0) == 1 ? 'Aluno' : 'Alunos' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-indigo-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -769,7 +769,7 @@ a { text-decoration: none !important; }
             </div>
             <p class="text-xs text-slate-500 mt-1">Hardware, Notebooks & TI Corporativa</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">186 Itens • 154 Pedidos</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['tec_items'] ?? 0 }} {{ ($stats['tec_items'] ?? 0) == 1 ? 'Item' : 'Itens' }} • {{ $stats['tec_orders'] ?? 0 }} {{ ($stats['tec_orders'] ?? 0) == 1 ? 'Pedido' : 'Pedidos' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-sky-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -780,14 +780,14 @@ a { text-decoration: none !important; }
               <div class="w-16 h-16 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/90 dark:border-white/15 p-2 shadow-sm flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-200">
                 <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
               </div>
-              <span class="badge2 s-done">14 Vagas</span>
+              <span class="badge2 s-done">{{ $stats['capital_services'] ?? 0 }} {{ ($stats['capital_services'] ?? 0) == 1 ? 'Solução' : 'Soluções' }}</span>
             </div>
             <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition" style="font-family:Outfit">
               RACHI Human Capital
             </div>
             <p class="text-xs text-slate-500 mt-1">Recrutamento, Gestão de Pessoas & RH</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">89 Candidatos Ativos</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['capital_requests'] ?? 0 }} {{ ($stats['capital_requests'] ?? 0) == 1 ? 'Demanda Ativa' : 'Demandas Ativas' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -798,14 +798,14 @@ a { text-decoration: none !important; }
               <div class="w-16 h-16 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/90 dark:border-white/15 p-2 shadow-sm flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-200">
                 <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
               </div>
-              <span class="badge2 s-analise">38 Produções</span>
+              <span class="badge2 s-analise">{{ $stats['print_requests'] ?? 0 }} {{ ($stats['print_requests'] ?? 0) == 1 ? 'Produção' : 'Produções' }}</span>
             </div>
             <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition" style="font-family:Outfit">
               RACHI Print
             </div>
             <p class="text-xs text-slate-500 mt-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">22 Catálogos • AOA 8.09k</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['print_products'] ?? 0 }} {{ ($stats['print_products'] ?? 0) == 1 ? 'Catálogo' : 'Catálogos' }} • AOA {{ $stats['print_revenue_formatted'] ?? '0,00' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-amber-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -869,19 +869,19 @@ a { text-decoration: none !important; }
           <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
             <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-bold uppercase">Academy</div>
-              <div class="text-sm font-black text-indigo-600 dark:text-indigo-400">32 reqs</div>
+              <div class="text-sm font-black text-indigo-600 dark:text-indigo-400">{{ $stats['dist_academy'] ?? 0 }} reqs</div>
             </div>
             <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-bold uppercase">Loja / Tec</div>
-              <div class="text-sm font-black text-sky-600 dark:text-sky-400">24 reqs</div>
+              <div class="text-sm font-black text-sky-600 dark:text-sky-400">{{ $stats['dist_tec'] ?? 0 }} reqs</div>
             </div>
             <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-bold uppercase">RH Capital</div>
-              <div class="text-sm font-black text-emerald-600 dark:text-emerald-400">18 reqs</div>
+              <div class="text-sm font-black text-emerald-600 dark:text-emerald-400">{{ $stats['dist_capital'] ?? 0 }} reqs</div>
             </div>
             <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-bold uppercase">Print</div>
-              <div class="text-sm font-black text-amber-500">12 reqs</div>
+              <div class="text-sm font-black text-amber-500">{{ $stats['dist_print'] ?? 0 }} reqs</div>
             </div>
           </div>
         </div>
@@ -1538,10 +1538,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">24</div><div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">18</div><div class="text-xs text-slate-500 mt-1 font-bold">Turmas Ativas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">342</div><div class="text-xs text-slate-500 mt-1 font-bold">Matrículas Totais</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">89</div><div class="text-xs text-slate-500 mt-1 font-bold">Diplomas Emitidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="coursesList.length || {{ $stats['academy_courses'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="activeEnrollmentsCount || {{ $stats['academy_students'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Turmas Ativas</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="academyEnrollments.length || {{ $stats['academy_students'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Matrículas Totais</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">{{ $stats['academy_certificates'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Diplomas Emitidos</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -1801,10 +1801,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">186</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">154</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">12</div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">20.5M</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['tec_items'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['tec_critical_stock'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -1845,10 +1845,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">14</div><div class="text-xs text-slate-500 mt-1 font-bold">Vagas Abertas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">89</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">23</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Entrevista</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Contratados</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['capital_services'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Soluções Ativas</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['capital_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Demandas & Processos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['capital_in_progress'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Atendimento</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['capital_completed'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídos</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -1890,10 +1890,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">22</div><div class="text-xs text-slate-500 mt-1 font-bold">Formatos Disponíveis</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">38</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Tiragem</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-yellow-500" style="font-family:Outfit">15</div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">8.09M</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Formatos Disponíveis</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['print_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-yellow-500" style="font-family:Outfit">{{ $stats['print_quotes'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -1928,10 +1928,10 @@ a { text-decoration: none !important; }
       <div class="sc2 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white border-blue-500/30 shadow-xl">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Faturamento Total do Mês (Setembro/2026)</div>
-            <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA 45.890.000</div>
+            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Faturamento Total Acumulado ({{ now()->format('Y') }})</div>
+            <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA {{ number_format($stats['total_revenue'] ?? 0, 2, ',', '.') }}</div>
             <div class="text-sm text-emerald-300 font-bold flex items-center gap-1.5 mt-2">
-              <i data-lucide="trending-up" class="w-4 h-4"></i> +12.4% acima da meta estabelecida
+              <i data-lucide="trending-up" class="w-4 h-4"></i> Valores sincronizados com a base de dados
             </div>
           </div>
           <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center flex-shrink-0">
@@ -2822,7 +2822,7 @@ function renderCharts(theme) {
       data: {
         labels: ['Academy', 'Loja/Tec', 'Human Capital', 'Print'],
         datasets: [{
-          data: [32, 24, 18, 12],
+          data: [{{ $stats['dist_academy'] ?? 0 }}, {{ $stats['dist_tec'] ?? 0 }}, {{ $stats['dist_capital'] ?? 0 }}, {{ $stats['dist_print'] ?? 0 }}],
           backgroundColor: ['#6366f1', '#0ea5e9', '#10b981', '#f59e0b'],
           borderWidth: isDark ? 2 : 3,
           borderColor: isDark ? '#131728' : '#ffffff'
@@ -3812,10 +3812,10 @@ function adminApp() {
     },
 
     kpis: [
-      { label: 'Clientes Ativos na Base', value: '1.248', trend: 8.2, icon: 'users', iconBg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', iconColor: 'text-blue-600 dark:text-blue-400' },
-      { label: 'Novas Solicitações no Mês', value: '86', trend: 12.5, icon: 'clipboard-list', iconBg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', iconColor: 'text-amber-600 dark:text-orange-400' },
-      { label: 'Pedidos da Loja Processados', value: '154', trend: -3.1, icon: 'shopping-cart', iconBg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', iconColor: 'text-purple-600 dark:text-purple-400' },
-      { label: 'Faturamento Total (AOA)', value: '45.89M', trend: 12.4, icon: 'banknote', iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400', iconColor: 'text-emerald-600 dark:text-emerald-400' }
+      { label: 'Clientes Ativos na Base', value: {!! json_encode($stats['kpi_clients_val'] ?? '0') !!}, trend: {{ $stats['kpi_clients_trend'] ?? 0 }}, icon: 'users', iconBg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', iconColor: 'text-blue-600 dark:text-blue-400' },
+      { label: 'Novas Solicitações no Mês', value: {!! json_encode($stats['kpi_requests_val'] ?? '0') !!}, trend: {{ $stats['kpi_requests_trend'] ?? 0 }}, icon: 'clipboard-list', iconBg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', iconColor: 'text-amber-600 dark:text-orange-400' },
+      { label: 'Pedidos da Loja Processados', value: {!! json_encode($stats['kpi_orders_val'] ?? '0') !!}, trend: {{ $stats['kpi_orders_trend'] ?? 0 }}, icon: 'shopping-cart', iconBg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', iconColor: 'text-purple-600 dark:text-purple-400' },
+      { label: 'Faturamento Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '0,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 0 }}, icon: 'banknote', iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400', iconColor: 'text-emerald-600 dark:text-emerald-400' }
     ],
 
     wfStatuses: [
@@ -3917,10 +3917,10 @@ function adminApp() {
     ],
 
     finMods: [
-      { label: 'RACHI Store / Tec', icon: '🛒', value: '20.500.000', pct: 45, bc: 'bg-sky-500' },
-      { label: 'RACHI Academy', icon: '🎓', value: '12.300.000', pct: 27, bc: 'bg-indigo-600' },
-      { label: 'RACHI Print', icon: '🖨️', value: '8.090.000', pct: 18, bc: 'bg-amber-500' },
-      { label: 'Human Capital', icon: '👥', value: '5.000.000', pct: 11, bc: 'bg-emerald-600' }
+      { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
+      { label: 'RACHI Academy', icon: '🎓', value: '0,00', pct: 0, bc: 'bg-indigo-600' },
+      { label: 'RACHI Print', icon: '🖨️', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
+      { label: 'Human Capital', icon: '👥', value: '0,00', pct: 0, bc: 'bg-emerald-600' }
     ],
 
     txs: [

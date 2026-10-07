@@ -349,7 +349,96 @@ Route::get('/admin-dashboard', function () {
     $systemUsers = \App\Models\User::withTrashed()->with('role')->latest()->get()->map(fn($u) => formatAdminUserRecord($u));
     $systemRoles = \App\Models\Role::all(['id', 'name', 'slug', 'description']);
 
-    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles'));
+    // Métricas dinâmicas sincronizadas com a base de dados
+    $activeCustomersCount = \App\Models\Customer::where('status', 'active')->whereNull('deleted_at')->count();
+    $totalCustomersCount = \App\Models\Customer::whereNull('deleted_at')->count();
+    $monthRequestsCount = \App\Models\ServiceRequest::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+    $totalRequestsCount = \App\Models\ServiceRequest::count();
+    $totalOrdersCount = \App\Models\Order::count();
+    $ordersRevenue = (float)\App\Models\Order::where('payment_status', 'paid')->sum('total');
+    $quotesRevenue = (float)\App\Models\Quote::where('status', 'approved')->sum('total');
+    $totalRevenue = $ordersRevenue + $quotesRevenue;
+
+    // Unidades RACHI
+    $academyCoursesCount = \App\Models\Course::count();
+    $academyActiveStudents = \App\Models\CourseEnrollment::where('status', 'active')->count();
+    $academyTotalEnrollments = \App\Models\CourseEnrollment::count();
+
+    $tecItemsCount = \App\Models\Product::where('business_unit_id', 1)->count() ?: \App\Models\Product::count();
+    $tecOrdersCount = \App\Models\Order::where('business_unit_id', 1)->count() ?: $totalOrdersCount;
+    $tecCriticalStock = \App\Models\Product::whereRaw('stock_quantity <= minimum_stock')->count();
+    $tecRevenue = (float)\App\Models\Order::where('business_unit_id', 1)->where('payment_status', 'paid')->sum('total');
+
+    $capitalServicesCount = \App\Models\Service::where('business_unit_id', 4)->count() ?: \App\Models\Service::count();
+    $capitalRequestsCount = \App\Models\ServiceRequest::where('business_unit_id', 4)->count();
+    $capitalInProgress = \App\Models\ServiceRequest::where('business_unit_id', 4)->whereIn('status', ['in_analysis', 'in_progress', 'quoted', 'waiting_customer'])->count();
+    $capitalCompleted = \App\Models\ServiceRequest::where('business_unit_id', 4)->where('status', 'completed')->count();
+
+    $printProductsCount = \App\Models\Product::where('business_unit_id', 2)->count() ?: \App\Models\Service::where('business_unit_id', 2)->count();
+    $printRequestsCount = \App\Models\ServiceRequest::where('business_unit_id', 2)->count();
+    $printQuotesCount = \App\Models\Quote::where('business_unit_id', 2)->count();
+    $printRevenue = (float)\App\Models\Order::where('business_unit_id', 2)->where('payment_status', 'paid')->sum('total');
+
+    // Distribuição de solicitações por unidade
+    $distAcademy = \App\Models\ServiceRequest::where('business_unit_id', 3)->count();
+    $distTec = \App\Models\ServiceRequest::where('business_unit_id', 1)->count();
+    $distCapital = \App\Models\ServiceRequest::where('business_unit_id', 4)->count();
+    $distPrint = \App\Models\ServiceRequest::where('business_unit_id', 2)->count();
+
+    $formatRevenue = function ($val) {
+        if ($val >= 1000000) {
+            return number_format($val / 1000000, 2, ',', '.') . 'M';
+        } elseif ($val >= 1000) {
+            return number_format($val / 1000, 1, ',', '.') . 'k';
+        }
+        return number_format($val, 2, ',', '.');
+    };
+
+    $stats = [
+        'active_customers' => $activeCustomersCount,
+        'total_customers' => $totalCustomersCount,
+        'month_requests' => $monthRequestsCount,
+        'total_requests' => $totalRequestsCount,
+        'total_orders' => $totalOrdersCount,
+        'total_revenue' => $totalRevenue,
+        'kpi_clients_val' => number_format($activeCustomersCount ?: $totalCustomersCount, 0, '', '.'),
+        'kpi_clients_trend' => 0.0,
+        'kpi_requests_val' => (string)$monthRequestsCount,
+        'kpi_requests_trend' => 0.0,
+        'kpi_orders_val' => (string)$totalOrdersCount,
+        'kpi_orders_trend' => 0.0,
+        'kpi_revenue_val' => $formatRevenue($totalRevenue),
+        'kpi_revenue_trend' => 0.0,
+        // Academy
+        'academy_courses' => $academyCoursesCount,
+        'academy_students' => $academyActiveStudents,
+        'academy_enrollments' => $academyTotalEnrollments,
+        'academy_certificates' => 0,
+        // Tec
+        'tec_items' => $tecItemsCount,
+        'tec_orders' => $tecOrdersCount,
+        'tec_critical_stock' => $tecCriticalStock,
+        'tec_revenue' => $tecRevenue,
+        'tec_revenue_formatted' => $formatRevenue($tecRevenue),
+        // Capital
+        'capital_services' => $capitalServicesCount,
+        'capital_requests' => $capitalRequestsCount,
+        'capital_in_progress' => $capitalInProgress,
+        'capital_completed' => $capitalCompleted,
+        // Print
+        'print_products' => $printProductsCount,
+        'print_requests' => $printRequestsCount,
+        'print_quotes' => $printQuotesCount,
+        'print_revenue' => $printRevenue,
+        'print_revenue_formatted' => $formatRevenue($printRevenue),
+        // Distribution
+        'dist_academy' => $distAcademy,
+        'dist_tec' => $distTec,
+        'dist_capital' => $distCapital,
+        'dist_print' => $distPrint,
+    ];
+
+    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats'));
 })->middleware(['auth', 'role:admin|super_admin'])->name('admin.dashboard.view');
 
 Route::get('/admin-dashboard.html', function () {
