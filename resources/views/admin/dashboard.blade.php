@@ -533,7 +533,7 @@ a { text-decoration: none !important; }
     <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" title="Perfis">
       <i data-lucide="users" class="si"></i>
       <span class="sl">Perfis</span>
-      <span class="sb2 badge bg-blue-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold">12</span>
+      <span class="sb2 badge bg-blue-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="userStats.total"></span>
     </div>
     <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item">
       <i data-lucide="building-2" class="si"></i>
@@ -976,7 +976,7 @@ a { text-decoration: none !important; }
       </div>
 
       <!-- KPIS RAPIDOS -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-black shrink-0">
             <i data-lucide="users" class="w-5 h-5"></i>
@@ -1026,18 +1026,6 @@ a { text-decoration: none !important; }
             <div class="text-[11px] font-semibold text-slate-400 truncate">Bloqueados</div>
           </div>
         </div>
-
-        <div @click="userFilterStatus = userFilterStatus === 'deleted' ? 'all' : 'deleted'"
-          class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3 cursor-pointer transition hover:opacity-80"
-          :class="userFilterStatus === 'deleted' ? 'ring-2 ring-slate-400/50' : ''">
-          <div class="w-10 h-10 rounded-xl bg-slate-500/10 text-slate-500 dark:text-slate-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="trash-2" class="w-5 h-5"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.deleted"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Eliminados</div>
-          </div>
-        </div>
       </div>
 
       <!-- FILTROS E BUSCA -->
@@ -1064,7 +1052,6 @@ a { text-decoration: none !important; }
               <option value="all">Todos os Status</option>
               <option value="active">Apenas Ativos</option>
               <option value="blocked">Apenas Bloqueados</option>
-              <option value="deleted">Ver Eliminados</option>
             </select>
           </div>
         </div>
@@ -1302,10 +1289,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">1.248</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">892</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">156</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">47</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['total_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['active_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['total_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -3500,9 +3487,10 @@ function adminApp() {
     async executeDeleteUser() {
       if (!this.userToDelete) return;
       const userName = this.userToDelete.nome;
+      const targetId = Number(this.userToDelete.id);
       try {
         const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-        const res = await fetch(`/admin/users/${this.userToDelete.id}/delete`, {
+        const res = await fetch(`/admin/users/${targetId}/delete`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -3511,8 +3499,9 @@ function adminApp() {
         });
         const data = await res.json();
         if (data.success) {
-          this.users = this.users.filter(x => x.id !== this.userToDelete.id);
+          this.users = (this.users || []).filter(x => Number(x.id) !== targetId);
           this.showDeleteUserModal = false;
+          this.userToDelete = null;
           this.notifs.unshift({
             icon: '🗑️',
             ib: 'bg-rose-50 text-rose-600',
@@ -3522,7 +3511,7 @@ function adminApp() {
             lida: false
           });
           this.showAlert('success', 'Utilizador Excluído', data.message || `O utilizador ${userName} foi excluído com sucesso!`);
-          this.userToDelete = null;
+          await this.refreshUsers(false);
           this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
         } else {
           this.showAlert('error', 'Falha ao Excluir', data.message || 'Não foi possível excluir o utilizador.');
@@ -3678,6 +3667,7 @@ function adminApp() {
 
     async updReqStatus(req, s) {
       req.status = s.label;
+      req.status_key = s.key;
       req.sc = s.sc;
       const now = new Date();
       req.timeline.push({
@@ -3690,7 +3680,7 @@ function adminApp() {
 
       try {
         const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-        await fetch(`/admin/solicitacoes/${req.id}/status`, {
+        const res = await fetch(`/admin/solicitacoes/${req.id}/status`, {
           method: 'POST',
           credentials: 'same-origin',
           headers: {
@@ -3700,6 +3690,16 @@ function adminApp() {
           },
           body: JSON.stringify({ status: s.label, comment: 'Status alterado para "' + s.label + '" pelo administrador.' })
         });
+        const data = await res.json();
+        if (data && data.success && data.request) {
+          const idx = this.allRequests.findIndex(r => r.id === req.id);
+          if (idx !== -1) {
+            this.allRequests[idx] = data.request;
+          }
+          if (this.selectedRequest && this.selectedRequest.id === req.id) {
+            this.selectedRequest = data.request;
+          }
+        }
 
         if (typeof BroadcastChannel !== 'undefined') {
           const bc = new BroadcastChannel('rachi_request_channel');
