@@ -1598,17 +1598,18 @@
                     <!-- Pill Tag -->
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
                         <span class="w-2 h-2 rounded-full bg-[#f5a800] animate-pulse"></span>
-                        Produção Gráfica, Brindes &amp; Acabamento Nobre
+                        Gráfica de Alto Padrão
                     </div>
 
                     <!-- Main H1 -->
-                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                        RACHI Print
+                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight uppercase">
+                        Dê vida aos seus materiais com <br class="hidden sm:inline">
+                        <span class="text-gradient-amber">acabamento institucional</span>
                     </h1>
 
                     <!-- Main Subtitle -->
-                    <p class="text-lg sm:text-2xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
-                        Impressão de documentos institucionais, materiais promocionais, brindes corporativos e acabamentos de alto padrão.
+                    <p class="text-base sm:text-xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
+                        Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                     </p>
 
                     <!-- CTAs -->

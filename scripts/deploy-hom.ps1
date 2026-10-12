@@ -14,7 +14,7 @@ Write-Host "Compactando e enviando arquivos via streaming direto para a VPS..." 
 Push-Location "$projectRoot"
 try {
     Write-Host "Criando pacote de deploy..." -ForegroundColor DarkGray
-    tar.exe -czf deploy-pack.tar.gz --exclude="deploy-pack.tar.gz" --exclude="node_modules" --exclude="vendor" --exclude=".git" --exclude="scratch" --exclude=".wrangler" --exclude="caneca" --exclude=".env" --exclude=".env.*" .
+    tar.exe -czf deploy-pack.tar.gz --exclude="deploy-pack.tar.gz" --exclude="node_modules" --exclude="vendor" --exclude=".git" --exclude="scratch" --exclude=".wrangler" --exclude="caneca" --exclude="bootstrap/cache/*.php" --exclude=".env" --exclude=".env.*" .
     Write-Host "Enviando pacote para a VPS via SCP..." -ForegroundColor DarkGray
     scp -i "$key" deploy-pack.tar.gz "${server}:/opt/rachi/hom/deploy-pack.tar.gz"
     Write-Host "Extraindo arquivos no servidor..." -ForegroundColor DarkGray
@@ -28,7 +28,7 @@ finally {
 }
 
 Write-Host "Aplicando atualizacoes no ambiente de homologacao..." -ForegroundColor Yellow
-$remoteCommands = "cd /opt/rachi/hom && npm install --silent && npm run build && docker exec rachi-hom-php composer install --no-dev --optimize-autoloader --no-interaction && docker exec rachi-hom-php php artisan migrate --force && docker exec rachi-hom-php php artisan db:seed --class=ProductSeeder --force && docker exec rachi-hom-php php artisan optimize:clear && docker exec rachi-hom-php php artisan config:cache && docker exec rachi-hom-php php artisan route:cache && docker exec rachi-hom-php php artisan view:cache && docker exec rachi-hom-php chown -R www-data:www-data storage bootstrap/cache && docker exec rachi-hom-php chmod -R 775 storage bootstrap/cache"
+$remoteCommands = "cd /opt/rachi/hom && rm -f bootstrap/cache/*.php && npm install --silent && npm run build && docker exec rachi-hom-php composer install --no-dev --optimize-autoloader --no-interaction && docker exec rachi-hom-php php artisan migrate --force && docker exec rachi-hom-php php artisan db:seed --class=ProductSeeder --force && docker exec rachi-hom-php php artisan optimize:clear && docker exec rachi-hom-php php artisan config:cache && docker exec rachi-hom-php php artisan route:cache && docker exec rachi-hom-php php artisan view:cache && docker exec rachi-hom-php chown -R www-data:www-data storage bootstrap/cache && docker exec rachi-hom-php chmod -R 775 storage bootstrap/cache"
 ssh -n -i "$key" $server $remoteCommands
 
 Write-Host "Deploy concluido com sucesso em https://hom.rachi.ao !" -ForegroundColor Green
