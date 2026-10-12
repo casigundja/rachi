@@ -7,6 +7,14 @@ use App\Models\BusinessUnit;
 use App\Models\Service;
 use App\Models\Product;
 use App\Models\Course;
+use App\Models\ServiceRequest;
+use App\Models\ServiceRequestStatusHistory;
+use App\Models\Customer;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class BusinessUnitController extends Controller
@@ -59,6 +67,154 @@ class BusinessUnitController extends Controller
         $otherServices = collect($printServices)->where('slug', '!=', $slug)->values()->all();
 
         return view('public.units.print-service', compact('unit', 'service', 'otherServices', 'printServices'));
+    }
+
+    public function requestQuote(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:40',
+            'produto' => 'required|string|max:255',
+            'linha' => 'nullable|string|max:255',
+            'service_slug' => 'nullable|string|max:100',
+            'empresa' => 'nullable|string|max:255',
+            'quantidade' => 'nullable|string|max:100',
+            'prazo' => 'nullable|string|max:100',
+            'message' => 'nullable|string|max:3000',
+        ]);
+
+        return DB::transaction(function () use ($validated, $request) {
+            // 1. Identificar ou criar utilizador
+            $printUnit = BusinessUnit::where('slug', 'print')->firstOrFail();
+            if (auth()->check() && strcasecmp(auth()->user()->email, $validated['email']) === 0) {
+                $user = auth()->user();
+            } else {
+                $user = User::where('email', $validated['email'])->first();
+                if (!$user) {
+                    $user = User::create([
+                        'name' => $validated['name'],
+                        'email' => $validated['email'],
+                        'phone' => $validated['phone'],
+                        'password' => bcrypt(Str::random(16)),
+                        'role_id' => \App\Models\Role::where('slug', 'customer')->firstOrFail()->id,
+                        'status' => 'active',
+                    ]);
+                }
+            }
+
+            // 2. Identificar ou criar cliente (Customer)
+            $customer = $user->customer ?? Customer::where('user_id', $user->id)->first();
+            $hasCompany = !empty($validated['empresa']);
+            if (!$customer) {
+                $customer = Customer::create([
+                    'user_id' => $user->id,
+                    'type' => $hasCompany ? 'company' : 'individual',
+                    'company_name' => $validated['empresa'] ?? null,
+                    'trade_name' => $validated['empresa'] ?? $validated['name'],
+                    'phone' => $validated['phone'],
+                    'whatsapp' => $validated['phone'],
+                    'status' => 'active',
+                ]);
+            } else {
+                if ($hasCompany && empty($customer->company_name)) {
+                    $customer->update([
+                        'company_name' => $validated['empresa'],
+                        'type' => 'company',
+                    ]);
+                }
+                if (empty($customer->phone)) {
+                    $customer->update([
+                        'phone' => $validated['phone'],
+                        'whatsapp' => $validated['phone'],
+                    ]);
+                }
+            }
+
+            // 3. Gerar protocolo único anual
+            $year = date('Y');
+            $protocol = 'TMP-' . Str::uuid();
+
+            // 4. Mapear prioridade de acordo com urgência
+            $urgencia = strtolower($validated['prazo'] ?? 'padrao');
+            $priority = match ($urgencia) {
+                'urgente', 'urgencia', 'alta' => 'urgent',
+                default => 'normal',
+            };
+
+            // 5. Montar descrição detalhada com todas as especificações
+            $prazosLabels = [
+                'padrao' => 'Prazo Normal (3 a 5 dias úteis)',
+                'urgente' => 'Urgência Expresso (24h a 48h úteis)',
+                'programado' => 'Entrega Programada (Evento futuro)',
+            ];
+            $prazoFormatado = $prazosLabels[$urgencia] ?? ($validated['prazo'] ?? 'Normal');
+
+            $descLines = [
+                '📦 Produto: ' . $validated['produto'],
+            ];
+            if (!empty($validated['linha'])) {
+                $descLines[] = '🏷️ Linha Gráfica: ' . $validated['linha'];
+            }
+            $descLines[] = '👤 Solicitante: ' . $validated['name'];
+            if (!empty($validated['empresa'])) {
+                $descLines[] = '🏢 Empresa: ' . $validated['empresa'];
+            }
+            $descLines[] = '📞 Telefone / WhatsApp: ' . $validated['phone'];
+            $descLines[] = '✉️ Email: ' . $validated['email'];
+            if (!empty($validated['quantidade'])) {
+                $descLines[] = '🔢 Quantidade Estimada: ' . $validated['quantidade'];
+            }
+            $descLines[] = '⏱️ Prazo Desejado: ' . $prazoFormatado;
+            if (!empty($validated['message'])) {
+                $descLines[] = "\n📝 Especificações & Detalhes:\n" . $validated['message'];
+            }
+
+            $description = implode("\n", $descLines);
+
+            // 6. Associar serviço se possível (RACHI Print é unit 2)
+            $serviceId = null;
+            if (!empty($validated['service_slug'])) {
+                $serviceId = Service::where('business_unit_id', $printUnit->id)
+                    ->where('slug', $validated['service_slug'])
+                    ->value('id');
+            }
+
+            // 7. Criar a ServiceRequest
+            $serviceRequest = ServiceRequest::create([
+                'protocol' => $protocol,
+                'customer_id' => $customer->id,
+                'business_unit_id' => $printUnit->id,
+                'service_id' => $serviceId,
+                'title' => Str::limit('Cotação Gráfica: ' . $validated['produto'], 255, ''),
+                'description' => $description,
+                'priority' => $priority,
+                'status' => 'new',
+                'requested_date' => now()->toDateString(),
+                'estimated_date' => now()->addDays($priority === 'urgent' ? 2 : 5)->toDateString(),
+            ]);
+
+            $protocol = sprintf('SOL-%s-%06d', $year, $serviceRequest->id);
+            $serviceRequest->update(['protocol' => $protocol]);
+
+            // 8. Histórico inicial
+            ServiceRequestStatusHistory::create([
+                'service_request_id' => $serviceRequest->id,
+                'user_id' => $user->id,
+                'old_status' => null,
+                'new_status' => 'new',
+                'comment' => "Solicitação de cotação enviada pelo catálogo online ({$validated['produto']})",
+                'created_at' => now(),
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => "Solicitação de cotação registada com sucesso! O seu número de protocolo é {$protocol}.",
+                'protocol' => $protocol,
+                'request_id' => $serviceRequest->id,
+                'produto' => $validated['produto'],
+            ]);
+        });
     }
 
     public function academy(): View
@@ -633,6 +789,50 @@ class BusinessUnitController extends Controller
                         'features' => ['Acima de 500 exemplares', 'Impressão offset industrial com fidelidade Pantone', 'Verniz UV localizado ou Hot Stamping', 'Logística de distribuição fracionada', 'Condições de pagamento facilitadas']
                     ]
                 ],
+                'products' => [
+                    [
+                        'name' => 'Relatórios de Gestão & Contas',
+                        'image' => 'images/print-products/relatorio-gestao.png',
+                        'tag' => 'Capa Dura & Hot-Stamping',
+                        'desc' => 'Produção executiva para relatórios anuais de contas e prestação institucional, com acabamento em capa dura personalizada, estampagem a quente e lombada PUR.',
+                        'specs' => ['Papel Miolo: Couché 135g / Offset 90g', 'Capa: Cartão cinzento 2.5mm forrado', 'Acabamento: Hot-stamping dourado ou prateado', 'Encadernação: Lombada PUR resistente']
+                    ],
+                    [
+                        'name' => 'Brochuras & Catálogos Institucionais',
+                        'image' => 'images/print-products/brochura-institucional.png',
+                        'tag' => 'Acabamento Soft-Touch',
+                        'desc' => 'Catálogos comerciais e brochuras de apresentação com laminação mate toque de veludo (soft-touch) e fidelidade cromática em alta definição.',
+                        'specs' => ['Papel Capa: Couché 300g mate', 'Papel Miolo: Couché 150g brilho/mate', 'Acabamento: Plastificação aveludada Soft-Touch', 'Encadernação: Agrafamento ômega ou simples']
+                    ],
+                    [
+                        'name' => 'Manuais Operacionais & Guias Técnicos',
+                        'image' => 'images/print-products/manual-tecnico.png',
+                        'tag' => 'Wire-o Metálico Nobre',
+                        'desc' => 'Manuais de procedimentos internos, compliance e formação corporativa com encadernação metálica em espiral dupla (wire-o) e divisórias plastificadas.',
+                        'specs' => ['Encadernação: Wire-o duplo metálico preto ou prata', 'Capa: PVC translúcido protetor', 'Separadores: Cartolina 250g com abas', 'Formato: A4 ou A5 horizontal/vertical']
+                    ],
+                    [
+                        'name' => 'Certificados & Diplomas Oficiais',
+                        'image' => 'images/print-products/certificado-oficial.png',
+                        'tag' => 'Papel Vergê & Selo Dourado',
+                        'desc' => 'Diplomas executivos, certificados de participação e mérito impressos em papéis texturados de alta gramagem com chancela e relevo.',
+                        'specs' => ['Papel: Diplomata ou Vergê 250g/300g', 'Segurança: Microtexto e marca d\'água opcional', 'Acabamento: Selo holográfico ou hot-stamping', 'Opção: Pasta executiva protetora']
+                    ],
+                    [
+                        'name' => 'Propostas Comerciais de Concurso',
+                        'image' => 'images/print-products/proposta-comercial.png',
+                        'tag' => 'Pastas Executivas com Bolsa',
+                        'desc' => 'Dossiers e propostas de concurso público organizados com rigor institucional, divisórias de índice e caixas arquivadoras personalizadas.',
+                        'specs' => ['Apresentação: Dossier com bolsa interior para cartão', 'Ficheiros: Conferência técnica preflight', 'Tiragem: Pequenos lotes sob demanda', 'Prazo: Regime de urgência 24h a 48h']
+                    ],
+                    [
+                        'name' => 'Livros & Publicações Corporativas',
+                        'image' => 'images/print-products/livro-corporativo.png',
+                        'tag' => 'Costura Smyth & Capa Dura',
+                        'desc' => 'Publicações comemorativas, livros de história institucional e códigos de ética impressos com encadernação costurada de luxo e fita marcadora.',
+                        'specs' => ['Encadernação: Costura à linha (Smyth sewn)', 'Capa: Dura com guarda impressa personalizada', 'Extra: Fita marcadora em cetim', 'Cromia: Calibração densitométrica ISO']
+                    ]
+                ],
                 'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação e especificações para o serviço de Impressão de Documentos Institucionais da RACHI Print.'
             ],
             [
@@ -695,6 +895,50 @@ class BusinessUnitController extends Controller
                         'desc' => 'Presentes de prestígio para membros de administração, sócios e clientes estratégicos.',
                         'popular' => false,
                         'features' => ['Agendas em pele sintética nobre com fecho magnético', 'Kits tecnológicos: Powerbank 10.000mAh + Pen Drive 64GB', 'Caixas de luxo com berço em espuma moldada', 'Cartão personalizado com mensagem da gerência']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Canetas Executivas Personalizadas RACHI',
+                        'image' => 'images/print-products/canetas-executivas.png',
+                        'tag' => 'Gravação a Laser & Tampografia',
+                        'desc' => 'Canetas executivas metálicas com acabamento cromado nobre, grip anatómico e gravação resistente da sua marca em 4 cores oficiais (Preto, Prata, Azul e Amarelo).',
+                        'specs' => ['Material: Metal com detalhes cromados', 'Carga: Tinta azul/preta fluida de longa escrita', 'Personalização: Laser de alta precisão ou tampografia', 'Cores: Preto, Prata, Azul e Amarelo institucional']
+                    ],
+                    [
+                        'name' => 'Agenda Executiva Moleskine 2026',
+                        'image' => 'images/print-products/agenda-executiva.png',
+                        'tag' => 'Baixo-Relevo & Pele Sintética',
+                        'desc' => 'Agenda executiva almofadada em pele sintética de alto padrão com gravação institucional em baixo-relevo (debossing), fecho elástico e fita marcadora.',
+                        'specs' => ['Capa: Pele sintética com toque acolchoado', 'Miolo: Papel marfim 80g com visão diária/semanal', 'Acabamento: Gravação a quente em baixo-relevo', 'Fecho: Elástico resistente de cor coordenada']
+                    ],
+                    [
+                        'name' => 'Canecas de Cerâmica Corporativas VIP',
+                        'image' => 'images/print-products/caneca-ceramica.png',
+                        'tag' => 'Cores da Marca & Gravação VIP',
+                        'desc' => 'Coleção de cadernos corporativos tipo Moleskine com capa dura resistente, cantos arredondados, bolsa interior para notas e fita em cetim.',
+                        'specs' => ['Paleta: Branco, Preto, Azul corporativo e Vermelho', 'Formato: A5 (14x21cm) com 160 páginas pautadas', 'Gravação: Serigrafia de alta resistência ou laser', 'Utilidade: Reuniões de direção e convenções de vendas']
+                    ],
+                    [
+                        'name' => 'Garrafas Térmicas Inteligentes com Display LED',
+                        'image' => 'images/print-products/garrafa-termica-led.png',
+                        'tag' => 'Display Touch & Parede Dupla',
+                        'desc' => 'Garrafas térmicas em aço inox 304 com isolamento a vácuo e display digital touch na tampa que exibe a temperatura real da bebida.',
+                        'specs' => ['Material: Aço inoxidável 304 de grau alimentar', 'Capacidade: 500ml com infusor para chá incluído', 'Tecnologia: Sensor digital LED na tampa', 'Isolamento: Vácuo térmico até 12h de conservação']
+                    ],
+                    [
+                        'name' => 'Sacolas Ecológicas & Kits Eco Sustentáveis',
+                        'image' => 'images/print-products/sacola-ecologica.png',
+                        'tag' => 'Linha Eco-Friendly & Sustentável',
+                        'desc' => 'Conjunto sustentável com capa em cortiça natural, folhas recicladas pautadas, fita elástica e caneta ecológica de bambu gravada a laser.',
+                        'specs' => ['Capa: Cortiça 100% natural e sustentável', 'Miolo: Papel reciclado certificado 80g', 'Caneta: Corpo em bambu e clipe metálico', 'Conceito: Responsabilidade ambiental e ESG corporativo']
+                    ],
+                    [
+                        'name' => 'Fitas Lanyard Executivas & Porta-Cartões',
+                        'image' => 'images/print-products/fita-lanyard.png',
+                        'tag' => 'Kit Boas-Vindas & Caixa VIP',
+                        'desc' => 'Kit institucional composto por garrafa térmica inox personalizada, caneca de porcelana de alta definição, saco ecológico TNT reforçado e caneta.',
+                        'specs' => ['Composição: Garrafa térmica + Caneca cerâmica + Saco TNT + Caneta', 'Embalagem: Caixa rígida personalizada com berço', 'Acolhimento: Fortalecimento imediato da cultura da empresa', 'Tiragens: Disponível a partir de 10 unidades']
                     ]
                 ],
                 'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Materiais Promocionais e Brindes Corporativos da RACHI Print.'
@@ -761,6 +1005,64 @@ class BusinessUnitController extends Controller
                         'features' => ['Produção em grande escala com desconto de volume', 'Garantia de reposição de stock em 48h úteis', 'Linha de atendimento corporativo dedicada', 'Faturação com prazos de crédito negociados']
                     ]
                 ],
+                'products' => [
+                    [
+                        'name' => 'Pastas Corporativas & Envelopes Timbrados',
+                        'image' => 'images/print-products/pastas-envelopes.png',
+                        'tag' => 'Pastas, Blocos & Cartões',
+                        'desc' => 'Pastas com bolsa e orelha, blocos espiral de notas, envelopes timbrados C4 e DL, papel de carta A4 e cartões de visita soft-touch.',
+                        'specs' => ['Papel Miolo: Offset 90g e 100g premium', 'Capa: Cartolina triplex 300g / Couché 350g', 'Acabamento: Plastificação aveludada Soft-Touch', 'Formatos: A4, A5, C4 e DL institucional']
+                    ],
+                    [
+                        'name' => 'Papel Timbrado Oficial A4',
+                        'image' => 'images/print-products/papel-timbrado.png',
+                        'tag' => 'Caixa Rígida & Tecnologia',
+                        'desc' => 'Caixa rígida magnética de luxo, garrafa térmica fosca, powerbank 10.000mAh, pen drive 64GB em metal, chaveiro e caneta com estojo nobre.',
+                        'specs' => ['Estrutura: Caixa rígida com fecho magnético', 'Itens: Garrafa térmica + Powerbank + Pen drive + Caneta VIP', 'Personalização: Gravação laser de alta precisão e baixo-relevo', 'Apresentação: Berço em EVA recortado sob medida']
+                    ],
+                    [
+                        'name' => 'Crachás Executivos em PVC Rígido',
+                        'image' => 'images/print-products/cracha-pvc.png',
+                        'tag' => 'Polos, Camisas & Coletes',
+                        'desc' => 'Linha de vestuário institucional: coletes acolchoados bordados, polos em piquê nobre, camisas sociais de manga comprida e t-shirts corporativas.',
+                        'specs' => ['Tecidos: 100% Algodão penteado, Piquê nobre e Microfibra térmica', 'Bordado: Computadorizado de alta definição', 'Estampa: DTF têxtil de ultra-durabilidade sem desbotar', 'Modelagem: Regular e Slim fit feminina e masculina']
+                    ],
+                    [
+                        'name' => 'Blocos & Facturação Autocopiativa',
+                        'image' => 'images/print-products/bloco-autocopiativo.png',
+                        'tag' => 'Letras 3D & Interiores',
+                        'desc' => 'Placas externas de fachada, balcão de receção com logótipo 3D retroiluminado, sinalética interna direcional e vinil fosco jateado em vidro.',
+                        'specs' => ['Letras Caixa: Aço inox polido, Acrílico cristal ou PVC expandido', 'Iluminação: LED embutido de baixo consumo e alta durabilidade', 'Vidros: Película fosca jateada com recorte computadorizado', 'Instalação: Equipa técnica especializada em Luanda']
+                    ],
+                    [
+                        'name' => 'Decoração de Frotas, Outdoors & MUPIs',
+                        'image' => 'images/Produção gráfica corporativa/WhatsApp Image 2026-10-06 at 21.17.41 (4).jpeg',
+                        'tag' => 'Viaturas, Lonas & MUPIs',
+                        'desc' => 'Vinil automotivo de alta conformabilidade para frotas de carrinhas, lonas com ilhós de grande resistência, painéis de outdoor e MUPIs urbanos.',
+                        'specs' => ['Vinil: Automotivo polimérico com laminação UV anti-risco', 'Remoção: Sem resíduos nem danos na pintura original', 'Impressão: Tintas solventes resistentes a sol e intempéries', 'Garantia: Durabilidade de 2 a 5 anos']
+                    ],
+                    [
+                        'name' => 'Bonés Corporativos Trucker Premium',
+                        'image' => 'images/Produção gráfica corporativa/WhatsApp Image 2026-10-06 at 21.23.39 (3).jpeg',
+                        'tag' => 'Rede Respirável 4 Cores',
+                        'desc' => 'Bonés respiráveis tipo trucker com rede traseira e estampagem nítida do logótipo institucional em 4 opções de cores (Branco, Preto, Azul e Amarelo).',
+                        'specs' => ['Modelo: Trucker com fecho ajustável snapback', 'Frente: Sarja acolchoada estruturada', 'Traseira: Rede mesh respirável de alto conforto', 'Personalização: Bordado 3D ou patch emborrachado']
+                    ],
+                    [
+                        'name' => 'Cartões de Visita Executivos VIP',
+                        'image' => 'images/print-products/cartoes-visita.png',
+                        'tag' => 'Soft-Touch & Verniz Localizado',
+                        'desc' => 'Cartões de visita em couché fosco 350g com cantos redondos opcionais, plastificação aveludada e verniz UV com brilho localizado no logótipo.',
+                        'specs' => ['Gramagem: Couché fosco 350g ou 400g extra-rígido', 'Acabamento: Toque de veludo Soft-Touch + Verniz UV 3D', 'Corte: Reto ou com cantos arredondados', 'Cores: Impressão offset HD frente e verso']
+                    ],
+                    [
+                        'name' => 'Carimbos Automáticos Autoentintados',
+                        'image' => 'images/print-products/carimbo-automatico.png',
+                        'tag' => 'Mecanismo Trodat & Laser',
+                        'desc' => 'Carimbos profissionais para gerência, departamento financeiro e receção com mecanismo automático de alta durabilidade e borracha gravada a laser.',
+                        'specs' => ['Marcas: Estruturas Trodat / Colop de alta resistência', 'Borracha: Gravação milimétrica a laser com alta nitidez', 'Cores de Tinta: Preto, Azul, Vermelho ou Verde', 'Rendimento: Mais de 10.000 impressões nítidas por almofada']
+                    ]
+                ],
                 'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Produção Gráfica Corporativa e Papelaria da RACHI Print.'
             ],
             [
@@ -823,6 +1125,50 @@ class BusinessUnitController extends Controller
                         'desc' => 'Estandes personalizados, painéis autoportantes e montagem completa de grandes fóruns.',
                         'popular' => false,
                         'features' => ['Decoração completa de estande ou pavilhão', 'Pórticos de entrada e balcões de credenciamento', 'Equipa de montagem e suporte no dia do evento', 'SLA prioritário para urgências de última hora']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Vinil Adesivo, Sinalética & Fachadas',
+                        'image' => 'images/print-products/vinil-adesivo.png',
+                        'tag' => 'Painéis Neon & Balcão Curvo',
+                        'desc' => 'Cenografia completa com iluminação spotlight, letreiros neon 3D, telas informativas, balcão curvo com iluminação frontal e tapete institucional.',
+                        'specs' => ['Iluminação: Fita LED e Neon 3D de alta luminosidade', 'Mobiliário: Balcão curvo com acabamento premium', 'Piso: Tapete institucional de tráfego intenso', 'Cenografia: Painéis modulares com personalização integral']
+                    ],
+                    [
+                        'name' => 'Lonas de Grande Formato & Banners com Ilhós',
+                        'image' => 'images/print-products/lona-banner-ilhos.png',
+                        'tag' => 'Roll-ups & Balcão QR Code',
+                        'desc' => 'Estrutura metálica preta modular, balcão expositor com QR Code dinâmico, roll-ups verticais informativos de alta nitidez e folhetos.',
+                        'specs' => ['Estrutura: Modular em perfis metálicos pintados', 'Comunicação: QR Code promocional e sinalética de balcão', 'Banners: Roll-ups de montagem instantânea', 'Portabilidade: Fácil transporte e remontagem']
+                    ],
+                    [
+                        'name' => 'Balcão Promocional Portátil / Degustação',
+                        'image' => 'images/print-products/balcao-promocional.png',
+                        'tag' => 'Testeira Aérea & Bolsa',
+                        'desc' => 'Balcão autoportante curvado com testeira superior personalizada, prateleira interna, estrutura leve desmontável e bolsa de transporte.',
+                        'specs' => ['Testeira: Haste metálica com placa superior visível a distância', 'Prateleira: Suporta até 20kg de materiais de apoio', 'Montagem: Encaixe rápido sem ferramentas em 3 minutos', 'Transporte: Mala de lona reforçada inclusa']
+                    ],
+                    [
+                        'name' => 'Roll-up Banners Autoportantes em Alumínio',
+                        'image' => 'images/print-products/rollup-publicitario.png',
+                        'tag' => 'Alumínio Reforçado & Saco Transporte',
+                        'desc' => 'Estrutura retrátil autoportante em alumínio com impressão em lona fotográfica fosca de alta definição que não encurva nas laterais.',
+                        'specs' => ['Dimensões: 85x200cm ou 120x200cm', 'Material: Estrutura em alumínio anodizado reforçado', 'Lona: Banner fosco blockout anti-reflexo', 'Inclui: Saco almofadado com fecho e alça de transporte']
+                    ],
+                    [
+                        'name' => 'Backdrop Fotográfico de Palco & Imprensa',
+                        'image' => 'images/print-products/backdrop-painel.png',
+                        'tag' => 'Acabamento Fosco Anti-Reflexo',
+                        'desc' => 'Painel de grande formato para fundo de palco, conferências de imprensa e photo opportunity com repetição equilibrada de logótipos de patrocinadores.',
+                        'specs' => ['Tamanho: 3x2m, 4x2.5m ou sob medida', 'Resolução: Impressão UV em grande formato sem emendas', 'Acabamento: Bainhas duplas reforçadas e ilhós metálicos', 'Anti-Reflexo: Superfície fosca ideal para flashes e câmaras de TV']
+                    ],
+                    [
+                        'name' => 'Flyers, Folhetos & Folders Promocionais',
+                        'image' => 'images/print-products/flyers-folhetos.png',
+                        'tag' => 'PVC Rígido & Fitas Sublimadas',
+                        'desc' => 'Sistema completo de identificação e controlo de acessos para congressos, com cartões rígidos em PVC resistentes e fitas lanyard sublimadas com logótipo.',
+                        'specs' => ['Cartão: PVC rígido 0.76mm tipo cartão de crédito ou A6', 'Furo: Ovóide ou redondo de segurança', 'Fita: Cetim acetinado 20mm com impressão em sublimação HD', 'Acessório: Gancho mosquetão metálico giratório']
                     ]
                 ],
                 'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Produção Gráfica de Eventos e Sinalética da RACHI Print.'

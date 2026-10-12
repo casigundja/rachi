@@ -343,6 +343,7 @@
         }
     </style>
 
+    <script src="/capital-requests.js?v=20261011"></script>
 </head>
 <body x-data="servicePageApp()">
 
@@ -721,9 +722,10 @@
                                 </div>
 
                                 <div class="pt-2">
-                                    <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-bold text-xs uppercase tracking-wider transition duration-200 shadow-md shadow-emerald-500/25 flex items-center justify-center gap-2 cursor-pointer">
+                                    <p x-show="formError" x-text="formError" role="alert" class="text-sm text-red-600 dark:text-red-400 mb-3"></p>
+                                    <button type="submit" :disabled="formSubmitting" class="w-full py-3.5 px-6 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-bold text-xs uppercase tracking-wider transition duration-200 shadow-md shadow-emerald-500/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50">
                                         <i data-lucide="send" class="w-4 h-4"></i>
-                                        <span>Submeter Pedido de Cotação</span>
+                                        <span x-text="formSubmitting ? 'A enviar…' : 'Submeter Pedido de Cotação'"></span>
                                     </button>
                                 </div>
                             </form>
@@ -735,6 +737,7 @@
                                 <i data-lucide="check-circle" class="w-8 h-8"></i>
                             </div>
                             <h3 class="text-xl font-black text-slate-900 dark:text-white">Pedido Submetido com Sucesso!</h3>
+                            <p class="text-sm text-slate-700 dark:text-slate-300">Protocolo: <strong x-text="formProtocol"></strong></p>
                             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
                                 Muito obrigado, <strong x-text="formData.nome"></strong>. Registamos a sua solicitação para <strong>{{ $service['title'] }}</strong>. A nossa equipa entrará em contacto em menos de 2 horas úteis.
                             </p>
@@ -940,31 +943,12 @@
     <script>
         function servicePageApp() {
             return {
-                formSubmitted: false,
-                formData: {
-                    nome: '',
-                    empresa: '',
-                    telefone: '',
-                    email: '',
-                    plano: '{{ $service['plans'][1]['name'] ?? $service['plans'][0]['name'] }}',
-                    detalhes: ''
-                },
+                ...window.rachiCapitalForm({
+                    servico: @json($service['title']), service_slug: @json($service['slug']),
+                    plano: @json($service['plans'][1]['name'] ?? $service['plans'][0]['name'] ?? ''),
+                }),
                 selectPlan(planName) {
                     this.formData.plano = planName;
-                },
-                submitForm() {
-                    if (!this.formData.nome || !this.formData.telefone) {
-                        if (window.RachiToast) {
-                            window.RachiToast.warning('Por favor, preencha o seu nome e contacto telefónico.');
-                        } else {
-                            alert('Por favor, preencha o seu nome e contacto telefónico.');
-                        }
-                        return;
-                    }
-                    this.formSubmitted = true;
-                    if (window.RachiToast) {
-                        window.RachiToast.success('Pedido registado com sucesso! A nossa equipa entrará em contacto em menos de 2 horas.');
-                    }
                 },
                 sendWhatsAppDirect() {
                     let msg = '{{ $service['whatsapp_msg'] }}';

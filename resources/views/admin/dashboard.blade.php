@@ -682,6 +682,9 @@ a { text-decoration: none !important; }
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.rh?'open':''"></i>
       </div>
       <div class="sidebar-sub-menu" x-show="openMenus.rh" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+        <div @click="setPage('rh-solicitacoes')" :class="currentPage==='rh-solicitacoes'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Solicitações & Consultoria</span>
+        </div>
         <div @click="setPage('rh-vagas')" :class="currentPage==='rh-vagas'?'active':''" class="sidebar-sub-item">
           <span class="sidebar-sub-dot"></span>
           <span class="sl">Vagas Corporativas</span>
@@ -1952,6 +1955,31 @@ a { text-decoration: none !important; }
       </div>
     </section>
 
+    <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-6">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Solicitações & Consultoria</h1>
+          <p class="text-sm text-slate-500 mt-1">Pedidos enviados pela página Human Capital e pelas suas páginas de serviços.</p>
+        </div>
+        <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
+      </div>
+      <div class="kc"><span class="text-3xl font-black text-slate-900 dark:text-white" x-text="capitalRequests.length"></span><span class="text-sm text-slate-500 ml-3">Solicitações Recebidas</span></div>
+      <div class="sc2 p-0 overflow-hidden"><div class="overflow-x-auto"><table class="at">
+        <thead><tr><th>Protocolo</th><th>Cliente / Empresa</th><th>Serviço</th><th>Data</th><th>Estado</th><th>Atendimento</th></tr></thead>
+        <tbody>
+          <template x-for="r in capitalRequests" :key="r.id"><tr>
+            <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol"></td>
+            <td><div class="font-bold text-slate-900 dark:text-white" x-text="r.cliente"></div><div class="text-xs text-slate-500" x-text="r.empresa"></div></td>
+            <td class="text-sm text-slate-700 dark:text-slate-300" x-text="r.titulo"></td>
+            <td class="text-xs text-slate-500" x-text="r.data || r.created_at"></td>
+            <td><span class="badge2" :class="r.sc" x-text="r.statusLabel || r.status"></span></td>
+            <td><button type="button" @click="openReq(r)" class="bap text-xs">Ver solicitação</button></td>
+          </tr></template>
+          <tr x-show="capitalRequests.length === 0"><td colspan="6" class="text-center py-10 text-sm text-slate-500">Nenhuma solicitação Human Capital recebida.</td></tr>
+        </tbody>
+      </table></div></div>
+    </section>
+
     <!-- RH VAGAS -->
     <section x-show="currentPage==='rh-vagas'" x-cloak class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -2224,44 +2252,142 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos de Venda</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Registo e acompanhamento de compras de equipamentos e hardware de TI.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos & Formulários de TI</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Gestão de vendas da loja e de formulários preenchidos em /tec e sub-páginas.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Atualizar</button>
+        </div>
+      </div>
+
+      <!-- Abas de Navegação entre Pedidos de Venda e Formulários /tec -->
+      <div class="flex items-center gap-3 border-b border-slate-200 dark:border-white/10 pb-1">
+        <button type="button" @click="tecTab = 'pedidos'"
+          class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer"
+          :class="tecTab === 'pedidos' ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
+          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+          <span>Pedidos de Venda Loja</span>
+          <span class="px-1.5 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'pedidos' ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'" x-text="tecOrders.length"></span>
+        </button>
+
+        <button type="button" @click="tecTab = 'propostas'"
+          class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer"
+          :class="tecTab === 'propostas' ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>Formulários & Propostas /tec</span>
+          <span class="px-1.5 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'propostas' ? 'bg-white/20 text-white' : 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300'" x-text="tecRequests.length"></span>
+        </button>
+      </div>
+
+      <!-- ABA 1: PEDIDOS DE VENDA DA LOJA -->
+      <div x-show="tecTab === 'pedidos'" class="space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
+        </div>
+
+        <div class="sc2 p-0 overflow-hidden">
+          <div class="overflow-x-auto min-h-[280px]">
+            <table class="at">
+              <thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
+              <tbody>
+                <template x-for="o in tecOrders" :key="o.id">
+                  <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                    <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="o.numero"></td>
+                    <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="o.cliente"></div></td>
+                    <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="o.total"></td>
+                    <td class="text-slate-500 text-xs" x-text="o.data"></td>
+                    <td><span class="badge2 s-ativo" x-text="o.status"></span></td>
+                  </tr>
+                </template>
+                <tr x-show="!tecOrders || tecOrders.length === 0">
+                  <td colspan="5" class="text-center py-12">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                      <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum pedido de venda registado</h4>
+                    <p class="text-xs text-slate-500 mt-1">Os pedidos da loja RACHI Tec aparecerão listados aqui automaticamente.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
-      </div>
+      <!-- ABA 2: FORMULÁRIOS & PROPOSTAS PREENCHIDOS DA PÁGINA /TEC E SUB-PÁGINAS -->
+      <div x-show="tecTab === 'propostas'" class="space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="tecRequests.filter(r => (r.status_key === 'new' || (r.status || '').toLowerCase().includes('nov'))).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Novas Propostas</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="tecRequests.filter(r => ['in_analysis', 'in_progress', 'quoted'].includes(r.status_key)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Em Negociação</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="tecRequests.filter(r => r.status_key === 'completed').length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídas</div></div>
+        </div>
 
-      <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto min-h-[280px]">
-          <table class="at">
-            <thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
-            <tbody>
-              <template x-for="o in tecOrders" :key="o.id">
-                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="o.numero"></td>
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="o.cliente"></div></td>
-                  <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="o.total"></td>
-                  <td class="text-slate-500 text-xs" x-text="o.data"></td>
-                  <td><span class="badge2 s-ativo" x-text="o.status"></span></td>
+        <div class="sc2 p-0 overflow-hidden">
+          <div class="p-4 border-b border-slate-100 dark:border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h2 class="font-bold text-slate-900 dark:text-white text-sm">Formulários de Serviços de TI (/tec)</h2>
+              <p class="text-xs text-slate-500">Demandas de consultoria, websites, sistemas de gestão, digitalização e suporte técnico.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-500" x-text="tecRequests.length + ' demanda(s) registada(s)'"></span>
+            </div>
+          </div>
+          <div class="overflow-x-auto min-h-[280px]">
+            <table class="at">
+              <thead><tr><th>Protocolo</th><th>Solicitante & Empresa</th><th>Serviço / Proposta</th><th>Contacto</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody>
+                <template x-for="r in tecRequests" :key="r.id">
+                  <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                    <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol || ('#' + r.id)"></td>
+                    <td>
+                      <div class="font-bold text-slate-900 dark:text-white text-sm" x-text="r.cliente"></div>
+                      <div class="text-xs text-slate-500" x-text="r.empresa || 'Cliente Particular'"></div>
+                    </td>
+                    <td>
+                      <div class="font-semibold text-slate-800 dark:text-slate-200 text-xs" x-text="r.titulo || r.servico"></div>
+                      <div class="text-[11px] text-slate-400 line-clamp-1" x-text="r.descricao"></div>
+                    </td>
+                    <td>
+                      <div class="text-xs font-mono font-bold text-slate-700 dark:text-slate-300" x-text="r.telefone || 'Não informado'"></div>
+                      <div class="text-[11px] text-slate-400" x-text="r.email"></div>
+                    </td>
+                    <td class="text-slate-500 text-xs whitespace-nowrap" x-text="r.data || r.created_at"></td>
+                    <td>
+                      <span class="badge2" :class="r.sc" x-text="r.status"></span>
+                    </td>
+                    <td class="whitespace-nowrap">
+                      <div class="flex items-center gap-2">
+                        <button type="button" @click="openReq(r)" class="bap text-xs py-1 px-2.5 flex items-center gap-1.5 cursor-pointer">
+                          <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                          <span>Ver Proposta</span>
+                        </button>
+                        <template x-if="r.telefone && r.telefone.replace(/\D/g, '').length >= 9">
+                          <a :href="'https://wa.me/' + (r.telefone.replace(/\D/g, '').startsWith('244') ? r.telefone.replace(/\D/g, '') : '244' + r.telefone.replace(/\D/g, '')) + '?text=Olá%20' + encodeURIComponent(r.cliente) + '!%20Entramos%20em%20contacto%20sobre%20a%20sua%20solicitação%20no%20RACHI%20Tec%20(' + encodeURIComponent(r.protocol || '') + ').'"
+                            target="_blank" class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition cursor-pointer" title="WhatsApp Direto">
+                            <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                          </a>
+                        </template>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+                <tr x-show="!tecRequests || tecRequests.length === 0">
+                  <td colspan="7" class="text-center py-12">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                      <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum formulário de proposta registado ainda</h4>
+                    <p class="text-xs text-slate-500 mt-1">Quando os clientes preencherem formulários na página /tec ou suas sub-páginas, eles aparecerão aqui instantaneamente.</p>
+                  </td>
                 </tr>
-              </template>
-              <tr x-show="!tecOrders || tecOrders.length === 0">
-                <td colspan="5" class="text-center py-12">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
-                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                  </div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum pedido de venda registado</h4>
-                  <p class="text-xs text-slate-500 mt-1">Os pedidos da loja RACHI Tec aparecerão listados aqui automaticamente.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -2275,30 +2401,77 @@ a { text-decoration: none !important; }
           </div>
           <div>
             <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo & Alertas de Estoque</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Níveis de inventário, reposição, alertas de estoque crítico e saldos.</p>
+            <p class="text-slate-500 text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de estoque crítico da loja.</p>
           </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" @click="openStockModal(null, 'add')" class="bap cursor-pointer flex items-center gap-2">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Nova Entrada de Estoque</span>
+          </button>
         </div>
       </div>
 
+      <!-- 4 Cards de Métricas de Estoque -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="sProducts.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Linhas de Produto</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="sProducts.reduce((acc, p) => acc + (p.est || 0), 0)"></div><div class="text-xs text-slate-500 mt-1 font-bold">Unidades em Depósito</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="sProducts.filter(p => (p.est || 0) <= (p.min_est || 5)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico / Reposição</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Acuracidade do Inventário</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-rose-500" style="font-family:Outfit" x-text="sProducts.filter(p => p.status !== 'Ativo' || (p.est || 0) === 0).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Itens Indisponíveis / Esgotados</div></div>
       </div>
 
+      <!-- Barra de Filtros Rápidos de Estoque -->
+      <div class="sc2 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 flex-1 max-w-md">
+          <div class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
+            <input type="text" x-model="stockSearch" placeholder="Filtrar por nome, SKU ou categoria..." class="ia w-full pl-9 text-xs">
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-500">Filtrar:</span>
+          <select x-model="stockFilter" class="ia text-xs font-semibold py-1.5 px-3">
+            <option value="all">Todos os Produtos</option>
+            <option value="critico">Apenas Estoque Crítico</option>
+            <option value="esgotado">Apenas Esgotados / Indisponíveis</option>
+            <option value="disponivel">Apenas Disponíveis na Loja</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabela de Controlo de Estoque Completa -->
       <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto min-h-[280px]">
+        <div class="overflow-x-auto min-h-[320px]">
           <table class="at">
-            <thead><tr><th>Produto</th><th>SKU</th><th>Estoque Atual</th><th>Mínimo Exigido</th><th>Nível de Estoque</th><th>Situação</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Produto & Categoria</th>
+                <th>SKU</th>
+                <th>Estoque Atual</th>
+                <th>Mínimo Exigido</th>
+                <th>Nível de Estoque</th>
+                <th>Situação</th>
+                <th>Disponibilidade na Loja</th>
+                <th class="text-right">Ações de Gestão</th>
+              </tr>
+            </thead>
             <tbody>
-              <template x-for="p in sProducts" :key="p.id">
+              <template x-for="p in filteredStockProducts" :key="p.id">
                 <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="p.nome"></div><div class="text-xs text-slate-500" x-text="p.cat"></div></td>
+                  <td>
+                    <div class="font-bold text-slate-900 dark:text-white text-sm" x-text="p.nome"></div>
+                    <div class="text-xs text-slate-500" x-text="p.cat"></div>
+                  </td>
                   <td class="font-mono text-xs font-bold text-slate-500" x-text="p.sku"></td>
-                  <td><span class="font-black text-sm" :class="p.est <= (p.min_est || 5) ? 'text-amber-500' : 'text-slate-900 dark:text-white'" x-text="p.est + ' un.'"></span></td>
+                  <td>
+                    <div class="flex items-center gap-2">
+                      <button type="button" @click="quickStockStep(p, -1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 text-slate-700 dark:text-slate-300 hover:text-rose-600 font-black text-xs flex items-center justify-center transition cursor-pointer" title="Retirar 1 un.">-</button>
+                      <span class="font-black text-sm min-w-[50px] text-center" :class="p.est <= (p.min_est || 5) ? 'text-amber-500' : 'text-slate-900 dark:text-white'" x-text="p.est + ' un.'"></span>
+                      <button type="button" @click="quickStockStep(p, 1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-slate-700 dark:text-slate-300 hover:text-emerald-600 font-black text-xs flex items-center justify-center transition cursor-pointer" title="Adicionar 1 un.">+</button>
+                    </div>
+                  </td>
                   <td class="text-slate-500 text-xs font-semibold" x-text="(p.min_est || 5) + ' un.'"></td>
-                  <td class="w-48">
+                  <td class="w-40">
                     <div class="flex items-center gap-2">
                       <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden">
                         <div class="h-full rounded-full transition-all" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'" :style="'width: ' + Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></div>
@@ -2307,10 +2480,51 @@ a { text-decoration: none !important; }
                     </div>
                   </td>
                   <td>
-                    <span class="px-2.5 py-1 rounded-full text-xs font-bold" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'" x-text="p.est <= (p.min_est || 5) ? 'Estoque Baixo' : 'Normal'"></span>
+                    <span class="px-2.5 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'"></span>
+                      <span x-text="p.est <= (p.min_est || 5) ? 'Estoque Baixo' : 'Normal'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <template x-if="p.status === 'Ativo' && p.est > 0">
+                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-500/30 inline-flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Disponível</span>
+                      </span>
+                    </template>
+                    <template x-if="p.status === 'Ativo' && p.est === 0">
+                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 border border-amber-200/60 dark:border-amber-500/30 inline-flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                        <span>Esgotado (0 un.)</span>
+                      </span>
+                    </template>
+                    <template x-if="p.status !== 'Ativo'">
+                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300 border border-rose-200/60 dark:border-rose-500/30 inline-flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                        <span>Indisponível (Pausado)</span>
+                      </span>
+                    </template>
+                  </td>
+                  <td class="text-right whitespace-nowrap">
+                    <div class="flex items-center justify-end gap-1.5">
+                      <button type="button" @click="openStockModal(p, 'add')" class="bap text-xs py-1 px-2.5 flex items-center gap-1 cursor-pointer" title="Adicionar / Ajustar Estoque">
+                        <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+                        <span>Ajustar</span>
+                      </button>
+                      <button type="button" @click="toggleProductAvailability(p)" class="p-1.5 rounded-lg border text-xs font-bold transition cursor-pointer"
+                        :class="p.status === 'Ativo' ? 'border-amber-300 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-500/10' : 'border-emerald-300 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-500/10'"
+                        :title="p.status === 'Ativo' ? 'Marcar como Indisponível na Loja' : 'Marcar como Disponível na Loja'">
+                        <i :data-lucide="p.status === 'Ativo' ? 'eye-off' : 'eye'" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </template>
+              <tr x-show="filteredStockProducts.length === 0">
+                <td colspan="8" class="text-center py-12 text-slate-500 text-sm">
+                  Nenhum produto encontrado para o filtro selecionado.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -2375,9 +2589,37 @@ a { text-decoration: none !important; }
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="printQuotes.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['print_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção Gráfica</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="printRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
+      </div>
+
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="p-5 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-white/10">
+          <div>
+            <h2 class="font-bold text-slate-900 dark:text-white">Solicitações de Cotação</h2>
+            <p class="text-xs text-slate-500 mt-1">Pedidos enviados pelo catálogo e pelas páginas de serviços da Print.</p>
+          </div>
+          <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="at">
+            <thead><tr><th>Protocolo</th><th>Cliente / Empresa</th><th>Produto / Serviço</th><th>Data</th><th>Estado</th><th>Atendimento</th></tr></thead>
+            <tbody>
+              <template x-for="r in printRequests" :key="r.id">
+                <tr>
+                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol"></td>
+                  <td><div class="font-bold text-slate-900 dark:text-white" x-text="r.cliente"></div><div class="text-xs text-slate-500" x-text="r.empresa"></div></td>
+                  <td class="text-sm text-slate-700 dark:text-slate-300" x-text="r.titulo"></td>
+                  <td class="text-xs text-slate-500" x-text="r.data || r.created_at"></td>
+                  <td><span class="badge2" :class="r.sc" x-text="r.statusLabel || r.status"></span></td>
+                  <td><button type="button" @click="openReq(r)" class="bap text-xs">Ver solicitação</button></td>
+                </tr>
+              </template>
+              <tr x-show="printRequests.length === 0"><td colspan="6" class="text-center py-10 text-sm text-slate-500">Nenhuma solicitação de cotação recebida.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -3204,6 +3446,81 @@ a { text-decoration: none !important; }
             <button type="submit" :disabled="newProduct.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
               <i data-lucide="check" class="w-4 h-4" x-show="!newProduct.isSubmitting"></i>
               <span x-text="newProduct.isSubmitting ? 'A guardar...' : 'Guardar Produto'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: AJUSTE DE ESTOQUE RACHI TEC (showStockModal) -->
+    <div x-show="showStockModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+      <div @click="showStockModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-lg bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-500"></div>
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <i data-lucide="package-check" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão & Ajuste de Estoque</h3>
+              <p class="text-xs text-slate-500">RACHI Tec — Entrada, saída e disponibilidade na loja</p>
+            </div>
+          </div>
+          <button type="button" @click="showStockModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <form @submit.prevent="submitStockAdjustment()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Produto da Loja *</label>
+            <select x-model="stockForm.product_id" required class="ia w-full text-xs font-semibold">
+              <template x-for="p in sProducts" :key="p.id">
+                <option :value="p.id" x-text="p.nome + ' (' + p.sku + ') — Estoque Atual: ' + p.est + ' un.'"></option>
+              </template>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Tipo de Movimento *</label>
+              <select x-model="stockForm.action" class="ia w-full text-xs font-semibold">
+                <option value="add">➕ Entrada / Adicionar ao Estoque</option>
+                <option value="remove">➖ Saída / Baixa no Estoque</option>
+                <option value="set">🔄 Definir Saldo Absoluto</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Quantidade (unidades) *</label>
+              <input type="number" min="1" max="100000" x-model="stockForm.quantity" required class="ia w-full text-xs font-semibold">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Mínimo de Alerta</label>
+              <input type="number" min="0" max="1000" x-model="stockForm.minimum_stock" placeholder="Ex: 3" class="ia w-full text-xs">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Motivo / Justificação</label>
+              <input type="text" x-model="stockForm.reason" placeholder="Ex: Novo lote recebido" class="ia w-full text-xs">
+            </div>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/10 flex items-center justify-between">
+            <div class="pr-3">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200 block">Pausar se ficar zerado</span>
+              <span class="text-[11px] text-slate-500 block">Muda automaticamente o produto para indisponível caso o estoque chegue a zero.</span>
+            </div>
+            <input type="checkbox" x-model="stockForm.auto_disable" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+          </div>
+
+          <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-white/10">
+            <button type="button" @click="showStockModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
+            <button type="submit" :disabled="stockForm.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4" x-show="!stockForm.isSubmitting"></i>
+              <span x-text="stockForm.isSubmitting ? 'A processar...' : 'Atualizar Estoque'"></span>
             </button>
           </div>
         </form>
@@ -4267,6 +4584,7 @@ function adminApp() {
         'loja-produtos': 'RACHI Store — Produtos',
         'loja-pedidos': 'RACHI Store — Pedidos',
         'loja-estoque': 'RACHI Store — Estoque',
+        'rh-solicitacoes': 'Human Capital — Solicitações',
         'rh-vagas': 'Human Capital — Vagas',
         'rh-candidatos': 'Human Capital — Candidatos',
         'grafica-produtos': 'RACHI Print — Produtos',
@@ -4330,10 +4648,35 @@ function adminApp() {
         if (!response.ok) throw new Error('Falha ao carregar solicitações.');
         const data = await response.json();
         this.allRequests = data.requests || [];
-        if (this.selectedRequest) {
-          this.selectedRequest = this.allRequests.find(item => item.id === this.selectedRequest.id) || this.selectedRequest;
+        const printResponse = await fetch('/admin/print/requests', {
+          headers: { 'Accept': 'application/json' }, credentials: 'same-origin'
+        });
+        if (!printResponse.ok) throw new Error('Falha ao carregar solicitações Print.');
+        this.printRequests = (await printResponse.json()).requests || [];
+        const capitalResponse = await fetch('/admin/capital/requests', {
+          headers: { 'Accept': 'application/json' }, credentials: 'same-origin'
+        });
+        if (!capitalResponse.ok) throw new Error('Falha ao carregar solicitações Human Capital.');
+        this.capitalRequests = (await capitalResponse.json()).requests || [];
+        const tecResponse = await fetch('/admin/tec/requests', {
+          headers: { 'Accept': 'application/json' }, credentials: 'same-origin'
+        });
+        if (tecResponse.ok) {
+          this.tecRequests = (await tecResponse.json()).requests || [];
         }
-        if (showToast) this.showAlert('success', 'Solicitações atualizadas', 'As conversas foram sincronizadas.');
+        const ordersResponse = await fetch('/admin/tec/orders', {
+          headers: { 'Accept': 'application/json' }, credentials: 'same-origin'
+        });
+        if (ordersResponse.ok) {
+          const ordersData = await ordersResponse.json();
+          if (ordersData.orders) {
+            this.tecOrders = ordersData.orders;
+          }
+        }
+        if (this.selectedRequest) {
+          this.selectedRequest = [...this.allRequests, ...this.printRequests, ...this.capitalRequests, ...this.tecRequests].find(item => item.id === this.selectedRequest.id) || this.selectedRequest;
+        }
+        if (showToast) this.showAlert('success', 'Solicitações atualizadas', 'As conversas e pedidos foram sincronizados.');
       } catch (error) {
         if (showToast) this.showAlert('error', 'Erro ao atualizar', 'Não foi possível carregar as conversas agora.');
       }
@@ -4447,6 +4790,12 @@ function adminApp() {
         if (typeof BroadcastChannel !== 'undefined') {
           this.reqChannel = new BroadcastChannel('rachi_request_channel');
           this.reqChannel.onmessage = (event) => {
+            if (event.data) {
+              this.refreshAdminRequests();
+            }
+          };
+          this.ordersChannel = new BroadcastChannel('rachi_orders_channel');
+          this.ordersChannel.onmessage = (event) => {
             if (event.data) {
               this.refreshAdminRequests();
             }
@@ -4836,8 +5185,163 @@ function adminApp() {
     aCourses: @json($academyCourses ?? []),
     sProducts: @json($tecProducts ?? []),
     tecOrders: @json($tecOrders ?? []),
+    tecRequests: @json($tecRequests ?? []),
+    tecTab: 'pedidos',
+    stockSearch: '',
+    stockFilter: 'all',
+    showStockModal: false,
+    selectedStockProduct: null,
+    stockForm: {
+      product_id: '',
+      action: 'add',
+      quantity: 5,
+      minimum_stock: 3,
+      reason: 'Reposição de inventário',
+      auto_disable: false,
+      isSubmitting: false
+    },
+
+    get filteredStockProducts() {
+      let list = this.sProducts || [];
+      if (this.stockFilter === 'critico') {
+        list = list.filter(p => (p.est || 0) <= (p.min_est || 5));
+      } else if (this.stockFilter === 'esgotado') {
+        list = list.filter(p => p.status !== 'Ativo' || (p.est || 0) === 0);
+      } else if (this.stockFilter === 'disponivel') {
+        list = list.filter(p => p.status === 'Ativo' && (p.est || 0) > 0);
+      }
+
+      if (this.stockSearch && this.stockSearch.trim() !== '') {
+        const q = this.stockSearch.toLowerCase();
+        list = list.filter(p => 
+          (p.nome && p.nome.toLowerCase().includes(q)) ||
+          (p.sku && p.sku.toLowerCase().includes(q)) ||
+          (p.cat && p.cat.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+
+    openStockModal(product = null, defaultAction = 'add') {
+      this.selectedStockProduct = product;
+      this.stockForm.product_id = product ? product.id : (this.sProducts[0]?.id || '');
+      this.stockForm.action = defaultAction;
+      this.stockForm.quantity = 5;
+      this.stockForm.minimum_stock = product ? (product.min_est || 3) : 3;
+      this.stockForm.reason = defaultAction === 'add' ? 'Entrada de novo lote / reposição' : (defaultAction === 'remove' ? 'Ajuste de avaria ou retirada' : 'Conferência de balanço');
+      this.stockForm.auto_disable = false;
+      this.stockForm.isSubmitting = false;
+      this.showStockModal = true;
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    async submitStockAdjustment() {
+      if (!this.stockForm.product_id) {
+        this.showAlert('error', 'Erro', 'Selecione um produto.');
+        return;
+      }
+      this.stockForm.isSubmitting = true;
+      try {
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const res = await fetch('/admin/tec/stock/adjust', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token || ''
+          },
+          body: JSON.stringify({
+            product_id: this.stockForm.product_id,
+            action: this.stockForm.action,
+            quantity: this.stockForm.quantity,
+            minimum_stock: this.stockForm.minimum_stock,
+            reason: this.stockForm.reason,
+            auto_disable: this.stockForm.auto_disable
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.product) {
+          const idx = this.sProducts.findIndex(p => p.id === data.product.id);
+          if (idx !== -1) {
+            this.sProducts[idx] = data.product;
+          }
+          this.showStockModal = false;
+          this.showAlert('success', 'Estoque Atualizado', data.message);
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Falha ao atualizar estoque.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro', 'Erro ao processar requisição: ' + err.message);
+      } finally {
+        this.stockForm.isSubmitting = false;
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      }
+    },
+
+    async toggleProductAvailability(product) {
+      try {
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const res = await fetch('/admin/tec/stock/toggle-status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token || ''
+          },
+          body: JSON.stringify({ product_id: product.id })
+        });
+        const data = await res.json();
+        if (data.success && data.product) {
+          const idx = this.sProducts.findIndex(p => p.id === data.product.id);
+          if (idx !== -1) {
+            this.sProducts[idx] = data.product;
+          }
+          this.showAlert('success', 'Disponibilidade Atualizada', data.message);
+        } else {
+          this.showAlert('error', 'Erro', data.message || 'Falha ao alterar disponibilidade.');
+        }
+      } catch (err) {
+        this.showAlert('error', 'Erro', 'Erro ao alterar estado: ' + err.message);
+      } finally {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      }
+    },
+
+    async quickStockStep(product, step) {
+      try {
+        const action = step > 0 ? 'add' : 'remove';
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const res = await fetch('/admin/tec/stock/adjust', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token || ''
+          },
+          body: JSON.stringify({
+            product_id: product.id,
+            action: action,
+            quantity: 1,
+            reason: step > 0 ? 'Entrada rápida de estoque (+1 un.)' : 'Baixa rápida de estoque (-1 un.)'
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.product) {
+          const idx = this.sProducts.findIndex(p => p.id === data.product.id);
+          if (idx !== -1) {
+            this.sProducts[idx] = data.product;
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      }
+    },
     rhJobs: @json($capitalServices ?? []),
     gProducts: @json($printItems ?? []),
+    capitalRequests: @json($capitalRequests ?? []),
+    printRequests: @json($printRequests ?? []),
     printQuotes: @json($printQuotes ?? []),
 
     finMods: [

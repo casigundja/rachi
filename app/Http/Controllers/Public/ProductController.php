@@ -62,8 +62,27 @@ class ProductController extends Controller
 
         $products = $query->paginate(12);
         $categories = Category::where('type', 'product')->get();
+        $liveProducts = Product::where('business_unit_id', 1)
+            ->with(['category', 'primaryImage'])
+            ->get()
+            ->map(function ($p) {
+                return [
+                    'id' => $p->id,
+                    'sku' => $p->sku,
+                    'name' => $p->name,
+                    'slug' => $p->slug,
+                    'stock_quantity' => (int)$p->stock_quantity,
+                    'minimum_stock' => (int)$p->minimum_stock,
+                    'price' => (float)$p->price,
+                    'price_formatted' => number_format($p->price, 2, ',', '.') . ' AOA',
+                    'status' => in_array(strtolower($p->status), ['active', 'ativo']) ? 'active' : 'inactive',
+                    'category_name' => $p->category?->name ?? 'Tecnologia',
+                    'image' => $p->primaryImage?->path ?? '/images/hp-elitebook-studio.png',
+                    'short_desc' => $p->short_description ?? '',
+                ];
+            });
 
-        return view('public.store.index', compact('products', 'categories'));
+        return view('public.store.index', compact('products', 'categories', 'liveProducts'));
     }
 
     public function show(string $slug): View

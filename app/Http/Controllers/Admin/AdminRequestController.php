@@ -32,6 +32,45 @@ class AdminRequestController extends Controller
         return response()->json(['requests' => $this->allRequests()]);
     }
 
+    public function printRequests(): Collection
+    {
+        return $this->unitRequests('print');
+    }
+
+    public function capitalRequests(): Collection
+    {
+        return $this->unitRequests('capital');
+    }
+
+    public function tecRequests(): Collection
+    {
+        return $this->unitRequests('tec');
+    }
+
+    private function unitRequests(string $slug): Collection
+    {
+        return ServiceRequest::with([
+            'customer.user', 'businessUnit', 'service', 'assignedEmployee.user',
+            'statusHistories.user', 'messages.user.role',
+        ])->whereHas('businessUnit', fn ($query) => $query->where('slug', $slug))
+            ->latest()->get()->map(fn (ServiceRequest $serviceRequest) => $this->present($serviceRequest));
+    }
+
+    public function printIndex(): JsonResponse
+    {
+        return response()->json(['requests' => $this->printRequests()]);
+    }
+
+    public function capitalIndex(): JsonResponse
+    {
+        return response()->json(['requests' => $this->capitalRequests()]);
+    }
+
+    public function tecIndex(): JsonResponse
+    {
+        return response()->json(['requests' => $this->tecRequests()]);
+    }
+
     public function sendMessage(Request $request, ServiceRequest $serviceRequest): JsonResponse
     {
         $validated = $request->validate([
@@ -153,6 +192,7 @@ class AdminRequestController extends Controller
         return [
             'id' => $serviceRequest->id,
             'protocol' => $serviceRequest->protocol,
+            'business_unit_id' => $serviceRequest->business_unit_id,
             'title' => $serviceRequest->title,
             'titulo' => $serviceRequest->title,
             'cliente' => $serviceRequest->customer?->display_name ?? 'Cliente',

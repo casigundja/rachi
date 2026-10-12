@@ -41,6 +41,16 @@ class ContactController extends Controller
             'updated_at' => now(),
         ]));
 
+        $subjectLower = mb_strtolower($data['subject']);
+        $unitParam = mb_strtolower((string)$request->input('unidade', ''));
+        if (str_contains($subjectLower, 'tec') || str_contains($subjectLower, 'adesão ao serviço') || str_contains($subjectLower, 'tecnologia') || str_contains($unitParam, 'tec') || $request->input('business_unit_id') == 1) {
+            try {
+                app(\App\Http\Controllers\Public\TecRequestController::class)->store($request);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Falha ao espelhar contacto Tec em ServiceRequest: ' . $e->getMessage());
+            }
+        }
+
         if ($request->expectsJson() || $request->is('api/*')) {
             return response()->json([
                 'success' => true,

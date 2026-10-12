@@ -1196,6 +1196,14 @@
                         class="px-2 py-1 transition cursor-pointer">
                         Acessórios &amp; Brindes
                     </button>
+
+                    <button @click="selectCategory('otaku')" 
+                        :class="activeCategory === 'otaku' ? 'text-[#f5a800] font-black border-b-2 border-[#f5a800]' : 'hover:text-[#071326] dark:hover:text-white'"
+                        class="px-2 py-1 transition cursor-pointer flex items-center gap-1">
+                        <span class="text-purple-500">✨</span>
+                        <span>Otaku</span>
+                    </button>
+
                     
                     <a href="/print" class="px-2 py-1 hover:text-[#071326] dark:hover:text-white transition">
                         Consumíveis &amp; Papelaria
@@ -1260,7 +1268,7 @@
             
             <div class="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-10 relative min-h-[380px] sm:min-h-[440px] grid grid-cols-1 items-center">
                 
-                <!-- SLIDE 1: SEJA UM REVENDEDOR / PARCEIRO B2B (EXATO AO PRINT) -->
+                <!-- SLIDE 1: UNIVERSO OTAKU & ANIME (ONE PUNCH MAN / SAITAMA SERIOUS PUNCH) -->
                 <div x-show="currentSlide === 0" 
                      x-transition:enter="transition ease-out duration-500 transform"
                      x-transition:enter-start="opacity-0 translate-x-8"
@@ -1270,41 +1278,42 @@
                      x-transition:leave-end="opacity-0 -translate-x-8"
                      class="col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Lado Esquerdo: Tipografia Exata ao Print -->
+                    <!-- Lado Esquerdo: Tipografia de Destaque Anime -->
                     <div class="lg:col-span-6 z-10 text-left pl-2 sm:pl-6">
-                        <p class="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mb-1">
-                            SEJA UM
-                        </p>
+                        <span class="inline-block px-3 py-1 bg-red-100 text-red-900 rounded-full font-black text-[11px] uppercase tracking-wider mb-2">
+                            DESTAQUE OTAKU • ONE PUNCH MAN
+                        </span>
                         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-none uppercase mb-2">
-                            revendedor<br>
-                            <span class="text-slate-800 font-extrabold text-2xl sm:text-3xl lg:text-4xl block mt-1 tracking-normal">DA RACHI TEC</span>
+                            Saitama Punch<br>
+                            <span class="text-red-600 dark:text-[#f5a800] font-extrabold text-2xl sm:text-3xl lg:text-4xl block mt-1 tracking-normal">SERIOUS PUNCH EDITION</span>
                         </h1>
                         
                         <p class="mt-4 sm:mt-6 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md font-medium">
-                            Conquiste a independência financeira e expanda os seus negócios com <strong class="text-slate-900 font-bold">equipamentos de informática, garantia oficial e faturação com NIF em Luanda</strong>.
+                            T-Shirt premium 100% algodão penteado com a estampa lendária do golpe mais poderoso dos animes. Conforto e atitude com entrega imediata em Luanda por <strong class="text-slate-900 font-bold">9.000,00 AOA</strong>.
                         </p>
 
-                        <!-- Botão Saiba mais > com Estilo Exato ao Print (Pílula Branca com Sombra) -->
+                        <!-- Botão de Ação -->
                         <div class="mt-6 sm:mt-8">
-                            <a href="/contacto?assunto=parceiro" 
-                               class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-900 font-black text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 border border-slate-200">
-                                <span>Saiba mais</span>
+                            <button @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))" 
+                               class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-900 font-black text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 border border-slate-200 cursor-pointer">
+                                <span>Comprar T-Shirt Saitama</span>
                                 <span class="text-sm font-black">&gt;</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Lado Direito: Imagem da Equipe com Blocos Geométricos Verdes/Âmbar (Exato ao Print) -->
+                    <!-- Lado Direito: Imagem com Fundo Transparente no Showcase Pod -->
                     <div class="lg:col-span-6 relative flex items-center justify-center">
-                        <!-- Quadrados Geométricos Decorativos (Estilo Boticário) -->
-                        <div class="absolute -top-6 left-12 w-28 h-28 bg-[#10b981]/70 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute bottom-2 -left-4 w-36 h-36 bg-[#059669]/80 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute top-10 right-4 w-32 h-44 bg-[#10b981]/75 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute -bottom-6 right-16 w-24 h-24 bg-[#047857]/85 rounded-none pointer-events-none hidden sm:block"></div>
+                        <!-- Quadrados Geométricos Decorativos (Vermelho & Dourado) -->
+                        <div class="absolute -top-6 left-12 w-28 h-28 bg-red-600/30 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute bottom-2 -left-4 w-36 h-36 bg-amber-500/30 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute top-10 right-4 w-32 h-44 bg-[#f5a800]/25 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute -bottom-6 right-16 w-24 h-24 bg-red-700/25 rounded-none pointer-events-none hidden sm:block"></div>
 
-                        <!-- Fotografia da Equipe RACHI em Estúdio -->
-                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white max-w-lg w-full">
-                            <img src="/images/rachi-hero-team.jpg" alt="Equipe RACHI Tec" class="w-full h-auto object-cover max-h-[340px]">
+                        <!-- Card Vitrine com Produto Otaku Transparente -->
+                        <div class="relative z-10 p-6 bg-white/80 dark:bg-white/5 backdrop-blur-md rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-white/10 group cursor-pointer"
+                             @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))">
+                            <img src="/images/otaku/tshirt-saitama-punch.png" alt="T-Shirt Saitama Serious Punch — One Punch Man" class="h-64 sm:h-72 w-auto object-contain mx-auto drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
                         </div>
                     </div>
                 </div>

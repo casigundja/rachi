@@ -9069,6 +9069,13 @@ catalog.post("/contacto", async (c) => {
   return done(c, { message: "Mensagem recebida. A nossa equipa responder\xE1 em breve." }, "/contacto?enviado=1");
 });
 
+import { receivePrintQuote } from './print-quotes.js';
+import { receiveCapitalRequest } from './capital-requests.js';
+catalog.post('/print/solicitar-cotacao', (c) => receivePrintQuote(c, {body, text, email, limit, randomToken, fail}));
+catalog.post('/api/print/solicitar-cotacao', (c) => receivePrintQuote(c, {body, text, email, limit, randomToken, fail}));
+catalog.post('/capital/solicitar-cotacao', (c) => receiveCapitalRequest(c, {body, text, email, limit, randomToken, digest, fail}));
+catalog.post('/api/capital/solicitar-cotacao', (c) => receiveCapitalRequest(c, {body, text, email, limit, randomToken, digest, fail}));
+
 // worker/requests.ts
 var requests = new Hono2();
 var labels = { new: "Novo", in_analysis: "Em An\xE1lise", waiting_customer: "Ag. Cliente", quoted: "Or\xE7amento", approved: "Aprovado", in_progress: "Em Execu\xE7\xE3o", in_review: "Em Revis\xE3o", completed: "Conclu\xEDdo", cancelled: "Cancelado" };
@@ -9080,7 +9087,7 @@ async function accessible(c, id, lock = false) {
   return r;
 }
 __name(accessible, "accessible");
-async function list(c) {
+async function list(c, unitSlug = null) {
   const u = c.get("user"), db = c.get("db");
   const isAdmin = !u || admin(u);
   const isStaff = !u || staff(u);
@@ -9091,11 +9098,19 @@ async function list(c) {
     COALESCE((SELECT json_agg(json_build_object('id',m.id,'user_id',m.user_id,'message',m.message,'text',m.message,'nome',mu.name,'sender',mu.name,'data',to_char(m.created_at,'DD/MM/YYYY HH24:MI'),'is_staff',COALESCE(mr.slug IN ('admin','super_admin','manager','employee','attendant'),false),'fromUser',NOT COALESCE(mr.slug IN ('admin','super_admin','manager','employee','attendant'),false)) ORDER BY m.id) FROM messages m JOIN users mu ON mu.id=m.user_id LEFT JOIN roles mr ON mr.id=mu.role_id WHERE m.service_request_id=s.id),'[]') messages,
     COALESCE((SELECT json_agg(json_build_object('title',h.comment,'desc',h.comment,'data',to_char(h.created_at,'DD/MM/YYYY HH24:MI'),'date',to_char(h.created_at,'DD/MM/YYYY HH24:MI')) ORDER BY h.id) FROM service_request_status_histories h WHERE h.service_request_id=s.id),'[]') timeline
     FROM service_requests s JOIN customers cu ON cu.id=s.customer_id JOIN users cuu ON cuu.id=cu.user_id JOIN business_units b ON b.id=s.business_unit_id LEFT JOIN employees e ON e.id=s.assigned_to LEFT JOIN users eu ON eu.id=e.user_id
-    WHERE s.deleted_at IS NULL AND ($2::boolean OR cu.user_id=$1 OR ($3::boolean AND (s.assigned_to=$4 OR s.business_unit_id=$5))) ORDER BY s.id DESC LIMIT 200`, [uid, isAdmin, isStaff, eid, eunit]);
+    WHERE s.deleted_at IS NULL AND ($6::text IS NULL OR b.slug=$6) AND ($2::boolean OR cu.user_id=$1 OR ($3::boolean AND (s.assigned_to=$4 OR s.business_unit_id=$5))) ORDER BY s.id DESC ${unitSlug ? '' : 'LIMIT 200'}`, [uid, isAdmin, isStaff, eid, eunit, unitSlug]);
   return rows.map((r) => ({ ...r, titulo: r.title, descricao: r.description, cliente: r.company_name || r.customer_name, empresa: r.company_name || r.trade_name || r.customer_name, servico: r.unit, responsavel: r.responsible || "Por atribuir", status_key: r.status, status: labels[r.status] ?? r.status, statusLabel: labels[r.status] ?? r.status, sc: "s-analise", dot: "bg-blue-500", unitBadge: "bg-slate-100 text-slate-700" }));
 }
 __name(list, "list");
 requests.get("/solicitacoes/conversas", async (c) => c.json({ success: true, requests: await list(c) }));
+requests.get('/admin/print/requests', async (c) => {
+  user(c, 'admin');
+  return c.json({requests:await list(c, 'print')});
+});
+requests.get('/admin/capital/requests', async (c) => {
+  user(c, 'admin');
+  return c.json({requests:await list(c, 'capital')});
+});
 requests.get("/api/requests/:id", async (c) => {
   const r = await accessible(c, c.req.param("id"));
   const db = c.get("db");

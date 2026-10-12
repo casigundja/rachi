@@ -510,7 +510,7 @@
 
 <section class="py-16 sm:py-24 bg-white dark:bg-[#071326] transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 sm:gap-6 items-stretch">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-6 items-stretch">
             
             <!-- 01: INOV QUIMUA -->
             <div class="group relative bg-slate-50/80 dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-blue-400/50 dark:hover:border-blue-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[130px] sm:min-h-[150px] overflow-hidden">
@@ -564,9 +564,17 @@
                      class="max-h-15 max-w-[85%] object-contain hidden dark:block group-hover:scale-105 transition-transform duration-300">
             </div>
 
-            <!-- 05: KLASSE (ÚNICO COM LINK OFICIAL) — col-span-2 lg:col-span-1 -->
+            <!-- 05: KUMOSI PRESTAÇÃO DE SERVIÇOS -->
+            <div class="group relative bg-slate-50/80 dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 border border-slate-200/90 dark:border-white/10 hover:border-amber-400/50 dark:hover:border-amber-500/40 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center min-h-[130px] sm:min-h-[150px] overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-500 via-emerald-500 to-[#0b4ea8] opacity-70"></div>
+                <img src="/images/kumosi-badge.png" 
+                     alt="KUMOSI — Prestação de Serviços" 
+                     class="max-h-16 max-w-[85%] object-contain drop-shadow-xs group-hover:scale-105 transition-transform duration-300">
+            </div>
+
+            <!-- 06: KLASSE (ÚNICO COM LINK OFICIAL) -->
             <a href="https://klasse.ao/" target="_blank" rel="noopener noreferrer" 
-               class="col-span-2 sm:col-span-1 group relative bg-emerald-50/50 dark:bg-[#0c2230] rounded-2xl sm:rounded-3xl p-6 border border-emerald-400/50 dark:border-emerald-500/40 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center min-h-[130px] sm:min-h-[150px] overflow-hidden cursor-pointer">
+               class="group relative bg-emerald-50/50 dark:bg-[#0c2230] rounded-2xl sm:rounded-3xl p-6 border border-emerald-400/50 dark:border-emerald-500/40 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center min-h-[130px] sm:min-h-[150px] overflow-hidden cursor-pointer">
                 <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600"></div>
                 <div class="absolute top-2.5 right-2.5 text-emerald-600 dark:text-emerald-400 opacity-75 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>

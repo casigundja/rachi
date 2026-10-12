@@ -87,6 +87,11 @@
 
         .hero-title {
             color: #0b1a2e;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            text-align: center !important;
+            max-width: 58rem !important;
             transition: color 0.3s ease;
         }
         html.dark .hero-title {
@@ -95,6 +100,15 @@
 
         .hero-subtitle {
             color: #475569;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            text-align: center !important;
+            max-width: 44rem !important;
+            display: block !important;
+            font-size: clamp(1rem, 1.3vw, 1.15rem) !important;
+            line-height: 1.65 !important;
             transition: color 0.3s ease;
         }
         html.dark .hero-subtitle {
@@ -153,6 +167,140 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
+        }
+
+        
+        /* Dynamic Hero Components */
+        .hero-quick-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 9999px;
+            background: #ffffff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            color: #1e293b;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        html.dark .hero-quick-pill {
+            background: rgba(15, 22, 38, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
+        }
+        .hero-quick-pill:hover {
+            transform: translateY(-2px);
+        }
+        .hero-pill-blue:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+            color: #2563eb;
+        }
+        html.dark .hero-pill-blue:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+            color: #60a5fa;
+        }
+        .hero-pill-amber:hover {
+            border-color: rgba(245, 158, 11, 0.6);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
+            color: #d97706;
+        }
+        html.dark .hero-pill-amber:hover {
+            border-color: rgba(245, 158, 11, 0.6);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+            color: #fbbf24;
+        }
+        .hero-pill-emerald:hover {
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+            color: #059669;
+        }
+        html.dark .hero-pill-emerald:hover {
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+            color: #34d399;
+        }
+        .hero-pill-purple:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.15);
+            color: #7c3aed;
+        }
+        html.dark .hero-pill-purple:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.25);
+            color: #c084fc;
+        }
+
+        .hero-feature-card {
+            padding: 1.25rem 1.35rem;
+            border-radius: 1.25rem;
+            background: #ffffff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html.dark .hero-feature-card {
+            background: rgba(15, 22, 38, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .hero-feature-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(245, 168, 0, 0.45);
+            box-shadow: 0 12px 28px rgba(245, 168, 0, 0.12);
+        }
+        html.dark .hero-feature-card:hover {
+            border-color: rgba(245, 168, 0, 0.45);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 168, 0, 0.15);
+        }
+
+        .btn-hero-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #f5a800 0%, #e08b00 100%);
+            color: #071326 !important;
+            font-weight: 800;
+            font-size: 0.875rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(245, 168, 0, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-hero-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(245, 168, 0, 0.5);
+            color: #000000 !important;
+        }
+        .btn-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 9999px;
+            background: #ffffff;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            color: #1e293b !important;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+            transition: all 0.25s ease;
+        }
+        html.dark .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9 !important;
+        }
+        .btn-hero-secondary:hover {
+            transform: translateY(-2px);
+            border-color: rgba(245, 168, 0, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Ambient Glow Backgrounds */
@@ -298,6 +446,21 @@
             border: 1px solid rgba(11, 26, 46, 0.08) !important;
         }
 
+        .dropdown-title {
+            color: #0b1a2e;
+            transition: color 0.2s ease;
+        }
+        html.dark .dropdown-title {
+            color: #f8fafc !important;
+        }
+        .dropdown-desc {
+            color: #64748b;
+            transition: color 0.2s ease;
+        }
+        html.dark .dropdown-desc {
+            color: #94a3b8 !important;
+        }
+
         /* Buttons */
         .btn-upload-primary {
             display: inline-flex;
@@ -407,15 +570,15 @@
         .showcase-product-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 1.5rem;
-            padding: 2rem;
+            border-radius: 1.75rem;
+            padding: 2.25rem 2rem;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
         }
         .showcase-product-card:hover {
             transform: translateY(-4px);
@@ -434,6 +597,166 @@
         .showcase-border-amber:hover { border-color: rgba(245, 168, 0, 0.6) !important; }
         .showcase-border-emerald:hover { border-color: rgba(5, 150, 105, 0.6) !important; }
         .showcase-border-purple:hover { border-color: rgba(124, 58, 237, 0.6) !important; }
+
+        /* Line Cover & Product Grid Showcase */
+        .line-cover-wrap {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            background: #0f172a;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+        .line-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .line-cover-wrap:hover .line-cover-img {
+            transform: scale(1.05);
+        }
+        .line-cover-badge {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.65rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .line-products-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+        }
+        html.dark .line-products-section-header {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+        .line-products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .line-products-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        .line-product-item {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 1.125rem;
+            padding: 0.65rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .line-product-item:hover {
+            transform: translateY(-4px);
+            border-color: #f5a800;
+            box-shadow: 0 16px 30px -10px rgba(245, 168, 0, 0.22), 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+        html.dark .line-product-item {
+            background: rgba(15, 23, 42, 0.65) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+        html.dark .line-product-item:hover {
+            border-color: #f5a800 !important;
+            box-shadow: 0 16px 35px -8px rgba(245, 168, 0, 0.35), 0 0 20px rgba(245, 168, 0, 0.15) !important;
+        }
+        .line-product-thumb-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 0.875rem;
+            overflow: hidden;
+            background: linear-gradient(145deg, #f8fafc 0%, #ffffff 40%, #edf2f7 100%);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+        html.dark .line-product-thumb-wrap {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+            border-color: rgba(255, 255, 255, 0.06) !important;
+        }
+        .line-product-thumb {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain !important;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+            filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+        }
+        .line-product-item:hover .line-product-thumb {
+            transform: scale(1.1);
+            filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
+        }
+        .line-product-zoom-hint {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 19, 38, 0.25);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            opacity: 0;
+            border-radius: 0.875rem;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+        .line-product-item:hover .line-product-zoom-hint {
+            opacity: 1;
+        }
+        .line-product-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+        html.dark .line-product-title {
+            color: #f1f5f9 !important;
+        }
+        .line-product-tag {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
 
         .showcase-divider {
             border-top: 1px solid #e2e8f0;
@@ -522,25 +845,32 @@
             color: #94a3b8 !important;
         }
 
-        /* CTA Studio Card */
+        /* CTA Studio Card (Light Mode & Dark Mode) */
         .cta-banner-card {
-            background: linear-gradient(135deg, #0c182b 0%, #07101e 100%) !important;
-            border: 1px solid rgba(245, 168, 0, 0.4) !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
-            color: #ffffff !important;
+            background: linear-gradient(135deg, #ffffff 0%, #fffdf9 40%, #f8fafc 100%) !important;
+            border: 1px solid rgba(245, 168, 0, 0.35) !important;
+            box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(245, 168, 0, 0.1) !important;
+            color: #0b1a2e !important;
             position: relative;
-            border-radius: 1.5rem;
-            padding: 3.5rem 2rem;
+            border-radius: 1.75rem;
+            padding: 3.75rem 2rem;
             overflow: hidden;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
         .cta-banner-card h2 {
-            color: #ffffff !important;
+            color: #0b1a2e !important;
         }
 
         .cta-banner-card p {
-            color: #cbd5e1 !important;
+            color: #475569 !important;
+        }
+
+        .cta-banner-badge {
+            background-color: rgba(245, 168, 0, 0.12);
+            border: 1px solid rgba(245, 168, 0, 0.3);
+            color: #b45309;
         }
 
         .cta-banner-card .btn-cta-secondary {
@@ -548,23 +878,60 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.1) !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            padding: 15px 28px;
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 1px solid #cbd5e1 !important;
+            padding: 15px 30px;
             border-radius: 50px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
             text-decoration: none;
         }
         .cta-banner-card .btn-cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.2) !important;
+            background: #f8fafc !important;
+            border-color: #10b981 !important;
+            color: #059669 !important;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.18);
+            transform: translateY(-2px);
+        }
+
+        /* Dark Mode overrides for CTA Card */
+        html.dark .cta-banner-card {
+            background: linear-gradient(135deg, #0c182b 0%, #07101e 100%) !important;
+            border: 1px solid rgba(245, 168, 0, 0.4) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+            color: #ffffff !important;
+        }
+
+        html.dark .cta-banner-card h2 {
+            color: #ffffff !important;
+        }
+
+        html.dark .cta-banner-card p {
+            color: #cbd5e1 !important;
+        }
+
+        html.dark .cta-banner-badge {
+            background-color: rgba(245, 168, 0, 0.14);
+            border-color: rgba(245, 168, 0, 0.35);
+            color: #fcd34d !important;
+        }
+
+        html.dark .cta-banner-card .btn-cta-secondary {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: none !important;
+        }
+
+        html.dark .cta-banner-card .btn-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.16) !important;
             border-color: rgba(245, 168, 0, 0.6) !important;
             color: #f5a800 !important;
-            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
         }
 
         /* Footer */
@@ -616,6 +983,323 @@
             color: #ffffff !important;
         }
     </style>
+
+    <!-- Alpine Store & Global Modal Logic (Loaded before body parsing) -->
+    <script>
+        function rachiPrintStudio() {
+            return {
+                mobileMenuOpen: false,
+                activeLine: null,
+                activeModalImage: null,
+                activeModalTitle: '',
+                activeModalDesc: '',
+                activeModalTag: '',
+                activeModalSlug: '',
+                showQuoteModal: false,
+                quoteProduct: '',
+                quoteCategory: 'RACHI Print',
+                quoteServiceSlug: '',
+                quoteSubmitting: false,
+                quoteSuccess: false,
+                quoteProtocol: '',
+                quoteErrorMsg: '',
+                quoteForm: {
+                    name: '',
+                    empresa: '',
+                    phone: '',
+                    email: '',
+                    quantidade: '',
+                    prazo: 'padrao',
+                    message: ''
+                },
+
+                openQuoteModal(productName, lineName, serviceSlug) {
+                    this.quoteProduct = productName || 'Solução Gráfica RACHI Print';
+                    this.quoteCategory = lineName || this.activeModalTag || 'RACHI Print';
+                    this.quoteServiceSlug = serviceSlug || this.activeModalSlug || '';
+                    this.quoteSubmitting = false;
+                    this.quoteSuccess = false;
+                    this.quoteErrorMsg = '';
+                    this.quoteProtocol = '';
+                    this.showQuoteModal = true;
+                    document.body.style.overflow = 'hidden';
+
+                    // Update DOM fallback inputs
+                    const titleEl = document.getElementById('modal-quote-product-display');
+                    if (titleEl) titleEl.textContent = this.quoteProduct;
+                    const prodInput = document.getElementById('modal-quote-product-input');
+                    if (prodInput) prodInput.value = this.quoteProduct;
+                    const lineInput = document.getElementById('modal-quote-line-input');
+                    if (lineInput) lineInput.value = this.quoteCategory;
+                    const slugInput = document.getElementById('modal-quote-slug-input');
+                    if (slugInput) slugInput.value = this.quoteServiceSlug;
+
+                    const formBox = document.getElementById('quote-modal-form-content');
+                    if (formBox) formBox.style.display = 'block';
+                    const successBox = document.getElementById('quote-modal-success-content');
+                    if (successBox) successBox.style.display = 'none';
+
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                closeQuoteModal() {
+                    this.showQuoteModal = false;
+                    const modalEl = document.getElementById('rachi-quote-modal');
+                    if (modalEl) modalEl.style.display = 'none';
+                    if (!this.activeModalImage) {
+                        document.body.style.overflow = '';
+                    }
+                },
+
+                async submitQuote() {
+                    if (this.quoteSubmitting || this.quoteSuccess) return;
+                    if (!this.quoteForm.name || !this.quoteForm.email || !this.quoteForm.phone) {
+                        this.quoteErrorMsg = 'Por favor preencha os campos obrigatórios (Nome, E-mail e Telefone).';
+                        return;
+                    }
+                    this.quoteSubmitting = true;
+                    this.quoteErrorMsg = '';
+
+                    try {
+                        const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                        const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
+                        const res = await fetch('/print/solicitar-cotacao', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': token
+                            },
+                            body: JSON.stringify({
+                                name: this.quoteForm.name,
+                                empresa: this.quoteForm.empresa,
+                                phone: this.quoteForm.phone,
+                                email: this.quoteForm.email,
+                                produto: this.quoteProduct,
+                                linha: this.quoteCategory,
+                                service_slug: this.quoteServiceSlug,
+                                quantidade: this.quoteForm.quantidade,
+                                prazo: this.quoteForm.prazo,
+                                message: this.quoteForm.message
+                            })
+                        });
+
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                            this.quoteSuccess = true;
+                            this.quoteProtocol = data.protocol;
+                            const protoEl = document.getElementById('quote-protocol-display');
+                            if (protoEl) protoEl.textContent = data.protocol;
+                            const prodSuccessEl = document.getElementById('quote-success-product-display');
+                            if (prodSuccessEl) prodSuccessEl.textContent = this.quoteProduct;
+                            const formBox = document.getElementById('quote-modal-form-content');
+                            if (formBox) formBox.style.display = 'none';
+                            const successBox = document.getElementById('quote-modal-success-content');
+                            if (successBox) successBox.style.display = 'block';
+
+                            if (window.toast) {
+                                window.toast.success(data.message || 'Solicitação registada com sucesso!');
+                            }
+                        } else {
+                            this.quoteErrorMsg = data.message || (data.errors ? Object.values(data.errors).flat().join(', ') : 'Erro ao processar solicitação. Tente novamente.');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        this.quoteErrorMsg = 'Erro de comunicação com o servidor. Verifique a sua ligação.';
+                    } finally {
+                        this.quoteSubmitting = false;
+                        this.$nextTick(() => {
+                            if (window.lucide) window.lucide.createIcons();
+                        });
+                    }
+                },
+
+                toggleLine(lineId) {
+                    if (this.activeLine === lineId) {
+                        this.activeLine = null;
+                    } else {
+                        this.activeLine = lineId;
+                    }
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                selectLine(lineId) {
+                    this.activeLine = lineId;
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                        const cardEl = document.getElementById('linha-' + lineId);
+                        if (cardEl) {
+                            cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    });
+                },
+
+                openModal(img, title, desc, tag, slug) {
+                    this.activeModalImage = img;
+                    this.activeModalTitle = title;
+                    this.activeModalDesc = desc;
+                    this.activeModalTag = tag;
+                    this.activeModalSlug = slug || '';
+                    document.body.style.overflow = 'hidden';
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                },
+
+                closeModal() {
+                    this.activeModalImage = null;
+                    this.activeModalSlug = '';
+                    if (!this.showQuoteModal) {
+                        document.body.style.overflow = '';
+                    }
+                },
+
+                init() {
+                    window.rachiPrintInstance = this;
+                    const handleScroll = () => {
+                        const nav = document.getElementById('navbar');
+                        if (nav) {
+                            if (window.scrollY > 30) {
+                                nav.classList.add('header-scrolled');
+                            } else {
+                                nav.classList.remove('header-scrolled');
+                            }
+                        }
+                    };
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    handleScroll();
+                }
+            };
+        }
+
+        window.rachiPrintStudio = rachiPrintStudio;
+        document.addEventListener('alpine:init', () => {
+            if (window.Alpine) {
+                Alpine.data('rachiPrintStudio', rachiPrintStudio);
+            }
+        });
+
+        // Global Modal Triggers (Works seamlessly across Alpine & Vanilla JS)
+        window.rachiOpenQuoteModal = function(productName, lineName, serviceSlug) {
+            productName = productName || 'Solução Gráfica RACHI Print';
+            lineName = lineName || 'RACHI Print';
+            serviceSlug = serviceSlug || '';
+
+            if (window.rachiPrintInstance && typeof window.rachiPrintInstance.openQuoteModal === 'function') {
+                window.rachiPrintInstance.openQuoteModal(productName, lineName, serviceSlug);
+                return false;
+            }
+
+            try {
+                const bodyEl = document.querySelector('body[x-data]');
+                if (bodyEl && window.Alpine) {
+                    const d = Alpine.$data(bodyEl);
+                    if (d && typeof d.openQuoteModal === 'function') {
+                        d.openQuoteModal(productName, lineName, serviceSlug);
+                        return false;
+                    }
+                }
+            } catch (e) {}
+
+            const modalEl = document.getElementById('rachi-quote-modal');
+            if (modalEl) {
+                modalEl.removeAttribute('x-cloak');
+                modalEl.style.display = 'flex';
+                const titleEl = document.getElementById('modal-quote-product-display');
+                if (titleEl) titleEl.textContent = productName;
+                const prodInput = document.getElementById('modal-quote-product-input');
+                if (prodInput) prodInput.value = productName;
+                const lineInput = document.getElementById('modal-quote-line-input');
+                if (lineInput) lineInput.value = lineName;
+                const slugInput = document.getElementById('modal-quote-slug-input');
+                if (slugInput) slugInput.value = serviceSlug;
+                const formBox = document.getElementById('quote-modal-form-content');
+                if (formBox) formBox.style.display = 'block';
+                const successBox = document.getElementById('quote-modal-success-content');
+                if (successBox) successBox.style.display = 'none';
+                document.body.style.overflow = 'hidden';
+            }
+            return false;
+        };
+
+        window.rachiCloseQuoteModal = function() {
+            if (window.rachiPrintInstance && typeof window.rachiPrintInstance.closeQuoteModal === 'function') {
+                window.rachiPrintInstance.closeQuoteModal();
+                return false;
+            }
+            try {
+                const bodyEl = document.querySelector('body[x-data]');
+                if (bodyEl && window.Alpine) {
+                    const d = Alpine.$data(bodyEl);
+                    if (d && typeof d.closeQuoteModal === 'function') {
+                        d.closeQuoteModal();
+                        return false;
+                    }
+                }
+            } catch (e) {}
+            const modalEl = document.getElementById('rachi-quote-modal');
+            if (modalEl) {
+                modalEl.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            return false;
+        };
+
+        window.rachiSubmitQuoteForm = async function(e) {
+            if (e) e.preventDefault();
+            const name = document.querySelector('input[x-model="quoteForm.name"]')?.value || '';
+            const empresa = document.querySelector('input[x-model="quoteForm.empresa"]')?.value || '';
+            const phone = document.querySelector('input[x-model="quoteForm.phone"]')?.value || '';
+            const email = document.querySelector('input[x-model="quoteForm.email"]')?.value || '';
+            const quantidade = document.querySelector('input[x-model="quoteForm.quantidade"]')?.value || '';
+            const prazo = document.querySelector('select[x-model="quoteForm.prazo"]')?.value || 'padrao';
+            const message = document.querySelector('textarea[x-model="quoteForm.message"]')?.value || '';
+            const produto = document.getElementById('modal-quote-product-input')?.value || document.getElementById('modal-quote-product-display')?.textContent || 'Solução Gráfica RACHI Print';
+            const linha = document.getElementById('modal-quote-line-input')?.value || 'RACHI Print';
+            const service_slug = document.getElementById('modal-quote-slug-input')?.value || '';
+
+            if (!name || !email || !phone) {
+                alert('Por favor preencha os campos obrigatórios (Nome, E-mail e Telefone).');
+                return false;
+            }
+
+            try {
+                const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                const token = csrfMeta ? csrfMeta.getAttribute('content') : '';
+                const res = await fetch('/print/solicitar-cotacao', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: JSON.stringify({ name, empresa, phone, email, produto, linha, service_slug, quantidade, prazo, message })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    const protoEl = document.getElementById('quote-protocol-display');
+                    if (protoEl) protoEl.textContent = data.protocol;
+                    const prodSuccessEl = document.getElementById('quote-success-product-display');
+                    if (prodSuccessEl) prodSuccessEl.textContent = produto;
+                    const formBox = document.getElementById('quote-modal-form-content');
+                    if (formBox) formBox.style.display = 'none';
+                    const successBox = document.getElementById('quote-modal-success-content');
+                    if (successBox) successBox.style.display = 'block';
+                    if (window.toast) window.toast.success(data.message || 'Solicitação registada com sucesso!');
+                } else {
+                    alert(data.message || 'Erro ao processar solicitação.');
+                }
+            } catch(err) {
+                console.error(err);
+                alert('Erro ao enviar solicitação.');
+            }
+            return false;
+        };
+    </script>
 </head>
 <body x-data="rachiPrintStudio()" class="ambient-bg antialiased">
 
@@ -713,14 +1397,11 @@
                 <a href="#produtos-graficos" class="nav-link"><span>Produtos</span></a>
                 <a href="#como-funciona" class="nav-link"><span>Diferenciais</span></a>
                 <a href="/loja" class="nav-link"><span>Loja</span></a>
-                <a href="/contacto" class="nav-link"><span>Pedir Orçamento</span></a>
                 <a href="/contacto" class="nav-link"><span>Contacto</span></a>
             </nav>
 
             <!-- Action Buttons -->
             <div class="flex items-center gap-2.5 sm:gap-3">
-                
-
                 <!-- Mobile Menu Button -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors">
                     <i data-lucide="menu" class="w-5 h-5"></i>
@@ -742,70 +1423,37 @@
                 <a href="#produtos-graficos" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Produtos Gráficos</a>
                 <a href="#como-funciona" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Diferenciais</a>
                 <a href="/loja" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Loja</a>
-                <a href="/contacto" class="block text-sm text-amber-600 dark:text-amber-400 font-bold py-1">Pedir Orçamento</a>
                 <a href="/contacto" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Contacto</a>
             </div>
         </div>
     </header>
 
+        <!-- ============================================================ -->
+    <!-- HERO SECTION (Dinâmico, Interativo e de Alto Padrão)         -->
     <!-- ============================================================ -->
-    <!-- HERO SECTION                                                 -->
-    <!-- ============================================================ -->
-    <main class="pt-32 pb-20">
-        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 sm:pt-14">
-            <div class="space-y-8 max-w-4xl mx-auto">
+    <main class="ambient-bg pt-32 pb-20">
+        <section class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 sm:pt-14 overflow-hidden">
+            <!-- Subtle Ambient Light Orbs -->
+            <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[650px] h-[320px] bg-gradient-to-tr from-amber-500/15 via-orange-500/10 to-blue-500/10 blur-[100px] pointer-events-none -z-10 rounded-full"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
                 
                 <!-- Pill Badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full section-tag text-xs font-semibold">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    <span>Gráfica de Alto Padrão • Luanda &amp; Províncias</span>
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-semibold shadow-xs mb-6">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse"></span>
+                    <span>Gráfica de Alto Padrão</span>
                 </div>
 
                 <!-- Main Heading -->
-                <h1 class="hero-title text-4xl sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
+                <h1 class="hero-title text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.12] tracking-tight uppercase mx-auto text-center mb-6">
                     Dê vida aos seus materiais com <br class="hidden sm:inline">
                     <span class="text-gradient-amber">acabamento institucional</span>
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="hero-subtitle text-base sm:text-xl leading-relaxed max-w-3xl mx-auto font-normal">
+                <p class="hero-subtitle text-slate-600 dark:text-slate-300 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto font-normal text-center mb-2">
                     Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                 </p>
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-                    <a href="/contacto" class="btn-upload-primary">
-                        <i data-lucide="printer" class="w-5 h-5"></i>
-                        <span>Solicitar Cotação</span>
-                    </a>
-
-                    <a href="#produtos-graficos" class="btn-watch-examples">
-                        <i data-lucide="layers" class="w-5 h-5 text-amber-500"></i>
-                        <span>Ver 4 Linhas de Produção</span>
-                    </a>
-                </div>
-
-                <!-- Trust Indicators -->
-                <div class="pt-8 hero-trust-bar max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-8 sm:gap-12 text-xs sm:text-sm">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
-                            <i data-lucide="check-circle" class="w-4 h-4"></i>
-                        </div>
-                        <span class="font-medium">Offset &amp; Digital</span>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
-                            <i data-lucide="shield-check" class="w-4 h-4"></i>
-                        </div>
-                        <span class="font-medium">100% Controlo de Qualidade</span>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-full bg-sky-500/10 text-sky-500 flex items-center justify-center shrink-0">
-                            <i data-lucide="truck" class="w-4 h-4"></i>
-                        </div>
-                        <span class="font-medium">Entrega Nacional</span>
-                    </div>
-                </div>
 
             </div>
         </section>
@@ -814,8 +1462,9 @@
         <!-- SHOWCASE SECTION: "Veja no que seus materiais gráficos      -->
         <!-- podem se transformar" (As 4 Linhas Oficiais de Produção)     -->
         <!-- ============================================================ -->
-        <section id="produtos-graficos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28">
-            <div class="text-center max-w-3xl mx-auto mb-16">
+        <section id="produtos-graficos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 scroll-mt-24">
+            <div id="catalogo"></div>
+            <div class="text-center max-w-3xl mx-auto mb-12">
                 <span class="text-xs font-bold uppercase tracking-widest section-tag px-3 py-1 rounded-full">
                     Catálogo de Soluções
                 </span>
@@ -823,315 +1472,286 @@
                     Veja no que seus materiais gráficos podem se transformar
                 </h2>
                 <p class="section-desc text-sm sm:text-base mt-3">
-                    As quatro linhas oficiais de produção da RACHI Print, prontas para atender as exigências mais elevadas de empresas e instituições.
+                    As quatro linhas oficiais de produção da RACHI Print. Conheça abaixo as soluções e amostras de cada linha ou aceda à página oficial para ver especificações e solicitar cotação.
                 </p>
             </div>
 
             <!-- 4 Detailed Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <!-- PRODUTO 1: Impressão de documentos institucionais -->
-                <div class="showcase-product-card showcase-border-blue group">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition"></div>
+                <!-- LINHA 1: Impressão de documentos institucionais -->
+                <div id="linha-1" 
+                     @click="window.location.href = '{{ route('print.service.show', 'documentos-institucionais') }}'"
+                     class="showcase-product-card showcase-border-blue group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                     role="link"
+                     tabindex="0"
+                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'documentos-institucionais') }}'">
+                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition duration-500"></div>
                     
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-500 flex items-center justify-center">
+                        <!-- Top Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="file-text" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/25">
                                 Documentos Oficiais
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-bold showcase-title group-hover:text-blue-500 transition">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition leading-tight">
                             Impressão de documentos institucionais
                         </h3>
 
-                        <p class="showcase-desc text-sm sm:text-base mt-3.5 leading-relaxed font-normal">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
                             Impressão de relatórios, brochuras, manuais, propostas e documentos oficiais com qualidade institucional.
                         </p>
 
                         <!-- Bullets Oficiais -->
-                        <div class="mt-6 pt-6 showcase-divider space-y-3">
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Impressão a cores e P&amp;B</span>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Impressão a cores e P&amp;B</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Acabamentos variados</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos variados</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Tiragens flexíveis</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Tiragens flexíveis</span>
                             </div>
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl showcase-app-box text-xs space-y-1">
-                            <span class="font-bold showcase-app-label block uppercase text-[10px] tracking-wider">Aplicações comuns:</span>
-                            <span>Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</span>
+                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-500"></i>
+                                <span>Aplicações Comuns:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 showcase-divider">
-                        <a href="/contacto" class="w-full py-3.5 px-5 rounded-xl showcase-btn showcase-btn-blue font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2">
-                            <span>Solicitar Cotação de Documentos</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <!-- Botão de Ação do Card -->
+                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
+                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-blue-600 dark:group-hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-blue-500/25">
+                            <span>Saber mais</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- PRODUTO 2: Materiais promocionais -->
-                <div class="showcase-product-card showcase-border-amber group">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition"></div>
+                <!-- LINHA 2: Materiais promocionais -->
+                <div id="linha-2" 
+                     @click="window.location.href = '{{ route('print.service.show', 'materiais-promocionais') }}'"
+                     class="showcase-product-card showcase-border-amber group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                     role="link"
+                     tabindex="0"
+                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'materiais-promocionais') }}'">
+                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition duration-500"></div>
                     
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-500 flex items-center justify-center">
+                        <!-- Top Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="gift" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25">
                                 Brindes &amp; Ativação
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-bold showcase-title group-hover:text-amber-500 transition">
-                            Materiais promocionais
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition leading-tight">
+                            Materiais promocionais &amp; brindes
                         </h3>
 
-                        <p class="showcase-desc text-sm sm:text-base mt-3.5 leading-relaxed font-normal">
-                            Criação e produção de brindes e materiais promocionais para campanhas, activações e fidelização.
+                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Brindes personalizados, kits corporativos e materiais promocionais de alto impacto para fixação da marca.
                         </p>
 
                         <!-- Bullets Oficiais -->
-                        <div class="mt-6 pt-6 showcase-divider space-y-3">
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Brindes personalizados</span>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Personalização premium</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Campanhas e activações</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Kits para eventos e colaboradores</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Opções para diferentes orçamentos</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Gravação a laser, UV e serigrafia</span>
                             </div>
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl showcase-app-box text-xs space-y-1">
-                            <span class="font-bold showcase-app-label block uppercase text-[10px] tracking-wider">Aplicações comuns:</span>
-                            <span>Agendas Executivas, Cadernos Corporativos, T-Shirts &amp; Polos bordados, Garrafas Térmicas, Canecas, Pen Drives, Mochilas e Kits Onboarding.</span>
+                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+                                <span>Aplicações Comuns:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano, Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 showcase-divider">
-                        <a href="/contacto" class="w-full py-3.5 px-5 rounded-xl showcase-btn showcase-btn-amber font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2">
-                            <span>Solicitar Cotação de Brindes</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <!-- Botão de Ação do Card -->
+                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
+                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-amber-500 group-hover:text-slate-950 dark:group-hover:text-slate-950 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-amber-500/25">
+                            <span>Saber mais</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- PRODUTO 3: Produção gráfica corporativa -->
-                <div class="showcase-product-card showcase-border-emerald group">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition"></div>
+                <!-- LINHA 3: Produção gráfica corporativa -->
+                <div id="linha-3" 
+                     @click="window.location.href = '{{ route('print.service.show', 'producao-grafica-corporativa') }}'"
+                     class="showcase-product-card showcase-border-emerald group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                     role="link"
+                     tabindex="0"
+                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'producao-grafica-corporativa') }}'">
+                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition duration-500"></div>
                     
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 flex items-center justify-center">
+                        <!-- Top Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="briefcase" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25">
                                 Papelaria &amp; Identidade
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-bold showcase-title group-hover:text-emerald-500 transition">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition leading-tight">
                             Produção gráfica corporativa
                         </h3>
 
-                        <p class="showcase-desc text-sm sm:text-base mt-3.5 leading-relaxed font-normal">
-                            Produção de materiais gráficos alinhados à identidade visual da sua empresa ou instituição.
+                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Papelaria institucional, pastas, envelopes e cartões de visita com precisão de cor e rigor técnico.
                         </p>
 
                         <!-- Bullets Oficiais -->
-                        <div class="mt-6 pt-6 showcase-divider space-y-3">
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Identidade visual consistente</span>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Identidade visual consistente</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Acabamento profissional</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Papéis nobres e especiais</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Prazos e qualidade controlados</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos táteis diferenciados</span>
                             </div>
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl showcase-app-box text-xs space-y-1">
-                            <span class="font-bold showcase-app-label block uppercase text-[10px] tracking-wider">Aplicações comuns:</span>
-                            <span>Cartões de Visita (soft touch, cantos redondos), Pastas com bolsa e orelha, Papel Timbrado, Envelopes Timbrados e Carimbos automáticos.</span>
+                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-500"></i>
+                                <span>Aplicações Comuns:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 showcase-divider">
-                        <a href="/contacto" class="w-full py-3.5 px-5 rounded-xl showcase-btn showcase-btn-emerald font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2">
-                            <span>Solicitar Cotação Corporativa</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                    <!-- Botão de Ação do Card -->
+                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
+                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-emerald-600 dark:group-hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-emerald-500/25">
+                            <span>Saber mais</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- PRODUTO 4: Produção gráfica para eventos -->
-                <div class="showcase-product-card showcase-border-purple group">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/20 transition"></div>
+                <!-- LINHA 4: Produção gráfica para eventos -->
+                <div id="linha-4" 
+                     @click="window.location.href = '{{ route('print.service.show', 'grafica-eventos') }}'"
+                     class="showcase-product-card showcase-border-purple group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                     role="link"
+                     tabindex="0"
+                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'grafica-eventos') }}'">
+                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-purple-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/20 transition duration-500"></div>
                     
                     <div>
-                        <div class="flex items-center justify-between mb-5">
-                            <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-500 flex items-center justify-center">
+                        <!-- Top Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="calendar-range" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/25">
                                 Grandes Formatos &amp; Feiras
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-bold showcase-title group-hover:text-purple-500 transition">
-                            Produção gráfica para eventos
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-tight">
+                            Produção gráfica para eventos &amp; feiras
                         </h3>
 
-                        <p class="showcase-desc text-sm sm:text-base mt-3.5 leading-relaxed font-normal">
-                            Produção de banners, convites, credenciais, sinalética e materiais para eventos corporativos.
+                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Materiais para stands, credenciais, sinalização e comunicação visual integrada para conferências e eventos.
                         </p>
 
                         <!-- Bullets Oficiais -->
-                        <div class="mt-6 pt-6 showcase-divider space-y-3">
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Materiais para todos os formatos</span>
+                        <div class="mt-6 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Grandes formatos e sinalização</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Entrega alinhada ao evento</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Credenciais e crachás com fita</span>
                             </div>
-                            <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold showcase-bullet">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-xs shrink-0 font-bold">✓</span>
-                                <span>Impacto visual e legibilidade</span>
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Prazos de entrega rigorosos</span>
                             </div>
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl showcase-app-box text-xs space-y-1">
-                            <span class="font-bold showcase-app-label block uppercase text-[10px] tracking-wider">Aplicações comuns:</span>
-                            <span>Roll-up Banners (85x200cm, 120x200cm), Backdrops de Palco, Credenciais em PVC com fita personalizada, Totens e Sinalética Direcional.</span>
+                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500"></i>
+                                <span>Aplicações Comuns:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica, Balcões Promocionais e Credenciais PVC para Congressos.</p>
                         </div>
                     </div>
 
-                    <div class="pt-6 mt-6 showcase-divider">
-                        <a href="/contacto" class="w-full py-3.5 px-5 rounded-xl showcase-btn showcase-btn-purple font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2">
-                            <span>Solicitar Cotação para Eventos</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ============================================================ -->
-        <!-- FEATURE HIGHLIGHTS                                           -->
-        <!-- ============================================================ -->
-        <section id="como-funciona" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest section-tag px-3 py-1 rounded-full">
-                    Excelência em Cada Detalhe
-                </span>
-                <h2 class="section-title text-3xl sm:text-4xl font-black mt-4">
-                    Por que as empresas líderes confiam na RACHI Print
-                </h2>
-                <p class="section-desc text-sm sm:text-base mt-3">
-                    Combinamos capacidade industrial com acabamentos manuais nobres para posicionar a sua marca com máxima autoridade.
-                </p>
-            </div>
-
-            <!-- 4 Grid Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- Card 1 -->
-                <div class="feature-card group">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-500 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                        <i data-lucide="award" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="feature-card-title text-lg font-bold mb-2">Faça sua empresa parecer maior</h3>
-                    <p class="feature-card-desc text-xs leading-relaxed">
-                        Transforme apresentações e relatórios em publicações executivas que transmitem solidez, prestígio institucional e credibilidade.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="feature-card group">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                        <i data-lucide="sparkles" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="feature-card-title text-lg font-bold mb-2">Destaque-se da concorrência</h3>
-                    <p class="feature-card-desc text-xs leading-relaxed">
-                        Acabamentos com verniz UV localizado, laminação soft-touch, relevo seco e hot-stamping que colocam sua marca num patamar superior.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="feature-card group">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                        <i data-lucide="calendar" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="feature-card-title text-lg font-bold mb-2">Perfeito para eventos &amp; campanhas</h3>
-                    <p class="feature-card-desc text-xs leading-relaxed">
-                        Produção ágil de credenciais, sinalética, backdrops e brindes temáticos prontos no prazo exato da sua activação ou feira.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="feature-card group">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-500 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                        <i data-lucide="sliders" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="feature-card-title text-lg font-bold mb-2">Feito sob medida para seu orçamento</h3>
-                    <p class="feature-card-desc text-xs leading-relaxed">
-                        Flexibilidade de tiragens: desde pequenas tiragens digitais sob demanda até grandes tiragens offset para ampla distribuição.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ============================================================ -->
-        <!-- TRUST & TECHNICAL SPECS BAR                                  -->
-        <!-- ============================================================ -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28">
-            <div class="trust-strip">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-black text-[#d97706] dark:text-[#f5a800]">+1.2M</div>
-                        <div class="text-xs trust-label font-medium mt-1">Páginas &amp; Peças Entregues</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-black text-emerald-500">100%</div>
-                        <div class="text-xs trust-label font-medium mt-1">Fidelidade Cromática &amp; ISO</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-black text-sky-500">48h</div>
-                        <div class="text-xs trust-label font-medium mt-1">Opção Express em Luanda</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-black text-purple-500">18</div>
-                        <div class="text-xs trust-label font-medium mt-1">Províncias Atendidas</div>
+                    <!-- Botão de Ação do Card -->
+                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
+                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-purple-600 dark:group-hover:bg-purple-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-purple-500/25">
+                            <span>Saber mais</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1146,7 +1766,7 @@
                 <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 max-w-2xl mx-auto space-y-6">
-                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 inline-block">
+                    <span class="cta-banner-badge text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full inline-block">
                         Atendimento Corporativo
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-black">
@@ -1155,13 +1775,9 @@
                     <p class="text-sm sm:text-base leading-relaxed">
                         Fale diretamente com os nossos consultores gráficos e receba um orçamento personalizado com as melhores especificações para o seu projeto.
                     </p>
-                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a href="/contacto" class="btn-upload-primary">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                            <span>Falar Connosco / Pedir Proposta</span>
-                        </a>
+                    <div class="pt-2 flex items-center justify-center">
                         <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print." target="_blank" class="btn-cta-secondary">
-                            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
+                            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
                             <span>WhatsApp Direto</span>
                         </a>
                     </div>
@@ -1169,12 +1785,329 @@
             </div>
         </section>
 
+        <!-- Product Preview Modal (Alpine Lightbox) -->
+        <div x-show="activeModalImage" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             @keydown.escape.window="closeModal()"
+             class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md"
+             style="display: none;">
+            
+            <div class="fixed inset-0" @click="closeModal()"></div>
+
+            <div class="relative w-full max-w-3xl bg-white dark:bg-[#0c192c] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-10"
+                 @click.stop>
+                
+                <!-- Close Button -->
+                <button @click="closeModal()" 
+                        class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center transition shadow-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Modal Content Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <!-- Image container with subtle dark background -->
+                    <div class="relative bg-gradient-to-b from-slate-900 via-[#0a1424] to-[#060c18] flex items-center justify-center p-8 min-h-[300px] md:min-h-[420px] max-h-[500px] overflow-hidden">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,168,0,0.14),transparent_65%)] pointer-events-none"></div>
+                        <img :src="activeModalImage" :alt="activeModalTitle" class="relative z-10 max-h-[420px] w-auto max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-transform duration-300">
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 mb-3"
+                                 x-text="activeModalTag">
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight" 
+                                x-text="activeModalTitle">
+                            </h3>
+                            <p class="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal" 
+                               x-text="activeModalDesc">
+                            </p>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
+                            <button type="button"
+                                    @click="closeModal(); openQuoteModal(activeModalTitle, activeModalTag, activeModalSlug)"
+                                    class="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#f5a800] hover:text-[#080c16] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg cursor-pointer">
+                                <i data-lucide="file-text" class="w-4 h-4"></i>
+                                <span>Solicitar Cotação deste Produto</span>
+                            </button>
+                            <a :href="'https://wa.me/244972888585?text=' + encodeURIComponent('Olá! Gostaria de solicitar cotação para o produto: ' + activeModalTitle + ' da RACHI Print.')"
+                               target="_blank"
+                               class="w-full py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
+                                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                <span>Pedir Cotação via WhatsApp</span>
+                            </a>
+                            <template x-if="activeModalSlug">
+                                <a :href="'/print/servicos/' + activeModalSlug + '?produto=' + encodeURIComponent(activeModalTitle)"
+                                   class="w-full py-3 px-5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition text-decoration-none">
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                    <span>Abrir Página da Linha &amp; Cotação</span>
+                                </a>
+                            </template>
+                            <button @click="closeModal()" 
+                                    class="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                                Fechar Visualização
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- MODAL FORMULÁRIO DE COTAÇÃO (SALVA NO BANCO & ADMIN)          -->
+        <!-- ============================================================ -->
+        <div x-show="showQuoteModal"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
+             id="rachi-quote-modal"
+             style="z-index: 99999;"
+             @click.self="closeQuoteModal()"
+             @keydown.escape.window="closeQuoteModal()"
+             x-cloak>
+
+            <div x-show="showQuoteModal"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+                 class="relative w-full max-w-2xl bg-white dark:bg-[#0c1322] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-8 z-20">
+
+                <!-- Botão Fechar -->
+                <button type="button"
+                        @click="closeQuoteModal()"
+                        onclick="window.rachiCloseQuoteModal(); return false;"
+                        class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition cursor-pointer">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+
+                <!-- Estado 1: Formulário de Solicitação -->
+                <div x-show="!quoteSuccess" id="quote-modal-form-content" class="p-6 sm:p-8">
+                    <!-- Header do Modal -->
+                    <div class="mb-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-[#f5a800] text-xs font-bold uppercase tracking-wider mb-2">
+                            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                            <span>RACHI Print • Cotação Oficial</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                            Solicitar Cotação Gráfica
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                            Preencha as informações do solicitante. A sua solicitação será registada no sistema e a equipa comercial responderá com a proforma oficial em até 2 horas úteis.
+                        </p>
+
+                        <!-- Item Selecionado -->
+                        <div class="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 font-bold">
+                                <i data-lucide="package" class="w-4 h-4"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[10px] uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Item Selecionado</div>
+                                <div class="text-xs font-bold text-slate-900 dark:text-white truncate" id="modal-quote-product-display" x-text="quoteProduct"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="modal-quote-product-input" name="produto">
+                        <input type="hidden" id="modal-quote-line-input" name="linha">
+                        <input type="hidden" id="modal-quote-slug-input" name="service_slug">
+                    </div>
+
+                    <!-- Mensagem de Erro (se houver) -->
+                    <div x-show="quoteErrorMsg" 
+                         x-transition 
+                         class="mb-4 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-start gap-2.5">
+                        <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-0.5 text-rose-500"></i>
+                        <span x-text="quoteErrorMsg"></span>
+                    </div>
+
+                    <!-- Formulário -->
+                    <form id="rachi-quote-form" @submit.prevent="submitQuote()" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Nome Completo -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Nome do Solicitante <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       x-model="quoteForm.name" 
+                                       required 
+                                       placeholder="Ex: Dr. António Silva"
+                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+
+                            <!-- Empresa / Instituição -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Empresa / Instituição
+                                </label>
+                                <input type="text" 
+                                       x-model="quoteForm.empresa" 
+                                       placeholder="Ex: Banco / Empresa LDA"
+                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Telefone / WhatsApp -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Telefone / WhatsApp <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="tel" 
+                                       x-model="quoteForm.phone" 
+                                       required 
+                                       placeholder="Ex: +244 972 888 585"
+                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+
+                            <!-- E-mail -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    E-mail Corporativo <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="email" 
+                                       x-model="quoteForm.email" 
+                                       required 
+                                       placeholder="comercial@empresa.co.ao"
+                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Quantidade Estimada -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Quantidade / Tiragem Estimada
+                                </label>
+                                <input type="text" 
+                                       x-model="quoteForm.quantidade" 
+                                       placeholder="Ex: 50 un / 500 exemplares / 10 m²"
+                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                            </div>
+
+                            <!-- Prazo Desejado -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                    Prazo de Entrega Desejado
+                                </label>
+                                <select x-model="quoteForm.prazo"
+                                        class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                    <option value="padrao">Prazo Normal (3 a 5 dias úteis)</option>
+                                    <option value="urgente">Urgência Expresso (24h a 48h úteis)</option>
+                                    <option value="programado">Entrega Programada (Evento futuro)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Especificações / Mensagem -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                Especificações &amp; Requisitos Adicionais
+                            </label>
+                            <textarea x-model="quoteForm.message" 
+                                      rows="3" 
+                                      placeholder="Descreva detalhes específicos, dimensões personalizadas, tipos de acabamento (bainha, ilhós, laminação mate/brilho, gramagem, etc.)..."
+                                      class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition"></textarea>
+                        </div>
+
+                        <!-- Ações do Formulário -->
+                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                                <span>Salvo de imediato no sistema RACHI</span>
+                            </div>
+
+                            <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                                <button type="button" 
+                                        @click="closeQuoteModal()" 
+                                        class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                                    Cancelar
+                                </button>
+                                
+                                <button type="submit" 
+                                        :disabled="quoteSubmitting"
+                                        class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md shadow-amber-500/20 disabled:opacity-50 cursor-pointer">
+                                    <template x-if="quoteSubmitting">
+                                        <svg class="animate-spin h-3.5 w-3.5 text-slate-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                        </svg>
+                                    </template>
+                                    <template x-if="!quoteSubmitting">
+                                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                    </template>
+                                    <span x-text="quoteSubmitting ? 'A enviar solicitação...' : 'Confirmar e Enviar Pedido'"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Estado 2: Sucesso com Protocolo -->
+                <div x-show="quoteSuccess" id="quote-modal-success-content" class="p-8 text-center" x-cloak>
+                    <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 mx-auto flex items-center justify-center mb-4">
+                        <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-2">
+                        Solicitação Registada no Sistema
+                    </span>
+
+                    <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                        Cotação Enviada com Sucesso!
+                    </h3>
+
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-md mx-auto">
+                        O seu pedido de cotação para <strong class="text-slate-900 dark:text-white" id="quote-success-product-display" x-text="quoteProduct"></strong> foi enviado para o departamento de produção e já está disponível em <strong class="text-amber-500">Solicitações &amp; Ordens</strong> da administração.
+                    </p>
+
+                    <!-- Box de Protocolo -->
+                    <div class="my-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 max-w-sm mx-auto">
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                            Número de Protocolo Oficial
+                        </div>
+                        <div class="text-xl sm:text-2xl font-black text-[#f5a800] tracking-wider font-mono select-all" id="quote-protocol-display" x-text="quoteProtocol"></div>
+                        <div class="text-[11px] text-slate-500 mt-1">Guarde este código para acompanhamento do seu pedido</div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
+                        <a :href="'https://wa.me/244972888585?text=' + encodeURIComponent('Olá! Acabei de submeter uma solicitação de cotação para ' + quoteProduct + ' com o Protocolo ' + quoteProtocol + '. Poderiam confirmar a recepção?')"
+                           target="_blank"
+                           class="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Acompanhar via WhatsApp</span>
+                        </a>
+
+                        <button type="button"
+                                @click="closeQuoteModal()"
+                                onclick="window.rachiCloseQuoteModal(); return false;"
+                                class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                            Concluir &amp; Fechar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </main>
 
     <!-- ============================================================ -->
     <!-- FOOTER                                                       -->
     <!-- ============================================================ -->
-        <!-- ============================================================ -->
+    <!-- ============================================================ -->
     <!-- FOOTER                                                       -->
     <!-- ============================================================ -->
     <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
@@ -1234,32 +2167,11 @@
         </div>
     </footer>
 
-    <!-- Alpine.js Application Logic -->
+    <!-- Bottom Scripts -->
     <script>
-        function rachiPrintStudio() {
-            return {
-                mobileMenuOpen: false,
-
-                init() {
-                    const handleScroll = () => {
-                        const nav = document.getElementById('navbar');
-                        if (nav) {
-                            if (window.scrollY > 30) {
-                                nav.classList.add('header-scrolled');
-                            } else {
-                                nav.classList.remove('header-scrolled');
-                            }
-                        }
-                    };
-                    window.addEventListener('scroll', handleScroll, { passive: true });
-                    handleScroll();
-                }
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) {
-                lucide.createIcons();
+                window.lucide.createIcons();
             }
         });
     </script>

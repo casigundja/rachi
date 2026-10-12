@@ -382,6 +382,7 @@
         html.dark .bullet-sky     { background-color: rgba(12, 74, 110, 0.6); color: #38bdf8; }
         html.dark .bullet-teal    { background-color: rgba(19, 78, 74, 0.6); color: #2dd4bf; }
     </style>
+    <script src="/capital-requests.js?v=20261011"></script>
 </head>
 <body x-data="{ mobileMenuOpen: false }">
 
@@ -434,45 +435,45 @@
                          x-cloak
                          class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-[#071326]/95 backdrop-blur-2xl border border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5">
                         
-                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 transition group">
+                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/15 text-emerald-800 dark:text-emerald-400 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
+                                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
                                 <div>
-                                    <div class="font-bold text-xs dropdown-title text-emerald-300">RACHI Human Capital</div>
-                                    <div class="text-[11px] text-emerald-400/80 dropdown-desc">Pessoas &amp; Gestão</div>
+                                    <div class="font-bold text-xs dropdown-title text-emerald-700 dark:text-emerald-300">RACHI Human Capital</div>
+                                    <div class="text-[11px] text-emerald-600/90 dark:text-emerald-400/80 dropdown-desc">Pessoas &amp; Gestão</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-100 transition"></i>
                         </a>
 
-                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-300 hover:text-indigo-300 transition group">
+                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-500/15 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Capacitação &amp; Ensino</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
 
-                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-300 hover:text-sky-300 transition group">
+                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-50 dark:hover:bg-sky-500/15 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">03</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
 
-                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-500/15 text-slate-300 hover:text-amber-300 transition group">
+                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-500/15 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-300 transition group">
                             <div class="flex items-center gap-3">
                                 <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">04</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Print</div>
-                                    <div class="text-[11px] text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
@@ -497,7 +498,7 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 
 
-                <a href="/contacto" class="btn-cta-emerald group">
+                <a href="#solicitar-cotacao" class="btn-cta-emerald group">
                     <i data-lucide="users" class="w-4 h-4"></i>
                     <span>Consultoria RH</span>
                 </a>
@@ -512,19 +513,19 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-[#071326]/98 backdrop-blur-2xl border-t border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
-            <a href="/" class="block font-medium py-1.5 text-white hover:text-[#10b981]">Home</a>
-            <div class="border-t border-white/10 pt-2">
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl border-t border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+            <a href="/" class="block font-medium py-1.5 text-slate-900 dark:text-white hover:text-[#10b981]">Home</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-[#10b981] tracking-wider">Soluções</span>
                 <div class="pl-3 mt-1 space-y-1.5">
-                    <a href="/capital" class="block text-sm text-emerald-400 font-bold">01 RACHI Human Capital</a>
-                    <a href="/academy" class="block text-sm text-slate-400 hover:text-indigo-400">02 RACHI Academy</a>
-                    <a href="/tec" class="block text-sm text-slate-400 hover:text-sky-400">03 RACHI Tec</a>
-                    <a href="/print" class="block text-sm text-slate-400 hover:text-amber-400">04 RACHI Print</a>
+                    <a href="/capital" class="block text-sm text-emerald-600 dark:text-emerald-400 font-bold">01 RACHI Human Capital</a>
+                    <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">02 RACHI Academy</a>
+                    <a href="/tec" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400">03 RACHI Tec</a>
+                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400">04 RACHI Print</a>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-2 space-y-1">
-                <a href="#servicos-capital" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-300 hover:text-white">Os nossos serviços</a>
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2 space-y-1">
+                <a href="#servicos-capital" @click="mobileMenuOpen = false" class="block font-medium py-1 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Os nossos serviços</a>
                 <a href="/contacto" class="block font-medium py-1 text-[#10b981] font-bold">Pedir Proposta / Contacto</a>
             </div>
         </div>
@@ -600,7 +601,7 @@
 
                     <!-- CTAs -->
                     <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <a href="/contacto" class="btn-cta-emerald text-sm px-6 py-3.5 shadow-lg shadow-emerald-500/20">
+                        <a href="#solicitar-cotacao" class="btn-cta-emerald text-sm px-6 py-3.5 shadow-lg shadow-emerald-500/20">
                             <i data-lucide="message-square" class="w-4 h-4"></i>
                             <span>Falar com um Consultor</span>
                         </a>
@@ -1026,7 +1027,7 @@
                         Fale diretamente com os nossos consultores especializados em RH, contabilidade e legalização empresarial em Angola e garanta total conformidade.
                     </p>
                     <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a href="/contacto" class="btn-cta-emerald text-sm px-6 py-3.5">
+                        <a href="#solicitar-cotacao" class="btn-cta-emerald text-sm px-6 py-3.5">
                             <i data-lucide="mail" class="w-4 h-4"></i>
                             <span>Falar Connosco / Pedir Proposta</span>
                         </a>
@@ -1039,6 +1040,41 @@
             </div>
         </section>
 
+    <section id="solicitar-cotacao" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" x-data="rachiCapitalForm()">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-[#071326] rounded-3xl border border-slate-200 dark:border-slate-700 p-6 sm:p-8">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Solicitar Consultoria Human Capital</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 mb-6">Conte-nos o que a sua empresa precisa. A nossa equipa entrará em contacto.</p>
+        <form x-show="!formSubmitted" @submit.prevent="submitForm()" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label class="text-sm text-slate-700 dark:text-slate-300">Nome Completo *<input required maxlength="255" x-model="formData.nome" type="text" autocomplete="name" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></label>
+                <label class="text-sm text-slate-700 dark:text-slate-300">Empresa / Organização<input maxlength="255" x-model="formData.empresa" type="text" autocomplete="organization" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></label>
+                <label class="text-sm text-slate-700 dark:text-slate-300">Contacto Telefónico / WhatsApp *<input required maxlength="40" x-model="formData.telefone" type="tel" autocomplete="tel" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></label>
+                <label class="text-sm text-slate-700 dark:text-slate-300">E-mail Corporativo<input maxlength="255" x-model="formData.email" type="email" autocomplete="email" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></label>
+            </div>
+            <label class="block text-sm text-slate-700 dark:text-slate-300">Serviço pretendido
+                <select x-model="capitalServiceSlug" @change="capitalService = $event.target.selectedOptions[0].textContent.trim()" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white">
+                    <option value="">Consultoria Human Capital</option>
+                                            <option value="cedencia-temporaria">Cedência temporária de trabalhadores</option>
+                                            <option value="constituicao-legalizacao-empresas">Constituição e legalização de empresas</option>
+                                            <option value="consultoria-recursos-humanos">Consultoria em recursos humanos</option>
+                                            <option value="organizacao-contabilidade">Organização de contabilidade</option>
+                                            <option value="registo-inss">Registo no INSS</option>
+                                            <option value="regularizacao-documental">Regularização documental empresarial</option>
+                                    </select>
+            </label>
+            <label class="block text-sm text-slate-700 dark:text-slate-300">Plano / Opção de interesse<input maxlength="255" x-model="formData.plano" type="text" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></label>
+            <label class="block text-sm text-slate-700 dark:text-slate-300">Detalhes da Solicitação<textarea maxlength="3000" x-model="formData.detalhes" rows="4" class="w-full mt-1 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071326] text-slate-900 dark:text-white"></textarea></label>
+            <p x-show="formError" x-text="formError" role="alert" class="text-sm text-red-600 dark:text-red-400"></p>
+            <button type="submit" :disabled="formSubmitting" class="btn-cta-emerald cursor-pointer disabled:opacity-50" x-text="formSubmitting ? 'A enviar…' : 'Submeter Solicitação'"></button>
+        </form>
+        <div x-show="formSubmitted" x-cloak class="py-6 text-center text-slate-700 dark:text-slate-300">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Solicitação Registada!</h3>
+            <p class="mt-2">A nossa equipa entrará em contacto.</p>
+            <p class="mt-3">Protocolo: <strong x-text="formProtocol"></strong></p>
+            <button type="button" @click="formSubmitted = false; formProtocol = ''" class="btn-cta-emerald mt-4">Novo Pedido</button>
+        </div>
+    </div>
+</section>
     </main>
 
     <!-- ============================================================ -->

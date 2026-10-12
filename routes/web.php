@@ -64,7 +64,10 @@ Route::prefix('print')->name('print.')->group(function () {
     Route::get('/', [BusinessUnitController::class, 'print'])->name('index');
     Route::get('/servicos', [ServiceController::class, 'byUnit'])->defaults('unit', 'print')->name('services');
     Route::get('/servicos/{slug}', [BusinessUnitController::class, 'printService'])->name('service.show');
+    Route::post('/solicitar-cotacao', [BusinessUnitController::class, 'requestQuote'])->name('quote.request');
 });
+Route::post('/api/print/solicitar-cotacao', [BusinessUnitController::class, 'requestQuote'])->name('api.print.quote');
+
 
 Route::prefix('academy')->name('academy.')->group(function () {
     Route::get('/', [BusinessUnitController::class, 'academy'])->name('index');
@@ -320,6 +323,9 @@ if (!function_exists('formatAdminUserRecord')) {
 
 Route::get('/admin-dashboard', function () {
     $allRequests = app(AdminRequestController::class)->allRequests();
+    $printRequests = app(AdminRequestController::class)->printRequests();
+    $capitalRequests = app(AdminRequestController::class)->capitalRequests();
+    $tecRequests = app(AdminRequestController::class)->tecRequests();
     $academyEnrollments = \App\Models\CourseEnrollment::whereHas('customer', function ($q) {
             $q->whereHas('user', function ($qu) {
                 $qu->whereNull('deleted_at');
@@ -657,7 +663,7 @@ Route::get('/admin-dashboard', function () {
 
     $recentTransactions = $recentOrders->concat($recentQuotes)->values();
 
-    return view('admin.dashboard', compact('allRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList', 'academyCourses', 'tecProducts', 'tecOrders', 'capitalServices', 'printItems', 'printQuotes', 'recentTransactions'));
+    return view('admin.dashboard', compact('allRequests', 'printRequests', 'capitalRequests', 'tecRequests', 'academyEnrollments', 'coursesList', 'systemUsers', 'systemRoles', 'stats', 'clientsList', 'academyCourses', 'tecProducts', 'tecOrders', 'capitalServices', 'printItems', 'printQuotes', 'recentTransactions'));
 })->middleware(['auth', 'role:admin|super_admin'])->name('admin.dashboard.view');
 
 Route::get('/admin-dashboard.html', function () {
@@ -843,6 +849,112 @@ Route::post('/admin/tec/products/create', function (\Illuminate\Http\Request $re
         'product' => $formatted,
     ]);
 })->middleware(['auth', 'role:admin|super_admin']);
+
+Route::post('/admin/tec/stock/adjust', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $productId = (int)($data['product_id'] ?? 0);
+    $action = $data['action'] ?? 'add'; // 'add', 'remove', 'set'
+    $quantity = (int)($data['quantity'] ?? 0);
+    $reason = trim($data['reason'] ?? '') ?: 'Ajuste manual de inventário';
+    $minStock = isset($data['minimum_stock']) ? (int)$data['minimum_stock'] : null;
+
+    $product = \App\Models\Product::findOrFail($productId);
+    $prevQuantity = (int)$product->stock_quantity;
+
+    if ($action === 'add') {
+        $newQuantity = $prevQuantity + max(0, $quantity);
+        $type = 'entry';
+    } elseif ($action === 'remove') {
+        $newQuantity = max(0, $prevQuantity - max(0, $quantity));
+        $type = 'exit';
+    } else {
+        $newQuantity = max(0, $quantity);
+        $type = $newQuantity >= $prevQuantity ? 'entry' : 'exit';
+    }
+
+    $updateData = ['stock_quantity' => $newQuantity];
+    if ($minStock !== null && $minStock >= 0) {
+        $updateData['minimum_stock'] = $minStock;
+    }
+    if ($newQuantity === 0 && ($data['auto_disable'] ?? false)) {
+        $updateData['status'] = 'inactive';
+    }
+
+    $product->update($updateData);
+
+    \App\Models\StockMovement::create([
+        'product_id' => $product->id,
+        'user_id' => auth()->id() ?? 1,
+        'type' => $type,
+        'quantity' => abs($newQuantity - $prevQuantity),
+        'previous_quantity' => $prevQuantity,
+        'current_quantity' => $newQuantity,
+        'reason' => $reason,
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => "Estoque do produto '{$product->name}' atualizado para {$newQuantity} un. com sucesso!",
+        'product' => [
+            'id' => $product->id,
+            'nome' => $product->name,
+            'marca' => 'RACHI Tec',
+            'sku' => $product->sku,
+            'cat' => $product->category?->name ?? 'Equipamentos TI',
+            'preco' => 'AOA ' . number_format($product->price, 2, ',', '.'),
+            'preco_raw' => (float)$product->price,
+            'est' => (int)$product->stock_quantity,
+            'min_est' => (int)$product->minimum_stock,
+            'vendas' => (int)\App\Models\OrderItem::where('product_id', $product->id)->sum('quantity'),
+            'status' => in_array(strtolower($product->status), ['active', 'ativo']) ? 'Ativo' : 'Inativo',
+        ]
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
+Route::post('/admin/tec/stock/toggle-status', function (\Illuminate\Http\Request $request) {
+    $raw = json_decode($request->getContent(), true);
+    $data = is_array($raw) ? array_merge($request->all(), $raw) : $request->all();
+
+    $productId = (int)($data['product_id'] ?? 0);
+    $product = \App\Models\Product::findOrFail($productId);
+
+    $currentStatus = strtolower($product->status);
+    $newStatus = in_array($currentStatus, ['active', 'ativo']) ? 'inactive' : 'active';
+    $product->update(['status' => $newStatus]);
+
+    $statusLabel = $newStatus === 'active' ? 'Disponível na Loja' : 'Indisponível na Loja';
+
+    return response()->json([
+        'success' => true,
+        'message' => "Produto '{$product->name}' agora está {$statusLabel}.",
+        'product' => [
+            'id' => $product->id,
+            'nome' => $product->name,
+            'marca' => 'RACHI Tec',
+            'sku' => $product->sku,
+            'cat' => $product->category?->name ?? 'Equipamentos TI',
+            'preco' => 'AOA ' . number_format($product->price, 2, ',', '.'),
+            'preco_raw' => (float)$product->price,
+            'est' => (int)$product->stock_quantity,
+            'min_est' => (int)$product->minimum_stock,
+            'vendas' => (int)\App\Models\OrderItem::where('product_id', $product->id)->sum('quantity'),
+            'status' => $newStatus === 'active' ? 'Ativo' : 'Inativo',
+        ]
+    ]);
+})->middleware(['auth', 'role:admin|super_admin']);
+
+Route::get('/admin/tec/requests', [AdminRequestController::class, 'tecIndex'])->middleware(['auth', 'role:admin|super_admin']);
+Route::post('/tec/solicitar-proposta', [\App\Http\Controllers\Public\TecRequestController::class, 'store'])->name('tec.request.store');
+Route::post('/api/tec/solicitar-proposta', [\App\Http\Controllers\Public\TecRequestController::class, 'store'])->name('api.tec.request');
+Route::post('/api/loja/pedidos', [\App\Http\Controllers\Public\StoreOrderController::class, 'store'])->name('api.loja.order');
+Route::get('/admin/tec/orders', [\App\Http\Controllers\Public\StoreOrderController::class, 'getTecOrders'])->middleware(['auth', 'role:admin|super_admin']);
+
+Route::get('/admin/print/requests', [AdminRequestController::class, 'printIndex'])->middleware(['auth', 'role:admin|super_admin']);
+Route::get('/admin/capital/requests', [AdminRequestController::class, 'capitalIndex'])->middleware(['auth', 'role:admin|super_admin']);
+Route::post('/capital/solicitar-cotacao', [\App\Http\Controllers\Public\CapitalRequestController::class, 'store']);
+Route::post('/api/capital/solicitar-cotacao', [\App\Http\Controllers\Public\CapitalRequestController::class, 'store']);
 
 Route::post('/admin/print/orders/create', function (\Illuminate\Http\Request $request) {
     $raw = json_decode($request->getContent(), true);

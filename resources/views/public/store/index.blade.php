@@ -757,6 +757,24 @@
             color: #cbd5e1 !important;
         }
     </style>
+    @php
+        $authUserPayload = null;
+        if (auth()->check()) {
+            $currentUser = auth()->user();
+            $customer = $currentUser->customer ?? null;
+            $firstAddress = $customer?->addresses?->first();
+            $authUserPayload = [
+                'name' => $currentUser->name,
+                'email' => $currentUser->email,
+                'phone' => $currentUser->phone ?? '',
+                'nif' => $customer?->document ?? '',
+                'address' => $firstAddress?->full_address ?? ($currentUser->address ?? ''),
+            ];
+        }
+    @endphp
+    <script>
+        window.AUTH_USER = {!! json_encode($authUserPayload) !!};
+    </script>
 </head>
 <body x-data="botiLojaApp()" x-init="init()" class="min-h-screen flex flex-col justify-between">
 
@@ -1197,6 +1215,14 @@
                         class="px-2 py-1 transition cursor-pointer">
                         Acessórios &amp; Brindes
                     </button>
+
+                    <button @click="selectCategory('otaku')" 
+                        :class="activeCategory === 'otaku' ? 'text-[#f5a800] font-black border-b-2 border-[#f5a800]' : 'hover:text-[#071326] dark:hover:text-white'"
+                        class="px-2 py-1 transition cursor-pointer flex items-center gap-1">
+                        <span class="text-purple-500">✨</span>
+                        <span>Otaku</span>
+                    </button>
+
                     
                     <a href="/print" class="px-2 py-1 hover:text-[#071326] dark:hover:text-white transition">
                         Consumíveis &amp; Papelaria
@@ -1261,7 +1287,7 @@
             
             <div class="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-10 relative min-h-[380px] sm:min-h-[440px] grid grid-cols-1 items-center">
                 
-                <!-- SLIDE 1: SEJA UM REVENDEDOR / PARCEIRO B2B (EXATO AO PRINT) -->
+                <!-- SLIDE 1: UNIVERSO OTAKU & ANIME (ONE PUNCH MAN / SAITAMA SERIOUS PUNCH) -->
                 <div x-show="currentSlide === 0" 
                      x-transition:enter="transition ease-out duration-500 transform"
                      x-transition:enter-start="opacity-0 translate-x-8"
@@ -1271,41 +1297,42 @@
                      x-transition:leave-end="opacity-0 -translate-x-8"
                      class="col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Lado Esquerdo: Tipografia Exata ao Print -->
+                    <!-- Lado Esquerdo: Tipografia de Destaque Anime -->
                     <div class="lg:col-span-6 z-10 text-left pl-2 sm:pl-6">
-                        <p class="text-xs sm:text-sm font-extrabold tracking-widest text-slate-800 uppercase mb-1">
-                            SEJA UM
-                        </p>
+                        <span class="inline-block px-3 py-1 bg-red-100 text-red-900 rounded-full font-black text-[11px] uppercase tracking-wider mb-2">
+                            DESTAQUE OTAKU • ONE PUNCH MAN
+                        </span>
                         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-none uppercase mb-2">
-                            revendedor<br>
-                            <span class="text-slate-800 font-extrabold text-2xl sm:text-3xl lg:text-4xl block mt-1 tracking-normal">DA RACHI TEC</span>
+                            Saitama Punch<br>
+                            <span class="text-red-600 dark:text-[#f5a800] font-extrabold text-2xl sm:text-3xl lg:text-4xl block mt-1 tracking-normal">SERIOUS PUNCH EDITION</span>
                         </h1>
                         
                         <p class="mt-4 sm:mt-6 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md font-medium">
-                            Conquiste a independência financeira e expanda os seus negócios com <strong class="text-slate-900 font-bold">equipamentos de informática, garantia oficial e faturação com NIF em Luanda</strong>.
+                            T-Shirt premium 100% algodão penteado com a estampa lendária do golpe mais poderoso dos animes. Conforto e atitude com entrega imediata em Luanda por <strong class="text-slate-900 font-bold">9.000,00 AOA</strong>.
                         </p>
 
-                        <!-- Botão Saiba mais > com Estilo Exato ao Print (Pílula Branca com Sombra) -->
+                        <!-- Botão de Ação -->
                         <div class="mt-6 sm:mt-8">
-                            <a href="/contacto?assunto=parceiro" 
-                               class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-900 font-black text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 border border-slate-200">
-                                <span>Saiba mais</span>
+                            <button @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))" 
+                               class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-900 font-black text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 border border-slate-200 cursor-pointer">
+                                <span>Comprar T-Shirt Saitama</span>
                                 <span class="text-sm font-black">&gt;</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Lado Direito: Imagem da Equipe com Blocos Geométricos Verdes/Âmbar (Exato ao Print) -->
+                    <!-- Lado Direito: Imagem com Fundo Transparente no Showcase Pod -->
                     <div class="lg:col-span-6 relative flex items-center justify-center">
-                        <!-- Quadrados Geométricos Decorativos (Estilo Boticário) -->
-                        <div class="absolute -top-6 left-12 w-28 h-28 bg-[#10b981]/70 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute bottom-2 -left-4 w-36 h-36 bg-[#059669]/80 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute top-10 right-4 w-32 h-44 bg-[#10b981]/75 rounded-none pointer-events-none hidden sm:block"></div>
-                        <div class="absolute -bottom-6 right-16 w-24 h-24 bg-[#047857]/85 rounded-none pointer-events-none hidden sm:block"></div>
+                        <!-- Quadrados Geométricos Decorativos (Vermelho & Dourado) -->
+                        <div class="absolute -top-6 left-12 w-28 h-28 bg-red-600/30 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute bottom-2 -left-4 w-36 h-36 bg-amber-500/30 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute top-10 right-4 w-32 h-44 bg-[#f5a800]/25 rounded-none pointer-events-none hidden sm:block"></div>
+                        <div class="absolute -bottom-6 right-16 w-24 h-24 bg-red-700/25 rounded-none pointer-events-none hidden sm:block"></div>
 
-                        <!-- Fotografia da Equipe RACHI em Estúdio -->
-                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white max-w-lg w-full">
-                            <img src="/images/rachi-hero-team.jpg" alt="Equipe RACHI Tec" class="w-full h-auto object-cover max-h-[340px]">
+                        <!-- Card Vitrine com Produto Otaku Transparente -->
+                        <div class="relative z-10 p-6 bg-white/80 dark:bg-white/5 backdrop-blur-md rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-white/10 group cursor-pointer"
+                             @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))">
+                            <img src="/images/otaku/tshirt-saitama-punch.png" alt="T-Shirt Saitama Serious Punch — One Punch Man" class="h-64 sm:h-72 w-auto object-contain mx-auto drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
                         </div>
                     </div>
                 </div>
@@ -1605,6 +1632,25 @@
                     </div>
                 </button>
 
+                <!-- Bolha 10: Otaku -->
+                <button @click="selectCategory('otaku')" class="bubble-item flex flex-col items-center gap-2.5 shrink-0 group focus:outline-none min-w-[76px] sm:min-w-[84px]">
+                    <div class="bubble-circle relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 flex items-center justify-center"
+                         :class="activeCategory === 'otaku' ? 'ring-2 ring-[#f5a800] ring-offset-2 ring-offset-[#f7f8fa] bg-amber-50 shadow-md' : 'bg-white shadow-sm border border-purple-200/80'">
+                        <span class="absolute -top-1 -right-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm z-10">Anime</span>
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-md shadow-purple-300/40">
+                            <i data-lucide="sparkles" class="w-6 h-6 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-xs sm:text-[13px] font-bold tracking-tight text-center whitespace-nowrap transition"
+                              :class="activeCategory === 'otaku' ? 'text-[#b45309] font-black' : 'text-slate-700 group-hover:text-[#d97706]'">
+                            Otaku
+                        </span>
+                        <span x-show="activeCategory === 'otaku'" class="w-1.5 h-1.5 rounded-full bg-[#f5a800] mt-1"></span>
+                    </div>
+                </button>
+
+
 
 
             </div>
@@ -1759,17 +1805,27 @@
                                 </div>
 
                                 <!-- Status de Stock com badge estilizado -->
-                                <div class="boti-stock-badge flex items-center gap-1.5 text-[11px] text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full w-fit font-bold border border-emerald-200/60 mb-3.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span x-text="p.stockText || 'Disponível em Luanda'"></span>
-                                </div>
+                                <template x-if="!p.isUnavailable && (p.stock_quantity === undefined || p.stock_quantity > 0)">
+                                    <div class="boti-stock-badge flex items-center gap-1.5 text-[11px] text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full w-fit font-bold border border-emerald-200/60 mb-3.5">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span x-text="p.stockText || 'Disponível em Luanda'"></span>
+                                    </div>
+                                </template>
+                                <template x-if="p.isUnavailable || (p.stock_quantity !== undefined && p.stock_quantity <= 0)">
+                                    <div class="boti-stock-badge flex items-center gap-1.5 text-[11px] text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full w-fit font-bold border border-rose-200/60 mb-3.5">
+                                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                        <span x-text="p.stockText || 'Esgotado / Indisponível'"></span>
+                                    </div>
+                                </template>
 
                                 <!-- Botões de Ação -->
                                 <div class="space-y-2">
                                     <button @click="addToCart(p)"
-                                        class="btn-comprar w-full py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 transition cursor-pointer">
+                                        :disabled="p.isUnavailable || (p.stock_quantity !== undefined && p.stock_quantity <= 0)"
+                                        :class="(p.isUnavailable || (p.stock_quantity !== undefined && p.stock_quantity <= 0)) ? 'opacity-50 cursor-not-allowed bg-slate-300 text-slate-500 shadow-none hover:shadow-none' : 'btn-comprar shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 cursor-pointer'"
+                                        class="w-full py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
                                         <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                                        <span>Comprar</span>
+                                        <span x-text="(p.isUnavailable || (p.stock_quantity !== undefined && p.stock_quantity <= 0)) ? 'Indisponível' : 'Comprar'"></span>
                                     </button>
                                     
                                     <button @click="openQuickView(p)"
@@ -1803,72 +1859,73 @@
         </section>
 
         <!-- ============================================================== -->
-        <!-- 8. BANNER DUPLO PROMOCIONAL (SHOPPABLE BANNERS BOTICÁRIO)      -->
+        <!-- 8. BANNER DESTAQUE ESPECIAL: T-SHIRT SAITAMA SERIOUS PUNCH     -->
         <!-- ============================================================== -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#071326] via-[#0c2242] to-[#160b24] border border-amber-500/30 p-8 sm:p-12 shadow-2xl">
                 
-                <!-- Banner 1: Serviços TI RACHI Tec -->
-                <div class="boti-promo-banner boti-promo-support rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[220px] transition-all duration-300">
-                    <div class="relative z-10">
-                        <span class="promo-badge px-3 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider">
-                            Soluções para Empresas
-                        </span>
-                        <h3 class="text-2xl font-black font-display mt-3">Contratos de Suporte &amp; Manutenção de TI</h3>
-                        <p class="promo-desc text-xs mt-2 max-w-md">
-                            Mantenha os computadores, servidores e rede da sua empresa sempre em operação com técnicos dedicados.
+                <!-- Efeitos decorativos de fundo com glow -->
+                <div class="absolute -right-20 -top-20 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute right-1/3 -bottom-20 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute left-10 top-1/2 -translate-y-1/2 w-64 h-64 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Lado Esquerdo: Conteúdo e Chamada -->
+                    <div class="lg:col-span-7 text-left space-y-4">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 border border-red-500/40 rounded-full font-black text-[10px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                                ONE PUNCH MAN • EDIÇÃO ESPECIAL
+                            </span>
+                            <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full font-black text-[10px] uppercase tracking-wider shadow-sm">
+                                -21% OFF EM LUANDA
+                            </span>
+                        </div>
+
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase font-display leading-tight">
+                            T-Shirt Saitama<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f5a800] via-amber-300 to-yellow-400">Serious Punch</span>
+                        </h2>
+
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl font-normal">
+                            Inspirada no golpe mais icónico do herói mais forte dos animes quebrando as barreiras da realidade. Confeccionada em malha encorpada 100% algodão penteado com estampa digital HD de alta durabilidade e toque suave.
                         </p>
-                    </div>
-                    <div class="mt-6 relative z-10">
-                        <a href="/tec" class="promo-btn inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition">
-                            <span>Conhecer Planos de Suporte</span>
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <!-- Banner 2: Criação de Sites e Portais -->
-                <div class="boti-promo-banner boti-promo-web rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[220px] transition-all duration-300">
-                    <div class="relative z-10">
-                        <span class="promo-badge px-3 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider">
-                            Digitalização Rápida
-                        </span>
-                        <h3 class="text-2xl font-black font-display mt-3">Criação de Sites &amp; Lojas Virtuais</h3>
-                        <p class="promo-desc text-xs mt-2 max-w-md">
-                            Desenvolvimento de websites institucionais e plataformas e-commerce responsivas para o seu negócio vender mais.
-                        </p>
-                    </div>
-                    <div class="mt-6 relative z-10">
-                        <a href="/tec" class="promo-btn inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition">
-                            <span>Pedir Proposta de Website</span>
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </a>
-                    </div>
-                </div>
+                        <!-- Preço e Badges -->
+                        <div class="pt-2 flex items-baseline gap-3">
+                            <span class="text-xs text-slate-400 line-through">De 11.500,00 AOA</span>
+                            <span class="text-2xl sm:text-3xl font-black text-amber-400">9.000,00 AOA</span>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">Pronta Entrega</span>
+                        </div>
 
-            </div>
-        </section>
+                        <!-- Botões de Ação -->
+                        <div class="pt-2 flex flex-wrap items-center gap-3.5">
+                            <button @click="addToCart(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))"
+                                class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#f5a800] to-amber-600 hover:from-amber-400 hover:to-[#f5a800] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-amber-500/30 transform hover:scale-105 cursor-pointer">
+                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                <span>Comprar T-Shirt Saitama</span>
+                            </button>
 
-        <!-- ============================================================== -->
-        <!-- 9. BENEFÍCIOS OMNICHANNEL / ATENDIMENTO VIA WHATSAPP           -->
-        <!-- ============================================================== -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="bg-gradient-to-r from-amber-50 via-amber-100/50 to-orange-50 rounded-3xl p-8 sm:p-10 border border-amber-200/90 flex flex-col md:flex-row items-center justify-between gap-6 boti-quote-banner">
-                <div class="max-w-xl">
-                    <span class="text-xs font-extrabold uppercase tracking-widest text-[#b45309]">Atendimento Consultivo</span>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display mt-1">
-                        Precisa de Cotação em Lote para a sua Empresa?
-                    </h3>
-                    <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-                        Fale diretamente com os consultores corporativos da RACHI Tec. Fornecemos fatura proforma imediata para emissão de cheques ou aprovação de compras.
-                    </p>
-                </div>
-                <div class="flex items-center gap-3 shrink-0">
-                    <a href="https://wa.me/244972888585" target="_blank"
-                        class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#071326] hover:bg-[#0d1f3d] text-[#f5a800] border border-[#f5a800]/40 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-black/15">
-                        <i data-lucide="message-circle" class="w-4 h-4 text-[#cda851]"></i>
-                        <span>Falar com Consultor no WhatsApp</span>
-                    </a>
+                            <button @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))"
+                                class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider border border-white/20 transition cursor-pointer backdrop-blur-sm">
+                                <span>Ver Detalhes</span>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Lado Direito: Imagem com Fundo Transparente Flutuando -->
+                    <div class="lg:col-span-5 relative flex items-center justify-center">
+                        <div class="relative w-full max-w-sm flex items-center justify-center group cursor-pointer"
+                             @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))">
+                            <div class="absolute inset-0 bg-gradient-to-b from-amber-500/20 via-red-500/10 to-transparent rounded-full blur-2xl transform scale-90 group-hover:scale-110 transition-transform"></div>
+                            <img src="/images/otaku/tshirt-saitama-punch.png" 
+                                 alt="T-Shirt Saitama Serious Punch — One Punch Man" 
+                                 class="relative z-10 max-h-80 sm:max-h-96 w-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -1968,10 +2025,10 @@
                 </div>
 
                 <!-- Botão de Finalizar Compra -->
-                <button @click="checkoutModal = true"
-                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f5a800]/25">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-[#cda851]"></i>
-                    <span>Finalizar Pedido / Solicitar Proforma</span>
+                <button @click="handleCheckoutClick()" :disabled="isSubmittingOrder"
+                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f5a800]/25 transition cursor-pointer">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-[#cda851]" x-show="!isSubmittingOrder"></i>
+                    <span x-text="isSubmittingOrder ? 'A finalizar pedido...' : 'Finalizar Pedido / Solicitar Proforma'"></span>
                 </button>
             </div>
 
@@ -2016,8 +2073,10 @@
 
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
                             <button @click="addToCart(selectedProduct); quickViewOpen = false"
-                                class="btn-comprar flex-1 py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-md">
-                                Adicionar à Sacola
+                                :disabled="selectedProduct?.isUnavailable || (selectedProduct?.stock_quantity !== undefined && selectedProduct?.stock_quantity <= 0)"
+                                :class="(selectedProduct?.isUnavailable || (selectedProduct?.stock_quantity !== undefined && selectedProduct?.stock_quantity <= 0)) ? 'opacity-50 cursor-not-allowed bg-slate-300 text-slate-500 shadow-none' : 'btn-comprar shadow-md cursor-pointer'"
+                                class="flex-1 py-3 rounded-xl font-black text-xs uppercase tracking-wider">
+                                <span x-text="(selectedProduct?.isUnavailable || (selectedProduct?.stock_quantity !== undefined && selectedProduct?.stock_quantity <= 0)) ? 'Indisponível no Momento' : 'Adicionar à Sacola'"></span>
                             </button>
                             <button @click="quickViewOpen = false" class="px-4 py-3 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50">
                                 Fechar
@@ -2046,7 +2105,7 @@
                 <p class="text-xs text-slate-500 mt-1">Preencha os dados da sua empresa para receber a cotação oficial com NIF.</p>
             </div>
 
-            <form @submit.prevent="submitOrder()" class="space-y-3.5 text-xs">
+            <form @submit.prevent="submitOrderForm()" class="space-y-3.5 text-xs">
                 <div>
                     <label class="block font-bold text-slate-700 mb-1">Nome da Empresa / Cliente *</label>
                     <input type="text" x-model="orderForm.name" required placeholder="Ex: Unitel, Sonangol, Banco BFA ou Particular" 
@@ -2083,9 +2142,9 @@
                     <strong class="text-base font-black text-[#071326]" x-text="formatKz(finalTotal)"></strong>
                 </div>
 
-                <button type="submit" 
-                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg">
-                    Confirmar Pedido &amp; Gerar Proforma
+                <button type="submit" :disabled="isSubmittingOrder"
+                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                    <span x-text="isSubmittingOrder ? 'A processar pedido...' : 'Confirmar Pedido & Gerar Proforma'"></span>
                 </button>
             </form>
         </div>
@@ -2427,6 +2486,8 @@
                         <li><a href="#catalogo" @click="selectCategory('gadgets')" class="hover:text-slate-900 dark:hover:text-white transition">Smartwatches &amp; TV Box</a></li>
                         <li><a href="#catalogo" @click="selectCategory('audio')" class="hover:text-slate-900 dark:hover:text-white transition">Áudio &amp; Consumíveis</a></li>
                         <li><a href="#catalogo" @click="selectCategory('promocional')" class="hover:text-slate-900 dark:hover:text-white transition">Material Promocional</a></li>
+                        <li><a href="#catalogo" @click="selectCategory('otaku')" class="hover:text-slate-900 dark:hover:text-white transition">Universo Otaku &amp; Anime</a></li>
+
                     </ul>
                 </div>
 
@@ -2484,8 +2545,8 @@
                 userMenuOpen: false,
                 loginModalOpen: false,
                 authTab: 'login',
-                userLoggedIn: false,
-                currentUser: { 
+                userLoggedIn: !!(window.AUTH_USER && window.AUTH_USER.name),
+                currentUser: window.AUTH_USER || { 
                     name: '', 
                     email: '',
                     phone: '',
@@ -2494,6 +2555,7 @@
                     balance: '0,00 AOA',
                     level: 'Corporativo'
                 },
+                isSubmittingOrder: false,
                 accountModalOpen: false,
                 accountTab: 'dados',
                 authChannel: null,
@@ -2570,7 +2632,8 @@
                     { id: 'conectividade', name: 'Cabos & Conectividade' },
                     { id: 'tvbox', name: 'TV Box & Streaming 4K' },
                     { id: 'audio', name: 'Áudio & Fones' },
-                    { id: 'promocional', name: 'Acessórios & Brindes' }
+                    { id: 'promocional', name: 'Acessórios & Brindes' },
+                    { id: 'otaku', name: 'Universo Otaku & Anime' }
                 ],
 
                 products: [
@@ -2731,6 +2794,362 @@
                         ],
                         image: "/images/capa-iphone-studio.png",
                         slug: "capa-tematica-naruto-iphone"
+                    },
+                    {
+                        title: "T-Shirt Naruto Shippuden Modo Sábio & Gamakichi",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Mais Vendido",
+                        stockText: "Disponível em Luanda",
+                        rating: "5.0",
+                        reviews: 36,
+                        shortDesc: "Algodão premium 100%, estampa digital HD com Naruto Sennin no topo de Gamakichi.",
+                        fullDesc: "T-Shirt temática de alta qualidade da linha Otaku Store RACHI Tec. Tecido macio e respirável com estampa em serigrafia digital de alta durabilidade que não desbota após lavagens. Disponível nas cores Branco, Preto e Cinza.",
+                        specs: [
+                            "100% Algodão penteado 30.1 de toque suave",
+                            "Estampa digital HD com máxima fidelidade de cor",
+                            "Cores disponíveis: Branco, Preto, Cinza",
+                            "Tamanhos: S, M, L, XL e XXL",
+                            "Gola redonda reforçada e costuras duplas"
+                        ],
+                        image: "/images/otaku/tshirt-naruto-gamakichi.png",
+                        slug: "tshirt-naruto-modo-sabio-gamakichi"
+                    },
+                    {
+                        title: "T-Shirt Akatsuki Clássica Nuvens Vermelhas",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "8.500,00 AOA",
+                        priceNum: 8500.00,
+                        oldPrice: "11.000,00 AOA",
+                        discountPercent: "-22% OFF",
+                        badge: "Destaque",
+                        stockText: "Disponível (Stock Existente)",
+                        rating: "4.9",
+                        reviews: 48,
+                        shortDesc: "Design icónico da organização Akatsuki com estampa das nuvens carmesim em fundo preto.",
+                        fullDesc: "A peça mais desejada pelos fãs de anime. Confeccionada com corte confortável e costura reforçada nas golas e mangas.",
+                        specs: [
+                            "100% Algodão premium respirável",
+                            "Nuvens carmesim Akatsuki com borda branca nítida",
+                            "Costura dupla reforçada ombro a ombro",
+                            "Disponível pronta-entrega em Luanda"
+                        ],
+                        image: "/images/otaku/tshirt-akatsuki-classic-black.png",
+                        slug: "tshirt-akatsuki-nuvens-vermelhas"
+                    },
+                    {
+                        title: "T-Shirt Saitama Serious Punch — One Punch Man",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.000,00 AOA",
+                        priceNum: 9000.00,
+                        oldPrice: "11.500,00 AOA",
+                        discountPercent: "-21% OFF",
+                        badge: "Sucesso",
+                        stockText: "Disponível em Luanda",
+                        rating: "5.0",
+                        reviews: 29,
+                        shortDesc: "Estampa do punho devastador de Saitama em alta resolução gráfica.",
+                        fullDesc: "Inspirada no herói mais forte dos animes. Acabamento especial anti-encolhimento e conforto térmico para o dia a dia.",
+                        specs: [
+                            "Malha 100% algodão de toque macio",
+                            "Impressão Silk Digital HD de alta durabilidade",
+                            "Tamanhos: S, M, L, XL",
+                            "Corte anatómico moderno"
+                        ],
+                        image: "/images/otaku/tshirt-saitama-punch.png",
+                        slug: "tshirt-saitama-serious-punch"
+                    },
+                    {
+                        title: "T-Shirt Naruto Shippuden Modo Chakra da Kurama",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Épico",
+                        stockText: "Disponível",
+                        rating: "4.9",
+                        reviews: 33,
+                        shortDesc: "Naruto envolto no lendário manto dourado de Nove Caudas com detalhes reluzentes.",
+                        fullDesc: "T-Shirt exclusiva com arte vetorial de alta definição do ápice da Quarta Grande Guerra Ninja.",
+                        specs: [
+                            "Algodão 30.1 penteado premium",
+                            "Estampa vibrante de longa duração",
+                            "Gola careca reforçada com elastano"
+                        ],
+                        image: "/images/otaku/tshirt-naruto-kurama-chakra.png",
+                        slug: "tshirt-naruto-modo-chakra-kurama"
+                    },
+                    {
+                        title: "T-Shirt Madara Uchiha — O Fantasma dos Uchiha",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "10.000,00 AOA",
+                        priceNum: 10000.00,
+                        oldPrice: "13.000,00 AOA",
+                        discountPercent: "-23% OFF",
+                        badge: "Exclusivo",
+                        stockText: "Disponível (Branco, Cinza, Azul)",
+                        rating: "5.0",
+                        reviews: 41,
+                        shortDesc: "Arte imponente do lendário patriarca Uchiha com armadura carmesim e pose de combate.",
+                        fullDesc: "Disponível nas versões Branco, Cinza e Azul Noite. Qualidade têxtil premium da Otaku Store RACHI Tec.",
+                        specs: [
+                            "Múltiplas opções de cores: Branco, Cinza e Azul",
+                            "Tecido com tratamento especial anti-bolinhas",
+                            "Corte unissexo regular fit com ótimo caimento"
+                        ],
+                        image: "/images/otaku/tshirt-madara-uchiha-white.png",
+                        slug: "tshirt-madara-uchiha-fantasma"
+                    },
+                    {
+                        title: "T-Shirt Minato Namikaze & Kushina Uzumaki — Família",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Emocionante",
+                        stockText: "Disponível em Luanda",
+                        rating: "5.0",
+                        reviews: 52,
+                        shortDesc: "Tributo emocionante aos pais do Naruto no momento do seu nascimento. Cores Vermelho, Branco e Preto.",
+                        fullDesc: "Uma das artes mais queridas da comunidade anime, com estampa vívida e duradoura sobre tecido confortável de algodão.",
+                        specs: [
+                            "100% Algodão antialérgico respirável",
+                            "Estampa frontal com Minato, Kushina e bebê Naruto",
+                            "Cores disponíveis: Vermelho, Preto e Branco"
+                        ],
+                        image: "/images/otaku/tshirt-minato-kushina-family.png",
+                        slug: "tshirt-minato-kushina-familia"
+                    },
+                    {
+                        title: "T-Shirt Nanadaime Hokage — Do Balanço ao Topo",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.500,00 AOA",
+                        discountPercent: "-24% OFF",
+                        badge: "Mais Procurado",
+                        stockText: "Disponível",
+                        rating: "5.0",
+                        reviews: 39,
+                        shortDesc: "Contraste visual marcante entre a infância no balanço e a capa do Sétimo Hokage.",
+                        fullDesc: "Composição artística de tirar o fôlego retratando a trajetória de superação do Naruto até se tornar Hokage.",
+                        specs: [
+                            "100% Algodão penteado de alta gramatura",
+                            "Impressão de alta gama com tons dourados e sépia",
+                            "Tamanhos S a XXL disponíveis"
+                        ],
+                        image: "/images/otaku/tshirt-hokage-naruto-swing.png",
+                        slug: "tshirt-nanadaime-hokage-balanco"
+                    },
+                    {
+                        title: "T-Shirt Gaara do Deserto — Kazekage de Suna",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.000,00 AOA",
+                        priceNum: 9000.00,
+                        oldPrice: "11.000,00 AOA",
+                        discountPercent: "-18% OFF",
+                        badge: "Destaque",
+                        stockText: "Disponível em Luanda",
+                        rating: "4.8",
+                        reviews: 25,
+                        shortDesc: "Gaara controlando a areia com selo de amor na testa e olhar compenetrado.",
+                        fullDesc: "Ilustração estilizada de Gaara em tecido macio de alta durabilidade.",
+                        specs: [
+                            "Tecido leve e fresco para o clima de Luanda",
+                            "Estampa detalhada em alta fidelidade de cor",
+                            "Gola reforçada que não deforma"
+                        ],
+                        image: "/images/otaku/tshirt-gaara-sand.png",
+                        slug: "tshirt-gaara-deserto-kazekage"
+                    },
+                    {
+                        title: "T-Shirt Sukuna & Kurama — Lua de Sangue Carmesim",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "10.000,00 AOA",
+                        priceNum: 10000.00,
+                        oldPrice: "13.000,00 AOA",
+                        discountPercent: "-23% OFF",
+                        badge: "Dark Fantasy",
+                        stockText: "Disponível",
+                        rating: "4.9",
+                        reviews: 31,
+                        shortDesc: "Arte sombria e imponente com lua de sangue e criatura colossal em tons escarlates.",
+                        fullDesc: "Design impactante para fãs de Shingeki no Kyojin, Jujutsu Kaisen e Naruto sombrio sobre camiseta preta de alta gramatura.",
+                        specs: [
+                            "Camiseta preta de alta gramatura",
+                            "Estampa de impacto visual em vermelho carmesim",
+                            "Corte moderno unissexo"
+                        ],
+                        image: "/images/otaku/tshirt-sukuna-blood-moon.png",
+                        slug: "tshirt-sukuna-kurama-lua-sangue"
+                    },
+                    {
+                        title: "T-Shirt Monkey D. Luffy — One Piece Gear",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.000,00 AOA",
+                        priceNum: 9000.00,
+                        oldPrice: "11.500,00 AOA",
+                        discountPercent: "-21% OFF",
+                        badge: "Rei dos Piratas",
+                        stockText: "Disponível em Luanda",
+                        rating: "5.0",
+                        reviews: 44,
+                        shortDesc: "Luffy com o icónico chapéu de palha em perfil dinâmico sobre fundo cinza mescla.",
+                        fullDesc: "A peça indispensável para qualquer nakama. Conforto extraordinário e estampa impecável com cores autênticas de One Piece.",
+                        specs: [
+                            "Malha cinza mescla 100% algodão",
+                            "Cores vivas e resistentes a lavagens",
+                            "Pronta-entrega em Luanda"
+                        ],
+                        image: "/images/otaku/tshirt-luffy-one-piece.png",
+                        slug: "tshirt-monkey-d-luffy-one-piece"
+                    },
+                    {
+                        title: "T-Shirt Super Saiyan Goku Neon Splash — Dragon Ball Z",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Goku SSJ",
+                        stockText: "Disponível",
+                        rating: "5.0",
+                        reviews: 50,
+                        shortDesc: "Estilo street art neon com Goku transformado em Super Saiyajin e aura amarela vibrante.",
+                        fullDesc: "Mistura de arte urbana contemporânea com o maior ícone dos animes. Estampa exclusiva Otaku Store.",
+                        specs: [
+                            "Efeito visual neon splash vibrante",
+                            "Tecido encorpado e durável 100% algodão",
+                            "Tamanhos S a XXL"
+                        ],
+                        image: "/images/otaku/tshirt-goku-super-saiyan-neon.png",
+                        slug: "tshirt-super-saiyan-goku-neon"
+                    },
+                    {
+                        title: "T-Shirt Kid Goku na Nuvem Voadora Kintoun Clássico",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "8.500,00 AOA",
+                        priceNum: 8500.00,
+                        oldPrice: "10.500,00 AOA",
+                        discountPercent: "-19% OFF",
+                        badge: "Nostalgia",
+                        stockText: "Disponível",
+                        rating: "4.8",
+                        reviews: 26,
+                        shortDesc: "O clássico Goku criança voando na nuvem dourada com sorriso contagiante.",
+                        fullDesc: "Nostalgia pura da primeira saga de Akira Toriyama com acabamento gráfico vintage.",
+                        specs: [
+                            "100% Algodão penteado leve e confortável",
+                            "Estampa retrô de alta resolução",
+                            "Ideal para uso diário casual"
+                        ],
+                        image: "/images/otaku/tshirt-kid-goku-kintoun.png",
+                        slug: "tshirt-kid-goku-nuvem-voadora"
+                    },
+                    {
+                        title: "T-Shirt Naruto Traço Manga Sketch Minimalista",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "8.500,00 AOA",
+                        priceNum: 8500.00,
+                        oldPrice: "11.000,00 AOA",
+                        discountPercent: "-22% OFF",
+                        badge: "Minimal",
+                        stockText: "Disponível",
+                        rating: "4.8",
+                        reviews: 21,
+                        shortDesc: "Estilo autêntico de nanquim original do mangá de Masashi Kishimoto sobre malha cinza.",
+                        fullDesc: "Visual sofisticado e discreto para quem aprecia a arte original do mangá.",
+                        specs: [
+                            "Malha cinza mescla premium de alta qualidade",
+                            "Estampa linear em nanquim digital",
+                            "Toque suave zero no tecido"
+                        ],
+                        image: "/images/otaku/tshirt-naruto-sketch-grey.png",
+                        slug: "tshirt-naruto-traco-manga-sketch"
+                    },
+                    {
+                        title: "T-Shirt Itachi Uchiha Chibi & Akatsuki Back",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.000,00 AOA",
+                        priceNum: 9000.00,
+                        oldPrice: "11.500,00 AOA",
+                        discountPercent: "-21% OFF",
+                        badge: "Favorito",
+                        stockText: "Disponível em Luanda",
+                        rating: "5.0",
+                        reviews: 38,
+                        shortDesc: "Itachi em versão chibi na frente e estampa marcante nas costas com símbolo Akatsuki.",
+                        fullDesc: "Design moderno com detalhes na frente e nas costas, ideal para eventos de anime e uso casual.",
+                        specs: [
+                            "Estampa dupla frente e costas",
+                            "100% Algodão penteado de alta densidade",
+                            "Disponível pronta entrega em Luanda"
+                        ],
+                        image: "/images/otaku/tshirt-itachi-chibi-back.png",
+                        slug: "tshirt-itachi-uchiha-chibi-back"
+                    },
+                    {
+                        title: "T-Shirt Naruto na Floresta Verde Oliva — Vila da Folha",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Verde Folha",
+                        stockText: "Disponível",
+                        rating: "4.9",
+                        reviews: 19,
+                        shortDesc: "Naruto descansando à sombra de uma árvore sob a luz solar da floresta de Konoha.",
+                        fullDesc: "Cores ricas e atmosfera serena da infância de Naruto sobre malha verde oliva de alta qualidade.",
+                        specs: [
+                            "Cor Verde Oliva exclusiva",
+                            "Estampa artística em alta definição",
+                            "Conforto térmico excelente"
+                        ],
+                        image: "/images/otaku/tshirt-naruto-tree-green.png",
+                        slug: "tshirt-naruto-floresta-verde-oliva"
+                    },
+                    {
+                        title: "T-Shirt Naruto Painel Mangá Multi-Cenas Quadros",
+                        category: "Universo Otaku",
+                        catId: "otaku",
+                        price: "9.500,00 AOA",
+                        priceNum: 9500.00,
+                        oldPrice: "12.000,00 AOA",
+                        discountPercent: "-20% OFF",
+                        badge: "Mangá Art",
+                        stockText: "Disponível",
+                        rating: "4.9",
+                        reviews: 27,
+                        shortDesc: "Composição em 4 painéis de mangá coloridos com cenas lendárias de Naruto e Gaara.",
+                        fullDesc: "T-Shirt estilo editorial japonês com momentos marcantes da jornada dos ninjas da Folha e da Areia.",
+                        specs: [
+                            "Composição em 4 quadrinhos de mangá",
+                            "100% Algodão respirável",
+                            "Corte unissexo confortável"
+                        ],
+                        image: "/images/otaku/tshirt-naruto-manga-panel.png",
+                        slug: "tshirt-naruto-painel-manga-quadros"
                     }
                 ],
 
@@ -2831,6 +3250,10 @@
                 },
 
                 addToCart(p) {
+                    if (p && (p.isUnavailable || (p.stock_quantity !== undefined && p.stock_quantity <= 0))) {
+                        this.showToast('Este produto está indisponível ou esgotado no momento.', 'Produto Indisponível', 'error', 3000);
+                        return;
+                    }
                     const existing = this.cart.find(item => item.slug === p.slug);
                     if (existing) {
                         existing.quantity = (existing.quantity || 1) + 1;
@@ -2901,20 +3324,106 @@
                     }).format(value) + ' AOA';
                 },
 
-                submitOrder() {
-                    const orderNum = 'PED-2026-' + Math.floor(100000 + Math.random() * 900000);
-                    const clientName = this.orderForm.name || 'Cliente';
-                    const clientEmail = this.orderForm.email || 'empresa@cliente.ao';
-                    this.cart = [];
-                    this.checkoutModal = false;
-                    this.cartDrawerOpen = false;
-                    this.orderForm = { name: '', nif: '', phone: '', email: '', address: '' };
-                    this.showToast(
-                        'Factura proforma formal gerada e enviada para ' + clientEmail + '. Entraremos em contacto para entrega em Luanda.',
-                        '🎉 Pedido ' + orderNum + ' Registado!',
-                        'success',
-                        5500
-                    );
+                handleCheckoutClick() {
+                    if (!this.cart || this.cart.length === 0) {
+                        this.showToast('A sua sacola de compras está vazia. Adicione produtos antes de finalizar.', 'Sacola Vazia', 'warning', 3500);
+                        return;
+                    }
+
+                    // Se estiver logado: pega as informações do usuário logado e finaliza a compra direto!
+                    const loggedIn = this.userLoggedIn && this.currentUser && (this.currentUser.name || this.currentUser.email);
+                    if (loggedIn) {
+                        this.executeOrder({
+                            name: this.currentUser.name,
+                            email: this.currentUser.email,
+                            phone: this.currentUser.phone || '',
+                            nif: this.currentUser.nif || '',
+                            address: this.currentUser.address || ''
+                        });
+                    } else {
+                        // Caso NÃO tenha um usuário logado: aí abre o formulário para preencher!
+                        this.checkoutModal = true;
+                    }
+                },
+
+                submitOrderForm() {
+                    if (!this.orderForm.name || !this.orderForm.email || !this.orderForm.phone) {
+                        this.showToast('Por favor, preencha o Nome, E-mail e Contacto Telefónico.', 'Campos Obrigatórios', 'warning', 3500);
+                        return;
+                    }
+                    this.executeOrder(this.orderForm);
+                },
+
+                async executeOrder(clientData) {
+                    if (this.isSubmittingOrder) return;
+                    this.isSubmittingOrder = true;
+
+                    try {
+                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                        const res = await fetch('/api/loja/pedidos', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': token || ''
+                            },
+                            body: JSON.stringify({
+                                customer_name: clientData.name,
+                                customer_email: clientData.email,
+                                customer_phone: clientData.phone,
+                                customer_nif: clientData.nif || '',
+                                delivery_address: clientData.address || '',
+                                items: this.cart,
+                                total: this.finalTotal,
+                                subtotal: this.cartSubtotal,
+                                discount: this.cartDiscount
+                            })
+                        });
+
+                        const data = await res.json();
+                        if (!res.ok || data.success === false) {
+                            throw new Error(data.message || 'Falha ao processar o pedido.');
+                        }
+
+                        // Sincroniza estoque localmente
+                        if (Array.isArray(data.updated_stock)) {
+                            data.updated_stock.forEach(us => {
+                                const prod = this.products.find(p => p.id === us.id || p.slug === us.slug);
+                                if (prod) {
+                                    prod.est = us.stock_quantity;
+                                    prod.stock_quantity = us.stock_quantity;
+                                    prod.isUnavailable = us.status !== 'active' || us.stock_quantity <= 0;
+                                    prod.stockText = us.stock_quantity <= 0 ? 'Esgotado' : `Disponível (${us.stock_quantity} unidades)`;
+                                }
+                            });
+                        }
+
+                        const orderNum = data.order_number || ('PED-2026-' + Math.floor(100000 + Math.random() * 900000));
+                        this.cart = [];
+                        this.checkoutModal = false;
+                        this.cartDrawerOpen = false;
+                        this.orderForm = { name: '', nif: '', phone: '', email: '', address: '' };
+
+                        // Notifica canal BroadcastChannel para atualizar o /admin-dashboard instantaneamente
+                        try {
+                            if (window.BroadcastChannel) {
+                                const ch = new BroadcastChannel('rachi_orders_channel');
+                                ch.postMessage({ action: 'new_order', order: data.order, timestamp: Date.now() });
+                            }
+                        } catch(e) {}
+
+                        this.showToast(
+                            'Pedido ' + orderNum + ' registado com sucesso para ' + (clientData.name || clientData.email) + '! Factura proforma enviada para Pedidos de Venda.',
+                            '🎉 Pedido Finalizado!',
+                            'success',
+                            6500
+                        );
+                    } catch (err) {
+                        this.showToast(err.message || 'Erro ao submeter pedido.', 'Erro no Pedido', 'error', 4500);
+                    } finally {
+                        this.isSubmittingOrder = false;
+                        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+                    }
                 },
 
                 async submitLogin() { try { this.currentUser = await RachiSession.login(this.loginForm.email.trim(), this.loginForm.password); this.userLoggedIn = true; this.loginModalOpen = false; } catch(e) { this.showToast(e.message, 'Falha no login', 'warning', 3500); } },
@@ -3030,16 +3539,46 @@
                     });
                 },
 
-                async syncSessionFromStorage() { const user = await RachiSession.session(); this.currentUser = user || { name: '', email: '' }; this.userLoggedIn = !!user; },
+                async syncSessionFromStorage() {
+                    const user = await RachiSession.session();
+                    if (user && user.name) {
+                        this.currentUser = Object.assign({}, this.currentUser, user);
+                        this.userLoggedIn = true;
+                    } else if (window.AUTH_USER && window.AUTH_USER.name) {
+                        this.currentUser = Object.assign({}, this.currentUser, window.AUTH_USER);
+                        this.userLoggedIn = true;
+                    }
+                },
 
                 init() {
                     // 1. Inicializar e restaurar sessão sincronizada entre todas as telas
                     this.syncSessionFromStorage();
 
-                    // 2. BroadcastChannel para sincronização instantânea em tempo real entre todas as telas
-
-
-                    // 3. Ouvinte de evento storage (para compatibilidade total com todas as abas e janelas do navegador)
+                    // Sincronização em tempo real com estoque da base de dados
+                    try {
+                        const liveList = @json($liveProducts ?? []);
+                        if (Array.isArray(liveList) && liveList.length > 0) {
+                            this.products.forEach(p => {
+                                const found = liveList.find(lp => 
+                                    (lp.slug && p.slug && lp.slug === p.slug) ||
+                                    (lp.name && p.title && lp.name.toLowerCase().trim() === p.title.toLowerCase().trim()) ||
+                                    (lp.sku && p.sku && lp.sku === p.sku)
+                                );
+                                if (found) {
+                                    p.id = found.id;
+                                    p.sku = found.sku;
+                                    p.stock_quantity = found.stock_quantity;
+                                    p.status = found.status;
+                                    p.isUnavailable = found.status !== 'active' || found.stock_quantity <= 0;
+                                    p.stockText = found.status !== 'active' 
+                                        ? 'Indisponível' 
+                                        : (found.stock_quantity <= 0 ? 'Esgotado' : `Disponível (${found.stock_quantity} unidades)`);
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Erro ao sincronizar estoque:', e);
+                    }
 
 
                     // Watchers do Alpine

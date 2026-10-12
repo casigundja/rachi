@@ -40,6 +40,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin/academy/*',
             'admin/users',
             'admin/users/*',
+            'admin/tec/*',
+            'tec/*',
+            'print/solicitar-cotacao',
+            'print/solicitar-cotacao/*',
             'api/*',
         ]);
     })

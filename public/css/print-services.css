@@ -1,0 +1,121 @@
+/* Print services: light surfaces and readable brand accents. */
+html:not(.dark) .print-service-page {
+    background: #f7f8fa;
+}
+html:not(.dark) .print-service-page .print-service-hero {
+    background: linear-gradient(125deg, #ffffff 35%, #fff8e8 100%);
+    border-color: #e6dcc8;
+    color: #0b1a2e;
+    box-shadow: 0 16px 48px rgba(11, 26, 46, .07);
+}
+html:not(.dark) .print-service-page .print-service-hero h1,
+html:not(.dark) .print-service-page .print-service-visual h3 {
+    color: #0b1a2e;
+}
+html:not(.dark) .print-service-page .print-service-hero p {
+    color: #475569;
+}
+html:not(.dark) .print-service-page .print-service-badge {
+    background: #fff2ce;
+    border-color: #e8c97f;
+    color: #92400e;
+}
+html:not(.dark) .print-service-page .print-service-brand {
+    background: #f1f5f9;
+    border-color: #d8e0e9;
+    color: #475569;
+}
+html:not(.dark) .print-service-page .print-service-back {
+    color: #475569;
+}
+html:not(.dark) .print-service-page .print-service-back:hover {
+    color: #92400e;
+}
+html:not(.dark) .print-service-page .print-service-whatsapp {
+    background: #047857;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(4, 120, 87, .15);
+}
+html:not(.dark) .print-service-page .print-service-whatsapp:hover {
+    background: #065f46;
+}
+html:not(.dark) .print-service-page .print-service-visual {
+    background: #fff;
+    border-color: #e2e8f0;
+    box-shadow: 0 12px 28px rgba(11, 26, 46, .08);
+}
+html:not(.dark) .print-service-page .print-service-visual .text-white\/90 {
+    color: #fff !important;
+}
+html:not(.dark) .print-service-page .print-service-actions button {
+    background: linear-gradient(135deg, #f5a800, #e99a00);
+    color: #080c16;
+}
+html:not(.dark) .print-service-page .print-service-actions button:hover {
+    background: #e08b00;
+}
+html:not(.dark) .print-service-page .print-service-certification,
+html:not(.dark) .print-service-page .print-service-guarantee .text-\[\#f5a800\] {
+    color: #92400e;
+}
+html:not(.dark) .print-service-page .print-service-guarantee {
+    background: #fffbeb;
+    border-color: #f0dfad;
+    color: #334155;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+html:not(.dark) .print-service-page main .text-amber-500,
+html:not(.dark) .print-service-page main .text-\[\#f5a800\] {
+    color: #92400e;
+}
+html:not(.dark) .print-service-page main .text-slate-400 {
+    color: #64748b;
+}
+html:not(.dark) .print-service-page main .group:hover h3 {
+    color: #92400e;
+}
+.print-service-page main :is(button, a, input, select, textarea):focus-visible {
+    outline: 3px solid #b45309;
+    outline-offset: 4px;
+}
+@media (min-width: 640px) {
+    .print-service-page .print-service-actions {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+@media (max-width: 1023px) {
+    .print-service-page .site-header .main-nav-capsule {
+        display: none !important;
+    }
+    .print-service-page .print-service-hero > .grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .print-service-page .print-service-hero > .grid > div {
+        min-width: 0;
+    }
+}
+@media (max-width: 639px) {
+    .print-service-page main {
+        width: 100%;
+        min-width: 0;
+    }
+    .print-service-page main > section {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    .print-service-page .print-service-hero {
+        padding: 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .print-service-page .site-header .btn-cta-amber {
+        display: none;
+    }
+    .print-service-page .print-service-actions :is(a, button) {
+        max-width: 100%;
+        white-space: normal;
+    }
+}

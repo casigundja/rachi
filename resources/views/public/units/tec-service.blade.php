@@ -796,9 +796,12 @@
                     
                     <!-- Formulário de Solicitação Direta (7 cols) -->
                     <div class="lg:col-span-7">
-                        <form action="/contacto" method="POST" class="space-y-4">
+                        <form action="/tec/solicitar-proposta" method="POST" class="space-y-4">
                             @csrf
+                            <input type="hidden" name="unidade" value="tec">
                             <input type="hidden" name="assunto" value="Adesão ao Serviço: {{ $service['title'] }}">
+                            <input type="hidden" name="servico" value="{{ $service['title'] }}">
+                            <input type="hidden" name="service_slug" value="{{ $service['slug'] ?? '' }}">
                             
                             <div class="p-3 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-xs text-sky-900 dark:text-sky-300 flex items-center justify-between">
                                 <span><strong>Plano Selecionado:</strong> <span x-text="selectedPlan" class="font-bold text-[#00a3e0]"></span></span>

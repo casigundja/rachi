@@ -3197,7 +3197,7 @@
                             <div class="mt-8 p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-4">
                                 <div class="flex items-center gap-3.5">
                                     <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-sm">
-                                        05
+                                        06
                                     </div>
                                     <div>
                                         <div class="text-xs font-black text-[#071326] uppercase tracking-wider">Parceiros Oficiais</div>
@@ -3284,35 +3284,37 @@
                                      loading="eager">
                             </div>
 
-                            <!-- CARD 5: KLASSE (DESTAQUE COM LINK OFICIAL EXCLUSIVO) — sm:col-span-2 -->
-                            <a href="https://klasse.ao/" target="_blank" rel="noopener noreferrer"
-                               class="sm:col-span-2 group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-emerald-300/80 dark:border-emerald-500/30 hover:border-emerald-500 shadow-xs hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 overflow-hidden">
-                                <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600"></div>
+                            <!-- CARD 5: KUMOSI PRESTAÇÃO DE SERVIÇOS -->
+                            <div class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-slate-200/90 dark:border-white/10 hover:border-amber-400/50 dark:hover:border-amber-500/40 shadow-xs hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center min-h-[140px] sm:min-h-[155px] overflow-hidden">
+                                <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-amber-500 via-emerald-500 to-[#0b4ea8] opacity-80"></div>
+                                <img src="/images/kumosi-badge.png"
+                                     alt="KUMOSI — Prestação de Serviços"
+                                     class="h-20 sm:h-24 w-auto max-w-[85%] object-contain drop-shadow-xs group-hover:scale-105 transition-transform duration-300"
+                                     loading="eager">
+                            </div>
 
-                                <!-- Logo + Marca Lockup -->
-                                <div class="flex items-center gap-4">
-                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50/60 dark:from-emerald-950/50 dark:to-teal-950/30 border border-emerald-200/70 dark:border-emerald-800/60 flex items-center justify-center p-2.5 shrink-0 shadow-xs group-hover:scale-105 transition-transform duration-300">
+                            <!-- CARD 6: KLASSE (DESTAQUE COM LINK OFICIAL EXCLUSIVO) -->
+                            <a href="https://klasse.ao/" target="_blank" rel="noopener noreferrer"
+                               class="group relative bg-white dark:bg-[#0c1829] rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-emerald-300/80 dark:border-emerald-500/30 hover:border-emerald-500 shadow-xs hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center min-h-[140px] sm:min-h-[155px] overflow-hidden cursor-pointer">
+                                <div class="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600"></div>
+                                <div class="absolute top-2.5 right-2.5 text-emerald-600 dark:text-emerald-400 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50/60 dark:from-emerald-950/50 dark:to-teal-950/30 border border-emerald-200/70 dark:border-emerald-800/60 flex items-center justify-center p-2 shrink-0 group-hover:scale-105 transition-transform duration-300">
                                         <img src="/images/logo-klasse-clean.png"
                                              alt="KLASSE"
                                              class="max-h-full max-w-full object-contain"
                                              loading="eager">
                                     </div>
                                     <div>
-                                        <div class="text-2xl sm:text-3xl font-[900] tracking-tight text-slate-900 dark:text-white leading-none">
+                                        <div class="text-xl sm:text-2xl font-[900] tracking-tight text-slate-900 dark:text-white leading-none">
                                             KLASSE
                                         </div>
-                                        <div class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1.5 flex items-center gap-2">
-                                            <span>Sistema de Gestão Escolar</span>
-                                            <span class="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
-                                            <span>Angola</span>
+                                        <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mt-1">
+                                            Gestão Escolar
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Ação e Link -->
-                                <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-emerald-700 dark:text-emerald-300 hover:text-white dark:hover:text-white border border-emerald-200/90 dark:border-emerald-800/80 text-xs font-bold transition-all duration-200 shadow-xs group-hover:shadow-md shrink-0">
-                                    <span>klasse.ao</span>
-                                    <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </div>
                             </a>
 
@@ -3516,17 +3518,12 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-5 border-t border-slate-100 flex items-center gap-2">
+                            <div class="mt-8 pt-5 border-t border-slate-100">
                                 <a href="/capital"
-                                    class="flex-1 py-3 px-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-1.5">
+                                    class="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-2 group-hover:shadow-md">
                                     <span>Saber mais</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </a>
-                                <button @click="openRequestWithPreselection(4, 'Consultoria Empresarial & RH')"
-                                    class="py-3 px-3 rounded-xl border border-slate-200 hover:border-slate-800 text-slate-700 font-bold text-xs transition"
-                                    title="Pedir proposta">
-                                    <i data-lucide="send" class="w-4 h-4"></i>
-                                </button>
                             </div>
                         </div>
 
@@ -3587,17 +3584,12 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-5 border-t border-slate-100 flex items-center gap-2">
+                            <div class="mt-8 pt-5 border-t border-slate-100">
                                 <a href="/academy"
-                                    class="flex-1 py-3 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-1.5">
+                                    class="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-2 group-hover:shadow-md">
                                     <span>Saber mais</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </a>
-                                <button @click="openRequestWithPreselection(3, 'Formação e Cursos Corporativos')"
-                                    class="py-3 px-3 rounded-xl border border-slate-200 hover:border-slate-800 text-slate-700 font-bold text-xs transition"
-                                    title="Pedir formação">
-                                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-                                </button>
                             </div>
                         </div>
 
@@ -3657,17 +3649,12 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-5 border-t border-slate-100 flex items-center gap-2">
+                            <div class="mt-8 pt-5 border-t border-slate-100">
                                 <a href="/tec"
-                                    class="flex-1 py-3 px-3 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-1.5">
+                                    class="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-2 group-hover:shadow-md">
                                     <span>Saber mais</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </a>
-                                <button @click="openRequestWithPreselection(1, 'Projecto de Tecnologia & TI')"
-                                    class="py-3 px-3 rounded-xl border border-slate-200 hover:border-slate-800 text-slate-700 font-bold text-xs transition"
-                                    title="Pedir orçamento">
-                                    <i data-lucide="cpu" class="w-4 h-4"></i>
-                                </button>
                             </div>
                         </div>
 
@@ -3727,17 +3714,12 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-5 border-t border-slate-100 flex items-center gap-2">
+                            <div class="mt-8 pt-5 border-t border-slate-100">
                                 <a href="/print"
-                                    class="flex-1 py-3 px-3 rounded-xl bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-1.5">
+                                    class="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-bold text-xs text-center transition duration-200 shadow-sm flex items-center justify-center gap-2 group-hover:shadow-md">
                                     <span>Saber mais</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </a>
-                                <button @click="openRequestWithPreselection(2, 'Produção Gráfica & Brindes')"
-                                    class="py-3 px-3 rounded-xl border border-slate-200 hover:border-slate-800 text-slate-700 font-bold text-xs transition"
-                                    title="Pedir proposta gráfica">
-                                    <i data-lucide="printer" class="w-4 h-4"></i>
-                                </button>
                             </div>
                         </div>
 

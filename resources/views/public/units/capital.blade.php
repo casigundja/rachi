@@ -382,6 +382,7 @@
         html.dark .bullet-sky     { background-color: rgba(12, 74, 110, 0.6); color: #38bdf8; }
         html.dark .bullet-teal    { background-color: rgba(19, 78, 74, 0.6); color: #2dd4bf; }
     </style>
+    <script src="/capital-requests.js?v=20261011"></script>
 </head>
 <body x-data="{ mobileMenuOpen: false }">
 
@@ -497,7 +498,7 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 
 
-                <a href="/contacto" class="btn-cta-emerald group">
+                <a href="#solicitar-cotacao" class="btn-cta-emerald group">
                     <i data-lucide="users" class="w-4 h-4"></i>
                     <span>Consultoria RH</span>
                 </a>
@@ -600,7 +601,7 @@
 
                     <!-- CTAs -->
                     <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <a href="/contacto" class="btn-cta-emerald text-sm px-6 py-3.5 shadow-lg shadow-emerald-500/20">
+                        <a href="#solicitar-cotacao" class="btn-cta-emerald text-sm px-6 py-3.5 shadow-lg shadow-emerald-500/20">
                             <i data-lucide="message-square" class="w-4 h-4"></i>
                             <span>Falar com um Consultor</span>
                         </a>
@@ -1026,7 +1027,7 @@
                         Fale diretamente com os nossos consultores especializados em RH, contabilidade e legalização empresarial em Angola e garanta total conformidade.
                     </p>
                     <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a href="/contacto" class="btn-cta-emerald text-sm px-6 py-3.5">
+                        <a href="#solicitar-cotacao" class="btn-cta-emerald text-sm px-6 py-3.5">
                             <i data-lucide="mail" class="w-4 h-4"></i>
                             <span>Falar Connosco / Pedir Proposta</span>
                         </a>
@@ -1039,6 +1040,7 @@
             </div>
         </section>
 
+    @include('components.capital-request-form')
     </main>
 
     <!-- ============================================================ -->
