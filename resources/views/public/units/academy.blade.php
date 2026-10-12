@@ -423,1001 +423,9 @@
                 class="hidden lg:flex items-center justify-center bg-slate-100 dark:bg-white/[0.08] border border-slate-200/90 dark:border-white/15 rounded-full p-1 shadow-xs dark:shadow-md shadow-slate-950/20 gap-0.5 text-[13px] tracking-tight transition-all">
                 <a href="#home" class="px-4 py-1.5 rounded-full bg-white dark:bg-white/15 text-[#0050f0] dark:text-white font-bold transition-all shadow-xs border border-slate-200/60 dark:border-transparent">Home</a>
 
-                <!-- Dropdown Cursos com Catálogo Animado -->
-                <div class="relative" x-data="{ openCursos: false }" @click.outside="openCursos = false" @keydown.escape.window="openCursos = false">
-                    <button type="button" 
-                        @click="openCursos = !openCursos"
-                        class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all font-semibold cursor-pointer select-none"
-                        :class="openCursos ? 'text-[#0050f0] bg-white shadow-xs font-bold border border-slate-200/60 dark:border-transparent dark:text-white dark:bg-white/15' : 'text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'">
-                        <span :class="openCursos ? 'text-[#0050f0] dark:text-white font-bold' : ''">Cursos</span>
-                        <svg class="w-3.5 h-3.5 transition-transform duration-200"
-                            :class="openCursos ? 'rotate-180 text-[#0050f0] dark:text-[#00a3e0]' : 'text-slate-400'" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-
-                    <!-- Painel Dropdown Flutuante (Mega-Menu Cascata — Replicação Fiel do Modelo de 3 Colunas) -->
-                    <div x-show="openCursos" x-cloak 
-                        x-data="rachiCascadingMenu()"
-                        x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 translate-y-2 scale-98"
-                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                        x-transition:leave="transition ease-in duration-150"
-                        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                        x-transition:leave-end="opacity-0 translate-y-2 scale-98"
-                        class="rachi-cascade-container absolute top-full left-1/2 -translate-x-1/2 mt-3 rounded-2xl border border-slate-300 dark:border-white/15 z-[100] text-left overflow-hidden before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
-
-                        <!-- ======================================================== -->
-                        <!-- COLUNA 1: Navegação Primária (Fundo Escuro Grafite)       -->
-                        <!-- ======================================================== -->
-                        <div class="rachi-cascade-col1 p-3 flex flex-col justify-start border-r border-slate-700/30 select-none space-y-1">
-                            
-                            <!-- Item 1: Área de Interesse -->
-                            <button type="button" 
-                                @mouseenter="setTab('areas')"
-                                @click="setTab('areas')"
-                                :class="activeTab === 'areas' ? 'rachi-tab-btn-active' : 'rachi-tab-btn-inactive'"
-                                class="w-full px-3.5 py-3 rounded-xl text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                <span>Área de Interesse</span>
-                                <svg x-show="activeTab === 'areas'" class="w-4 h-4 text-slate-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-
-                            <!-- Item 2: Carreiras -->
-                            <button type="button" 
-                                @mouseenter="setTab('carreiras')"
-                                @click="setTab('carreiras')"
-                                :class="activeTab === 'carreiras' ? 'rachi-tab-btn-active' : 'rachi-tab-btn-inactive'"
-                                class="w-full px-3.5 py-3 rounded-xl text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                <span>Carreiras</span>
-                                <svg x-show="activeTab === 'carreiras'" class="w-4 h-4 text-slate-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-
-                            <!-- Item 3: Senioridade (Conecta sem borda com a Coluna 2) -->
-                            <button type="button" 
-                                @mouseenter="setTab('senioridade')"
-                                @click="setTab('senioridade')"
-                                :class="activeTab === 'senioridade' ? 'rachi-tab-btn-active' : 'rachi-tab-btn-inactive'"
-                                class="w-full px-3.5 py-3 rounded-xl text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                <span>Senioridade</span>
-                                <svg x-show="activeTab === 'senioridade'" class="w-4 h-4 text-slate-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- ======================================================== -->
-                        <!-- COLUNA 2: Conteúdo / Subcategorias / Iniciante (Cinza)    -->
-                        <!-- ======================================================== -->
-                        <div class="rachi-cascade-col2 p-4 sm:p-5 overflow-y-auto border-r border-slate-300 dark:border-white/10 select-none flex flex-col justify-between">
-                            
-                            <!-- SEÇÃO 1: Quando Senioridade está ativa (Visual Exato do Screenshot) -->
-                            <div x-show="activeTab === 'senioridade'" class="space-y-3">
-                                <div>
-                                    <!-- Título Grande "Iniciante" exatamente como na foto -->
-                                    <h3 class="text-2xl font-normal text-slate-900 dark:text-white tracking-tight"
-                                        x-text="seniorityDetails[activeSeniority].title">
-                                        Iniciante
-                                    </h3>
-                                    <!-- Descrição idêntica à imagem do usuário -->
-                                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mt-3"
-                                        x-text="seniorityDetails[activeSeniority].desc">
-                                        Comece do zero com uma trilha clara e progressiva.
-                                        Fundamentos práticos para dar os primeiros passos com segurança e construir uma base sólida.
-                                    </p>
-                                </div>
-
-                                <!-- Alternadores de Nível de Senioridade -->
-                                <div class="pt-4 border-t border-slate-300/60 dark:border-white/10 space-y-1">
-                                    <button type="button" @mouseenter="activeSeniority = 'iniciante'" @click="activeSeniority = 'iniciante'"
-                                        :class="activeSeniority === 'iniciante' ? 'rachi-pill-active' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-medium text-slate-700 dark:text-slate-300'"
-                                        class="w-full px-3 py-1.5 rounded-lg text-xs flex items-center justify-between transition-all cursor-pointer text-left">
-                                        <span>Iniciante</span>
-                                        <svg x-show="activeSeniority === 'iniciante'" class="w-3 h-3 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                    </button>
-
-                                    <button type="button" @mouseenter="activeSeniority = 'intermediario'" @click="activeSeniority = 'intermediario'"
-                                        :class="activeSeniority === 'intermediario' ? 'rachi-pill-active' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-medium text-slate-700 dark:text-slate-300'"
-                                        class="w-full px-3 py-1.5 rounded-lg text-xs flex items-center justify-between transition-all cursor-pointer text-left">
-                                        <span>Intermediário / Profissional</span>
-                                        <svg x-show="activeSeniority === 'intermediario'" class="w-3 h-3 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                    </button>
-
-                                    <button type="button" @mouseenter="activeSeniority = 'avancado'" @click="activeSeniority = 'avancado'"
-                                        :class="activeSeniority === 'avancado' ? 'rachi-pill-active' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-medium text-slate-700 dark:text-slate-300'"
-                                        class="w-full px-3 py-1.5 rounded-lg text-xs flex items-center justify-between transition-all cursor-pointer text-left">
-                                        <span>Executivo &amp; Liderança</span>
-                                        <svg x-show="activeSeniority === 'avancado'" class="w-3 h-3 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- SEÇÃO 2: Quando Área de Interesse está ativa -->
-                            <div x-show="activeTab === 'areas'" class="space-y-0.5">
-                                <button type="button" @mouseenter="activeArea = 'tech'" @click="activeArea = 'tech'"
-                                    :class="activeArea === 'tech' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Tecnologia &amp; IA</span>
-                                    <svg x-show="activeArea === 'tech'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeArea = 'ciber'" @click="activeArea = 'ciber'"
-                                    :class="activeArea === 'ciber' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Cibersegurança &amp; Redes</span>
-                                    <svg x-show="activeArea === 'ciber'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeArea = 'gestao'" @click="activeArea = 'gestao'"
-                                    :class="activeArea === 'gestao' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Gestão &amp; Liderança</span>
-                                    <svg x-show="activeArea === 'gestao'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeArea = 'mpme'" @click="activeArea = 'mpme'"
-                                    :class="activeArea === 'mpme' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>MPMEs &amp; Negócios</span>
-                                    <svg x-show="activeArea === 'mpme'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeArea = 'fiscal'" @click="activeArea = 'fiscal'"
-                                    :class="activeArea === 'fiscal' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Fiscalidade &amp; Finanças</span>
-                                    <svg x-show="activeArea === 'fiscal'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeArea = 'vendas'" @click="activeArea = 'vendas'"
-                                    :class="activeArea === 'vendas' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Vendas &amp; Atendimento B2B</span>
-                                    <svg x-show="activeArea === 'vendas'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-
-                            <!-- SEÇÃO 3: Quando Carreiras está ativa -->
-                            <div x-show="activeTab === 'carreiras'" class="space-y-0.5">
-                                <button type="button" @mouseenter="activeCarreira = 'ciber_sec'" @click="activeCarreira = 'ciber_sec'"
-                                    :class="activeCarreira === 'ciber_sec' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Especialista em Cibersegurança</span>
-                                    <svg x-show="activeCarreira === 'ciber_sec'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeCarreira = 'lider_ia'" @click="activeCarreira = 'lider_ia'"
-                                    :class="activeCarreira === 'lider_ia' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Líder de IA &amp; Automação</span>
-                                    <svg x-show="activeCarreira === 'lider_ia'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-
-                                <button type="button" @mouseenter="activeCarreira = 'gestor_exec'" @click="activeCarreira = 'gestor_exec'"
-                                    :class="activeCarreira === 'gestor_exec' ? 'bg-white dark:bg-[#0e182b] text-slate-900 dark:text-white font-bold shadow-xs' : 'hover:bg-slate-200/60 dark:hover:bg-white/5 font-normal text-slate-700 dark:text-slate-300'"
-                                    class="w-full px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-all cursor-pointer text-left">
-                                    <span>Gestor Executivo de MPMEs</span>
-                                    <svg x-show="activeCarreira === 'gestor_exec'" class="w-3.5 h-3.5 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- ======================================================== -->
-                        <!-- COLUNA 3: Lista de Cursos Direta (Fundo Branco Limpo)     -->
-                        <!-- ======================================================== -->
-                        <div class="rachi-cascade-col3 p-5 overflow-y-auto">
-                            <!-- Painel Senioridade: Iniciante -->
-                            <div x-show="activeTab === 'senioridade' && activeSeniority === 'iniciante'" class="space-y-1">
-                                <div class="pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'competencias-digitais') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Engenharia de Prompt: Prompts Eficazes para IA Generativa
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Claude Code: Criando sua Primeira Aplicação
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'competencias-digitais') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Pensamento computacional: fundamentos da computação e lógica para negócios
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'competencias-digitais') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Competências Digitais e Produtividade Tecnológica na Nuvem
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-estruturacao-mpme') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão e Estruturação Prática de MPMEs: Primeiros Passos Empresariais
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Senioridade: Intermediário / Profissional -->
-                            <div x-show="activeTab === 'senioridade' && activeSeniority === 'intermediario'" class="space-y-1">
-                                <div class="pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'transformacao-digital-para-empresas') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Transformação Digital e Automação de Processos Empresariais
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Automação Digital, Inteligência Artificial e Power BI Prático
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-de-projectos-e-metodologias-ageis') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão de Projectos & Metodologias Ágeis: Scrum e Kanban
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'contabilidade-e-fiscalidade-angolana') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Contabilidade Prática, Fiscalidade Angolana & Finanças
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'vendas-consultivas-e-negociacao-b2b') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Vendas Consultivas & Estratégias Comerciais B2B
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Senioridade: Executivo & Liderança -->
-                            <div x-show="activeTab === 'senioridade' && activeSeniority === 'avancado'" class="space-y-1">
-                                <div class="pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'lideranca-executiva-e-comunicacao') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Liderança Executiva, Gestão de Equipas e Comunicação Assertiva
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-empresarial-e-estrategia') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão Empresarial, Estratégia e Operações de Alto Desempenho
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'ciberseguranca') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Cibersegurança: Defesa, Segurança da Informação e Redes
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'auditoria-de-sistemas-e-compliance') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Auditoria de Sistemas & Compliance em Segurança (normas APD)
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-empresarial-e-estrategia') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <!-- Ícone Azul com contorno [<>] idêntico à imagem -->
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Planeamento Estratégico Corporativo e Modelagem de Negócios
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: Tecnologia & IA -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'tech'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de Tecnologia & IA</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'competencias-digitais') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Engenharia de Prompt: Prompts Eficazes para IA Generativa
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Claude Code: Criando sua Primeira Aplicação
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Automação Digital, Inteligência Artificial e Power BI
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'transformacao-digital-para-empresas') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Transformação Digital e Automação de Processos
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'competencias-digitais') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Competências Digitais e Produtividade Tecnológica
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: Cibersegurança & Redes -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'ciber'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de Cibersegurança & Redes</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'ciberseguranca') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Cibersegurança: Defesa, Segurança da Informação e Redes
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'auditoria-de-sistemas-e-compliance') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Auditoria de Sistemas & Compliance em Segurança (APD)
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'ciberseguranca') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Segurança da Informação e Prevenção de Fraudes Digitais
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'auditoria-de-sistemas-e-compliance') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão de Incidentes de Segurança e Continuidade de Negócios
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: Gestão & Liderança -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'gestao'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de Gestão & Liderança</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'lideranca-executiva-e-comunicacao') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Liderança Executiva, Gestão de Equipas e Comunicação Assertiva
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-empresarial-e-estrategia') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão Empresarial, Estratégia e Operações de Alto Desempenho
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-de-projectos-e-metodologias-ageis') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão de Projectos & Metodologias Ágeis: Scrum e Kanban
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: MPMEs & Negócios -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'mpme'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de MPMEs & Negócios</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'gestao-estruturacao-mpme') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão e Estruturação Prática de MPMEs em Angola
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'formacao-profissional-e-empregabilidade') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Formação Profissional & Aceleração de Empregabilidade
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-estruturacao-mpme') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Modelagem de Negócios e Expansão Comercial
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: Fiscalidade & Finanças -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'fiscal'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de Fiscalidade & Finanças</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'contabilidade-e-fiscalidade-angolana') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Contabilidade Prática, Fiscalidade Angolana & Finanças
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'contabilidade-e-fiscalidade-angolana') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão Financeira, Fluxo de Caixa e Controlo de Custos
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Área: Vendas & Atendimento B2B -->
-                            <div x-show="activeTab === 'areas' && activeArea === 'vendas'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver mais cursos de Vendas & Atendimento B2B</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'vendas-consultivas-e-negociacao-b2b') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Vendas Consultivas & Estratégias Comerciais B2B
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'atendimento-ao-cliente-e-cx') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Atendimento ao Cliente, CX & Excelência em Serviços
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Carreira: Especialista em Cibersegurança -->
-                            <div x-show="activeTab === 'carreiras' && activeCarreira === 'ciber_sec'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver trilha de Especialista em Cibersegurança</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'ciberseguranca') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Cibersegurança: Defesa, Segurança da Informação e Redes
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'auditoria-de-sistemas-e-compliance') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Auditoria de Sistemas & Compliance em Segurança (normas APD)
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'ciberseguranca') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Segurança da Informação e Prevenção de Fraudes Digitais
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Carreira: Líder de Transformação Digital & IA -->
-                            <div x-show="activeTab === 'carreiras' && activeCarreira === 'lider_ia'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver trilha de Líder de Transformação Digital & IA</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Claude Code: Criando sua Primeira Aplicação
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'automacao-ia-e-power-bi') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Automação Digital, Inteligência Artificial e Power BI
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'transformacao-digital-para-empresas') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Transformação Digital e Automação de Processos
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                            <!-- Painel Carreira: Gestor Executivo de MPMEs -->
-                            <div x-show="activeTab === 'carreiras' && activeCarreira === 'gestor_exec'" class="space-y-1">
-                                <div class="flex items-center justify-between pb-3 mb-2">
-                                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                        CURSOS
-                                    </span>
-                                    <a href="/academy/cursos" @click="openCursos = false"
-                                        class="text-xs font-medium text-slate-900 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] flex items-center gap-1 transition">
-                                        <span>Ver trilha de Gestor Executivo de MPMEs</span>
-                                        <svg class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#00a3e0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="space-y-1">
-                                <a href="{{ route('academy.course.show', 'gestao-empresarial-e-estrategia') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão Empresarial, Estratégia e Operações de Alto Desempenho
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'gestao-estruturacao-mpme') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Gestão e Estruturação Prática de MPMEs em Angola
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('academy.course.show', 'contabilidade-e-fiscalidade-angolana') }}" @click="openCursos = false"
-                                    class="group/item flex items-center justify-between py-2.5 px-2 hover:bg-slate-50 dark:hover:bg-white/[0.04] rounded-lg transition-colors">
-                                    <div class="flex items-center gap-3 min-w-0 pr-3">
-                                        <span class="w-5 h-4.5 rounded-[4px] border border-[#0050f0] text-[#0050f0] dark:border-[#00a3e0] dark:text-[#00a3e0] flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                                            &lt;&gt;
-                                        </span>
-                                        <span class="text-[13px] text-slate-800 dark:text-slate-100 group-hover/item:text-[#0050f0] dark:group-hover/item:text-[#00a3e0] underline transition-colors truncate">
-                                            Contabilidade Prática, Fiscalidade Angolana & Finanças
-                                        </span>
-                                    </div>
-                                    <svg class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0] shrink-0 group-hover/item:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <a href="#cursos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Eventos</a>
-                <a href="#cursos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Conteúdos</a>
-                <a href="/loja" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Loja</a>
+                <a href="#cursos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Curso Especializado</a>
+                <a href="#modalidades" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Modalidades &amp; Preços</a>
+                <a href="#contactos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Contactos</a>
             </nav>
 
             <!-- Botões da Direita (Portal do Aluno, Tema, Busca, CTA, Menu Mobile) -->
@@ -1459,7 +467,9 @@
             class="xl:hidden mt-3 p-4 bg-white dark:bg-[#0a1428] rounded-2xl border border-slate-200 dark:border-white/10 space-y-2 text-sm shadow-xl">
             <a href="#home" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-900 dark:text-white font-bold">Home</a>
             <a href="#cursos" @click="mobileMenuOpen = false"
-                class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Cursos &amp; Carreiras</a>
+                class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Curso Especializado</a>
+            <a href="#modalidades" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Modalidades &amp; Preços</a>
+            <a href="#contactos" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Contactos</a>
             <template x-if="!isLoggedIn">
                 <a href="/academy/login" class="block py-1.5 text-[#0050f0] dark:text-[#00a3e0] font-bold">Entrar na Conta</a>
             </template>
@@ -1582,19 +592,8 @@
 
             </div>
 
-            <!-- COLUNA DA DIREITA (ESCUDO 3D DE CIBERSEGURANÇA + MEDALHA + FAIXA SUSPENSA) -->
+            <!-- COLUNA DA DIREITA (ESCUDO 3D DE CIBERSEGURANÇA + MEDALHA) -->
             <div class="w-full lg:w-[45%] relative min-h-[360px] lg:min-h-[560px] flex items-center justify-center">
-
-                <!-- FAIXA / RIBBON SUSPENSA NO TOPO -->
-                <div class="absolute top-0 right-14 sm:right-24 xl:right-32 z-30">
-                    <div
-                        class="bg-white/95 dark:bg-[#071326]/95 backdrop-blur-xl text-slate-900 dark:text-white border-x border-b border-slate-200 dark:border-white/15 px-5 pt-3 pb-4 shadow-xl text-center rounded-b-xl flex flex-col items-center w-28 transition-colors">
-                        <span class="text-xs font-semibold text-slate-800 dark:text-slate-200 tracking-tight">RACHI</span>
-                        <span class="text-3xl font-black text-[#0050f0] dark:text-[#00a3e0] leading-none mt-1 tracking-tight">22</span>
-                        <span class="text-[11px] font-black text-slate-800 dark:text-slate-200 tracking-widest leading-none mt-1">ANOS</span>
-                        <span class="text-[9px] font-medium text-slate-500 dark:text-slate-400 leading-none mt-1">no ensino tech</span>
-                    </div>
-                </div>
 
                 <!-- MEDALHA 3D CIRCULAR AZUL: "ATÉ 40% OFF" SOBRE A DIVISÓRIA -->
                 <div class="absolute left-[-24px] sm:left-[-45px] lg:left-[-70px] top-1/2 -translate-y-1/2 z-40">
@@ -1626,518 +625,561 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- 6. SHOWCASE DE CURSOS & CARREIRAS (ESTRUTURADO EM 6 PILARES)   -->
+    <!-- 6. CURSO ESPECIALIZADO: ENGENHARIA SOCIAL INSTITUCIONAL        -->
     <!-- ============================================================== -->
-    <section class="py-12 sm:py-16 bg-slate-50/90 dark:bg-[#070f1e] border-t border-slate-200/80 dark:border-white/10 relative overflow-hidden transition-colors duration-300" id="cursos" x-data="{ currentCarreirasPage: 1 }">
+    <section class="py-14 sm:py-20 bg-slate-50/95 dark:bg-[#070f1e] border-t border-slate-200/80 dark:border-white/10 relative overflow-hidden transition-colors duration-300" id="cursos" x-data="{
+        modalOpen: false,
+        modalidadeSelecionada: 'Workshop Intensivo (60.000 Kz)',
+        solicitanteNome: '',
+        solicitanteEmpresa: '',
+        solicitanteEmail: '',
+        solicitanteTelefone: '',
+        solicitanteMensagem: '',
+        enviarWhatsApp() {
+            let msg = `*Solicitação de Inscrição / Proposta — RACHI Academy*%0A%0A` +
+                      `*Curso:* Engenharia Social Institucional%0A` +
+                      `*Modalidade:* ${this.modalidadeSelecionada}%0A` +
+                      `*Nome:* ${this.solicitanteNome || 'Não informado'}%0A` +
+                      `*Instituição/Empresa:* ${this.solicitanteEmpresa || 'Não informado'}%0A` +
+                      `*Telefone:* ${this.solicitanteTelefone || 'Não informado'}%0A` +
+                      `*E-mail:* ${this.solicitanteEmail || 'Não informado'}%0A` +
+                      (this.solicitanteMensagem ? `*Observações:* ${this.solicitanteMensagem}%0A` : '');
+            window.open(`https://wa.me/972888585?text=${msg}`, '_blank');
+        }
+    }">
         
-        <!-- Luz ambiente radial suave -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-[#00a3e0]/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <!-- Luzes ambientes com efeitos glow premium -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#00a3e0]/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-[#0050f0]/15 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
             
-            <!-- Título e Subtítulo -->
-            <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#0050f0] dark:text-[#00a3e0]">Programas Oficiais de Capacitação</span>
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mt-2">
-                    O caminho mais seguro para a sua próxima profissão
+            <!-- HEADER DA SEÇÃO: CURSO ESPECIALIZADO -->
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/30 dark:border-[#00a3e0]/30 shadow-xs mb-4">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0]"></i>
+                    <span>FORMAÇÃO INSTITUCIONAL EXCLUSIVA &bull; RACHI ACADEMY</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                    Curso Especializado: <span class="bg-gradient-to-r from-[#0050f0] via-[#0077ff] to-[#00a3e0] bg-clip-text text-transparent">Engenharia Social Institucional</span>
                 </h2>
-                <p class="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                    Formações práticas com foco no mercado de trabalho e nas exigências das organizações em Angola: estude com cronograma pronto, construa projetos reais e obtenha certificação reconhecida.
+                <p class="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto font-normal">
+                    Capacite colaboradores e decisores estratégicos a blindar o elo humano contra manipulações psicológicas, invasões e fraudes direcionadas no contexto corporativo angolano.
                 </p>
             </div>
 
-                                                            <!-- PÁGINA 1: OS 6 PILARES OFICIAIS SOLICITADOS -->
-            <div x-show="currentCarreirasPage === 1" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-3"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-                <!-- Card: Cibersegurança -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
+            <!-- BLOCO PRINCIPAL: OBJETIVO + IMAGEM DE ALTO IMPACTO -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                <!-- COLUNA DO OBJETIVO & DESTAQUES (7 cols) -->
+                <div class="lg:col-span-7 flex flex-col justify-between bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl shadow-slate-900/5 dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0]"></div>
+                    
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0050f0] to-[#00a3e0] flex items-center justify-center text-white shadow-md shadow-[#0050f0]/25">
+                                <i data-lucide="target" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs uppercase font-extrabold tracking-widest text-[#0050f0] dark:text-[#00a3e0] block">Finalidade Estratégica</span>
+                                <h3 class="text-2xl font-black font-heading text-slate-900 dark:text-white tracking-tight">
+                                    Objetivo
+                                </h3>
+                            </div>
+                        </div>
 
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/ciberseguranca.jpg" alt="Cibersegurança" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Cibersegurança
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Aprenda a prevenir ameaças cibernéticas, proteger infraestruturas críticas de dados e reforçar a segurança digital com práticas de mercado.
+                        <!-- TEXTO OFICIAL DO OBJETIVO -->
+                        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/10 my-4">
+                            <p class="text-base sm:text-lg font-medium text-slate-800 dark:text-slate-100 leading-relaxed italic">
+                                "Capacitar colaboradores e gestores a reconhecer e neutralizar ataques de engenharia social no ambiente institucional, fortalecendo a cultura de segurança organizacional."
                             </p>
                         </div>
 
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/ciberseguranca" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <!-- BADGES COM PILARES -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
+                            <div class="p-3.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
+                                <i data-lucide="shield-alert" class="w-5 h-5 text-[#0050f0] dark:text-[#00a3e0] shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Human Firewall</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Defesa do elo humano contra fraudes</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
+                                <i data-lucide="zap" class="w-5 h-5 text-amber-500 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Simulações Reais</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Phishing e roleplays práticos</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/5 flex items-start gap-3">
+                                <i data-lucide="award" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Certificação</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Certificado institucional reconhecido</p>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- BOTÕES DE AÇÃO RÁPIDA -->
+                    <div class="pt-6 sm:pt-8 mt-6 border-t border-slate-100 dark:border-white/10 flex flex-wrap items-center gap-3.5">
+                        <button @click="modalOpen = true; modalidadeSelecionada = 'Workshop Intensivo (60.000 Kz)'"
+                            class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0050f0] via-[#0066ff] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#0050f0]/25 hover:shadow-xl hover:shadow-[#00a3e0]/40 hover:scale-[1.02] cursor-pointer inline-flex items-center gap-2">
+                            <span>Inscrever Participantes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+
+                        <button @click="modalOpen = true; modalidadeSelecionada = 'Treinamento In Company Personalizado (Sob consulta)'"
+                            class="px-5 py-3 rounded-xl bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-white font-bold text-xs uppercase tracking-wider transition-all border border-slate-300 dark:border-white/20 cursor-pointer inline-flex items-center gap-2">
+                            <i data-lucide="building" class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0]"></i>
+                            <span>Solicitar Proposta In Company</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Card: Competências Digitais -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/competencias-digitais.jpg" alt="Competências Digitais" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Competências Digitais
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Capacitação no uso de ferramentas em nuvem, inteligência artificial e produtividade digital para se destacar no ambiente de trabalho moderno.
-                            </p>
+                <!-- COLUNA DA IMAGEM E SELOS (5 cols) -->
+                <div class="lg:col-span-5 relative flex flex-col justify-center rounded-3xl overflow-hidden border border-slate-200/90 dark:border-white/10 shadow-xl group">
+                    <img src="/images/courses/engenharia-social.jpg" alt="Curso Especializado: Engenharia Social Institucional RACHI Academy"
+                        class="w-full h-full min-h-[380px] lg:min-h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#071326] via-[#071326]/40 to-transparent"></div>
+                    
+                    <div class="absolute bottom-6 left-6 right-6 z-10 space-y-3">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold bg-[#0050f0]/80 backdrop-blur-md text-white border border-white/20">
+                            <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                            <span>Ambiente de Simulação Ativa</span>
                         </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/competencias-digitais" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
+                        <h4 class="text-xl sm:text-2xl font-bold font-heading text-white tracking-tight leading-snug">
+                            Blindagem do Fator Humano contra Ameaças Digitais e Presenciais
+                        </h4>
+                        <p class="text-xs text-slate-200 font-normal leading-relaxed">
+                            Instrutores especialistas em segurança da informação, auditoria e inteligência defensiva corporativa.
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <!-- Card: Formação Corporativa -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/formacao-corporativa.jpg" alt="Formação Corporativa" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Formação Corporativa
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Soluções sob medida para capacitar equipas e lideranças empresariais, alinhando competências técnicas aos objectivos estratégicos da organização.
-                            </p>
-                        </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/formacao-corporativa" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    </div>
+            <!-- SEÇÃO: CONTEÚDOS PROGRAMÁTICOS -->
+            <div class="pt-4">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#0050f0] dark:text-[#00a3e0] block">Ementa Oficial</span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-slate-900 dark:text-white tracking-tight mt-1">
+                        Conteúdos Programáticos
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">
+                        Estrutura programática rigorosa composta por 5 pilares práticos e vivenciais:
+                    </p>
                 </div>
 
-                <!-- Card: Formação Profissional -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/formacao-profissional.jpg" alt="Formação Profissional" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Tópico 1 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/60 shadow-sm hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Formação Profissional
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Acelere a sua inserção no mercado de trabalho com programas práticos, projetos reais e certificação de alto valor para a sua carreira.
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] font-mono font-black text-sm flex items-center justify-center border border-[#0050f0]/20 dark:border-[#00a3e0]/30">01</span>
+                                <i data-lucide="book-open" class="w-5 h-5 text-slate-400 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors mb-2">
+                                Introdução à Engenharia Social
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                                Conceitos, exemplos reais e mapeamento detalhado dos riscos institucionais e regulamentares que afetam as organizações.
                             </p>
                         </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/formacao-profissional" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span>Fundamentos &amp; Vetores de Risco</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card: Gestão Empresarial -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/gestao-empresarial.jpg" alt="Gestão Empresarial" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
+                    <!-- Tópico 2 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/60 shadow-sm hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Gestão Empresarial
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Domine estratégias corporativas, planeamento financeiro e optimização de operações para gerir e expandir negócios com solidez.
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] font-mono font-black text-sm flex items-center justify-center border border-[#0050f0]/20 dark:border-[#00a3e0]/30">02</span>
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-slate-400 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors mb-2">
+                                Táticas de Manipulação Psicológica
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                                Phishing, spear phishing, vishing (ligações falsas), pretexting (pretextos fabricados) e tailgating (acesso físico não autorizado).
                             </p>
                         </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/gestao-empresarial" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span>Mecanismos de Engodo Psicológico</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card: Liderança Executiva -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/lideranca.jpg" alt="Liderança Executiva" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
+                    <!-- Tópico 3 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/60 shadow-sm hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Liderança Executiva
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Desenvolva competências avançadas de liderança, comunicação estratégica e gestão de equipas de alto desempenho e resultados.
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] font-mono font-black text-sm flex items-center justify-center border border-[#0050f0]/20 dark:border-[#00a3e0]/30">03</span>
+                                <i data-lucide="building-2" class="w-5 h-5 text-slate-400 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors mb-2">
+                                Cenários Institucionais
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                                Casos reais e lições aprendidas em bancos, empresas privadas e órgãos públicos, dissecando prejuízos operacionais e reputacionais.
                             </p>
                         </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span>Estudo de Casos Reais de Impacto</span>
+                        </div>
+                    </div>
 
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/lideranca" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                    <!-- Tópico 4 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/60 shadow-sm hover:shadow-lg transition-all duration-300 relative group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] font-mono font-black text-sm flex items-center justify-center border border-[#0050f0]/20 dark:border-[#00a3e0]/30">04</span>
+                                <i data-lucide="shield-check" class="w-5 h-5 text-slate-400 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors mb-2">
+                                Estratégias de Proteção
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                                Criação e reforço de políticas de segurança, autenticação robusta (MFA), gestão de acessos e protocolos formais de validação de pedidos urgentes.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span>Políticas de Segurança &amp; Governança</span>
+                        </div>
+                    </div>
+
+                    <!-- Tópico 5 -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/60 shadow-sm hover:shadow-lg transition-all duration-300 relative group md:col-span-2 lg:col-span-2 flex flex-col justify-between bg-gradient-to-br from-white via-white to-blue-50/40 dark:from-[#071326] dark:via-[#071326] dark:to-[#0050f0]/10">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-[#0050f0]/10 dark:bg-[#00a3e0]/15 text-[#0050f0] dark:text-[#00a3e0] font-mono font-black text-sm flex items-center justify-center border border-[#0050f0]/20 dark:border-[#00a3e0]/30">05</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wider">Prática Vivencial</span>
+                            </div>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors mb-2">
+                                Simulações Práticas
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                                Exercícios práticos de phishing controlado em ambiente seguro e roleplays interativos de interações suspeitas para calibrar o reflexo defensivo da equipa.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500"></i>
+                            <span>Phishing Controlado &amp; Roleplays de Confronto</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- PÁGINA 2: APROFUNDAMENTO & ESPECIALIZAÇÕES PRÁTICAS -->
-            <div x-show="currentCarreirasPage === 2" x-cloak
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-3"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-                <!-- Card: Auditoria de Sistemas -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/auditoria-sistemas.jpg" alt="Auditoria de Sistemas" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Auditoria de Sistemas
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Especialização em auditoria técnica, governança de TI e conformidade legal com a Lei de Proteção de Dados (APD Angola).
-                            </p>
-                        </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/auditoria-sistemas" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    </div>
+            <!-- SEÇÃO: MODALIDADES DA FORMAÇÃO & PREÇOS -->
+            <div class="pt-4" id="modalidades">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#0050f0] dark:text-[#00a3e0] block">Investimento &amp; Formatos</span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-slate-900 dark:text-white tracking-tight mt-1">
+                        Modalidades da Formação
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">
+                        Escolha a opção ideal para a dinâmica da sua equipa e cronograma da sua instituição:
+                    </p>
                 </div>
 
-                <!-- Card: Automação Digital & IA -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/automacao-digital-ia.jpg" alt="Automação Digital & IA" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
+                <!-- CARDS DAS 3 MODALIDADES -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-10">
+                    
+                    <!-- 1. WORKSHOP INTENSIVO -->
+                    <div class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group hover:-translate-y-1">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Automação Digital & IA
-                            </h3>
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Formato Prático</span>
+                            <h4 class="text-xl sm:text-2xl font-black font-heading text-slate-900 dark:text-white mb-2">
+                                Workshop Intensivo
+                            </h4>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-500/10 text-[#0050f0] dark:text-[#00a3e0] mb-4">
+                                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                                <span>1 dia (8 horas)</span>
+                            </div>
 
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Automatize rotinas de trabalho, crie dashboards executivos no Power BI e aplique ferramentas de Inteligência Artificial para aumentar a eficiência.
-                            </p>
+                            <div class="my-4 pt-4 border-t border-slate-100 dark:border-white/5">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Preço (por participante)</span>
+                                <div class="flex items-baseline gap-1 mt-1">
+                                    <span class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white font-heading">60.000</span>
+                                    <span class="text-base font-bold text-slate-700 dark:text-slate-300">Kz</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pt-2">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Conscientização tática imediata</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Reconhecimento de golpes e phishing</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Material de consulta executivo</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Certificado de participação individual</span>
+                                </li>
+                            </ul>
                         </div>
 
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/automacao-digital-ia" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <div class="mt-8 pt-4 border-t border-slate-100 dark:border-white/10">
+                            <button @click="modalOpen = true; modalidadeSelecionada = 'Workshop Intensivo (60.000 Kz)'"
+                                class="w-full py-3 rounded-xl bg-slate-900 hover:bg-[#0050f0] text-white dark:bg-white/10 dark:hover:bg-[#00a3e0] dark:hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2">
+                                <span>Inscrever no Workshop</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card: Gestão de Projectos -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
+                    <!-- 2. MINI-CURSO (DESTAQUE) -->
+                    <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-[#0050f0]/5 via-white to-white dark:from-[#0050f0]/15 dark:via-[#071326] dark:to-[#071326] border-2 border-[#0050f0] dark:border-[#00a3e0] shadow-2xl shadow-[#0050f0]/15 dark:shadow-[0_20px_50px_rgba(0,163,224,0.25)] flex flex-col justify-between relative group hover:-translate-y-1 transform scale-100 md:scale-105 z-10">
+                        <!-- Selo de destaque -->
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#0050f0] to-[#00a3e0] text-white text-[11px] font-extrabold uppercase tracking-widest shadow-md">
+                            Mais Completo &amp; Recomendado
+                        </div>
 
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/gestao-projectos.jpg" alt="Gestão de Projectos" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Gestão de Projectos
-                            </h3>
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-[#0050f0] dark:text-[#00a3e0] block mb-2">Formato Aprofundado</span>
+                            <h4 class="text-xl sm:text-2xl font-black font-heading text-slate-900 dark:text-white mb-2">
+                                Mini-curso
+                            </h4>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#0050f0]/15 dark:bg-[#00a3e0]/20 text-[#0050f0] dark:text-[#00a3e0] mb-4">
+                                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                                <span>2 dias (16 horas)</span>
+                            </div>
 
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Aprenda a gerir projetos com excelência utilizando Scrum, Kanban e metodologias ágeis reconhecidas internacionalmente.
-                            </p>
+                            <div class="my-4 pt-4 border-t border-slate-100 dark:border-white/5">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Preço (por participante)</span>
+                                <div class="flex items-baseline gap-1 mt-1">
+                                    <span class="text-3xl sm:text-4xl font-black text-[#0050f0] dark:text-[#00a3e0] font-heading">100.000</span>
+                                    <span class="text-base font-bold text-slate-700 dark:text-slate-300">Kz</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pt-2">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Tudo incluído do Workshop Intensivo</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Laboratórios de phishing controlado</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Roleplays vivenciais de interação suspeita</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Certificação oficial em Engenharia Social</span>
+                                </li>
+                            </ul>
                         </div>
 
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/gestao-projectos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <div class="mt-8 pt-4 border-t border-slate-100 dark:border-white/10">
+                            <button @click="modalOpen = true; modalidadeSelecionada = 'Mini-curso (100.000 Kz)'"
+                                class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#0050f0] via-[#0066ff] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] text-white font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-[#0050f0]/30 hover:scale-[1.02] cursor-pointer flex items-center justify-center gap-2">
+                                <span>Inscrever no Mini-curso</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card: Atendimento ao Cliente -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/atendimento-cliente.jpg" alt="Atendimento ao Cliente" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
+                    <!-- 3. TREINAMENTO IN COMPANY -->
+                    <div class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group hover:-translate-y-1">
                         <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Atendimento ao Cliente
-                            </h3>
+                            <span class="text-xs uppercase font-extrabold tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Solução Corporativa</span>
+                            <h4 class="text-xl sm:text-2xl font-black font-heading text-slate-900 dark:text-white mb-2">
+                                Treinamento In Company
+                            </h4>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-4">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                                <span>Personalizado</span>
+                            </div>
 
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Domine técnicas de Customer Experience (CX), resolução de conflitos e comunicação empática para encantar e fidelizar clientes.
-                            </p>
+                            <div class="my-4 pt-4 border-t border-slate-100 dark:border-white/5">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 block">Preço (por participante / turma)</span>
+                                <div class="flex items-baseline gap-1 mt-1">
+                                    <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white font-heading">Sob consulta</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pt-2">
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Conteúdo alinhado aos riscos da empresa</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Turmas fechadas presenciais ou online</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Relatório executivo de vulnerabilidades</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                                    <span>Consultoria em políticas de segurança</span>
+                                </li>
+                            </ul>
                         </div>
 
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/atendimento-cliente" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card: Vendas Consultivas B2B -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/vendas-b2b.jpg" alt="Vendas Consultivas B2B" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Vendas Consultivas B2B
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Estratégias avançadas de prospecção corporativa, negociação de alto impacto e fecho de vendas consultivas para empresas.
-                            </p>
-                        </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/vendas-b2b" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
+                        <div class="mt-8 pt-4 border-t border-slate-100 dark:border-white/10">
+                            <button @click="modalOpen = true; modalidadeSelecionada = 'Treinamento In Company Personalizado (Sob consulta)'"
+                                class="w-full py-3 rounded-xl bg-slate-900 hover:bg-[#0050f0] text-white dark:bg-white/10 dark:hover:bg-[#00a3e0] dark:hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2">
+                                <span>Solicitar Proposta In Company</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card: Contabilidade & Fiscalidade -->
-                <div class="relative bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 hover:border-[#0050f0]/60 dark:hover:border-[#00a3e0]/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#0050f0]/10 dark:shadow-xl dark:hover:shadow-[0_16px_36px_-8px_rgba(0,163,224,0.3)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                    <!-- Linha decorativa de topo sutil -->
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
-
-                    <!-- Imagem Fotográfica com Fusão Adaptativa (Modo Claro & Escuro) -->
-                    <div class="relative h-40 sm:h-44 w-full overflow-hidden shrink-0">
-                        <img src="/images/courses/contabilidade-fiscalidade.jpg" alt="Contabilidade & Fiscalidade" class="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500">
-                        
-                        <!-- Gradiente de Fusão: Branco no Modo Claro, Azul Escuro no Dark Mode -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/75 via-35% to-transparent dark:from-[#071326] dark:via-[#071326]/75 pointer-events-none"></div>
-                    </div>
-
-                    <!-- Corpo do Card Limpo & Compacto Dual-Mode -->
-                    <div class="p-4 sm:p-5 pt-2.5 flex flex-col flex-grow justify-between text-center relative z-10">
-                        <div>
-                            <!-- Título Principal em Destaque -->
-                            <h3 class="text-lg sm:text-xl font-black font-heading text-slate-900 dark:text-white tracking-wide uppercase mb-2 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors">
-                                Contabilidade & Fiscalidade
-                            </h3>
-
-                            <!-- Descrição Curta e Direta -->
-                            <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-sm mx-auto min-h-[42px]">
-                                Domine a prática contabilística em Angola, regras do PGC, apuramento de impostos e cumprimento de obrigações com a AGT.
-                            </p>
-                        </div>
-
-                        <!-- Botão de Ação Estilo Print 2 Dual-Mode -->
-                        <div class="pt-3 mt-2.5 border-t border-slate-100 dark:border-white/10 flex flex-col items-center">
-                            <a href="/academy/cursos/contabilidade-fiscalidade" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border-2 border-slate-800 dark:border-white/80 hover:border-[#0050f0] dark:hover:border-[#00a3e0] bg-transparent hover:bg-gradient-to-r hover:from-[#0050f0] hover:to-[#00a3e0] text-slate-800 dark:text-white hover:text-white dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs group-hover:shadow-[0_0_20px_rgba(0,80,240,0.3)] dark:group-hover:shadow-[0_0_20px_rgba(0,163,224,0.4)] group-hover:scale-[1.02] cursor-pointer">
-                                <span>VER CURSOS</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- CONTROLES DE PAGINAÇÃO (<- 1 2 ->) -->
-            <div class="flex items-center justify-center gap-2 mt-8 sm:mt-10">
-                <!-- Seta Anterior -->
-                <button @click="if (currentCarreirasPage > 1) currentCarreirasPage--" 
-                        :disabled="currentCarreirasPage === 1"
-                        :class="currentCarreirasPage === 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-200 dark:hover:bg-white/20 hover:text-slate-900 dark:hover:text-white'"
-                        class="w-9 h-9 rounded-full bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 flex items-center justify-center transition focus:outline-none border border-slate-200 dark:border-transparent cursor-pointer"
-                        title="Página Anterior">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                </button>
+            <!-- SEÇÃO: CONTACTOS & PARCEIROS EM SOLUÇÕES INTELIGENTES -->
+            <div class="pt-4" id="contactos">
+                <div class="rounded-3xl bg-gradient-to-br from-[#071326] via-[#091b38] to-[#040914] border border-white/15 p-8 sm:p-10 lg:p-12 text-white relative overflow-hidden shadow-2xl">
+                    <!-- Glow decorativo -->
+                    <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-[#00a3e0]/20 rounded-full blur-[100px] pointer-events-none"></div>
+                    <div class="absolute -left-20 -top-20 w-80 h-80 bg-[#0050f0]/30 rounded-full blur-[90px] pointer-events-none"></div>
 
-                <!-- Páginas 1 e 2 -->
-                <button @click="currentCarreirasPage = 1" 
-                        :class="currentCarreirasPage === 1 ? 'bg-[#0050f0] text-white dark:bg-white dark:text-slate-950 font-black shadow-md scale-105' : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/20'"
-                        class="w-9 h-9 rounded-full text-xs font-semibold flex items-center justify-center transition focus:outline-none cursor-pointer">
-                    1
-                </button>
-                <button @click="currentCarreirasPage = 2" 
-                        :class="currentCarreirasPage === 2 ? 'bg-[#0050f0] text-white dark:bg-white dark:text-slate-950 font-black shadow-md scale-105' : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/20'"
-                        class="w-9 h-9 rounded-full text-xs font-semibold flex items-center justify-center transition focus:outline-none cursor-pointer">
-                    2
-                </button>
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <span class="px-3.5 py-1 rounded-full text-xs font-extrabold bg-[#00a3e0]/20 text-[#00a3e0] border border-[#00a3e0]/30 inline-block uppercase tracking-wider">
+                                Atendimento Corporativo &amp; Inscrições
+                            </span>
+                            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-black tracking-tight">
+                                Parceiros em Soluções Inteligentes – Rachi-Tec, Lda.
+                            </h3>
+                            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+                                Agende a capacitação da sua instituição com a nossa equipa especializada ou tire dúvidas sobre inscrições de turmas e propostas In Company.
+                            </p>
 
-                <!-- Seta Próximo -->
-                <button @click="if (currentCarreirasPage < 2) currentCarreirasPage++" 
-                        :disabled="currentCarreirasPage === 2"
-                        :class="currentCarreirasPage === 2 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-200 dark:hover:bg-white/20 hover:text-slate-900 dark:hover:text-white'"
-                        class="w-9 h-9 rounded-full bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 flex items-center justify-center transition focus:outline-none border border-slate-200 dark:border-transparent cursor-pointer"
-                        title="Próxima Página">
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
+                            <!-- DADOS DE CONTACTO DESTACADOS -->
+                            <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm sm:text-base">
+                                <a href="tel:+972888585" class="inline-flex items-center gap-2.5 font-bold hover:text-[#00a3e0] transition-colors group">
+                                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-[#00a3e0] group-hover:bg-[#00a3e0] group-hover:text-slate-950 transition-all">
+                                        <i data-lucide="phone" class="w-5 h-5"></i>
+                                    </div>
+                                    <span>+972 888 585</span>
+                                </a>
+
+                                <a href="mailto:rachi.tec.su@gmail.com" class="inline-flex items-center gap-2.5 font-bold hover:text-[#00a3e0] transition-colors group">
+                                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-[#00a3e0] group-hover:bg-[#00a3e0] group-hover:text-slate-950 transition-all">
+                                        <i data-lucide="mail" class="w-5 h-5"></i>
+                                    </div>
+                                    <span>rachi.tec.su@gmail.com</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3.5 justify-end">
+                            <a href="https://wa.me/972888585?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20Curso%20Especializado%3A%20Engenharia%20Social%20Institucional." target="_blank"
+                                class="px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-black text-sm uppercase tracking-wider transition-all duration-300 text-center shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                <span>Falar pelo WhatsApp (+972 888 585)</span>
+                            </a>
+
+                            <a href="mailto:rachi.tec.su@gmail.com?subject=Inscri%C3%A7%C3%A3o%20-%20Engenharia%20Social%20Institucional"
+                                class="px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 text-center border border-white/20 hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                <span>Enviar E-mail Corporativo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+        <!-- MODAL INTERATIVO DE INSCRIÇÃO / COTAÇÃO (ALPINES.JS) -->
+        <div x-show="modalOpen" x-cloak
+            class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            
+            <div @click.away="modalOpen = false"
+                class="bg-white dark:bg-[#071326] border border-slate-200 dark:border-white/15 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-left"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100">
+                
+                <!-- Botão fechar -->
+                <button @click="modalOpen = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 dark:hover:text-white transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <div class="mb-5">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#0050f0] dark:text-[#00a3e0] block">Inscrição &amp; Proposta</span>
+                    <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-900 dark:text-white mt-1">
+                        Engenharia Social Institucional
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
+                        Preencha os dados abaixo para receber o contato da equipa RACHI com todos os detalhes.
+                    </p>
+                </div>
+
+                <form @submit.prevent="enviarWhatsApp()" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">Modalidade Selecionada</label>
+                        <select x-model="modalidadeSelecionada" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
+                            <option value="Workshop Intensivo (60.000 Kz)">Workshop Intensivo — 1 dia (8h) &bull; 60.000 Kz</option>
+                            <option value="Mini-curso (100.000 Kz)">Mini-curso — 2 dias (16h) &bull; 100.000 Kz</option>
+                            <option value="Treinamento In Company Personalizado (Sob consulta)">Treinamento In Company — Personalizado &bull; Sob consulta</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">Nome Completo</label>
+                        <input type="text" x-model="solicitanteNome" required placeholder="Ex: Dr. Manuel dos Santos" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">Instituição / Empresa</label>
+                        <input type="text" x-model="solicitanteEmpresa" required placeholder="Ex: Banco / Seguradora / Ministério / Empresa" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">Telefone / WhatsApp</label>
+                            <input type="tel" x-model="solicitanteTelefone" required placeholder="Ex: +244 9..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">E-mail Institucional</label>
+                            <input type="email" x-model="solicitanteEmail" required placeholder="Ex: contacto@empresa.ao" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">Observações ou N.º de Participantes</label>
+                        <textarea x-model="solicitanteMensagem" rows="2" placeholder="Ex: Estimativa de 15 participantes para formação no próximo mês..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]"></textarea>
+                    </div>
+
+                    <div class="pt-3 flex items-center justify-end gap-3">
+                        <button type="button" @click="modalOpen = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#0050f0] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#0050f0]/30 cursor-pointer inline-flex items-center gap-2">
+                            <span>Confirmar via WhatsApp</span>
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
     </section>
 
     <!-- ============================================================== -->

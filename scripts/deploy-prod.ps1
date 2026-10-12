@@ -26,7 +26,7 @@ finally {
 }
 
 Write-Host "Aplicando atualizacoes no ambiente de producao..." -ForegroundColor Yellow
-$remoteCommands = "cd /opt/rachi/prod && rm -f bootstrap/cache/*.php && npm install --silent && npm run build && docker exec rachi-prod-php composer install --no-dev --optimize-autoloader --no-interaction && docker exec rachi-prod-php php artisan migrate --force && docker exec rachi-prod-php php artisan db:seed --class=ProductSeeder --force && docker exec rachi-prod-php php artisan optimize:clear && docker exec rachi-prod-php php artisan config:cache && docker exec rachi-prod-php php artisan route:cache && docker exec rachi-prod-php php artisan view:cache && docker exec rachi-prod-php chown -R www-data:www-data storage bootstrap/cache && docker exec rachi-prod-php chmod -R 775 storage bootstrap/cache"
+$remoteCommands = "cd /opt/rachi/prod && rm -f bootstrap/cache/*.php && npm install --silent && npm run build && docker exec rachi-prod-php composer install --no-dev --optimize-autoloader --no-interaction && docker exec rachi-prod-php php artisan migrate --force && docker exec rachi-prod-php php artisan db:seed --class=ProductSeeder --force && docker exec rachi-prod-php php artisan db:seed --class=CourseSeeder --force && docker exec rachi-prod-php php artisan optimize:clear && docker exec rachi-prod-php php artisan config:cache && docker exec rachi-prod-php php artisan route:cache && docker exec rachi-prod-php php artisan view:cache && docker exec rachi-prod-php chown -R www-data:www-data storage bootstrap/cache && docker exec rachi-prod-php chmod -R 775 storage bootstrap/cache"
 ssh -n -i "$key" $server $remoteCommands
 
 Write-Host "Deploy concluido com sucesso em https://rachi.ao !" -ForegroundColor Green
