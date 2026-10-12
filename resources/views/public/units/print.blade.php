@@ -1612,16 +1612,6 @@
                         Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                     </p>
 
-                    <!-- CTAs -->
-                    <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print." target="_blank" class="btn-cta-amber text-sm px-6 py-3.5 shadow-lg shadow-amber-500/20">
-                            <i data-lucide="message-square" class="w-4 h-4"></i>
-                            <span>Falar com um Consultor</span>
-                        </a>
-                        <a href="#produtos-graficos" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300/80 dark:border-white/15 text-slate-800 dark:text-white font-semibold text-sm transition shadow-xs">
-                            <i data-lucide="layers" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
-                            <span>Explorar as Nossas Soluções</span>
-                        </a>
                     </div>
                 </div>
 
