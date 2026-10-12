@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" class="scroll-smooth">
+
 <head>
     <meta name="csrf-token" content="JFGGQKwlwKF6YvAxsrGLyVw4pacUR1T5JIph9aMc">
     <link rel="stylesheet" href="/toast.css">
@@ -8,12 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RACHI Print — Impressão Institucional, Brindes &amp; Produção Gráfica Corporativa</title>
-    <meta name="description" content="RACHI Print — Impressão de documentos institucionais, materiais promocionais, produção gráfica corporativa e gráfica para eventos com acabamentos de alta qualidade em Angola.">
+    <meta name="description"
+        content="RACHI Print — Impressão de documentos institucionais, materiais promocionais, produção gráfica corporativa e gráfica para eventos com acabamentos de alta qualidade em Angola.">
 
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <link rel="stylesheet" href="/worker-marketing.css">
@@ -24,7 +28,7 @@
 
     <!-- Script de Inicialização Imediata do Tema (Anti-Flash Dark Mode) -->
     <script>
-        (function() {
+        (function () {
             var theme = localStorage.getItem('rachi_theme');
             if (theme === 'dark' || (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
@@ -33,14 +37,14 @@
             }
         })();
 
-        window.toggleRachiTheme = function() {
+        window.toggleRachiTheme = function () {
             var isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('rachi_theme', isDark ? 'dark' : 'light');
             window.dispatchEvent(new CustomEvent('rachi-theme-changed', { detail: { dark: isDark } }));
             return isDark;
         };
 
-        window.addEventListener('storage', function(e) {
+        window.addEventListener('storage', function (e) {
             if (e.key === 'rachi_theme') {
                 if (e.newValue === 'dark') {
                     document.documentElement.classList.add('dark');
@@ -53,9 +57,18 @@
     </script>
     <link rel="stylesheet" href="/css/site.css?v=1790340043">
     <style>
-        [x-cloak] { display: none !important; }
-        html { scroll-behavior: smooth; }
-        section[id], div[id] { scroll-margin-top: 90px; }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section[id],
+        div[id] {
+            scroll-margin-top: 90px;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -73,14 +86,19 @@
         }
 
         /* Headings & Typography */
-        h1, h2, h3, h4, .font-display {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
             font-family: 'Outfit', sans-serif;
             color: #0b1a2e;
             transition: color 0.3s ease;
         }
-        html.dark h1, 
-        html.dark h2, 
-        html.dark h3, 
+
+        html.dark h1,
+        html.dark h2,
+        html.dark h3,
         html.dark h4 {
             color: #ffffff !important;
         }
@@ -94,6 +112,7 @@
             max-width: 58rem !important;
             transition: color 0.3s ease;
         }
+
         html.dark .hero-title {
             color: #ffffff !important;
         }
@@ -111,6 +130,7 @@
             line-height: 1.65 !important;
             transition: color 0.3s ease;
         }
+
         html.dark .hero-subtitle {
             color: #cbd5e1 !important;
         }
@@ -120,6 +140,7 @@
             border: 1px solid rgba(245, 168, 0, 0.25);
             color: #b45309;
         }
+
         html.dark .section-tag {
             background-color: rgba(245, 168, 0, 0.12);
             border-color: rgba(245, 168, 0, 0.3);
@@ -130,6 +151,7 @@
             color: #0b1a2e;
             transition: color 0.3s ease;
         }
+
         html.dark .section-title {
             color: #ffffff !important;
         }
@@ -138,6 +160,7 @@
             color: #475569;
             transition: color 0.3s ease;
         }
+
         html.dark .section-desc {
             color: #94a3b8 !important;
         }
@@ -147,6 +170,7 @@
             color: #334155;
             transition: border-color 0.3s ease, color 0.3s ease;
         }
+
         html.dark .hero-trust-bar {
             border-top-color: rgba(255, 255, 255, 0.1) !important;
             color: #cbd5e1 !important;
@@ -161,6 +185,7 @@
             color: transparent;
             display: inline-block;
         }
+
         html.dark .text-gradient-amber {
             background: linear-gradient(135deg, #f5a800 0%, #ffd580 50%, #f5a800 100%);
             -webkit-background-clip: text;
@@ -169,7 +194,7 @@
             color: transparent;
         }
 
-        
+
         /* Dynamic Hero Components */
         .hero-quick-pill {
             display: inline-flex;
@@ -185,50 +210,60 @@
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
         }
+
         html.dark .hero-quick-pill {
             background: rgba(15, 22, 38, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             color: #e2e8f0;
         }
+
         .hero-quick-pill:hover {
             transform: translateY(-2px);
         }
+
         .hero-pill-blue:hover {
             border-color: rgba(59, 130, 246, 0.6);
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
             color: #2563eb;
         }
+
         html.dark .hero-pill-blue:hover {
             border-color: rgba(59, 130, 246, 0.6);
             box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
             color: #60a5fa;
         }
+
         .hero-pill-amber:hover {
             border-color: rgba(245, 158, 11, 0.6);
             box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
             color: #d97706;
         }
+
         html.dark .hero-pill-amber:hover {
             border-color: rgba(245, 158, 11, 0.6);
             box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
             color: #fbbf24;
         }
+
         .hero-pill-emerald:hover {
             border-color: rgba(16, 185, 129, 0.6);
             box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
             color: #059669;
         }
+
         html.dark .hero-pill-emerald:hover {
             border-color: rgba(16, 185, 129, 0.6);
             box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
             color: #34d399;
         }
+
         .hero-pill-purple:hover {
             border-color: rgba(168, 85, 247, 0.6);
             box-shadow: 0 8px 20px rgba(168, 85, 247, 0.15);
             color: #7c3aed;
         }
+
         html.dark .hero-pill-purple:hover {
             border-color: rgba(168, 85, 247, 0.6);
             box-shadow: 0 8px 24px rgba(168, 85, 247, 0.25);
@@ -243,16 +278,19 @@
             box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         html.dark .hero-feature-card {
             background: rgba(15, 22, 38, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
+
         .hero-feature-card:hover {
             transform: translateY(-3px);
             border-color: rgba(245, 168, 0, 0.45);
             box-shadow: 0 12px 28px rgba(245, 168, 0, 0.12);
         }
+
         html.dark .hero-feature-card:hover {
             border-color: rgba(245, 168, 0, 0.45);
             box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 168, 0, 0.15);
@@ -272,11 +310,13 @@
             box-shadow: 0 8px 25px rgba(245, 168, 0, 0.35);
             transition: all 0.25s ease;
         }
+
         .btn-hero-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(245, 168, 0, 0.5);
             color: #000000 !important;
         }
+
         .btn-hero-secondary {
             display: inline-flex;
             align-items: center;
@@ -292,11 +332,13 @@
             box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
             transition: all 0.25s ease;
         }
+
         html.dark .btn-hero-secondary {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #f1f5f9 !important;
         }
+
         .btn-hero-secondary:hover {
             transform: translateY(-2px);
             border-color: rgba(245, 168, 0, 0.4);
@@ -305,7 +347,7 @@
 
         /* Ambient Glow Backgrounds */
         .ambient-bg {
-            background: 
+            background:
                 radial-gradient(75% 95% at 82% -5%, rgba(245, 168, 0, 0.12), transparent 58%),
                 radial-gradient(60% 80% at 12% 45%, rgba(0, 163, 224, 0.08), transparent 62%),
                 radial-gradient(45% 60% at 70% 95%, rgba(245, 168, 0, 0.06), transparent 65%),
@@ -314,7 +356,7 @@
         }
 
         html.dark .ambient-bg {
-            background: 
+            background:
                 radial-gradient(75% 95% at 82% -5%, rgba(245, 168, 0, 0.16), transparent 58%),
                 radial-gradient(60% 80% at 12% 45%, rgba(0, 163, 224, 0.12), transparent 62%),
                 radial-gradient(45% 60% at 70% 95%, rgba(245, 168, 0, 0.08), transparent 65%),
@@ -324,13 +366,15 @@
         /* HEADER THEME SYSTEM (LIGHT & DARK MODES) */
         .site-header {
             position: fixed !important;
-            top: 0 !important; left: 0 !important; right: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
             transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         /* 1. DARK MODE (html.dark) */
@@ -341,37 +385,53 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35) !important;
         }
+
         html.dark .site-header.header-scrolled {
             background: rgba(7, 19, 38, 0.98) !important;
             box-shadow: 0 6px 35px rgba(0, 0, 0, 0.5) !important;
         }
+
         html.dark .site-header .brand-logo-box {
             background: rgba(255, 255, 255, 0.08) !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
         }
+
         html.dark .site-header .brand-logo-text {
             color: #ffffff !important;
         }
+
         html.dark .site-header .brand-subtitle {
             color: #94a3b8 !important;
         }
+
         html.dark .site-header .main-nav-capsule {
-            display: flex; align-items: center; gap: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 9999px; padding: 0.3rem 0.5rem;
+            border-radius: 9999px;
+            padding: 0.3rem 0.5rem;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
         }
+
         html.dark .site-header .main-nav-capsule .nav-link {
-            position: relative; font-size: 0.88rem; font-weight: 500;
+            position: relative;
+            font-size: 0.88rem;
+            font-weight: 500;
             color: rgba(255, 255, 255, 0.8) !important;
-            padding: 0.45rem 0.9rem !important; border-radius: 9999px;
-            white-space: nowrap; text-decoration: none;
+            padding: 0.45rem 0.9rem !important;
+            border-radius: 9999px;
+            white-space: nowrap;
+            text-decoration: none;
             transition: all 0.2s ease;
         }
+
         html.dark .site-header .main-nav-capsule .nav-link:hover {
-            color: #ffffff !important; background: rgba(255, 255, 255, 0.08);
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08);
         }
+
         html.dark .site-header .main-nav-capsule .nav-link.active {
             color: #f5a800 !important;
             background: rgba(245, 168, 0, 0.2);
@@ -379,11 +439,13 @@
             box-shadow: 0 2px 8px rgba(245, 168, 0, 0.2);
             font-weight: 700;
         }
+
         html.dark .site-header .theme-toggle-btn {
             background: rgba(255, 255, 255, 0.08) !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
             color: #f8fafc !important;
         }
+
         html.dark .site-header .mobile-menu-btn {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.08) !important;
@@ -398,48 +460,65 @@
             border-bottom: 1px solid rgba(11, 26, 46, 0.08) !important;
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06) !important;
         }
+
         html:not(.dark) .site-header.header-scrolled {
             background: rgba(255, 255, 255, 0.98) !important;
             box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1) !important;
         }
+
         html:not(.dark) .site-header .brand-logo-box {
             background: rgba(11, 26, 46, 0.04) !important;
             border: 1px solid rgba(11, 26, 46, 0.08) !important;
         }
+
         html:not(.dark) .site-header .brand-logo-text {
             color: #071326 !important;
         }
+
         html:not(.dark) .site-header .brand-subtitle {
             color: #64748b !important;
         }
+
         html:not(.dark) .site-header .main-nav-capsule {
-            display: flex; align-items: center; gap: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
             background: rgba(11, 26, 46, 0.04);
             border: 1px solid rgba(11, 26, 46, 0.08);
-            border-radius: 9999px; padding: 0.3rem 0.5rem;
+            border-radius: 9999px;
+            padding: 0.3rem 0.5rem;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
         }
+
         html:not(.dark) .site-header .main-nav-capsule .nav-link {
-            font-size: 0.88rem; font-weight: 600;
+            font-size: 0.88rem;
+            font-weight: 600;
             color: #0b1a2e !important;
-            padding: 0.45rem 0.9rem !important; border-radius: 9999px;
-            white-space: nowrap; text-decoration: none;
+            padding: 0.45rem 0.9rem !important;
+            border-radius: 9999px;
+            white-space: nowrap;
+            text-decoration: none;
             transition: all 0.2s ease;
         }
+
         html:not(.dark) .site-header .main-nav-capsule .nav-link:hover {
-            color: #d97706 !important; background: rgba(245, 168, 0, 0.08);
+            color: #d97706 !important;
+            background: rgba(245, 168, 0, 0.08);
         }
+
         html:not(.dark) .site-header .main-nav-capsule .nav-link.active {
             color: #d97706 !important;
             background: rgba(245, 168, 0, 0.12);
             border: 1px solid rgba(245, 168, 0, 0.3);
             font-weight: 700;
         }
+
         html:not(.dark) .site-header .theme-toggle-btn {
             background: rgba(11, 26, 46, 0.04) !important;
             border: 1px solid rgba(11, 26, 46, 0.08) !important;
             color: #0b1a2e !important;
         }
+
         html:not(.dark) .site-header .mobile-menu-btn {
             color: #0b1a2e !important;
             background: rgba(11, 26, 46, 0.05) !important;
@@ -450,13 +529,16 @@
             color: #0b1a2e;
             transition: color 0.2s ease;
         }
+
         html.dark .dropdown-title {
             color: #f8fafc !important;
         }
+
         .dropdown-desc {
             color: #64748b;
             transition: color 0.2s ease;
         }
+
         html.dark .dropdown-desc {
             color: #94a3b8 !important;
         }
@@ -479,6 +561,7 @@
             box-shadow: 0 4px 20px rgba(245, 168, 0, 0.4);
             text-decoration: none;
         }
+
         .btn-upload-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(245, 168, 0, 0.55);
@@ -502,6 +585,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
             text-decoration: none;
         }
+
         .btn-watch-examples:hover {
             background: #fffbeb;
             border-color: #f5a800;
@@ -515,6 +599,7 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: none;
         }
+
         html.dark .btn-watch-examples:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(245, 168, 0, 0.4);
@@ -533,6 +618,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .feature-card:hover {
             transform: translateY(-4px);
             border-color: rgba(245, 168, 0, 0.4);
@@ -544,6 +630,7 @@
             border: 1px solid rgba(255, 255, 255, 0.07);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
         }
+
         html.dark .feature-card:hover {
             background: rgba(255, 255, 255, 0.04);
             border-color: rgba(245, 168, 0, 0.35);
@@ -554,6 +641,7 @@
             color: #0f172a;
             transition: color 0.25s ease;
         }
+
         html.dark .feature-card-title {
             color: #ffffff !important;
         }
@@ -562,11 +650,12 @@
             color: #475569;
             transition: color 0.25s ease;
         }
+
         html.dark .feature-card-desc {
             color: #94a3b8 !important;
         }
 
-                
+
         /* CTA Amber Button */
         .btn-cta-amber {
             background: linear-gradient(135deg, #f5a800 0%, #d97706 100%);
@@ -583,6 +672,7 @@
             transition: all 0.25s ease;
             box-shadow: 0 4px 15px rgba(245, 168, 0, 0.35);
         }
+
         .btn-cta-amber:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 22px rgba(245, 168, 0, 0.45);
@@ -604,36 +694,53 @@
             justify-content: space-between;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
         }
+
         .showcase-product-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.08);
         }
+
         html.dark .showcase-product-card {
             background: linear-gradient(180deg, #0d1527 0%, #080f1d 100%) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
         }
+
         html.dark .showcase-product-card:hover {
             transform: translateY(-5px);
         }
 
-        .showcase-border-blue:hover { border-color: rgba(2, 132, 199, 0.6) !important; }
-        .showcase-border-amber:hover { border-color: rgba(245, 168, 0, 0.6) !important; }
-        .showcase-border-emerald:hover { border-color: rgba(5, 150, 105, 0.6) !important; }
-        .showcase-border-purple:hover { border-color: rgba(124, 58, 237, 0.6) !important; }
+        .showcase-border-blue:hover {
+            border-color: rgba(2, 132, 199, 0.6) !important;
+        }
+
+        .showcase-border-amber:hover {
+            border-color: rgba(245, 168, 0, 0.6) !important;
+        }
+
+        .showcase-border-emerald:hover {
+            border-color: rgba(5, 150, 105, 0.6) !important;
+        }
+
+        .showcase-border-purple:hover {
+            border-color: rgba(124, 58, 237, 0.6) !important;
+        }
 
         html.dark .showcase-border-blue:hover {
             border-color: rgba(56, 189, 248, 0.5) !important;
             box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3), inset 0 1px 0 rgba(56, 189, 248, 0.25) !important;
         }
+
         html.dark .showcase-border-amber:hover {
             border-color: rgba(245, 168, 0, 0.5) !important;
             box-shadow: 0 20px 40px -10px rgba(245, 168, 0, 0.3), inset 0 1px 0 rgba(245, 168, 0, 0.25) !important;
         }
+
         html.dark .showcase-border-emerald:hover {
             border-color: rgba(52, 211, 153, 0.5) !important;
             box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(52, 211, 153, 0.25) !important;
         }
+
         html.dark .showcase-border-purple:hover {
             border-color: rgba(192, 132, 252, 0.5) !important;
             box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.3), inset 0 1px 0 rgba(192, 132, 252, 0.25) !important;
@@ -648,11 +755,13 @@
             border: 1px solid #e2e8f0;
             transition: all 0.25s ease;
         }
+
         html.dark .showcase-applications-box {
             background: rgba(15, 23, 42, 0.85) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
+
         .showcase-applications-box .app-box-header {
             display: flex;
             align-items: center;
@@ -664,9 +773,11 @@
             color: #64748b;
             margin-bottom: 0.45rem;
         }
+
         html.dark .showcase-applications-box .app-box-header {
             color: #94a3b8 !important;
         }
+
         .showcase-applications-box .app-box-text {
             font-size: 0.8125rem;
             line-height: 1.6;
@@ -674,6 +785,7 @@
             margin: 0;
             font-weight: 400;
         }
+
         html.dark .showcase-applications-box .app-box-text {
             color: #e2e8f0 !important;
             font-weight: 500;
@@ -699,12 +811,14 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
             user-select: none;
         }
+
         html.dark .showcase-action-btn {
             background: rgba(30, 41, 59, 0.8) !important;
             border: 1px solid rgba(255, 255, 255, 0.14) !important;
             color: #ffffff !important;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
         }
+
         .showcase-product-card:hover .showcase-action-btn i {
             transform: translateX(4px);
         }
@@ -716,6 +830,7 @@
             color: #ffffff !important;
             box-shadow: 0 8px 24px rgba(2, 132, 199, 0.4) !important;
         }
+
         .showcase-border-amber:hover .showcase-action-btn {
             background: linear-gradient(135deg, #f5a800 0%, #d97706 100%) !important;
             border-color: #f5a800 !important;
@@ -723,12 +838,14 @@
             font-weight: 900 !important;
             box-shadow: 0 8px 24px rgba(245, 168, 0, 0.4) !important;
         }
+
         .showcase-border-emerald:hover .showcase-action-btn {
             background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
             border-color: #059669 !important;
             color: #ffffff !important;
             box-shadow: 0 8px 24px rgba(5, 150, 105, 0.4) !important;
         }
+
         .showcase-border-purple:hover .showcase-action-btn {
             background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
             border-color: #7c3aed !important;
@@ -740,11 +857,12 @@
         html.dark .showcase-product-card .text-slate-800 {
             color: #f1f5f9 !important;
         }
+
         html.dark .showcase-product-card .text-slate-600 {
             color: #94a3b8 !important;
         }
 
-/* Line Cover & Product Grid Showcase */
+        /* Line Cover & Product Grid Showcase */
         .line-cover-wrap {
             position: relative;
             border-radius: 1rem;
@@ -755,15 +873,18 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             cursor: pointer;
         }
+
         .line-cover-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
+
         .line-cover-wrap:hover .line-cover-img {
             transform: scale(1.05);
         }
+
         .line-cover-badge {
             position: absolute;
             bottom: 0.75rem;
@@ -783,6 +904,7 @@
             gap: 0.375rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
+
         .line-products-section-header {
             display: flex;
             align-items: center;
@@ -792,20 +914,24 @@
             padding-top: 1rem;
             border-top: 1px dashed #e2e8f0;
         }
+
         html.dark .line-products-section-header {
             border-top-color: rgba(255, 255, 255, 0.1);
         }
+
         .line-products-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 0.75rem;
             margin-bottom: 1.25rem;
         }
+
         @media (min-width: 640px) {
             .line-products-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
+
         .line-product-item {
             background: #ffffff;
             border: 1px solid rgba(226, 232, 240, 0.9);
@@ -821,20 +947,24 @@
             position: relative;
             overflow: hidden;
         }
+
         .line-product-item:hover {
             transform: translateY(-4px);
             border-color: #f5a800;
             box-shadow: 0 16px 30px -10px rgba(245, 168, 0, 0.22), 0 4px 15px rgba(0, 0, 0, 0.06);
         }
+
         html.dark .line-product-item {
             background: rgba(15, 23, 42, 0.65) !important;
             border-color: rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
         }
+
         html.dark .line-product-item:hover {
             border-color: #f5a800 !important;
             box-shadow: 0 16px 35px -8px rgba(245, 168, 0, 0.35), 0 0 20px rgba(245, 168, 0, 0.15) !important;
         }
+
         .line-product-thumb-wrap {
             position: relative;
             width: 100%;
@@ -849,10 +979,12 @@
             justify-content: center;
             padding: 0.75rem;
         }
+
         html.dark .line-product-thumb-wrap {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
             border-color: rgba(255, 255, 255, 0.06) !important;
         }
+
         .line-product-thumb {
             width: 100%;
             height: 100%;
@@ -862,10 +994,12 @@
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
             filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
         }
+
         .line-product-item:hover .line-product-thumb {
             transform: scale(1.1);
             filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
         }
+
         .line-product-zoom-hint {
             position: absolute;
             inset: 0;
@@ -880,9 +1014,11 @@
             transition: opacity 0.25s ease;
             pointer-events: none;
         }
+
         .line-product-item:hover .line-product-zoom-hint {
             opacity: 1;
         }
+
         .line-product-title {
             font-size: 11.5px;
             font-weight: 700;
@@ -894,9 +1030,11 @@
             overflow: hidden;
             margin-bottom: 0.25rem;
         }
+
         html.dark .line-product-title {
             color: #f1f5f9 !important;
         }
+
         .line-product-tag {
             font-size: 9px;
             font-weight: 700;
@@ -907,6 +1045,7 @@
         .showcase-divider {
             border-top: 1px solid #e2e8f0;
         }
+
         html.dark .showcase-divider {
             border-top-color: rgba(255, 255, 255, 0.1) !important;
         }
@@ -915,6 +1054,7 @@
             color: #0f172a;
             transition: color 0.25s ease;
         }
+
         html.dark .showcase-title {
             color: #ffffff !important;
         }
@@ -923,6 +1063,7 @@
             color: #475569;
             transition: color 0.25s ease;
         }
+
         html.dark .showcase-desc {
             color: #cbd5e1 !important;
         }
@@ -931,6 +1072,7 @@
             color: #334155;
             transition: color 0.25s ease;
         }
+
         html.dark .showcase-bullet {
             color: #e2e8f0 !important;
         }
@@ -940,6 +1082,7 @@
             border: 1px solid #e2e8f0;
             color: #64748b;
         }
+
         html.dark .showcase-app-box {
             background-color: rgba(255, 255, 255, 0.03) !important;
             border-color: rgba(255, 255, 255, 0.06) !important;
@@ -949,6 +1092,7 @@
         .showcase-app-label {
             color: #1e293b;
         }
+
         html.dark .showcase-app-label {
             color: #cbd5e1 !important;
         }
@@ -959,16 +1103,36 @@
             color: #0f172a;
             transition: all 0.25s ease;
         }
+
         html.dark .showcase-btn {
             background-color: rgba(255, 255, 255, 0.06) !important;
             border-color: rgba(255, 255, 255, 0.1) !important;
             color: #ffffff !important;
         }
 
-        .showcase-btn-blue:hover { background-color: #0284c7 !important; color: #ffffff !important; border-color: #0284c7 !important; }
-        .showcase-btn-amber:hover { background-color: #f5a800 !important; color: #071326 !important; border-color: #f5a800 !important; }
-        .showcase-btn-emerald:hover { background-color: #059669 !important; color: #ffffff !important; border-color: #059669 !important; }
-        .showcase-btn-purple:hover { background-color: #7c3aed !important; color: #ffffff !important; border-color: #7c3aed !important; }
+        .showcase-btn-blue:hover {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            border-color: #0284c7 !important;
+        }
+
+        .showcase-btn-amber:hover {
+            background-color: #f5a800 !important;
+            color: #071326 !important;
+            border-color: #f5a800 !important;
+        }
+
+        .showcase-btn-emerald:hover {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            border-color: #059669 !important;
+        }
+
+        .showcase-btn-purple:hover {
+            background-color: #7c3aed !important;
+            color: #ffffff !important;
+            border-color: #7c3aed !important;
+        }
 
         /* Trust Strip */
         .trust-strip {
@@ -978,6 +1142,7 @@
             border-radius: 1.5rem;
             padding: 2.5rem;
         }
+
         html.dark .trust-strip {
             background: rgba(255, 255, 255, 0.02) !important;
             border-color: rgba(255, 255, 255, 0.08) !important;
@@ -987,6 +1152,7 @@
         .trust-label {
             color: #64748b;
         }
+
         html.dark .trust-label {
             color: #94a3b8 !important;
         }
@@ -1036,6 +1202,7 @@
             box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
             text-decoration: none;
         }
+
         .cta-banner-card .btn-cta-secondary:hover {
             background: #f8fafc !important;
             border-color: #10b981 !important;
@@ -1087,6 +1254,7 @@
             padding: 3rem 0;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
+
         html.dark .site-footer {
             background-color: #060911 !important;
             border-top-color: rgba(255, 255, 255, 0.08) !important;
@@ -1096,6 +1264,7 @@
             background-color: rgba(11, 26, 46, 0.04);
             border: 1px solid rgba(11, 26, 46, 0.08);
         }
+
         html.dark .footer-brand-box {
             background-color: rgba(255, 255, 255, 0.06);
             border-color: rgba(255, 255, 255, 0.1);
@@ -1104,12 +1273,15 @@
         .footer-copyright {
             color: #64748b;
         }
+
         html.dark .footer-copyright {
             color: #94a3b8 !important;
         }
+
         .footer-copyright strong {
             color: #0f172a;
         }
+
         html.dark .footer-copyright strong {
             color: #ffffff !important;
         }
@@ -1119,12 +1291,15 @@
             text-decoration: none;
             transition: color 0.2s ease;
         }
+
         .footer-link:hover {
             color: #0f172a;
         }
+
         html.dark .footer-link {
             color: #94a3b8 !important;
         }
+
         html.dark .footer-link:hover {
             color: #ffffff !important;
         }
@@ -1330,7 +1505,7 @@
         });
 
         // Global Modal Triggers (Works seamlessly across Alpine & Vanilla JS)
-        window.rachiOpenQuoteModal = function(productName, lineName, serviceSlug) {
+        window.rachiOpenQuoteModal = function (productName, lineName, serviceSlug) {
             productName = productName || 'Solução Gráfica RACHI Print';
             lineName = lineName || 'RACHI Print';
             serviceSlug = serviceSlug || '';
@@ -1349,7 +1524,7 @@
                         return false;
                     }
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             const modalEl = document.getElementById('rachi-quote-modal');
             if (modalEl) {
@@ -1372,7 +1547,7 @@
             return false;
         };
 
-        window.rachiCloseQuoteModal = function() {
+        window.rachiCloseQuoteModal = function () {
             if (window.rachiPrintInstance && typeof window.rachiPrintInstance.closeQuoteModal === 'function') {
                 window.rachiPrintInstance.closeQuoteModal();
                 return false;
@@ -1386,7 +1561,7 @@
                         return false;
                     }
                 }
-            } catch (e) {}
+            } catch (e) { }
             const modalEl = document.getElementById('rachi-quote-modal');
             if (modalEl) {
                 modalEl.style.display = 'none';
@@ -1395,7 +1570,7 @@
             return false;
         };
 
-        window.rachiSubmitQuoteForm = async function(e) {
+        window.rachiSubmitQuoteForm = async function (e) {
             if (e) e.preventDefault();
             const name = document.querySelector('input[x-model="quoteForm.name"]')?.value || '';
             const empresa = document.querySelector('input[x-model="quoteForm.empresa"]')?.value || '';
@@ -1439,7 +1614,7 @@
                 } else {
                     alert(data.message || 'Erro ao processar solicitação.');
                 }
-            } catch(err) {
+            } catch (err) {
                 console.error(err);
                 alert('Erro ao enviar solicitação.');
             }
@@ -1447,6 +1622,7 @@
         };
     </script>
 </head>
+
 <body x-data="rachiPrintStudio()" class="ambient-bg antialiased">
 
     <!-- ============================================================ -->
@@ -1454,23 +1630,29 @@
     <!-- ============================================================ -->
     <header class="site-header" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
+
             <!-- Brand Logo Oficial RACHI Print -->
-            <a href="/" class="flex items-center gap-3 group text-decoration-none" title="Ir para a página inicial (Portal RACHI)">
-                <div class="brand-logo-box h-12 px-2.5 py-1 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
+            <a href="/" class="flex items-center gap-3 group text-decoration-none"
+                title="Ir para a página inicial (Portal RACHI)">
+                <div
+                    class="brand-logo-box h-12 px-2.5 py-1 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                        <img src="/images/areas/rachi-print.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
-                             alt="RACHI Print" 
-                             class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
+                        <img src="/images/areas/rachi-print.png"
+                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'"
+                            alt="RACHI Print"
+                            class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
                 </div>
                 <div class="flex flex-col">
-                    <span class="brand-logo-text font-display font-black text-lg tracking-wider flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#d97706] dark:text-[#f5a800] text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">PRINT</span>
+                    <span
+                        class="brand-logo-text font-display font-black text-lg tracking-wider flex items-center gap-1.5 transition-colors">
+                        RACHI <span
+                            class="text-[#d97706] dark:text-[#f5a800] text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">PRINT</span>
                     </span>
-                    <span class="brand-subtitle text-[10px] tracking-widest uppercase font-medium transition-colors">Gráfica &amp; Produção</span>
+                    <span
+                        class="brand-subtitle text-[10px] tracking-widest uppercase font-medium transition-colors">Gráfica
+                        &amp; Produção</span>
                 </div>
             </a>
 
@@ -1479,60 +1661,78 @@
                 <a href="/" class="nav-link cursor-pointer">
                     <span>Home</span>
                 </a>
-                
+
                 <!-- Solutions Dropdown -->
-                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false">
-                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false"
+                    @keydown.escape.window="openSol = false">
+                    <button @click="openSol = !openSol"
+                        class="nav-link flex items-center gap-1.5 focus:outline-none active">
                         <span>Soluções</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-amber-500' : ''">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" class="opacity-70 transition-transform duration-200"
+                            :class="openSol ? 'rotate-180 text-amber-500' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
-                    <div x-show="openSol" 
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                         x-transition:leave="transition ease-in duration-150"
-                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                         x-cloak 
-                         class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5 transition-colors">
-                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-500/15 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-300 transition group">
+                    <div x-show="openSol" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave-end="opacity-0 translate-y-2 scale-95" x-cloak
+                        class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5 transition-colors">
+                        <a href="/capital"
+                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-500/15 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-300 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Human Capital</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Recrutamento &amp; RH</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">
+                                        Recrutamento &amp; RH</div>
                                 </div>
                             </div>
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                            <i data-lucide="arrow-right"
+                                class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
-                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition group">
+                        <a href="/academy"
+                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-indigo-500/15 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação &amp; Treinamento</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação
+                                        &amp; Treinamento</div>
                                 </div>
                             </div>
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                            <i data-lucide="arrow-right"
+                                class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
-                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-300 transition group">
+                        <a href="/tec"
+                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-500/15 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-300 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-500 dark:text-sky-400 flex items-center justify-center font-black text-xs">03</span>
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-500 dark:text-sky-400 flex items-center justify-center font-black text-xs">03</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Sistemas
+                                        &amp; TI</div>
                                 </div>
                             </div>
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                            <i data-lucide="arrow-right"
+                                class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
                         </a>
-                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 transition group">
+                        <a href="/print"
+                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 transition group">
                             <div class="flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-500 dark:text-amber-400 flex items-center justify-center font-black text-xs">04</span>
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-500 dark:text-amber-400 flex items-center justify-center font-black text-xs">04</span>
                                 <div>
-                                    <div class="font-bold text-xs dropdown-title text-amber-600 dark:text-amber-300">RACHI Print</div>
-                                    <div class="text-[11px] text-amber-600/80 dark:text-amber-400/80 dropdown-desc">Gráfica &amp; Produção</div>
+                                    <div class="font-bold text-xs dropdown-title text-amber-600 dark:text-amber-300">
+                                        RACHI Print</div>
+                                    <div class="text-[11px] text-amber-600/80 dark:text-amber-400/80 dropdown-desc">
+                                        Gráfica &amp; Produção</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-100 transition"></i>
@@ -1549,42 +1749,56 @@
             <!-- Action Buttons -->
             <div class="flex items-center gap-2.5 sm:gap-3">
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors">
+                <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Dropdown -->
-        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="lg:hidden bg-white/98 dark:bg-[#080c16]/98 border-b border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-xl transition-colors">
-            <a href="/" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-white">Home</a>
+        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak
+            class="lg:hidden bg-white/98 dark:bg-[#080c16]/98 border-b border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-xl transition-colors">
+            <a href="/"
+                class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-white">Home</a>
             <div class="pt-2 border-t border-slate-200 dark:border-white/10 space-y-1">
-                <span class="text-xs uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Soluções</span>
-                <a href="/capital" class="block pl-3 text-xs text-slate-600 dark:text-slate-400 py-1">01 RACHI Human Capital</a>
-                <a href="/academy" class="block pl-3 text-xs text-slate-600 dark:text-slate-400 py-1">02 RACHI Academy</a>
+                <span
+                    class="text-xs uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Soluções</span>
+                <a href="/capital" class="block pl-3 text-xs text-slate-600 dark:text-slate-400 py-1">01 RACHI Human
+                    Capital</a>
+                <a href="/academy" class="block pl-3 text-xs text-slate-600 dark:text-slate-400 py-1">02 RACHI
+                    Academy</a>
                 <a href="/tec" class="block pl-3 text-xs text-slate-600 dark:text-slate-400 py-1">03 RACHI Tec</a>
-                <a href="/print" class="block pl-3 text-xs text-amber-600 dark:text-amber-400 font-bold py-1">04 RACHI Print</a>
+                <a href="/print" class="block pl-3 text-xs text-amber-600 dark:text-amber-400 font-bold py-1">04 RACHI
+                    Print</a>
             </div>
             <div class="pt-2 border-t border-slate-200 dark:border-white/10 space-y-2">
-                <a href="#produtos-graficos" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Produtos Gráficos</a>
-                <a href="#como-funciona" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Diferenciais</a>
+                <a href="#produtos-graficos" @click="mobileMenuOpen = false"
+                    class="block text-sm text-slate-700 dark:text-slate-300 py-1">Produtos Gráficos</a>
+                <a href="#como-funciona" @click="mobileMenuOpen = false"
+                    class="block text-sm text-slate-700 dark:text-slate-300 py-1">Diferenciais</a>
                 <a href="/loja" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Loja</a>
                 <a href="/contacto" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Contacto</a>
             </div>
         </div>
     </header>
 
-            <!-- ============================================================ -->
+    <!-- ============================================================ -->
     <!-- 1. HERO BANNER: RACHI Print (Layout Padronizado com Capital) -->
     <!-- ============================================================ -->
     <main class="flex-1" style="padding-top: 75px;">
-        <section class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+        <section
+            class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
             <!-- Ambient Glow Gradients -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.22),transparent_70%)] pointer-events-none"></div>
-            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div
+                class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.22),transparent_70%)] pointer-events-none">
+            </div>
+            <div
+                class="absolute top-1/3 -right-20 w-96 h-96 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none">
+            </div>
 
             <div class="max-w-7xl mx-auto relative z-10">
-                
+
                 <!-- Breadcrumbs -->
                 <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">
                     <a href="/" class="hover:text-slate-900 dark:hover:text-white transition cursor-pointer">Início</a>
@@ -1596,54 +1810,67 @@
 
                 <div class="max-w-4xl">
                     <!-- Pill Tag -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
                         <span class="w-2 h-2 rounded-full bg-[#f5a800] animate-pulse"></span>
                         Gráfica de Alto Padrão
                     </div>
 
                     <!-- Main H1 -->
-                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight uppercase">
+                    <h1
+                        class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight uppercase">
                         Dê vida aos seus materiais com <br class="hidden sm:inline">
                         <span class="text-gradient-amber">acabamento institucional</span>
                     </h1>
 
                     <!-- Main Subtitle -->
                     <p class="text-base sm:text-xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
-                        Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
+                        Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição
+                        que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                     </p>
 
                     </div>
                 </div>
 
                 <!-- 3 Pilares Oficiais: Qualidade Institucional, Processo Rápido, Suporte Especializado -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
+                    <div
+                        class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="font-bold text-sm text-slate-900 dark:text-white">Qualidade Institucional</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Rigor cromático e acabamentos nobres</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Rigor cromático e acabamentos nobres
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                    <div
+                        class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                             <i data-lucide="zap" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="font-bold text-sm text-slate-900 dark:text-white">Processo Rápido</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Tiragens flexíveis e prazos rigorosos</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Tiragens flexíveis e prazos
+                                rigorosos</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
+                    <div
+                        class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
                             <i data-lucide="headphones" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="font-bold text-sm text-slate-900 dark:text-white">Suporte Especializado</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Consultores gráficos dedicados em Angola</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Consultores gráficos dedicados em
+                                Angola</div>
                         </div>
                     </div>
                 </div>
@@ -1657,67 +1884,83 @@
         <section id="produtos-graficos" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="catalogo"></div>
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#f5a800] font-bold text-xs uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-200 dark:border-amber-500/25">
+                <span
+                    class="text-[#f5a800] font-bold text-xs uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-200 dark:border-amber-500/25">
                     Catálogo de Soluções
                 </span>
                 <h2 class="text-3xl sm:text-5xl font-black mt-4 text-slate-900 dark:text-white">
                     Veja no que seus materiais gráficos podem se transformar
                 </h2>
                 <p class="text-sm sm:text-base mt-3 text-slate-600 dark:text-slate-300">
-                    As quatro linhas oficiais de produção da RACHI Print. Conheça abaixo as soluções e amostras de cada linha ou aceda à página oficial para ver especificações e solicitar cotação.
+                    As quatro linhas oficiais de produção da RACHI Print. Conheça abaixo as soluções e amostras de cada
+                    linha ou aceda à página oficial para ver especificações e solicitar cotação.
                 </p>
             </div>
 
             <!-- 4 Detailed Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
+
                 <!-- LINHA 1: Impressão de documentos institucionais -->
-                <div id="linha-1" 
-                     @click="window.location.href = '/print/servicos/documentos-institucionais'"
-                     class="showcase-product-card showcase-border-blue group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '/print/servicos/documentos-institucionais'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition duration-500"></div>
-                    
+                <div id="linha-1" @click="window.location.href = '/print/servicos/documentos-institucionais'"
+                    class="showcase-product-card showcase-border-blue group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    role="link" tabindex="0"
+                    @keydown.enter="window.location.href = '/print/servicos/documentos-institucionais'">
+                    <div
+                        class="absolute -top-10 -right-10 w-44 h-44 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition duration-500">
+                    </div>
+
                     <div>
                         <!-- Top Header -->
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="file-text" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/25">
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/25">
                                 Documentos Oficiais
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition leading-tight">
+                        <h3
+                            class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition leading-tight">
                             Impressão de documentos institucionais
                         </h3>
 
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Impressão de relatórios, brochuras, manuais, propostas e documentos oficiais com qualidade institucional.
+                        <p
+                            class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Impressão de relatórios, brochuras, manuais, propostas e documentos oficiais com qualidade
+                            institucional.
                         </p>
 
                         <!-- Bullets Oficiais -->
                         <div class="mt-6 space-y-3">
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Impressão a cores e P&amp;B</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Impressão
+                                    a cores e P&amp;B</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos variados</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos
+                                    variados</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Tiragens flexíveis</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Tiragens
+                                    flexíveis</span>
                             </div>
                         </div>
 
@@ -1727,7 +1970,8 @@
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="app-box-text">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
+                            <p class="app-box-text">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos,
+                                Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
                         </div>
                     </div>
 
@@ -1741,52 +1985,65 @@
                 </div>
 
                 <!-- LINHA 2: Materiais promocionais -->
-                <div id="linha-2" 
-                     @click="window.location.href = '/print/servicos/materiais-promocionais'"
-                     class="showcase-product-card showcase-border-amber group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '/print/servicos/materiais-promocionais'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition duration-500"></div>
-                    
+                <div id="linha-2" @click="window.location.href = '/print/servicos/materiais-promocionais'"
+                    class="showcase-product-card showcase-border-amber group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    role="link" tabindex="0"
+                    @keydown.enter="window.location.href = '/print/servicos/materiais-promocionais'">
+                    <div
+                        class="absolute -top-10 -right-10 w-44 h-44 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition duration-500">
+                    </div>
+
                     <div>
                         <!-- Top Header -->
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="gift" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25">
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25">
                                 Brindes &amp; Ativação
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition leading-tight">
+                        <h3
+                            class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition leading-tight">
                             Materiais promocionais &amp; brindes
                         </h3>
 
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Brindes personalizados, kits corporativos e materiais promocionais de alto impacto para fixação da marca.
+                        <p
+                            class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Brindes personalizados, kits corporativos e materiais promocionais de alto impacto para
+                            fixação da marca.
                         </p>
 
                         <!-- Bullets Oficiais -->
                         <div class="mt-6 space-y-3">
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Personalização premium</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Personalização
+                                    premium</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Kits para eventos e colaboradores</span>
+                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Kits
+                                    para eventos e colaboradores</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Gravação a laser, UV e serigrafia</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Gravação
+                                    a laser, UV e serigrafia</span>
                             </div>
                         </div>
 
@@ -1796,7 +2053,8 @@
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="app-box-text">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano, Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
+                            <p class="app-box-text">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano,
+                                Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
                         </div>
                     </div>
 
@@ -1810,52 +2068,66 @@
                 </div>
 
                 <!-- LINHA 3: Produção gráfica corporativa -->
-                <div id="linha-3" 
-                     @click="window.location.href = '/print/servicos/producao-grafica-corporativa'"
-                     class="showcase-product-card showcase-border-emerald group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '/print/servicos/producao-grafica-corporativa'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition duration-500"></div>
-                    
+                <div id="linha-3" @click="window.location.href = '/print/servicos/producao-grafica-corporativa'"
+                    class="showcase-product-card showcase-border-emerald group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    role="link" tabindex="0"
+                    @keydown.enter="window.location.href = '/print/servicos/producao-grafica-corporativa'">
+                    <div
+                        class="absolute -top-10 -right-10 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition duration-500">
+                    </div>
+
                     <div>
                         <!-- Top Header -->
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="briefcase" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25">
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25">
                                 Papelaria &amp; Identidade
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition leading-tight">
+                        <h3
+                            class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition leading-tight">
                             Produção gráfica corporativa
                         </h3>
 
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Papelaria institucional, pastas, envelopes e cartões de visita com precisão de cor e rigor técnico.
+                        <p
+                            class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Papelaria institucional, pastas, envelopes e cartões de visita com precisão de cor e rigor
+                            técnico.
                         </p>
 
                         <!-- Bullets Oficiais -->
                         <div class="mt-6 space-y-3">
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Identidade visual consistente</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Identidade
+                                    visual consistente</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Papéis nobres e especiais</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Papéis
+                                    nobres e especiais</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos táteis diferenciados</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos
+                                    táteis diferenciados</span>
                             </div>
                         </div>
 
@@ -1865,7 +2137,8 @@
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="app-box-text">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
+                            <p class="app-box-text">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas
+                                Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
                         </div>
                     </div>
 
@@ -1879,52 +2152,65 @@
                 </div>
 
                 <!-- LINHA 4: Produção gráfica para eventos -->
-                <div id="linha-4" 
-                     @click="window.location.href = '/print/servicos/grafica-eventos'"
-                     class="showcase-product-card showcase-border-purple group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '/print/servicos/grafica-eventos'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-purple-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/20 transition duration-500"></div>
-                    
+                <div id="linha-4" @click="window.location.href = '/print/servicos/grafica-eventos'"
+                    class="showcase-product-card showcase-border-purple group transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    role="link" tabindex="0" @keydown.enter="window.location.href = '/print/servicos/grafica-eventos'">
+                    <div
+                        class="absolute -top-10 -right-10 w-44 h-44 bg-purple-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/20 transition duration-500">
+                    </div>
+
                     <div>
                         <!-- Top Header -->
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
                                 <i data-lucide="calendar-range" class="w-7 h-7"></i>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/25">
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/25">
                                 Grandes Formatos &amp; Feiras
                             </span>
                         </div>
 
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-tight">
+                        <h3
+                            class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-tight">
                             Produção gráfica para eventos &amp; feiras
                         </h3>
 
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Materiais para stands, credenciais, sinalização e comunicação visual integrada para conferências e eventos.
+                        <p
+                            class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
+                            Materiais para stands, credenciais, sinalização e comunicação visual integrada para
+                            conferências e eventos.
                         </p>
 
                         <!-- Bullets Oficiais -->
                         <div class="mt-6 space-y-3">
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Grandes formatos e sinalização</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Grandes
+                                    formatos e sinalização</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Credenciais e crachás com fita</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Credenciais
+                                    e crachás com fita</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <span
+                                    class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                                 </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Prazos de entrega rigorosos</span>
+                                <span
+                                    class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Prazos
+                                    de entrega rigorosos</span>
                             </div>
                         </div>
 
@@ -1934,7 +2220,8 @@
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="app-box-text">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica, Balcões Promocionais e Credenciais PVC para Congressos.</p>
+                            <p class="app-box-text">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica,
+                                Balcões Promocionais e Credenciais PVC para Congressos.</p>
                         </div>
                     </div>
 
@@ -1954,21 +2241,28 @@
         <!-- ============================================================ -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 mb-12">
             <div class="cta-banner-card">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div
+                    class="absolute -top-20 -right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute -bottom-20 -left-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none">
+                </div>
 
                 <div class="relative z-10 max-w-2xl mx-auto space-y-6">
-                    <span class="cta-banner-badge text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full inline-block">
+                    <span
+                        class="cta-banner-badge text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full inline-block">
                         Atendimento Corporativo
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-black">
                         Pronto para elevar a produção gráfica da sua instituição?
                     </h2>
                     <p class="text-sm sm:text-base leading-relaxed">
-                        Fale diretamente com os nossos consultores gráficos e receba um orçamento personalizado com as melhores especificações para o seu projeto.
+                        Fale diretamente com os nossos consultores gráficos e receba um orçamento personalizado com as
+                        melhores especificações para o seu projeto.
                     </p>
                     <div class="pt-2 flex items-center justify-center">
-                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print." target="_blank" class="btn-cta-secondary">
+                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print."
+                            target="_blank" class="btn-cta-secondary">
                             <i data-lucide="message-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
                             <span>WhatsApp Direto</span>
                         </a>
@@ -1978,72 +2272,72 @@
         </section>
 
         <!-- Product Preview Modal (Alpine Lightbox) -->
-        <div x-show="activeModalImage" 
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             @keydown.escape.window="closeModal()"
-             class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md"
-             style="display: none;">
-            
+        <div x-show="activeModalImage" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" @keydown.escape.window="closeModal()"
+            class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md"
+            style="display: none;">
+
             <div class="fixed inset-0" @click="closeModal()"></div>
 
             <div class="relative w-full max-w-3xl bg-white dark:bg-[#0c192c] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-10"
-                 @click.stop>
-                
+                @click.stop>
+
                 <!-- Close Button -->
-                <button @click="closeModal()" 
-                        class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center transition shadow-lg">
+                <button @click="closeModal()"
+                    class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center transition shadow-lg">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
 
                 <!-- Modal Content Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <!-- Image container with subtle dark background -->
-                    <div class="relative bg-gradient-to-b from-slate-900 via-[#0a1424] to-[#060c18] flex items-center justify-center p-8 min-h-[300px] md:min-h-[420px] max-h-[500px] overflow-hidden">
-                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,168,0,0.14),transparent_65%)] pointer-events-none"></div>
-                        <img :src="activeModalImage" :alt="activeModalTitle" class="relative z-10 max-h-[420px] w-auto max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-transform duration-300">
+                    <div
+                        class="relative bg-gradient-to-b from-slate-900 via-[#0a1424] to-[#060c18] flex items-center justify-center p-8 min-h-[300px] md:min-h-[420px] max-h-[500px] overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,168,0,0.14),transparent_65%)] pointer-events-none">
+                        </div>
+                        <img :src="activeModalImage" :alt="activeModalTitle"
+                            class="relative z-10 max-h-[420px] w-auto max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.7)] transition-transform duration-300">
                     </div>
 
                     <!-- Product Details -->
                     <div class="p-6 sm:p-8 flex flex-col justify-between">
                         <div>
                             <div class="inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 mb-3"
-                                 x-text="activeModalTag">
+                                x-text="activeModalTag">
                             </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight" 
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight"
                                 x-text="activeModalTitle">
                             </h3>
-                            <p class="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal" 
-                               x-text="activeModalDesc">
+                            <p class="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal"
+                                x-text="activeModalDesc">
                             </p>
                         </div>
 
                         <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-3">
                             <button type="button"
-                                    @click="closeModal(); openQuoteModal(activeModalTitle, activeModalTag, activeModalSlug)"
-                                    class="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#f5a800] hover:text-[#080c16] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg cursor-pointer">
+                                @click="closeModal(); openQuoteModal(activeModalTitle, activeModalTag, activeModalSlug)"
+                                class="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-[#f5a800] hover:text-[#080c16] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg cursor-pointer">
                                 <i data-lucide="file-text" class="w-4 h-4"></i>
                                 <span>Solicitar Cotação deste Produto</span>
                             </button>
                             <a :href="'https://wa.me/244972888585?text=' + encodeURIComponent('Olá! Gostaria de solicitar cotação para o produto: ' + activeModalTitle + ' da RACHI Print.')"
-                               target="_blank"
-                               class="w-full py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
+                                target="_blank"
+                                class="w-full py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
                                 <span>Pedir Cotação via WhatsApp</span>
                             </a>
                             <template x-if="activeModalSlug">
                                 <a :href="'/print/servicos/' + activeModalSlug + '?produto=' + encodeURIComponent(activeModalTitle)"
-                                   class="w-full py-3 px-5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition text-decoration-none">
+                                    class="w-full py-3 px-5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition text-decoration-none">
                                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                     <span>Abrir Página da Linha &amp; Cotação</span>
                                 </a>
                             </template>
-                            <button @click="closeModal()" 
-                                    class="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                            <button @click="closeModal()"
+                                class="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
                                 Fechar Visualização
                             </button>
                         </div>
@@ -2055,34 +2349,25 @@
         <!-- ============================================================ -->
         <!-- MODAL FORMULÁRIO DE COTAÇÃO (SALVA NO BANCO & ADMIN)          -->
         <!-- ============================================================ -->
-        <div x-show="showQuoteModal"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
-             id="rachi-quote-modal"
-             style="z-index: 99999;"
-             @click.self="closeQuoteModal()"
-             @keydown.escape.window="closeQuoteModal()"
-             x-cloak>
+        <div x-show="showQuoteModal" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
+            id="rachi-quote-modal" style="z-index: 99999;" @click.self="closeQuoteModal()"
+            @keydown.escape.window="closeQuoteModal()" x-cloak>
 
-            <div x-show="showQuoteModal"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 scale-95 translate-y-4"
-                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-200"
-                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-                 class="relative w-full max-w-2xl bg-white dark:bg-[#0c1322] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-8 z-20">
+            <div x-show="showQuoteModal" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+                class="relative w-full max-w-2xl bg-white dark:bg-[#0c1322] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-8 z-20">
 
                 <!-- Botão Fechar -->
-                <button type="button"
-                        @click="closeQuoteModal()"
-                        onclick="window.rachiCloseQuoteModal(); return false;"
-                        class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition cursor-pointer">
+                <button type="button" @click="closeQuoteModal()" onclick="window.rachiCloseQuoteModal(); return false;"
+                    class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition cursor-pointer">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
 
@@ -2090,7 +2375,8 @@
                 <div x-show="!quoteSuccess" id="quote-modal-form-content" class="p-6 sm:p-8">
                     <!-- Header do Modal -->
                     <div class="mb-6">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-[#f5a800] text-xs font-bold uppercase tracking-wider mb-2">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-[#f5a800] text-xs font-bold uppercase tracking-wider mb-2">
                             <i data-lucide="printer" class="w-3.5 h-3.5"></i>
                             <span>RACHI Print • Cotação Oficial</span>
                         </div>
@@ -2098,17 +2384,23 @@
                             Solicitar Cotação Gráfica
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                            Preencha as informações do solicitante. A sua solicitação será registada no sistema e a equipa comercial responderá com a proforma oficial em até 2 horas úteis.
+                            Preencha as informações do solicitante. A sua solicitação será registada no sistema e a
+                            equipa comercial responderá com a proforma oficial em até 2 horas úteis.
                         </p>
 
                         <!-- Item Selecionado -->
-                        <div class="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 font-bold">
+                        <div
+                            class="mt-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 font-bold">
                                 <i data-lucide="package" class="w-4 h-4"></i>
                             </div>
                             <div class="min-w-0">
-                                <div class="text-[10px] uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Item Selecionado</div>
-                                <div class="text-xs font-bold text-slate-900 dark:text-white truncate" id="modal-quote-product-display" x-text="quoteProduct"></div>
+                                <div
+                                    class="text-[10px] uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">
+                                    Item Selecionado</div>
+                                <div class="text-xs font-bold text-slate-900 dark:text-white truncate"
+                                    id="modal-quote-product-display" x-text="quoteProduct"></div>
                             </div>
                         </div>
                         <input type="hidden" id="modal-quote-product-input" name="produto">
@@ -2117,9 +2409,8 @@
                     </div>
 
                     <!-- Mensagem de Erro (se houver) -->
-                    <div x-show="quoteErrorMsg" 
-                         x-transition 
-                         class="mb-4 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-start gap-2.5">
+                    <div x-show="quoteErrorMsg" x-transition
+                        class="mb-4 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-start gap-2.5">
                         <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-0.5 text-rose-500"></i>
                         <span x-text="quoteErrorMsg"></span>
                     </div>
@@ -2132,11 +2423,8 @@
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                     Nome do Solicitante <span class="text-rose-500">*</span>
                                 </label>
-                                <input type="text" 
-                                       x-model="quoteForm.name" 
-                                       required 
-                                       placeholder="Ex: Dr. António Silva"
-                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                <input type="text" x-model="quoteForm.name" required placeholder="Ex: Dr. António Silva"
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                             </div>
 
                             <!-- Empresa / Instituição -->
@@ -2144,10 +2432,8 @@
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                     Empresa / Instituição
                                 </label>
-                                <input type="text" 
-                                       x-model="quoteForm.empresa" 
-                                       placeholder="Ex: Banco / Empresa LDA"
-                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                <input type="text" x-model="quoteForm.empresa" placeholder="Ex: Banco / Empresa LDA"
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                             </div>
                         </div>
 
@@ -2157,11 +2443,8 @@
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                     Telefone / WhatsApp <span class="text-rose-500">*</span>
                                 </label>
-                                <input type="tel" 
-                                       x-model="quoteForm.phone" 
-                                       required 
-                                       placeholder="Ex: +244 972 888 585"
-                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                <input type="tel" x-model="quoteForm.phone" required placeholder="Ex: +244 972 888 585"
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                             </div>
 
                             <!-- E-mail -->
@@ -2169,11 +2452,9 @@
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                     E-mail Corporativo <span class="text-rose-500">*</span>
                                 </label>
-                                <input type="email" 
-                                       x-model="quoteForm.email" 
-                                       required 
-                                       placeholder="comercial@empresa.co.ao"
-                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                <input type="email" x-model="quoteForm.email" required
+                                    placeholder="comercial@empresa.co.ao"
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                             </div>
                         </div>
 
@@ -2183,10 +2464,9 @@
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                     Quantidade / Tiragem Estimada
                                 </label>
-                                <input type="text" 
-                                       x-model="quoteForm.quantidade" 
-                                       placeholder="Ex: 50 un / 500 exemplares / 10 m²"
-                                       class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                <input type="text" x-model="quoteForm.quantidade"
+                                    placeholder="Ex: 50 un / 500 exemplares / 10 m²"
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                             </div>
 
                             <!-- Prazo Desejado -->
@@ -2195,7 +2475,7 @@
                                     Prazo de Entrega Desejado
                                 </label>
                                 <select x-model="quoteForm.prazo"
-                                        class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
+                                    class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition">
                                     <option value="padrao">Prazo Normal (3 a 5 dias úteis)</option>
                                     <option value="urgente">Urgência Expresso (24h a 48h úteis)</option>
                                     <option value="programado">Entrega Programada (Evento futuro)</option>
@@ -2208,10 +2488,9 @@
                             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
                                 Especificações &amp; Requisitos Adicionais
                             </label>
-                            <textarea x-model="quoteForm.message" 
-                                      rows="3" 
-                                      placeholder="Descreva detalhes específicos, dimensões personalizadas, tipos de acabamento (bainha, ilhós, laminação mate/brilho, gramagem, etc.)..."
-                                      class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition"></textarea>
+                            <textarea x-model="quoteForm.message" rows="3"
+                                placeholder="Descreva detalhes específicos, dimensões personalizadas, tipos de acabamento (bainha, ilhós, laminação mate/brilho, gramagem, etc.)..."
+                                class="w-full px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition"></textarea>
                         </div>
 
                         <!-- Ações do Formulário -->
@@ -2222,25 +2501,27 @@
                             </div>
 
                             <div class="flex items-center gap-2.5 w-full sm:w-auto">
-                                <button type="button" 
-                                        @click="closeQuoteModal()" 
-                                        class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                                <button type="button" @click="closeQuoteModal()"
+                                    class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
                                     Cancelar
                                 </button>
-                                
-                                <button type="submit" 
-                                        :disabled="quoteSubmitting"
-                                        class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md shadow-amber-500/20 disabled:opacity-50 cursor-pointer">
+
+                                <button type="submit" :disabled="quoteSubmitting"
+                                    class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md shadow-amber-500/20 disabled:opacity-50 cursor-pointer">
                                     <template x-if="quoteSubmitting">
-                                        <svg class="animate-spin h-3.5 w-3.5 text-slate-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                        <svg class="animate-spin h-3.5 w-3.5 text-slate-950"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z">
+                                            </path>
                                         </svg>
                                     </template>
                                     <template x-if="!quoteSubmitting">
                                         <i data-lucide="send" class="w-3.5 h-3.5"></i>
                                     </template>
-                                    <span x-text="quoteSubmitting ? 'A enviar solicitação...' : 'Confirmar e Enviar Pedido'"></span>
+                                    <span
+                                        x-text="quoteSubmitting ? 'A enviar solicitação...' : 'Confirmar e Enviar Pedido'"></span>
                                 </button>
                             </div>
                         </div>
@@ -2249,11 +2530,13 @@
 
                 <!-- Estado 2: Sucesso com Protocolo -->
                 <div x-show="quoteSuccess" id="quote-modal-success-content" class="p-8 text-center" x-cloak>
-                    <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 mx-auto flex items-center justify-center mb-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 mx-auto flex items-center justify-center mb-4">
                         <i data-lucide="check-circle-2" class="w-8 h-8"></i>
                     </div>
 
-                    <span class="inline-block text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-2">
+                    <span
+                        class="inline-block text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-2">
                         Solicitação Registada no Sistema
                     </span>
 
@@ -2262,30 +2545,35 @@
                     </h3>
 
                     <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-md mx-auto">
-                        O seu pedido de cotação para <strong class="text-slate-900 dark:text-white" id="quote-success-product-display" x-text="quoteProduct"></strong> foi enviado para o departamento de produção e já está disponível em <strong class="text-amber-500">Solicitações &amp; Ordens</strong> da administração.
+                        O seu pedido de cotação para <strong class="text-slate-900 dark:text-white"
+                            id="quote-success-product-display" x-text="quoteProduct"></strong> foi enviado para o
+                        departamento de produção e já está disponível em <strong class="text-amber-500">Solicitações
+                            &amp; Ordens</strong> da administração.
                     </p>
 
                     <!-- Box de Protocolo -->
-                    <div class="my-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 max-w-sm mx-auto">
+                    <div
+                        class="my-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 max-w-sm mx-auto">
                         <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
                             Número de Protocolo Oficial
                         </div>
-                        <div class="text-xl sm:text-2xl font-black text-[#f5a800] tracking-wider font-mono select-all" id="quote-protocol-display" x-text="quoteProtocol"></div>
-                        <div class="text-[11px] text-slate-500 mt-1">Guarde este código para acompanhamento do seu pedido</div>
+                        <div class="text-xl sm:text-2xl font-black text-[#f5a800] tracking-wider font-mono select-all"
+                            id="quote-protocol-display" x-text="quoteProtocol"></div>
+                        <div class="text-[11px] text-slate-500 mt-1">Guarde este código para acompanhamento do seu
+                            pedido</div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
                         <a :href="'https://wa.me/244972888585?text=' + encodeURIComponent('Olá! Acabei de submeter uma solicitação de cotação para ' + quoteProduct + ' com o Protocolo ' + quoteProtocol + '. Poderiam confirmar a recepção?')"
-                           target="_blank"
-                           class="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
+                            target="_blank"
+                            class="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/20">
                             <i data-lucide="message-circle" class="w-4 h-4"></i>
                             <span>Acompanhar via WhatsApp</span>
                         </a>
 
-                        <button type="button"
-                                @click="closeQuoteModal()"
-                                onclick="window.rachiCloseQuoteModal(); return false;"
-                                class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
+                        <button type="button" @click="closeQuoteModal()"
+                            onclick="window.rachiCloseQuoteModal(); return false;"
+                            class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer">
                             Concluir &amp; Fechar
                         </button>
                     </div>
@@ -2302,7 +2590,8 @@
     <!-- ============================================================ -->
     <!-- FOOTER                                                       -->
     <!-- ============================================================ -->
-    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+    <footer
+        class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
@@ -2310,51 +2599,72 @@
                     <a href="/print" class="inline-flex items-center gap-2.5 mb-4 group text-decoration-none">
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                            <img src="/images/areas/rachi-print.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
-                                 alt="RACHI Print" 
-                                 class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(245,168,0,0.35)] group-hover:scale-105 transition-all">
+                            <img src="/images/areas/rachi-print.png"
+                                onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'"
+                                alt="RACHI Print"
+                                class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(245,168,0,0.35)] group-hover:scale-105 transition-all">
                         </picture>
-                        <span class="font-display font-bold text-base text-slate-900 dark:text-white">RACHI <span class="text-[#f5a800]">Print</span></span>
+                        <span class="font-display font-bold text-base text-slate-900 dark:text-white">RACHI <span
+                                class="text-[#f5a800]">Print</span></span>
                     </a>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Gráfica digital, impressão offset, merchandising e produção corporativa premium com acabamento industrial nobre.
+                        Gráfica digital, impressão offset, merchandising e produção corporativa premium com acabamento
+                        industrial nobre.
                     </p>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Soluções RACHI</h4>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">
+                        Soluções RACHI</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
                         <li><a href="/capital" class="hover:text-emerald-400 transition">01 RACHI Human Capital</a></li>
                         <li><a href="/academy" class="hover:text-indigo-400 transition">02 RACHI Academy</a></li>
                         <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
-                        <li><a href="/print" class="hover:text-amber-400 transition text-[#d97706] dark:text-[#f5a800] font-bold">04 RACHI Print</a></li>
+                        <li><a href="/print"
+                                class="hover:text-amber-400 transition text-[#d97706] dark:text-[#f5a800] font-bold">04
+                                RACHI Print</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Navegação</h4>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">
+                        Navegação</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Portal RACHI</a></li>
-                        <li><a href="/print#catalogo" class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Produtos</a></li>
-                        <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a RACHI</a></li>
-                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto &amp; Propostas</a></li>
+                        <li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Portal RACHI</a>
+                        </li>
+                        <li><a href="/print#catalogo"
+                                class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Produtos</a>
+                        </li>
+                        <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a
+                                RACHI</a></li>
+                        <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto
+                                &amp; Propostas</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">Contacto</h4>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-3">
+                        Contacto</h4>
                     <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
                     <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Produção sob encomenda e entregas em todo o país.</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">Produção sob encomenda e entregas em todo
+                        o país.</p>
                 </div>
             </div>
-            <div class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
-                <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI Print</strong>. Todos os direitos reservados.</div>
+            <div
+                class="border-t border-slate-200 dark:border-slate-800/80 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
+                <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI Print</strong>. Todos os direitos
+                    reservados.</div>
                 <div class="flex gap-3 items-center text-xs">
-                        <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt" class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition" title="Português">PT</button>
-                        <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('en')" data-rachi-lang="en" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="English">EN</button>
-                        <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="中文 (Mandarim)">中文</button>
-                    </div>
+                    <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt"
+                        class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition"
+                        title="Português">PT</button>
+                    <span class="text-slate-500 opacity-60">|</span>
+                    <button type="button" onclick="setRachiLanguage('en')" data-rachi-lang="en"
+                        class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition"
+                        title="English">EN</button>
+                    <span class="text-slate-500 opacity-60">|</span>
+                    <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN"
+                        class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition"
+                        title="中文 (Mandarim)">中文</button>
+                </div>
             </div>
         </div>
     </footer>
@@ -2367,588 +2677,627 @@
             }
         });
     </script>
-<script src="/worker-public.js"></script>    <!-- ============================================================================== -->
-<!-- RACHI FLOATING CONTROLS: TEMA (DARK/LIGHT) & TRADUTOR MULTI-IDIOMA (PT/EN/ZH)  -->
-<!-- ============================================================================== -->
+    <script src="/worker-public.js"></script>
+    <!-- ============================================================================== -->
+    <!-- RACHI FLOATING CONTROLS: TEMA (DARK/LIGHT) & TRADUTOR MULTI-IDIOMA (PT/EN/ZH)  -->
+    <!-- ============================================================================== -->
 
-<div id="rachi-floating-dock" class="rachi-fab-dock" x-data="rachiFloatingDock()" @click.outside="langMenuOpen = false">
+    <div id="rachi-floating-dock" class="rachi-fab-dock" x-data="rachiFloatingDock()"
+        @click.outside="langMenuOpen = false">
 
-    <!-- 1. POPUP DE SELEÇÃO DE IDIOMA (PT / EN / ZH - MANDARIM) -->
-    <div x-show="langMenuOpen"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 translate-y-3 scale-95"
-         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-         x-transition:leave-end="opacity-0 translate-y-3 scale-95"
-         x-cloak
-         class="rachi-lang-menu shadow-2xl">
-        <div class="rachi-lang-menu-header">
-            <span class="text-[10px] font-black uppercase tracking-widest text-[#00a3e0]">Idioma / Language / 语言</span>
+        <!-- 1. POPUP DE SELEÇÃO DE IDIOMA (PT / EN / ZH - MANDARIM) -->
+        <div x-show="langMenuOpen" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 translate-y-3 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-3 scale-95" x-cloak class="rachi-lang-menu shadow-2xl">
+            <div class="rachi-lang-menu-header">
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#00a3e0]">Idioma / Language /
+                    语言</span>
+            </div>
+            <div class="rachi-lang-menu-list">
+                <!-- Português -->
+                <button type="button" @click="changeLang('pt')" onclick="setRachiLanguage('pt')" class="rachi-lang-item"
+                    :class="currentLang === 'pt' ? 'active' : ''" data-lang-option="pt">
+                    <span class="rachi-lang-flag">🇦🇴</span>
+                    <div class="rachi-lang-text">
+                        <strong class="text-xs">Português</strong>
+                        <span class="text-[10px] opacity-70">Padrão Oficial (PT)</span>
+                    </div>
+                    <span x-show="currentLang === 'pt'" class="rachi-lang-check">✓</span>
+                </button>
+
+                <!-- English -->
+                <button type="button" @click="changeLang('en')" onclick="setRachiLanguage('en')" class="rachi-lang-item"
+                    :class="currentLang === 'en' ? 'active' : ''" data-lang-option="en">
+                    <span class="rachi-lang-flag">🇬🇧</span>
+                    <div class="rachi-lang-text">
+                        <strong class="text-xs">English</strong>
+                        <span class="text-[10px] opacity-70">English (EN)</span>
+                    </div>
+                    <span x-show="currentLang === 'en'" class="rachi-lang-check">✓</span>
+                </button>
+
+                <!-- Mandarim (中文) -->
+                <button type="button" @click="changeLang('zh-CN')" onclick="setRachiLanguage('zh-CN')"
+                    class="rachi-lang-item" :class="currentLang === 'zh-CN' ? 'active' : ''" data-lang-option="zh-CN">
+                    <span class="rachi-lang-flag">🇨🇳</span>
+                    <div class="rachi-lang-text">
+                        <strong class="text-xs">中文 (Mandarim)</strong>
+                        <span class="text-[10px] opacity-70">Simplified Chinese (ZH)</span>
+                    </div>
+                    <span x-show="currentLang === 'zh-CN'" class="rachi-lang-check">✓</span>
+                </button>
+            </div>
         </div>
-        <div class="rachi-lang-menu-list">
-            <!-- Português -->
-            <button type="button" @click="changeLang('pt')" onclick="setRachiLanguage('pt')" class="rachi-lang-item" :class="currentLang === 'pt' ? 'active' : ''" data-lang-option="pt">
-                <span class="rachi-lang-flag">🇦🇴</span>
-                <div class="rachi-lang-text">
-                    <strong class="text-xs">Português</strong>
-                    <span class="text-[10px] opacity-70">Padrão Oficial (PT)</span>
-                </div>
-                <span x-show="currentLang === 'pt'" class="rachi-lang-check">✓</span>
-            </button>
 
-            <!-- English -->
-            <button type="button" @click="changeLang('en')" onclick="setRachiLanguage('en')" class="rachi-lang-item" :class="currentLang === 'en' ? 'active' : ''" data-lang-option="en">
-                <span class="rachi-lang-flag">🇬🇧</span>
-                <div class="rachi-lang-text">
-                    <strong class="text-xs">English</strong>
-                    <span class="text-[10px] opacity-70">English (EN)</span>
-                </div>
-                <span x-show="currentLang === 'en'" class="rachi-lang-check">✓</span>
-            </button>
+        <!-- 2. BOTÃO DO TRADUTOR FLUTUANTE -->
+        <button type="button" id="rachi-lang-fab-btn" @click="langMenuOpen = !langMenuOpen" class="rachi-lang-fab group"
+            aria-label="Alterar Idioma (Português, English, 中文)" title="Alterar Idioma / Change Language / 更改语言">
+            <svg class="w-4 h-4 text-[#00a3e0] group-hover:rotate-12 transition-transform duration-300" fill="none"
+                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+            <span class="rachi-lang-fab-label font-bold text-xs tracking-wide"
+                x-text="langLabels[currentLang] || 'PT'">PT</span>
+            <svg class="w-3 h-3 opacity-60 transition-transform duration-200" :class="langMenuOpen ? 'rotate-180' : ''"
+                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
 
-            <!-- Mandarim (中文) -->
-            <button type="button" @click="changeLang('zh-CN')" onclick="setRachiLanguage('zh-CN')" class="rachi-lang-item" :class="currentLang === 'zh-CN' ? 'active' : ''" data-lang-option="zh-CN">
-                <span class="rachi-lang-flag">🇨🇳</span>
-                <div class="rachi-lang-text">
-                    <strong class="text-xs">中文 (Mandarim)</strong>
-                    <span class="text-[10px] opacity-70">Simplified Chinese (ZH)</span>
-                </div>
-                <span x-show="currentLang === 'zh-CN'" class="rachi-lang-check">✓</span>
-            </button>
-        </div>
+        <!-- 3. BOTÃO FLUTUANTE DE TEMA (CLARO / ESCURO) -->
+        <button type="button" id="rachi-theme-toggle-fab"
+            onclick="if(typeof toggleRachiTheme==='function'){toggleRachiTheme()}else if(typeof window.toggleRachiTheme==='function'){window.toggleRachiTheme()}else{var d=document.documentElement.classList.toggle('dark');localStorage.setItem('rachi_theme',d?'dark':'light');window.dispatchEvent(new CustomEvent('rachi-theme-changed',{detail:{dark:d}}));}"
+            class="rachi-theme-fab group" aria-label="Alternar entre Modo Claro e Modo Escuro"
+            title="Alternar entre Modo Claro e Modo Escuro">
+
+            <!-- MODO CLARO ATIVO -> Exibe Lua + "Modo Escuro" -->
+            <span class="fab-light-content">
+                <svg class="w-4 h-4 text-slate-700 group-hover:text-[#0050f0] transition-transform duration-300 group-hover:-rotate-12"
+                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <span class="fab-label text-slate-800 group-hover:text-slate-950 font-bold text-xs tracking-wide">Modo
+                    Escuro</span>
+            </span>
+
+            <!-- MODO ESCURO ATIVO -> Exibe Sol + "Modo Claro" -->
+            <span class="fab-dark-content">
+                <svg class="w-4 h-4 text-amber-400 group-hover:text-amber-300 transition-transform duration-300 group-hover:rotate-45"
+                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4" />
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+                <span class="fab-label text-amber-100 group-hover:text-white font-bold text-xs tracking-wide">Modo
+                    Claro</span>
+            </span>
+        </button>
+
     </div>
 
-    <!-- 2. BOTÃO DO TRADUTOR FLUTUANTE -->
-    <button type="button"
-            id="rachi-lang-fab-btn"
-            @click="langMenuOpen = !langMenuOpen"
-            class="rachi-lang-fab group"
-            aria-label="Alterar Idioma (Português, English, 中文)"
-            title="Alterar Idioma / Change Language / 更改语言">
-        <svg class="w-4 h-4 text-[#00a3e0] group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-        <span class="rachi-lang-fab-label font-bold text-xs tracking-wide" x-text="langLabels[currentLang] || 'PT'">PT</span>
-        <svg class="w-3 h-3 opacity-60 transition-transform duration-200" :class="langMenuOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-        </svg>
-    </button>
+    <!-- Content Container Oculto do Google Translate -->
+    <div id="google_translate_element" style="display:none !important;" aria-hidden="true"></div>
 
-    <!-- 3. BOTÃO FLUTUANTE DE TEMA (CLARO / ESCURO) -->
-    <button type="button"
-        id="rachi-theme-toggle-fab"
-        onclick="if(typeof toggleRachiTheme==='function'){toggleRachiTheme()}else if(typeof window.toggleRachiTheme==='function'){window.toggleRachiTheme()}else{var d=document.documentElement.classList.toggle('dark');localStorage.setItem('rachi_theme',d?'dark':'light');window.dispatchEvent(new CustomEvent('rachi-theme-changed',{detail:{dark:d}}));}"
-        class="rachi-theme-fab group"
-        aria-label="Alternar entre Modo Claro e Modo Escuro"
-        title="Alternar entre Modo Claro e Modo Escuro">
-        
-        <!-- MODO CLARO ATIVO -> Exibe Lua + "Modo Escuro" -->
-        <span class="fab-light-content">
-            <svg class="w-4 h-4 text-slate-700 group-hover:text-[#0050f0] transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-            </svg>
-            <span class="fab-label text-slate-800 group-hover:text-slate-950 font-bold text-xs tracking-wide">Modo Escuro</span>
-        </span>
-
-        <!-- MODO ESCURO ATIVO -> Exibe Sol + "Modo Claro" -->
-        <span class="fab-dark-content">
-            <svg class="w-4 h-4 text-amber-400 group-hover:text-amber-300 transition-transform duration-300 group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="4"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-            </svg>
-            <span class="fab-label text-amber-100 group-hover:text-white font-bold text-xs tracking-wide">Modo Claro</span>
-        </span>
-    </button>
-
-</div>
-
-<!-- Content Container Oculto do Google Translate -->
-<div id="google_translate_element" style="display:none !important;" aria-hidden="true"></div>
-
-<!-- ============================================================================== -->
-<!-- MOTOR JAVASCRIPT DO TRADUTOR RACHI (PT / EN / ZH - MANDARIM)                    -->
-<!-- ============================================================================== -->
-<script>
-    (function() {
-        // 1. Obter idioma salvo (localStorage ou Cookie)
-        function getStoredLanguage() {
-            try {
-                var cookieMatch = document.cookie.match(/(^|;)\s*googtrans=([^;]+)/);
-                if (cookieMatch) {
-                    var val = decodeURIComponent(cookieMatch[2]);
-                    if (val.indexOf('/zh-CN') !== -1 || val.indexOf('/zh') !== -1) return 'zh-CN';
-                    if (val.indexOf('/en') !== -1) return 'en';
-                    if (val.indexOf('/pt') !== -1) return 'pt';
+    <!-- ============================================================================== -->
+    <!-- MOTOR JAVASCRIPT DO TRADUTOR RACHI (PT / EN / ZH - MANDARIM)                    -->
+    <!-- ============================================================================== -->
+    <script>
+        (function () {
+            // 1. Obter idioma salvo (localStorage ou Cookie)
+            function getStoredLanguage() {
+                try {
+                    var cookieMatch = document.cookie.match(/(^|;)\s*googtrans=([^;]+)/);
+                    if (cookieMatch) {
+                        var val = decodeURIComponent(cookieMatch[2]);
+                        if (val.indexOf('/zh-CN') !== -1 || val.indexOf('/zh') !== -1) return 'zh-CN';
+                        if (val.indexOf('/en') !== -1) return 'en';
+                        if (val.indexOf('/pt') !== -1) return 'pt';
+                    }
+                    var local = localStorage.getItem('rachi_lang');
+                    if (local === 'zh-CN' || local === 'zh') return 'zh-CN';
+                    if (local === 'en') return 'en';
+                    return 'pt';
+                } catch (e) {
+                    return 'pt';
                 }
-                var local = localStorage.getItem('rachi_lang');
-                if (local === 'zh-CN' || local === 'zh') return 'zh-CN';
-                if (local === 'en') return 'en';
-                return 'pt';
-            } catch (e) {
-                return 'pt';
             }
-        }
 
-        // 2. Gravar cookies para Google Translate
-        function setGoogleTranslateCookie(lang) {
-            try {
-                var host = window.location.hostname;
-                var isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(host) || host === 'localhost' || host === '127.0.0.1';
+            // 2. Gravar cookies para Google Translate
+            function setGoogleTranslateCookie(lang) {
+                try {
+                    var host = window.location.hostname;
+                    var isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(host) || host === 'localhost' || host === '127.0.0.1';
 
-                if (lang === 'pt') {
-                    // Ao voltar para Português, limpa cookies de tradução e define /pt/pt
-                    var exp = 'expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
-                    document.cookie = 'googtrans=; ' + exp;
-                    document.cookie = 'googtrans=; ' + exp + ' domain=' + host + ';';
-                    document.cookie = 'googtrans=/pt/pt; path=/; max-age=31536000; SameSite=Lax';
+                    if (lang === 'pt') {
+                        // Ao voltar para Português, limpa cookies de tradução e define /pt/pt
+                        var exp = 'expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+                        document.cookie = 'googtrans=; ' + exp;
+                        document.cookie = 'googtrans=; ' + exp + ' domain=' + host + ';';
+                        document.cookie = 'googtrans=/pt/pt; path=/; max-age=31536000; SameSite=Lax';
+                        if (!isIp) {
+                            var parts = host.split('.');
+                            if (parts.length >= 2) {
+                                var rootDomain = '.' + parts.slice(-2).join('.');
+                                document.cookie = 'googtrans=; ' + exp + ' domain=' + rootDomain + ';';
+                                document.cookie = 'googtrans=/pt/pt; path=/; domain=' + rootDomain + '; max-age=31536000; SameSite=Lax';
+                            }
+                        }
+                        return;
+                    }
+
+                    var cookieVal = '/pt/' + lang;
+                    var maxAge = 31536000;
+
+                    document.cookie = 'googtrans=' + cookieVal + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
+                    document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + host + '; max-age=' + maxAge + '; SameSite=Lax';
+                    document.cookie = 'googtrans=/auto/' + lang + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
+
                     if (!isIp) {
                         var parts = host.split('.');
                         if (parts.length >= 2) {
                             var rootDomain = '.' + parts.slice(-2).join('.');
-                            document.cookie = 'googtrans=; ' + exp + ' domain=' + rootDomain + ';';
-                            document.cookie = 'googtrans=/pt/pt; path=/; domain=' + rootDomain + '; max-age=31536000; SameSite=Lax';
+                            document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
+                            document.cookie = 'googtrans=/auto/' + lang + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
                         }
                     }
-                    return;
-                }
-
-                var cookieVal = '/pt/' + lang;
-                var maxAge = 31536000;
-                
-                document.cookie = 'googtrans=' + cookieVal + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
-                document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + host + '; max-age=' + maxAge + '; SameSite=Lax';
-                document.cookie = 'googtrans=/auto/' + lang + '; path=/; max-age=' + maxAge + '; SameSite=Lax';
-
-                if (!isIp) {
-                    var parts = host.split('.');
-                    if (parts.length >= 2) {
-                        var rootDomain = '.' + parts.slice(-2).join('.');
-                        document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
-                        document.cookie = 'googtrans=/auto/' + lang + '; path=/; domain=' + rootDomain + '; max-age=' + maxAge + '; SameSite=Lax';
-                    }
-                }
-            } catch(e) {}
-        }
-
-        // 3. Atualizar indicadores visuais no DOM (FAB, Menu e Rodapé)
-        function updateVisualLangIndicators(lang) {
-            try {
-                document.documentElement.lang = (lang === 'zh-CN') ? 'zh-CN' : lang;
-
-                // Atualizar texto do FAB
-                var fabLabels = { 'pt': 'PT', 'en': 'EN', 'zh-CN': '中文' };
-                document.querySelectorAll('.rachi-lang-fab-label').forEach(function(el) {
-                    el.textContent = fabLabels[lang] || 'PT';
-                });
-
-                // Atualizar itens do menu dropdown
-                document.querySelectorAll('[data-lang-option]').forEach(function(btn) {
-                    var isSelected = btn.getAttribute('data-lang-option') === lang;
-                    btn.classList.toggle('active', isSelected);
-                    var check = btn.querySelector('.rachi-lang-check');
-                    if (check) check.style.display = isSelected ? 'inline' : 'none';
-                });
-
-                // Atualizar botões de idioma no rodapé de todas as páginas
-                document.querySelectorAll('[data-rachi-lang]').forEach(function(el) {
-                    var elLang = el.getAttribute('data-rachi-lang');
-                    if (elLang === lang) {
-                        el.classList.add('text-amber-500', 'dark:text-amber-400', 'font-black');
-                        el.classList.remove('opacity-60', 'opacity-70');
-                    } else {
-                        el.classList.remove('text-amber-500', 'dark:text-amber-400', 'font-black');
-                        el.classList.add('opacity-70');
-                    }
-                });
-            } catch(e) {}
-        }
-
-        // 4. Aplicar idioma no select do Google Translate (.goog-te-combo)
-        function applyComboLanguage(lang) {
-            var combo = document.querySelector('.goog-te-combo');
-            if (combo) {
-                var targetVal = (lang === 'pt') ? 'pt' : lang;
-                if (combo.value !== targetVal) {
-                    combo.value = targetVal;
-                    combo.dispatchEvent(new Event('change'));
-                }
-                return true;
+                } catch (e) { }
             }
-            return false;
-        }
 
-        // 5. Função global para troca de idioma
-        window.setRachiLanguage = function(lang) {
-            if (!lang) lang = 'pt';
-            try { localStorage.setItem('rachi_lang', lang); } catch(e) {}
-            setGoogleTranslateCookie(lang);
-            updateVisualLangIndicators(lang);
+            // 3. Atualizar indicadores visuais no DOM (FAB, Menu e Rodapé)
+            function updateVisualLangIndicators(lang) {
+                try {
+                    document.documentElement.lang = (lang === 'zh-CN') ? 'zh-CN' : lang;
 
-            window.dispatchEvent(new CustomEvent('rachi-lang-changed', { detail: { lang: lang } }));
-
-            var applied = applyComboLanguage(lang);
-            if (!applied) {
-                var attempts = 0;
-                var interval = setInterval(function() {
-                    attempts++;
-                    if (applyComboLanguage(lang) || attempts > 15) {
-                        clearInterval(interval);
-                        if (!document.querySelector('.goog-te-combo')) {
-                            window.location.reload();
-                        }
-                    }
-                }, 100);
-            }
-        };
-
-        // 6. Callback oficial do Google Translate
-        window.googleTranslateElementInit = function() {
-            try {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'pt',
-                    includedLanguages: 'pt,en,zh-CN',
-                    autoDisplay: false
-                }, 'google_translate_element');
-
-                var saved = getStoredLanguage();
-                updateVisualLangIndicators(saved);
-
-                if (saved && saved !== 'pt') {
-                    var attempts = 0;
-                    var pollInterval = setInterval(function() {
-                        attempts++;
-                        if (applyComboLanguage(saved) || attempts >= 40) {
-                            clearInterval(pollInterval);
-                        }
-                    }, 150);
-                }
-            } catch(e) {
-                console.warn('Google Translate initialization:', e);
-            }
-        };
-
-        // 7. Inserir script do Google Translate de forma segura (HTTPS)
-        if (!document.getElementById('google-translate-script')) {
-            var s = document.createElement('script');
-            s.id = 'google-translate-script';
-            s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-            s.async = true;
-            s.defer = true;
-            document.head.appendChild(s);
-        }
-
-        // 8. Alpine.js Component + Fallback Vanilla JS
-        window.rachiFloatingDock = function() {
-            return {
-                langMenuOpen: false,
-                currentLang: getStoredLanguage(),
-                langLabels: {
-                    'pt': 'PT',
-                    'en': 'EN',
-                    'zh-CN': '中文'
-                },
-                init() {
-                    window.addEventListener('rachi-lang-changed', (e) => {
-                        this.currentLang = e.detail.lang;
+                    // Atualizar texto do FAB
+                    var fabLabels = { 'pt': 'PT', 'en': 'EN', 'zh-CN': '中文' };
+                    document.querySelectorAll('.rachi-lang-fab-label').forEach(function (el) {
+                        el.textContent = fabLabels[lang] || 'PT';
                     });
-                    updateVisualLangIndicators(this.currentLang);
-                },
-                changeLang(lang) {
-                    this.langMenuOpen = false;
-                    this.currentLang = lang;
-                    window.setRachiLanguage(lang);
+
+                    // Atualizar itens do menu dropdown
+                    document.querySelectorAll('[data-lang-option]').forEach(function (btn) {
+                        var isSelected = btn.getAttribute('data-lang-option') === lang;
+                        btn.classList.toggle('active', isSelected);
+                        var check = btn.querySelector('.rachi-lang-check');
+                        if (check) check.style.display = isSelected ? 'inline' : 'none';
+                    });
+
+                    // Atualizar botões de idioma no rodapé de todas as páginas
+                    document.querySelectorAll('[data-rachi-lang]').forEach(function (el) {
+                        var elLang = el.getAttribute('data-rachi-lang');
+                        if (elLang === lang) {
+                            el.classList.add('text-amber-500', 'dark:text-amber-400', 'font-black');
+                            el.classList.remove('opacity-60', 'opacity-70');
+                        } else {
+                            el.classList.remove('text-amber-500', 'dark:text-amber-400', 'font-black');
+                            el.classList.add('opacity-70');
+                        }
+                    });
+                } catch (e) { }
+            }
+
+            // 4. Aplicar idioma no select do Google Translate (.goog-te-combo)
+            function applyComboLanguage(lang) {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    var targetVal = (lang === 'pt') ? 'pt' : lang;
+                    if (combo.value !== targetVal) {
+                        combo.value = targetVal;
+                        combo.dispatchEvent(new Event('change'));
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            // 5. Função global para troca de idioma
+            window.setRachiLanguage = function (lang) {
+                if (!lang) lang = 'pt';
+                try { localStorage.setItem('rachi_lang', lang); } catch (e) { }
+                setGoogleTranslateCookie(lang);
+                updateVisualLangIndicators(lang);
+
+                window.dispatchEvent(new CustomEvent('rachi-lang-changed', { detail: { lang: lang } }));
+
+                var applied = applyComboLanguage(lang);
+                if (!applied) {
+                    var attempts = 0;
+                    var interval = setInterval(function () {
+                        attempts++;
+                        if (applyComboLanguage(lang) || attempts > 15) {
+                            clearInterval(interval);
+                            if (!document.querySelector('.goog-te-combo')) {
+                                window.location.reload();
+                            }
+                        }
+                    }, 100);
                 }
             };
-        };
 
-        // Vanilla JS Fallback para abrir/fechar menu de idiomas
-        document.addEventListener('DOMContentLoaded', function() {
-            var current = getStoredLanguage();
-            updateVisualLangIndicators(current);
+            // 6. Callback oficial do Google Translate
+            window.googleTranslateElementInit = function () {
+                try {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'pt',
+                        includedLanguages: 'pt,en,zh-CN',
+                        autoDisplay: false
+                    }, 'google_translate_element');
 
-            var fabBtn = document.getElementById('rachi-lang-fab-btn');
-            var menu = document.getElementById('rachi-lang-menu');
-            if (fabBtn && menu) {
-                fabBtn.addEventListener('click', function(e) {
-                    if (!window.Alpine) {
-                        e.stopPropagation();
-                        menu.classList.toggle('hidden');
+                    var saved = getStoredLanguage();
+                    updateVisualLangIndicators(saved);
+
+                    if (saved && saved !== 'pt') {
+                        var attempts = 0;
+                        var pollInterval = setInterval(function () {
+                            attempts++;
+                            if (applyComboLanguage(saved) || attempts >= 40) {
+                                clearInterval(pollInterval);
+                            }
+                        }, 150);
                     }
-                });
-                document.addEventListener('click', function(e) {
-                    if (!window.Alpine && menu && !menu.contains(e.target) && !fabBtn.contains(e.target)) {
-                        menu.classList.add('hidden');
-                    }
-                });
+                } catch (e) {
+                    console.warn('Google Translate initialization:', e);
+                }
+            };
+
+            // 7. Inserir script do Google Translate de forma segura (HTTPS)
+            if (!document.getElementById('google-translate-script')) {
+                var s = document.createElement('script');
+                s.id = 'google-translate-script';
+                s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                s.async = true;
+                s.defer = true;
+                document.head.appendChild(s);
             }
-        });
-    })();
-</script>
 
-<!-- ============================================================================== -->
-<!-- ESTILOS DO FLOATING DOCK, MENU DE IDIOMAS & HIGIENIZAÇÃO DO GOOGLE TRANSLATE   -->
-<!-- ============================================================================== -->
-<style>
-/* 1. DOCK FLUTUANTE INFERIOR DIREITO */
-.rachi-fab-dock {
-    position: fixed !important;
-    bottom: 1.5rem !important;
-    right: 1.5rem !important;
-    z-index: 9999 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.65rem !important;
-}
+            // 8. Alpine.js Component + Fallback Vanilla JS
+            window.rachiFloatingDock = function () {
+                return {
+                    langMenuOpen: false,
+                    currentLang: getStoredLanguage(),
+                    langLabels: {
+                        'pt': 'PT',
+                        'en': 'EN',
+                        'zh-CN': '中文'
+                    },
+                    init() {
+                        window.addEventListener('rachi-lang-changed', (e) => {
+                            this.currentLang = e.detail.lang;
+                        });
+                        updateVisualLangIndicators(this.currentLang);
+                    },
+                    changeLang(lang) {
+                        this.langMenuOpen = false;
+                        this.currentLang = lang;
+                        window.setRachiLanguage(lang);
+                    }
+                };
+            };
 
-/* 2. BOTÃO DO IDIOMA */
-.rachi-lang-fab {
-    height: 2.75rem !important;
-    padding: 0 1rem !important;
-    border-radius: 9999px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.45rem !important;
-    cursor: pointer !important;
-    user-select: none !important;
-    white-space: nowrap !important;
-    outline: none !important;
-    box-sizing: border-box !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
+            // Vanilla JS Fallback para abrir/fechar menu de idiomas
+            document.addEventListener('DOMContentLoaded', function () {
+                var current = getStoredLanguage();
+                updateVisualLangIndicators(current);
 
-/* LIGHT MODE DO IDIOMA */
-html:not(.dark) .rachi-lang-fab {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid rgba(203, 213, 225, 0.95) !important;
-    box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06) !important;
-    color: #1e293b !important;
-}
-html:not(.dark) .rachi-lang-fab:hover {
-    background: #ffffff !important;
-    border-color: rgba(0, 163, 224, 0.5) !important;
-    box-shadow: 0 14px 32px -4px rgba(0, 163, 224, 0.22) !important;
-    transform: translateY(-2px) scale(1.02) !important;
-}
+                var fabBtn = document.getElementById('rachi-lang-fab-btn');
+                var menu = document.getElementById('rachi-lang-menu');
+                if (fabBtn && menu) {
+                    fabBtn.addEventListener('click', function (e) {
+                        if (!window.Alpine) {
+                            e.stopPropagation();
+                            menu.classList.toggle('hidden');
+                        }
+                    });
+                    document.addEventListener('click', function (e) {
+                        if (!window.Alpine && menu && !menu.contains(e.target) && !fabBtn.contains(e.target)) {
+                            menu.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
 
-/* DARK MODE DO IDIOMA */
-html.dark .rachi-lang-fab {
-    background: rgba(15, 23, 42, 0.95) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.6) !important;
-    color: #f1f5f9 !important;
-}
-html.dark .rachi-lang-fab:hover {
-    background: rgba(30, 41, 59, 0.98) !important;
-    border-color: rgba(0, 163, 224, 0.5) !important;
-    transform: translateY(-2px) scale(1.02) !important;
-}
+    <!-- ============================================================================== -->
+    <!-- ESTILOS DO FLOATING DOCK, MENU DE IDIOMAS & HIGIENIZAÇÃO DO GOOGLE TRANSLATE   -->
+    <!-- ============================================================================== -->
+    <style>
+        /* 1. DOCK FLUTUANTE INFERIOR DIREITO */
+        .rachi-fab-dock {
+            position: fixed !important;
+            bottom: 1.5rem !important;
+            right: 1.5rem !important;
+            z-index: 9999 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.65rem !important;
+        }
 
-/* 3. MENU POPOVER DO IDIOMA */
-.rachi-lang-menu {
-    position: absolute !important;
-    bottom: calc(100% + 0.75rem) !important;
-    right: 0 !important;
-    width: 15rem !important;
-    border-radius: 1.25rem !important;
-    padding: 0.5rem !important;
-    z-index: 10000 !important;
-}
-html:not(.dark) .rachi-lang-menu {
-    background: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(20px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
-    border: 1px solid rgba(226, 232, 240, 0.95) !important;
-    box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18) !important;
-}
-html.dark .rachi-lang-menu {
-    background: rgba(7, 19, 38, 0.98) !important;
-    backdrop-filter: blur(20px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6) !important;
-}
-.rachi-lang-menu-header {
-    padding: 0.5rem 0.75rem 0.35rem !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.15) !important;
-    margin-bottom: 0.25rem !important;
-}
-.rachi-lang-item {
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    padding: 0.6rem 0.75rem !important;
-    border-radius: 0.85rem !important;
-    text-align: left !important;
-    cursor: pointer !important;
-    transition: all 0.18s ease !important;
-    border: none !important;
-    background: transparent !important;
-}
-html:not(.dark) .rachi-lang-item {
-    color: #1e293b !important;
-}
-html:not(.dark) .rachi-lang-item:hover {
-    background: #f1f5f9 !important;
-    color: #0077c2 !important;
-}
-html:not(.dark) .rachi-lang-item.active {
-    background: rgba(0, 163, 224, 0.12) !important;
-    color: #0077c2 !important;
-    font-weight: 700 !important;
-}
-html.dark .rachi-lang-item {
-    color: #e2e8f0 !important;
-}
-html.dark .rachi-lang-item:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    color: #38bdf8 !important;
-}
-html.dark .rachi-lang-item.active {
-    background: rgba(0, 163, 224, 0.2) !important;
-    color: #38bdf8 !important;
-    font-weight: 700 !important;
-}
-.rachi-lang-flag {
-    font-size: 1.25rem !important;
-    line-height: 1 !important;
-}
-.rachi-lang-text {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.rachi-lang-check {
-    color: #00a3e0 !important;
-    font-weight: 900 !important;
-}
+        /* 2. BOTÃO DO IDIOMA */
+        .rachi-lang-fab {
+            height: 2.75rem !important;
+            padding: 0 1rem !important;
+            border-radius: 9999px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.45rem !important;
+            cursor: pointer !important;
+            user-select: none !important;
+            white-space: nowrap !important;
+            outline: none !important;
+            box-sizing: border-box !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
 
-/* 4. BOTÃO DO TEMA (CLARO/ESCURO) */
-.rachi-theme-fab {
-    height: 2.75rem !important;
-    padding: 0 1.15rem !important;
-    border-radius: 9999px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    user-select: none !important;
-    white-space: nowrap !important;
-    box-sizing: border-box !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    outline: none !important;
-}
-.rachi-theme-fab:active {
-    transform: translateY(0) scale(0.97) !important;
-}
-.rachi-theme-fab .fab-label {
-    line-height: 1 !important;
-    white-space: nowrap !important;
-}
+        /* LIGHT MODE DO IDIOMA */
+        html:not(.dark) .rachi-lang-fab {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(16px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+            border: 1px solid rgba(203, 213, 225, 0.95) !important;
+            box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06) !important;
+            color: #1e293b !important;
+        }
 
-/* LIGHT MODE */
-html:not(.dark) .rachi-theme-fab {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid rgba(203, 213, 225, 0.95) !important;
-    box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06) !important;
-    color: #1e293b !important;
-}
-html:not(.dark) .rachi-theme-fab:hover {
-    background: #ffffff !important;
-    border-color: rgba(0, 80, 240, 0.45) !important;
-    box-shadow: 0 14px 32px -4px rgba(0, 80, 240, 0.22), 0 6px 12px -2px rgba(15, 23, 42, 0.1) !important;
-    transform: translateY(-2px) scale(1.03) !important;
-}
-html:not(.dark) .rachi-theme-fab .fab-light-content {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-}
-html:not(.dark) .rachi-theme-fab .fab-dark-content {
-    display: none !important;
-}
+        html:not(.dark) .rachi-lang-fab:hover {
+            background: #ffffff !important;
+            border-color: rgba(0, 163, 224, 0.5) !important;
+            box-shadow: 0 14px 32px -4px rgba(0, 163, 224, 0.22) !important;
+            transform: translateY(-2px) scale(1.02) !important;
+        }
 
-/* DARK MODE */
-html.dark .rachi-theme-fab {
-    background: rgba(15, 23, 42, 0.95) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px rgba(245, 158, 11, 0.18) !important;
-    color: #fef08a !important;
-}
-html.dark .rachi-theme-fab:hover {
-    background: rgba(30, 41, 59, 0.98) !important;
-    border-color: rgba(245, 158, 11, 0.55) !important;
-    box-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.3) !important;
-    transform: translateY(-2px) scale(1.03) !important;
-    color: #ffffff !important;
-}
-html.dark .rachi-theme-fab .fab-light-content {
-    display: none !important;
-}
-html.dark .rachi-theme-fab .fab-dark-content {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-}
+        /* DARK MODE DO IDIOMA */
+        html.dark .rachi-lang-fab {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(16px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.6) !important;
+            color: #f1f5f9 !important;
+        }
 
-/* 5. HIGIENIZAÇÃO COMPLETA DO GOOGLE TRANSLATE (SEM BANNERS NEM QUEBRAS DE LAYOUT) */
-.goog-te-banner-frame.skiptranslate,
-iframe.goog-te-banner-frame {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    border: none !important;
-}
-body {
-    top: 0px !important;
-    position: static !important;
-}
-.goog-te-gadget {
-    display: none !important;
-}
-#goog-gt-tt, 
-.goog-te-balloon-frame {
-    display: none !important;
-    visibility: hidden !important;
-}
-.goog-text-highlight {
-    background: none !important;
-    box-shadow: none !important;
-}
-#google_translate_element {
-    display: none !important;
-}
+        html.dark .rachi-lang-fab:hover {
+            background: rgba(30, 41, 59, 0.98) !important;
+            border-color: rgba(0, 163, 224, 0.5) !important;
+            transform: translateY(-2px) scale(1.02) !important;
+        }
 
-@media (max-width: 640px) {
-    .rachi-fab-dock {
-        bottom: 1.25rem !important;
-        right: 1.25rem !important;
-        gap: 0.45rem !important;
-    }
-    .rachi-lang-fab {
-        height: 2.5rem !important;
-        padding: 0 0.85rem !important;
-    }
-    .rachi-theme-fab {
-        height: 2.5rem !important;
-        padding: 0 0.95rem !important;
-    }
-    .rachi-lang-menu {
-        width: 13.5rem !important;
-        right: 0 !important;
-    }
-}
-</style>
+        /* 3. MENU POPOVER DO IDIOMA */
+        .rachi-lang-menu {
+            position: absolute !important;
+            bottom: calc(100% + 0.75rem) !important;
+            right: 0 !important;
+            width: 15rem !important;
+            border-radius: 1.25rem !important;
+            padding: 0.5rem !important;
+            z-index: 10000 !important;
+        }
+
+        html:not(.dark) .rachi-lang-menu {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(20px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+            border: 1px solid rgba(226, 232, 240, 0.95) !important;
+            box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18) !important;
+        }
+
+        html.dark .rachi-lang-menu {
+            background: rgba(7, 19, 38, 0.98) !important;
+            backdrop-filter: blur(20px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .rachi-lang-menu-header {
+            padding: 0.5rem 0.75rem 0.35rem !important;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15) !important;
+            margin-bottom: 0.25rem !important;
+        }
+
+        .rachi-lang-item {
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+            padding: 0.6rem 0.75rem !important;
+            border-radius: 0.85rem !important;
+            text-align: left !important;
+            cursor: pointer !important;
+            transition: all 0.18s ease !important;
+            border: none !important;
+            background: transparent !important;
+        }
+
+        html:not(.dark) .rachi-lang-item {
+            color: #1e293b !important;
+        }
+
+        html:not(.dark) .rachi-lang-item:hover {
+            background: #f1f5f9 !important;
+            color: #0077c2 !important;
+        }
+
+        html:not(.dark) .rachi-lang-item.active {
+            background: rgba(0, 163, 224, 0.12) !important;
+            color: #0077c2 !important;
+            font-weight: 700 !important;
+        }
+
+        html.dark .rachi-lang-item {
+            color: #e2e8f0 !important;
+        }
+
+        html.dark .rachi-lang-item:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: #38bdf8 !important;
+        }
+
+        html.dark .rachi-lang-item.active {
+            background: rgba(0, 163, 224, 0.2) !important;
+            color: #38bdf8 !important;
+            font-weight: 700 !important;
+        }
+
+        .rachi-lang-flag {
+            font-size: 1.25rem !important;
+            line-height: 1 !important;
+        }
+
+        .rachi-lang-text {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .rachi-lang-check {
+            color: #00a3e0 !important;
+            font-weight: 900 !important;
+        }
+
+        /* 4. BOTÃO DO TEMA (CLARO/ESCURO) */
+        .rachi-theme-fab {
+            height: 2.75rem !important;
+            padding: 0 1.15rem !important;
+            border-radius: 9999px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            user-select: none !important;
+            white-space: nowrap !important;
+            box-sizing: border-box !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            outline: none !important;
+        }
+
+        .rachi-theme-fab:active {
+            transform: translateY(0) scale(0.97) !important;
+        }
+
+        .rachi-theme-fab .fab-label {
+            line-height: 1 !important;
+            white-space: nowrap !important;
+        }
+
+        /* LIGHT MODE */
+        html:not(.dark) .rachi-theme-fab {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(16px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+            border: 1px solid rgba(203, 213, 225, 0.95) !important;
+            box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06) !important;
+            color: #1e293b !important;
+        }
+
+        html:not(.dark) .rachi-theme-fab:hover {
+            background: #ffffff !important;
+            border-color: rgba(0, 80, 240, 0.45) !important;
+            box-shadow: 0 14px 32px -4px rgba(0, 80, 240, 0.22), 0 6px 12px -2px rgba(15, 23, 42, 0.1) !important;
+            transform: translateY(-2px) scale(1.03) !important;
+        }
+
+        html:not(.dark) .rachi-theme-fab .fab-light-content {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+
+        html:not(.dark) .rachi-theme-fab .fab-dark-content {
+            display: none !important;
+        }
+
+        /* DARK MODE */
+        html.dark .rachi-theme-fab {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(16px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px rgba(245, 158, 11, 0.18) !important;
+            color: #fef08a !important;
+        }
+
+        html.dark .rachi-theme-fab:hover {
+            background: rgba(30, 41, 59, 0.98) !important;
+            border-color: rgba(245, 158, 11, 0.55) !important;
+            box-shadow: 0 14px 36px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.3) !important;
+            transform: translateY(-2px) scale(1.03) !important;
+            color: #ffffff !important;
+        }
+
+        html.dark .rachi-theme-fab .fab-light-content {
+            display: none !important;
+        }
+
+        html.dark .rachi-theme-fab .fab-dark-content {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+
+        /* 5. HIGIENIZAÇÃO COMPLETA DO GOOGLE TRANSLATE (SEM BANNERS NEM QUEBRAS DE LAYOUT) */
+        .goog-te-banner-frame.skiptranslate,
+        iframe.goog-te-banner-frame {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            border: none !important;
+        }
+
+        body {
+            top: 0px !important;
+            position: static !important;
+        }
+
+        .goog-te-gadget {
+            display: none !important;
+        }
+
+        #goog-gt-tt,
+        .goog-te-balloon-frame {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        @media (max-width: 640px) {
+            .rachi-fab-dock {
+                bottom: 1.25rem !important;
+                right: 1.25rem !important;
+                gap: 0.45rem !important;
+            }
+
+            .rachi-lang-fab {
+                height: 2.5rem !important;
+                padding: 0 0.85rem !important;
+            }
+
+            .rachi-theme-fab {
+                height: 2.5rem !important;
+                padding: 0 0.95rem !important;
+            }
+
+            .rachi-lang-menu {
+                width: 13.5rem !important;
+                right: 0 !important;
+            }
+        }
+    </style>
 </body>
+
 </html>
