@@ -1611,8 +1611,6 @@
                     <p class="text-base sm:text-xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
                         Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                     </p>
-
-                    </div>
                 </div>
 
                 <!-- 3 Pilares Oficiais: Qualidade Institucional, Processo Rápido, Suporte Especializado -->
