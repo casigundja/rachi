@@ -566,7 +566,7 @@
             color: #94a3b8 !important;
         }
 
-        /* Showcase Product Card */
+                /* Showcase Product Card */
         .showcase-product-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -585,12 +585,12 @@
             box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.08);
         }
         html.dark .showcase-product-card {
-            background-color: rgba(15, 22, 38, 0.95) !important;
-            border-color: rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+            background: linear-gradient(180deg, #0d1527 0%, #080f1d 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
         }
         html.dark .showcase-product-card:hover {
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6) !important;
+            transform: translateY(-5px);
         }
 
         .showcase-border-blue:hover { border-color: rgba(2, 132, 199, 0.6) !important; }
@@ -598,7 +598,129 @@
         .showcase-border-emerald:hover { border-color: rgba(5, 150, 105, 0.6) !important; }
         .showcase-border-purple:hover { border-color: rgba(124, 58, 237, 0.6) !important; }
 
-        /* Line Cover & Product Grid Showcase */
+        html.dark .showcase-border-blue:hover {
+            border-color: rgba(56, 189, 248, 0.5) !important;
+            box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3), inset 0 1px 0 rgba(56, 189, 248, 0.25) !important;
+        }
+        html.dark .showcase-border-amber:hover {
+            border-color: rgba(245, 168, 0, 0.5) !important;
+            box-shadow: 0 20px 40px -10px rgba(245, 168, 0, 0.3), inset 0 1px 0 rgba(245, 168, 0, 0.25) !important;
+        }
+        html.dark .showcase-border-emerald:hover {
+            border-color: rgba(52, 211, 153, 0.5) !important;
+            box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(52, 211, 153, 0.25) !important;
+        }
+        html.dark .showcase-border-purple:hover {
+            border-color: rgba(192, 132, 252, 0.5) !important;
+            box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.3), inset 0 1px 0 rgba(192, 132, 252, 0.25) !important;
+        }
+
+        /* Aplicações Comuns Box */
+        .showcase-applications-box {
+            margin-top: 1.5rem;
+            padding: 1.15rem 1.25rem;
+            border-radius: 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.25s ease;
+        }
+        html.dark .showcase-applications-box {
+            background: rgba(15, 23, 42, 0.85) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .showcase-applications-box .app-box-header {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #64748b;
+            margin-bottom: 0.45rem;
+        }
+        html.dark .showcase-applications-box .app-box-header {
+            color: #94a3b8 !important;
+        }
+        .showcase-applications-box .app-box-text {
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: #334155;
+            margin: 0;
+            font-weight: 400;
+        }
+        html.dark .showcase-applications-box .app-box-text {
+            color: #e2e8f0 !important;
+            font-weight: 500;
+        }
+
+        /* Botão de Ação "Saber mais" */
+        .showcase-action-btn {
+            width: 100%;
+            padding: 0.95rem 1.25rem;
+            border-radius: 0.875rem;
+            background: #0f172a;
+            color: #ffffff !important;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid transparent;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            user-select: none;
+        }
+        html.dark .showcase-action-btn {
+            background: rgba(30, 41, 59, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.14) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+        }
+        .showcase-product-card:hover .showcase-action-btn i {
+            transform: translateX(4px);
+        }
+
+        /* Hover Color Variations for Buttons */
+        .showcase-border-blue:hover .showcase-action-btn {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            border-color: #0284c7 !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.4) !important;
+        }
+        .showcase-border-amber:hover .showcase-action-btn {
+            background: linear-gradient(135deg, #f5a800 0%, #d97706 100%) !important;
+            border-color: #f5a800 !important;
+            color: #071326 !important;
+            font-weight: 900 !important;
+            box-shadow: 0 8px 24px rgba(245, 168, 0, 0.4) !important;
+        }
+        .showcase-border-emerald:hover .showcase-action-btn {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+            border-color: #059669 !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.4) !important;
+        }
+        .showcase-border-purple:hover .showcase-action-btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+            border-color: #7c3aed !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4) !important;
+        }
+
+        /* Bullet Points Text in Dark Mode */
+        html.dark .showcase-product-card .text-slate-800 {
+            color: #f1f5f9 !important;
+        }
+        html.dark .showcase-product-card .text-slate-600 {
+            color: #94a3b8 !important;
+        }
+
+/* Line Cover & Product Grid Showcase */
         .line-cover-wrap {
             position: relative;
             border-radius: 1rem;
@@ -1530,20 +1652,20 @@
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
-                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        <div class="showcase-applications-box">
+                            <div class="app-box-header">
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
+                            <p class="app-box-text">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
                         </div>
                     </div>
 
                     <!-- Botão de Ação do Card -->
                     <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-blue-600 dark:group-hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-blue-500/25">
+                        <div class="showcase-action-btn">
                             <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
                         </div>
                     </div>
                 </div>
@@ -1599,20 +1721,20 @@
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
-                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        <div class="showcase-applications-box">
+                            <div class="app-box-header">
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano, Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
+                            <p class="app-box-text">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano, Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
                         </div>
                     </div>
 
                     <!-- Botão de Ação do Card -->
                     <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-amber-500 group-hover:text-slate-950 dark:group-hover:text-slate-950 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-amber-500/25">
+                        <div class="showcase-action-btn">
                             <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
                         </div>
                     </div>
                 </div>
@@ -1668,20 +1790,20 @@
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
-                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        <div class="showcase-applications-box">
+                            <div class="app-box-header">
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
+                            <p class="app-box-text">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
                         </div>
                     </div>
 
                     <!-- Botão de Ação do Card -->
                     <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-emerald-600 dark:group-hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-emerald-500/25">
+                        <div class="showcase-action-btn">
                             <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
                         </div>
                     </div>
                 </div>
@@ -1737,20 +1859,20 @@
                         </div>
 
                         <!-- Aplicações Práticas -->
-                        <div class="mt-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/70 space-y-1.5">
-                            <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        <div class="showcase-applications-box">
+                            <div class="app-box-header">
                                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500"></i>
                                 <span>Aplicações Comuns:</span>
                             </div>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica, Balcões Promocionais e Credenciais PVC para Congressos.</p>
+                            <p class="app-box-text">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica, Balcões Promocionais e Credenciais PVC para Congressos.</p>
                         </div>
                     </div>
 
                     <!-- Botão de Ação do Card -->
                     <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="w-full py-3.5 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 dark:border dark:border-white/10 group-hover:bg-purple-600 dark:group-hover:bg-purple-600 text-white font-bold text-xs uppercase tracking-wider transition duration-200 flex items-center justify-center gap-2 shadow-xs group-hover:shadow-md group-hover:shadow-purple-500/25">
+                        <div class="showcase-action-btn">
                             <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
                         </div>
                     </div>
                 </div>
