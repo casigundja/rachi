@@ -566,7 +566,31 @@
             color: #94a3b8 !important;
         }
 
-                /* Showcase Product Card */
+                
+        /* CTA Amber Button */
+        .btn-cta-amber {
+            background: linear-gradient(135deg, #f5a800 0%, #d97706 100%);
+            color: #071326 !important;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(245, 168, 0, 0.35);
+        }
+        .btn-cta-amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(245, 168, 0, 0.45);
+            background: linear-gradient(135deg, #fbbf24 0%, #f5a800 100%);
+            color: #000000 !important;
+        }
+
+        /* Showcase Product Card */
         .showcase-product-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -1550,50 +1574,105 @@
         </div>
     </header>
 
-        <!-- ============================================================ -->
-    <!-- HERO SECTION (Dinâmico, Interativo e de Alto Padrão)         -->
+            <!-- ============================================================ -->
+    <!-- 1. HERO BANNER: RACHI Print (Layout Padronizado com Capital) -->
     <!-- ============================================================ -->
-    <main class="ambient-bg pt-32 pb-20">
-        <section class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 sm:pt-14 overflow-hidden">
-            <!-- Subtle Ambient Light Orbs -->
-            <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[650px] h-[320px] bg-gradient-to-tr from-amber-500/15 via-orange-500/10 to-blue-500/10 blur-[100px] pointer-events-none -z-10 rounded-full"></div>
+    <main class="flex-1" style="padding-top: 75px;">
+        <section class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+            <!-- Ambient Glow Gradients -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.22),transparent_70%)] pointer-events-none"></div>
+            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
+            <div class="max-w-7xl mx-auto relative z-10">
                 
-                <!-- Pill Badge -->
-                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-semibold shadow-xs mb-6">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse"></span>
-                    <span>Gráfica de Alto Padrão</span>
+                <!-- Breadcrumbs -->
+                <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">
+                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition cursor-pointer">Início</a>
+                    <span>/</span>
+                    <span class="text-slate-400 dark:text-slate-500">Soluções</span>
+                    <span>/</span>
+                    <span class="text-amber-700 dark:text-[#f5a800] font-semibold">RACHI Print</span>
+                </nav>
+
+                <div class="max-w-4xl">
+                    <!-- Pill Tag -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
+                        <span class="w-2 h-2 rounded-full bg-[#f5a800] animate-pulse"></span>
+                        Produção Gráfica, Brindes &amp; Acabamento Nobre
+                    </div>
+
+                    <!-- Main H1 -->
+                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                        RACHI Print
+                    </h1>
+
+                    <!-- Main Subtitle -->
+                    <p class="text-lg sm:text-2xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
+                        Impressão de documentos institucionais, materiais promocionais, brindes corporativos e acabamentos de alto padrão.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print." target="_blank" class="btn-cta-amber text-sm px-6 py-3.5 shadow-lg shadow-amber-500/20">
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                            <span>Falar com um Consultor</span>
+                        </a>
+                        <a href="#produtos-graficos" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300/80 dark:border-white/15 text-slate-800 dark:text-white font-semibold text-sm transition shadow-xs">
+                            <i data-lucide="layers" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
+                            <span>Explorar as Nossas Soluções</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Main Heading -->
-                <h1 class="hero-title text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.12] tracking-tight uppercase mx-auto text-center mb-6">
-                    Dê vida aos seus materiais com <br class="hidden sm:inline">
-                    <span class="text-gradient-amber">acabamento institucional</span>
-                </h1>
+                <!-- 3 Pilares Oficiais: Qualidade Institucional, Processo Rápido, Suporte Especializado -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Qualidade Institucional</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Rigor cromático e acabamentos nobres</div>
+                        </div>
+                    </div>
 
-                <!-- Subtitle -->
-                <p class="hero-subtitle text-slate-600 dark:text-slate-300 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto font-normal text-center mb-2">
-                    Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
-                </p>
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Processo Rápido</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Tiragens flexíveis e prazos rigorosos</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="headphones" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm text-slate-900 dark:text-white">Suporte Especializado</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Consultores gráficos dedicados em Angola</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </section>
 
         <!-- ============================================================ -->
-        <!-- SHOWCASE SECTION: "Veja no que seus materiais gráficos      -->
-        <!-- podem se transformar" (As 4 Linhas Oficiais de Produção)     -->
+        <!-- 2. CATÁLOGO DE SOLUÇÕES (As 4 Linhas Oficiais de Produção)     -->
         <!-- ============================================================ -->
-        <section id="produtos-graficos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 scroll-mt-24">
+        <section id="produtos-graficos" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="catalogo"></div>
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-xs font-bold uppercase tracking-widest section-tag px-3 py-1 rounded-full">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-[#f5a800] font-bold text-xs uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-200 dark:border-amber-500/25">
                     Catálogo de Soluções
                 </span>
-                <h2 class="section-title text-3xl sm:text-5xl font-black mt-4">
+                <h2 class="text-3xl sm:text-5xl font-black mt-4 text-slate-900 dark:text-white">
                     Veja no que seus materiais gráficos podem se transformar
                 </h2>
-                <p class="section-desc text-sm sm:text-base mt-3">
+                <p class="text-sm sm:text-base mt-3 text-slate-600 dark:text-slate-300">
                     As quatro linhas oficiais de produção da RACHI Print. Conheça abaixo as soluções e amostras de cada linha ou aceda à página oficial para ver especificações e solicitar cotação.
                 </p>
             </div>

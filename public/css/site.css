@@ -10452,3 +10452,28 @@ html.dark .user-menu-badge-inactive {
         html.dark .showcase-product-card .text-slate-600 {
             color: #94a3b8 !important;
         }
+
+
+        /* CTA Amber Button */
+        .btn-cta-amber {
+            background: linear-gradient(135deg, #f5a800 0%, #d97706 100%);
+            color: #071326 !important;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(245, 168, 0, 0.35);
+        }
+        .btn-cta-amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(245, 168, 0, 0.45);
+            background: linear-gradient(135deg, #fbbf24 0%, #f5a800 100%);
+            color: #000000 !important;
+        }
+
