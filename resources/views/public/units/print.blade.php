@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -1128,6 +1128,1191 @@
         html.dark .footer-link:hover {
             color: #ffffff !important;
         }
+
+        /* ============================================================
+           HERO BANNER RACHI PRINT (Arte Editorial Industrial CMYK)
+           ============================================================ */
+        .breadcrumb-nav-bar {
+            background-color: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        html.dark .breadcrumb-nav-bar {
+            background-color: #040d1d !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: #94a3b8 !important;
+        }
+
+        #print-hero-banner {
+            position: relative;
+            width: 100%;
+            min-height: clamp(470px, 43vw, 600px);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            isolation: isolate;
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+        html.dark #print-hero-banner {
+            background-color: #040d1d !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        #print-hero-banner > picture {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
+
+        #print-hero-banner .print-hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center right;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            transition: filter 0.35s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-bg {
+            filter: brightness(1.06) contrast(1.02) saturate(1.06);
+        }
+        html.dark #print-hero-banner .print-hero-bg {
+            filter: none;
+        }
+
+        #print-hero-banner .print-hero-scrim {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.35s ease;
+        }
+
+        /* Light Mode Editorial Studio Scrim */
+        html:not(.dark) #print-hero-banner .print-hero-scrim {
+            background:
+                linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.98) 0%,
+                    rgba(250, 252, 255, 0.95) 33%,
+                    rgba(248, 250, 252, 0.74) 51%,
+                    rgba(248, 250, 252, 0.12) 75%,
+                    rgba(255, 255, 255, 0) 100%),
+                linear-gradient(0deg,
+                    rgba(248, 250, 252, 0.52) 0%,
+                    transparent 22%);
+        }
+
+        /* Dark Mode Editorial Midnight Scrim */
+        html.dark #print-hero-banner .print-hero-scrim {
+            background:
+                linear-gradient(90deg,
+                    rgba(4, 12, 26, 0.95) 0%,
+                    rgba(5, 16, 35, 0.86) 28%,
+                    rgba(6, 18, 38, 0.42) 52%,
+                    rgba(6, 18, 38, 0.05) 76%,
+                    transparent 100%),
+                linear-gradient(0deg,
+                    rgba(4, 12, 26, 0.42) 0%,
+                    transparent 26%);
+        }
+
+        @media (max-width: 767px) {
+            #print-hero-banner {
+                min-height: 440px;
+            }
+            #print-hero-banner .print-hero-bg {
+                object-position: 68% center;
+            }
+            html:not(.dark) #print-hero-banner .print-hero-scrim {
+                background:
+                    linear-gradient(90deg,
+                        rgba(255, 255, 255, 0.97) 0%,
+                        rgba(248, 250, 252, 0.90) 58%,
+                        rgba(248, 250, 252, 0.62) 100%),
+                    linear-gradient(0deg,
+                        rgba(248, 250, 252, 0.65) 0%,
+                        transparent 35%);
+            }
+            html.dark #print-hero-banner .print-hero-scrim {
+                background:
+                    linear-gradient(90deg,
+                        rgba(4, 12, 26, 0.95) 0%,
+                        rgba(5, 16, 35, 0.88) 55%,
+                        rgba(6, 18, 38, 0.55) 100%),
+                    linear-gradient(0deg,
+                        rgba(4, 12, 26, 0.55) 0%,
+                        transparent 35%);
+            }
+        }
+
+        #print-hero-banner .print-hero-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: clamp(2.75rem, 5vw, 4.25rem) clamp(1.25rem, 4vw, 3rem);
+        }
+
+        #print-hero-banner .print-hero-editorial {
+            max-width: 580px;
+            margin-left: clamp(0rem, 3.5vw, 3rem);
+        }
+
+        #print-hero-banner .print-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.85rem;
+        }
+
+        #print-hero-banner .print-hero-topline {
+            width: 42px;
+            height: 2.5px;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-topline {
+            background-color: #d97706;
+        }
+        html.dark #print-hero-banner .print-hero-topline {
+            background-color: #ffffff;
+        }
+
+        #print-hero-banner .print-hero-eyebrow-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            transition: color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-eyebrow-text {
+            color: #b45309 !important;
+        }
+        html.dark #print-hero-banner .print-hero-eyebrow-text {
+            color: #fcd34d !important;
+        }
+
+        #print-hero-banner .print-hero-heading {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            text-align: left !important;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-heading {
+            color: #0b1a2e !important;
+        }
+        html.dark #print-hero-banner .print-hero-heading {
+            color: #ffffff !important;
+        }
+
+        #print-hero-banner .print-hero-line-top {
+            font-weight: 500;
+            font-size: clamp(1.55rem, 2.45vw, 2.3rem);
+            line-height: 1.18;
+            letter-spacing: 0.005em;
+            transition: color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-line-top {
+            color: #0b1a2e !important;
+        }
+        html.dark #print-hero-banner .print-hero-line-top {
+            color: #ffffff !important;
+            font-weight: 400;
+        }
+
+        #print-hero-banner .print-hero-box-amber {
+            display: inline-block;
+            padding: 0.06em 0.36em 0.13em 0.36em;
+            margin: 0.28rem 0 0.36rem 0;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 3.65vw, 3.45rem);
+            line-height: 1.06;
+            letter-spacing: 0.01em;
+            border-radius: 0.2rem;
+            transition: all 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-box-amber {
+            border: 2.5px solid #d97706;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(251, 191, 36, 0.05) 100%);
+            color: #d97706 !important;
+            box-shadow: 0 10px 24px -8px rgba(217, 119, 6, 0.22);
+        }
+        html.dark #print-hero-banner .print-hero-box-amber {
+            border: 2.5px solid #e59819;
+            background: rgba(5, 15, 32, 0.36);
+            color: #f59e0b !important;
+            box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.45);
+        }
+
+        #print-hero-banner .print-hero-line-bottom {
+            font-weight: 500;
+            font-size: clamp(1.85rem, 2.95vw, 2.8rem);
+            line-height: 1.15;
+            letter-spacing: 0.005em;
+            transition: color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-line-bottom {
+            color: #0b1a2e !important;
+        }
+        html.dark #print-hero-banner .print-hero-line-bottom {
+            color: #ffffff !important;
+            font-weight: 400;
+        }
+
+        #print-hero-banner .print-hero-desc {
+            margin: 0.75rem 0 0 0;
+            max-width: 500px;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.86rem, 0.98vw, 0.96rem);
+            line-height: 1.62;
+            text-align: left !important;
+            transition: color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-desc {
+            font-weight: 450;
+            color: #334155 !important;
+        }
+        html.dark #print-hero-banner .print-hero-desc {
+            font-weight: 300;
+            color: rgba(241, 245, 249, 0.93) !important;
+        }
+
+        #print-hero-banner .print-hero-brand {
+            margin-top: 1.75rem;
+            padding-left: clamp(0rem, 5vw, 4.75rem);
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        #print-hero-banner .print-hero-brand-icon {
+            height: clamp(54px, 4.6vw, 68px);
+            width: auto;
+            object-fit: contain;
+            transition: filter 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-brand-icon {
+            filter: drop-shadow(0 8px 16px rgba(15, 23, 42, 0.16));
+        }
+        html.dark #print-hero-banner .print-hero-brand-icon {
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+        }
+
+        #print-hero-banner .print-hero-brand-name {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.25rem, 1.75vw, 1.55rem);
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            transition: color 0.3s ease;
+        }
+        html:not(.dark) #print-hero-banner .print-hero-brand-name {
+            color: #0b1a2e !important;
+        }
+        html.dark #print-hero-banner .print-hero-brand-name {
+            color: #ffffff !important;
+        }
+
+        .print-pillars-strip {
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .print-pillars-strip {
+            background-color: #071326 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        .print-pillar-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.05);
+            transition: all 0.25s ease;
+        }
+        .print-pillar-card:hover {
+            background-color: #ffffff;
+            border-color: rgba(217, 119, 6, 0.38);
+            box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.09);
+            transform: translateY(-2px);
+        }
+        html.dark .print-pillar-card {
+            background-color: rgba(15, 23, 42, 0.72) !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28) !important;
+        }
+        html.dark .print-pillar-card:hover {
+            background-color: rgba(15, 23, 42, 0.94) !important;
+            border-color: rgba(245, 168, 0, 0.38) !important;
+        }
+        html:not(.dark) .print-pillar-title { color: #0f172a !important; }
+        html.dark .print-pillar-title { color: #ffffff !important; }
+        html:not(.dark) .print-pillar-desc { color: #475569 !important; }
+        html.dark .print-pillar-desc { color: #94a3b8 !important; }
+
+        /* ============================================================
+           NOSSOS SERVIÇOS, PORTFÓLIO & CTA (Design Editorial RACHI Print)
+           ============================================================ */
+        .rprint-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.42rem 1.15rem;
+            border-radius: 9999px;
+            background-color: #f6eefb;
+            color: #d91b7a;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            border: 1px solid rgba(217, 27, 122, 0.08);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .rprint-pill {
+            background-color: rgba(217, 27, 122, 0.16) !important;
+            border-color: rgba(244, 114, 182, 0.28) !important;
+            color: #f472b6 !important;
+        }
+
+        .rprint-gradient-text {
+            background: linear-gradient(90deg, #d91b7a 0%, #ef5b5b 52%, #f5a623 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        html.dark .rprint-gradient-text {
+            background: linear-gradient(90deg, #f43f8e 0%, #fb7185 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .rprint-sec-header {
+            text-align: center;
+            max-width: 50rem;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .rprint-sec-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 3.6vw, 3.1rem);
+            line-height: 1.16;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            margin: 1.1rem 0 0 0;
+        }
+        html.dark .rprint-sec-title {
+            color: #ffffff !important;
+        }
+
+        .rprint-sec-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+            line-height: 1.65;
+            color: #64748b;
+            max-width: 39rem;
+            margin: 0.95rem auto 0 auto;
+        }
+        html.dark .rprint-sec-sub {
+            color: #94a3b8 !important;
+        }
+
+        /* Services Grid (3x2) */
+        .rprint-services-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.75rem;
+        }
+        @media (min-width: 640px) {
+            .rprint-services-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .rprint-services-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .rprint-service-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.15rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.05);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease,
+                        background-color 0.3s ease;
+        }
+        .rprint-service-card:hover {
+            transform: translateY(-6px);
+            background-color: #ffffff;
+            border-color: rgba(217, 27, 122, 0.32);
+            box-shadow: 0 18px 36px -10px rgba(15, 23, 42, 0.10);
+        }
+        html.dark .rprint-service-card {
+            background-color: #0d1729 !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+        }
+        html.dark .rprint-service-card:hover {
+            background-color: #111e35 !important;
+            border-color: rgba(244, 63, 142, 0.42) !important;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.55);
+        }
+
+        .rprint-service-media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background-color: #e2e8f0;
+        }
+        html.dark .rprint-service-media {
+            background-color: #08101e;
+        }
+
+        .rprint-service-media picture {
+            display: contents;
+        }
+
+        .rprint-service-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rprint-service-card:hover .rprint-service-media img {
+            transform: scale(1.05);
+        }
+
+        .rprint-service-body {
+            padding: 1.65rem 1.75rem 1.85rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .rprint-service-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.85rem;
+            background-color: #f6eaf8;
+            color: #d91b7a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+        .rprint-service-card:hover .rprint-service-icon {
+            transform: scale(1.06);
+            background-color: #f2def6;
+        }
+        html.dark .rprint-service-icon {
+            background-color: rgba(217, 27, 122, 0.16) !important;
+            color: #f472b6 !important;
+            border: 1px solid rgba(244, 114, 182, 0.22);
+        }
+
+        .rprint-service-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.32;
+            color: #0f172a;
+            margin: 0 0 0.65rem 0;
+            transition: color 0.2s ease;
+        }
+        .rprint-service-card:hover .rprint-service-title {
+            color: #d91b7a;
+        }
+        html.dark .rprint-service-title {
+            color: #ffffff !important;
+        }
+        html.dark .rprint-service-card:hover .rprint-service-title {
+            color: #f472b6 !important;
+        }
+
+        .rprint-service-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.62;
+            color: #64748b;
+            margin: 0;
+        }
+        html.dark .rprint-service-desc {
+            color: #94a3b8 !important;
+        }
+
+        .rprint-service-badge {
+            position: absolute;
+            top: 0.85rem;
+            left: 0.85rem;
+            z-index: 2;
+            padding: 0.28rem 0.72rem;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(15, 23, 42, 0.78);
+            color: #ffffff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .rprint-service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .rprint-service-chip {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.24rem 0.6rem;
+            border-radius: 0.45rem;
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .rprint-service-chip {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #cbd5e1 !important;
+            border-color: rgba(255, 255, 255, 0.10) !important;
+        }
+
+        .rprint-service-more {
+            margin-top: auto;
+            padding-top: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #d91b7a;
+            transition: gap 0.2s ease, color 0.2s ease;
+        }
+        .rprint-service-card:hover .rprint-service-more {
+            gap: 0.62rem;
+        }
+        html.dark .rprint-service-more {
+            color: #f472b6 !important;
+        }
+
+        /* Branding & Visual Identity Dedicated Section */
+        .rprint-branding-section {
+            padding: 5.25rem 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border-top: 1px solid rgba(226, 232, 240, 0.85);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .rprint-branding-section {
+            background: linear-gradient(180deg, #091222 0%, #070e1b 100%) !important;
+            border-top-color: rgba(255, 255, 255, 0.07) !important;
+        }
+
+        .rprint-branding-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .rprint-branding-hero-grid {
+                grid-template-columns: 1.05fr 1fr;
+                gap: 3.25rem;
+            }
+        }
+
+        .rprint-branding-visual {
+            position: relative;
+            border-radius: 1.35rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background-color: #0b1424;
+            box-shadow: 0 22px 45px -16px rgba(15, 23, 42, 0.18);
+            cursor: pointer;
+        }
+        html.dark .rprint-branding-visual {
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 24px 50px -14px rgba(0, 0, 0, 0.65);
+        }
+        .rprint-branding-visual img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rprint-branding-visual:hover img {
+            transform: scale(1.04);
+        }
+
+        .rprint-branding-visual-bar {
+            position: absolute;
+            left: 1rem;
+            right: 1rem;
+            bottom: 1rem;
+            padding: 0.85rem 1.1rem;
+            border-radius: 0.95rem;
+            background: rgba(7, 15, 30, 0.84);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: #ffffff;
+        }
+
+        .rprint-deliverables-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.95rem;
+            margin-top: 1.65rem;
+        }
+        @media (min-width: 640px) {
+            .rprint-deliverables-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .rprint-deliverable-card {
+            padding: 1.1rem 1.15rem;
+            border-radius: 1rem;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+            transition: transform 0.22s ease, border-color 0.22s ease;
+        }
+        .rprint-deliverable-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(217, 27, 122, 0.32);
+        }
+        html.dark .rprint-deliverable-card {
+            background-color: #0e192d !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+        }
+        html.dark .rprint-deliverable-card:hover {
+            border-color: rgba(244, 114, 182, 0.38) !important;
+        }
+
+        .rprint-deliverable-num {
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #d91b7a;
+            background-color: #f8ecf9;
+            padding: 0.18rem 0.55rem;
+            border-radius: 9999px;
+            margin-bottom: 0.5rem;
+        }
+        html.dark .rprint-deliverable-num {
+            background-color: rgba(217, 27, 122, 0.18) !important;
+            color: #f472b6 !important;
+        }
+
+        .rprint-deliverable-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 0.32rem 0;
+        }
+        html.dark .rprint-deliverable-title {
+            color: #ffffff !important;
+        }
+
+        .rprint-deliverable-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.81rem;
+            line-height: 1.55;
+            color: #64748b;
+            margin: 0;
+        }
+        html.dark .rprint-deliverable-desc {
+            color: #94a3b8 !important;
+        }
+
+        /* Brand Ecosystem Applications Showcase Grid */
+        .rprint-brand-apps-wrap {
+            margin-top: 4rem;
+            padding-top: 3.25rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        html.dark .rprint-brand-apps-wrap {
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .rprint-brand-apps-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 640px) {
+            .rprint-brand-apps-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .rprint-brand-apps-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .rprint-brand-app-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.15rem;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease;
+        }
+        .rprint-brand-app-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.45);
+            box-shadow: 0 18px 34px -10px rgba(15, 23, 42, 0.14);
+        }
+        html.dark .rprint-brand-app-card {
+            background-color: #0d1729 !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+        }
+        html.dark .rprint-brand-app-card:hover {
+            border-color: rgba(251, 191, 36, 0.45) !important;
+            box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .rprint-brand-app-media {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background-color: #08101e;
+            overflow: hidden;
+        }
+        .rprint-brand-app-media picture {
+            display: contents;
+        }
+        .rprint-brand-app-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rprint-brand-app-card:hover .rprint-brand-app-media img {
+            transform: scale(1.05);
+        }
+
+        .rprint-brand-app-body {
+            padding: 1.2rem 1.35rem 1.35rem 1.35rem;
+        }
+        .rprint-brand-app-kicker {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #d97706;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        html.dark .rprint-brand-app-kicker {
+            color: #fbbf24 !important;
+        }
+        .rprint-brand-app-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 0.35rem 0;
+        }
+        html.dark .rprint-brand-app-title {
+            color: #ffffff !important;
+        }
+        .rprint-brand-app-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #64748b;
+            margin: 0;
+        }
+        html.dark .rprint-brand-app-desc {
+            color: #94a3b8 !important;
+        }
+
+        /* Finishes & Technologies Strip */
+        .rprint-finishes-box {
+            margin-top: 2.75rem;
+            padding: 1.65rem 1.85rem;
+            border-radius: 1.2rem;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+        }
+        html.dark .rprint-finishes-box {
+            background-color: #0c1628 !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+        }
+        .rprint-finishes-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .rprint-finish-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.48rem 0.9rem;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .rprint-finish-pill {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #e2e8f0 !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+
+        /* Portfolio Section & Grid */
+        .rprint-portfolio-section {
+            padding: 5.25rem 0;
+            background-color: #f9fafc;
+            border-top: 1px solid rgba(226, 232, 240, 0.75);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.75);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .rprint-portfolio-section {
+            background-color: #060d19 !important;
+            border-top-color: rgba(255, 255, 255, 0.06) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .rprint-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.6rem;
+        }
+        @media (min-width: 640px) {
+            .rprint-portfolio-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .rprint-portfolio-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .rprint-portfolio-item {
+            position: relative;
+            border-radius: 1.1rem;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background-color: #0b1424;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+            transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.32s ease,
+                        border-color 0.32s ease;
+        }
+        .rprint-portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 38px -12px rgba(15, 23, 42, 0.24);
+            border-color: rgba(217, 27, 122, 0.35);
+        }
+        html.dark .rprint-portfolio-item {
+            border-color: rgba(255, 255, 255, 0.10) !important;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
+        html.dark .rprint-portfolio-item:hover {
+            border-color: rgba(244, 63, 142, 0.45) !important;
+            box-shadow: 0 22px 44px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .rprint-portfolio-item picture {
+            display: contents;
+        }
+
+        .rprint-portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rprint-portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .rprint-portfolio-caption {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(6, 13, 25, 0) 42%, rgba(6, 13, 25, 0.90) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.25rem 1.35rem;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.28s ease, transform 0.28s ease;
+        }
+        .rprint-portfolio-item:hover .rprint-portfolio-caption,
+        .rprint-portfolio-item:focus-visible .rprint-portfolio-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (hover: none) {
+            .rprint-portfolio-caption {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .rprint-portfolio-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #fbbf24;
+            margin-bottom: 0.22rem;
+        }
+
+        .rprint-portfolio-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1.25;
+            color: #ffffff !important;
+            margin: 0;
+        }
+
+        /* CTA Card Section */
+        .rprint-cta-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: clamp(3rem, 5.5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+            isolation: isolate;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .rprint-cta-card {
+            background-color: #0c1628 !important;
+            border-color: rgba(255, 255, 255, 0.10) !important;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.42);
+        }
+
+        .rprint-cta-glow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 46% 58% at 50% 0%,
+                rgba(217, 27, 122, 0.09) 0%,
+                rgba(245, 166, 35, 0.05) 52%,
+                transparent 78%);
+        }
+        html.dark .rprint-cta-glow {
+            background: radial-gradient(ellipse 48% 60% at 50% 0%,
+                rgba(236, 72, 153, 0.18) 0%,
+                rgba(245, 158, 11, 0.08) 56%,
+                transparent 82%);
+        }
+
+        .rprint-cta-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 44rem;
+            margin: 0 auto;
+        }
+
+        .rprint-cta-title {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+            line-height: 1.22;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            margin: 0;
+        }
+        html.dark .rprint-cta-title {
+            color: #ffffff !important;
+        }
+
+        .rprint-cta-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.92rem, 1.05vw, 1rem);
+            line-height: 1.65;
+            color: #64748b;
+            max-width: 34rem;
+            margin: 1.1rem auto 0 auto;
+        }
+        html.dark .rprint-cta-sub {
+            color: #94a3b8 !important;
+        }
+
+        .rprint-cta-actions {
+            margin-top: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .rprint-btn-gradient {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.9rem 1.85rem;
+            border-radius: 9999px;
+            border: none;
+            background: linear-gradient(90deg, #e11d74 0%, #f05a4f 52%, #f59e0b 100%);
+            color: #ffffff !important;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 12px 26px -6px rgba(225, 29, 116, 0.45);
+            transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+        }
+        .rprint-btn-gradient:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.04);
+            box-shadow: 0 16px 32px -6px rgba(225, 29, 116, 0.55);
+        }
+
+        .rprint-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.9rem 1.85rem;
+            border-radius: 9999px;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #0f172a !important;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+            transition: transform 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+        }
+        .rprint-btn-outline:hover {
+            transform: translateY(-2px);
+            border-color: #cbd5e1;
+            background-color: #f8fafc;
+        }
+        html.dark .rprint-btn-outline {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+            border-color: rgba(255, 255, 255, 0.16) !important;
+            color: #ffffff !important;
+        }
+        html.dark .rprint-btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.09) !important;
+            border-color: rgba(255, 255, 255, 0.28) !important;
+        }
+
+        /* Header Quick Theme Button & Dropdown Dual-Theme Integrity */
+        .header-theme-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+        html:not(.dark) .header-theme-pill {
+            background: rgba(15, 23, 42, 0.04) !important;
+            border: 1px solid rgba(15, 23, 42, 0.10) !important;
+            color: #0f172a !important;
+        }
+        html:not(.dark) .header-theme-pill:hover {
+            background: rgba(245, 158, 11, 0.12) !important;
+            border-color: rgba(217, 119, 6, 0.35) !important;
+            color: #b45309 !important;
+        }
+        html.dark .header-theme-pill {
+            background: rgba(255, 255, 255, 0.07) !important;
+            border: 1px solid rgba(251, 191, 36, 0.32) !important;
+            color: #fbbf24 !important;
+        }
+        html.dark .header-theme-pill:hover {
+            background: rgba(251, 191, 36, 0.16) !important;
+            border-color: #fbbf24 !important;
+            color: #fef08a !important;
+        }
+        html:not(.dark) .header-theme-pill .icon-for-light { display: block !important; }
+        html:not(.dark) .header-theme-pill .icon-for-dark { display: none !important; }
+        html.dark .header-theme-pill .icon-for-light { display: none !important; }
+        html.dark .header-theme-pill .icon-for-dark { display: block !important; }
+
+        html:not(.dark) .header-dropdown {
+            background: rgba(255, 255, 255, 0.98) !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.14) !important;
+        }
+        html.dark .header-dropdown {
+            background: rgba(7, 19, 38, 0.97) !important;
+            border-color: rgba(255, 255, 255, 0.14) !important;
+            box-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.65) !important;
+        }
     </style>
 
     <!-- Alpine Store & Global Modal Logic (Loaded before body parsing) -->
@@ -1135,6 +2320,7 @@
         function rachiPrintStudio() {
             return {
                 mobileMenuOpen: false,
+                showAllPortfolio: false,
                 activeLine: null,
                 activeModalImage: null,
                 activeModalTitle: '',
@@ -1461,7 +2647,7 @@
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-print.webp" type="image/webp">
                         <img src="/images/areas/rachi-print.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
                              alt="RACHI Print" 
                              class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
@@ -1512,7 +2698,7 @@
                                 <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação &amp; Treinamento</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação &amp; Formação</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
@@ -1540,15 +2726,39 @@
                     </div>
                 </div>
 
-                <a href="#produtos-graficos" class="nav-link"><span>Produtos</span></a>
+                <a href="#produtos-graficos" class="nav-link"><span>Serviços</span></a>
+                <a href="#identidade-branding" class="nav-link"><span>Branding</span></a>
+                <a href="#portfolio-print" class="nav-link"><span>Portfólio</span></a>
                 <a href="/loja" class="nav-link"><span>Loja</span></a>
                 <a href="/contacto" class="nav-link"><span>Contacto</span></a>
             </nav>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-2.5 sm:gap-3">
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <button type="button"
+                        onclick="toggleRachiTheme()"
+                        class="header-theme-pill"
+                        aria-label="Alternar entre Modo Claro e Modo Escuro"
+                        title="Alternar Modo Claro / Modo Escuro">
+                    <svg class="icon-for-light w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <svg class="icon-for-dark w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                </button>
+
+                <button type="button"
+                        @click="openQuoteModal('Orçamento Personalizado RACHI Print', 'RACHI Print', '')"
+                        onclick="return window.rachiOpenQuoteModal('Orçamento Personalizado RACHI Print', 'RACHI Print', '')"
+                        class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-extrabold bg-gradient-to-r from-[#f5a800] to-[#d97706] text-[#071326] shadow-md hover:brightness-105 transition cursor-pointer">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    <span>Pedir Orçamento</span>
+                </button>
+
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors" aria-label="Abrir menu">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -1565,380 +2775,685 @@
                 <a href="/print" class="block pl-3 text-xs text-amber-600 dark:text-amber-400 font-bold py-1">04 RACHI Print</a>
             </div>
             <div class="pt-2 border-t border-slate-200 dark:border-white/10 space-y-2">
-                <a href="#produtos-graficos" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Produtos Gráficos</a>
+                <a href="#produtos-graficos" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Nossos Serviços</a>
+                <a href="#identidade-branding" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Identidade Visual &amp; Branding</a>
+                <a href="#portfolio-print" @click="mobileMenuOpen = false" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Portfólio</a>
                 <a href="/loja" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Loja</a>
                 <a href="/contacto" class="block text-sm text-slate-700 dark:text-slate-300 py-1">Contacto</a>
             </div>
         </div>
     </header>
 
-            <!-- ============================================================ -->
-    <!-- 1. HERO BANNER: RACHI Print (Layout Padronizado com Capital) -->
+    <!-- ============================================================ -->
+    <!-- 1. HERO BANNER: RACHI Print (Arte Editorial Indústria Gráfica) -->
     <!-- ============================================================ -->
     <main class="flex-1" style="padding-top: 75px;">
-        <section class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
-            <!-- Ambient Glow Gradients -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(245,168,0,0.22),transparent_70%)] pointer-events-none"></div>
-            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="max-w-7xl mx-auto relative z-10">
-                
-                <!-- Breadcrumbs -->
-                <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">
-                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition cursor-pointer">Início</a>
-                    <span>/</span>
-                    <span class="text-slate-400 dark:text-slate-500">Soluções</span>
-                    <span>/</span>
-                    <span class="text-amber-700 dark:text-[#f5a800] font-semibold">RACHI Print</span>
+        <!-- Breadcrumbs Navigation Bar (Theme Adaptive) -->
+        <div class="breadcrumb-nav-bar py-3 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <nav class="flex items-center gap-2 text-xs font-medium">
+                    <a href="/" class="hover:text-amber-600 dark:hover:text-white transition cursor-pointer">Início</a>
+                    <span class="opacity-50">/</span>
+                    <span class="opacity-70">Soluções</span>
+                    <span class="opacity-50">/</span>
+                    <span class="text-amber-700 dark:text-[#f5a800] font-bold">RACHI Print</span>
                 </nav>
+            </div>
+        </div>
 
-                <div class="max-w-4xl">
-                    <!-- Pill Tag -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-5">
-                        <span class="w-2 h-2 rounded-full bg-[#f5a800] animate-pulse"></span>
-                        Gráfica de Alto Padrão
+        <!-- Hero Artwork Section -->
+        <section id="print-hero-banner" aria-label="Gráfica de Alto Padrão — RACHI Print">
+            <picture>
+                <source srcset="{{ asset('images/print-hero-banner.webp') }}" type="image/webp">
+                <img src="{{ asset('images/print-hero-banner.jpg') }}"
+                     alt="RACHI Print — Dê vida aos seus materiais com acabamento institucional"
+                     class="print-hero-bg"
+                     loading="eager"
+                     fetchpriority="high">
+            </picture>
+
+            <div class="print-hero-scrim" aria-hidden="true"></div>
+
+            <div class="print-hero-inner">
+                <div class="print-hero-editorial">
+                    <!-- Barra superior branca + Tag original da RACHI Print -->
+                    <div class="print-hero-eyebrow">
+                        <span class="print-hero-topline" aria-hidden="true"></span>
+                        <span class="print-hero-eyebrow-text">Gráfica de Alto Padrão</span>
                     </div>
 
-                    <!-- Main H1 -->
-                    <h1 class="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight uppercase">
-                        Dê vida aos seus materiais com <br class="hidden sm:inline">
-                        <span class="text-gradient-amber">acabamento institucional</span>
+                    <!-- Título Original da RACHI Print com o Design Editorial do Modelo -->
+                    <h1 class="print-hero-heading">
+                        <span class="print-hero-line-top">Dê vida aos seus materiais com</span>
+                        <span class="print-hero-box-amber">Acabamento</span>
+                        <span class="print-hero-line-bottom">Institucional</span>
                     </h1>
 
-                    <!-- Main Subtitle -->
-                    <p class="text-base sm:text-xl text-slate-600 dark:text-slate-200 mt-4 leading-relaxed font-normal">
-                        Produção gráfica corporativa, brindes promocionais e documentos institucionais de alta definição que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
+                    <!-- Subtítulo Oficial Completo da RACHI Print -->
+                    <p class="print-hero-desc">
+                        Design de identidade visual, branding corporativo, produção gráfica de alta definição, embalagens, brindes promocionais e sinalética que destacam a sua empresa, impressionam clientes e garantem total conformidade de marca.
                     </p>
-                </div>
 
-                <!-- 3 Pilares Oficiais: Qualidade Institucional, Processo Rápido, Suporte Especializado -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                    <!-- Assinatura Oficial RACHI Print -->
+                    <div class="print-hero-brand">
+                        <picture>
+                            <source srcset="{{ asset('images/areas/rachi-print-symbol.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/areas/rachi-print-symbol.png') }}"
+                                 alt="Símbolo RACHI Print"
+                                 class="print-hero-brand-icon">
+                        </picture>
+                        <span class="print-hero-brand-name">RACHI Print</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Pilares Estratégicos da Unidade RACHI Print -->
+        <section class="print-pillars-strip w-full">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                    <div class="print-pillar-card flex items-center gap-3.5 p-4 rounded-2xl">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="palette" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="print-pillar-title font-bold text-sm text-slate-900 dark:text-white">Branding &amp; Identidade Visual</div>
+                            <div class="print-pillar-desc text-xs text-slate-500 dark:text-slate-400">Criação de marcas, logótipos e Brandbook</div>
+                        </div>
+                    </div>
+
+                    <div class="print-pillar-card flex items-center gap-3.5 p-4 rounded-2xl">
                         <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-slate-900 dark:text-white">Qualidade Institucional</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Rigor cromático e acabamentos nobres</div>
+                            <div class="print-pillar-title font-bold text-sm text-slate-900 dark:text-white">Produção Gráfica &amp; Editorial</div>
+                            <div class="print-pillar-desc text-xs text-slate-500 dark:text-slate-400">Rigor cromático CMYK e acabamentos nobres</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                    <div class="print-pillar-card flex items-center gap-3.5 p-4 rounded-2xl">
                         <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
-                            <i data-lucide="zap" class="w-5 h-5"></i>
+                            <i data-lucide="gift" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-slate-900 dark:text-white">Processo Rápido</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Tiragens flexíveis e prazos rigorosos</div>
+                            <div class="print-pillar-title font-bold text-sm text-slate-900 dark:text-white">Brindes, Têxtil &amp; Embalagens</div>
+                            <div class="print-pillar-desc text-xs text-slate-500 dark:text-slate-400">Kits VIP, fardamento bordado e cartonagem</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-shadow">
+                    <div class="print-pillar-card flex items-center gap-3.5 p-4 rounded-2xl">
                         <div class="w-10 h-10 rounded-xl bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
-                            <i data-lucide="headphones" class="w-5 h-5"></i>
+                            <i data-lucide="building-2" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-sm text-slate-900 dark:text-white">Suporte Especializado</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">Consultores gráficos dedicados em Angola</div>
+                            <div class="print-pillar-title font-bold text-sm text-slate-900 dark:text-white">Sinalética &amp; Grandes Formatos</div>
+                            <div class="print-pillar-desc text-xs text-slate-500 dark:text-slate-400">Letras 3D, fachadas, frotas e eventos</div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- ============================================================ -->
-        <!-- 2. CATÁLOGO DE SOLUÇÕES (As 4 Linhas Oficiais de Produção)     -->
+        <!-- 2. NOSSOS SERVIÇOS — Branding, Design & Impressão Gráfica    -->
         <!-- ============================================================ -->
         <section id="produtos-graficos" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="catalogo"></div>
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#f5a800] font-bold text-xs uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-200 dark:border-amber-500/25">
-                    Catálogo de Soluções
-                </span>
-                <h2 class="text-3xl sm:text-5xl font-black mt-4 text-slate-900 dark:text-white">
-                    Veja no que seus materiais gráficos podem se transformar
+            <div id="catalogo"></div><div id="servicos-print"></div>
+            <div class="rprint-sec-header">
+                <span class="rprint-pill">Nossos Serviços</span>
+                <h2 class="rprint-sec-title">
+                    Soluções completas em <span class="rprint-gradient-text">branding e impressão gráfica</span>
                 </h2>
-                <p class="text-sm sm:text-base mt-3 text-slate-600 dark:text-slate-300">
-                    As quatro linhas oficiais de produção da RACHI Print. Conheça abaixo as soluções e amostras de cada linha ou aceda à página oficial para ver especificações e solicitar cotação.
+                <p class="rprint-sec-sub">
+                    Da criação da marca e manual de identidade visual à produção gráfica, embalagens, brindes, fardamento e sinalética corporativa para todas as necessidades do seu negócio.
                 </p>
             </div>
 
-            <!-- 4 Detailed Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- LINHA 1: Impressão de documentos institucionais -->
-                <div id="linha-1" 
-                     @click="window.location.href = '{{ route('print.service.show', 'documentos-institucionais') }}'"
-                     class="showcase-product-card showcase-border-blue group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'documentos-institucionais') }}'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition duration-500"></div>
-                    
-                    <div>
-                        <!-- Top Header -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
-                                <i data-lucide="file-text" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/25">
-                                Documentos Oficiais
-                            </span>
+            <div class="rprint-services-grid">
+                <!-- 1. Design de Identidade Visual e Branding -->
+                <a id="linha-1"
+                   href="{{ route('print.service.show', 'design-identidade-visual') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Branding &amp; Marcas</span>
+                        <picture>
+                            <source srcset="{{ asset('images/services/service-print-identidade-branding.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/services/service-print-identidade-branding.jpg') }}"
+                                 alt="Design de Identidade Visual e Branding"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="palette" class="w-5 h-5"></i>
                         </div>
-
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition leading-tight">
-                            Impressão de documentos institucionais
-                        </h3>
-
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Impressão de relatórios, brochuras, manuais, propostas e documentos oficiais com qualidade institucional.
+                        <h3 class="rprint-service-title">Design de Identidade Visual e Branding</h3>
+                        <p class="rprint-service-desc">
+                            Criação de logótipos exclusivos, rebranding corporativo, Manual de Normas Gráficas (Brandbook), paleta Pantone/CMYK, tipografia institucional e kits para redes sociais.
                         </p>
-
-                        <!-- Bullets Oficiais -->
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Impressão a cores e P&amp;B</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos variados</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Tiragens flexíveis</span>
-                            </div>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Logótipo &amp; Rebranding</span>
+                            <span class="rprint-service-chip">Brandbook</span>
+                            <span class="rprint-service-chip">Kit Social Media</span>
                         </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
 
-                        <!-- Aplicações Práticas -->
-                        <div class="showcase-applications-box">
-                            <div class="app-box-header">
-                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-500"></i>
-                                <span>Aplicações Comuns:</span>
+                <!-- 2. Papelaria Corporativa e Cartões de Visita -->
+                <a id="linha-2"
+                   href="{{ route('print.service.show', 'producao-grafica-corporativa') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Estacionário Executivo</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/papelaria-corporativa.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/papelaria-corporativa.jpg') }}"
+                                 alt="Papelaria Corporativa e Cartões de Visita"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="credit-card" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Cartões de Visita e Papelaria Corporativa</h3>
+                        <p class="rprint-service-desc">
+                            Estacionário completo alinhado à sua marca: cartões de visita com Soft-Touch e verniz UV localizado, pastas com bolsa, envelopes, papel timbrado, blocos e carimbos.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Cartões Soft-Touch</span>
+                            <span class="rprint-service-chip">Pastas &amp; Envelopes</span>
+                            <span class="rprint-service-chip">Carimbos</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 3. Impressão Editorial, Institucional e Folhetos -->
+                <a id="linha-3"
+                   href="{{ route('print.service.show', 'documentos-institucionais') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Editorial &amp; Folhetos</span>
+                        <img src="{{ asset('images/services/service-print-documentos-institucionais.jpg') }}"
+                             alt="Impressão de Documentos Institucionais e Folhetos"
+                             loading="lazy">
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Impressão Institucional, Catálogos e Folhetos</h3>
+                        <p class="rprint-service-desc">
+                            Impressão de relatórios de gestão e contas, brochuras, catálogos comerciais, flyers, desdobráveis, manuais técnicos, propostas de concurso e certificados oficiais.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Relatórios &amp; Livros</span>
+                            <span class="rprint-service-chip">Brochuras &amp; Flyers</span>
+                            <span class="rprint-service-chip">Certificados</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 4. Embalagens, Cartonagem, Sacolas e Rótulos -->
+                <a id="linha-4"
+                   href="{{ route('print.service.show', 'embalagens-cartonagem-rotulos') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Packaging &amp; Cartonagem</span>
+                        <picture>
+                            <source srcset="{{ asset('images/services/service-print-embalagens-rotulos.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/services/service-print-embalagens-rotulos.jpg') }}"
+                                 alt="Embalagens, Cartonagem, Sacolas e Rótulos"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="package" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Embalagens, Cartonagem, Sacolas e Rótulos</h3>
+                        <p class="rprint-service-desc">
+                            Produção de embalagens em cartonagem à medida, caixas rígidas magnéticas, sacolas corporativas em couché ou kraft, rótulos em vinil/bobina, etiquetas e selos.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Caixas &amp; Cartonagem</span>
+                            <span class="rprint-service-chip">Sacolas VIP</span>
+                            <span class="rprint-service-chip">Rótulos Adesivos</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 5. Materiais Promocionais, Brindes e Kits VIP -->
+                <a id="linha-5"
+                   href="{{ route('print.service.show', 'materiais-promocionais') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Brindes &amp; Kits VIP</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/kit-corporativo-vip.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/kit-corporativo-vip.jpg') }}"
+                                 alt="Materiais Promocionais, Brindes e Kits Executivos"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="gift" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Materiais Promocionais, Brindes e Kits VIP</h3>
+                        <p class="rprint-service-desc">
+                            Kits onboarding, agendas executivas em baixo-relevo, garrafas térmicas, canecas, powerbanks, pendrives e canetas metálicas com gravação a laser e UV.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Kits Onboarding</span>
+                            <span class="rprint-service-chip">Agendas &amp; Garrafas</span>
+                            <span class="rprint-service-chip">Gravação Laser</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 6. Vestuário Corporativo, Bordados e Estampagem -->
+                <a id="linha-6"
+                   href="{{ route('print.service.show', 'vestuario-bordados-textil') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Fardamento &amp; Têxtil</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/vestuario-corporativo.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/vestuario-corporativo.jpg') }}"
+                                 alt="Vestuário Corporativo, Bordados e Estampagem"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="shirt" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Vestuário Corporativo, Bordados e Estampagem</h3>
+                        <p class="rprint-service-desc">
+                            Uniformização profissional de equipas: polos em malha piquet, camisas sociais, coletes acolchoados, t-shirts promocionais e bonés com bordado HD, DTF e serigrafia.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Polos &amp; Camisas</span>
+                            <span class="rprint-service-chip">Bordado HD</span>
+                            <span class="rprint-service-chip">DTF &amp; Serigrafia</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 7. Sinalética Corporativa, Fachadas e Letras 3D -->
+                <a id="linha-7"
+                   href="{{ route('print.service.show', 'sinaletica-comunicacao-visual') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Sinalética &amp; Letras 3D</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/sinaletica-fachada-recepcao.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/sinaletica-fachada-recepcao.jpg') }}"
+                                 alt="Sinalética Corporativa, Fachadas e Letras 3D"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="building-2" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Sinalética Corporativa, Fachadas e Letras 3D</h3>
+                        <p class="rprint-service-desc">
+                            Placas externas em ACM, logótipos 3D retroiluminados em LED para recepção, placas direccionais em acrílico/inox, películas de vidro jateado e wall graphics.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Letras Caixa LED</span>
+                            <span class="rprint-service-chip">Fachadas ACM</span>
+                            <span class="rprint-service-chip">Vidro Jateado</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 8. Comunicação Externa, Frotas, Outdoors e MUPIs -->
+                <a id="linha-8"
+                   href="{{ route('print.service.show', 'sinaletica-comunicacao-visual') }}?produto={{ urlencode('Decoração de Frotas, Outdoors & MUPIs') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Frotas &amp; Mídia Exterior</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/comunicacao-externa-frotas.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/comunicacao-externa-frotas.jpg') }}"
+                                 alt="Comunicação Externa, Decoração de Frotas, Outdoors e MUPIs"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Decoração de Frotas, Lonas, Outdoors e MUPIs</h3>
+                        <p class="rprint-service-desc">
+                            Envelopamento e personalização de viaturas comerciais em vinil polimérico laminado UV, impressão de lonas com ilhós, outdoors, MUPIs e montras.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Viaturas &amp; Frotas</span>
+                            <span class="rprint-service-chip">Lonas &amp; Banners</span>
+                            <span class="rprint-service-chip">Outdoors &amp; MUPIs</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Pedir cotação desta linha</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 9. Produção Gráfica para Eventos, Feiras e Stands -->
+                <a id="linha-9"
+                   href="{{ route('print.service.show', 'grafica-eventos') }}"
+                   class="rprint-service-card">
+                    <div class="rprint-service-media">
+                        <span class="rprint-service-badge">Eventos &amp; Stands</span>
+                        <picture>
+                            <source srcset="{{ asset('images/portfolio-print/stands-cenografia-eventos.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/portfolio-print/stands-cenografia-eventos.jpg') }}"
+                                 alt="Produção Gráfica para Eventos, Feiras e Stands"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="rprint-service-body">
+                        <div class="rprint-service-icon">
+                            <i data-lucide="calendar-range" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="rprint-service-title">Cenografia para Eventos, Feiras e Stands</h3>
+                        <p class="rprint-service-desc">
+                            Stands modulares personalizados, roll-ups em alumínio, backdrops fotográficos anti-reflexo, balcões promocionais, fitas lanyard, pins e credenciais em PVC.
+                        </p>
+                        <div class="rprint-service-tags">
+                            <span class="rprint-service-chip">Stands &amp; Backdrops</span>
+                            <span class="rprint-service-chip">Roll-ups</span>
+                            <span class="rprint-service-chip">Credenciais PVC</span>
+                        </div>
+                        <span class="rprint-service-more">
+                            <span>Ver planos e detalhes</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 2.5 ESTÚDIO DE BRANDING, IDENTIDADE VISUAL & APLICAÇÕES      -->
+        <!-- ============================================================ -->
+        <section id="identidade-branding" class="rprint-branding-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rprint-branding-hero-grid">
+                    <!-- Coluna Visual: Estúdio de Identidade Visual & Brandbook -->
+                    <div class="rprint-branding-visual"
+                         role="button"
+                         tabindex="0"
+                         @click="openModal(@js(asset('images/services/service-print-identidade-branding.jpg')), 'Design de Identidade Visual & Manual de Marca (Brandbook)', 'Concepção estratégica de logótipos com grelha geométrica, definição de paleta cromática Pantone/CMYK/RGB, tipografia institucional, estacionário executivo e activos vectoriais prontos para gráfica e plataformas digitais.', 'Estúdio de Branding RACHI Print', 'design-identidade-visual')"
+                         @keydown.enter="openModal(@js(asset('images/services/service-print-identidade-branding.jpg')), 'Design de Identidade Visual & Manual de Marca (Brandbook)', 'Concepção estratégica de logótipos com grelha geométrica, definição de paleta cromática Pantone/CMYK/RGB, tipografia institucional, estacionário executivo e activos vectoriais prontos para gráfica e plataformas digitais.', 'Estúdio de Branding RACHI Print', 'design-identidade-visual')">
+                        <picture>
+                            <source srcset="{{ asset('images/services/service-print-identidade-branding.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/services/service-print-identidade-branding.jpg') }}"
+                                 alt="Manual de Identidade Visual, Escala Pantone e Estacionário Corporativo — RACHI Print"
+                                 loading="lazy">
+                        </picture>
+                        <div class="rprint-branding-visual-bar">
+                            <div>
+                                <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Estúdio Criativo RACHI Print</div>
+                                <div class="text-xs sm:text-sm font-semibold text-white">Manual de Marca • Escalas Pantone &amp; CMYK • Ficheiros Vectoriais</div>
                             </div>
-                            <p class="app-box-text">Relatórios de Gestão &amp; Contas, Manuais de Procedimentos, Propostas de Concurso Público, Livros Institucionais e Certificados Oficiais.</p>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 shrink-0">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i>
+                                <span>Ampliar</span>
+                            </span>
                         </div>
                     </div>
 
-                    <!-- Botão de Ação do Card -->
-                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="showcase-action-btn">
-                            <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
+                    <!-- Coluna Estratégica: Entregáveis de Identidade Visual & Branding -->
+                    <div>
+                        <span class="rprint-pill">Identidade Visual &amp; Branding</span>
+                        <h2 class="rprint-sec-title" style="text-align: left; margin-top: 0.75rem;">
+                            Construímos marcas <span class="rprint-gradient-text">fortes, coerentes e memoráveis</span>
+                        </h2>
+                        <p class="rprint-sec-sub" style="text-align: left; margin: 0.9rem 0 0 0; max-width: 100%;">
+                            Mais do que imprimir, a RACHI Print cria e estrutura toda a comunicação visual da sua organização. Desenvolvemos marcas de raiz ou conduzimos processos de <strong>rebranding</strong> garantindo unidade absoluta entre o digital, o papel, o fardamento e o espaço físico.
+                        </p>
+
+                        <div class="rprint-deliverables-grid">
+                            <div class="rprint-deliverable-card">
+                                <span class="rprint-deliverable-num">01 • MARCA</span>
+                                <h3 class="rprint-deliverable-title">Criação de Logótipo &amp; Rebranding</h3>
+                                <p class="rprint-deliverable-desc">
+                                    Símbolos exclusivos construídos sobre grelha geométrica, versões horizontais, verticais e monocromáticas para máxima legibilidade.
+                                </p>
+                            </div>
+
+                            <div class="rprint-deliverable-card">
+                                <span class="rprint-deliverable-num">02 • BRANDBOOK</span>
+                                <h3 class="rprint-deliverable-title">Manual de Normas Gráficas</h3>
+                                <p class="rprint-deliverable-desc">
+                                    Documentação oficial com códigos Pantone, CMYK, RGB e HEX, tipografia institucional, margens de segurança e regras de aplicação.
+                                </p>
+                            </div>
+
+                            <div class="rprint-deliverable-card">
+                                <span class="rprint-deliverable-num">03 • PRESENÇA</span>
+                                <h3 class="rprint-deliverable-title">Estacionário &amp; Kit Digital</h3>
+                                <p class="rprint-deliverable-desc">
+                                    Papelaria executiva completa, assinaturas de e-mail, templates editáveis para redes sociais e apresentações corporativas (Pitch Deck).
+                                </p>
+                            </div>
+
+                            <div class="rprint-deliverable-card">
+                                <span class="rprint-deliverable-num">04 • EXECUÇÃO</span>
+                                <h3 class="rprint-deliverable-title">Desdobramento 360º &amp; Produção</h3>
+                                <p class="rprint-deliverable-desc">
+                                    Arte-final fechada e produção directa de embalagens, uniformes, fachadas 3D, viaturas e stands sem perda de fidelidade cromática.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-7 flex flex-wrap items-center gap-3.5">
+                            <button type="button"
+                                    onclick="window.rachiOpenQuoteModal('Projecto de Identidade Visual & Branding', 'Branding & Identidade Visual', 'design-identidade-visual'); return false;"
+                                    class="rprint-btn-gradient">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                <span>Pedir Proposta de Branding</span>
+                            </button>
+                            <a href="{{ route('print.service.show', 'design-identidade-visual') }}"
+                               class="rprint-btn-outline">
+                                <span>Ver Pacotes de Identidade Visual</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- LINHA 2: Materiais promocionais -->
-                <div id="linha-2" 
-                     @click="window.location.href = '{{ route('print.service.show', 'materiais-promocionais') }}'"
-                     class="showcase-product-card showcase-border-amber group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'materiais-promocionais') }}'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition duration-500"></div>
-                    
-                    <div>
-                        <!-- Top Header -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
-                                <i data-lucide="gift" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/25">
-                                Brindes &amp; Ativação
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition leading-tight">
-                            Materiais promocionais &amp; brindes
+                <!-- Vitrine Visual de Aplicações de Marca (6 Pranchas Oficiais) -->
+                <div class="rprint-brand-apps-wrap">
+                    <div class="rprint-sec-header" style="margin-bottom: 1.5rem;">
+                        <span class="rprint-pill"> Universo da Marca na Prática </span>
+                        <h3 class="rprint-sec-title" style="font-size: clamp(1.65rem, 2.7vw, 2.35rem);">
+                            Aplicações de <span class="rprint-gradient-text">identidade visual e comunicação 360º</span>
                         </h3>
-
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Brindes personalizados, kits corporativos e materiais promocionais de alto impacto para fixação da marca.
+                        <p class="rprint-sec-sub">
+                            Veja como traduzimos a identidade visual de uma organização em todos os pontos de contacto com clientes, equipas e parceiros. Clique em qualquer aplicação para ampliar.
                         </p>
+                    </div>
 
-                        <!-- Bullets Oficiais -->
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Personalização premium</span>
+                    <div class="rprint-brand-apps-grid">
+                        <!-- Prancha 1: Papelaria & Estacionário -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/papelaria-corporativa.jpg')), 'Identidade Aplicada em Papelaria & Estacionário', 'Desenvolvimento e produção coordenada de agenda executiva em baixo-relevo, bloco de notas, pasta institucional com bolsa, cartões de visita, envelopes e papel timbrado.', 'Identidade Corporativa', 'design-identidade-visual')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/papelaria-corporativa.jpg')), 'Identidade Aplicada em Papelaria & Estacionário', 'Desenvolvimento e produção coordenada de agenda executiva em baixo-relevo, bloco de notas, pasta institucional com bolsa, cartões de visita, envelopes e papel timbrado.', 'Identidade Corporativa', 'design-identidade-visual')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/papelaria-corporativa.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/papelaria-corporativa.jpg') }}"
+                                         alt="Identidade Aplicada em Papelaria e Estacionário Corporativo"
+                                         loading="lazy">
+                                </picture>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Kits para eventos e colaboradores</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Gravação a laser, UV e serigrafia</span>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">01 • Estacionário Institucional</span>
+                                <h4 class="rprint-brand-app-title">Papelaria Corporativa Completa</h4>
+                                <p class="rprint-brand-app-desc">Pastas, cartões de visita, envelopes, papel timbrado, blocos e agendas alinhados ao manual de marca.</p>
                             </div>
                         </div>
 
-                        <!-- Aplicações Práticas -->
-                        <div class="showcase-applications-box">
-                            <div class="app-box-header">
-                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
-                                <span>Aplicações Comuns:</span>
+                        <!-- Prancha 2: Sinalética, Fachada & Recepção -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/sinaletica-fachada-recepcao.jpg')), 'Branding Ambiental: Fachada, Recepção 3D & Sinalética', 'Projecto completo de arquitectura de marca: placa externa, recepção com logótipo 3D iluminado, sinalética direccional interna, vidro jateado para salas de reunião e wall graphic.', 'Sinalética & Arquitectura', 'sinaletica-comunicacao-visual')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/sinaletica-fachada-recepcao.jpg')), 'Branding Ambiental: Fachada, Recepção 3D & Sinalética', 'Projecto completo de arquitectura de marca: placa externa, recepção com logótipo 3D iluminado, sinalética direccional interna, vidro jateado para salas de reunião e wall graphic.', 'Sinalética & Arquitectura', 'sinaletica-comunicacao-visual')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/sinaletica-fachada-recepcao.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/sinaletica-fachada-recepcao.jpg') }}"
+                                         alt="Fachada Externa, Recepção 3D, Sinalética, Vidro Jateado e Wall Graphic"
+                                         loading="lazy">
+                                </picture>
                             </div>
-                            <p class="app-box-text">Kits Onboarding para Novos Colaboradores, Brindes de Fim de Ano, Canecas Térmicas, Cadernos Moleskine e Welcome Kits VIP.</p>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">02 • Branding Ambiental</span>
+                                <h4 class="rprint-brand-app-title">Fachadas, Recepção 3D &amp; Sinalética</h4>
+                                <p class="rprint-brand-app-desc">Placas externas, recepção LED, directórios internos, películas em vidro jateado e murais corporativos.</p>
+                            </div>
+                        </div>
+
+                        <!-- Prancha 3: Aplicações Externas & Frotas -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/comunicacao-externa-frotas.jpg')), 'Aplicações Externas: Viaturas, Banners, Outdoors & MUPIs', 'Padronização visual exterior em frotas de viaturas comerciais, lonas de fachada com ilhós, painéis de outdoor e mobiliário urbano (MUPIs).', 'Comunicação Externa', 'sinaletica-comunicacao-visual')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/comunicacao-externa-frotas.jpg')), 'Aplicações Externas: Viaturas, Banners, Outdoors & MUPIs', 'Padronização visual exterior em frotas de viaturas comerciais, lonas de fachada com ilhós, painéis de outdoor e mobiliário urbano (MUPIs).', 'Comunicação Externa', 'sinaletica-comunicacao-visual')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/comunicacao-externa-frotas.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/comunicacao-externa-frotas.jpg') }}"
+                                         alt="Aplicações Externas: Viaturas, Banners, Outdoors e MUPIs"
+                                         loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">03 • Visibilidade Urbana</span>
+                                <h4 class="rprint-brand-app-title">Frotas, Banners, Outdoors &amp; MUPIs</h4>
+                                <p class="rprint-brand-app-desc">Decoração de carrinhas empresariais, lonas resistentes ao tempo e campanhas de rua de alto impacto.</p>
+                            </div>
+                        </div>
+
+                        <!-- Prancha 4: Ecossistema de Merchandising & Fardamento -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/kit-merchandising-completo.jpg')), 'Ecossistema Completo de Merchandising & Vestuário', 'Linha coordenada de coletes acolchoados, polos bordados, t-shirts, bonés, tote bag, caneca, cadernos, crachá PVC com fita lanyard e cartões.', 'Merchandising & Têxtil', 'vestuario-bordados-textil')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/kit-merchandising-completo.jpg')), 'Ecossistema Completo de Merchandising & Vestuário', 'Linha coordenada de coletes acolchoados, polos bordados, t-shirts, bonés, tote bag, caneca, cadernos, crachá PVC com fita lanyard e cartões.', 'Merchandising & Têxtil', 'vestuario-bordados-textil')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/kit-merchandising-completo.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/kit-merchandising-completo.jpg') }}"
+                                         alt="Ecossistema Completo de Merchandising e Vestuário Corporativo"
+                                         loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">04 • Cultura &amp; Equipa</span>
+                                <h4 class="rprint-brand-app-title">Vestuário, Tote Bags &amp; Merchandising</h4>
+                                <p class="rprint-brand-app-desc">Uniformização e brindes integrados que fortalecem o orgulho de pertença e a presença da marca.</p>
+                            </div>
+                        </div>
+
+                        <!-- Prancha 5: Submarcas, Academias & Certificação -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/kit-formacao-academy.jpg')), 'Identidade para Academias, Formação & Certificados', 'Kit completo para centros de formação e eventos: certificado oficial com selo dourado, crachá personalizado, manual encadernado, sacola, painel fotográfico e roll-up.', 'Submarcas & Formação', 'documentos-institucionais')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/kit-formacao-academy.jpg')), 'Identidade para Academias, Formação & Certificados', 'Kit completo para centros de formação e eventos: certificado oficial com selo dourado, crachá personalizado, manual encadernado, sacola, painel fotográfico e roll-up.', 'Submarcas & Formação', 'documentos-institucionais')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/kit-formacao-academy.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/kit-formacao-academy.jpg') }}"
+                                         alt="Kit de Identidade para Formação, Certificados, Crachás e Roll-ups"
+                                         loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">05 • Academias &amp; Congressos</span>
+                                <h4 class="rprint-brand-app-title">Kits de Formação, Diplomas &amp; Crachás</h4>
+                                <p class="rprint-brand-app-desc">Certificados com selo metálico, credenciais PVC, manuais técnicos, sacolas e roll-ups institucionais.</p>
+                            </div>
+                        </div>
+
+                        <!-- Prancha 6: Stands & Feiras -->
+                        <div class="rprint-brand-app-card"
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js(asset('images/portfolio-print/stands-cenografia-eventos.jpg')), 'Stands Modulares, Expositores & Feiras de Negócios', 'Projecto cenográfico e produção de stands para feiras e exposições, combinando estrutura iluminada, balcão com QR Code e comunicação por unidade de negócio.', 'Feiras & Exposições', 'grafica-eventos')"
+                             @keydown.enter="openModal(@js(asset('images/portfolio-print/stands-cenografia-eventos.jpg')), 'Stands Modulares, Expositores & Feiras de Negócios', 'Projecto cenográfico e produção de stands para feiras e exposições, combinando estrutura iluminada, balcão com QR Code e comunicação por unidade de negócio.', 'Feiras & Exposições', 'grafica-eventos')">
+                            <div class="rprint-brand-app-media">
+                                <picture>
+                                    <source srcset="{{ asset('images/portfolio-print/stands-cenografia-eventos.webp') }}" type="image/webp">
+                                    <img src="{{ asset('images/portfolio-print/stands-cenografia-eventos.jpg') }}"
+                                         alt="Stands Corporativos, Balcões e Cenografia para Feiras"
+                                         loading="lazy">
+                                </picture>
+                            </div>
+                            <div class="rprint-brand-app-body">
+                                <span class="rprint-brand-app-kicker">06 • Feiras &amp; Cimeiras</span>
+                                <h4 class="rprint-brand-app-title">Stands Corporativos &amp; Cenografia</h4>
+                                <p class="rprint-brand-app-desc">Arquitectura promocional, balcões de atendimento, painéis retroiluminados e expositores portáteis.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Botão de Ação do Card -->
-                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="showcase-action-btn">
-                            <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LINHA 3: Produção gráfica corporativa -->
-                <div id="linha-3" 
-                     @click="window.location.href = '{{ route('print.service.show', 'producao-grafica-corporativa') }}'"
-                     class="showcase-product-card showcase-border-emerald group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'producao-grafica-corporativa') }}'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition duration-500"></div>
-                    
-                    <div>
-                        <!-- Top Header -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
-                                <i data-lucide="briefcase" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25">
-                                Papelaria &amp; Identidade
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition leading-tight">
-                            Produção gráfica corporativa
-                        </h3>
-
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Papelaria institucional, pastas, envelopes e cartões de visita com precisão de cor e rigor técnico.
-                        </p>
-
-                        <!-- Bullets Oficiais -->
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Identidade visual consistente</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Papéis nobres e especiais</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Acabamentos táteis diferenciados</span>
+                    <!-- Faixa Técnica: Acabamentos Especiais & Tecnologias Gráficas -->
+                    <div class="rprint-finishes-box">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Acabamentos Nobres &amp; Parque Tecnológico</div>
+                                <div class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">Tecnologias de impressão, corte e personalização disponíveis na RACHI Print</div>
                             </div>
                         </div>
-
-                        <!-- Aplicações Práticas -->
-                        <div class="showcase-applications-box">
-                            <div class="app-box-header">
-                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-500"></i>
-                                <span>Aplicações Comuns:</span>
-                            </div>
-                            <p class="app-box-text">Cartões de Visita com Soft-Touch e Verniz Localizado, Pastas Corporativas com Bolsa, Papel Timbrado Oficial e Envelopes Seguros.</p>
-                        </div>
-                    </div>
-
-                    <!-- Botão de Ação do Card -->
-                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="showcase-action-btn">
-                            <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LINHA 4: Produção gráfica para eventos -->
-                <div id="linha-4" 
-                     @click="window.location.href = '{{ route('print.service.show', 'grafica-eventos') }}'"
-                     class="showcase-product-card showcase-border-purple group transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                     role="link"
-                     tabindex="0"
-                     @keydown.enter="window.location.href = '{{ route('print.service.show', 'grafica-eventos') }}'">
-                    <div class="absolute -top-10 -right-10 w-44 h-44 bg-purple-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/20 transition duration-500"></div>
-                    
-                    <div>
-                        <!-- Top Header -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-2xs">
-                                <i data-lucide="calendar-range" class="w-7 h-7"></i>
-                            </div>
-                            <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/25">
-                                Grandes Formatos &amp; Feiras
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition leading-tight">
-                            Produção gráfica para eventos &amp; feiras
-                        </h3>
-
-                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-                            Materiais para stands, credenciais, sinalização e comunicação visual integrada para conferências e eventos.
-                        </p>
-
-                        <!-- Bullets Oficiais -->
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Grandes formatos e sinalização</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Credenciais e crachás com fita</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-                                </span>
-                                <span class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">Prazos de entrega rigorosos</span>
-                            </div>
-                        </div>
-
-                        <!-- Aplicações Práticas -->
-                        <div class="showcase-applications-box">
-                            <div class="app-box-header">
-                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-500"></i>
-                                <span>Aplicações Comuns:</span>
-                            </div>
-                            <p class="app-box-text">Roll-ups Premium 85x200cm, Banners Frontlight em Lona Vinílica, Balcões Promocionais e Credenciais PVC para Congressos.</p>
-                        </div>
-                    </div>
-
-                    <!-- Botão de Ação do Card -->
-                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-white/10">
-                        <div class="showcase-action-btn">
-                            <span>Saber mais</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300"></i>
+                        <div class="rprint-finishes-list">
+                            <span class="rprint-finish-pill"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i> Laminação Soft-Touch (Toque Aveludado)</span>
+                            <span class="rprint-finish-pill"><i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i> Verniz UV Localizado 3D</span>
+                            <span class="rprint-finish-pill"><i data-lucide="award" class="w-3.5 h-3.5 text-amber-500"></i> Hot-Stamping Dourado &amp; Prateado</span>
+                            <span class="rprint-finish-pill"><i data-lucide="stamp" class="w-3.5 h-3.5 text-amber-500"></i> Baixo-Relevo &amp; Corte Especial (Troquel)</span>
+                            <span class="rprint-finish-pill"><i data-lucide="cpu" class="w-3.5 h-3.5 text-sky-500"></i> Gravação a Laser de Precisão</span>
+                            <span class="rprint-finish-pill"><i data-lucide="shirt" class="w-3.5 h-3.5 text-sky-500"></i> Bordado Computadorizado &amp; DTF Têxtil</span>
+                            <span class="rprint-finish-pill"><i data-lucide="box" class="w-3.5 h-3.5 text-emerald-500"></i> Recorte CNC, Acrílico &amp; Letras 3D LED</span>
+                            <span class="rprint-finish-pill"><i data-lucide="printer" class="w-3.5 h-3.5 text-emerald-500"></i> Impressão Offset, Digital HD &amp; UV Grande Formato</span>
                         </div>
                     </div>
                 </div>
@@ -1946,27 +3461,274 @@
         </section>
 
         <!-- ============================================================ -->
-        <!-- CALL TO ACTION BANNER (Studio CTA)                           -->
+        <!-- 3. PORTFÓLIO — Trabalhos realizados (Pasta Oficial)          -->
         <!-- ============================================================ -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 mb-12">
-            <div class="cta-banner-card">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        @php
+            $portfolioDir = public_path('images/banner/trabalho realizado');
+            $curatedMeta = [
+                'WhatsApp Image 2026-10-14 at 12.35.36.jpeg' => [
+                    'order' => 1,
+                    'title' => 'Kits Institucionais & Brindes Personalizados',
+                    'tag' => 'Brindes & Instituições',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Garrafas térmicas em inox, canecas sublimadas e sacolas personalizadas produzidas para instituições públicas e empresas parceiras.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.05.jpeg' => [
+                    'order' => 2,
+                    'title' => 'Kit Executivo: Agenda, Caneca & Esferográfica',
+                    'tag' => 'Kits Personalizados',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Conjunto institucional personalizado sob medida composto por agenda executiva com gravação dourada, caneca de cerâmica e esferográfica.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.24.jpeg' => [
+                    'order' => 3,
+                    'title' => 'Crachá Executivo Dourado Magnético',
+                    'tag' => 'Identificação Corporativa',
+                    'slug' => 'producao-grafica-corporativa',
+                    'desc' => 'Crachá executivo personalizado com acabamento dourado escovado e fixação magnética dupla de alta segurança.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.27.jpeg' => [
+                    'order' => 4,
+                    'title' => 'Pins & Bottons Corporativos Personalizados',
+                    'tag' => 'Eventos & Identificação',
+                    'slug' => 'grafica-eventos',
+                    'desc' => 'Bottons e pins metálicos personalizados com acabamento brilhante resistente para atendimento ao cliente, eventos e equipas.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.32.54.jpeg' => [
+                    'order' => 5,
+                    'title' => 'Agenda em Cortiça Gravada & Caneca VIP',
+                    'tag' => 'Linha Eco & Executiva',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Caderno ecológico revestido em cortiça natural personalizado combinando com caneca sublimada de alta resolução.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.34.33.jpeg' => [
+                    'order' => 6,
+                    'title' => 'Kit Corporativo: Garrafa, Caneca, Sacola & Caneta',
+                    'tag' => 'Kit Boas-Vindas',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Conjunto institucional completo com garrafa térmica branca, caneca corporativa, sacola personalizada e esferográfica.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.02.jpeg' => [
+                    'order' => 7,
+                    'title' => 'Canecas Institucionais para Campanhas',
+                    'tag' => 'Personalização em Cerâmica',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Impressão de alta definição frente e verso em canecas de porcelana para campanhas institucionais e acções sociais.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.10.jpeg' => [
+                    'order' => 8,
+                    'title' => 'Agenda Institucional com Gravação Dourada',
+                    'tag' => 'Papelaria & Agendas',
+                    'slug' => 'documentos-institucionais',
+                    'desc' => 'Personalização elegante de agendas anuais e cadernos executivos com acabamento dourado para lideranças e instituições.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.36.14.jpeg' => [
+                    'order' => 9,
+                    'title' => 'Estampagem Têxtil DTF de Alta Definição',
+                    'tag' => 'Vestuário & DTF',
+                    'slug' => 'vestuario-bordados-textil',
+                    'desc' => 'Estampagem têxtil colorida de alta durabilidade e cores vibrantes sobre t-shirt preta 100% algodão com tecnologia DTF.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.35.27.jpeg' => [
+                    'order' => 10,
+                    'title' => 'Linha Corporativa de Garrafas, Canecas & Sacolas',
+                    'tag' => 'Brindes Corporativos',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Produção em série de garrafas térmicas inox em diversas cores, canecas corporativas e sacolas institucionais.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.38.52.jpeg' => [
+                    'order' => 11,
+                    'title' => 'Canecas Personalizadas para Eventos & Causas',
+                    'tag' => 'Brindes Promocionais',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Canecas personalizadas com fidelidade cromática para campanhas de sensibilização, eventos e datas comemorativas.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.35.58.jpeg' => [
+                    'order' => 12,
+                    'title' => 'T-Shirt Branca Personalizada em Alta Resolução',
+                    'tag' => 'Estampagem Têxtil',
+                    'slug' => 'vestuario-bordados-textil',
+                    'desc' => 'Impressão têxtil policromática com contornos precisos e elevada resistência à lavagem em malha de algodão.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.34.06.jpeg' => [
+                    'order' => 13,
+                    'title' => 'Brindes para Administração Pública & Empresas',
+                    'tag' => 'Brindes Institucionais',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Garrafas térmicas metálicas, canecas institucionais e sacolas personalizadas entregues a entidades públicas e privadas.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.38.43.jpeg' => [
+                    'order' => 14,
+                    'title' => 'Canecas Comemorativas Frente e Verso',
+                    'tag' => 'Personalização em Porcelana',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Canecas brancas de cerâmica personalizadas frente e verso com emblemas e logótipos de programas institucionais.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.36.28.jpeg' => [
+                    'order' => 15,
+                    'title' => 'T-Shirt Mescla com Estampagem Colorida',
+                    'tag' => 'Têxtil Personalizado',
+                    'slug' => 'vestuario-bordados-textil',
+                    'desc' => 'Aplicação térmica de alta definição sobre tecido cinzento mescla com toque macio e cores intensas.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.35.39.jpeg' => [
+                    'order' => 16,
+                    'title' => 'Conjunto Garrafa Térmica & Caneca Corporativa',
+                    'tag' => 'Personalização Corporativa',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Dupla executiva de garrafa térmica branca e caneca em cerâmica com aplicação nítida das cores oficiais da marca.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.39.07.jpeg' => [
+                    'order' => 17,
+                    'title' => 'Caneca Institucional de Homenagem',
+                    'tag' => 'Personalização Institucional',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Caneca personalizada com dedicatória institucional, brasão oficial e acabamento vitrificado de alto brilho.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.36.16.jpeg' => [
+                    'order' => 18,
+                    'title' => 'Estampagem Monocromática de Traço Fino',
+                    'tag' => 'Serigrafia & DTF',
+                    'slug' => 'vestuario-bordados-textil',
+                    'desc' => 'Estampagem têxtil de linhas finas de alto contraste em t-shirt de algodão cinzenta.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.34.19.jpeg' => [
+                    'order' => 19,
+                    'title' => 'Garrafas Térmicas Vermelha e Branca & Canecas',
+                    'tag' => 'Brindes & Kits',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Personalização coordenada em garrafas térmicas metálicas coloridas, canecas sublimadas e sacolas de apresentação.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.38.34.jpeg' => [
+                    'order' => 20,
+                    'title' => 'Kit Corporativo com Garrafas & Esferográficas',
+                    'tag' => 'Kits Corporativos',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Lote de kits promocionais compostos por garrafas térmicas personalizadas, sacolas e canetas institucionais.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.36.48.jpeg' => [
+                    'order' => 21,
+                    'title' => 'Garrafas Térmicas Personalizadas Multimarcas',
+                    'tag' => 'Gravação Durável',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Acabamento resistente em garrafas térmicas de parede dupla personalizadas para empresas e clientes.',
+                ],
+                'WhatsApp Image 2026-10-14 at 12.35.45.jpeg' => [
+                    'order' => 22,
+                    'title' => 'Mostruário de Produção de Brindes & Kits',
+                    'tag' => 'Brindes & Activação',
+                    'slug' => 'materiais-promocionais',
+                    'desc' => 'Diversidade de garrafas térmicas, canecas e sacolas produzidas nas oficinas da RACHI Print.',
+                ],
+            ];
 
-                <div class="relative z-10 max-w-2xl mx-auto space-y-6">
-                    <span class="cta-banner-badge text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full inline-block">
-                        Atendimento Corporativo
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-black">
-                        Pronto para elevar a produção gráfica da sua instituição?
+            $portfolioItems = [];
+            $seenHashes = [];
+            if (is_dir($portfolioDir)) {
+                $rawFiles = scandir($portfolioDir) ?: [];
+                foreach ($rawFiles as $fName) {
+                    if ($fName === '.' || $fName === '..') continue;
+                    $ext = strtolower(pathinfo($fName, PATHINFO_EXTENSION));
+                    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp'], true)) continue;
+                    $fullPath = $portfolioDir . DIRECTORY_SEPARATOR . $fName;
+                    if (!is_file($fullPath)) continue;
+
+                    $hash = @md5_file($fullPath) ?: $fName;
+                    if (isset($seenHashes[$hash])) continue;
+                    $seenHashes[$hash] = true;
+
+                    $ver = @filemtime($fullPath) ?: 1;
+                    $meta = $curatedMeta[$fName] ?? [
+                        'order' => 100,
+                        'title' => 'Trabalho Realizado — RACHI Print',
+                        'tag' => 'Produção RACHI Print',
+                        'slug' => 'materiais-promocionais',
+                        'desc' => 'Projecto gráfico e personalização produzidos nas oficinas da RACHI Print com rigor cromático e acabamento profissional.',
+                    ];
+
+                    $portfolioItems[] = [
+                        'url' => '/images/banner/trabalho%20realizado/' . rawurlencode($fName) . '?v=' . $ver,
+                        'order' => $meta['order'],
+                        'title' => $meta['title'],
+                        'tag' => $meta['tag'],
+                        'slug' => $meta['slug'],
+                        'desc' => $meta['desc'],
+                    ];
+                }
+                usort($portfolioItems, fn($a, $b) => $a['order'] <=> $b['order']);
+            }
+        @endphp
+
+        <section id="portfolio-print" class="rprint-portfolio-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rprint-sec-header">
+                    <span class="rprint-pill">Portfólio</span>
+                    <h2 class="rprint-sec-title">
+                        Trabalhos <span class="rprint-gradient-text">realizados</span>
                     </h2>
-                    <p class="text-sm sm:text-base leading-relaxed">
-                        Fale diretamente com os nossos consultores gráficos e receba um orçamento personalizado com as melhores especificações para o seu projeto.
+                    <p class="rprint-sec-sub">
+                        Explore os {{ count($portfolioItems) }} trabalhos reais produzidos na RACHI Print e inspire-se para o seu próximo projecto.
                     </p>
-                    <div class="pt-2 flex items-center justify-center">
-                        <a href="https://wa.me/244972888585?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20para%20a%20RACHI%20Print." target="_blank" class="btn-cta-secondary">
-                            <i data-lucide="message-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
-                            <span>WhatsApp Direto</span>
+                </div>
+
+                <div class="rprint-portfolio-grid">
+                    @foreach($portfolioItems as $idx => $item)
+                        <div class="rprint-portfolio-item"
+                             @if($idx >= 6) x-show="showAllPortfolio" x-cloak x-transition.opacity.duration.300ms @endif
+                             role="button"
+                             tabindex="0"
+                             @click="openModal(@js($item['url']), @js($item['title']), @js($item['desc']), @js($item['tag']), @js($item['slug']))"
+                             @keydown.enter="openModal(@js($item['url']), @js($item['title']), @js($item['desc']), @js($item['tag']), @js($item['slug']))">
+                            <img src="{{ $item['url'] }}"
+                                 alt="{{ $item['title'] }}"
+                                 loading="lazy">
+                            <div class="rprint-portfolio-caption">
+                                <span class="rprint-portfolio-tag">{{ $item['tag'] }}</span>
+                                <h3 class="rprint-portfolio-title">{{ $item['title'] }}</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                @if(count($portfolioItems) > 6)
+                    <div class="mt-10 text-center">
+                        <button type="button"
+                                @click="showAllPortfolio = !showAllPortfolio; if (!showAllPortfolio) { document.getElementById('portfolio-print')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } $nextTick(() => { if (window.lucide) window.lucide.createIcons(); })"
+                                class="rprint-btn-outline">
+                            <span x-text="showAllPortfolio ? 'Ocultar trabalhos' : 'Mostrar mais trabalhos ({{ count($portfolioItems) - 6 }} restantes)'">
+                                Mostrar mais trabalhos ({{ count($portfolioItems) - 6 }} restantes)
+                            </span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200" :style="showAllPortfolio ? 'transform: rotate(180deg);' : ''"></i>
+                        </button>
+                    </div>
+                @endif
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 4. CALL TO ACTION — Pronto para transformar as suas ideias?  -->
+        <!-- ============================================================ -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 my-20 sm:my-24">
+            <div class="rprint-cta-card">
+                <div class="rprint-cta-glow" aria-hidden="true"></div>
+                <div class="rprint-cta-inner">
+                    <h2 class="rprint-cta-title">
+                        Pronto para transformar as suas <span class="rprint-gradient-text">ideias em realidade</span>?
+                    </h2>
+                    <p class="rprint-cta-sub">
+                        Entre em contacto connosco e descubra como a RACHI Print pode desenvolver a sua identidade visual, branding, brindes, sinalética e produção gráfica.
+                    </p>
+                    <div class="rprint-cta-actions">
+                        <button type="button"
+                                onclick="window.rachiOpenQuoteModal('Orçamento Personalizado — RACHI Print', 'RACHI Print', ''); return false;"
+                                class="rprint-btn-gradient">
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                            <span>Pedir Orçamento</span>
+                        </button>
+                        <a href="tel:+244972888585"
+                           class="rprint-btn-outline">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            <span>Ligar Agora</span>
                         </a>
                     </div>
                 </div>
@@ -2307,7 +4069,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-print.webp" type="image/webp">
                             <img src="/images/areas/rachi-print.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
                                  alt="RACHI Print" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(245,168,0,0.35)] group-hover:scale-105 transition-all">
                         </picture>
@@ -2333,6 +4095,7 @@
                         <li><a href="/print#catalogo" class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Produtos</a></li>
                         <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a RACHI</a></li>
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto &amp; Propostas</a></li>
+                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition">Reclamações e Denúncia</a></li>
                     </ul>
                 </div>
                 <div>

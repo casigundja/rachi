@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -369,7 +369,7 @@
                     <picture>
                         <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
                         <img src="/images/areas/rachi-tec.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-tec.png'" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
                              alt="RACHI Tec" 
                              class="h-7 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
@@ -960,7 +960,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
                             <img src="/images/areas/rachi-tec.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-tec.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
                                  alt="RACHI Tec" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(255,255,255,0.35)] group-hover:scale-105 transition-all">
                         </picture>

@@ -32,7 +32,7 @@
             return isDark;
         };
 
-        // Matrículas ativas recuperadas do banco de dados (Eloquent)
+        // Matrículas ativas recuperadas do base de dados (Eloquent)
         window.DB_ENROLLMENTS = @json($dbEnrollments ?? []);
     </script>
 
@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="/toast.css">
     <script src="/toast.js"></script>
     <script src="/auth-session.js"></script>
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -262,7 +262,7 @@
     <!-- ESTADO 1: TELA DE LOGIN & MATRÍCULA (MODELO COSMICO OFICIAL)    -->
     <!-- ============================================================== -->
     <div x-show="view === 'auth'" class="min-h-screen grid grid-cols-1 lg:grid-cols-[26rem_1fr] xl:grid-cols-[28rem_1fr]">
-        <!-- COLUNA ESQUERDA: FORMULÁRIO DE LOGIN / CADASTRO -->
+        <!-- COLUNA ESQUERDA: FORMULÁRIO DE INÍCIO DE SESSÃO / REGISTO -->
         <section class="login-sidebar flex flex-col justify-between px-6 sm:px-12 pt-6 pb-8 relative z-20 min-h-screen transition-colors duration-300">
             
             <div class="w-full max-w-sm mx-auto mt-2 sm:mt-4 mb-auto">
@@ -292,8 +292,8 @@
                         <span x-show="mode === 'register'" x-cloak>Ainda não estuda<br>com a gente?</span>
                     </h1>
                     <p class="login-subtitle mt-2 text-xs leading-relaxed">
-                        <span x-show="mode === 'login'">Faça seu login para acessar suas aulas, progresso e certificados.</span>
-                        <span x-show="mode === 'register'" x-cloak>Crie sua conta de aluno para iniciar sua capacitação.</span>
+                        <span x-show="mode === 'login'">Inicie sessão para aceder às suas aulas, progresso e certificados.</span>
+                        <span x-show="mode === 'register'" x-cloak>Crie a sua conta de formando para iniciar a sua formação.</span>
                     </p>
                 </header>
 
@@ -349,7 +349,7 @@
                         <!-- E-mail -->
                         <div>
                             <label for="login_email" class="login-label block text-xs font-semibold mb-1.5">
-                                E-mail ou Usuário
+                                E-mail ou Utilizador
                             </label>
                             <input 
                                 type="email" 
@@ -361,11 +361,9 @@
                             >
                         </div>
 
-                        <!-- Senha -->
+                        <!-- Palavra-passe -->
                         <div>
-                            <label for="login_password" class="login-label block text-xs font-semibold mb-1.5">
-                                Senha
-                            </label>
+                            <label for="login_password" class="login-label block text-xs font-semibold mb-1.5">Palavra-passe</label>
                             <div class="relative">
                                 <input 
                                     :type="showPassword ? 'text' : 'password'" 
@@ -379,7 +377,7 @@
                                     type="button" 
                                     @click="showPassword = !showPassword" 
                                     class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white p-1 cursor-pointer"
-                                    aria-label="Mostrar senha">
+                                    aria-label="Mostrar palavra-passe">
                                     <svg x-show="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     <svg x-show="showPassword" x-cloak class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
                                 </button>
@@ -397,10 +395,10 @@
                             </button>
                         </div>
 
-                        <!-- Esqueci Senha e Checkbox Lembrar-me -->
+                        <!-- Esqueci a Palavra-passe e Checkbox Lembrar-me -->
                         <div class="flex items-center justify-between pt-3 text-xs">
                             <a href="#recuperar" @click.prevent="forgotPassword()" class="login-sublink hover:underline underline-offset-2 transition">
-                                Esqueci minha senha
+                                Esqueci-me da palavra-passe
                             </a>
                             <label class="inline-flex items-center gap-1.5 cursor-pointer select-none">
                                 <input 
@@ -441,16 +439,16 @@
                             <input type="tel" x-model="regForm.phone" placeholder="+244 972 888 585" class="input-alura w-full h-11 px-3.5 rounded-xl text-xs">
                         </div>
                         <div>
-                            <label class="login-label block text-xs font-semibold mb-1">Senha</label>
+                            <label class="login-label block text-xs font-semibold mb-1">Palavra-passe</label>
                             <input type="password" x-model="regForm.password" required placeholder="••••••••••••" class="input-alura w-full h-11 px-3.5 rounded-xl text-xs">
                         </div>
                         <button type="submit" :disabled="loading" class="w-full h-12 mt-2 rounded-xl bg-gradient-to-r from-[#0050f0] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] active:scale-[0.99] text-white font-bold text-xs tracking-wider uppercase transition flex items-center justify-center gap-2 shadow-lg shadow-[#0050f0]/25 cursor-pointer">
-                            <span x-text="loading ? 'CRIANDO CONTA...' : 'CRIAR CONTA &amp; ACESSAR'"></span>
+                            <span x-text="loading ? 'CRIANDO CONTA...' : 'CRIAR CONTA &amp; ACEDER'"></span>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </button>
                         <div class="text-center pt-2">
                             <button type="button" @click="toggleMode()" class="login-sublink text-xs hover:underline cursor-pointer">
-                                Já tem conta? Faça seu login
+                                Já tem conta? Inicie sessão
                             </button>
                         </div>
                     </form>
@@ -739,7 +737,7 @@
                             <thead class="bg-[#121b30] text-slate-300 uppercase tracking-wider text-[10px] border-b border-white/10">
                                 <tr>
                                     <th class="py-3 px-4">ID</th>
-                                    <th class="py-3 px-4">Usuário ID</th>
+                                    <th class="py-3 px-4">ID do Utilizador</th>
                                     <th class="py-3 px-4">Data do Acesso</th>
                                     <th class="py-3 px-4">Hora</th>
                                     <th class="py-3 px-4">Endereço IP</th>
@@ -912,7 +910,7 @@
                                     <div class="text-[10px] text-slate-500">2.4 MB &bull; Download direto</div>
                                 </div>
                             </div>
-                            <button @click="alert('Download do material iniciado!')" class="text-xs text-sky-400 hover:underline font-bold">Baixar</button>
+                            <button @click="alert('Download do material iniciado!')" class="text-xs text-sky-400 hover:underline font-bold">Descarregar</button>
                         </div>
                         <div class="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between text-xs">
                             <div class="flex items-center gap-2.5">
@@ -1037,7 +1035,7 @@
 
             <div class="flex gap-3 justify-center">
                 <button @click="alert('Certificado enviado para seu e-mail e pronto para download!')" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs transition">
-                    Imprimir / Baixar PDF
+                    Imprimir / Descarregar PDF
                 </button>
                 <button @click="certificateModalOpen = false" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition">
                     Fechar
@@ -1057,7 +1055,7 @@
             </div>
             <h3 class="text-lg font-bold text-white">Acesso Negado à Formação</h3>
             <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-                Você não possui matrícula ativa neste curso. Conforme as regras de segurança do sistema, o conteúdo só é acessível após a matrícula.
+                Não possui matrícula activa neste curso. Conforme as regras de segurança do sistema, o conteúdo só é acessível após a matrícula.
             </p>
             <div class="mt-5 flex gap-2">
                 <button @click="accessDeniedModal = false; dashboardTab = 'catalogo'" class="flex-1 py-2.5 rounded-xl bg-[#0050f0] text-white font-bold text-xs transition">
@@ -1267,7 +1265,7 @@
                         } catch(e) {}
                     }
 
-                    // Mescla com matrículas ativas do banco de dados oficial (Eloquent)
+                    // Mescla com matrículas ativas do base de dados oficial (Eloquent)
                     if (window.DB_ENROLLMENTS && Array.isArray(window.DB_ENROLLMENTS)) {
                         window.DB_ENROLLMENTS.forEach(dbStudent => {
                             const idx = users.findIndex(u => u.email.toLowerCase() === dbStudent.email.toLowerCase());
@@ -1330,7 +1328,7 @@
                                 nome: 'Fundamentos e Vetores de Ameaça',
                                 aulas: [
                                     { id: 1, ordem: 1, titulo: 'Introdução à Cibersegurança & Cenário Angolano', descricao: 'Compreenda o ecossistema de ameaças, vetores de risco e impactos em organizações.', duracao: '15 min', concluida: true, bloqueada: false },
-                                    { id: 2, ordem: 2, titulo: 'Boas Práticas de Senhas e Autenticação MFA', descricao: 'Mecanismos de autenticação robusta, políticas de complexidade e cofres de senhas.', duracao: '20 min', concluida: true, bloqueada: false },
+                                    { id: 2, ordem: 2, titulo: 'Boas Práticas de Palavras-passe e Autenticação MFA', descricao: 'Mecanismos de autenticação robusta, políticas de complexidade e cofres de palavras-passe.', duracao: '20 min', concluida: true, bloqueada: false },
                                     { id: 3, ordem: 3, titulo: 'Engenharia Social e Proteção Contra Phishing', descricao: 'Identificação de e-mails maliciosos, spear phishing e conscientização corporativa.', duracao: '25 min', concluida: true, bloqueada: false }
                                 ]
                             },
@@ -1371,7 +1369,7 @@
                                 id: 201,
                                 nome: 'Produtividade e Colaboração em Nuvem',
                                 aulas: [
-                                    { id: 21, ordem: 1, titulo: 'Ecossistema Digital e Armazenamento em Nuvem', descricao: 'Organização de arquivos corporativos e trabalho em equipe em tempo real.', duracao: '15 min', concluida: true, bloqueada: false },
+                                    { id: 21, ordem: 1, titulo: 'Ecossistema Digital e Armazenamento em Nuvem', descricao: 'Organização de ficheiros corporativos e trabalho em equipa em tempo real.', duracao: '15 min', concluida: true, bloqueada: false },
                                     { id: 22, ordem: 2, titulo: 'Planilhas Avançadas e Fórmulas Essenciais', descricao: 'Automatização de cálculos operacionais e formatação condicional.', duracao: '25 min', concluida: true, bloqueada: false },
                                     { id: 23, ordem: 3, titulo: 'Dashboards com Tabelas Dinâmicas', descricao: 'Construção de resumos executivos dinâmicos para tomada de decisão.', duracao: '30 min', concluida: true, bloqueada: false },
                                     { id: 24, ordem: 4, titulo: 'Automação de Tarefas Repetitivas com IA', descricao: 'Uso de ferramentas de inteligência artificial para resumos e relatórios.', duracao: '20 min', concluida: true, bloqueada: false }
@@ -1408,9 +1406,9 @@
                                     { id: 31, ordem: 1, titulo: 'Estilos de Liderança e Autoconhecimento', descricao: 'Identificação de forças e liderança situacional.', duracao: '20 min', concluida: true, bloqueada: false },
                                     { id: 32, ordem: 2, titulo: 'Comunicação Assertiva e Cultura de Feedback', descricao: 'Modelos práticos de feedback construtivo.', duracao: '25 min', concluida: true, bloqueada: false },
                                     { id: 33, ordem: 3, titulo: 'Gestão Construtiva de Conflitos', descricao: 'Técnicas de mediação e alinhamento de expectativas.', duracao: '30 min', concluida: true, bloqueada: false },
-                                    { id: 34, ordem: 4, titulo: 'Delegação Eficaz e Empoderamento', descricao: 'Como delegar responsabilidades sem perder o controle de qualidade.', duracao: '25 min', concluida: true, bloqueada: false },
+                                    { id: 34, ordem: 4, titulo: 'Delegação Eficaz e Empoderamento', descricao: 'Como delegar responsabilidades sem perder o controlo de qualidade.', duracao: '25 min', concluida: true, bloqueada: false },
                                     { id: 35, ordem: 5, titulo: 'Tomada de Decisão sob Pressão', descricao: 'Matrizes de decisão rápida e priorização de riscos.', duracao: '30 min', concluida: true, bloqueada: false },
-                                    { id: 36, ordem: 6, titulo: 'Cultura de Reconhecimento e Motivação', descricao: 'Manutenção da energia da equipe e celebração de marcos.', duracao: '20 min', concluida: true, bloqueada: false }
+                                    { id: 36, ordem: 6, titulo: 'Cultura de Reconhecimento e Motivação', descricao: 'Manutenção da energia da equipa e celebração de marcos.', duracao: '20 min', concluida: true, bloqueada: false }
                                 ]
                             }
                         ]
@@ -1504,7 +1502,7 @@
                     const passwordInput = (this.loginForm.password || '').trim();
 
                     if (!emailInput || !passwordInput) {
-                        this.setErrorMessage('Informe o e-mail ou usuário e a senha de acesso.');
+                        this.setErrorMessage('Informe o e-mail ou utilizador e a senha de acesso.');
                         return;
                     }
 
@@ -1518,7 +1516,7 @@
                     // SE O USUÁRIO NÃO ESTIVER CADASTRADO NO BANCO -> ACESSO NEGADO!
                     if (!foundUser) {
                         this.loading = false;
-                        this.setErrorMessage('Usuário não cadastrado no banco de dados. Verifique os dados ou crie uma conta.');
+                        this.setErrorMessage('Utilizador não registado na base de dados. Verifique os dados ou crie uma conta.');
                         return;
                     }
 
@@ -1526,14 +1524,14 @@
                     const isAcceptedAdminPass = (emailInput === 'admin@rachi.ao' && (passwordInput === 'admin123' || passwordInput === 'Rachi@2026!' || passwordInput === '123456'));
                     if (!isAcceptedAdminPass && foundUser.senha && passwordInput !== foundUser.senha && passwordInput !== '123456') {
                         this.loading = false;
-                        this.setErrorMessage('Senha incorreta para o usuário informado.');
+                        this.setErrorMessage('Palavra-passe incorreta para o utilizador indicado.');
                         return;
                     }
 
                     // 3. VALIDAÇÃO DE STATUS
                     if (foundUser.status && foundUser.status !== 'ativo') {
                         this.loading = false;
-                        this.setErrorMessage('Este usuário encontra-se inativo ou bloqueado no sistema.');
+                        this.setErrorMessage('Este utilizador encontra-se inativo ou bloqueado no sistema.');
                         return;
                     }
 
@@ -1543,7 +1541,7 @@
 
                     if (!isMatriculaAtiva) {
                         this.loading = false;
-                        this.setErrorMessage('Acesso restrito: Para entrar no Portal da Academy é obrigatório possuir uma matrícula ativa no banco de dados. Caso ainda não tenha concluído a sua inscrição, matricule-se em um dos cursos.');
+                        this.setErrorMessage('Acesso restrito: Para entrar no Portal da Academy é obrigatório possuir uma matrícula ativa no base de dados. Caso ainda não tenha concluído a sua inscrição, matricule-se em um dos cursos.');
                         return;
                     }
 
@@ -1652,7 +1650,7 @@
                         return;
                     }
                     if (!password || password.length < 3) {
-                        this.setErrorMessage('A senha deve ter pelo menos 4 caracteres.');
+                        this.setErrorMessage('A palavra-passe deve ter pelo menos 4 caracteres.');
                         return;
                     }
 
@@ -1665,7 +1663,7 @@
 
                         if (exists) {
                             this.loading = false;
-                            this.setErrorMessage('Este e-mail já está cadastrado no banco. Faça seu login diretamente.');
+                            this.setErrorMessage('Este e-mail já está registado na base de dados. Inicie sessão diretamente.');
                             return;
                         }
 
@@ -1724,7 +1722,7 @@
                     } catch (err) {
                         console.error('Erro ao criar usuário:', err);
                         this.loading = false;
-                        this.setErrorMessage('Erro ao cadastrar: ' + err.message);
+                        this.setErrorMessage('Erro ao registar: ' + err.message);
                     }
                 },
 
@@ -1924,7 +1922,7 @@
                 },
 
                 forgotPassword() {
-                    alert('Instruções de redefinição foram enviadas para seu e-mail cadastrado.');
+                    alert('Instruções de recuperação foram enviadas para o seu e-mail registado.');
                 }
             }
         }

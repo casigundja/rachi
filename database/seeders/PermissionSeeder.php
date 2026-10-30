@@ -11,30 +11,30 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            // Usuários
-            ['name' => 'Visualizar Usuários', 'slug' => 'users.view', 'group' => 'users'],
-            ['name' => 'Criar Usuários', 'slug' => 'users.create', 'group' => 'users'],
-            ['name' => 'Editar Usuários', 'slug' => 'users.update', 'group' => 'users'],
-            ['name' => 'Excluir Usuários', 'slug' => 'users.delete', 'group' => 'users'],
+            // Utilizadores
+            ['name' => 'Visualizar Utilizadores', 'slug' => 'users.view', 'group' => 'users'],
+            ['name' => 'Criar Utilizadores', 'slug' => 'users.create', 'group' => 'users'],
+            ['name' => 'Editar Utilizadores', 'slug' => 'users.update', 'group' => 'users'],
+            ['name' => 'Eliminar Utilizadores', 'slug' => 'users.delete', 'group' => 'users'],
 
             // Clientes
             ['name' => 'Visualizar Clientes', 'slug' => 'customers.view', 'group' => 'customers'],
             ['name' => 'Criar Clientes', 'slug' => 'customers.create', 'group' => 'customers'],
             ['name' => 'Editar Clientes', 'slug' => 'customers.update', 'group' => 'customers'],
 
-            // Produtos e Estoque
+            // Produtos e Stock
             ['name' => 'Visualizar Produtos', 'slug' => 'products.view', 'group' => 'products'],
             ['name' => 'Criar Produtos', 'slug' => 'products.create', 'group' => 'products'],
             ['name' => 'Editar Produtos', 'slug' => 'products.update', 'group' => 'products'],
-            ['name' => 'Excluir Produtos', 'slug' => 'products.delete', 'group' => 'products'],
-            ['name' => 'Visualizar Estoque', 'slug' => 'stock.view', 'group' => 'stock'],
-            ['name' => 'Gerenciar Estoque', 'slug' => 'stock.manage', 'group' => 'stock'],
+            ['name' => 'Eliminar Produtos', 'slug' => 'products.delete', 'group' => 'products'],
+            ['name' => 'Visualizar Stock', 'slug' => 'stock.view', 'group' => 'stock'],
+            ['name' => 'Gerir Stock', 'slug' => 'stock.manage', 'group' => 'stock'],
 
             // Serviços
             ['name' => 'Visualizar Serviços', 'slug' => 'services.view', 'group' => 'services'],
             ['name' => 'Criar Serviços', 'slug' => 'services.create', 'group' => 'services'],
             ['name' => 'Editar Serviços', 'slug' => 'services.update', 'group' => 'services'],
-            ['name' => 'Excluir Serviços', 'slug' => 'services.delete', 'group' => 'services'],
+            ['name' => 'Eliminar Serviços', 'slug' => 'services.delete', 'group' => 'services'],
 
             // Solicitações
             ['name' => 'Visualizar Solicitações', 'slug' => 'requests.view', 'group' => 'requests'],
@@ -53,7 +53,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'Visualizar Cursos', 'slug' => 'courses.view', 'group' => 'courses'],
             ['name' => 'Criar Cursos', 'slug' => 'courses.create', 'group' => 'courses'],
             ['name' => 'Editar Cursos', 'slug' => 'courses.update', 'group' => 'courses'],
-            ['name' => 'Excluir Cursos', 'slug' => 'courses.delete', 'group' => 'courses'],
+            ['name' => 'Eliminar Cursos', 'slug' => 'courses.delete', 'group' => 'courses'],
 
             // Relatórios
             ['name' => 'Visualizar Relatórios', 'slug' => 'reports.view', 'group' => 'reports'],

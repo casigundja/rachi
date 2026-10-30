@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -7,8 +7,8 @@
     <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quem Somos — RACHI</title>
-    <meta name="description" content="RACHI — soluções inteligentes em tecnologia, educação e serviços empresariais.">
+    <title>Quem Somos ” RACHI</title>
+    <meta name="description" content="RACHI ” soluções inteligentes em tecnologia, educação e serviços empresariais.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -304,7 +304,7 @@
         }
 </style>
     <link rel="stylesheet" href="/css/site.css">
-<link rel="stylesheet" href="/worker-marketing.css"></head>
+<link rel="stylesheet" href="/worker-marketing.css?v=20261030-2"></head>
 <body x-data="{ currentTab: 'about', mobileMenuOpen: false, solutionsOpen: false, solutionsOpen: false, goToHome() { location.href = '/'; }, scrollToSection(section) { location.href = '/' + section; }, openUnitPage(unit) { location.href = '/' + unit; }, openStore() { location.href = '/loja'; }, openContacto() { location.href = '/contacto'; } }" class="min-h-screen flex flex-col justify-between">
     <!-- EXACT NAV BAR -->
     <!-- HEADER DUAL-THEME: ESCURO NO TOPO, CLARO AO ROLAR (ESTILO KLASSE.AO) -->
@@ -315,7 +315,7 @@
                     <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'"
+                             onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"
                              alt="RACHI" 
                              class="brand-logo-img logo-light filter drop-shadow-sm group-hover:drop-shadow-[0_0_12px_rgba(0,163,224,0.3)] transition-all">
                         <!-- Dark Logo (for light header when scrolled) -->
@@ -361,7 +361,19 @@
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                                        <a href="/#diferencial" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">O nosso diferencial</span>
+                            </a>
+                            <a href="/#missao" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="compass" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">Missão, visão e valores</span>
+                            </a>
+<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="handshake" class="w-4 h-4"></i>
                                 </span>
@@ -371,7 +383,7 @@
                                 <span class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
                                 </span>
-                                <span class="font-medium text-xs dropdown-title">Depoimentos</span>
+                                <span class="font-medium text-xs dropdown-title">Testemunhos</span>
                             </a>
                         </div>
                     </div>
@@ -442,7 +454,7 @@
                         <a href="#sobre" @click.prevent="scrollToSection('sobre')" class="block text-sm text-slate-400 hover:text-white">Quem somos</a>
                         <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos')" class="block text-sm text-slate-400 hover:text-white">O que fazemos</a>
                         <a href="#parceiros" @click.prevent="scrollToSection('parceiros')" class="block text-sm text-slate-400 hover:text-white">Parceiros</a>
-                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos')" class="block text-sm text-slate-400 hover:text-white">Depoimentos</a>
+                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos')" class="block text-sm text-slate-400 hover:text-white">Testemunhos</a>
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2">
@@ -521,7 +533,7 @@
                         A <strong>RACHI</strong> actua como parceira estratégica para empresas que precisam de soluções práticas, integradas e confiáveis em Angola.
                     </p>
                     <p>
-                        Combinamos competências em quatro áreas fundamentais — tecnologia, comunicação visual e produção gráfica, formação profissional e recursos humanos — para responder com agilidade e consistência aos desafios de cada cliente.
+                        Combinamos competências em quatro áreas fundamentais ” tecnologia, comunicação visual e produção gráfica, formação profissional e recursos humanos ” para responder com agilidade e consistência aos desafios de cada cliente.
                     </p>
                 </div>
                 <div class="mt-8 flex gap-4">
@@ -536,13 +548,13 @@
 
             <div class="lg:col-span-6">
                 <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
-                    <img src="https://hom.rachi.ao/assets/img/about-team.png" 
-                         onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/about-team.webp'"
-                         alt="Equipa RACHI — pessoas, processos e tecnologia" 
+                    <img src="/images/about-team-clean.png" 
+                         onerror="this.onerror=null; this.src='/images/about-team-clean.png'"
+                         alt="Equipa RACHI ” pessoas, processos e tecnologia" 
                          class="w-full h-auto dark:hidden">
                     <img src="/images/about-team-dark.jpg" 
-                         onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/about-team.png'"
-                         alt="Equipa RACHI — pessoas, processos e tecnologia" 
+                         onerror="this.onerror=null; this.src='/images/about-team-clean.png'"
+                         alt="Equipa RACHI ” pessoas, processos e tecnologia" 
                          class="w-full h-auto hidden dark:block">
                 </div>
             </div>
@@ -580,8 +592,8 @@
     <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 border-t border-slate-200 dark:border-slate-800 py-12 px-6 transition-colors duration-300">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-                <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
-                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
+                <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
                 <p class="text-sm text-slate-400">
                     Soluções inteligentes em tecnologia, comunicação visual, formação profissional e recursos humanos.
                 </p>
@@ -589,10 +601,10 @@
             <div>
                 <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Unidades</h4>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li><a href="/solucoes/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec — Loja de TI</a></li>
-                    <li><a href="/solucoes/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print — Artes &amp; Logótipos</a></li>
-                    <li><a href="/solucoes/academy" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy — Cursos</a></li>
-                    <li><a href="/solucoes/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Capital — Sites &amp; Suporte TI</a></li>
+                    <li><a href="/solucoes/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec ” Loja de TI</a></li>
+                    <li><a href="/solucoes/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print ” Artes &amp; Logótipos</a></li>
+                    <li><a href="/solucoes/academy" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy ” Cursos</a></li>
+                    <li><a href="/solucoes/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Capital ” Sites &amp; Suporte TI</a></li>
                 </ul>
             </div>
             <div>
@@ -604,20 +616,22 @@
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Contacto</h4>
-                <p class="text-sm text-slate-400">Luanda, Angola</p>
-                <p class="text-sm text-slate-400 mt-1">geral@rachi.ao</p>
+                <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Sede &amp; Contactos</h4>
+                <p class="text-sm text-slate-300 font-semibold">Rua Ndunduma</p>
+                <p class="text-xs text-slate-400 mt-0.5 font-medium">Miramar – Luanda, Angola</p>
+                <p class="text-xs text-slate-400 mt-0.5">Por detrás do BFA</p>
+                <p class="text-sm text-slate-400 mt-2">geral@rachi.ao</p>
                 <p class="text-sm text-slate-400 mt-1">+244 972 888 585</p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> — Soluções Inteligentes. Todos os direitos reservados.</div>
+            <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> ” Soluções Inteligentes. Todos os direitos reservados.</div>
             <div class="flex gap-3 items-center text-xs">
                         <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt" class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition" title="Português">PT</button>
                         <span class="text-slate-500 opacity-60">|</span>
                         <button type="button" onclick="setRachiLanguage('en')" data-rachi-lang="en" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="English">EN</button>
                         <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="中文 (Mandarim)">中文</button>
+                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="ä¸­æ–‡ (Mandarim)">ä¸­æ–‡</button>
                     </div>
         </div>
     </footer>

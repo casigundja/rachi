@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-AO" class="dark">
 <head>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Painel Administrativo · RACHI</title>
-  <meta name="description" content="Autenticação segura e gestão integrada das unidades TEC, PRINT, ACADEMY e HUMAN CAPITAL — RACHI.">
+  <title>Painel Administrativo Â· RACHI</title>
+  <meta name="description" content="Autenticação segura e gestão integrada das unidades TEC, PRINT, ACADEMY e HUMAN CAPITAL ” RACHI.">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-rachi-light.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,7 +145,7 @@
       width: 100%;
     }
 
-    /* COLUNA ESQUERDA: AUTENTICAÇÃO ADMINISTRATIVA */
+    /* COLUNA ESQUERDA: AUTENTICAÇÃƒO ADMINISTRATIVA */
     .auth-col {
       background-color: var(--bg-sidebar);
       border-right: 1px solid var(--border-subtle);
@@ -419,7 +419,7 @@
       gap: 0.4rem;
     }
 
-    /* COLUNA DIREITA: APRESENTAÇÃO DO PROJETO RACHI */
+    /* COLUNA DIREITA: APRESENTAÇÃƒO DO PROJETO RACHI */
     .showcase-col {
       display: flex;
       flex-direction: column;
@@ -582,7 +582,7 @@
   <div class="admin-login-layout">
     
     <!-- ========================================== -->
-    <!-- COLUNA ESQUERDA: AUTENTICAÇÃO ADMINISTRATIVA -->
+    <!-- COLUNA ESQUERDA: AUTENTICAÇÃƒO ADMINISTRATIVA -->
     <!-- ========================================== -->
     <aside class="auth-col">
       <div>
@@ -598,8 +598,8 @@
 
         <!-- Marca -->
         <div class="brand-wrap">
-          <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'" alt="RACHI" class="brand-logo-img logo-for-light">
-          <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="brand-logo-img logo-for-dark">
+          <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='/images/logo-rachi-dark.png'" alt="RACHI" class="brand-logo-img logo-for-light">
+          <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="brand-logo-img logo-for-dark">
         </div>
 
         <h1 class="auth-title">Painel Administrativo</h1>
@@ -663,7 +663,7 @@
             Tecnologia, Indústria Gráfica, Formação e <span>Capital Humano</span>
           </h2>
           <p class="showcase-lead">
-            A <strong>RACHI — Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
+            A <strong>RACHI ” Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
           </p>
         </header>
 
@@ -677,7 +677,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box tec">💻</div>
+                <div class="unit-icon-box tec">ðŸ’»</div>
                 <div class="unit-name-wrap">
                   <h3>RACHI TEC</h3>
                   <span class="unit-tag">Tecnologia & Infraestrutura</span>
@@ -691,7 +691,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box print">🖨️</div>
+                <div class="unit-icon-box print">ðŸ–¨ï¸</div>
                 <div class="unit-name-wrap">
                   <h3>RACHI PRINT</h3>
                   <span class="unit-tag">Indústria Gráfica & Merchandising</span>
@@ -705,7 +705,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box academy">🎓</div>
+                <div class="unit-icon-box academy">ðŸŽ“</div>
                 <div class="unit-name-wrap">
                   <h3>RACHI ACADEMY</h3>
                   <span class="unit-tag">Formação Profissional & LMS</span>
@@ -719,7 +719,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box capital">👥</div>
+                <div class="unit-icon-box capital">ðŸ‘¥</div>
                 <div class="unit-name-wrap">
                   <h3>RACHI HUMAN CAPITAL</h3>
                   <span class="unit-tag">Gestão Estratégica de Talentos</span>

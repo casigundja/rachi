@@ -13,7 +13,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Loja RACHI Tec — Informática, Equipamentos & Tecnologia">
-    <meta property="og:description" content="Laptops, cabos, smartwatches, TV Box e periféricos corporativos com entrega garantida e faturação em Luanda.">
+    <meta property="og:description" content="Laptops, cabos, smartwatches, TV Box e periféricos corporativos com entrega garantida e facturação em Luanda.">
     <meta property="og:url" content="https://rachi.ao/loja">
     <meta property="og:type" content="website">
 
@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -1003,8 +1003,8 @@
                 <!-- Logótipo da Loja RACHI Tec -->
                 <div class="shrink-0">
                     <a href="/" class="flex items-center gap-2 focus:outline-none" title="RACHI — Ir para a página inicial">
-                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain dark:hidden" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'">
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
+                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain dark:hidden" onerror="this.src='/images/logo-rachi-dark.png'">
+                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.src='/images/logo-rachi-light.png'">
                         <span class="store-brand-text hidden sm:inline-block font-black text-xs uppercase tracking-widest text-[#071326] dark:text-white border-l-2 border-[#f5a800] pl-2.5 py-0.5">
                             Tec Loja
                         </span>
@@ -1015,7 +1015,7 @@
                 <div class="flex-1 max-w-2xl px-1 sm:px-2">
                     <div class="relative flex items-center w-full">
                         <input type="search" x-model="searchQuery" @input="filterProducts()"
-                            placeholder="O que você procura hoje?"
+                            placeholder="O que procura hoje?"
                             class="store-search-input w-full pl-5 pr-11 py-2.5 bg-slate-100 hover:bg-slate-200/80 focus:bg-white text-xs sm:text-sm text-slate-900 placeholder-slate-400 rounded-full border border-slate-200 focus:border-[#f5a800] focus:ring-2 focus:ring-[#f5a800]/25 transition-all outline-none shadow-2xs dark:bg-slate-900/90 dark:hover:bg-slate-900 dark:focus:bg-slate-950 dark:text-white dark:border-slate-700">
                         
                         <button @click="filterProducts()"
@@ -1026,29 +1026,20 @@
                     </div>
                 </div>
 
-                <!-- Ações Direitas: Headphone/Ajuda + Localização + Usuário + Sacola -->
+                <!-- Ações Direitas: Ajuda + Localização + Utilizador + Carrinho -->
                 <div class="flex items-center gap-2 sm:gap-3.5 shrink-0">
                     
 
-                    <!-- Ícone Headphone Atendimento com Pulse -->
-                    <button type="button" @click="openChatModal()" class="w-9 h-9 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 hover:text-[#071326] dark:hover:text-white flex items-center justify-center transition cursor-pointer relative" title="Ajuda &amp; Chat Online">
-                        <i data-lucide="headphones" class="w-5 h-5"></i>
-                        <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-[#071326] animate-pulse"></span>
-                    </button>
-
-                    <!-- Perfil de Usuário Executivo & Moderno -->
+                    <!-- Perfil de Utilizador Executivo & Moderno -->
                     <div class="relative">
                         <button type="button" @click="userMenuOpen = !userMenuOpen"
-                            class="store-user-btn flex items-center gap-2.5 py-1 px-2 sm:px-3 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all cursor-pointer select-none">
-                            <div class="store-user-avatar w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 text-[#f5a800] border border-[#f5a800]/40 flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
-                                <span x-text="userLoggedIn ? userInitials : 'U'">CC</span>
-                            </div>
-                            <div class="text-left text-xs leading-tight hidden md:block">
+                            class="store-user-btn flex items-center gap-2 py-1.5 px-3 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all cursor-pointer select-none">
+                            <div class="text-left text-xs leading-tight">
                                 <div class="flex items-center gap-1">
-                                    <span class="store-user-name text-xs font-bold text-slate-800 dark:text-white" x-text="userLoggedIn ? 'Olá, ' + currentUserFirstName : 'Iniciar Sessão'">Olá, Casimiro</span>
+                                    <span class="store-user-name text-xs font-bold text-slate-800 dark:text-white" x-text="userLoggedIn ? 'Olá, ' + currentUserFirstName : 'Iniciar Sessão'">Iniciar Sessão</span>
                                     <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform duration-200" :class="{ 'rotate-180': userMenuOpen }"></i>
                                 </div>
-                                <span class="store-user-sub text-[11px] text-slate-500 dark:text-slate-400 font-medium" x-text="userLoggedIn ? 'Minha Conta' : 'Conta RACHI'">Minha Conta</span>
+                                <span class="store-user-sub text-[11px] text-slate-500 dark:text-slate-400 font-medium" x-text="userLoggedIn ? 'Minha Conta' : 'Conta RACHI'">Conta RACHI</span>
                             </div>
                         </button>
 
@@ -1093,12 +1084,12 @@
                                         <button type="button" @click="openAccountModal('dados'); userMenuOpen = false"
                                             class="w-full flex items-center gap-3 py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/5 transition group text-left cursor-pointer">
                                             <i data-lucide="user-check" class="w-4 h-4 text-[#f5a800] group-hover:scale-110 transition-transform"></i>
-                                            <span class="text-xs font-medium">Meus Dados Cadastrais</span>
+                                            <span class="text-xs font-medium">Os Meus Dados de Registo</span>
                                         </button>
                                         <button type="button" @click="openAccountModal('pedidos'); userMenuOpen = false"
                                             class="w-full flex items-center gap-3 py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/5 transition group text-left cursor-pointer">
                                             <i data-lucide="package" class="w-4 h-4 text-[#f5a800] group-hover:scale-110 transition-transform"></i>
-                                            <span class="text-xs font-medium">Histórico de Pedidos &amp; Faturas</span>
+                                            <span class="text-xs font-medium">Histórico de Pedidos &amp; Facturas</span>
                                         </button>
                                         <button type="button" @click="openAccountModal('favoritos'); userMenuOpen = false"
                                             class="w-full flex items-center gap-3 py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/5 transition group text-left cursor-pointer">
@@ -1127,13 +1118,13 @@
                                 <div>
                                     <button type="button" @click="loginModalOpen = true; authTab = 'login'; userMenuOpen = false"
                                         class="w-full py-2.5 px-4 bg-[#f5a800] hover:bg-[#e09900] active:bg-[#c88200] text-[#071326] font-black text-xs rounded-xl shadow-md hover:shadow-lg transition text-center flex items-center justify-center cursor-pointer">
-                                        Acessar minha conta
+                                        Aceder à minha conta
                                     </button>
                                     <div class="mt-2.5 text-center text-xs text-slate-500 dark:text-slate-400">
                                         Não tem conta? 
                                         <button type="button" @click="loginModalOpen = true; authTab = 'register'; userMenuOpen = false"
                                             class="font-black text-[#f5a800] hover:text-[#fbbf24] underline underline-offset-2 ml-0.5 transition cursor-pointer">
-                                            Cadastrar.
+                                            Registar.
                                         </button>
                                     </div>
                                 </div>
@@ -1800,7 +1791,7 @@
                                     </div>
                                     <div class="flex items-center gap-1.5 text-[10px] text-slate-500 mt-1">
                                         <i data-lucide="credit-card" class="w-3.5 h-3.5 text-amber-600 shrink-0"></i>
-                                        <span class="truncate">À vista via Multicaixa ou transferência</span>
+                                        <span class="truncate">A pronto via Multicaixa ou transferência</span>
                                     </div>
                                 </div>
 
@@ -2132,7 +2123,7 @@
                 </div>
 
                 <div>
-                    <label class="block font-bold text-slate-700 mb-1">Endereço de Entrega em Luanda</label>
+                    <label class="block font-bold text-slate-700 mb-1">Morada de Entrega em Luanda</label>
                     <input type="text" x-model="orderForm.address" placeholder="Bairro, Rua, Edifício, Luanda" 
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
                 </div>
@@ -2151,7 +2142,7 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- 13. MODAL DE LOGIN / CADASTRO (ACESSAR MINHA CONTA)            -->
+    <!-- 13. MODAL DE INÍCIO DE SESSÃO / REGISTO (ACEDER À MINHA CONTA) -->
     <!-- ============================================================== -->
     <div x-show="loginModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div @click.outside="loginModalOpen = false" class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
@@ -2164,16 +2155,14 @@
                 <div class="w-12 h-12 rounded-full bg-amber-50 text-[#d97706] flex items-center justify-center mx-auto mb-3">
                     <i data-lucide="user-check" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-xl font-extrabold text-slate-900 font-display" x-text="authTab === 'login' ? 'Acessar Conta Corporativa' : 'Criar Nova Conta'"></h3>
-                <p class="text-xs text-slate-500 mt-1" x-text="authTab === 'login' ? 'Entre com as credenciais da sua organização ou cliente' : 'Cadastre sua empresa para gerir encomendas e cotações'"></p>
+                <h3 class="text-xl font-extrabold text-slate-900 font-display" x-text="authTab === 'login' ? 'Aceder à Conta Corporativa' : 'Criar Nova Conta'"></h3>
+                <p class="text-xs text-slate-500 mt-1" x-text="authTab === 'login' ? 'Entre com as credenciais da sua organização ou cliente' : 'Registe a sua empresa para gerir encomendas e cotações'"></p>
                 
                 <div class="flex bg-slate-100 p-1 rounded-xl mt-4">
                     <button type="button" @click="authTab = 'login'" :class="authTab === 'login' ? 'bg-white text-[#d97706] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="flex-1 py-2 text-xs rounded-lg transition">
                         Entrar
                     </button>
-                    <button type="button" @click="authTab = 'register'" :class="authTab === 'register' ? 'bg-white text-[#d97706] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="flex-1 py-2 text-xs rounded-lg transition">
-                        Cadastrar
-                    </button>
+                    <button type="button" @click="authTab = 'register'" :class="authTab === 'register' ? 'bg-white text-[#d97706] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900'" class="flex-1 py-2 text-xs rounded-lg transition">Registar</button>
                 </div>
             </div>
 
@@ -2187,7 +2176,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-1">
                         <label class="font-bold text-slate-700">Palavra-passe</label>
-                        <a href="/contacto" class="text-[11px] text-[#d97706] hover:text-[#b45309] hover:underline">Esqueceu a senha?</a>
+                        <a href="/contacto" class="text-[11px] text-[#d97706] hover:text-[#b45309] hover:underline">Esqueceu a palavra-passe?</a>
                     </div>
                     <input type="password" x-model="loginForm.password" required placeholder="••••••••"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800] focus:ring-2 focus:ring-[#f5a800]/20 transition">
@@ -2199,11 +2188,11 @@
                 </div>
 
                 <button type="submit" class="btn-comprar w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md mt-2">
-                    Acessar minha conta
+                    Aceder à minha conta
                 </button>
             </form>
 
-            <!-- Formulário de Registo / Cadastro -->
+            <!-- Formulário de Registo -->
             <form x-show="authTab === 'register'" @submit.prevent="submitRegister()" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-slate-700 mb-1">Nome da Empresa ou Cliente *</label>
@@ -2301,7 +2290,7 @@
                         <div>
                             <span class="text-[10px] text-amber-800 font-black uppercase tracking-wider">Conta Corporativa RACHI Tec</span>
                             <h4 class="font-black text-sm text-slate-900" x-text="(currentUser.name || 'Casimiro Custódio') + ' • Cliente Verificado'">Casimiro Custódio • Cliente Verificado</h4>
-                            <p class="text-[11px] text-slate-600 mt-0.5">Faturação oficial com NIF, cotações em lote e entregas corporativas em Luanda.</p>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Facturação oficial com NIF, cotações em lote e entregas corporativas em Luanda.</p>
                         </div>
                         <span class="w-10 h-10 rounded-xl bg-[#071326] text-[#f5a800] flex items-center justify-center font-black text-sm border border-[#f5a800]/40 shadow-xs" x-text="userInitials">CC</span>
                     </div>
@@ -2336,7 +2325,7 @@
 
                         <div class="pt-3 flex justify-end">
                             <button type="submit" class="btn-comprar py-2.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md">
-                                Salvar Alterações
+                                Guardar Alterações
                             </button>
                         </div>
                     </form>
@@ -2364,7 +2353,7 @@
                                 <button type="button" @click="showToast('Download da factura proforma oficial ' + order.id + ' iniciado.', 'Documento Emitido', 'success')" 
                                     class="text-[11px] font-black text-[#d97706] hover:text-[#b45309] hover:underline flex items-center gap-1 cursor-pointer">
                                     <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                                    <span>Baixar Proforma (PDF)</span>
+                                    <span>Descarregar Pró-forma (PDF)</span>
                                 </button>
                             </div>
                         </div>
@@ -2465,14 +2454,14 @@
                 
                 <div class="lg:col-span-2">
                     <a href="/" class="inline-block mb-3" title="RACHI — Ir para a página inicial">
-                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-10 w-auto object-contain dark:hidden" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-dark.png'">
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 w-auto object-contain hidden dark:block" onerror="this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
+                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-10 w-auto object-contain dark:hidden" onerror="this.src='/images/logo-rachi-dark.png'">
+                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 w-auto object-contain hidden dark:block" onerror="this.src='/images/logo-rachi-light.png'">
                     </a>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
                         A Loja RACHI Tec é o canal oficial de suprimentos corporativos, equipamentos de informática, cabos, redes e acessórios de tecnologia da RACHI em Angola.
                     </p>
                     <div class="mt-4 text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                        <p>📍 <strong class="text-slate-800 dark:text-slate-200">Localização:</strong> Luanda, Angola</p>
+                        <p>📍 <strong class="text-slate-800 dark:text-slate-200">Localização:</strong> Rua Ndunduma, Miramar – Luanda (Por detrás do BFA)</p>
                         <p>📧 <strong class="text-slate-800 dark:text-slate-200">Email de Vendas:</strong> tec@rachi.ao / loja@rachi.ao</p>
                         <p>🕒 <strong class="text-slate-800 dark:text-slate-200">Atendimento:</strong> Segunda a Sexta, 08h às 17h</p>
                     </div>
@@ -2496,8 +2485,9 @@
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Falar Connosco</a></li>
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Pedir Cotação em Lote</a></li>
-                        <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Termos &amp; Condições</a></li>
-                        <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Política de Privacidade</a></li>
+                        <li><a href="/termos" class="hover:text-slate-900 dark:hover:text-white transition">Termos &amp; Condições</a></li>
+                        <li><a href="/privacidade" class="hover:text-slate-900 dark:hover:text-white transition">Política de Privacidade</a></li>
+                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition font-semibold">Reclamações e Denúncia</a></li>
                     </ul>
                 </div>
 
@@ -3330,7 +3320,7 @@
                         return;
                     }
 
-                    // Se estiver logado: pega as informações do usuário logado e finaliza a compra direto!
+                    // Se estiver logado: pega as informações do utilizador autenticado e finaliza a compra direto!
                     const loggedIn = this.userLoggedIn && this.currentUser && (this.currentUser.name || this.currentUser.email);
                     if (loggedIn) {
                         this.executeOrder({
@@ -3341,7 +3331,7 @@
                             address: this.currentUser.address || ''
                         });
                     } else {
-                        // Caso NÃO tenha um usuário logado: aí abre o formulário para preencher!
+                        // Caso NÃO tenha um utilizador autenticado: aí abre o formulário para preencher!
                         this.checkoutModal = true;
                     }
                 },
@@ -3385,7 +3375,7 @@
                             throw new Error(data.message || 'Falha ao processar o pedido.');
                         }
 
-                        // Sincroniza estoque localmente
+                        // Sincroniza stock localmente
                         if (Array.isArray(data.updated_stock)) {
                             data.updated_stock.forEach(us => {
                                 const prod = this.products.find(p => p.id === us.id || p.slug === us.slug);
@@ -3453,7 +3443,7 @@
                     
                     this.chatMessages.push({
                         sender: 'user',
-                        name: this.userLoggedIn && this.currentUser.name ? this.currentUser.name : 'Você',
+                        name: this.userLoggedIn && this.currentUser.name ? this.currentUser.name : 'Utilizador',
                         time: timeStr,
                         text: text
                     });
@@ -3472,9 +3462,9 @@
                         const lower = text.toLowerCase();
                         
                         if (lower.includes('pedido') || lower.includes('encomenda') || lower.includes('rastreio')) {
-                            reply = 'Para consultar o seu pedido, aceda a "Meus Pedidos" no menu da sua conta ou informe o número do pedido aqui. Faturas proforma são emitidas com prazo de entrega imediato em Luanda.';
+                            reply = 'Para consultar o seu pedido, aceda a "Meus Pedidos" no menu da sua conta ou informe o número do pedido aqui. Facturas pró-forma são emitidas com prazo de entrega imediato em Luanda.';
                         } else if (lower.includes('preco') || lower.includes('preço') || lower.includes('nif') || lower.includes('fatura') || lower.includes('pagamento') || lower.includes('factura')) {
-                            reply = 'Os preços apresentados incluem IVA em Kwanzas (AOA). Emitimos Fatura Proforma formal e Fatura Comercial com o NIF da sua empresa. Aceitamos pagamentos por transferência bancária (IBAN) e multicaixa.';
+                            reply = 'Os preços apresentados incluem IVA em Kwanzas (AOA). Emitimos Factura Pró-forma formal e Factura Comercial com o NIF da sua empresa. Aceitamos pagamentos por transferência bancária (IBAN) e multicaixa.';
                         } else if (lower.includes('entrega') || lower.includes('luanda') || lower.includes('levantamento') || lower.includes('onde')) {
                             reply = 'Fazemos entregas em toda a província de Luanda num prazo ágil de 24h a 48h úteis. Também pode realizar o levantamento gratuito das suas encomendas diretamente nas instalações da RACHI no Edifício Kilamba.';
                         } else if (lower.includes('laptop') || lower.includes('computador') || lower.includes('cabo') || lower.includes('tv box') || lower.includes('equipamento') || lower.includes('produto')) {
@@ -3518,7 +3508,7 @@
                             this.authChannel.postMessage({ action: 'update', user: this.currentUser, timestamp: Date.now() });
                         }
                     } catch (e) {}
-                    this.showToast('Dados cadastrais atualizados com sucesso!', 'Perfil Atualizado', 'success', 3500);
+                    this.showToast('Dados de registo atualizados com sucesso!', 'Perfil Atualizado', 'success', 3500);
                     this.accountModalOpen = false;
                 },
 
@@ -3554,7 +3544,7 @@
                     // 1. Inicializar e restaurar sessão sincronizada entre todas as telas
                     this.syncSessionFromStorage();
 
-                    // Sincronização em tempo real com estoque da base de dados
+                    // Sincronização em tempo real com stock da base de dados
                     try {
                         const liveList = @json($liveProducts ?? []);
                         if (Array.isArray(liveList) && liveList.length > 0) {
@@ -3577,7 +3567,7 @@
                             });
                         }
                     } catch (e) {
-                        console.error('Erro ao sincronizar estoque:', e);
+                        console.error('Erro ao sincronizar stock:', e);
                     }
 
 

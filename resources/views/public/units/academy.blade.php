@@ -136,7 +136,7 @@
     </style>
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -399,10 +399,10 @@
                     class="flex items-center gap-2.5 group cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
                     title="Ir para a página inicial (Portal RACHI)">
                     <!-- Logo Dark Mode (Branco) -->
-                    <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI Academy" class="h-8 lg:h-9 w-auto object-contain hidden dark:block">
+                    <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI Academy" class="h-8 lg:h-9 w-auto object-contain hidden dark:block">
                     <!-- Logo Light Mode (Escuro) -->
                     <img src="/images/logo-rachi-dark.png"
-                        onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'"
+                        onerror="this.onerror=null; this.src='/images/logo-rachi.png'"
                         alt="RACHI Academy"
                         class="h-8 lg:h-9 w-auto object-contain filter drop-shadow-sm group-hover:drop-shadow-[0_0_14px_rgba(0,80,240,0.3)] transition-all block dark:hidden">
                     <span
@@ -730,7 +730,7 @@
                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </button>
 
-                        <button @click="modalOpen = true; modalidadeSelecionada = 'Treinamento In Company Personalizado (Sob consulta)'"
+                        <button @click="modalOpen = true; modalidadeSelecionada = 'Formação In-Company Personalizada (Sob consulta)'"
                             class="px-5 py-3 rounded-xl bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-white font-bold text-xs uppercase tracking-wider transition-all border border-slate-300 dark:border-white/20 cursor-pointer inline-flex items-center gap-2">
                             <i data-lucide="building" class="w-4 h-4 text-[#0050f0] dark:text-[#00a3e0]"></i>
                             <span>Solicitar Proposta In Company</span>
@@ -992,12 +992,12 @@
                         </div>
                     </div>
 
-                    <!-- 3. TREINAMENTO IN COMPANY -->
+                    <!-- 3. FORMAÇÃO IN-COMPANY -->
                     <div class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#071326] border border-slate-200/90 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group hover:-translate-y-1">
                         <div>
                             <span class="text-xs uppercase font-extrabold tracking-widest text-slate-500 dark:text-slate-400 block mb-2">Solução Corporativa</span>
                             <h4 class="text-xl sm:text-2xl font-black font-heading text-slate-900 dark:text-white mb-2">
-                                Treinamento In Company
+                                Formação In-Company
                             </h4>
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-4">
                                 <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
@@ -1032,7 +1032,7 @@
                         </div>
 
                         <div class="mt-8 pt-4 border-t border-slate-100 dark:border-white/10">
-                            <button @click="modalOpen = true; modalidadeSelecionada = 'Treinamento In Company Personalizado (Sob consulta)'"
+                            <button @click="modalOpen = true; modalidadeSelecionada = 'Formação In-Company Personalizada (Sob consulta)'"
                                 class="w-full py-3 rounded-xl bg-slate-900 hover:bg-[#0050f0] text-white dark:bg-white/10 dark:hover:bg-[#00a3e0] dark:hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2">
                                 <span>Solicitar Proposta In Company</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -1126,7 +1126,7 @@
                         Engenharia Social Institucional
                     </h3>
                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
-                        Preencha os dados abaixo para receber o contato da equipa RACHI com todos os detalhes.
+                        Preencha os dados abaixo para receber o contacto da equipa RACHI com todos os detalhes.
                     </p>
                 </div>
 
@@ -1136,7 +1136,7 @@
                         <select x-model="modalidadeSelecionada" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/[0.05] text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0050f0]">
                             <option value="Workshop Intensivo (60.000 Kz)">Workshop Intensivo — 1 dia (8h) &bull; 60.000 Kz</option>
                             <option value="Mini-curso (100.000 Kz)">Mini-curso — 2 dias (16h) &bull; 100.000 Kz</option>
-                            <option value="Treinamento In Company Personalizado (Sob consulta)">Treinamento In Company — Personalizado &bull; Sob consulta</option>
+                            <option value="Formação In-Company Personalizada (Sob consulta)">Formação In-Company — Personalizado &bull; Sob consulta</option>
                         </select>
                     </div>
 
@@ -1183,10 +1183,10 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- 5. HISTÓRIAS REAIS & DEPOIMENTOS DE ALUNOS                     -->
+    <!-- 5. HISTÓRIAS REAIS & TESTEMUNHOS DE ALUNOS                     -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-    <!-- 5. HISTÓRIAS REAIS & DEPOIMENTOS DE ALUNOS (ANIMADO & OTIMIZADO) -->
+    <!-- 5. HISTÓRIAS REAIS & TESTEMUNHOS DE ALUNOS (ANIMADO & OTIMIZADO) -->
     <!-- ============================================================== -->
     <section class="py-10 sm:py-14 bg-slate-100/70 dark:bg-[#070f1e] transition-colors duration-300 relative overflow-hidden" 
              id="depoimentos" 
@@ -1443,7 +1443,7 @@
 
             </div>
 
-            <!-- CONTROLES DO SLIDER (AUTO-PLAY + BARRA DE PROGRESSO + NAVEGAÇÃO COMPACTA) -->
+            <!-- CONTROLOS DO SLIDER (AUTO-PLAY + BARRA DE PROGRESSO + NAVEGAÇÃO COMPACTA) -->
             <div class="flex flex-col items-center justify-center gap-2.5 mt-6 sm:mt-8">
                 <!-- Barra de progresso do auto-play suave -->
                 <div class="w-28 h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
@@ -1569,7 +1569,7 @@
                          :class="activeFaq === 2 ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
                         <div class="overflow-hidden">
                             <div class="px-4 sm:px-5 pb-4 pt-1 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/5">
-                                Pagamento direto em Kwanzas (AOA) por <strong>Multicaixa Express</strong>, transferência bancária por <strong>IBAN</strong> com fatura proforma e recibo oficial para pessoas físicas ou empresas, e cartões internacionais (Visa/Mastercard) em até 12x.
+                                Pagamento direto em Kwanzas (AOA) por <strong>Multicaixa Express</strong>, transferência bancária por <strong>IBAN</strong> com factura pró-forma e recibo oficial para pessoas físicas ou empresas, e cartões internacionais (Visa/Mastercard) em até 12x.
                             </div>
                         </div>
                     </div>
@@ -1602,7 +1602,7 @@
                          :class="activeFaq === 3 ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
                         <div class="overflow-hidden">
                             <div class="px-4 sm:px-5 pb-4 pt-1 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/5">
-                                Sim! Com a solução corporativa da RACHI, oferecemos programas customizados para empresas com gestão de progresso para o RH e contratação corporativa por fatura proforma / IBAN.
+                                Sim! Com a solução corporativa da RACHI, oferecemos programas personalizados para empresas com gestão de progresso para o RH e contratação corporativa por factura pró-forma / IBAN.
                             </div>
                         </div>
                     </div>
@@ -1625,7 +1625,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
                             <img src="/images/areas/rachi-academy.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-academy.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'" 
                                  alt="RACHI Academy" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(99,102,241,0.35)] group-hover:scale-105 transition-all">
                         </picture>
@@ -1651,6 +1651,7 @@
                         <li><a href="/academy#cursos" class="hover:text-slate-900 dark:hover:text-white transition">Catálogo de Cursos</a></li>
                         <li><a href="/aluno-dashboard" class="hover:text-slate-900 dark:hover:text-white transition">Área do Aluno</a></li>
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto &amp; Matrículas</a></li>
+                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition">Reclamações e Denúncia</a></li>
                     </ul>
                 </div>
                 <div>

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-AO" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Dashboard | RACHI Academy — Portal do Aluno</title>
+    <title>Meu Dashboard | RACHI Academy ” Portal do Aluno</title>
     <meta name="description" content="Dashboard do Aluno RACHI Academy: continue seus estudos, acompanhe formações, ganhe XP e emita seus certificados.">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-rachi-dark.png">
     
@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="/toast.css">
     <script src="/toast.js"></script>
     <script src="/auth-session.js"></script>
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -169,7 +169,7 @@
             <h4 class="text-sm font-bold text-slate-900 dark:text-white" x-text="toast.title"></h4>
             <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5" x-text="toast.message"></p>
         </div>
-        <button @click="toast.visible = false" class="text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+        <button @click="toast.visible = false" class="text-slate-400 hover:text-slate-600 text-xs font-bold">âœ•</button>
     </div>
 
     <!-- ================================================================ -->
@@ -188,9 +188,9 @@
 
                     <a href="/aluno-dashboard" class="flex items-center gap-2 group cursor-pointer" title="RACHI Academy">
                         <!-- Logo Light Mode -->
-                        <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-7 sm:h-8 w-auto object-contain block dark:hidden transition group-hover:scale-105">
+                        <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-7 sm:h-8 w-auto object-contain block dark:hidden transition group-hover:scale-105">
                         <!-- Logo Dark Mode -->
-                        <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-7 sm:h-8 w-auto object-contain hidden dark:block transition group-hover:scale-105">
+                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-7 sm:h-8 w-auto object-contain hidden dark:block transition group-hover:scale-105">
                         <span class="font-heading font-black text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight">Academy</span>
                     </a>
                 </div>
@@ -341,7 +341,7 @@
             <!-- Mobile Close Button -->
             <div class="flex items-center justify-between mb-4 lg:hidden">
                 <span class="font-heading font-black text-sm text-slate-900 dark:text-white uppercase tracking-wider">Navegação</span>
-                <button @click="sidebarOpen = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">✕</button>
+                <button @click="sidebarOpen = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">âœ•</button>
             </div>
 
             <div class="space-y-4">
@@ -457,7 +457,7 @@
             <!-- ======================================================== -->
             <div x-show="activeMainTab === 'dashboard'" class="space-y-6">
 
-                <!-- 1. INDICADOR: ● CURSO EM ANDAMENTO (ALURA STYLE) -->
+                <!-- 1. INDICADOR: â— CURSO EM ANDAMENTO (ALURA STYLE) -->
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3">
                         <span class="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
@@ -543,7 +543,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                         <div>
                             <h2 class="text-lg sm:text-xl font-heading font-extrabold text-slate-900 dark:text-white">Meus Cursos</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Acesse seus cursos e continue de onde parou</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Aceda aos seus cursos e continue de onde parou</p>
                         </div>
 
                         <!-- Filtros -->
@@ -573,7 +573,7 @@
                                 
                                 <!-- Topo com a Imagem Real do Curso Sincronizada -->
                                 <div class="h-32 p-4 flex flex-col justify-between relative overflow-hidden group/card-top">
-                                    <!-- Imagem real da capa do curso cadastrado -->
+                                    <!-- Imagem real da capa do curso registado -->
                                     <img :src="curso.imagem || curso.thumbnail || ('/images/courses/' + curso.slug + '.jpg')" 
                                          :alt="curso.nome"
                                          class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105"
@@ -588,7 +588,7 @@
                                               x-text="curso.categoria"></span>
                                         <span :class="curso.progresso === 100 ? 'bg-emerald-500 text-white' : 'bg-white/95 text-slate-900'"
                                               class="text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs"
-                                              x-text="curso.progresso === 100 ? '✓ Concluído' : curso.progresso + '%'"></span>
+                                              x-text="curso.progresso === 100 ? 'âœ“ Concluído' : curso.progresso + '%'"></span>
                                     </div>
                                     <div class="relative z-20 text-white font-semibold text-xs flex items-center justify-between drop-shadow-md">
                                         <span class="flex items-center gap-1 font-mono text-[11px]">
@@ -720,7 +720,7 @@
                                     <div class="w-full flex items-center justify-between text-xs text-slate-500">
                                         <span>Conclua o curso para desbloquear</span>
                                         <button @click="openClassroom(curso)" class="text-[#0050f0] font-bold hover:underline cursor-pointer">
-                                            Continuar aula →
+                                            Continuar aula â†’
                                         </button>
                                     </div>
                                 </template>
@@ -758,11 +758,11 @@
                 <button @click="toggleLessonStatus(activeLesson)" 
                         :class="activeLesson?.concluida ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'bg-[#0050f0] text-white hover:bg-[#0042c7]'"
                         class="px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-                    <span x-show="activeLesson?.concluida">✓ Aula Concluída</span>
+                    <span x-show="activeLesson?.concluida">âœ“ Aula Concluída</span>
                     <span x-show="!activeLesson?.concluida">Marcar como Concluída</span>
                 </button>
 
-                <button @click="classroomModal = false" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white cursor-pointer font-bold">✕</button>
+                <button @click="classroomModal = false" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white cursor-pointer font-bold">âœ•</button>
             </div>
         </header>
 
@@ -784,7 +784,7 @@
 
                 <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
                     <span x-text="'Duração estimada: ' + (activeLesson?.duracao || '30min')"></span>
-                    <button @click="toggleLessonStatus(activeLesson)" class="text-[#00a3e0] hover:underline cursor-pointer">Avançar para a próxima aula →</button>
+                    <button @click="toggleLessonStatus(activeLesson)" class="text-[#00a3e0] hover:underline cursor-pointer">Avançar para a próxima aula â†’</button>
                 </div>
             </div>
 
@@ -834,14 +834,14 @@
                     <i data-lucide="award" class="w-5 h-5"></i>
                     <span class="text-xs uppercase tracking-wider">Certificado Oficial RACHI Academy</span>
                 </div>
-                <button @click="certificateModalOpen = false" class="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-pointer">✕</button>
+                <button @click="certificateModalOpen = false" class="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-pointer">âœ•</button>
             </div>
 
             <div id="printable-certificate" class="bg-gradient-to-br from-[#faf8f2] via-[#ffffff] to-[#f7f4ec] border-4 border-double border-amber-500/50 rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden shadow-lg">
                 <div class="relative z-10 space-y-5">
                     <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-9 mx-auto object-contain">
                     <div class="text-[11px] font-bold uppercase tracking-widest text-amber-800">
-                        CERTIFICADO OFICIAL DE CONCLUSÃO E CAPACITAÇÃO EXECUTIVA
+                        CERTIFICADO OFICIAL DE CONCLUSÃƒO E CAPACITAÇÃƒO EXECUTIVA
                     </div>
                     <p class="text-xs text-slate-600">Certificamos com distinção de mérito acadêmico que:</p>
                     <h2 class="text-2xl sm:text-3xl font-heading font-extrabold text-slate-950 tracking-wide underline decoration-amber-500/60 underline-offset-8" 
@@ -857,7 +857,7 @@
                             <div class="font-mono text-amber-700 font-bold text-xs" x-text="'RACHI-CERT-' + (currentUser.aluno_id || '104') + '-' + (certificateCourse?.id || '1') + '-2026'"></div>
                         </div>
                         <div class="text-right">
-                            <div class="text-[10px] uppercase font-bold text-slate-400">DATA DE EMISSÃO</div>
+                            <div class="text-[10px] uppercase font-bold text-slate-400">DATA DE EMISSÃƒO</div>
                             <div class="text-slate-800 font-semibold" x-text="new Date().toLocaleDateString('pt-AO')"></div>
                         </div>
                     </div>
@@ -887,7 +887,7 @@
                     <i data-lucide="sparkles" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Modo Entrevista Técnica (IA)</h3>
                 </div>
-                <button @click="interviewModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
+                <button @click="interviewModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Pratique entrevistas reais simuladas com perguntas técnicas de TI, Cibersegurança, Finanças e Gestão Corporativa com feedbacks em tempo real.
@@ -911,25 +911,25 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2 text-[#0050f0]">
                     <i data-lucide="book-open" class="w-5 h-5"></i>
-                    <h3 class="text-base font-bold text-slate-900 dark:text-white">Meus Livros &amp; Apostilas</h3>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white">Os Meus Livros &amp; Manuais</h3>
                 </div>
-                <button @click="booksModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
+                <button @click="booksModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300">Acesse e faça download das apostilas oficiais, guias práticos e referências bibliográficas do seu curso:</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300">Aceda e faça download das manuais de formação oficiais, guias práticos e referências bibliográficas do seu curso:</p>
             <div class="space-y-2 text-xs">
                 <div class="p-3 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
                     <div>
                         <span class="font-bold text-slate-900 dark:text-white block">Manual de Cibersegurança &amp; Defesa Ativa</span>
-                        <span class="text-[11px] text-slate-500">PDF • 140 páginas • RACHI Academy Press</span>
+                        <span class="text-[11px] text-slate-500">PDF —¢ 140 páginas —¢ RACHI Academy Press</span>
                     </div>
-                    <button @click="toastMessage('Download do livro iniciado...', 'Download')" class="px-3 py-1.5 rounded-lg bg-blue-50 text-[#0050f0] font-bold border border-blue-200">Baixar</button>
+                    <button @click="toastMessage('Download do livro iniciado...', 'Download')" class="px-3 py-1.5 rounded-lg bg-blue-50 text-[#0050f0] font-bold border border-blue-200">Descarregar</button>
                 </div>
                 <div class="p-3 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
                     <div>
                         <span class="font-bold text-slate-900 dark:text-white block">Guia de Redes e Arquitetura Cliente-Servidor</span>
-                        <span class="text-[11px] text-slate-500">PDF • 95 páginas • RACHI Academy Press</span>
+                        <span class="text-[11px] text-slate-500">PDF —¢ 95 páginas —¢ RACHI Academy Press</span>
                     </div>
-                    <button @click="toastMessage('Download do livro iniciado...', 'Download')" class="px-3 py-1.5 rounded-lg bg-blue-50 text-[#0050f0] font-bold border border-blue-200">Baixar</button>
+                    <button @click="toastMessage('Download do livro iniciado...', 'Download')" class="px-3 py-1.5 rounded-lg bg-blue-50 text-[#0050f0] font-bold border border-blue-200">Descarregar</button>
                 </div>
             </div>
             <div class="flex justify-end pt-2">
@@ -948,12 +948,12 @@
                     <i data-lucide="calendar" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Agenda de Eventos e Mentorias</h3>
                 </div>
-                <button @click="eventsModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
+                <button @click="eventsModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
             </div>
             <div class="space-y-3 text-xs">
                 <div class="p-3.5 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
                     <div>
-                        <span class="text-[10px] font-bold text-emerald-600 uppercase bg-emerald-50 px-2 py-0.5 rounded">Próxima Quinta • 18:00</span>
+                        <span class="text-[10px] font-bold text-emerald-600 uppercase bg-emerald-50 px-2 py-0.5 rounded">Próxima Quinta —¢ 18:00</span>
                         <h4 class="font-bold text-slate-900 dark:text-white mt-1">Live Coding: Análise Forense de Incidentes de Segurança</h4>
                     </div>
                     <button @click="toastMessage('Lembrete ativado no seu calendário!', 'Lembretes')" class="px-3 py-1.5 rounded-lg bg-[#0050f0] text-white font-bold">Lembrar-me</button>
@@ -977,7 +977,7 @@
                     <i data-lucide="shield-check" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Histórico de Acessos &amp; Sessões</h3>
                 </div>
-                <button @click="accessLogsModal = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
+                <button @click="accessLogsModal = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
             </div>
 
             <p class="text-xs text-slate-600 dark:text-slate-300">Registros de segurança de autenticação do seu usuário na RACHI Academy:</p>
@@ -1057,7 +1057,7 @@
                 formations: [
                     {
                         id: 1,
-                        icon: '🛡️',
+                        icon: 'ðŸ›¡ï¸',
                         title: 'Formação Cibersegurança & Defesa Ativa',
                         description: 'Trilha completa cobrindo governança de segurança, prevenção a ameaças cibernéticas e conformidade com a APD.',
                         totalHours: 115,
@@ -1072,7 +1072,7 @@
                     },
                     {
                         id: 2,
-                        icon: '📈',
+                        icon: 'ðŸ“ˆ',
                         title: 'Formação Gestão Financeira & Liderança Corporativa',
                         description: 'Domínio de DRE, valuation, fluxo de caixa estratégico e liderança de equipas.',
                         totalHours: 100,
@@ -1087,7 +1087,7 @@
                     },
                     {
                         id: 3,
-                        icon: '⚡',
+                        icon: 'âš¡',
                         title: 'Formação Automação de Escritório & Produtividade com IA',
                         description: 'Trabalho colaborativo em nuvem, automação com inteligência artificial e Power BI.',
                         totalHours: 66,

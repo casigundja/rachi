@@ -10,15 +10,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="admin-session-authenticated" content="{{ auth()->check() && auth()->user()->isAdmin() ? 'true' : 'false' }}">
-    <title>RACHI — Soluções inteligentes</title>
-    <meta name="description" content="RACHI — soluções inteligentes em tecnologia, educação e serviços empresariais.">
+    <title>RACHI — Soluções Inteligentes em Tecnologia, Gráfica, Formação & Gestão</title>
+    <meta name="description" content="Ecossistema empresarial em Angola: RACHI Tec (tecnologia, websites e suporte de TI), RACHI Print (gráfica e brindes), RACHI Academy (formações executivas) e RACHI Human Capital (RH, contabilidade e legalização).">
+    <link rel="canonical" href="https://rachi.ao/">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-rachi-light.png">
+
+    <!-- Open Graph / Redes Sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rachi.ao/">
+    <meta property="og:title" content="RACHI — Soluções Inteligentes em Angola">
+    <meta property="og:description" content="Soluções integradas de tecnologia, produção gráfica, formação profissional corporativa e consultoria em recursos humanos em Luanda e em todo o país.">
+    <meta property="og:image" content="https://rachi.ao/images/banner_modo_claro.png">
+    <meta property="og:locale" content="pt_AO">
+    <meta property="og:site_name" content="RACHI">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RACHI — Soluções Inteligentes em Angola">
+    <meta name="twitter:description" content="Tecnologia, produção gráfica, formação profissional e capital humano integrados.">
+    <meta name="twitter:image" content="https://rachi.ao/images/banner_modo_claro.png">
+
+    <!-- Dados Estruturados Schema.org (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RACHI",
+      "legalName": "RACHI — Soluções Inteligentes",
+      "url": "https://rachi.ao",
+      "logo": "https://rachi.ao/images/logo-rachi-light.png",
+      "description": "Ecossistema de serviços empresariais integrados em Angola nas áreas de tecnologia, produção gráfica, capacitação profissional e gestão de pessoas.",
+      "telephone": "+244972888585",
+      "email": "geral@rachi.ao",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Ndunduma, Miramar (Por detrás do BFA)",
+        "addressLocality": "Luanda",
+        "addressRegion": "Luanda",
+        "addressCountry": "AO"
+      },
+      "department": [
+        {
+          "@type": "ProfessionalService",
+          "name": "RACHI Tec",
+          "description": "Desenvolvimento de websites, plataformas web, digitalização de processos e suporte técnico de TI com SLA."
+        },
+        {
+          "@type": "ProfessionalService",
+          "name": "RACHI Print",
+          "description": "Produção gráfica corporativa, brindes empresariais, impressão institucional e sinalética."
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "RACHI Academy",
+          "description": "Cursos práticos e formação executiva com certificação verificável via QR Code."
+        },
+        {
+          "@type": "ProfessionalService",
+          "name": "RACHI Human Capital",
+          "description": "Estruturação societária, contabilidade, processamento salarial e recrutamento de talentos."
+        }
+      ]
+    }
+    </script>
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -461,7 +522,7 @@
             animation: toastShrink 4.5s linear forwards;
         }
 
-        /* Hero styling matching hom.rachi.ao & screenshot with Dual Theme (Light & Dark) */
+        /* Hero styling matching rachi.ao & screenshot with Dual Theme (Light & Dark) */
         /* ============================================================
            HERO REDESIGN: EXECUTIVE SIZING & INTEGRATED ARTWORK BACKDROP
         ============================================================ */
@@ -2160,7 +2221,7 @@
 
 
     <!-- ============================================================== -->
-    <!-- VIEW 1: PUBLIC PORTAL (EXACT CLONE OF https://hom.rachi.ao/)   -->
+    <!-- VIEW 1: PUBLIC PORTAL (EXACT CLONE OF https://rachi.ao/)   -->
     <!-- ============================================================== -->
     <div x-show="currentView === 'public'">
 
@@ -2173,7 +2234,7 @@
                         class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png"
-                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'"
+                            onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"
                             alt="RACHI"
                             class="brand-logo-img logo-light filter drop-shadow-sm group-hover:drop-shadow-[0_0_12px_rgba(0,163,224,0.3)] transition-all">
                         <!-- Dark Logo (for light header when scrolled) -->
@@ -2226,7 +2287,21 @@
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false"
+                                                                                    <a href="#diferencial" @click.prevent="scrollToSection('diferencial'); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">O nosso diferencial</span>
+                            </a>
+                            <a href="#missao" @click.prevent="openIdentityModal(); open = false; solutionsOpen = false"
+                                class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="compass" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">Missão, visão e valores</span>
+                            </a>
+<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false"
                                 class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span
                                     class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
@@ -2240,7 +2315,7 @@
                                     class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
                                 </span>
-                                <span class="font-medium text-xs dropdown-title">Depoimentos</span>
+                                <span class="font-medium text-xs dropdown-title">Testemunhos</span>
                             </a>
                         </div>
                     </div>
@@ -2266,7 +2341,7 @@
                         </span>
                     </button>
 
-                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="nav-link"
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false; mobileMenuOpen = false" class="nav-link"
                         :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
@@ -2283,7 +2358,7 @@
                 <div class="header-col-auth w-auto lg:w-[140px] flex-shrink-0 flex items-center justify-end gap-2 sm:gap-3 z-10">
                     
 
-                    <!-- Entrar / Perfil do Usuário Autenticado (Renderizado estaticamente para zero layout shift) -->
+                    <!-- Entrar / Perfil do Utilizador Autenticado (Renderizado estaticamente para zero layout shift) -->
                     <button x-show="!currentUser" @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
@@ -2414,14 +2489,18 @@
                 <div class="border-t border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Sobre Nós</span>
                     <div class="pl-3 mt-1 space-y-1.5">
-                        <a href="#sobre" @click.prevent="scrollToSection('sobre')"
+                        <a href="#sobre" @click.prevent="scrollToSection('sobre'); mobileMenuOpen = false"
                             class="block text-sm text-slate-400 hover:text-white">Quem somos</a>
-                        <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos')"
+                        <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); mobileMenuOpen = false"
                             class="block text-sm text-slate-400 hover:text-white">O que fazemos</a>
-                        <a href="#parceiros" @click.prevent="scrollToSection('parceiros')"
+                                                <a href="#diferencial" @click.prevent="scrollToSection('diferencial'); mobileMenuOpen = false"
+                            class="block text-sm text-slate-400 hover:text-white transition">O nosso diferencial</a>
+                        <a href="#missao" @click.prevent="openIdentityModal(); mobileMenuOpen = false"
+                            class="block text-sm text-slate-400 hover:text-white transition">Missão, visão e valores</a>
+<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); mobileMenuOpen = false"
                             class="block text-sm text-slate-400 hover:text-white">Parceiros</a>
-                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos')"
-                            class="block text-sm text-slate-400 hover:text-white">Depoimentos</a>
+                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); mobileMenuOpen = false"
+                            class="block text-sm text-slate-400 hover:text-white">Testemunhos</a>
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2">
@@ -2442,7 +2521,7 @@
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2 space-y-2">
-                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false"
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false; mobileMenuOpen = false"
                         class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
                     <a href="/loja" class="block font-medium py-1 hover:text-[#00a3e0]">Loja</a>
                     <a href="/contacto" class="block font-medium py-1 hover:text-[#00a3e0]">Contacto</a>
@@ -2541,7 +2620,7 @@
                                 fetchpriority="high" decoding="async">
                         </picture>
 
-                        <a class="hero-video-link" href="#sobre" @click.prevent="scrollToSection('sobre')"
+                        <a class="hero-video-link" href="#sobre" @click.prevent="scrollToSection('sobre'); mobileMenuOpen = false"
                             aria-label="Conheça a RACHI">
                             <span class="hero-video-play" aria-hidden="true">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -2598,7 +2677,7 @@
                     </div>
 
                     <div class="hero-identity-action reveal delay-2">
-                        <button class="hero-identity-link" type="button" @click="identityModalOpen = true"
+                        <button class="hero-identity-link" type="button" @click="openIdentityModal()"
                             aria-haspopup="dialog">
                             <span>VER MISSÃO, VISÃO E VALORES</span>
                             <span aria-hidden="true">&rarr;</span>
@@ -2636,7 +2715,7 @@
                                 desafios do mercado angolano.
                             </p>
                             <div class="pt-4 flex flex-wrap gap-4">
-                                <button @click="identityModalOpen = true"
+                                <button @click="openIdentityModal()"
                                     class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#071326] hover:bg-[#0d1f3d] text-white font-semibold text-sm transition">
                                     <i data-lucide="compass" class="w-4 h-4 text-amber-400"></i>
                                     <span>Missão, visão e valores</span>
@@ -2650,20 +2729,19 @@
                         </div>
 
                         <div class="lg:col-span-6 relative">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800">
-                                <img src="https://hom.rachi.ao/assets/img/about-team.png"
-                                    onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/about-team.webp'"
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl dark:shadow-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#071326] transition-colors duration-300">
+                                <img src="/images/about-team-clean.png"
+                                    onerror="this.onerror=null; this.src='/images/about-team-clean.png'"
                                     alt="Equipa RACHI — pessoas, processos e tecnologia"
                                     class="w-full h-auto object-cover dark:hidden">
                                 <img src="/images/about-team-dark.jpg"
-                                    onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/about-team.png'"
+                                    onerror="this.onerror=null; this.src='/images/about-team-clean.png'"
                                     alt="Equipa RACHI — pessoas, processos e tecnologia"
                                     class="w-full h-auto object-cover hidden dark:block">
                                 <div
-                                    class="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-md text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-between border border-white/10">
-                                    <span class="tracking-wider uppercase text-amber-400">Pessoas • Processos •
-                                        Tecnologia</span>
-                                    <span class="text-slate-300">Luanda, Angola</span>
+                                    class="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-between border border-slate-200/90 dark:border-white/10 z-20 shadow-md transition-colors">
+                                    <span class="tracking-wider uppercase text-amber-500 dark:text-amber-400 font-extrabold">Pessoas • Processos • Tecnologia</span>
+                                    <span class="text-slate-500 dark:text-slate-300 font-medium">Luanda, Angola</span>
                                 </div>
                             </div>
                         </div>
@@ -2852,12 +2930,12 @@
 
                         <div class="lg:col-span-6">
                             <div class="rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
-                                <img src="https://hom.rachi.ao/assets/img/what-we-do-team.png"
-                                    onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/what-we-do-team.webp'"
+                                <img src="/images/what-we-do-team-clean.png"
+                                    onerror="this.onerror=null; this.src='/images/what-we-do-team-clean.png'"
                                     alt="Profissionais RACHI a desenvolver soluções integradas"
                                     class="w-full h-auto object-cover dark:hidden">
                                 <img src="/images/what-we-do-team-dark.jpg"
-                                    onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/what-we-do-team.png'"
+                                    onerror="this.onerror=null; this.src='/images/what-we-do-team-clean.png'"
                                     alt="Profissionais RACHI a desenvolver soluções integradas"
                                     class="w-full h-auto object-cover hidden dark:block">
                             </div>
@@ -3163,7 +3241,478 @@
 
             <!-- ========================================================= -->
             <!-- SECTION: PARCEIROS ESTRATÉGICOS (SPLIT BENTO ARCHITECTURE) -->
+            
+                        <!-- ========================================================= -->
+            <!-- SECTION: O NOSSO DIFERENCIAL                              -->
             <!-- ========================================================= -->
+            <section id="diferencial" class="diff-section py-20 transition-colors duration-300" aria-labelledby="diferencial-title">
+                <style>
+                    /* Base Light Mode — O Nosso Diferencial */
+                    #diferencial.diff-section {
+                        background-color: #ffffff !important;
+                        border-top: 1px solid #e2e8f0 !important;
+                        color: #071326;
+                    }
+                    html.dark #diferencial.diff-section {
+                        background-color: #071326 !important;
+                        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+                        color: #e2e8f0 !important;
+                    }
+
+                    #diferencial .diff-hero-flex {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2.5rem;
+                        align-items: center;
+                    }
+                    @media (min-width: 1024px) {
+                        #diferencial .diff-hero-flex {
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: 3rem;
+                        }
+                        #diferencial .diff-hero-text {
+                            flex: 1 1 0%;
+                            min-width: 0;
+                        }
+                        #diferencial .diff-hero-image {
+                            width: 50%;
+                            max-width: 580px;
+                            flex-shrink: 0;
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+                    }
+
+                    /* Typography & Dual Brand Bars */
+                    #diferencial .diff-main-title {
+                        font-family: 'Montserrat', sans-serif;
+                        line-height: 1.08;
+                        color: #071326;
+                    }
+                    html.dark #diferencial .diff-main-title {
+                        color: #ffffff !important;
+                    }
+                    #diferencial .diff-title-accent {
+                        color: #eba72d;
+                    }
+                    html.dark #diferencial .diff-title-accent {
+                        color: #fbbf24 !important;
+                    }
+                    #diferencial .diff-pill-blue {
+                        background-color: #0050f0 !important;
+                    }
+                    html.dark #diferencial .diff-pill-blue {
+                        background-color: #00a3e0 !important;
+                        box-shadow: 0 0 12px rgba(0, 163, 224, 0.45);
+                    }
+                    #diferencial .diff-pill-gold {
+                        background-color: #eba72d !important;
+                    }
+                    html.dark #diferencial .diff-pill-gold {
+                        background-color: #fbbf24 !important;
+                        box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+                    }
+                    #diferencial .diff-hero-sub {
+                        color: #334155;
+                    }
+                    html.dark #diferencial .diff-hero-sub {
+                        color: #e2e8f0 !important;
+                    }
+
+                    /* Dual-Theme Studio Visual Card */
+                    #diferencial .diff-visual-wrap {
+                        width: 100%;
+                        max-width: 36rem;
+                    }
+                    #diferencial .diff-visual-card {
+                        background-color: #ffffff !important;
+                        border: 1px solid rgba(226, 232, 240, 0.95) !important;
+                        box-shadow: 0 20px 45px -12px rgba(7, 19, 38, 0.10), 0 4px 14px -2px rgba(7, 19, 38, 0.04) !important;
+                        border-radius: 1rem;
+                        overflow: hidden;
+                        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+                    }
+                    html.dark #diferencial .diff-visual-card {
+                        background-color: #071326 !important;
+                        border: 1px solid rgba(255, 255, 255, 0.10) !important;
+                        box-shadow: 0 24px 55px -12px rgba(0, 0, 0, 0.72), 0 0 32px rgba(0, 80, 240, 0.12) !important;
+                    }
+                    #diferencial .diff-img-light {
+                        display: block !important;
+                        width: 100%;
+                        height: auto;
+                    }
+                    #diferencial .diff-img-dark {
+                        display: none !important;
+                        width: 100%;
+                        height: auto;
+                    }
+                    html.dark #diferencial .diff-img-light {
+                        display: none !important;
+                    }
+                    html.dark #diferencial .diff-img-dark {
+                        display: block !important;
+                    }
+
+                    /* Middle Content: Foco no que realmente importa */
+                    #diferencial .diff-content-grid {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
+                        align-items: flex-start;
+                        width: 100%;
+                        border-top: 1px solid #f1f5f9;
+                    }
+                    html.dark #diferencial .diff-content-grid {
+                        border-top-color: rgba(255, 255, 255, 0.08) !important;
+                    }
+                    @media (min-width: 768px) {
+                        #diferencial .diff-content-grid {
+                            flex-direction: row;
+                            align-items: flex-start;
+                            gap: 3.5rem;
+                        }
+                        #diferencial .diff-tagline-col {
+                            width: 240px;
+                            flex-shrink: 0;
+                        }
+                        #diferencial .diff-text-col {
+                            flex: 1 1 0%;
+                            min-width: 0;
+                            width: 100%;
+                        }
+                    }
+                    #diferencial .diff-target-badge {
+                        background-color: #eff6ff;
+                        border: 1px solid #bfdbfe;
+                        color: #0284c7;
+                        box-shadow: 0 2px 8px rgba(2, 132, 199, 0.08);
+                    }
+                    html.dark #diferencial .diff-target-badge {
+                        background-color: rgba(0, 163, 224, 0.14) !important;
+                        border-color: rgba(56, 189, 248, 0.35) !important;
+                        color: #38bdf8 !important;
+                        box-shadow: 0 0 18px rgba(0, 163, 224, 0.18) !important;
+                    }
+                    #diferencial .diff-tagline-title {
+                        color: #0f172a;
+                    }
+                    html.dark #diferencial .diff-tagline-title {
+                        color: #ffffff !important;
+                    }
+                    #diferencial .diff-text-col p {
+                        color: #475569;
+                    }
+                    html.dark #diferencial .diff-text-col p {
+                        color: #cbd5e1 !important;
+                    }
+                    #diferencial .diff-text-col strong {
+                        color: #0f172a;
+                    }
+                    html.dark #diferencial .diff-text-col strong {
+                        color: #ffffff !important;
+                    }
+
+                    /* Bottom Highlight Box: O QUE NOS TORNA DIFERENTES */
+                    #diferencial .diff-pillars-box {
+                        margin-top: 4rem;
+                        background-color: #f8fafc !important;
+                        border: 1px solid #e2e8f0 !important;
+                        border-radius: 1.5rem;
+                        padding: 2rem;
+                        box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.05);
+                        transition: all 0.3s ease;
+                    }
+                    @media (min-width: 640px) {
+                        #diferencial .diff-pillars-box {
+                            margin-top: 5rem;
+                            padding: 3rem;
+                        }
+                    }
+                    html.dark #diferencial .diff-pillars-box {
+                        background: linear-gradient(145deg, rgba(12, 26, 51, 0.92) 0%, rgba(8, 19, 38, 0.96) 100%) !important;
+                        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                        box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+                    }
+                    #diferencial .diff-pillars-heading {
+                        color: #0f172a;
+                    }
+                    html.dark #diferencial .diff-pillars-heading {
+                        color: #ffffff !important;
+                    }
+
+                    #diferencial .diff-cards-grid {
+                        display: grid;
+                        grid-template-columns: repeat(1, minmax(0, 1fr));
+                        gap: 1.5rem;
+                        width: 100%;
+                    }
+                    @media (min-width: 640px) {
+                        #diferencial .diff-cards-grid {
+                            grid-template-columns: repeat(2, minmax(0, 1fr));
+                        }
+                    }
+                    @media (min-width: 1024px) {
+                        #diferencial .diff-cards-grid {
+                            grid-template-columns: repeat(5, minmax(0, 1fr));
+                            gap: 1.25rem;
+                        }
+                    }
+
+                    #diferencial .diff-pillar-item {
+                        border-radius: 1rem;
+                        padding: 1rem;
+                        border: 1px solid transparent;
+                        transition: background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+                    }
+                    #diferencial .diff-pillar-item:hover {
+                        background-color: #ffffff !important;
+                        border-color: #e2e8f0 !important;
+                        box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.07);
+                        transform: translateY(-2px);
+                    }
+                    html.dark #diferencial .diff-pillar-item:hover {
+                        background-color: rgba(255, 255, 255, 0.04) !important;
+                        border-color: rgba(255, 255, 255, 0.10) !important;
+                        box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45);
+                    }
+                    #diferencial .diff-pillar-title {
+                        color: #0f172a;
+                    }
+                    html.dark #diferencial .diff-pillar-title {
+                        color: #ffffff !important;
+                    }
+                    #diferencial .diff-pillar-desc {
+                        color: #475569;
+                    }
+                    html.dark #diferencial .diff-pillar-desc {
+                        color: #94a3b8 !important;
+                    }
+
+                    /* 5 Colored Pillar Icon Badges (Light & Dark) */
+                    #diferencial .diff-icon-blue {
+                        background-color: #eff6ff;
+                        border: 1px solid #bfdbfe;
+                        color: #0050f0;
+                    }
+                    html.dark #diferencial .diff-icon-blue {
+                        background-color: rgba(37, 99, 235, 0.16) !important;
+                        border-color: rgba(96, 165, 250, 0.35) !important;
+                        color: #60a5fa !important;
+                    }
+                    #diferencial .diff-icon-amber {
+                        background-color: #fffbeb;
+                        border: 1px solid #fde68a;
+                        color: #d97706;
+                    }
+                    html.dark #diferencial .diff-icon-amber {
+                        background-color: rgba(245, 158, 11, 0.16) !important;
+                        border-color: rgba(251, 191, 36, 0.35) !important;
+                        color: #fbbf24 !important;
+                    }
+                    #diferencial .diff-icon-emerald {
+                        background-color: #ecfdf5;
+                        border: 1px solid #a7f3d0;
+                        color: #059669;
+                    }
+                    html.dark #diferencial .diff-icon-emerald {
+                        background-color: rgba(16, 185, 129, 0.16) !important;
+                        border-color: rgba(52, 211, 153, 0.35) !important;
+                        color: #34d399 !important;
+                    }
+                    #diferencial .diff-icon-purple {
+                        background-color: #faf5ff;
+                        border: 1px solid #e9d5ff;
+                        color: #7c3aed;
+                    }
+                    html.dark #diferencial .diff-icon-purple {
+                        background-color: rgba(168, 85, 247, 0.16) !important;
+                        border-color: rgba(192, 132, 252, 0.35) !important;
+                        color: #c084fc !important;
+                    }
+                    #diferencial .diff-icon-cyan {
+                        background-color: #ecfeff;
+                        border: 1px solid #a5f3fc;
+                        color: #0891b2;
+                    }
+                    html.dark #diferencial .diff-icon-cyan {
+                        background-color: rgba(6, 182, 212, 0.16) !important;
+                        border-color: rgba(34, 211, 238, 0.35) !important;
+                        color: #22d3ee !important;
+                    }
+                </style>
+
+                <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                    
+                    <!-- Top Flex: Hero with Title & Corporate Team Visual -->
+                    <div class="diff-hero-flex mb-16">
+                        
+                        <!-- Left: Title, Decorative Pill Bar, Subtitle -->
+                        <div class="diff-hero-text w-full">
+                            <h2 id="diferencial-title" class="diff-main-title text-4xl sm:text-5xl lg:text-6xl font-[850] uppercase tracking-tight">
+                                O NOSSO<br>
+                                <span class="diff-title-accent">DIFERENCIAL</span>
+                            </h2>
+                            
+                            <!-- Decorative dual-color bar (Blue & Yellow) -->
+                            <div class="flex items-center gap-1.5 mt-5 mb-6">
+                                <span class="diff-pill-blue w-10 h-1.5 rounded-full"></span>
+                                <span class="diff-pill-gold w-10 h-1.5 rounded-full"></span>
+                            </div>
+
+                            <!-- Subtitle -->
+                            <div class="space-y-1">
+                                <p class="diff-hero-sub text-xl sm:text-2xl font-semibold">
+                                    Integramos soluções.
+                                </p>
+                                <p class="diff-hero-sub text-xl sm:text-2xl font-semibold">
+                                    Transformamos negócios.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right: Corporate Team Image Visual (Dual-Theme: Light & Dark) -->
+                        <div class="diff-hero-image w-full">
+                            <div class="diff-visual-wrap relative">
+                                <div class="diff-visual-card relative">
+                                    <img src="/images/differential-team-clean.png?v=8"
+                                         onerror="this.onerror=null; this.src='/images/differential-team.jpg'"
+                                         alt="O Nosso Diferencial — Equipa RACHI"
+                                         class="diff-img-light object-cover select-none">
+                                    <img src="/images/differential-team-dark.jpg?v=8"
+                                         onerror="this.onerror=null; this.src='/images/differential-team-clean.png'"
+                                         alt="O Nosso Diferencial — Equipa RACHI"
+                                         class="diff-img-dark object-cover select-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Content: Foco no que realmente importa + 3 Parágrafos -->
+                    <div class="diff-content-grid pt-8">
+                        
+                        <!-- Left: Circular Icon Badge + Tagline -->
+                        <div class="diff-tagline-col pt-2">
+                            <div class="diff-target-badge w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="6"></circle>
+                                    <circle cx="12" cy="12" r="2"></circle>
+                                </svg>
+                            </div>
+                            <p class="diff-tagline-title font-extrabold text-base sm:text-lg leading-snug">
+                                Foco no que<br>realmente importa
+                            </p>
+                        </div>
+
+                        <!-- Right: 3 Text Paragraphs with Bold Emphasis -->
+                        <div class="diff-text-col space-y-6 text-base sm:text-lg leading-relaxed">
+                            <p>
+                                O diferencial da RACHI está na capacidade de <strong class="font-bold">integrar</strong>, num só ecossistema, <strong class="font-bold">soluções essenciais</strong> para a estruturação, modernização e crescimento das empresas.
+                            </p>
+                            <p>
+                                Não actuamos apenas sobre <strong class="font-bold">problemas isolados</strong>. Analisamos a realidade de cada negócio, identificamos os seus principais desafios e desenvolvemos <strong class="font-bold">soluções ajustadas</strong> às suas necessidades, combinando formalização empresarial, gestão, recursos humanos, formação, tecnologia e comunicação institucional.
+                            </p>
+                            <p>
+                                A RACHI diferencia-se também, pela <strong class="font-bold">abordagem prática, integrada e orientada para resultados</strong>, oferecendo aos seus clientes uma resposta completa para transformar ideias em negócios estruturados e empresas tradicionais em organizações mais <strong class="font-bold">modernas, competitivas e sustentáveis</strong>.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Highlight Card: O QUE NOS TORNA DIFERENTES -->
+                    <div class="diff-pillars-box">
+                        
+                        <!-- Card Header -->
+                        <div class="text-center max-w-xl mx-auto mb-12">
+                            <h3 class="diff-pillars-heading text-xl sm:text-2xl font-[850] uppercase tracking-wider">
+                                O QUE NOS TORNA DIFERENTES
+                            </h3>
+                            <div class="flex items-center justify-center gap-1.5 mt-2.5">
+                                <span class="diff-pill-blue w-6 h-1 rounded-full"></span>
+                                <span class="diff-pill-gold w-6 h-1 rounded-full"></span>
+                            </div>
+                        </div>
+
+                        <!-- 5 Columns Grid -->
+                        <div class="diff-cards-grid">
+                            
+                            <!-- 1. INTEGRAÇÃO -->
+                            <div class="diff-pillar-item flex flex-col items-center text-center group">
+                                <div class="diff-icon-blue w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                                    <i data-lucide="puzzle" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="diff-pillar-title font-[850] text-xs sm:text-sm tracking-wider uppercase mb-2">
+                                    INTEGRAÇÃO
+                                </h4>
+                                <p class="diff-pillar-desc text-xs leading-relaxed">
+                                    Todas as soluções que o seu negócio precisa, num só ecossistema.
+                                </p>
+                            </div>
+
+                            <!-- 2. ABORDAGEM PRÁTICA -->
+                            <div class="diff-pillar-item flex flex-col items-center text-center group">
+                                <div class="diff-icon-amber w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                                    <i data-lucide="user" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="diff-pillar-title font-[850] text-xs sm:text-sm tracking-wider uppercase mb-2">
+                                    ABORDAGEM PRÁTICA
+                                </h4>
+                                <p class="diff-pillar-desc text-xs leading-relaxed">
+                                    Soluções aplicáveis à realidade do seu negócio.
+                                </p>
+                            </div>
+
+                            <!-- 3. ORIENTAÇÃO PARA RESULTADOS -->
+                            <div class="diff-pillar-item flex flex-col items-center text-center group">
+                                <div class="diff-icon-emerald w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                                    <i data-lucide="trending-up" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="diff-pillar-title font-[850] text-xs sm:text-sm tracking-wider uppercase mb-2">
+                                    ORIENTAÇÃO PARA RESULTADOS
+                                </h4>
+                                <p class="diff-pillar-desc text-xs leading-relaxed">
+                                    Foco em gerar valor, eficiência e crescimento sustentável.
+                                </p>
+                            </div>
+
+                            <!-- 4. SOLUÇÕES AJUSTADAS -->
+                            <div class="diff-pillar-item flex flex-col items-center text-center group">
+                                <div class="diff-icon-purple w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="diff-pillar-title font-[850] text-xs sm:text-sm tracking-wider uppercase mb-2">
+                                    SOLUÇÕES AJUSTADAS
+                                </h4>
+                                <p class="diff-pillar-desc text-xs leading-relaxed">
+                                    Analisamos o seu negócio e criamos soluções à medida.
+                                </p>
+                            </div>
+
+                            <!-- 5. PARCEIRA DE CONFIANÇA -->
+                            <div class="diff-pillar-item flex flex-col items-center text-center group">
+                                <div class="diff-icon-cyan w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="diff-pillar-title font-[850] text-xs sm:text-sm tracking-wider uppercase mb-2">
+                                    PARCEIRA DE CONFIANÇA
+                                </h4>
+                                <p class="diff-pillar-desc text-xs leading-relaxed">
+                                    Compromisso com a transparência, ética e o sucesso dos nossos clientes.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+<!-- ========================================================= -->
             <section id="parceiros" class="relative py-20 lg:py-28 bg-[#f8fafc] overflow-hidden border-t border-slate-200" aria-labelledby="partners-title">
                 <!-- Ambient Backdrop Glows -->
                 <div class="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
@@ -3325,7 +3874,7 @@
             </section>
 
             <!-- ========================================================= -->
-            <!-- SECTION: DEPOIMENTOS                                     -->
+            <!-- SECTION: TESTEMUNHOS                                    -->
             <!-- ========================================================= -->
             <section id="depoimentos" class="py-20 bg-slate-50 border-t border-slate-200"
                 aria-labelledby="testimonials-title">
@@ -3335,7 +3884,7 @@
                             Conquistada</span>
                         <h2 id="testimonials-title"
                             class="text-3xl md:text-4xl font-[850] text-[#071326] mt-2 uppercase">
-                            O que dizem quem trabalha connosco
+                            O que diz quem trabalha connosco
                         </h2>
                         <p class="text-slate-600 mt-3 text-sm md:text-base">
                             Resultados e confiança construídos com empresas, líderes e profissionais que escolheram a
@@ -3489,7 +4038,7 @@
                                     <picture>
                                         <source srcset="/images/areas/rachi-human-capital.webp?v={{ time() }}" type="image/webp">
                                         <img src="/images/areas/rachi-human-capital.png?v={{ time() }}"
-                                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'"
+                                            onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'"
                                             alt="RACHI Human Capital"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
                                     </picture>
@@ -3554,7 +4103,7 @@
                                     <picture>
                                         <source srcset="/images/areas/rachi-academy.webp?v={{ time() }}" type="image/webp">
                                         <img src="/images/areas/rachi-academy.png?v={{ time() }}"
-                                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-academy.png'"
+                                            onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'"
                                             alt="RACHI Academy"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
                                     </picture>
@@ -3579,7 +4128,7 @@
                                     </div>
                                     <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                         <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-500 shrink-0"></i>
-                                        <span>Treinamento Corporativo In-Company</span>
+                                        <span>Formação Corporativa In-Company</span>
                                     </div>
                                 </div>
                             </div>
@@ -3619,7 +4168,7 @@
                                     <picture>
                                         <source srcset="/images/areas/rachi-tec.webp?v={{ time() }}" type="image/webp">
                                         <img src="/images/areas/rachi-tec.png?v={{ time() }}"
-                                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-tec.png'"
+                                            onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'"
                                             alt="RACHI Tec"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
                                     </picture>
@@ -3685,7 +4234,7 @@
                                     <picture>
                                         <source srcset="/images/areas/rachi-print.webp?v={{ time() }}" type="image/webp">
                                         <img src="/images/areas/rachi-print.png?v={{ time() }}"
-                                            onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'"
+                                            onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'"
                                             alt="RACHI Print"
                                             class="max-h-24 max-w-[140px] object-contain drop-shadow-sm">
                                     </picture>
@@ -3755,7 +4304,7 @@
             <section id="etica" class="py-20 bg-slate-900 text-white relative overflow-hidden"
                 aria-labelledby="ethics-title">
                 <div class="absolute inset-0 bg-cover bg-center opacity-10"
-                    style="background-image: url('https://hom.rachi.ao/assets/img/ethics-governance.webp')"></div>
+                    style="background-image: url('/images/blue-waves-bg.jpg')"></div>
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                     <div class="max-w-3xl mb-16">
                         <span
@@ -3816,6 +4365,33 @@
                             </p>
                         </div>
                     </div>
+
+                    <!-- Canal Oficial de Reclamações e Denúncia -->
+                    <div class="mt-10 p-6 sm:p-8 rounded-3xl bg-slate-800/85 border border-slate-700/80 backdrop-blur-md flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div class="max-w-2xl">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-amber-400 mb-2">
+                                <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+                                Ouvidoria &amp; Canal de Ética Confidencial
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+                                Canal de Reclamações e Denúncia
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                                Disponibilizamos um canal transparente e seguro para apresentação de reclamações (Lei n.º 15/03) ou denúncias confidenciais e anónimas de condutas irregulares, com emissão imediata de protocolo de acompanhamento.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 shrink-0">
+                            <a href="/reclamacoes-e-denuncia"
+                               class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition inline-flex items-center gap-2 shadow-lg">
+                                <span>Apresentar Reclamação</span>
+                                <span>&rarr;</span>
+                            </a>
+                            <a href="/reclamacoes-e-denuncia?tipo=denuncia"
+                               class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition inline-flex items-center gap-2">
+                                <span>Canal de Denúncia</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -3841,7 +4417,7 @@
                         </div>
 
                         <div class="flex flex-wrap items-center gap-3">
-                            <!-- Controles para passar/deslizar produtos -->
+                            <!-- Controlos para passar/deslizar produtos -->
                             <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
                                 <button @click="prevFeaturedProduct()"
                                     class="w-9 h-9 rounded-lg bg-white text-slate-700 hover:text-amber-600 hover:bg-slate-50 flex items-center justify-center shadow-sm transition active:scale-95"
@@ -3970,15 +4546,17 @@
 
 
             <!-- IDENTITY MODAL (MISSÃO, VISÃO E VALORES) - DARK LUXURY GLASS REDESIGN -->
-            <div x-show="identityModalOpen" x-cloak
+            <div id="identity-modal" x-show="identityModalOpen" x-cloak
+                @keydown.escape.window="closeIdentityModal()"
+                @click.self="closeIdentityModal()"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"
                 x-transition:leave="transition ease-in duration-200"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
-                class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-                <div @click.away="identityModalOpen = false"
+                class="fixed inset-0 overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer" style="z-index: 2000 !important;">
+                <div @click.stop
                     x-transition:enter="transition ease-out duration-300"
                     x-transition:enter-start="opacity-0 scale-95 translate-y-4"
                     x-transition:enter-end="opacity-100 scale-100 translate-y-0"
@@ -3991,7 +4569,7 @@
                     <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-48 bg-sky-500/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
                     <!-- Close Button -->
-                    <button @click="identityModalOpen = false"
+                    <button @click="closeIdentityModal()"
                         aria-label="Fechar janela"
                         class="absolute top-5 right-5 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-sky-400/50 text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 z-10">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
@@ -4084,7 +4662,7 @@
 
                     <!-- Footer Action Button -->
                     <div class="mt-8 pt-2 text-center relative z-10">
-                        <button @click="identityModalOpen = false"
+                        <button @click="closeIdentityModal()"
                             class="px-8 py-3 rounded-full bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 hover:border-sky-400/50 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-widest transition-all duration-200 shadow-lg hover:shadow-sky-500/20 hover:-translate-y-0.5 inline-flex items-center gap-2">
                             <span>Fechar Janela</span>
                         </button>
@@ -4094,1773 +4672,10 @@
         </div>
 
 
-        <!-- SUB-PAGE: RACHI TEC (TECNOLOGIA & DIGITALIZAÇÃO) -->
-        <div x-show="currentTab === 'tec'" x-cloak class="min-h-screen bg-slate-50">
-            <!-- Hero Banner -->
-            <section
-                class="bg-[#071326] text-white pt-12 pb-16 px-6 lg:px-12 border-b border-slate-800 relative overflow-hidden">
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-blue-900/30 via-transparent to-cyan-900/20 pointer-events-none">
-                </div>
-                <div class="max-w-7xl mx-auto relative z-10">
-                    <!-- Breadcrumbs -->
-                    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
-                            class="hover:text-white transition cursor-pointer">Início</a>
-                        <span>/</span>
-                        <span class="text-slate-500">Soluções</span>
-                        <span>/</span>
-                        <span class="text-[#00a3e0] font-semibold">RACHI Tec — Loja de TI</span>
-                    </nav>
-
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                        <div class="max-w-3xl">
-                            <span
-                                class="text-xs font-bold uppercase tracking-widest text-[#00a3e0] bg-blue-950/80 px-3 py-1 rounded-full border border-blue-800/60 inline-flex items-center gap-2">
-                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-blue-400"></i>
-                                Loja Oficial de Informática &amp; Hardware
-                            </span>
-                            <h1 class="text-3xl md:text-5xl font-[850] text-white mt-4 uppercase tracking-tight">
-                                Produtos de TI, Periféricos &amp; <span class="text-[#00a3e0]">Tecnologia</span>
-                            </h1>
-                            <p class="text-slate-300 text-base md:text-lg mt-3 leading-relaxed">
-                                Ratos, TV Box 4K, computadores, cabos de rede, adaptadores e gadgets certificados.
-                                Pronta entrega em Luanda e faturação formal com NIF para empresas.
-                            </p>
-
-                            <!-- Search Bar -->
-                            <div class="mt-8 max-w-2xl">
-                                <div
-                                    class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-2xl border border-slate-200">
-                                    <span class="pl-3 text-slate-400">
-                                        <i data-lucide="search" class="w-5 h-5"></i>
-                                    </span>
-                                    <input type="search" x-model="storeSearchQuery"
-                                        placeholder="Pesquisar mouse, tv box, cabo, laptop..."
-                                        class="w-full px-3 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none">
-                                    <button @click="$nextTick(() => lucide.createIcons())"
-                                        class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition whitespace-nowrap">
-                                        Pesquisar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Store Quick Highlights -->
-                        <div
-                            class="lg:w-80 bg-slate-800/80 border border-slate-700/80 p-6 rounded-3xl backdrop-blur-md">
-                            <h4
-                                class="text-xs uppercase font-black text-amber-400 tracking-wider mb-4 flex items-center gap-2">
-                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Garantia RACHI Tec
-                            </h4>
-                            <ul class="space-y-3 text-xs text-slate-300">
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="truck" class="w-4 h-4 text-blue-400 shrink-0"></i>
-                                    <span>Entrega expressa em Luanda</span>
-                                </li>
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="file-text" class="w-4 h-4 text-amber-400 shrink-0"></i>
-                                    <span>Fatura proforma e comercial com NIF</span>
-                                </li>
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="shield" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-                                    <span>Garantia de 6 a 12 meses em hardware</span>
-                                </li>
-                                <li class="flex items-center gap-2.5">
-                                    <i data-lucide="credit-card" class="w-4 h-4 text-purple-400 shrink-0"></i>
-                                    <span>Multicaixa Express &amp; TPA</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Store Catalog -->
-            <section class="py-16 max-w-7xl mx-auto px-6 lg:px-12">
-                <!-- Category Tabs & Sorting Filter -->
-                <div
-                    class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-200">
-                    <!-- Category Buttons -->
-                    <div class="flex flex-wrap items-center gap-2">
-                        <button @click="storeCategory = 'todas'; $nextTick(() => lucide.createIcons())"
-                            :class="storeCategory === 'todas' ? 'bg-[#071326] text-white shadow-md' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'"
-                            class="px-4 py-2 rounded-xl text-xs font-bold transition">
-                            Todos os Produtos
-                        </button>
-                        <button @click="storeCategory = 'perifericos'; $nextTick(() => lucide.createIcons())"
-                            :class="storeCategory === 'perifericos' ? 'bg-[#071326] text-white shadow-md' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'"
-                            class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-                            <i data-lucide="mouse" class="w-3.5 h-3.5"></i> Periféricos &amp; Mouses
-                        </button>
-                        <button @click="storeCategory = 'streaming'; $nextTick(() => lucide.createIcons())"
-                            :class="storeCategory === 'streaming' ? 'bg-[#071326] text-white shadow-md' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'"
-                            class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-                            <i data-lucide="tv" class="w-3.5 h-3.5"></i> TV Box &amp; Streaming
-                        </button>
-                        <button @click="storeCategory = 'cabos'; $nextTick(() => lucide.createIcons())"
-                            :class="storeCategory === 'cabos' ? 'bg-[#071326] text-white shadow-md' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'"
-                            class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-                            <i data-lucide="cable" class="w-3.5 h-3.5"></i> Cabos &amp; Redes
-                        </button>
-                        <button @click="storeCategory = 'computadores'; $nextTick(() => lucide.createIcons())"
-                            :class="storeCategory === 'computadores' ? 'bg-[#071326] text-white shadow-md' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'"
-                            class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-                            <i data-lucide="laptop" class="w-3.5 h-3.5"></i> Computadores
-                        </button>
-                    </div>
-
-                    <!-- Sorting -->
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-slate-500 font-semibold">Ordenar por:</span>
-                        <select x-model="storeSort"
-                            class="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-blue-500">
-                            <option value="recentes">Mais recentes</option>
-                            <option value="preco_menor">Menor Preço</option>
-                            <option value="preco_maior">Maior Preço</option>
-                            <option value="nome">Nome A-Z</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <template x-for="p in filteredStoreProducts" :key="p.slug">
-                        <div
-                            class="bg-white dark:bg-[#0c1a33] rounded-3xl border border-slate-200 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
-                            <!-- Image Box -->
-                            <div
-                                class="h-52 bg-[#f8fafc] dark:bg-gradient-to-b dark:from-white/5 dark:to-[#071326] p-4 flex items-center justify-center relative overflow-hidden group-hover:bg-slate-100/70 dark:group-hover:from-white/10 dark:group-hover:to-[#071326] transition dark:border-b dark:border-white/10">
-                                <span x-show="p.badge"
-                                    class="absolute top-3 left-3 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm"
-                                    :class="p.badge === 'Promoção' ? 'bg-rose-500 text-white' : 'bg-amber-500 text-slate-950'"
-                                    x-text="p.badge"></span>
-                                <span
-                                    class="absolute top-3 right-3 text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/40 px-2 py-0.5 rounded-full border border-emerald-100"
-                                    x-text="p.stockText"></span>
-                                <img :src="p.image" :alt="p.title"
-                                    class="max-h-36 max-w-full object-contain drop-shadow-sm dark:drop-shadow-[0_12px_20px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-300">
-                            </div>
-
-                            <!-- Content -->
-                            <div class="p-5 flex-1 flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-amber-400"
-                                        x-text="p.categoryLabel || p.category"></span>
-                                    <h3 class="text-sm font-bold text-slate-900 dark:text-white mt-1 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-amber-400 transition"
-                                        x-text="p.title"></h3>
-                                </div>
-                                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-between">
-                                    <div>
-                                        <span x-show="p.oldPrice" class="text-[11px] text-slate-400 line-through block"
-                                            x-text="p.oldPrice"></span>
-                                        <span class="text-base font-black text-slate-950 dark:text-white" x-text="p.price"></span>
-                                    </div>
-                                    <button @click="addToCartFromStore(p)"
-                                        class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs transition shadow-sm hover:shadow active:scale-95 flex items-center gap-1.5">
-                                        <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
-                                        <span>Adicionar</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </section>
-        </div>
-
-        <!-- SUB-PAGE: RACHI PRINT (GRÁFICA & COMUNICAÇÃO VISUAL) -->
-        <!-- SUB-PAGE: RACHI PRINT (LOJA DE ARTES & LOGÓTIPOS) -->
-        <div x-show="currentTab === 'print'" x-cloak class="min-h-screen bg-slate-50">
-            <!-- Hero Banner -->
-            <section class="bg-[#071326] text-white pt-14 pb-16 relative overflow-hidden">
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-pink-950/40 via-purple-950/20 to-slate-900 pointer-events-none">
-                </div>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <!-- Breadcrumbs -->
-                    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
-                            class="hover:text-white transition cursor-pointer">Início</a>
-                        <span>/</span>
-                        <span class="text-slate-500">Soluções</span>
-                        <span>/</span>
-                        <span class="text-pink-400 font-semibold">RACHI Print</span>
-                    </nav>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                        <div class="lg:col-span-8">
-                            <div
-                                class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold uppercase tracking-wider mb-4">
-                                <span class="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></span>
-                                Estúdio & Loja de Artes, Logótipos e Identidade Visual
-                            </div>
-                            <h1
-                                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                                Logótipos Marcantes, <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-300 to-amber-300">Identidade
-                                    Visual Única</span> e Artes de Alto Impacto
-                            </h1>
-                            <p class="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
-                                Destaque a sua empresa no mercado angolano com um visual profissional. Criamos logótipos
-                                100% vetorizados, manuais de marca, papelaria corporativa e pacotes de artes prontos
-                                para redes sociais.
-                            </p>
-                            <div class="mt-8 flex flex-wrap gap-4">
-                                <a href="#pacotes-logos"
-                                    @click.prevent="const el = document.getElementById('pacotes-logos'); if(el) el.scrollIntoView({behavior:'smooth'})"
-                                    class="btn-cta-gold shadow-lg shadow-amber-500/20 flex items-center gap-2">
-                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
-                                    <span>Ver Pacotes de Logótipos</span>
-                                </a>
-                                <a href="#pacotes-artes"
-                                    @click.prevent="const el = document.getElementById('pacotes-artes'); if(el) el.scrollIntoView({behavior:'smooth'})"
-                                    class="px-5 py-3 rounded-lg border border-pink-500/40 hover:border-pink-400 text-pink-300 hover:text-white text-sm font-semibold transition flex items-center gap-2 bg-pink-950/20">
-                                    <i data-lucide="image" class="w-4 h-4"></i>
-                                    <span>Packs para Redes Sociais</span>
-                                </a>
-                                <a href="#briefing-artes"
-                                    @click.prevent="const el = document.getElementById('briefing-artes'); if(el) el.scrollIntoView({behavior:'smooth'})"
-                                    class="px-5 py-3 rounded-lg border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white text-sm font-semibold transition flex items-center gap-2">
-                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                    <span>Briefing Rápido</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-4">
-                            <div
-                                class="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border border-pink-500/30 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
-                                <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
-                                    <i data-lucide="award" class="w-5 h-5 text-pink-400"></i>
-                                    Garantias RACHI Print
-                                </h3>
-                                <ul class="space-y-3.5 text-xs text-slate-300">
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Arquivos Vetoriais Abertos:</strong> Entrega em .AI, .EPS, .SVG,
-                                            .PDF e .PNG em alta resolução.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Direitos Autorais 100% Seus:</strong> Cessão completa para registo
-                                            oficial da marca.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Aprovação por Etapas:</strong> Apresentação de conceitos com
-                                            ajustes até a aprovação ideal.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Pronto para Impressão & Web:</strong> Ficheiros configurados em
-                                            CMYK e RGB.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Métricas -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-slate-800/80">
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-pink-400">+350</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Marcas & Logos Criados</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-amber-400">100%</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Arquivos Vetoriais Editáveis</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-emerald-400">3-5 Dias</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Prazo Médio de Apresentação</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-blue-400">99%</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Aprovação nas Primeiras Propostas</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 1: PACOTES DE LOGÓTIPOS & IDENTIDADE VISUAL -->
-            <section id="pacotes-logos" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span
-                        class="text-pink-600 font-bold text-xs uppercase tracking-widest bg-pink-50 px-3 py-1 rounded-full border border-pink-100">
-                        Criação de Marcas Profissionais
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
-                        Pacotes de Logótipo & Identidade Visual
-                    </h2>
-                    <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-                        Escolha o pacote ideal para a sua empresa. Todos os planos incluem arquivos originais em vetor,
-                        prontos para uso em fardas, fachadas, carimbos, viaturas e redes sociais.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                    <!-- Pacote Essencial -->
-                    <div
-                        class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group hover:border-pink-300">
-                        <div>
-                            <div
-                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-4">
-                                Entrada Rápida
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900">Logótipo Essencial</h3>
-                            <p class="text-slate-500 text-xs mt-2 leading-relaxed">
-                                Ideal para profissionais autónomos, pequenos negócios e projetos em fase inicial que
-                                precisam de uma marca profissional rápida.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-100">
-                                <span class="text-3xl font-black text-slate-900">45.000</span>
-                                <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Pagamento único • Sem
-                                    mensalidades</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-600">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span><strong>2 Conceitos Iniciais</strong> para escolha</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Logótipo Principal e Versão Horizontal</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Versões Monocromáticas (Preto e Branco)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Ficheiros em PNG (sem fundo) e JPG alta resolução</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>PDF Vetorial para pequenas impressões</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Até 2 rondas de revisões</span>
-                                </li>
-                                <li class="flex items-start gap-2.5 text-slate-400">
-                                    <i data-lucide="x" class="w-4 h-4 text-slate-300 shrink-0 mt-0.5"></i>
-                                    <span>Sem manual de identidade de marca</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button @click="openRequestWithPreselection(2, 'Logótipo Essencial - 45.000 AOA')"
-                                class="w-full py-3 px-4 rounded-xl border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                                <span>Escolher Essencial</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Pacote Profissional (Destaque) -->
-                    <div
-                        class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl p-8 shadow-2xl relative flex flex-col justify-between border-2 border-pink-500 transform lg:-translate-y-2">
-                        <div
-                            class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-[11px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
-                            Mais Escolhido • Melhor Custo-Benefício
-                        </div>
-
-                        <div>
-                            <div
-                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-bold uppercase tracking-wider mb-4 mt-2">
-                                Identidade Completa
-                            </div>
-                            <h3 class="text-2xl font-black text-white">Identidade Profissional</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
-                                Para empresas que desejam uma marca imponente, memorável e preparada para competir em
-                                alto nível no mercado.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-800">
-                                <span class="text-4xl font-black text-white">95.000</span>
-                                <span class="text-xs font-bold text-pink-400">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Pacote completo com fontes e
-                                    vetores abertos</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-300">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span><strong>3 Conceitos Criativos Exclusivos</strong></span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Logótipo Principal, Secundário e Sub-marca / Ícone para Avatar</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Paleta de Cores Oficial com códigos HEX, RGB e CMYK</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Guia de Tipografia Institucional (fontes corporativas)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span><strong>Arquivos Vetoriais Abertos:</strong> Adobe Illustrator (.AI), .EPS,
-                                        .SVG, .PDF</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Mockups 3D realistas (cartão, placa, farda, brindes)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Capa estilizada para Facebook/LinkedIn + Foto de perfil pronta</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-pink-400 shrink-0 mt-0.5"></i>
-                                    <span>Até 4 rondas de ajustes incluídas</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button @click="openRequestWithPreselection(2, 'Identidade Profissional - 95.000 AOA')"
-                                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-extrabold text-xs transition duration-200 shadow-lg shadow-pink-500/25 flex items-center justify-center gap-2">
-                                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                                <span>Escolher Pacote Profissional</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Pacote Corporativo 360 -->
-                    <div
-                        class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group hover:border-pink-300">
-                        <div>
-                            <div
-                                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold uppercase tracking-wider mb-4">
-                                Premium & Papelaria
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900">Corporativo 360</h3>
-                            <p class="text-slate-500 text-xs mt-2 leading-relaxed">
-                                Solução definitiva de branding com manual de normas completo e toda a papelaria
-                                institucional pronta para impressão.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-100">
-                                <span class="text-3xl font-black text-slate-900">180.000</span>
-                                <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Branding 360 com papelaria e
-                                    templates</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-600">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span><strong>Tudo do Pacote Profissional</strong></span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span><strong>Manual de Identidade Visual (Brandbook de 20 páginas)</strong></span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Design de Cartão de Visita Executivo (frente e verso)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Design de Papel Timbrado e Pasta Corporativa</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Design de Envelope Saco e Assinatura de E-mail em HTML</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span><strong>5 Templates Editáveis no Canva ou Photoshop</strong></span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Ajustes ilimitados na fase de criação dos conceitos</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button @click="openRequestWithPreselection(2, 'Corporativo 360 - 180.000 AOA')"
-                                class="w-full py-3 px-4 rounded-xl border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                <i data-lucide="crown" class="w-4 h-4 text-amber-500"></i>
-                                <span>Escolher Corporativo 360</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 2: PACKS DE ARTES PARA REDES SOCIAIS -->
-            <section id="pacotes-artes" class="py-16 bg-white border-y border-slate-100">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center max-w-3xl mx-auto mb-12">
-                        <span
-                            class="text-pink-600 font-bold text-xs uppercase tracking-widest bg-pink-50 px-3 py-1 rounded-full border border-pink-100">
-                            Marketing Visual & Redes Sociais
-                        </span>
-                        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
-                            Packs de Artes para Instagram, Facebook & WhatsApp
-                        </h2>
-                        <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-                            Mantenha o perfil da sua empresa com visual profissional e atraente. Artes criadas por
-                            designers seniores para aumentar o engajamento e gerar vendas.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Pack 6 Artes -->
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-md transition">
-                            <div
-                                class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center mb-4 font-black">
-                                06
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900">Pack Starter (6 Artes)</h3>
-                            <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
-                                Ideal para campanhas pontuais de promoções, lançamentos de produtos ou eventos
-                                específicos.
-                            </p>
-                            <div class="text-2xl font-black text-slate-900 mb-4">
-                                30.000 <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="text-[10px] text-slate-400 block font-normal">(5.000 AOA por arte)</span>
-                            </div>
-                            <ul class="space-y-2 text-xs text-slate-600 mb-6">
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-emerald-500"></i> 6 artes para Feed (formato 1:1
-                                    quadrado ou 4:5 vertical)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-emerald-500"></i> Formatação adaptada para Stories e
-                                    Status do WhatsApp</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-emerald-500"></i> Sugestão de texto / legenda de cada
-                                    post</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-emerald-500"></i> Entrega em até 3 dias úteis</li>
-                            </ul>
-                            <button @click="openRequestWithPreselection(2, 'Pack Starter 6 Artes - 30.000 AOA')"
-                                class="w-full py-2.5 px-4 rounded-lg bg-[#071326] hover:bg-pink-600 text-white font-bold text-xs transition">
-                                Contratar Pack 6 Artes
-                            </button>
-                        </div>
-
-                        <!-- Pack 12 Artes -->
-                        <div
-                            class="bg-gradient-to-br from-pink-50/70 to-purple-50/70 border-2 border-pink-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition relative">
-                            <span
-                                class="absolute top-4 right-4 bg-pink-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">
-                                Recomendado
-                            </span>
-                            <div
-                                class="w-10 h-10 rounded-xl bg-pink-600 text-white flex items-center justify-center mb-4 font-black">
-                                12
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900">Pack Pro Mensal (12 Artes)</h3>
-                            <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
-                                Ideal para empresas que publicam 3 vezes por semana e precisam manter uma frequência
-                                consistente e visual harmonioso.
-                            </p>
-                            <div class="text-2xl font-black text-slate-900 mb-4">
-                                55.000 <span class="text-xs font-bold text-pink-600">AOA</span>
-                                <span class="text-[10px] text-slate-400 block font-normal">(Economia de 5.000
-                                    AOA)</span>
-                            </div>
-                            <ul class="space-y-2 text-xs text-slate-700 mb-6">
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-pink-600"></i> 12 artes para Feed (estático ou carrossel
-                                    de até 4 telas)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-pink-600"></i> Versões dimensionadas para Stories e
-                                    WhatsApp</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-pink-600"></i> Harmonização estética do Feed (mosaico ou
-                                    padrão visual)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-pink-600"></i> Calendário mensal sugerido de postagens
-                                </li>
-                            </ul>
-                            <button @click="openRequestWithPreselection(2, 'Pack Pro 12 Artes - 55.000 AOA')"
-                                class="w-full py-2.5 px-4 rounded-lg bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs transition shadow">
-                                Contratar Pack 12 Artes
-                            </button>
-                        </div>
-
-                        <!-- Pack 24 Artes -->
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-md transition">
-                            <div
-                                class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4 font-black">
-                                24
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900">Gestão Visual 360 (24 Artes)</h3>
-                            <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
-                                Cobertura completa para presença quase diária nas redes, incluindo capas de Reels e
-                                destaques temáticos.
-                            </p>
-                            <div class="text-2xl font-black text-slate-900 mb-4">
-                                110.000 <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="text-[10px] text-slate-400 block font-normal">(Máxima autoridade e
-                                    frequência)</span>
-                            </div>
-                            <ul class="space-y-2 text-xs text-slate-600 mb-6">
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-purple-600"></i> 24 artes personalizadas (Feed,
-                                    Carrosséis e Infográficos)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-purple-600"></i> 6 capas estilizadas para vídeos do
-                                    Reels e TikTok</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-purple-600"></i> 5 capas de destaques do Instagram
-                                    personalizadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check"
-                                        class="w-3.5 h-3.5 text-purple-600"></i> Ficheiros abertos editáveis em formato
-                                    Canva ou PSD</li>
-                            </ul>
-                            <button @click="openRequestWithPreselection(2, 'Gestão Visual 24 Artes - 110.000 AOA')"
-                                class="w-full py-2.5 px-4 rounded-lg bg-[#071326] hover:bg-purple-600 text-white font-bold text-xs transition">
-                                Contratar Pack 24 Artes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 3: GALERIA / SHOWCASE VISUAL DE ARTES E NICHOS -->
-            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="text-pink-600 font-bold text-xs uppercase tracking-widest">Portfólio &
-                        Inspirações</span>
-                    <h2 class="text-3xl font-black text-slate-900 mt-1">Identidades Visuais Criadas para Diversos Ramos
-                    </h2>
-                    <p class="text-slate-600 text-sm mt-2">Adaptamos a linguagem gráfica exactamente ao público-alvo do
-                        seu sector de actividade.</p>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="cpu" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Tecnologia</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Linhas futuristas, minimalismo e tons cianos.</p>
-                    </div>
-
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="utensils" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Gastronomia</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Cores quentes, apetite e identidade vibrante.</p>
-                    </div>
-
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="heart-pulse" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Saúde & Clínicas</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Transmissão de higiene, confiança e serenidade.</p>
-                    </div>
-
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-slate-100 text-slate-800 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="scale" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Advocacia & Finanças</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Tipografia nobre, monogramas e sobriedade.</p>
-                    </div>
-
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-pink-50 text-pink-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="sparkles" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Moda & Beleza</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Elegância, curvas orgânicas e visual chic.</p>
-                    </div>
-
-                    <div
-                        class="bg-white p-5 rounded-2xl border border-slate-200 text-center hover:border-pink-500 hover:shadow-lg transition group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-full bg-orange-50 text-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                            <i data-lucide="truck" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-sm">Logística & Varejo</h4>
-                        <p class="text-[11px] text-slate-500 mt-1">Dinamismo, robustez e alta legibilidade.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 4: BRIEFING RÁPIDO ONLINE DE LOGÓTIPO & ARTES -->
-            <section id="briefing-artes" class="py-16 bg-slate-900 text-white relative overflow-hidden">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="text-center mb-10">
-                        <span
-                            class="text-pink-400 font-bold text-xs uppercase tracking-widest bg-pink-500/10 px-3 py-1 rounded-full border border-pink-500/30">
-                            Atendimento Rápido
-                        </span>
-                        <h2 class="text-3xl font-extrabold text-white mt-3">Envie o Briefing do seu Logótipo ou Arte
-                        </h2>
-                        <p class="text-slate-300 text-sm mt-2 max-w-xl mx-auto">
-                            Preencha as preferências da sua marca abaixo para que a nossa equipa criativa prepare uma
-                            proposta personalizada em menos de 2 horas.
-                        </p>
-                    </div>
-
-                    <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm"
-                        x-data="{
-                            companyName: '',
-                            businessSector: '',
-                            serviceType: 'Logótipo Profissional',
-                            preferredStyle: 'Moderno e Minimalista',
-                            colorPreferences: '',
-                            details: '',
-                            sendToWhatsApp() {
-                                let text = '*BRIEFING RACHI PRINT - CRIAÇÃO DE LOGO/ARTE*\n';
-                                text += '🏢 *Empresa / Marca:* ' + (this.companyName || 'Não informado') + '\n';
-                                text += '🏷️ *Ramo:* ' + (this.businessSector || 'Não informado') + '\n';
-                                text += '📦 *Serviço:* ' + this.serviceType + '\n';
-                                text += '🎨 *Estilo:* ' + this.preferredStyle + '\n';
-                                if(this.colorPreferences) text += '🌈 *Cores:* ' + this.colorPreferences + '\n';
-                                if(this.details) text += '📝 *Detalhes:* ' + this.details + '\n';
-                                const url = 'https://wa.me/244972888585?text=' + encodeURIComponent(text);
-                                window.open(url, '_blank');
-                            }
-                         }">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nome
-                                    da Empresa / Marca *</label>
-                                <input type="text" x-model="companyName" placeholder="Ex: Rachi Motors, Luanda Coffee"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Ramo
-                                    de Actividade *</label>
-                                <input type="text" x-model="businessSector"
-                                    placeholder="Ex: Gastronomia, Engenharia, Moda, TI"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
-                            </div>
-
-                            <div>
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Serviço
-                                    Pretendido</label>
-                                <select x-model="serviceType"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
-                                    <option value="Logótipo Essencial (45.000 AOA)">Logótipo Essencial (45.000 AOA)
-                                    </option>
-                                    <option value="Identidade Profissional (95.000 AOA)">Identidade Profissional (95.000
-                                        AOA)</option>
-                                    <option value="Corporativo 360 (180.000 AOA)">Corporativo 360 (180.000 AOA)</option>
-                                    <option value="Pack 6 Artes Redes Sociais (30.000 AOA)">Pack 6 Artes Redes Sociais
-                                        (30.000 AOA)</option>
-                                    <option value="Pack 12 Artes Redes Sociais (55.000 AOA)">Pack 12 Artes Redes Sociais
-                                        (55.000 AOA)</option>
-                                    <option value="Gestão Visual 24 Artes (110.000 AOA)">Gestão Visual 24 Artes (110.000
-                                        AOA)</option>
-                                    <option value="Redesign de Logótipo Existente">Redesign de Logótipo Existente
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Estilo
-                                    Visual Pretendido</label>
-                                <select x-model="preferredStyle"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
-                                    <option value="Moderno e Minimalista">Moderno e Minimalista</option>
-                                    <option value="Corporativo e Sóbrio">Corporativo e Sóbrio</option>
-                                    <option value="Luxuoso e Elegante (Dourado / Preto)">Luxuoso e Elegante (Dourado /
-                                        Preto)</option>
-                                    <option value="Criativo, Jovem e Colorido">Criativo, Jovem e Colorido</option>
-                                    <option value="Tecnológico e Futurista">Tecnológico e Futurista</option>
-                                    <option value="Vintage / Retrô">Vintage / Retrô</option>
-                                </select>
-                            </div>
-
-                            <div class="md:col-span-2">
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Cores
-                                    de Preferência (Opcional)</label>
-                                <input type="text" x-model="colorPreferences"
-                                    placeholder="Ex: Azul e Dourado, Preto e Branco, Tons pastéis"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition">
-                            </div>
-
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">O
-                                    que deseja transmitir com a sua marca?</label>
-                                <textarea x-model="details" rows="3"
-                                    placeholder="Descreva brevemente valores, símbolos desejados ou referências visuais que você aprecia..."
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-pink-500 transition"></textarea>
-                            </div>
-                        </div>
-
-                        <div
-                            class="mt-8 pt-6 border-t border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <div class="text-xs text-slate-400 text-center sm:text-left">
-                                <i data-lucide="shield-check" class="w-4 h-4 inline text-emerald-400 mr-1"></i>
-                                Orçamento sem compromisso e garantia de confidencialidade.
-                            </div>
-                            <div class="flex items-center gap-3 w-full sm:w-auto">
-                                <button @click="sendToWhatsApp()"
-                                    class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
-                                    <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                    <span>Enviar no WhatsApp</span>
-                                </button>
-                                <button
-                                    @click="openRequestWithPreselection(2, serviceType + ' - ' + (companyName || 'Briefing'))"
-                                    class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-pink-900/30">
-                                    <i data-lucide="send" class="w-4 h-4"></i>
-                                    <span>Pedir Proposta Formal</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- SUB-PAGE: RACHI ACADEMY (Página separada e dedicada em /academy) -->
-        <div x-show="currentTab === 'academy'" x-cloak class="hidden" x-init="$watch('currentTab', val => { if(val === 'academy') window.location.href = '/academy'; })">
-        </div>
-<!-- SUB-PAGE: RACHI CAPITAL (RECURSOS HUMANOS & CONSULTORIA) -->
-        <!-- SUB-PAGE: RACHI CAPITAL (SITES & SUPORTE TI CORPORATIVO) -->
-        <div x-show="currentTab === 'capital'" x-cloak class="min-h-screen bg-slate-50">
-            <!-- Hero Banner -->
-            <section class="bg-[#071326] text-white pt-14 pb-16 relative overflow-hidden">
-                <div
-                    class="absolute inset-0 bg-gradient-to-r from-blue-950/50 via-slate-900 to-amber-950/30 pointer-events-none">
-                </div>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <!-- Breadcrumbs -->
-                    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
-                            class="hover:text-white transition cursor-pointer">Início</a>
-                        <span>/</span>
-                        <span class="text-slate-500">Soluções</span>
-                        <span>/</span>
-                        <span class="text-amber-400 font-semibold">RACHI Capital</span>
-                    </nav>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                        <div class="lg:col-span-8">
-                            <div
-                                class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
-                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                                Desenvolvimento Web, Plataformas & Suporte Técnico de TI
-                            </div>
-                            <h1
-                                class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                                Criação de Sites Modernos & <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-blue-400">Suporte
-                                    Técnico de TI com SLA</span>
-                            </h1>
-                            <p class="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
-                                Transforme visitantes em clientes com websites de alta performance e garanta a
-                                estabilidade operacional da sua empresa através de contratos corporativos de suporte de
-                                TI com atendimento rápido garantido.
-                            </p>
-                            <div class="mt-8 flex flex-wrap gap-4">
-                                <a href="#web-solutions"
-                                    @click.prevent="const el = document.getElementById('web-solutions'); if(el) el.scrollIntoView({behavior:'smooth'})"
-                                    class="btn-cta-gold shadow-lg shadow-amber-500/20 flex items-center gap-2">
-                                    <i data-lucide="globe" class="w-4 h-4"></i>
-                                    <span>Criação de Sites & Lojas</span>
-                                </a>
-                                <a href="#suporte-ti"
-                                    @click.prevent="const el = document.getElementById('suporte-ti'); if(el) el.scrollIntoView({behavior:'smooth'})"
-                                    class="px-5 py-3 rounded-lg border border-amber-500/40 hover:border-amber-400 text-amber-300 hover:text-white text-sm font-semibold transition flex items-center gap-2 bg-amber-950/20">
-                                    <i data-lucide="headphones" class="w-4 h-4"></i>
-                                    <span>Planos de Suporte TI (SLA)</span>
-                                </a>
-                                <button
-                                    @click="openRequestWithPreselection(4, 'Serviços de Criação de Sites e Suporte TI')"
-                                    class="px-5 py-3 rounded-lg border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white text-sm font-semibold transition flex items-center gap-2">
-                                    <i data-lucide="send" class="w-4 h-4"></i>
-                                    <span>Solicitar Proposta</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-4">
-                            <div
-                                class="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border border-amber-500/30 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
-                                <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
-                                    <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
-                                    Compromissos Corporativos
-                                </h3>
-                                <ul class="space-y-3.5 text-xs text-slate-300">
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle"
-                                            class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>SLA Rígido em Contrato:</strong> Tempos de resposta definidos a
-                                            partir de 30 minutos a 2 horas.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle"
-                                            class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Pagamentos Angolanos:</strong> Integração nativa de pagamentos por
-                                            referência Multicaixa Express.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle"
-                                            class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Segurança & Backups:</strong> Rotinas diárias automatizadas na
-                                            nuvem contra perda de dados.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check-circle"
-                                            class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Atendimento Híbrido:</strong> Suporte remoto ilimitado com equipa
-                                            local em Luanda para visitas presenciais.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Métricas -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-slate-800/80">
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-amber-400">+60</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Websites & Lojas no Ar</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-[#00a3e0]">99.9%</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Disponibilidade Garantida</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-emerald-400">&lt; 1h</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Tempo Médio de Resolução TI</div>
-                        </div>
-                        <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-center">
-                            <div class="text-2xl sm:text-3xl font-black text-cyan-400">24/7</div>
-                            <div class="text-xs text-slate-400 mt-1 font-medium">Monitorização Proativa de Redes</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 1: CRIAÇÃO DE SITES & SOLUÇÕES WEB -->
-            <section id="web-solutions" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span
-                        class="text-amber-600 font-bold text-xs uppercase tracking-widest bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
-                        Presença Digital & Conversão
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
-                        Criação de Sites Profissionais e Lojas Virtuais
-                    </h2>
-                    <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-                        Construímos plataformas digitais de alta conversão, totalmente responsivas e adaptadas ao
-                        comportamento do consumidor em Angola.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                    <!-- Site Institucional -->
-                    <div
-                        class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:border-blue-300">
-                        <div>
-                            <div
-                                class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                                <i data-lucide="globe" class="w-6 h-6"></i>
-                            </div>
-                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Autoridade de
-                                Marca</span>
-                            <h3 class="text-xl font-bold text-slate-900 mt-1">Website Institucional</h3>
-                            <p class="text-slate-500 text-xs mt-2 leading-relaxed">
-                                Ideal para empresas prestadoras de serviços, clínicas, escritórios e indústrias que
-                                necessitam de presença sólida e profissional.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-100">
-                                <span class="text-[11px] uppercase text-slate-400 font-bold block">A partir de</span>
-                                <span class="text-3xl font-black text-slate-900">150.000</span>
-                                <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Projeto completo entregue
-                                    pronto</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-600">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Design exclusivo e 100% responsivo (smartphone, tablet e PC)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Otimização SEO para posicionar o seu negócio no Google</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Formulários inteligentes com envio direto para o WhatsApp</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Domínio .AO e Hospedagem de alta velocidade por 1 ano</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Contas de E-mail corporativo personalizadas</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button
-                                @click="openRequestWithPreselection(4, 'Website Institucional - A partir de 150.000 AOA')"
-                                class="w-full py-3 px-4 rounded-xl border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                <i data-lucide="send" class="w-4 h-4"></i>
-                                <span>Solicitar Orçamento de Site</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- E-Commerce / Loja Virtual (Destaque) -->
-                    <div
-                        class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl p-8 shadow-2xl relative flex flex-col justify-between border-2 border-amber-500 transform lg:-translate-y-2">
-                        <div
-                            class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 text-[11px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
-                            Vendas 24/7 • Alta Procura
-                        </div>
-
-                        <div>
-                            <div
-                                class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-6">
-                                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                            </div>
-                            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Vendas Online em
-                                Angola</span>
-                            <h3 class="text-2xl font-black text-white mt-1">Loja Virtual (E-Commerce)</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
-                                Plataforma completa para vender produtos físicos ou digitais com carrinho de compras e
-                                pagamentos locais automáticos.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-800">
-                                <span class="text-[11px] uppercase text-slate-400 font-bold block">A partir de</span>
-                                <span class="text-4xl font-black text-white">250.000</span>
-                                <span class="text-xs font-bold text-amber-400">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Com Multicaixa Express e gestão de
-                                    stock</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-300">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                    <span>Catálogo dinâmico de produtos com fotos, variações e preços</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                    <span><strong>Pagamento por Referência Multicaixa Express</strong></span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                    <span>Painel de administração fácil para gerir encomendas e stock</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                    <span>Cálculo de taxa de entrega em Luanda e Províncias</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                    <span>Certificado de segurança SSL para pagamentos 100% seguros</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button
-                                @click="openRequestWithPreselection(4, 'Loja Virtual E-Commerce - A partir de 250.000 AOA')"
-                                class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-extrabold text-xs transition duration-200 shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2">
-                                <i data-lucide="rocket" class="w-4 h-4"></i>
-                                <span>Iniciar Minha Loja Virtual</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Sistemas Web & ERP Sob Medida -->
-                    <div
-                        class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:border-emerald-300">
-                        <div>
-                            <div
-                                class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                                <i data-lucide="cpu" class="w-6 h-6"></i>
-                            </div>
-                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Eficiência
-                                Operacional</span>
-                            <h3 class="text-xl font-bold text-slate-900 mt-1">Sistemas Web Sob Medida</h3>
-                            <p class="text-slate-500 text-xs mt-2 leading-relaxed">
-                                Plataformas web e ERPs desenhados especificamente para a lógica operacional e regras de
-                                negócio da sua empresa.
-                            </p>
-
-                            <div class="my-6 pb-6 border-b border-slate-100">
-                                <span class="text-[11px] uppercase text-slate-400 font-bold block">A partir de</span>
-                                <span class="text-3xl font-black text-slate-900">450.000</span>
-                                <span class="text-xs font-bold text-slate-500">AOA</span>
-                                <span class="block text-[11px] text-slate-400 mt-0.5">Ou orçamento conforme escopo
-                                    técnico</span>
-                            </div>
-
-                            <ul class="space-y-3 text-xs text-slate-600">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Módulos integrados: Faturação AGT, Clientes, Armazém e RH</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Níveis de acesso hierárquicos e auditoria de utilizadores</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Relatórios executivos e gráficos em tempo real (BI)</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Banco de dados na nuvem com alta disponibilidade e backups</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                                    <span>Treinamento completo da sua equipa e suporte contínuo</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-8">
-                            <button @click="openRequestWithPreselection(4, 'Sistema Web Sob Medida')"
-                                class="w-full py-3 px-4 rounded-xl border border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                <i data-lucide="layers" class="w-4 h-4"></i>
-                                <span>Solicitar Análise de Projeto</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 2: PLANOS DE SUPORTE TÉCNICO DE TI COM SLA -->
-            <section id="suporte-ti" class="py-16 bg-slate-900 text-white relative overflow-hidden">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="text-center max-w-3xl mx-auto mb-14">
-                        <span
-                            class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
-                            Terceirização & Continuidade de Negócio
-                        </span>
-                        <h2 class="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight">
-                            Planos Mensais de Suporte de TI com SLA
-                        </h2>
-                        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
-                            Elimine paragens inesperadas, falhas de rede e riscos de perda de dados. Conte com uma
-                            equipa técnica completa de TI por uma fracção do custo de uma contratação interna.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                        <!-- Plano Startup TI -->
-                        <div
-                            class="bg-slate-800/80 border border-slate-700 rounded-2xl p-8 flex flex-col justify-between hover:border-amber-400/50 transition">
-                            <div>
-                                <div
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-700/80 text-slate-300 text-xs font-bold uppercase tracking-wider mb-4">
-                                    Até 8 Computadores
-                                </div>
-                                <h3 class="text-xl font-bold text-white">Suporte TI Startup</h3>
-                                <p class="text-slate-400 text-xs mt-2 leading-relaxed">
-                                    Ideal para pequenos escritórios, consultórios e lojas que necessitam de estabilidade
-                                    básica e apoio técnico imediato.
-                                </p>
-
-                                <div class="my-6 pb-6 border-b border-slate-700">
-                                    <span class="text-3xl font-black text-white">85.000</span>
-                                    <span class="text-xs font-bold text-amber-400">AOA / mês</span>
-                                    <div
-                                        class="mt-2 inline-flex items-center gap-1.5 bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded text-[11px] font-bold">
-                                        <i data-lucide="clock" class="w-3.5 h-3.5"></i> SLA de Resposta: até 4h úteis
-                                    </div>
-                                </div>
-
-                                <ul class="space-y-3 text-xs text-slate-300">
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Suporte Remoto Ilimitado (Helpdesk via telefone e acesso remoto)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>1 Visita Presencial Mensal Preventiva (limpeza lógica e física)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Instalação e gestão de antivírus corporativo</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Configuração de impressoras e partilhas de ficheiros</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5 text-slate-500">
-                                        <i data-lucide="x" class="w-4 h-4 text-slate-600 shrink-0 mt-0.5"></i>
-                                        <span>Sem gestão avançada de servidores dedicados</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="pt-8">
-                                <button
-                                    @click="openRequestWithPreselection(4, 'Contrato Suporte TI Startup - 85.000 AOA/mês')"
-                                    class="w-full py-3 px-4 rounded-xl border border-slate-600 hover:border-amber-400 text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                    <span>Contratar Plano Startup</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Plano Business TI (Destaque) -->
-                        <div
-                            class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-amber-400 rounded-2xl p-8 flex flex-col justify-between shadow-2xl relative transform lg:-translate-y-2">
-                            <div
-                                class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 text-[11px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
-                                Mais Escolhido pelas Empresas
-                            </div>
-
-                            <div>
-                                <div
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 mt-2">
-                                    Até 25 Postos + 2 Servidores
-                                </div>
-                                <h3 class="text-2xl font-black text-white">Suporte TI Business Pro</h3>
-                                <p class="text-slate-300 text-xs mt-2 leading-relaxed">
-                                    A solução completa para médias empresas que não podem tolerar interrupções
-                                    operacionais e necessitam de segurança de dados.
-                                </p>
-
-                                <div class="my-6 pb-6 border-b border-slate-700">
-                                    <span class="text-4xl font-black text-white">195.000</span>
-                                    <span class="text-xs font-bold text-amber-400">AOA / mês</span>
-                                    <div
-                                        class="mt-2 inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded text-[11px] font-bold">
-                                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> SLA Rápido: Resposta em até 2
-                                        horas
-                                    </div>
-                                </div>
-
-                                <ul class="space-y-3 text-xs text-slate-200">
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Suporte Remoto Ilimitado</strong> para todos os
-                                            colaboradores</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>4 Visitas Presenciais Mensais</strong> (preventivas e
-                                            corretivas)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span>Gestão completa de Redes, Roteadores, Switches e Wi-Fi Corporativo</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span><strong>Rotinas Automatizadas de Backup em Nuvem Diárias</strong></span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span>Administração de Servidores Windows Server / Linux</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-                                        <span>Relatório técnico mensal com inventário e recomendações</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="pt-8">
-                                <button
-                                    @click="openRequestWithPreselection(4, 'Contrato Suporte TI Business Pro - 195.000 AOA/mês')"
-                                    class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-extrabold text-xs transition duration-200 shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2">
-                                    <i data-lucide="shield-check" class="w-4 h-4"></i>
-                                    <span>Contratar Plano Business Pro</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Plano Enterprise TI -->
-                        <div
-                            class="bg-slate-800/80 border border-slate-700 rounded-2xl p-8 flex flex-col justify-between hover:border-amber-400/50 transition">
-                            <div>
-                                <div
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-700/80 text-slate-300 text-xs font-bold uppercase tracking-wider mb-4">
-                                    Infraestrutura Ilimitada & Filiais
-                                </div>
-                                <h3 class="text-xl font-bold text-white">Suporte TI Enterprise</h3>
-                                <p class="text-slate-400 text-xs mt-2 leading-relaxed">
-                                    Para grandes corporações, grupos empresariais e indústrias que exigem NOC 24/7,
-                                    técnico dedicado e continuidade absoluta.
-                                </p>
-
-                                <div class="my-6 pb-6 border-b border-slate-700">
-                                    <span class="text-3xl font-black text-white">Sob Medida</span>
-                                    <span class="text-xs font-bold text-slate-400 block mt-1">Conforme dimensão da
-                                        empresa</span>
-                                    <div
-                                        class="mt-2 inline-flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded text-[11px] font-bold">
-                                        <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i> SLA Crítico: 30 minutos
-                                        (24/7/365)
-                                    </div>
-                                </div>
-
-                                <ul class="space-y-3 text-xs text-slate-300">
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Número ilimitado de computadores, portáteis e servidores</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Monitorização ativa de NOC 24 horas por dia, 7 dias por semana</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Técnico residente ou visitas presenciais ilimitadas sob chamado</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Plano de Recuperação de Desastres (Disaster Recovery Plan)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                                        <span>Auditoria semestral de cibersegurança e testes de intrusão</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="pt-8">
-                                <button @click="openRequestWithPreselection(4, 'Consultoria Suporte TI Enterprise')"
-                                    class="w-full py-3 px-4 rounded-xl border border-slate-600 hover:border-amber-400 text-white font-bold text-xs transition duration-200 shadow-sm flex items-center justify-center gap-2">
-                                    <span>Solicitar Proposta Enterprise</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 3: DIFERENCIAIS DA GESTÃO DE TI RACHI -->
-            <section class="py-16 bg-white border-b border-slate-100">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center max-w-3xl mx-auto mb-12">
-                        <span class="text-blue-600 font-bold text-xs uppercase tracking-widest">Porquê Escolher a
-                            RACHI</span>
-                        <h2 class="text-3xl font-black text-slate-900 mt-1">Por que Terceirizar a Sua TI Connosco?</h2>
-                        <p class="text-slate-600 text-sm mt-2">Reduza em até 60% os custos com equipa técnica interna e
-                            ganhe acesso imediato a engenheiros de software e especialistas de redes.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div
-                            class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-white transition duration-300">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
-                                <i data-lucide="activity" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="text-base font-bold text-slate-900">Prevenção Ativa</h4>
-                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                                Monitorizamos discos, temperaturas e conectividade para resolver anomalias antes que
-                                elas causem paragens na sua operação.
-                            </p>
-                        </div>
-
-                        <div
-                            class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-white transition duration-300">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
-                                <i data-lucide="lock" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="text-base font-bold text-slate-900">Segurança de Dados</h4>
-                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                                Blindagem de redes e cópias de segurança criptografadas em nuvem imutável, prevenindo
-                                sequestro de dados por ransomware.
-                            </p>
-                        </div>
-
-                        <div
-                            class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-400 hover:bg-white transition duration-300">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
-                                <i data-lucide="users-round" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="text-base font-bold text-slate-900">Equipa Multidisciplinar</h4>
-                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                                Especialistas certificados em Microsoft, Cisco, MikroTik, Linux e Desenvolvimento Web
-                                trabalhando juntos para o seu negócio.
-                            </p>
-                        </div>
-
-                        <div
-                            class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-cyan-400 hover:bg-white transition duration-300">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center mb-4">
-                                <i data-lucide="file-check" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="text-base font-bold text-slate-900">Transparência Total</h4>
-                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                                Relatórios mensais executivos detalhando chamados resolvidos, inventário de ativos e
-                                recomendações de melhorias tecnológicas.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 4: SIMULADOR / FORMULÁRIO DE COTAÇÃO RÁPIDA -->
-            <section id="cotacao-capital" class="py-16 bg-slate-900 text-white relative overflow-hidden">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="text-center mb-10">
-                        <span
-                            class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
-                            Proposta Sob Medida
-                        </span>
-                        <h2 class="text-3xl font-extrabold text-white mt-3">Solicite um Orçamento Técnico ou Diagnóstico
-                            Gratuito</h2>
-                        <p class="text-slate-300 text-sm mt-2 max-w-xl mx-auto">
-                            Diga-nos o que a sua empresa precisa e receba uma proposta técnica detalhada com escopo,
-                            prazos e valores em até 24 horas úteis.
-                        </p>
-                    </div>
-
-                    <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm"
-                        x-data="{
-                            companyName: '',
-                            serviceCategory: 'Criação de Website Institucional',
-                            workstationCount: '1 a 5 computadores',
-                            urgency: 'Imediato (em até 7 dias)',
-                            messageText: '',
-                            sendToWhatsApp() {
-                                let text = '*SOLICITAÇÃO DE SERVIÇO - RACHI CAPITAL*\n';
-                                text += '🏢 *Empresa:* ' + (this.companyName || 'Não informado') + '\n';
-                                text += '🛠️ *Serviço Pretendido:* ' + this.serviceCategory + '\n';
-                                text += '💻 *Dimensão / Postos:* ' + this.workstationCount + '\n';
-                                text += '⏱️ *Urgência:* ' + this.urgency + '\n';
-                                if(this.messageText) text += '📝 *Mensagem:* ' + this.messageText + '\n';
-                                const url = 'https://wa.me/244972888585?text=' + encodeURIComponent(text);
-                                window.open(url, '_blank');
-                            }
-                         }">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nome
-                                    da Empresa / Solicitante *</label>
-                                <input type="text" x-model="companyName" placeholder="Ex: Grupo Atlântico, Lda"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-                            </div>
-
-                            <div>
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Serviço
-                                    Pretendido *</label>
-                                <select x-model="serviceCategory"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-                                    <option value="Criação de Website Institucional">Criação de Website Institucional (a
-                                        partir de 150.000 AOA)</option>
-                                    <option value="Loja Virtual / E-Commerce">Loja Virtual / E-Commerce (a partir de
-                                        250.000 AOA)</option>
-                                    <option value="Sistema de Gestão Sob Medida (ERP/CRM)">Sistema de Gestão Sob Medida
-                                        (ERP/CRM)</option>
-                                    <option value="Contrato de Suporte TI Startup (85.000 AOA/mês)">Contrato de Suporte
-                                        TI Startup (85.000 AOA/mês)</option>
-                                    <option value="Contrato de Suporte TI Business (195.000 AOA/mês)">Contrato de
-                                        Suporte TI Business (195.000 AOA/mês)</option>
-                                    <option value="Contrato de Suporte TI Enterprise">Contrato de Suporte TI Enterprise
-                                    </option>
-                                    <option value="Auditoria e Reestruturação de Redes">Auditoria e Reestruturação de
-                                        Redes</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Dimensão
-                                    da Empresa / Postos</label>
-                                <select x-model="workstationCount"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-                                    <option value="1 a 5 computadores">1 a 5 postos de trabalho</option>
-                                    <option value="6 a 15 computadores">6 a 15 postos de trabalho</option>
-                                    <option value="16 a 30 computadores">16 a 30 postos de trabalho</option>
-                                    <option value="Mais de 30 computadores / Múltiplas filiais">Mais de 30 postos /
-                                        Múltiplas filiais</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Prazo
-                                    de Início Desejado</label>
-                                <select x-model="urgency"
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-                                    <option value="Imediato (em até 7 dias)">Imediato (em até 7 dias)</option>
-                                    <option value="Dentro de 1 mês">Dentro de 1 mês</option>
-                                    <option value="Planeamento para próximo trimestre">Planeamento para próximo
-                                        trimestre</option>
-                                </select>
-                            </div>
-
-                            <div class="md:col-span-2">
-                                <label
-                                    class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Descreva
-                                    os detalhes do projeto ou os problemas atuais de TI</label>
-                                <textarea x-model="messageText" rows="3"
-                                    placeholder="Ex: Precisamos renovar nosso site antigo para vender online e de um suporte mensal para os 12 computadores do escritório..."
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition"></textarea>
-                            </div>
-                        </div>
-
-                        <div
-                            class="mt-8 pt-6 border-t border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <div class="text-xs text-slate-400 text-center sm:text-left">
-                                <i data-lucide="shield-check" class="w-4 h-4 inline text-amber-400 mr-1"></i>
-                                Proposta formal enviada em PDF timbrado com SLA e garantias.
-                            </div>
-                            <div class="flex items-center gap-3 w-full sm:w-auto">
-                                <button @click="sendToWhatsApp()"
-                                    class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
-                                    <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                    <span>Enviar no WhatsApp</span>
-                                </button>
-                                <button
-                                    @click="openRequestWithPreselection(4, serviceCategory + ' - ' + (companyName || 'Cotação'))"
-                                    class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-extrabold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-amber-900/30">
-                                    <i data-lucide="send" class="w-4 h-4"></i>
-                                    <span>Pedir Proposta Formal</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- SUB-PAGE: LOJA OFICIAL (REPLICA EXACTA DE https://hom.rachi.ao/loja) -->
-        <!-- ============================================================== -->
-        <div x-show="currentTab === 'loja'" x-cloak class="min-h-screen bg-slate-50">
-
-            <!-- STORE HERO BANNER -->
-            <section class="bg-[#071326] text-white pt-12 pb-16 px-6 lg:px-12 border-b border-slate-800">
-                <div class="max-w-7xl mx-auto">
-                    <!-- Breadcrumb -->
-                    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
-                        <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
-                            class="hover:text-white transition cursor-pointer">Início</a>
-                        <span class="text-slate-600">/</span>
-                        <span class="text-amber-400 font-bold">Loja</span>
-                    </nav>
-
-                    <div class="max-w-3xl">
-                        <span
-                            class="text-xs font-bold uppercase tracking-widest text-[#00a3e0] bg-blue-950/80 px-3 py-1 rounded-full border border-blue-800/60">
-                            Loja Corporativa RACHI
-                        </span>
-                        <h1 class="text-3xl md:text-5xl font-[850] text-white mt-3 uppercase tracking-tight">
-                            Produtos para a sua <span class="text-[#eba72d]">empresa</span>
-                        </h1>
-                        <p class="text-slate-300 text-base md:text-lg mt-3 leading-relaxed">
-                            Encontre consumíveis, equipamentos, software e serviços num único lugar com entrega
-                            garantida em Luanda.
-                        </p>
-                    </div>
-
-                    <!-- Search Bar -->
-                    <div class="mt-8 max-w-2xl">
-                        <div
-                            class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-2xl border border-slate-200">
-                            <span class="pl-3 text-slate-400">
-                                <i data-lucide="search" class="w-5 h-5"></i>
-                            </span>
-                            <input type="search" x-model="storeSearchQuery"
-                                placeholder="Pesquisar por nome ou referência..."
-                                class="w-full px-3 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none">
-                            <button @click="$nextTick(() => lucide.createIcons())"
-                                class="px-6 py-2.5 bg-[#071326] hover:bg-amber-500 hover:text-slate-950 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition whitespace-nowrap">
-                                Pesquisar
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Store Benefits -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-800/80">
-                        <div class="flex items-center gap-3 text-xs text-slate-300">
-                            <div
-                                class="w-8 h-8 rounded-lg bg-blue-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="truck" class="w-4 h-4"></i>
-                            </div>
-                            <span>Entrega em Luanda com prazo a combinar</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-xs text-slate-300">
-                            <div
-                                class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="store" class="w-4 h-4"></i>
-                            </div>
-                            <span>Levantamento nas instalações RACHI sem custos</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-xs text-slate-300">
-                            <div
-                                class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="shield-check" class="w-4 h-4"></i>
-                            </div>
-                            <span>Facturação e garantia empresarial formal</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- STORE CATALOG & FILTER TOOLBAR -->
-            <section class="py-12 px-6 lg:px-12 max-w-7xl mx-auto">
-
-                <!-- Category Tabs & Sort Controls -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-8">
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                        <!-- Category Filter Pills -->
-                        <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
-                            <button @click="storeCategory = 'todas'"
-                                :class="storeCategory === 'todas' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Todas as Categorias
-                            </button>
-                            <button @click="storeCategory = 'Personalizado_Gráfica'"
-                                :class="storeCategory === 'Personalizado_Gráfica' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Personalizado_Gráfica
-                            </button>
-                            <button @click="storeCategory = 'Consumíveis'"
-                                :class="storeCategory === 'Consumíveis' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Consumíveis
-                            </button>
-                            <button @click="storeCategory = 'Material de Escritório'"
-                                :class="storeCategory === 'Material de Escritório' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Material de Escritório
-                            </button>
-                            <button @click="storeCategory = 'Informática e Tecnologia'"
-                                :class="storeCategory === 'Informática e Tecnologia' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Informática e Tecnologia
-                            </button>
-                            <button @click="storeCategory = 'Impressão e Papelaria'"
-                                :class="storeCategory === 'Impressão e Papelaria' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Impressão e Papelaria
-                            </button>
-                            <button @click="storeCategory = 'Material Promocional'"
-                                :class="storeCategory === 'Material Promocional' ? 'bg-[#071326] text-white font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
-                                class="px-4 py-2 rounded-xl text-xs transition whitespace-nowrap">
-                                Material Promocional
-                            </button>
-                        </div>
-
-                        <!-- Sort dropdown -->
-                        <div class="flex items-center gap-3 flex-shrink-0">
-                            <span class="text-xs font-semibold text-slate-500">Ordenar por:</span>
-                            <select x-model="storeSort"
-                                class="text-xs font-semibold bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500">
-                                <option value="recentes">Mais recentes</option>
-                                <option value="preco_menor">Menor preço</option>
-                                <option value="preco_maior">Maior preço</option>
-                                <option value="nome">Nome (A-Z)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <template x-for="p in filteredStoreProducts" :key="p.slug">
-                        <article
-                            class="bg-white dark:bg-[#0c1a33] rounded-2xl border border-slate-200 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-xl hover:border-amber-400 dark:hover:border-amber-400/80 transition-all duration-300 flex flex-col justify-between group">
-                            <!-- Product Media & Badges -->
-                            <div class="h-56 bg-slate-50 dark:bg-gradient-to-b dark:from-white/5 dark:to-[#071326] dark:border-b dark:border-white/10 p-6 flex items-center justify-center relative overflow-hidden">
-                                <img :src="p.image" :alt="p.title"
-                                    class="max-h-full max-w-full object-contain dark:drop-shadow-[0_12px_20px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-300">
-
-                                <div class="absolute top-3 left-3 flex flex-col gap-1">
-                                    <span x-show="p.badge" x-text="p.badge"
-                                        class="px-2.5 py-1 bg-amber-500 text-slate-950 font-black text-[10px] rounded-md uppercase tracking-wider shadow-sm"></span>
-                                </div>
-                            </div>
-
-                            <!-- Product Body -->
-                            <div class="p-5 flex-1 flex flex-col justify-between">
-                                <div>
-                                    <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400"
-                                        x-text="p.category"></p>
-                                    <h3 class="font-bold text-slate-900 dark:text-white text-sm mt-1 line-clamp-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-amber-400 transition"
-                                        x-text="p.title"></h3>
-                                </div>
-
-                                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/10">
-                                    <!-- Price -->
-                                    <div class="flex items-baseline gap-2 mb-2">
-                                        <strong class="text-base font-black text-slate-900 dark:text-white" x-text="p.price"></strong>
-                                        <span x-show="p.oldPrice" class="text-xs text-slate-400 line-through"
-                                            x-text="p.oldPrice"></span>
-                                    </div>
-
-                                    <!-- Stock -->
-                                    <p
-                                        class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1.5 mb-4">
-                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        <span x-text="p.stockText || 'Disponível'"></span>
-                                    </p>
-
-                                    <!-- Buttons -->
-                                    <div class="space-y-2">
-                                        <button @click="addToCartFromStore(p)"
-                                            class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-sm shadow-amber-500/20 transition flex items-center justify-center gap-2">
-                                            <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
-                                            <span>Adicionar ao carrinho</span>
-                                        </button>
-                                        <button @click="openProductModal(p)"
-                                            class="w-full py-1.5 text-center text-xs font-bold text-slate-600 hover:text-blue-600 transition flex items-center justify-center gap-1">
-                                            <span>Ver detalhes</span>
-                                            <span aria-hidden="true">&rarr;</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </template>
-                </div>
-
-                <!-- Empty State if no products match -->
-                <div x-show="filteredStoreProducts.length === 0"
-                    class="text-center py-16 bg-white rounded-2xl border border-slate-200 mt-6">
-                    <i data-lucide="package-open" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-900">Nenhum produto encontrado</h3>
-                    <p class="text-sm text-slate-500 mt-1">Tente pesquisar com outros termos ou selecione outra
-                        categoria.</p>
-                    <button @click="storeCategory = 'todas'; storeSearchQuery = ''"
-                        class="mt-4 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg">
-                        Limpar Filtros
-                    </button>
-                </div>
-            </section>
-        </div>
 
         <!-- PRODUCT DETAILS MODAL -->
         <div x-show="productModalOpen" x-cloak
-            class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+            class="fixed inset-0 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" style="z-index: 2000 !important;">
             <div @click.away="productModalOpen = false"
                 class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-slate-100 relative">
                 <button @click="productModalOpen = false"
@@ -5891,7 +4706,7 @@
 
                             <p class="text-xs text-emerald-600 font-semibold mt-2 flex items-center gap-1">
                                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                <span>Em estoque — Entrega em Luanda</span>
+                                <span>Em stock — Entrega em Luanda</span>
                             </p>
 
                             <p class="text-xs text-slate-600 mt-4 leading-relaxed">
@@ -5916,45 +4731,60 @@
         </div>
 
 
-        <!-- FOOTER EXACT TO RACHI -->
+                <!-- FOOTER CORPORATIVO OFICIAL RACHI -->
         <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
-                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
+                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='/images/logo-rachi-dark.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
                         <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Um ecossistema de soluções inteligentes para impulsionar negócios e pessoas em Angola e no
-                            mundo.
+                            Ecossistema integrado de soluções corporativas em Angola: tecnologia, produção gráfica, formação profissional e capital humano.
                         </p>
+                        <div class="mt-4 flex items-center gap-3 text-xs text-slate-500">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold border border-emerald-500/20">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Luanda · Angola
+                            </span>
+                        </div>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Áreas de Negócio</h4>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Unidades de Negócio</h4>
                         <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                            <li><a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a></li>
-                            <li><a href="/print" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print</a></li>
-                            <li><a href="/academy" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy</a></li>
-                            <li><a href="/capital" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Human Capital</a></li>
+                            <li><a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition font-medium">RACHI Tec — Tecnologia, Sites &amp; Suporte TI</a></li>
+                            <li><a href="/print" class="hover:text-slate-900 dark:hover:text-white transition font-medium">RACHI Print — Gráfica, Brindes &amp; Sinalética</a></li>
+                            <li><a href="/academy" class="hover:text-slate-900 dark:hover:text-white transition font-medium">RACHI Academy — Formação &amp; Certificação</a></li>
+                            <li><a href="/capital" class="hover:text-slate-900 dark:hover:text-white transition font-medium">RACHI Human Capital — RH &amp; Contabilidade</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Sobre Nós</h4>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Institucional &amp; Legal</h4>
                         <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                            <li><a href="#sobre" @click.prevent="scrollToSection('sobre')" class="hover:text-slate-900 dark:hover:text-white transition">Quem somos</a></li>
-                            <li><a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos')" class="hover:text-slate-900 dark:hover:text-white transition">O que fazemos</a></li>
-                            <li><a href="#parceiros" @click.prevent="scrollToSection('parceiros')" class="hover:text-slate-900 dark:hover:text-white transition">Parceiros</a></li>
-                            <li><a href="#etica" @click.prevent="currentTab = 'etica'" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
-                            <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto</a></li>
+                            <li><a href="/privacidade" class="hover:text-blue-600 dark:hover:text-amber-400 transition font-semibold">Política de Privacidade (Lei 22/11)</a></li>
+                            <li><a href="/termos" class="hover:text-blue-600 dark:hover:text-amber-400 transition font-semibold">Termos e Condições de Uso</a></li>
+                            <li><a href="/cookies" class="hover:text-blue-600 dark:hover:text-amber-400 transition">Política de Cookies</a></li>
+                            <li><a href="/reclamacoes-e-denuncia" class="hover:text-blue-600 dark:hover:text-amber-400 transition font-semibold">Reclamações e Denúncia</a></li>
+                            <li><a href="#etica" @click.prevent="scrollToSection('etica')" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Localização</h4>
-                        <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
-                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-500 mb-3">Sede &amp; Contactos</h4>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-semibold">Rua Ndunduma</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 font-medium">Miramar – Luanda, Angola</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Por detrás do BFA</p>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-2 flex items-center gap-1.5">
+                            <span class="text-slate-400">Tel:</span> +244 972 888 585
+                        </p>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-1 flex items-center gap-1.5">
+                            <span class="text-slate-400">WhatsApp:</span> +244 923 000 001
+                        </p>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-1 flex items-center gap-1.5">
+                            <span class="text-slate-400">E-mail:</span> geral@rachi.ao
+                        </p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Segunda a Sexta: 08h00 às 17h00</p>
                     </div>
                 </div>
-                <div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
-                    <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong>. Todos os direitos reservados.</div>
+                <div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+                    <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> — Soluções Inteligentes. Todos os direitos reservados. República de Angola.</div>
                     <div class="flex gap-3 items-center text-xs">
                         <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt" class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition" title="Português">PT</button>
                         <span class="text-slate-500 opacity-60">|</span>
@@ -5978,7 +4808,8 @@
          x-transition:leave="transition ease-in duration-200 transform"
          x-transition:leave-start="opacity-100 translate-y-0 sm:translate-x-0 scale-100"
          x-transition:leave-end="opacity-0 -translate-y-4 sm:translate-y-0 sm:translate-x-4 scale-95"
-         class="fixed top-20 right-4 sm:right-6 z-[100] max-w-md w-full bg-slate-900/95 rounded-2xl p-4 shadow-2xl backdrop-blur-xl text-white border transition-colors duration-300"
+         class="fixed top-20 right-4 sm:right-6 z-[2100] max-w-md w-full bg-slate-900/95 rounded-2xl p-4 shadow-2xl backdrop-blur-xl text-white border transition-colors duration-300"
+         style="z-index: 2100 !important;"
          :class="{
              'border-emerald-500/50 shadow-emerald-500/10': loginToast.type === 'success',
              'border-[#0050f0]/60 shadow-blue-500/10': loginToast.type === 'logout',
@@ -6073,12 +4904,13 @@
     <!-- MODAL: ENTRAR E CRIAR CONTA UNIFICADO (LIGHT & DARK MODE)      -->
     <!-- ============================================================== -->
     <div x-show="loginModal"
-        class="fixed inset-0 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 transition-all duration-300"
+        class="fixed inset-0 bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto transition-all duration-300 no-scrollbar scrollbar-none"
+        style="z-index: 2000 !important;"
         x-cloak
         x-init="$watch('loginModal', val => document.body.style.overflow = val ? 'hidden' : '')"
         @click.self="loginModal = false">
-        <div :class="authTab === 'register' ? 'max-w-xl' : 'max-w-md'"
-             class="bg-white dark:bg-gradient-to-b dark:from-slate-900 dark:to-[#071326] border border-slate-200 dark:border-slate-700/80 rounded-3xl w-full p-5 sm:p-6 shadow-2xl text-slate-800 dark:text-white relative overflow-hidden transition-all duration-300">
+        <div :class="authTab === 'register' ? 'max-w-xl max-h-[88vh] overflow-y-auto my-auto no-scrollbar scrollbar-none' : 'max-w-md my-auto overflow-hidden'"
+             class="bg-white dark:bg-gradient-to-b dark:from-slate-900 dark:to-[#071326] border border-slate-200 dark:border-slate-700/80 rounded-3xl w-full p-5 sm:p-6 shadow-2xl text-slate-800 dark:text-white relative transition-all duration-300">
             <!-- Glow background effect -->
             <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-500/10 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-600/10 dark:bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -6091,7 +4923,7 @@
                          onerror="this.onerror=null; this.src='/images/logo-rachi.png'"
                          alt="RACHI" class="h-8 object-contain dark:hidden">
                     <!-- Light Logo para Modo Escuro -->
-                    <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" 
+                    <img src="/images/logo-rachi-light.png" 
                          onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"
                          alt="RACHI" class="h-8 object-contain hidden dark:block">
                 </div>
@@ -6120,7 +4952,7 @@
                             <span>Criar conta</span>
                         </h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 leading-relaxed">
-                            Cadastre-se como particular ou empresa. Enviaremos a palavra-passe temporária e o código de activação para o seu e-mail.
+                            Registe-se como particular ou empresa. Enviaremos a palavra-passe temporária e o código de activação para o seu e-mail.
                         </p>
                     </div>
                 </template>
@@ -6154,15 +4986,18 @@
                         E-mail
                     </label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500 dark:text-slate-400">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
                             </svg>
                         </span>
-                        <input type="text" x-model="authForm.email" required
+                        <input type="email" x-model="authForm.email"
+                               @input="authErrors.email = ''"
                                placeholder="ex: seu.email@empresa.com"
-                               class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 focus:border-[#0050f0] dark:focus:border-amber-400 focus:ring-1 focus:ring-[#0050f0] dark:focus:ring-amber-400 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition outline-none">
+                               :class="authErrors.email ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 dark:border-slate-700 focus:border-[#0050f0]'"
+                               class="w-full bg-slate-50 dark:bg-slate-800/90 border rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition outline-none">
                     </div>
+                    <p x-show="authErrors.email" x-text="authErrors.email" class="text-[11px] text-rose-500 font-semibold mt-1" x-cloak></p>
                 </div>
 
                 <!-- Campo Palavra-passe -->
@@ -6173,19 +5008,22 @@
                         </label>
                     </div>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500 dark:text-slate-400">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
                         </span>
-                        <input :type="authForm.showPassword ? 'text' : 'password'" x-model="authForm.password" required
+                        <input :type="authForm.showPassword ? 'text' : 'password'" x-model="authForm.password"
+                               @input="authErrors.password = ''"
                                placeholder="••••••••"
-                               class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 focus:border-[#0050f0] dark:focus:border-amber-400 focus:ring-1 focus:ring-[#0050f0] dark:focus:ring-amber-400 rounded-xl pl-10 pr-10 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition outline-none">
+                               :class="authErrors.password ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 dark:border-slate-700 focus:border-[#0050f0]'"
+                               class="w-full bg-slate-50 dark:bg-slate-800/90 border rounded-xl pl-10 pr-10 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition outline-none">
                         <button type="button" @click="authForm.showPassword = !authForm.showPassword" 
                                 class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer">
                             <span x-text="authForm.showPassword ? '🙈' : '👁️'" class="text-xs"></span>
                         </button>
                     </div>
+                    <p x-show="authErrors.password" x-text="authErrors.password" class="text-[11px] text-rose-500 font-semibold mt-1" x-cloak></p>
                 </div>
 
                 <!-- Botão de Ação: Login -->
@@ -6194,7 +5032,7 @@
                         class="w-full mt-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#0050f0] via-[#0284c7] to-[#00a3e0] hover:from-[#0040d0] hover:to-[#0274b5] text-white font-bold text-sm uppercase tracking-wider shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2 transform active:scale-[0.99] cursor-pointer">
                     <template x-if="!authLoading">
                         <div class="flex items-center gap-2">
-                            <span>Acessar Plataforma</span>
+                            <span>Aceder à Plataforma</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                             </svg>
@@ -6212,7 +5050,7 @@
                 </button>
 
                 <!-- Footer Link -->
-                <p class="text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 pt-1">
+                <p class="text-center text-xs text-slate-500 dark:text-slate-400 pt-1">
                     Ainda não tem conta?
                     <button type="button" @click="authTab = 'register'; authError = ''"
                             class="font-bold text-[#0050f0] dark:text-amber-400 hover:underline cursor-pointer ml-1">
@@ -6296,14 +5134,14 @@
                 </div>
 
 
-                <!-- Endereço (opcional) -->
+                <!-- Morada (opcional) -->
                 <div class="pt-2 border-t border-slate-200/70 dark:border-slate-700/60 space-y-2">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                             Endereço (opcional)
                         </label>
                         <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">
-                            Se preencher o endereço, indique pelo menos a província e o município.
+                            Se preencher a morada, indique pelo menos a província e o município.
                         </p>
                     </div>
 
@@ -6387,6 +5225,32 @@
                     </div>
                 </div>
 
+                <!-- Palavra-passe & Confirmação -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
+                            Palavra-passe
+                        </label>
+                        <input type="password" x-model="registerForm.password" required minlength="6"
+                               placeholder="Mínimo 6 caracteres"
+                               class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 focus:border-[#0050f0] dark:focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
+                            Confirmar Palavra-passe
+                        </label>
+                        <input type="password" x-model="registerForm.password_confirmation" required minlength="6"
+                               placeholder="Repita a palavra-passe"
+                               class="w-full bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 focus:border-[#0050f0] dark:focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 outline-none">
+                    </div>
+                </div>
+
+                <!-- Termos e Privacidade (Lei 22/11 de Angola) -->
+                <label class="flex items-start gap-2 text-[11px] text-slate-600 dark:text-slate-400 cursor-pointer pt-1">
+                    <input type="checkbox" x-model="registerForm.terms_accepted" required class="mt-0.5 accent-[#0050f0]">
+                    <span>Concordo com os <a href="/termos" target="_blank" class="text-blue-600 dark:text-amber-400 underline font-semibold">Termos de Uso</a> e a <a href="/privacidade" target="_blank" class="text-blue-600 dark:text-amber-400 underline font-semibold">Política de Privacidade</a> (Lei n.º 22/11 de Angola).</span>
+                </label>
+
                 <!-- Botão de Ação: Criar Conta -->
                 <button type="submit"
                         :disabled="authLoading"
@@ -6424,7 +5288,7 @@
 
     <!-- MODAL INFORMATIVO: MATRÍCULA NECESSÁRIA NA ACADEMY (RESPONDE A DARK MODE E MODO CLARO) -->
     <div x-show="matriculaModalOpen" 
-         class="fixed inset-0 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 transition-all duration-300" 
+         class="fixed inset-0 bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto transition-all duration-300" style="z-index: 2000 !important;" 
          x-cloak 
          @click.self="matriculaModalOpen = false">
         <div class="bg-white dark:bg-gradient-to-b dark:from-slate-900 dark:to-[#071326] border border-slate-200 dark:border-slate-700/80 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl text-slate-800 dark:text-white relative overflow-hidden transition-all duration-300">
@@ -6473,7 +5337,7 @@
     </div>
 
     <!-- CART SLIDE-OVER -->
-    <div x-show="cartDrawer" class="fixed inset-0 z-50 overflow-hidden" x-cloak>
+    <div x-show="cartDrawer" class="fixed inset-0 overflow-hidden" style="z-index: 2000 !important;" x-cloak>
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="cartDrawer = false"></div>
         <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col">
             <div class="p-6 border-b flex justify-between items-center bg-[#071326] text-white">
@@ -6502,1453 +5366,73 @@
                     </div>
                 </template>
             </div>
-            <div class="p-6 bg-slate-50 border-t space-y-3" x-show="cart.length > 0">
+            <div class="p-6 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 space-y-3" x-show="cart.length > 0">
                 <div class="flex justify-between font-bold text-base">
-                    <span>Total:</span>
-                    <span class="text-amber-600" x-text="cartTotal.toLocaleString('pt-AO') + ' AOA'"></span>
+                    <span class="text-slate-700 dark:text-slate-300">Total:</span>
+                    <span class="text-amber-600 dark:text-amber-400 font-black" x-text="cartTotal.toLocaleString('pt-AO') + ' AOA'"></span>
                 </div>
-                <button @click="checkoutSimulated()"
-                    class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-lg shadow">
-                    Finalizar Compra (Pagamento via Multicaixa)
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- ============================================================== -->
-    <!-- VIEW 2: CLIENT PORTAL (AUTHENTICATED)                          -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- VIEW 2: CLIENT PORTAL (PREMIUM EXECUTIVE SAAS)                 -->
-    <!-- ============================================================== -->
-    <div x-show="currentView === 'customer'" x-cloak
-         :class="customerDarkMode ? 'bg-slate-950 text-slate-100 dark' : 'bg-[#f8fafc] text-slate-800'"
-         class="min-h-screen flex flex-col transition-colors duration-200">
-
-        <!-- HEADER EXECUTIVO DO CLIENTE -->
-        <header :class="customerDarkMode ? 'bg-[#071326] text-white border-slate-800 shadow-lg' : 'bg-white text-slate-800 border-slate-200/90 shadow-sm'"
-                class="h-[68px] flex items-center justify-between px-4 sm:px-6 lg:px-8 border-b sticky top-0 z-40 transition-colors duration-200">
-            <!-- Esquerda: Logótipo, Divisor e Badges de Status -->
-            <div class="flex items-center gap-3 sm:gap-4">
-                <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer">
-                    <img :src="customerDarkMode ? '/images/logo-rachi-light.png' : '/images/logo-rachi-dark.png'" 
-                         onerror="this.onerror=null; this.src='/images/logo-rachi.png'"
-                         alt="RACHI" class="h-8 sm:h-9 w-auto object-contain">
-                </a>
-                <div :class="customerDarkMode ? 'bg-slate-700' : 'bg-slate-200'" class="h-5 w-px hidden sm:block"></div>
-                <div class="flex items-center gap-2">
-                    <span :class="customerDarkMode ? 'bg-blue-900/60 text-blue-300 border-blue-600/50' : 'bg-blue-50 text-blue-700 border-blue-200'"
-                          class="text-xs px-2.5 py-0.5 rounded-full font-bold border flex items-center gap-1.5 shadow-sm">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>Portal do Cliente VIP</span>
-                    </span>
-                    <span :class="customerDarkMode ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-emerald-50 text-emerald-700 border-emerald-200'"
-                          class="hidden md:inline-flex text-[11px] px-2 py-0.5 rounded-full font-semibold border items-center gap-1">
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        SSL 256-bit
-                    </span>
-                </div>
-            </div>
-
-            <!-- Centro: Barra de Busca Rápida no Painel (Filtro em Tempo Real) -->
-            <div class="hidden md:flex items-center flex-1 max-w-md mx-6">
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    </div>
-                    <input type="text" x-model="customerSearchQuery"
-                           placeholder="Buscar por protocolo, serviço, orçamento, fatura..."
-                           :class="customerDarkMode ? 'bg-slate-900/90 border-slate-700/80 text-slate-200 placeholder-slate-400 focus:border-blue-400' : 'bg-slate-100 border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-blue-500'"
-                           class="w-full border rounded-full pl-9 pr-8 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-blue-400 transition">
-                    <button x-show="customerSearchQuery" @click="customerSearchQuery = ''"
-                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-white">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Direita: Ações, Alternador de Modo, Notificações, Voltar ao Site & Perfil -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <!-- Alternador Dark / Light Mode na Área do Cliente (Sincronizado) -->
-                <button @click="toggleTheme()"
-                        :title="customerDarkMode ? 'Mudar para Tema Claro' : 'Mudar para Tema Escuro'"
-                        :class="customerDarkMode ? 'bg-slate-900/80 hover:bg-slate-800 border-slate-700/80 text-blue-400' : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-blue-600'"
-                        class="p-2 rounded-xl border transition flex items-center justify-center cursor-pointer">
-                    <template x-if="!customerDarkMode">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                    </template>
-                    <template x-if="customerDarkMode">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    </template>
-                </button>
-
-                <!-- Notificações com Dropdown -->
-                <div class="relative" x-data="{ notifOpen: false }" @click.away="notifOpen = false">
-                    <button @click="notifOpen = !notifOpen"
-                            :class="customerDarkMode ? 'bg-slate-900/80 hover:bg-slate-800 border-slate-700/80 text-slate-300 hover:text-white' : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-blue-600'"
-                            class="relative p-2 rounded-xl border transition">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                    </button>
-
-                    <!-- Painel de Notificações -->
-                    <div x-show="notifOpen" x-cloak
-                         :class="customerDarkMode ? 'bg-slate-900/98 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-800 shadow-2xl'"
-                         class="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl backdrop-blur-xl border p-4 z-50 text-xs">
-                        <div :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'"
-                             class="flex items-center justify-between pb-2.5 border-b">
-                            <span :class="customerDarkMode ? 'text-slate-100' : 'text-slate-900'"
-                                  class="font-bold flex items-center gap-1.5">
-                                <span>Notificações em Tempo Real</span>
-                                <span class="px-1.5 py-0.2 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold" x-text="customerNotifications.length"></span>
-                            </span>
-                            <button @click="customerNotifications.forEach(n => n.unread = false); notifOpen = false" class="text-[10px] text-blue-600 font-bold hover:underline">Marcar lidas</button>
+                <!-- Formulário de Identificação do Cliente para Factura Proforma (quando não autenticado) -->
+                <template x-if="!currentUser && cartCheckoutStep === 'identity'">
+                    <div class="space-y-3 pt-2 border-t border-slate-200 dark:border-slate-700 text-xs">
+                        <div class="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 text-[11px] leading-relaxed">
+                            <strong>Factura Proforma Multicaixa:</strong> Introduza os dados de facturação para emitirmos o documento formal com coordenadas de pagamento.
                         </div>
-                        <div :class="customerDarkMode ? 'divide-slate-800/80' : 'divide-slate-100'"
-                             class="divide-y max-h-72 overflow-y-auto">
-                            <template x-for="n in customerNotifications" :key="n.id">
-                                <div :class="customerDarkMode ? 'hover:bg-slate-800/50' : 'hover:bg-slate-50'"
-                                     class="py-3 flex items-start gap-3 px-2 rounded-xl transition cursor-pointer">
-                                    <div class="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    </div>
-                                    <div class="flex-1">
-                                        <div class="flex items-center justify-between">
-                                            <span :class="customerDarkMode ? 'text-slate-200' : 'text-slate-800'"
-                                                  class="font-bold" x-text="n.title"></span>
-                                            <span class="text-[10px] text-slate-400" x-text="n.time"></span>
-                                        </div>
-                                        <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'"
-                                           class="text-[11px] mt-0.5 leading-snug" x-text="n.text"></p>
-                                    </div>
-                                </div>
-                            </template>
+                        <div>
+                            <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Nome / Empresa *</label>
+                            <input type="text" x-model="checkoutForm.name" required placeholder="O seu nome ou empresa" class="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none">
                         </div>
-                    </div>
-                </div>
-
-                <!-- Botão Voltar ao Site -->
-                <button @click="goToHome()"
-                        :class="customerDarkMode ? 'text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border-slate-700/80' : 'text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 border-slate-200'"
-                        class="text-xs px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition">
-                    <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span class="hidden sm:inline font-bold">Voltar ao Site</span>
-                </button>
-
-                <!-- Perfil do Usuário com Mini-Badge e Logout -->
-                <div :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200'"
-                     class="flex items-center gap-2.5 pl-3 border-l">
-                    <div class="text-right hidden lg:block">
-                        <span :class="customerDarkMode ? 'text-slate-100' : 'text-slate-900'"
-                              class="text-xs font-bold block leading-tight" x-text="currentUser ? currentUser?.nome : 'Cliente Corporativo'"></span>
-                        <span class="text-[10px] text-blue-600 dark:text-blue-400 font-bold block" x-text="currentUser && currentUser?.has_matricula ? 'Matrícula Academy Ativa' : 'Acesso VIP Autorizado'"></span>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-md shadow-blue-500/20"
-                         x-text="currentUser ? (currentUser?.avatar || 'C') : 'C'">
-                    </div>
-                    <button @click="logout()" title="Terminar Sessão" class="text-slate-400 hover:text-rose-500 p-1.5 rounded-xl hover:bg-rose-500/10 transition">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <div class="flex-1 flex overflow-hidden">
-            <!-- SIDEBAR MODERNA DO CLIENTE (BRANCA COM DESTAQUES EM AZUL) -->
-            <aside :class="customerDarkMode ? 'bg-[#071326] text-white border-slate-800' : 'bg-white text-slate-800 border-slate-200/90 shadow-sm'"
-                   class="w-64 lg:w-72 p-4 space-y-4 border-r flex flex-col justify-between shrink-0 overflow-y-auto transition-colors duration-200">
-                <div class="space-y-4">
-                    <!-- Card da Empresa / Cliente Conectado -->
-                    <div :class="customerDarkMode ? 'bg-gradient-to-br from-slate-900 via-slate-900/90 to-[#0b2247]/60 border-slate-800' : 'bg-gradient-to-br from-blue-50/50 via-white to-slate-50 border-slate-200/90 shadow-sm'"
-                         class="p-3.5 rounded-2xl border">
-                        <div class="flex items-center justify-between mb-1.5">
-                            <span class="text-[10px] uppercase tracking-wider font-extrabold text-blue-600">Conta Corporativa</span>
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">E-mail *</label>
+                                <input type="email" x-model="checkoutForm.email" required placeholder="para envio da proforma" class="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Telefone *</label>
+                                <input type="text" x-model="checkoutForm.phone" required placeholder="+244 ..." class="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none">
+                            </div>
                         </div>
-                        <div :class="customerDarkMode ? 'text-slate-100' : 'text-slate-900'"
-                             class="font-bold text-sm truncate" x-text="currentUser ? (currentUser?.empresa || currentUser?.nome) : 'Inovquimua Angola'"></div>
-                        <div class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5">
-                            <span>ID: CLI-AO-9204</span>
-                            <span>•</span>
-                            <span class="text-blue-600 font-bold">Verificado</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">NIF (Opcional)</label>
+                                <input type="text" x-model="checkoutForm.document" placeholder="N.º fiscal" class="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Município / Bairro</label>
+                                <input type="text" x-model="checkoutForm.address" placeholder="Talatona, Luanda" class="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none">
+                            </div>
                         </div>
+                        <div class="pt-2 flex gap-2">
+                            <button type="button" @click="submitProformaOrder()" class="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition">
+                                Emitir Factura Proforma
+                            </button>
+                            <button type="button" @click="cartCheckoutStep = 'cart'" class="px-3 py-3 border rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300">
+                                Voltar
+                            </button>
+                        </div>
+                        <p class="text-center text-[10px] text-slate-500 pt-1">
+                            Já tem conta? <button type="button" @click="cartDrawer = false; loginModal = true; authTab = 'login'" class="text-blue-600 font-bold underline">Iniciar sessão</button>
+                        </p>
                     </div>
+                </template>
 
-                    <!-- Navegação Principal -->
-                    <div>
-                        <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 px-3 mb-2">Menu Principal</div>
-                        <nav class="space-y-1">
-                            <!-- Aba 1: Painel Geral -->
-                            <button @click="customerTab = 'dashboard'"
-                                    :class="customerTab === 'dashboard' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-                                    <span>Painel Geral</span>
-                                </span>
-                            </button>
-
-                            <!-- Aba 2: Minhas Solicitações -->
-                            <button @click="customerTab = 'requests'"
-                                    :class="customerTab === 'requests' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-                                    <span>Minhas Solicitações</span>
-                                </span>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold"
-                                      :class="customerTab === 'requests' ? 'bg-white/20 text-white' : (customerDarkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700')"
-                                      x-text="customerRequests.length"></span>
-                            </button>
-
-                            <!-- Aba 3: Solicitar Novo Serviço (Destaque Azul) -->
-                            <button @click="customerTab = 'new_request'"
-                                    :class="customerTab === 'new_request' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30' : 'text-blue-700 bg-blue-50/80 hover:bg-blue-100 border border-blue-200/90 font-bold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition font-semibold">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <span>+ Solicitar Serviço</span>
-                                </span>
-                                <span class="text-[9px] uppercase px-1.5 py-0.5 rounded bg-blue-600/20 text-blue-700 dark:text-blue-300 font-bold">Novo</span>
-                            </button>
-
-                            <!-- Aba 4: Meus Orçamentos -->
-                            <button @click="customerTab = 'my_quotes'"
-                                    :class="customerTab === 'my_quotes' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"/></svg>
-                                    <span>Orçamentos &amp; Propostas</span>
-                                </span>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold"
-                                      :class="customerTab === 'my_quotes' ? 'bg-white/20 text-white' : (customerDarkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-50 text-blue-700 border border-blue-200/60')"
-                                      x-text="customerQuotes.filter(q => q.status === 'sent').length + ' Pendente'"></span>
-                            </button>
-
-                            <!-- Aba 5: Serviços & Contratos Ativos -->
-                            <button @click="customerTab = 'contracts'"
-                                    :class="customerTab === 'contracts' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                                    <span>Contratos &amp; SLAs</span>
-                                </span>
-                                <span :class="customerTab === 'contracts' ? 'bg-white/20 text-white' : (customerDarkMode ? 'bg-emerald-500/20 text-emerald-300' : 'bg-emerald-100 text-emerald-800')"
-                                      class="px-1.5 py-0.5 rounded text-[10px] font-bold">2 Ativos</span>
-                            </button>
-
-                            <!-- Aba 6: Faturas & Documentos -->
-                            <button @click="customerTab = 'documents'"
-                                    :class="customerTab === 'documents' ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/25' : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')"
-                                    class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition">
-                                <span class="flex items-center gap-2.5">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                    <span>Faturas &amp; Recibos</span>
-                                </span>
-                            </button>
-                        </nav>
-                    </div>
-
-                    <!-- Ecossistema Integrado (Academy & Loja) -->
-                    <div :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200'" class="pt-2 border-t">
-                        <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 px-3 mb-2">Ecossistema RACHI</div>
-                        
-                        <!-- Perfil Aluno (Academy) com validação de matrícula -->
-                        <button @click="openAcademyAluno()"
-                                class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition"
-                                :class="currentUser && currentUser?.has_matricula ? (customerDarkMode ? 'text-emerald-300 hover:bg-emerald-950/40 border border-emerald-500/30' : 'text-emerald-700 hover:bg-emerald-50 border border-emerald-200 font-bold') : (customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 border border-transparent' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold')">
-                            <span class="flex items-center gap-2.5">
-                                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
-                                <span>RACHI Academy</span>
-                            </span>
-                            <template x-if="currentUser && currentUser.has_matricula">
-                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold">Matriculado</span>
-                            </template>
-                            <template x-if="!currentUser || !currentUser.has_matricula">
-                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 border border-blue-200/60 text-blue-700 font-bold">Cursos</span>
-                            </template>
+                <template x-if="currentUser || cartCheckoutStep === 'cart'">
+                    <div class="space-y-2">
+                        <button @click="processCartCheckout()"
+                            class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-xl shadow-lg transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                            <span>Gerar Factura Proforma (Multicaixa)</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </button>
-
-                        <!-- Loja Integrada -->
-                        <a href="/loja"
-                           :class="customerDarkMode ? 'text-slate-300 hover:bg-slate-800/80 hover:text-white' : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700 font-semibold'"
-                           class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-left transition mt-1">
-                            <span class="flex items-center gap-2.5">
-                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                                <span>Loja de Suprimentos &amp; TI</span>
-                            </span>
-                            <span class="text-slate-400 text-xs">&rarr;</span>
-                        </a>
+                        <p class="text-[11px] text-center text-slate-500 dark:text-slate-400">
+                            Facturação formal com coordenadas bancárias Multicaixa Express / IBAN.
+                        </p>
                     </div>
-                </div>
-
-                <!-- Rodapé da Sidebar: Widget do Gestor de Atendimento Dedicado -->
-                <div :class="customerDarkMode ? 'bg-gradient-to-b from-slate-900 to-[#071326] border-slate-800 text-white shadow-lg' : 'bg-slate-50 border-slate-200/90 text-slate-800 shadow-sm'"
-                     class="mt-4 p-3.5 rounded-2xl border text-xs space-y-2.5">
-                    <div class="flex items-center gap-3">
-                        <div class="relative">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs shadow-inner">
-                                AM
-                            </div>
-                            <span :class="customerDarkMode ? 'ring-slate-900' : 'ring-white'"
-                                  class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2"></span>
-                        </div>
-                        <div>
-                            <div :class="customerDarkMode ? 'text-slate-200' : 'text-slate-900'"
-                                 class="font-bold text-xs leading-tight">Eng. António Mendes</div>
-                            <div class="text-[10px] text-blue-600 dark:text-blue-400 font-bold">Gestor de Atendimento VIP</div>
-                        </div>
-                    </div>
-                    <p :class="customerDarkMode ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'"
-                       class="text-[11px] leading-tight">
-                        Disponível para suporte prioritário e alinhamento executivo.
-                    </p>
-                    <button @click="selectedRequest = customerRequests[0]; customerTab = 'view_request'"
-                            :class="customerDarkMode ? 'bg-slate-800 hover:bg-blue-600 text-slate-200' : 'bg-white hover:bg-blue-600 hover:text-white text-slate-700 border border-slate-200 shadow-sm'"
-                            class="w-full py-1.5 px-2.5 font-bold rounded-xl transition text-[11px] flex items-center justify-center gap-1.5">
-                        <svg class="w-3.5 h-3.5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-                        <span>Abrir Atendimento</span>
-                    </button>
-                </div>
-            </aside>
-
-            <!-- CONTEÚDO PRINCIPAL (MAIN CONTENT) -->
-            <main :class="customerDarkMode ? 'bg-slate-950' : 'bg-[#f8fafc]'"
-                  class="flex-1 p-5 sm:p-6 lg:p-8 overflow-y-auto transition-colors duration-200">
-
-                <!-- ============================================================== -->
-                <!-- ABA 1: PAINEL GERAL (DASHBOARD COMPLETO E SEM ESPAÇOS VAZIOS) -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'dashboard'" class="space-y-6">
-
-                    <!-- Banner Executivo de Boas-Vindas (AZUL E BRANCO) -->
-                    <div :class="customerDarkMode ? 'bg-gradient-to-r from-[#071326] via-[#0b244d] to-[#0c1b33] border-slate-800 text-white shadow-xl' : 'bg-white border-slate-200/90 text-slate-900 shadow-sm'"
-                         class="relative overflow-hidden rounded-3xl p-6 sm:p-8 border transition-all">
-                        <!-- Efeito de brilho radial ambiente de fundo (Apenas no Dark Mode) -->
-                        <div x-show="customerDarkMode" class="absolute -right-16 -top-16 w-80 h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-                        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                            <div class="max-w-2xl space-y-2">
-                                <div :class="customerDarkMode ? 'bg-blue-950/60 border-blue-800 text-blue-300' : 'bg-blue-50 border-blue-200 text-blue-700'"
-                                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                    <span>Centro Integrado de Operações RACHI</span>
-                                </div>
-                                <h1 :class="customerDarkMode ? 'text-white' : 'text-slate-900'"
-                                    class="text-2xl sm:text-3xl font-black tracking-tight">
-                                    Olá, <span class="text-blue-600 dark:text-blue-400 font-black" x-text="currentUser ? currentUser?.nome : 'Cliente Corporativo'"></span>!
-                                </h1>
-                                <p :class="customerDarkMode ? 'text-slate-300' : 'text-slate-600'"
-                                   class="text-sm leading-relaxed">
-                                    Acompanhe o andamento dos seus projetos de tecnologia, produção gráfica, capacitações e propostas comerciais em um só lugar.
-                                </p>
-                            </div>
-
-                            <!-- Botões de Ação Imediata (Azul e Branco) -->
-                            <div class="flex flex-wrap items-center gap-3">
-                                <button @click="customerTab = 'new_request'"
-                                        class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs tracking-wide shadow-lg shadow-blue-600/25 transition transform hover:-translate-y-0.5 flex items-center gap-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                                    <span>NOVA SOLICITAÇÃO</span>
-                                </button>
-                                <button @click="customerTab = 'my_quotes'"
-                                        :class="customerDarkMode ? 'bg-white/10 hover:bg-white/15 border-white/20 text-white' : 'bg-white hover:bg-blue-50 border-slate-200 text-slate-800 hover:text-blue-700'"
-                                        class="px-4 py-2.5 rounded-2xl border font-bold text-xs backdrop-blur-md transition flex items-center gap-2 shadow-sm">
-                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <span>Aprovar Proposta</span>
-                                </button>
-                                <button @click="openAcademyAluno()"
-                                        :class="customerDarkMode ? 'bg-emerald-600/20 hover:bg-emerald-600/30 border-emerald-500/30 text-emerald-300' : 'bg-white hover:bg-emerald-50 border-emerald-200 text-emerald-700'"
-                                        class="px-4 py-2.5 rounded-2xl border font-bold text-xs backdrop-blur-md transition flex items-center gap-2 shadow-sm">
-                                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
-                                    <span>Sala de Aula</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quatro Cards de Indicadores Executivos (KPIs) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                        <!-- KPI 1: Solicitações Ativas -->
-                        <div class="p-5 rounded-2xl border transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
-                             @click="customerTab = 'requests'"
-                             :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs uppercase font-extrabold tracking-wider text-slate-400">Solicitações Ativas</span>
-                                <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                </div>
-                            </div>
-                            <div class="flex items-baseline gap-2 mt-3">
-                                <span class="text-3xl font-black text-slate-900 dark:text-white" x-text="customerRequests.length"></span>
-                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400">em andamento</span>
-                            </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
-                                <span>1 Análise • 1 Execução</span>
-                                <span class="text-blue-600 dark:text-blue-400 font-bold hover:underline">Ver todas &rarr;</span>
-                            </div>
-                        </div>
-
-                        <!-- KPI 2: Orçamentos Pendentes -->
-                        <div class="p-5 rounded-2xl border transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
-                             @click="customerTab = 'my_quotes'"
-                             :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs uppercase font-extrabold tracking-wider text-slate-400">Orçamentos Pendentes</span>
-                                <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                </div>
-                            </div>
-                            <div class="flex items-baseline gap-2 mt-3">
-                                <span class="text-2xl font-black text-amber-500">450.000 AOA</span>
-                            </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
-                                <span class="text-amber-600 dark:text-amber-400 font-bold">Aguardando Aprovação</span>
-                                <span class="text-amber-600 font-bold hover:underline">Aprovar &rarr;</span>
-                            </div>
-                        </div>
-
-                        <!-- KPI 3: Serviços e Contratos -->
-                        <div class="p-5 rounded-2xl border transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
-                             @click="customerTab = 'contracts'"
-                             :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs uppercase font-extrabold tracking-wider text-slate-400">Contratos &amp; SLAs</span>
-                                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                                </div>
-                            </div>
-                            <div class="flex items-baseline gap-2 mt-3">
-                                <span class="text-3xl font-black text-emerald-500">2 Ativos</span>
-                            </div>
-                            <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center justify-between">
-                                <span>SLA Técnico: 4 Horas</span>
-                                <span class="text-emerald-500 font-bold">100% Operacional</span>
-                            </div>
-                        </div>
-
-                        <!-- KPI 4: Academy & Capacitação -->
-                        <div class="p-5 rounded-2xl border transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
-                             @click="openAcademyAluno()"
-                             :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs uppercase font-extrabold tracking-wider text-slate-400">RACHI Academy</span>
-                                <div class="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="text-base font-bold text-slate-900 dark:text-white truncate"
-                                     x-text="currentUser && currentUser?.has_matricula ? (currentUser?.cursoMatriculado || 'Gestão Prática MPMEs') : 'Capacitação Executiva'"></div>
-                            </div>
-                            <div class="mt-3 text-xs flex items-center justify-between">
-                                <span class="font-bold"
-                                      :class="currentUser && currentUser?.has_matricula ? 'text-emerald-500' : 'text-amber-500'"
-                                      x-text="currentUser && currentUser?.has_matricula ? 'Matrícula Ativa' : 'Matrícula Disponível'"></span>
-                                <span class="text-indigo-500 font-bold hover:underline">Aceder &rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Grade de Duas Colunas (65% Esquerda + 35% Direita) -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                        <!-- COLUNA DA ESQUERDA (2/3): Solicitações Detalhadas e Documentos -->
-                        <div class="lg:col-span-2 space-y-6">
-
-                            <!-- Card de Solicitações em Andamento -->
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div>
-                                        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                            <span>Projetos &amp; Solicitações em Andamento</span>
-                                            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold" x-text="filteredCustomerRequests().length"></span>
-                                        </h2>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-0.5">Acompanhe a esteira de atendimento técnico e prazos de entrega.</p>
-                                    </div>
-
-                                    <!-- Filtro de Status em Abas Rápidas -->
-                                    <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
-                                        <button @click="customerFilterStatus = 'all'"
-                                                :class="customerFilterStatus === 'all' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
-                                                class="px-2.5 py-1 rounded-lg transition">Todas</button>
-                                        <button @click="customerFilterStatus = 'in_analysis'"
-                                                :class="customerFilterStatus === 'in_analysis' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
-                                                class="px-2.5 py-1 rounded-lg transition">Análise</button>
-                                        <button @click="customerFilterStatus = 'in_progress'"
-                                                :class="customerFilterStatus === 'in_progress' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
-                                                class="px-2.5 py-1 rounded-lg transition">Execução</button>
-                                        <button @click="customerFilterStatus = 'completed'"
-                                                :class="customerFilterStatus === 'completed' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
-                                                class="px-2.5 py-1 rounded-lg transition">Concluídas</button>
-                                    </div>
-                                </div>
-
-                                <!-- Lista de Solicitações com Esteira Visual de Progresso -->
-                                <div class="space-y-4 mt-5">
-                                    <template x-for="req in filteredCustomerRequests()" :key="req.id">
-                                        <div class="p-5 rounded-2xl border transition-all duration-200 hover:border-blue-400 group relative"
-                                             :class="customerDarkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50/70 border-slate-200/80'">
-                                            <!-- Topo do Card: Protocolo, Unidade, Prioridade e Data -->
-                                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                                <div class="flex items-center gap-2.5">
-                                                    <span class="font-mono font-bold text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2.5 py-1 rounded-lg border border-blue-200/60 dark:border-blue-900/60"
-                                                          x-text="req.protocol"></span>
-                                                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border"
-                                                          :class="req.unitBadge || 'bg-slate-100 text-slate-700'"
-                                                          x-text="req.unit"></span>
-                                                    <span class="text-[11px] font-semibold px-2 py-0.5 rounded border"
-                                                          :class="req.priorityBadge || 'bg-slate-100 text-slate-600'"
-                                                          x-text="'Prioridade ' + req.priority"></span>
-                                                </div>
-                                                <span class="text-xs font-semibold px-3 py-1 rounded-full"
-                                                      :class="getStatusBadgeClass(req.status)"
-                                                      x-text="req.statusLabel"></span>
-                                            </div>
-
-                                            <!-- Título e Descrição -->
-                                            <div class="mt-3">
-                                                <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
-                                                    x-text="req.title"></h3>
-                                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1 leading-relaxed"
-                                                   x-text="req.description"></p>
-                                            </div>
-
-                                            <!-- Esteira Visual de Progresso (5 Fases) -->
-                                            <div class="mt-4 pt-4 border-t"
-                                                 :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200/60'">
-                                                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-2">
-                                                    <span class="flex items-center gap-1.5">
-                                                        <span class="w-2 h-2 rounded-full"
-                                                              :class="req.status === 'completed' ? 'bg-emerald-500' : 'bg-blue-600 animate-pulse'"></span>
-                                                        <span>Progresso do Serviço</span>
-                                                    </span>
-                                                    <span class="font-mono font-bold text-slate-700 dark:text-slate-300" x-text="req.progressPercent + '% Concluído'"></span>
-                                                </div>
-                                                <!-- Barra de Progresso Gradual em Tons de Azul RACHI -->
-                                                <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                                                    <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full transition-all duration-500"
-                                                         :style="'width: ' + req.progressPercent + '%'"></div>
-                                                </div>
-                                                <!-- Marcadores de Etapa -->
-                                                <div class="grid grid-cols-5 text-[10px] text-center mt-2 text-slate-400">
-                                                    <span :class="req.step >= 1 ? 'text-blue-600 dark:text-blue-400 font-bold' : ''">1. Briefing</span>
-                                                    <span :class="req.step >= 2 ? 'text-blue-600 dark:text-blue-400 font-bold' : ''">2. Análise</span>
-                                                    <span :class="req.step >= 3 ? 'text-blue-600 dark:text-blue-400 font-bold' : ''">3. Orçamento</span>
-                                                    <span :class="req.step >= 4 ? 'text-indigo-600 dark:text-indigo-400 font-bold' : ''">4. Execução</span>
-                                                    <span :class="req.step >= 5 ? 'text-emerald-500 font-bold' : ''">5. Entrega</span>
-                                                </div>
-                                            </div>
-
-                                            <!-- Rodapé do Card: Técnico Designado e Ações -->
-                                            <div class="mt-4 pt-3 flex flex-wrap items-center justify-between gap-3 text-xs border-t"
-                                                 :class="customerDarkMode ? 'border-slate-800/80' : 'border-slate-200/50'">
-                                                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px]">
-                                                    <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                                    <span x-text="'Técnico: ' + (req.technician || 'Equipe Técnica RACHI')"></span>
-                                                </div>
-                                                <div class="flex items-center gap-2">
-                                                    <button @click="selectedRequest = req; customerTab = 'view_request'"
-                                                            class="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-sm shadow-blue-600/20">
-                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                                                        <span>Abrir Chat &amp; Detalhes</span>
-                                                    </button>
-                                                    <template x-if="req.status === 'quoted'">
-                                                        <button @click="customerTab = 'my_quotes'"
-                                                                class="px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold text-xs transition shadow-sm">
-                                                            Aprovar Proposta
-                                                        </button>
-                                                    </template>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-
-                            <!-- Card de Documentos Recentes & Faturas Proforma -->
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex items-center justify-between pb-4 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div>
-                                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                            <span>Faturas Proforma &amp; Recibos Recentes</span>
-                                        </h3>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-0.5">Consulte comprovativos e referências para pagamento bancário via Multicaixa.</p>
-                                    </div>
-                                    <button @click="customerTab = 'documents'" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">Ver todas &rarr;</button>
-                                </div>
-
-                                <div class="overflow-x-auto mt-4">
-                                    <table class="w-full text-left text-xs">
-                                        <thead>
-                                            <tr class="text-[10px] uppercase font-bold text-slate-400 border-b"
-                                                :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200'">
-                                                <th class="py-2.5 px-3">Documento</th>
-                                                <th class="py-2.5 px-3">Unidade</th>
-                                                <th class="py-2.5 px-3">Descrição</th>
-                                                <th class="py-2.5 px-3">Valor (AOA)</th>
-                                                <th class="py-2.5 px-3">Estado</th>
-                                                <th class="py-2.5 px-3 text-right">Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y"
-                                               :class="customerDarkMode ? 'divide-slate-800/60' : 'divide-slate-100'">
-                                            <template x-for="inv in customerInvoices" :key="inv.id">
-                                                <tr class="hover:bg-slate-500/5 transition">
-                                                    <td class="py-3 px-3 font-mono font-bold text-blue-600 dark:text-blue-400" x-text="inv.id"></td>
-                                                    <td class="py-3 px-3">
-                                                        <span class="px-2 py-0.5 rounded-full font-semibold text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300" x-text="inv.unit"></span>
-                                                    </td>
-                                                    <td class="py-3 px-3 text-slate-700 dark:text-slate-300 font-medium" x-text="inv.desc"></td>
-                                                    <td class="py-3 px-3 font-bold text-slate-900 dark:text-white" x-text="inv.value.toLocaleString('pt-AO') + ' AOA'"></td>
-                                                    <td class="py-3 px-3">
-                                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold"
-                                                              :class="inv.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
-                                                              x-text="inv.statusLabel"></span>
-                                                    </td>
-                                                    <td class="py-3 px-3 text-right">
-                                                        <button @click="mockDownloadDoc(inv.id)"
-                                                                class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-[11px] transition inline-flex items-center gap-1">
-                                                            <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                                                            <span>PDF</span>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- COLUNA DA DIREITA (1/3): Gestor Dedicado, Radar das 4 Unidades & Suporte -->
-                        <div class="space-y-6">
-
-                            <!-- Widget: Meu Gestor de Atendimento Dedicado -->
-                            <div class="p-6 rounded-3xl border shadow-sm relative overflow-hidden"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex items-center justify-between pb-4 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <span class="text-xs uppercase font-extrabold tracking-wider text-slate-400">Atendimento Dedicado</span>
-                                    <span class="flex items-center gap-1.5 text-[11px] font-bold text-emerald-500">
-                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        Online Agora
-                                    </span>
-                                </div>
-
-                                <div class="mt-4 flex items-center gap-4">
-                                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#00a3e0] to-[#071326] text-white font-black text-lg flex items-center justify-center shadow-lg shrink-0">
-                                        AM
-                                    </div>
-                                    <div>
-                                        <h3 class="font-extrabold text-base text-slate-900 dark:text-white">Eng. António Mendes</h3>
-                                        <p class="text-xs text-blue-600 dark:text-blue-400 font-bold">Gestor de Atendimento Corporativo</p>
-                                        <p class="text-[11px] text-slate-400 mt-0.5">Grupo RACHI • Luanda, Angola</p>
-                                    </div>
-                                </div>
-
-                                <div class="mt-5 space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                        <span>antonio.mendes@rachi.ao</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                                        <span>+244 972 888 585 (Linha Direta VIP)</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                        <span>Horário: 08:00 às 18:00 (Segunda a Sexta)</span>
-                                    </div>
-                                </div>
-
-                                <div class="mt-5 grid grid-cols-2 gap-2">
-                                    <button @click="selectedRequest = customerRequests[0]; customerTab = 'view_request'"
-                                            class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/20">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                                        <span>Chat Direto</span>
-                                    </button>
-                                    <a href="https://wa.me/244972888585" target="_blank"
-                                       class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow">
-                                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                                        <span>WhatsApp</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Widget: Status do Ecossistema nas 4 Unidades RACHI -->
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Status nas 4 Unidades RACHI</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-4">Serviços ativos e disponíveis para sua empresa.</p>
-
-                                <div class="space-y-3 text-xs">
-                                    <!-- RACHI Tec -->
-                                    <div class="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-500 font-bold flex items-center justify-center text-[10px]">TEC</div>
-                                            <div>
-                                                <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Tec</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Portal Web • Em Execução</div>
-                                            </div>
-                                        </div>
-                                        <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400">75% Concluído</span>
-                                    </div>
-
-                                    <!-- RACHI Print -->
-                                    <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-500 font-bold flex items-center justify-center text-[10px]">PRT</div>
-                                            <div>
-                                                <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Print</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">1.000 Catálogos em Acabamento</div>
-                                            </div>
-                                        </div>
-                                        <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400">Entrega: 24/09</span>
-                                    </div>
-
-                                    <!-- RACHI Academy -->
-                                    <div class="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-500 font-bold flex items-center justify-center text-[10px]">ACD</div>
-                                            <div>
-                                                <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Academy</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Cursos Executivos &amp; Alunos</div>
-                                            </div>
-                                        </div>
-                                        <button @click="openAcademyAluno()" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Aceder &rarr;</button>
-                                    </div>
-
-                                    <!-- RACHI Capital -->
-                                    <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-500 font-bold flex items-center justify-center text-[10px]">CAP</div>
-                                            <div>
-                                                <div class="font-bold text-slate-800 dark:text-slate-200">RACHI Capital</div>
-                                                <div class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400">Dossiê RH Homologado</div>
-                                            </div>
-                                        </div>
-                                        <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Finalizado</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Widget: FAQ & Perguntas Frequentes -->
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Dúvidas Frequentes</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mb-3">Respostas rápidas para sua operação corporativa.</p>
-
-                                <div class="space-y-2 text-xs">
-                                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
-                                         @click="activeFaq = activeFaq === 1 ? null : 1">
-                                        <div class="font-semibold flex items-center justify-between text-slate-800 dark:text-slate-200">
-                                            <span>Como aprovar uma proposta comercial?</span>
-                                            <span x-text="activeFaq === 1 ? '−' : '+'" class="font-bold text-slate-400"></span>
-                                        </div>
-                                        <div x-show="activeFaq === 1" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
-                                            Basta clicar na aba "Orçamentos &amp; Propostas" e pressionar o botão "Aprovar Orçamento". A equipe técnica receberá a notificação instantaneamente.
-                                        </div>
-                                    </div>
-
-                                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
-                                         @click="activeFaq = activeFaq === 2 ? null : 2">
-                                        <div class="font-semibold flex items-center justify-between text-slate-800 dark:text-slate-200">
-                                            <span>Como pagar via Multicaixa / Referência?</span>
-                                            <span x-text="activeFaq === 2 ? '−' : '+'" class="font-bold text-slate-400"></span>
-                                        </div>
-                                        <div x-show="activeFaq === 2" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
-                                            Na seção de faturas, copie a Entidade e Referência geradas na sua fatura proforma para pagamento no ATM, Multicaixa Express ou Internet Banking.
-                                        </div>
-                                    </div>
-
-                                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
-                                         @click="activeFaq = activeFaq === 3 ? null : 3">
-                                        <div class="font-semibold flex items-center justify-between text-slate-800 dark:text-slate-200">
-                                            <span>Como matricular colaboradores na Academy?</span>
-                                            <span x-text="activeFaq === 3 ? '−' : '+'" class="font-bold text-slate-400"></span>
-                                        </div>
-                                        <div x-show="activeFaq === 3" class="mt-2 text-slate-500 dark:text-slate-400 dark:text-slate-400 text-[11px] leading-relaxed">
-                                            Acesse o menu "RACHI Academy" ou solicite uma turma corporativa personalizada in-company pelo botão "Nova Solicitação".
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 2: LISTA COMPLETA DE SOLICITAÇÕES                          -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'requests'" class="space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div>
-                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Minhas Solicitações &amp; Chamados</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Histórico completo de projetos, orçamentos e serviços abertos com o Grupo RACHI.</p>
-                        </div>
-                        <button @click="customerTab = 'new_request'"
-                                class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                            <span>Nova Solicitação</span>
-                        </button>
-                    </div>
-
-                    <!-- Lista Completa -->
-                    <div class="space-y-4">
-                        <template x-for="req in filteredCustomerRequests()" :key="req.id">
-                            <div class="p-6 rounded-3xl border transition shadow-sm hover:border-blue-400"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex flex-wrap items-center justify-between gap-3">
-                                    <div class="flex items-center gap-3">
-                                        <span class="font-mono font-bold text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-3 py-1 rounded-lg border border-blue-200 dark:border-blue-800"
-                                              x-text="req.protocol"></span>
-                                        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border"
-                                              :class="req.unitBadge || 'bg-slate-100 text-slate-700'"
-                                              x-text="req.unit"></span>
-                                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" x-text="'Aberto em ' + req.date"></span>
-                                    </div>
-                                    <span class="text-xs font-bold px-3 py-1 rounded-full"
-                                          :class="getStatusBadgeClass(req.status)"
-                                          x-text="req.statusLabel"></span>
-                                </div>
-                                <h3 class="font-bold text-lg text-slate-900 dark:text-white mt-3" x-text="req.title"></h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1 leading-relaxed" x-text="req.description"></p>
-
-                                <div class="mt-4 pt-4 border-t flex items-center justify-between"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                                        <span>Responsável:</span>
-                                        <span class="font-semibold text-slate-800 dark:text-slate-200" x-text="req.technician || 'Equipe Técnica'"></span>
-                                    </div>
-                                    <button @click="selectedRequest = req; customerTab = 'view_request'"
-                                            class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs transition flex items-center gap-1.5 shadow">
-                                        <span>Abrir Atendimento &amp; Histórico</span>
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 3: SOLICITAR NOVO SERVIÇO COM SELETOR DE UNIDADES         -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'new_request'" class="space-y-6">
-                    <div class="max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl border shadow-xl"
-                         :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                        <div class="pb-5 border-b mb-6"
-                             :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Solicitar Novo Produto / Serviço</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">
-                                Escolha a unidade de negócio desejada e preencha as especificações para receber proposta técnica imediata.
-                            </p>
-                        </div>
-
-                        <!-- Seletor Visual de Unidade em 4 Cartões Clicáveis -->
-                        <div class="mb-6">
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2.5">
-                                1. Selecione a Unidade de Negócio *
-                            </label>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                                <!-- Opção 1: RACHI Tec -->
-                                <div @click="newRequest.unit = '1'"
-                                     class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
-                                     :class="newRequest.unit === '1' ? 'border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-blue-300'">
-                                    <div class="font-extrabold text-sm">RACHI Tec</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Websites, Software &amp; TI</p>
-                                </div>
-                                <!-- Opção 2: RACHI Print -->
-                                <div @click="newRequest.unit = '2'"
-                                     class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
-                                     :class="newRequest.unit === '2' ? 'border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-amber-300'">
-                                    <div class="font-extrabold text-sm">RACHI Print</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Gráfica, Banners &amp; Brindes</p>
-                                </div>
-                                <!-- Opção 3: RACHI Academy -->
-                                <div @click="newRequest.unit = '3'"
-                                     class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
-                                     :class="newRequest.unit === '3' ? 'border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-indigo-300'">
-                                    <div class="font-extrabold text-sm">RACHI Academy</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Treinamento &amp; Cursos</p>
-                                </div>
-                                <!-- Opção 4: RACHI Capital -->
-                                <div @click="newRequest.unit = '4'"
-                                     class="p-3.5 rounded-2xl border-2 cursor-pointer transition-all"
-                                     :class="newRequest.unit === '4' ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shadow-md' : 'border-slate-200 dark:border-slate-800 hover:border-emerald-300'">
-                                    <div class="font-extrabold text-sm">RACHI Capital</div>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-400 mt-1">Gestão de RH &amp; Consultoria</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <form @submit.prevent="submitRequest" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                                    Título da Solicitação *
-                                </label>
-                                <input type="text" x-model="newRequest.title" required
-                                       placeholder="Ex: Criação de Nova Plataforma de Vendas ou 5.000 Flyers Promocionais"
-                                       class="w-full border rounded-xl p-3 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                                    Descrição Detalhada do Projeto ou Pedido *
-                                </label>
-                                <textarea x-model="newRequest.description" rows="4" required
-                                          placeholder="Descreva as especificações, quantidade, funcionalidades requeridas, cores, formato ou objetivos corporativos..."
-                                          class="w-full border rounded-xl p-3 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"></textarea>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Prioridade</label>
-                                    <select x-model="newRequest.priority"
-                                            class="w-full border rounded-xl p-3 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                                        <option value="normal">Normal (Até 5 dias úteis)</option>
-                                        <option value="high">Alta (Até 48 horas úteis)</option>
-                                        <option value="urgent">Urgente (SLA de Emergência 24h)</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Prazo Pretendido de Entrega</label>
-                                    <input type="date" x-model="newRequest.date"
-                                           class="w-full border rounded-xl p-3 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                                </div>
-                            </div>
-
-                            <!-- Dropzone Simulado para Briefing e Arquivos -->
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Anexar Briefing / Arquivos (PDF, PNG, DOCX)</label>
-                                <div class="border-2 border-dashed rounded-2xl p-4 text-center border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-100 transition cursor-pointer">
-                                    <svg class="w-8 h-8 mx-auto text-slate-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                                    <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Arraste arquivos ou clique para selecionar</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5">Tamanho máximo de arquivo: 25 MB</p>
-                                </div>
-                            </div>
-
-                            <div class="pt-3 flex gap-3">
-                                <button type="submit"
-                                        class="flex-1 py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-blue-600/25 transition transform hover:-translate-y-0.5">
-                                    Enviar Solicitação &amp; Iniciar Atendimento
-                                </button>
-                                <button type="button" @click="customerTab = 'dashboard'"
-                                        class="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold transition">
-                                    Cancelar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 4: MEUS ORÇAMENTOS & PROPOSTAS COMERCIAIS                  -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'my_quotes'" class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Orçamentos &amp; Propostas Comerciais</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Revise os itens técnicos, valores em Kwanzas e aprove propostas em 1 clique.</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <template x-for="q in customerQuotes" :key="q.number">
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div class="flex items-center gap-3">
-                                        <span class="font-mono font-black text-base text-slate-900 dark:text-white" x-text="q.number"></span>
-                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400" x-text="q.unit"></span>
-                                        <span class="text-xs text-slate-600 dark:text-slate-400" x-text="'Ref: ' + q.protocol + ' • Validade: ' + q.validUntil"></span>
-                                    </div>
-                                    <span class="text-xs px-3 py-1 rounded-full font-bold"
-                                          :class="q.status === 'approved' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
-                                          x-text="q.status === 'approved' ? 'Proposta Aprovada' : 'Aguardando Sua Aprovação'"></span>
-                                </div>
-
-                                <div class="mt-4">
-                                    <h4 class="font-bold text-base text-slate-900 dark:text-white" x-text="q.title"></h4>
-                                </div>
-
-                                <!-- Tabela de Itens do Orçamento -->
-                                <div class="mt-4 overflow-x-auto">
-                                    <table class="w-full text-left text-xs">
-                                        <thead>
-                                            <tr class="text-[10px] uppercase font-bold text-slate-400 border-b"
-                                                :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                                <th class="py-2">Item / Descrição Técnica</th>
-                                                <th class="py-2 text-center">Qtd</th>
-                                                <th class="py-2 text-right">Subtotal (AOA)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y"
-                                               :class="customerDarkMode ? 'divide-slate-800/40' : 'divide-slate-100'">
-                                            <template x-for="(item, idx) in (q.items || [])" :key="idx">
-                                                <tr>
-                                                    <td class="py-2.5 text-slate-700 dark:text-slate-300" x-text="item.desc"></td>
-                                                    <td class="py-2.5 text-center font-bold text-slate-500 dark:text-slate-400" x-text="item.qty"></td>
-                                                    <td class="py-2.5 text-right font-semibold text-slate-900 dark:text-white" x-text="item.price.toLocaleString('pt-AO') + ' AOA'"></td>
-                                                </tr>
-                                            </template>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <!-- Rodapé com Total e Botão de Ação -->
-                                <div class="mt-5 pt-4 border-t flex flex-wrap items-center justify-between gap-4"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div>
-                                        <span class="text-xs text-slate-400 uppercase font-bold block">Valor Total Homologado (c/ IVA 14%)</span>
-                                        <span class="text-2xl font-black text-emerald-600 dark:text-emerald-400"
-                                              x-text="q.total.toLocaleString('pt-AO') + ' AOA'"></span>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <button @click="mockDownloadDoc(q.number)"
-                                                class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs transition flex items-center gap-1.5">
-                                            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                                            <span>Baixar Proposta Oficial</span>
-                                        </button>
-                                        <template x-if="q.status === 'sent'">
-                                            <button @click="approveQuote(q)"
-                                                    class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs transition shadow-lg shadow-emerald-600/20 flex items-center gap-1.5">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                                                <span>Aprovar Orçamento</span>
-                                            </button>
-                                        </template>
-                                        <template x-if="q.status === 'approved'">
-                                            <span class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center gap-1.5">
-                                                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                                                <span>Orçamento Homologado</span>
-                                            </span>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 5: SERVIÇOS & CONTRATOS ATIVOS                             -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'contracts'" class="space-y-6">
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Serviços &amp; Contratos Ativos</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Acordos de nível de serviço (SLA), manutenções programadas e contratos recorrentes.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <template x-for="c in customerContracts" :key="c.id">
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex items-center justify-between pb-3 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <span class="font-mono font-bold text-xs text-slate-500 dark:text-slate-400" x-text="c.id"></span>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-500" x-text="c.status"></span>
-                                </div>
-                                <h3 class="font-bold text-base text-slate-900 dark:text-white mt-3" x-text="c.name"></h3>
-                                <div class="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">
-                                    <div class="flex justify-between">
-                                        <span>Unidade:</span>
-                                        <span class="font-bold text-slate-700 dark:text-slate-200" x-text="c.unit"></span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>Garantia de SLA:</span>
-                                        <span class="font-bold text-blue-600 dark:text-blue-400" x-text="c.sla"></span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>Próxima Renovação:</span>
-                                        <span class="font-bold text-slate-700 dark:text-slate-200" x-text="c.renewal"></span>
-                                    </div>
-                                </div>
-                                <div class="mt-5 pt-3 border-t flex justify-end"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <button @click="mockDownloadDoc(c.name)"
-                                            class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
-                                        <span>Ver Termos do Contrato</span>
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 6: FATURAS & DOCUMENTOS FISCAIS                            -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'documents'" class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Central de Faturas &amp; Documentos</h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400">Acesse proformas, termos de aceitação e comprovativos oficiais.</p>
-                        </div>
-                    </div>
-
-                    <div class="p-6 rounded-3xl border shadow-sm overflow-x-auto"
-                         :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                        <table class="w-full text-left text-xs">
-                            <thead>
-                                <tr class="text-[10px] uppercase font-bold text-slate-400 border-b"
-                                    :class="customerDarkMode ? 'border-slate-800' : 'border-slate-200'">
-                                    <th class="py-3 px-4">Referência</th>
-                                    <th class="py-3 px-4">Unidade</th>
-                                    <th class="py-3 px-4">Descrição</th>
-                                    <th class="py-3 px-4">Data de Emissão</th>
-                                    <th class="py-3 px-4">Valor</th>
-                                    <th class="py-3 px-4">Status</th>
-                                    <th class="py-3 px-4 text-right">Download</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y"
-                                   :class="customerDarkMode ? 'divide-slate-800/60' : 'divide-slate-100'">
-                                <template x-for="inv in customerInvoices" :key="inv.id">
-                                    <tr class="hover:bg-slate-500/5 transition">
-                                        <td class="py-3.5 px-4 font-mono font-bold text-blue-600 dark:text-blue-400" x-text="inv.id"></td>
-                                        <td class="py-3.5 px-4 font-semibold" x-text="inv.unit"></td>
-                                        <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium" x-text="inv.desc"></td>
-                                        <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400" x-text="inv.date"></td>
-                                        <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="inv.value.toLocaleString('pt-AO') + ' AOA'"></td>
-                                        <td class="py-3.5 px-4">
-                                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold"
-                                                  :class="inv.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
-                                                  x-text="inv.statusLabel"></span>
-                                        </td>
-                                        <td class="py-3.5 px-4 text-right">
-                                            <button @click="mockDownloadDoc(inv.id)"
-                                                    class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs transition inline-flex items-center gap-1.5 shadow">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                                                <span>Baixar PDF</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ============================================================== -->
-                <!-- ABA 7: DETALHES DA SOLICITAÇÃO & CHAT COM TÉCNICO              -->
-                <!-- ============================================================== -->
-                <div x-show="customerTab === 'view_request'" x-cloak class="space-y-4">
-                    <button @click="customerTab = 'dashboard'"
-                            class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1.5 mb-2">
-                        <span>&larr; Voltar ao Painel Geral</span>
-                    </button>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" x-if="selectedRequest">
-                        <!-- Chat e Especificações Técnicas -->
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex items-center justify-between pb-4 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <span class="font-mono font-black text-lg text-blue-600 dark:text-blue-400"
-                                          x-text="selectedRequest?.protocol"></span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold"
-                                          :class="getStatusBadgeClass(selectedRequest?.status)"
-                                          x-text="selectedRequest?.statusLabel"></span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-4" x-text="selectedRequest?.title"></h3>
-                                <p class="text-slate-600 dark:text-slate-300 text-xs mt-2 leading-relaxed"
-                                   x-text="selectedRequest?.description"></p>
-                            </div>
-
-                            <!-- Chat Interativo com Técnico -->
-                            <div class="p-6 rounded-3xl border shadow-sm"
-                                 :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                                <div class="flex items-center justify-between mb-4 pb-3 border-b"
-                                     :class="customerDarkMode ? 'border-slate-800' : 'border-slate-100'">
-                                    <div class="flex items-center gap-2.5">
-                                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow">
-                                            CG
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-xs text-slate-900 dark:text-white">Casimiro Gundja</div>
-                                            <div class="text-[10px] text-emerald-500 font-semibold">Técnico Designado (Online)</div>
-                                        </div>
-                                    </div>
-                                    <span class="text-[10px] text-slate-400">Atendimento Registrado em Protocolo</span>
-                                </div>
-
-                                <!-- Mensagens -->
-                                <div class="space-y-3 mb-4 max-h-72 overflow-y-auto pr-2">
-                                    <template x-for="m in selectedRequest?.messages" :key="m.id">
-                                        <div class="p-3.5 rounded-2xl text-xs max-w-lg shadow-sm"
-                                             :class="m.fromUser ? 'bg-blue-50 dark:bg-blue-950/50 ml-auto border border-blue-200/80 dark:border-blue-800 text-blue-950 dark:text-blue-100' : 'bg-slate-100 dark:bg-slate-800 mr-auto border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200'">
-                                            <div class="text-[10px] font-bold mb-1"
-                                                 :class="m.fromUser ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-400'"
-                                                 x-text="m.sender"></div>
-                                            <div class="leading-relaxed" x-text="m.text"></div>
-                                        </div>
-                                    </template>
-                                </div>
-
-                                <div class="flex gap-2">
-                                    <input type="text" x-model="chatInput" @keydown.enter.prevent="sendChatMessage()"
-                                           placeholder="Escreva sua mensagem ou dúvida técnica..."
-                                           class="flex-1 border rounded-xl px-4 py-2.5 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                                    <button @click="sendChatMessage()"
-                                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition shadow-md shadow-blue-600/20">
-                                        Enviar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Histórica do Chamado -->
-                        <div class="p-6 rounded-3xl border shadow-sm h-fit"
-                             :class="customerDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90'">
-                            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-4">Linha do Tempo de Execução</h4>
-                            <div class="space-y-4 relative before:absolute before:inset-0 before:left-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
-                                <template x-for="step in selectedRequest?.timeline" :key="step.title">
-                                    <div class="flex items-start gap-3 relative z-10">
-                                        <div class="w-4 h-4 mt-0.5 rounded-full bg-blue-600 ring-4 ring-blue-100 dark:ring-blue-950 shrink-0 shadow"></div>
-                                        <div>
-                                            <div class="text-[10px] text-slate-400 font-semibold" x-text="step.date"></div>
-                                            <div class="font-bold text-xs text-slate-800 dark:text-slate-200 mt-0.5" x-text="step.title"></div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </main>
+                </template>
+            </div>
         </div>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- VIEW 3: EMPLOYEE PORTAL (AUTHENTICATED)                        -->
-    <!-- ============================================================== -->
-    <div x-show="currentView === 'employee'" x-cloak class="min-h-screen bg-slate-100 flex flex-col">
-        <header class="bg-[#071326] text-white h-16 flex items-center justify-between px-6 border-b border-slate-800">
-            <div class="flex items-center gap-4">
-                <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" alt="RACHI" class="h-8">
-                <span
-                    class="text-xs px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300 font-bold border border-blue-700/50">Área
-                    de Atendimento & Técnicos</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <button @click="currentView = 'public'"
-                    class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="globe" class="w-3.5 h-3.5"></i> Voltar ao Site
-                </button>
-                <div class="flex items-center gap-2 pl-4 border-l border-slate-800">
-                    <span class="text-sm font-semibold">Técnico: Casimiro (RACHI Tec)</span>
-                    <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-xs">
-                        CG</div>
-                </div>
-            </div>
-        </header>
 
-        <div class="flex-1 flex">
-            <!-- Sidebar -->
-            <aside class="w-64 bg-[#071326] text-white p-4 space-y-2 border-r border-slate-800">
-                <button
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left bg-blue-600 text-white font-bold shadow-md shadow-blue-600/20">
-                    <i data-lucide="inbox" class="w-4 h-4"></i> Fila de Chamados
-                </button>
-                <button @click="RachiToast.info('Módulo de estoque: 6 itens monitorados.')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
-                    <i data-lucide="boxes" class="w-4 h-4"></i> Movimentação Estoque
-                </button>
-            </aside>
-
-            <!-- Main Panel -->
-            <main class="flex-1 p-8 overflow-y-auto">
-                <h2 class="text-2xl font-bold text-slate-900 mb-6">Fila de Atendimento (Suporte & Vendas)</h2>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-50 text-slate-600 uppercase text-xs border-b">
-                            <tr>
-                                <th class="p-4">Protocolo</th>
-                                <th class="p-4">Unidade</th>
-                                <th class="p-4">Assunto</th>
-                                <th class="p-4">Prioridade</th>
-                                <th class="p-4">Alterar Estado</th>
-                                <th class="p-4 text-right">Orçamento</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <template x-for="r in customerRequests" :key="r.id">
-                                <tr class="hover:bg-slate-50">
-                                    <td class="p-4 font-mono font-bold text-blue-600" x-text="r.protocol"></td>
-                                    <td class="p-4"><span class="px-2 py-0.5 rounded bg-slate-100 text-xs font-semibold"
-                                            x-text="r.unit"></span></td>
-                                    <td class="p-4 font-medium" x-text="r.title"></td>
-                                    <td class="p-4"><span class="text-xs px-2 py-0.5 rounded font-semibold text-white"
-                                            :class="r.priority === 'urgent' ? 'bg-red-500' : 'bg-amber-500'"
-                                            x-text="r.priority"></span></td>
-                                    <td class="p-4">
-                                        <select @change="updateRequestStatus(r, $event.target.value)"
-                                            class="text-xs border rounded p-1.5 bg-white">
-                                            <option value="new" :selected="r.status === 'new'">Nova</option>
-                                            <option value="in_analysis" :selected="r.status === 'in_analysis'">Em
-                                                análise</option>
-                                            <option value="quoted" :selected="r.status === 'quoted'">Orçado</option>
-                                            <option value="in_progress" :selected="r.status === 'in_progress'">Em
-                                                execução</option>
-                                            <option value="completed" :selected="r.status === 'completed'">Concluída
-                                            </option>
-                                        </select>
-                                    </td>
-                                    <td class="p-4 text-right">
-                                        <button @click="openSendQuote(r)"
-                                            class="text-xs bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded shadow">
-                                            Gerar Orçamento
-                                        </button>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- ============================================================== -->
-    <!-- VIEW 4: ADMIN PORTAL (AUTHENTICATED)                           -->
-    <!-- ============================================================== -->
-    <div x-show="currentView === 'admin'" x-cloak class="min-h-screen bg-slate-100 flex flex-col">
-        <header class="bg-[#071326] text-white h-16 flex items-center justify-between px-6 border-b border-slate-800">
-            <div class="flex items-center gap-4">
-                <img src="https://hom.rachi.ao/assets/img/logo-rachi-light.png" alt="RACHI" class="h-8">
-                <span
-                    class="text-xs px-2.5 py-0.5 rounded bg-red-900/60 text-red-300 font-bold border border-red-700/50">Super
-                    Administrador</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <button @click="currentView = 'public'"
-                    class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="globe" class="w-3.5 h-3.5"></i> Voltar ao Site
-                </button>
-                <div class="flex items-center gap-2 pl-4 border-l border-slate-800">
-                    <span class="text-sm font-semibold">Administrador Geral</span>
-                    <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center font-bold text-xs">SA
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="flex-1 flex">
-            <!-- Sidebar -->
-            <aside class="w-64 bg-[#071326] text-white p-4 space-y-2 border-r border-slate-800">
-                <button
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left bg-amber-500 text-slate-950 font-bold">
-                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Dashboard Executivo
-                </button>
-                <button @click="RachiToast.info('Visualização de 4 unidades cadastradas.')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
-                    <i data-lucide="building" class="w-4 h-4"></i> Unidades de Negócio
-                </button>
-                <button @click="RachiToast.info('Controle de estoque sincronizado.')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
-                    <i data-lucide="package" class="w-4 h-4"></i> Produtos e Estoque
-                </button>
-                <button @click="RachiToast.info('Módulo de Auditoria: todas as operações gravadas em activity_logs.')"
-                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-left text-slate-400 hover:bg-slate-800">
-                    <i data-lucide="shield" class="w-4 h-4"></i> Logs de Auditoria
-                </button>
-            </aside>
-
-            <!-- Main Panel -->
-            <main class="flex-1 p-8 overflow-y-auto">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900">Visão Geral da Empresa (4 Unidades)</h2>
-                </div>
-
-                <!-- 8 KPIs (Section 48) -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Vendas Totais</span>
-                        <div class="text-2xl font-black text-emerald-600 mt-2">1.504.000,29 AOA</div>
-                        <span class="text-xs text-emerald-500 mt-1 block">&uarr; +14% esse mês</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Pedidos</span>
-                        <div class="text-2xl font-black text-slate-900 mt-2">14</div>
-                        <span class="text-xs text-slate-400 mt-1 block">Na loja virtual</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Solicitações</span>
-                        <div class="text-2xl font-black text-amber-500 mt-2" x-text="customerRequests.length"></div>
-                        <span class="text-xs text-slate-400 mt-1 block">Entre as 4 unidades</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Estoque Crítico</span>
-                        <div class="text-2xl font-black text-rose-600 mt-2">1</div>
-                        <span class="text-xs text-rose-400 mt-1 block">Produtos &lt; 5 unid.</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Clientes</span>
-                        <div class="text-2xl font-black text-slate-900 mt-2">42</div>
-                        <span class="text-xs text-slate-400 mt-1 block">Particulares / Empresas</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Funcionários</span>
-                        <div class="text-2xl font-black text-slate-900 mt-2">12</div>
-                        <span class="text-xs text-slate-400 mt-1 block">Com acesso a tickets</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Cursos Vendidos</span>
-                        <div class="text-2xl font-black text-purple-600 mt-2">89</div>
-                        <span class="text-xs text-purple-400 mt-1 block">RACHI Academy</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold">Serviços Cadastrados</span>
-                        <div class="text-2xl font-black text-slate-900 mt-2" x-text="services.length"></div>
-                        <span class="text-xs text-slate-400 mt-1 block">Ativos no catálogo</span>
-                    </div>
-                </div>
-
-                <!-- Recent Activity Logs Table (Section 31 & RN015) -->
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-                    <h3 class="font-bold text-base text-slate-900 mb-4">Auditoria / Activity Logs (RN015)</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between text-xs p-3 bg-slate-50 rounded-lg">
-                            <div>
-                                <span class="font-bold text-blue-600">STATUS_UPDATE:</span>
-                                <span class="text-slate-700">Técnico Casimiro alterou o status de
-                                    <strong>#SOL-2026-000001</strong> para 'Em Análise'</span>
-                            </div>
-                            <span class="text-slate-400">Há 12 min</span>
-                        </div>
-                        <div class="flex items-center justify-between text-xs p-3 bg-slate-50 rounded-lg">
-                            <div>
-                                <span class="font-bold text-emerald-600">QUOTE_APPROVED:</span>
-                                <span class="text-slate-700">Cliente 'Inov Quimua' aprovou orçamento
-                                    <strong>#ORC-2026-0001</strong> no valor de 450.000 AOA</span>
-                            </div>
-                            <span class="text-slate-400">Há 35 min</span>
-                        </div>
-                        <div class="flex items-center justify-between text-xs p-3 bg-slate-50 rounded-lg">
-                            <div>
-                                <span class="font-bold text-amber-600">STOCK_MOVEMENT:</span>
-                                <span class="text-slate-700">Saída de 1x 'HP Elitebook x360' por motivo de Venda
-                                    #PED-2026-000002</span>
-                            </div>
-                            <span class="text-slate-400">Há 1 hora</span>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
 
     <!-- Script Implementation -->
     <script>
@@ -7958,15 +5442,31 @@
                 isLoggedIn: false,
                 currentView: 'public',
                 currentTab: 'home',
+                identityModalOpen: false,
                 matriculaModalOpen: false,
                 mobileMenuOpen: false,
                 solutionsOpen: false,
-                customerTab: 'dashboard',
+                loginModal: false,
+                cartDrawer: false,
+                productModalOpen: false,
+                selectedStoreProduct: null,
+                cartCheckoutStep: 'cart',
+                checkoutForm: {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    document: '',
+                    address: ''
+                },
                 authTab: 'login',
                 authForm: {
                     email: '',
                     password: '',
                     showPassword: false
+                },
+                authErrors: {
+                    email: '',
+                    password: ''
                 },
                 registerForm: {
                     tipo_cliente: 'particular',
@@ -7975,12 +5475,11 @@
                     email: '',
                     telefone: '',
                     whatsapp: '',
+                    password: '',
+                    password_confirmation: '',
                     provincia: '',
                     municipio: '',
-                    bairro: '',
-                    rua: '',
-                    numero: '',
-                    referencia: ''
+                    terms_accepted: true
                 },
                 authError: '',
                 authErrorTimer: null,
@@ -7994,7 +5493,9 @@
                     timer: null,
                     progressKey: 0
                 },
-                showLoginToast(title, message, type = 'success', duration = 6000) { return RachiToast.show(message, { title, type, duration }); },
+                showLoginToast(title, message, type = 'success', duration = 6000) {
+                    return RachiToast.show(message, { title, type, duration });
+                },
                 closeLoginToast() {
                     if (this.loginToast.timer) {
                         clearTimeout(this.loginToast.timer);
@@ -8019,282 +5520,89 @@
                     });
                     this.$watch('authError', (val) => {
                         if (val) {
-                            if (this.authErrorTimer) {
-                                clearTimeout(this.authErrorTimer);
-                            }
+                            if (this.authErrorTimer) clearTimeout(this.authErrorTimer);
                             this.authErrorTimer = setTimeout(() => {
                                 this.authError = '';
                                 this.authErrorTimer = null;
                             }, 4500);
                         }
                     });
-                    // Sincronização em tempo real entre todas as abas e sub-páginas
-
-
-                    // Ouvinte de evento storage (para compatibilidade total entre abas e janelas)
-
 
                     const urlParams = new URLSearchParams(window.location.search);
                     if (urlParams.get('login') === '1') {
                         this.loginModal = true;
                     }
-
-                    // Sincronização em tempo real de solicitações & chat
-                    this.refreshCustomerRequests();
-                    setInterval(() => {
-                        if (this.currentView === 'customer') {
-                            this.refreshCustomerRequests();
+                    if (window.location.hash) {
+                        const targetId = window.location.hash.replace('#', '').toLowerCase();
+                        if (['missao', 'visao', 'valores', 'identidade', 'missao-visao-valores'].includes(targetId)) {
+                            this.identityModalOpen = true;
+                        } else if (targetId) {
+                            setTimeout(() => {
+                                this.scrollToSection(targetId);
+                            }, 300);
                         }
-                    }, 5000);
+                    }
+                    window.addEventListener('hashchange', () => {
+                        const hash = window.location.hash.replace('#', '').toLowerCase();
+                        if (['missao', 'visao', 'valores', 'identidade', 'missao-visao-valores'].includes(hash)) {
+                            this.identityModalOpen = true;
+                        }
+                    });
+                    window.openIdentityModal = () => { this.openIdentityModal(); };
+                    window.closeIdentityModal = () => { this.closeIdentityModal(); };
+                    this.$nextTick(() => lucide.createIcons());
+                },
 
+                async restoreUserSession() {
                     try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            this.reqChannel = new BroadcastChannel('rachi_request_channel');
-                            this.reqChannel.onmessage = (event) => {
-                                if (event.data) {
-                                    this.refreshCustomerRequests();
-                                }
-                            };
-                        }
+                        this.currentUser = await window.RachiSession.session();
+                        this.isLoggedIn = !!this.currentUser;
+                        if (this.currentUser) this.loginModal = false;
                     } catch(e) {}
                 },
 
-                async restoreUserSession() { this.currentUser = await window.RachiSession.session(); this.isLoggedIn = !!this.currentUser; if (this.currentUser) this.loginModal = false; },
                 goToHome() {
                     this.solutionsOpen = false;
-                    this.currentView = 'public';
                     this.currentTab = 'home';
-                    this.solutionsOpen = false;
                     if (this.mobileMenuOpen) this.mobileMenuOpen = false;
                     try {
                         if (window.location.hash) {
                             history.pushState(null, '', window.location.pathname + window.location.search);
                         }
-                    } catch (e) { }
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                },
-                loginModal: false,
-                cartDrawer: false,
-                identityModalOpen: false,
-                openStore() {
-                    window.location.href = '/loja';
-                },
-                openUnitPage(unit) {
-                    if (unit === 'academy') {
-                        window.location.href = '/academy';
-                        return;
-                    }
-                    if (unit === 'capital') {
-                        window.location.href = '/capital';
-                        return;
-                    }
-                    if (unit === 'tec') {
-                        window.location.href = '/tec';
-                        return;
-                    }
-                    if (unit === 'print') {
-                        window.location.href = '/print';
-                        return;
-                    }
-                    this.currentView = 'public';
-                    this.currentTab = unit;
-                    if (this.mobileMenuOpen) this.mobileMenuOpen = false;
-                    try {
-                        window.history.pushState(null, '', '#' + unit);
-                    } catch (e) { }
+                    } catch (e) {}
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                    this.$nextTick(() => lucide.createIcons());
                 },
-                openContacto() {
-                    window.location.href = '/contacto';
+
+                openIdentityModal() {
+                    this.identityModalOpen = true;
+                    if (this.mobileMenuOpen) this.mobileMenuOpen = false;
+                    if (this.solutionsOpen) this.solutionsOpen = false;
                 },
-                storeCategory: 'todas',
-                storeSearchQuery: '',
-                storeSort: 'recentes',
-                productModalOpen: false,
-                selectedStoreProduct: null,
-                storeProducts: [
-                    {
-                        id: 1,
-                        slug: "hp-elitebook-x360-1040-g8",
-                        name: "HP Elitebook x360 1040 G8 (2-in-1)",
-                        title: "HP Elitebook x360 1040 G8 (2-in-1)",
-                        category: "Laptops & Computadores",
-                        catId: "informatica",
-                        priceText: "1.489.000,29 AOA",
-                        price: "1.489.000,29 AOA",
-                        priceNum: 1489000.29,
-                        oldPrice: "1.650.000,00 AOA",
-                        discountPercent: "-10% OFF",
-                        badge: "Mais Vendido",
-                        badgeColor: "bg-amber-500 text-slate-950",
-                        rating: "5.0",
-                        reviews: 28,
-                        stockText: "Disponível (4 unidades)",
-                        shortDesc: "SSD 512GB NVMe, 16GB RAM, Intel Core i7, Touchscreen conversível 360°.",
-                        image: "/images/hp-elitebook-studio.png"
-                    },
-                    {
-                        id: 2,
-                        slug: "smartwatch-lige-executivo",
-                        name: "Smartwatch Lige Executivo Pro",
-                        title: "Smartwatch Lige Executivo Pro",
-                        category: "Smartwatches & Wearables",
-                        catId: "smartwatches",
-                        priceText: "10.000,00 AOA",
-                        price: "10.000,00 AOA",
-                        priceNum: 10000.00,
-                        oldPrice: "15.000,00 AOA",
-                        discountPercent: "-33% OFF",
-                        badge: "Destaque",
-                        badgeColor: "bg-blue-600 text-white",
-                        rating: "4.8",
-                        reviews: 42,
-                        stockText: "Disponível (25 unidades)",
-                        shortDesc: "Visor digital AMOLED, chamadas Bluetooth e pulseira de aço inoxidável.",
-                        image: "/images/smartwatch-studio.png"
-                    },
-                    {
-                        id: 3,
-                        slug: "cabo-console-rs232-db9-rj45",
-                        name: "Cabo Console RS232/DB9 para RJ45 1.5M",
-                        title: "Cabo Console RS232/DB9 para RJ45 1.5M",
-                        category: "Cabos & Redes",
-                        catId: "conectividade",
-                        priceText: "16.989,89 AOA",
-                        price: "16.989,89 AOA",
-                        priceNum: 16989.89,
-                        oldPrice: "18.000,00 AOA",
-                        discountPercent: "-6% OFF",
-                        badge: "Essencial TI",
-                        badgeColor: "bg-emerald-600 text-white",
-                        rating: "4.9",
-                        reviews: 19,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Cabo serial padrão para configuração de roteadores e switches Cisco/Huawei.",
-                        image: "/images/cabo-console-studio.png"
-                    },
-                    {
-                        id: 4,
-                        slug: "tv-box-android-mxq-pro-4k",
-                        name: "TV Box Android MXQ Pro 4K Ultra HD",
-                        title: "TV Box Android MXQ Pro 4K Ultra HD",
-                        category: "TV Box & Streaming",
-                        catId: "tvbox",
-                        priceText: "18.000,00 AOA",
-                        price: "18.000,00 AOA",
-                        priceNum: 18000.00,
-                        oldPrice: "25.000,00 AOA",
-                        discountPercent: "-28% OFF",
-                        badge: "Promoção",
-                        badgeColor: "bg-purple-600 text-white",
-                        rating: "4.7",
-                        reviews: 35,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Streaming 4K, Wi-Fi integrado, HDMI e suporte a aplicativos corporativos.",
-                        image: "/images/tvbox-studio.png"
-                    },
-                    {
-                        id: 5,
-                        slug: "auricular-com-fio-3-5mm",
-                        name: "Auricular com Fio 3.5mm Alta Fidelidade",
-                        title: "Auricular com Fio 3.5mm Alta Fidelidade",
-                        category: "Áudio & Consumíveis",
-                        catId: "audio",
-                        priceText: "3.000,00 AOA",
-                        price: "3.000,00 AOA",
-                        priceNum: 3000.00,
-                        oldPrice: "5.000,00 AOA",
-                        discountPercent: "-40% OFF",
-                        badge: "Mais Barato",
-                        badgeColor: "bg-amber-500 text-slate-950",
-                        rating: "4.6",
-                        reviews: 50,
-                        stockText: "Disponível (50 unidades)",
-                        shortDesc: "Áudio estéreo nítido com microfone embutido para reuniões e chamadas.",
-                        image: "/images/auricular-fio-studio.png"
-                    },
-                    {
-                        id: 6,
-                        slug: "auriculares-sem-fio-bluetooth",
-                        name: "Auriculares sem Fio Bluetooth TWS",
-                        title: "Auriculares sem Fio Bluetooth TWS",
-                        category: "Áudio & Consumíveis",
-                        catId: "audio",
-                        priceText: "15.000,00 AOA",
-                        price: "15.000,00 AOA",
-                        priceNum: 15000.00,
-                        oldPrice: "20.000,00 AOA",
-                        discountPercent: "-25% OFF",
-                        badge: "Lançamento",
-                        badgeColor: "bg-sky-600 text-white",
-                        rating: "4.9",
-                        reviews: 22,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Conexão Bluetooth 5.3, estojo com visor LED e autonomia até 24h.",
-                        image: "/images/auriculares-tws-studio.png"
-                    },
-                    {
-                        id: 7,
-                        slug: "capa-tematica-naruto-iphone",
-                        name: "Capa Temática Naruto para iPhone",
-                        title: "Capa Temática Naruto para iPhone",
-                        category: "Acessórios & Brindes",
-                        catId: "promocional",
-                        priceText: "7.000,00 AOA",
-                        price: "7.000,00 AOA",
-                        priceNum: 7000.00,
-                        oldPrice: "9.500,00 AOA",
-                        discountPercent: "-26% OFF",
-                        badge: "Popular",
-                        badgeColor: "bg-rose-600 text-white",
-                        rating: "4.9",
-                        reviews: 17,
-                        stockText: "Disponível",
-                        shortDesc: "Silicone reforçado com proteção contra quedas e acabamento fosco.",
-                        image: "/images/capa-iphone-studio.png"
-                    }
-                ],
-                get filteredStoreProducts() {
-                    let list = this.storeProducts;
-                    if (this.storeCategory && this.storeCategory !== 'todas') {
-                        list = list.filter(p => p.category.toLowerCase().includes(this.storeCategory.toLowerCase()));
-                    }
-                    if (this.storeSearchQuery && this.storeSearchQuery.trim()) {
-                        const q = this.storeSearchQuery.toLowerCase().trim();
-                        list = list.filter(p => p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-                    }
-                    if (this.storeSort === 'preco_menor') {
-                        list = [...list].sort((a, b) => {
-                            const pa = parseFloat(a.price.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
-                            const pb = parseFloat(b.price.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
-                            return pa - pb;
-                        });
-                    } else if (this.storeSort === 'preco_maior') {
-                        list = [...list].sort((a, b) => {
-                            const pa = parseFloat(a.price.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
-                            const pb = parseFloat(b.price.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
-                            return pb - pa;
-                        });
-                    } else if (this.storeSort === 'nome') {
-                        list = [...list].sort((a, b) => a.title.localeCompare(b.title));
-                    }
-                    return list;
+                closeIdentityModal() {
+                    this.identityModalOpen = false;
                 },
+                openStore() { window.location.href = '/loja'; },
+                openUnitPage(unit) {
+                    if (unit === 'academy') { window.location.href = '/academy'; return; }
+                    if (unit === 'capital') { window.location.href = '/capital'; return; }
+                    if (unit === 'tec') { window.location.href = '/tec'; return; }
+                    if (unit === 'print') { window.location.href = '/print'; return; }
+                    window.location.href = '/' + unit;
+                },
+                openContacto() { window.location.href = '/contacto'; },
+
                 openProductModal(p) {
                     this.selectedStoreProduct = p;
                     this.productModalOpen = true;
+                    this.$nextTick(() => lucide.createIcons());
                 },
+
                 addToCartFromStore(p) {
-                    const priceNum = parseFloat(p.price.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
                     this.cart.push({
                         id: Date.now(),
-                        name: p.title,
+                        name: p.title || p.name,
                         category: p.category,
-                        price: priceNum,
+                        price: p.priceNum || parseFloat(String(p.price).replace(/[^0-9]/g, '')) || 10000,
                         image: p.image
                     });
                     this.cartDrawer = true;
@@ -8302,7 +5610,6 @@
                 },
 
                 featuredIndex: 0,
-                featuredPaused: false,
                 featuredProducts: [
                     {
                         id: 1,
@@ -8310,18 +5617,11 @@
                         name: "HP Elitebook x360 1040 G8 (2-in-1)",
                         title: "HP Elitebook x360 1040 G8 (2-in-1)",
                         category: "Laptops & Computadores",
-                        catId: "informatica",
-                        priceText: "1.489.000,29 AOA",
                         price: "1.489.000,29 AOA",
                         priceNum: 1489000.29,
                         oldPrice: "1.650.000,00 AOA",
                         discountPercent: "-10% OFF",
                         badge: "Mais Vendido",
-                        badgeColor: "bg-amber-500 text-slate-950",
-                        rating: "5.0",
-                        reviews: 28,
-                        stockText: "Disponível (4 unidades)",
-                        shortDesc: "SSD 512GB NVMe, 16GB RAM, Intel Core i7, Touchscreen conversível 360°.",
                         image: "/images/hp-elitebook-studio.png"
                     },
                     {
@@ -8330,18 +5630,11 @@
                         name: "Smartwatch Lige Executivo Pro",
                         title: "Smartwatch Lige Executivo Pro",
                         category: "Smartwatches & Wearables",
-                        catId: "smartwatches",
-                        priceText: "10.000,00 AOA",
                         price: "10.000,00 AOA",
                         priceNum: 10000.00,
                         oldPrice: "15.000,00 AOA",
                         discountPercent: "-33% OFF",
                         badge: "Destaque",
-                        badgeColor: "bg-blue-600 text-white",
-                        rating: "4.8",
-                        reviews: 42,
-                        stockText: "Disponível (25 unidades)",
-                        shortDesc: "Visor digital AMOLED, chamadas Bluetooth e pulseira de aço inoxidável.",
                         image: "/images/smartwatch-studio.png"
                     },
                     {
@@ -8350,18 +5643,11 @@
                         name: "Cabo Console RS232/DB9 para RJ45 1.5M",
                         title: "Cabo Console RS232/DB9 para RJ45 1.5M",
                         category: "Cabos & Redes",
-                        catId: "conectividade",
-                        priceText: "16.989,89 AOA",
                         price: "16.989,89 AOA",
                         priceNum: 16989.89,
                         oldPrice: "18.000,00 AOA",
                         discountPercent: "-6% OFF",
                         badge: "Essencial TI",
-                        badgeColor: "bg-emerald-600 text-white",
-                        rating: "4.9",
-                        reviews: 19,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Cabo serial padrão para configuração de roteadores e switches Cisco/Huawei.",
                         image: "/images/cabo-console-studio.png"
                     },
                     {
@@ -8370,87 +5656,22 @@
                         name: "TV Box Android MXQ Pro 4K Ultra HD",
                         title: "TV Box Android MXQ Pro 4K Ultra HD",
                         category: "TV Box & Streaming",
-                        catId: "tvbox",
-                        priceText: "18.000,00 AOA",
                         price: "18.000,00 AOA",
                         priceNum: 18000.00,
                         oldPrice: "25.000,00 AOA",
                         discountPercent: "-28% OFF",
                         badge: "Promoção",
-                        badgeColor: "bg-purple-600 text-white",
-                        rating: "4.7",
-                        reviews: 35,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Streaming 4K, Wi-Fi integrado, HDMI e suporte a aplicativos corporativos.",
                         image: "/images/tvbox-studio.png"
-                    },
-                    {
-                        id: 5,
-                        slug: "auricular-com-fio-3-5mm",
-                        name: "Auricular com Fio 3.5mm Alta Fidelidade",
-                        title: "Auricular com Fio 3.5mm Alta Fidelidade",
-                        category: "Áudio & Consumíveis",
-                        catId: "audio",
-                        priceText: "3.000,00 AOA",
-                        price: "3.000,00 AOA",
-                        priceNum: 3000.00,
-                        oldPrice: "5.000,00 AOA",
-                        discountPercent: "-40% OFF",
-                        badge: "Mais Barato",
-                        badgeColor: "bg-amber-500 text-slate-950",
-                        rating: "4.6",
-                        reviews: 50,
-                        stockText: "Disponível (50 unidades)",
-                        shortDesc: "Áudio estéreo nítido com microfone embutido para reuniões e chamadas.",
-                        image: "/images/auricular-fio-studio.png"
-                    },
-                    {
-                        id: 6,
-                        slug: "auriculares-sem-fio-bluetooth",
-                        name: "Auriculares sem Fio Bluetooth TWS",
-                        title: "Auriculares sem Fio Bluetooth TWS",
-                        category: "Áudio & Consumíveis",
-                        catId: "audio",
-                        priceText: "15.000,00 AOA",
-                        price: "15.000,00 AOA",
-                        priceNum: 15000.00,
-                        oldPrice: "20.000,00 AOA",
-                        discountPercent: "-25% OFF",
-                        badge: "Lançamento",
-                        badgeColor: "bg-sky-600 text-white",
-                        rating: "4.9",
-                        reviews: 22,
-                        stockText: "Disponível em Luanda",
-                        shortDesc: "Conexão Bluetooth 5.3, estojo com visor LED e autonomia até 24h.",
-                        image: "/images/auriculares-tws-studio.png"
-                    },
-                    {
-                        id: 7,
-                        slug: "capa-tematica-naruto-iphone",
-                        name: "Capa Temática Naruto para iPhone",
-                        title: "Capa Temática Naruto para iPhone",
-                        category: "Acessórios & Brindes",
-                        catId: "promocional",
-                        priceText: "7.000,00 AOA",
-                        price: "7.000,00 AOA",
-                        priceNum: 7000.00,
-                        oldPrice: "9.500,00 AOA",
-                        discountPercent: "-26% OFF",
-                        badge: "Popular",
-                        badgeColor: "bg-rose-600 text-white",
-                        rating: "4.9",
-                        reviews: 17,
-                        stockText: "Disponível",
-                        shortDesc: "Silicone reforçado com proteção contra quedas e acabamento fosco.",
-                        image: "/images/capa-iphone-studio.png"
                     }
                 ],
+
                 get visibleFeaturedProducts() {
                     const total = this.featuredProducts.length;
                     const maxStart = total - 3;
-                    const start = Math.min(this.featuredIndex, maxStart);
+                    const start = Math.min(this.featuredIndex, Math.max(0, maxStart));
                     return this.featuredProducts.slice(start, start + 3);
                 },
+
                 nextFeaturedProduct() {
                     const maxIndex = this.featuredProducts.length - 3;
                     if (this.featuredIndex >= maxIndex) {
@@ -8460,15 +5681,17 @@
                     }
                     this.$nextTick(() => lucide.createIcons());
                 },
+
                 prevFeaturedProduct() {
                     const maxIndex = this.featuredProducts.length - 3;
                     if (this.featuredIndex <= 0) {
-                        this.featuredIndex = maxIndex;
+                        this.featuredIndex = Math.max(0, maxIndex);
                     } else {
                         this.featuredIndex--;
                     }
                     this.$nextTick(() => lucide.createIcons());
                 },
+
                 addToCartFromFeatured(p) {
                     this.cart.push({
                         id: Date.now(),
@@ -8478,33 +5701,23 @@
                         image: p.image
                     });
                     this.cartDrawer = true;
+                    this.cartCheckoutStep = 'cart';
                     this.$nextTick(() => lucide.createIcons());
                 },
 
                 scrollToSection(id) {
-                    if (id === 'academy') {
-                        window.location.href = '/academy';
-                        return;
-                    }
-                    if (id === 'capital' || id === 'tec' || id === 'print') {
-                        this.openUnitPage(id);
-                        return;
-                    }
-                    if (id === 'contacto') {
-                        window.location.href = '/contacto';
-                        return;
-                    }
-                    this.currentView = 'public';
+                    if (id === 'academy') { window.location.href = '/academy'; return; }
+                    if (id === 'capital' || id === 'tec' || id === 'print') { this.openUnitPage(id); return; }
+                    if (id === 'contacto') { window.location.href = '/contacto'; return; }
                     this.currentTab = 'home';
                     this.solutionsOpen = false;
                     if (this.mobileMenuOpen) this.mobileMenuOpen = false;
+
                     if (id === 'home' || id === 'inicio' || !id) {
                         this.goToHome();
                         return;
                     }
-                    try {
-                        window.history.pushState(null, '', '#' + id);
-                    } catch (e) { }
+                    try { window.history.pushState(null, '', '#' + id); } catch (e) {}
                     this.$nextTick(() => {
                         setTimeout(() => {
                             const el = document.getElementById(id);
@@ -8512,600 +5725,200 @@
                                 const headerOffset = 75;
                                 const elementPosition = el.getBoundingClientRect().top;
                                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                                window.scrollTo({
-                                    top: offsetPosition,
-                                    behavior: 'smooth'
-                                });
+                                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                             }
                         }, 50);
                     });
                 },
-                chatInput: '',
-                newRequest: {
-                    unit: '',
-                    title: '',
-                    description: '',
-                    priority: 'normal',
-                    date: ''
-                },
-                selectedRequest: null,
+
                 cart: [],
                 get cartTotal() {
-                    return this.cart.reduce((sum, item) => sum + item.price, 0);
+                    return this.cart.reduce((sum, item) => sum + (item.price || 0), 0);
                 },
-                products: [
-                    { id: 1, name: 'HP Elitebook x360 1040 G8 (2-in-1)', category: 'informatica', price: 1489000.29, stock: 4, desc: 'SSD 512GB, 16GB RAM DDR4, Touchscreen conversível.', image: '/images/hp-elitebook-studio.png' },
-                    { id: 2, name: 'Smartwatch Lige Executivo', category: 'informatica', price: 10000.00, stock: 25, desc: 'Visor digital com funções de chamada e pulseira metálica.', image: '/images/smartwatch-studio.png' },
-                    { id: 3, name: 'Cabo Console RS232/DB9 para RJ45', category: 'informatica', price: 16989.89, stock: 30, desc: 'Para configuração de switches e roteadores.', image: '/images/cabo-console-studio.png' },
-                    { id: 4, name: 'Auricular com Fio 3.5mm', category: 'consumiveis', price: 3000.00, stock: 50, desc: 'Áudio estéreo de alta fidelidade para chamadas e reuniões.', image: '/images/auricular-fio-studio.png' },
-                    { id: 5, name: 'Capa Temática Naruto p/ iPhone', category: 'promocional', price: 7000.00, stock: 2, desc: 'Capa decorada de alta durabilidade e aderência.', image: '/images/capa-iphone-studio.png' },
-                    { id: 6, name: 'TV Box Android MXQ Pro 4K', category: 'informatica', price: 18000.00, stock: 15, desc: 'Streaming em 4K e conexão Wi-Fi de alta velocidade.', image: '/images/tvbox-studio.png' }
-                ],
-                services: [
-                    { id: 1, unitId: 1, name: 'Consultoria em Transformação Digital', description: 'Apoio estratégico para modernizar a empresa com tecnologia, processos e cultura digital.', price: 'Sob Consulta' },
-                    { id: 2, unitId: 1, name: 'Criação de Websites & Portais', description: 'Desenvolvimento de websites institucionais, páginas comerciais e lojas online responsivas.', price: 'A partir de 450.000 AOA' },
-                    { id: 3, unitId: 1, name: 'Digitalização de Processos Empresariais', description: 'Mapeamos e digitalizamos processos internos para reduzir papel, erros e tempos de operação.', price: 'Sob Consulta' },
-                    { id: 4, unitId: 1, name: 'Implementação de Sistemas de Gestão', description: 'Implementação e configuração de sistemas de gestão adaptados à realidade da sua empresa.', price: 'Sob Consulta' },
-                    { id: 5, unitId: 1, name: 'Suporte Técnico Especializado', description: 'Assistência técnica contínua a sistemas, equipamentos e utilizadores para manter a operação estável.', price: 'Planos a partir de 85.000 AOA/mês' },
-                    { id: 6, unitId: 2, name: 'Branding & Identidade Visual', description: 'Desenvolvimento de logotipo, manual de normas e identidade completa.', price: 'A partir de 120.000 AOA' },
-                    { id: 7, unitId: 2, name: 'Impressão de Grandes Formatos', description: 'Banners, lonas, roll-ups e adesivos de alta resolução.', price: 'Sob Cotação' },
-                    { id: 8, unitId: 4, name: 'Formalização e Constituição de Empresas', description: 'Processo completo de abertura de empresa, NIF e licenças comerciais.', price: '150.000 AOA' },
-                    { id: 9, unitId: 4, name: 'Recrutamento & Selecção de Talentos', description: 'Atração de perfis qualificados alinhados aos valores e necessidades do seu negócio.', price: 'Sob Consulta' }
-                ],
-                courses: [
-                    { id: 1, title: 'Gestão e Estruturação Prática de MPMEs em Angola', level: 'Intermédio', duration: '24 Horas', price: '65.000 AOA', description: 'Aprenda a organizar processos administrativos, finanças básicas e conformidade tributária.' },
-                    { id: 2, title: 'Transformação Digital e Automação de Processos', level: 'Iniciante', duration: '16 Horas', price: '45.000 AOA', description: 'Implemente ferramentas modernas, reduza retrabalho e aumente a produtividade da sua equipa.' }
-                ],
-                customerDarkMode: false,
-                customerSearchQuery: '',
-                customerFilterStatus: 'all',
-                customerNotificationsOpen: false,
-                customerNotifications: [
-                    { id: 1, title: 'Proposta Comercial Emitida', text: 'O orçamento ORC-2026-0001 (450.000 AOA) para o Website foi emitido pela RACHI Tec.', time: 'Há 25 min', unread: true, unit: 'RACHI Tec' },
-                    { id: 2, title: 'Produção Gráfica em Execução', text: 'Seus 1.000 Catálogos Corporativos entraram em fase de acabamento na RACHI Print.', time: 'Há 2 horas', unread: true, unit: 'RACHI Print' },
-                    { id: 3, title: 'Gestor Designado', text: 'Eng. António Mendes está online como seu gestor de atendimento corporativo.', time: 'Hoje', unread: false, unit: 'Geral' }
-                ],
-                customerRequests: [
-                    {
-                        id: 1,
-                        protocol: 'SOL-2026-000001',
-                        unit: 'RACHI Tec',
-                        unitBadge: 'bg-blue-500/15 text-blue-700 border-blue-200',
-                        title: 'Desenvolvimento de Novo Website Institucional & Portal',
-                        description: 'Modernização do portal corporativo com área de agendamento de consultas, catálogo de produtos e integração de pagamentos.',
-                        status: 'in_analysis',
-                        statusLabel: 'Em Análise',
-                        priority: 'Alta',
-                        priorityBadge: 'bg-rose-50 text-rose-700 border-rose-200',
-                        step: 2,
-                        progressPercent: 35,
-                        date: '19/09/2026',
-                        technician: 'Casimiro Gundja (Especialista Web)',
-                        deadline: '25/10/2026',
-                        timeline: [
-                            { date: '19/09/2026 09:15', title: 'Solicitação Criada (#SOL-2026-000001)' },
-                            { date: '19/09/2026 10:30', title: 'Atribuída ao Técnico Casimiro Gundja' },
-                            { date: '19/09/2026 11:00', title: 'Em Análise de Requisitos e Arquitetura' }
-                        ],
-                        messages: [
-                            { id: 1, sender: 'Cliente', fromUser: true, text: 'Olá, enviamos o briefing técnico e a paleta da nossa marca.' },
-                            { id: 2, sender: 'Técnico Casimiro', fromUser: false, text: 'Recebido com sucesso! Estamos finalizando a proposta orçamentária detalhada.' }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        protocol: 'SOL-2026-000002',
-                        unit: 'RACHI Print',
-                        unitBadge: 'bg-amber-500/15 text-amber-700 border-amber-200',
-                        title: 'Produção de Material Gráfico & Brindes Corporativos',
-                        description: 'Impressão offset de 1.000 catálogos com laminação fosca, 2 Roll-ups retráteis e 200 pastas institucionais com bolsa.',
-                        status: 'in_progress',
-                        statusLabel: 'Em Execução',
-                        priority: 'Média',
-                        priorityBadge: 'bg-amber-50 text-amber-700 border-amber-200',
-                        step: 4,
-                        progressPercent: 75,
-                        date: '16/09/2026',
-                        technician: 'Oficina Gráfica RACHI Print',
-                        deadline: '24/09/2026',
-                        timeline: [
-                            { date: '16/09/2026 14:00', title: 'Ordem de Produção Iniciada' },
-                            { date: '17/09/2026 11:20', title: 'Prova de Cor e Impressão Aprovada' },
-                            { date: '20/09/2026 16:30', title: 'Em Fase de Acabamento & Corte' }
-                        ],
-                        messages: [
-                            { id: 1, sender: 'Cliente', fromUser: true, text: 'A prova digital ficou excelente, autorizamos a tiragem completa.' },
-                            { id: 2, sender: 'Produção Print', fromUser: false, text: 'Ótimo! Previsão de entrega do lote para quinta-feira no vosso escritório.' }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        protocol: 'SOL-2026-000003',
-                        unit: 'RACHI Capital',
-                        unitBadge: 'bg-emerald-500/15 text-emerald-700 border-emerald-200',
-                        title: 'Diagnóstico e Estruturação de Cargos & Salários',
-                        description: 'Elaboração de manual de cargos, matriz de competências e plano de cargos e salários para 28 colaboradores.',
-                        status: 'completed',
-                        statusLabel: 'Concluído',
-                        priority: 'Normal',
-                        priorityBadge: 'bg-slate-50 text-slate-700 border-slate-200',
-                        step: 5,
-                        progressPercent: 100,
-                        date: '05/09/2026',
-                        technician: 'Consultoria RACHI Capital',
-                        deadline: '18/09/2026',
-                        timeline: [
-                            { date: '05/09/2026 10:00', title: 'Contrato de Consultoria Ativado' },
-                            { date: '12/09/2026 15:00', title: 'Apresentação do Diagnóstico Preliminar' },
-                            { date: '18/09/2026 17:00', title: 'Entrega do Dossiê Final e Homologação' }
-                        ],
-                        messages: [
-                            { id: 1, sender: 'Consultoria Capital', fromUser: false, text: 'Dossiê final homologado e entregue com sucesso à Direção.' }
-                        ]
-                    }
-                ],
-                customerQuotes: [
-                    { 
-                        number: 'ORC-2026-0001', 
-                        protocol: 'SOL-2026-000001', 
-                        unit: 'RACHI Tec',
-                        title: 'Desenvolvimento Web Institucional',
-                        subtotal: 394736,
-                        iva: 55264,
-                        total: 450000, 
-                        validUntil: '05/10/2026', 
-                        status: 'sent',
-                        items: [
-                            { desc: 'Arquitetura de Informação & Design UI/UX Personalizado', qty: 1, price: 180000 },
-                            { desc: 'Desenvolvimento Frontend Responsivo & Painel Integrado', qty: 1, price: 150000 },
-                            { desc: 'Otimização de Performance, SEO & Segurança SSL', qty: 1, price: 64736 },
-                            { desc: 'IVA Legal (14%)', qty: 1, price: 55264 }
-                        ]
-                    },
-                    { 
-                        number: 'ORC-2026-0002', 
-                        protocol: 'SOL-2026-000002', 
-                        unit: 'RACHI Print',
-                        title: 'Impressão Offset de Catálogos & Roll-ups',
-                        subtotal: 245614,
-                        iva: 34386,
-                        total: 280000, 
-                        validUntil: '12/10/2026', 
-                        status: 'approved',
-                        items: [
-                            { desc: '1.000 Catálogos A4 Couché 250g com verniz localizado', qty: 1, price: 210000 },
-                            { desc: '2 Roll-ups Retráteis em Alumínio 200x85cm', qty: 2, price: 35614 },
-                            { desc: 'IVA Legal (14%)', qty: 1, price: 34386 }
-                        ]
-                    }
-                ],
-                customerInvoices: [
-                    { id: 'FAT-2026-089', protocol: 'SOL-2026-000002', unit: 'RACHI Print', desc: 'Material Gráfico & Catálogos', value: 280000, date: '18/09/2026', status: 'paid', statusLabel: 'Liquidado' },
-                    { id: 'PRF-2026-104', protocol: 'SOL-2026-000001', unit: 'RACHI Tec', desc: 'Proforma 50% Adiantamento Website', value: 225000, date: '19/09/2026', status: 'pending', statusLabel: 'Aguardando Pagamento' },
-                    { id: 'FAT-2026-062', protocol: 'SOL-2026-000003', unit: 'RACHI Capital', desc: 'Consultoria de Estruturação RH', value: 620000, date: '18/09/2026', status: 'paid', statusLabel: 'Liquidado' }
-                ],
-                customerContracts: [
-                    { id: 'CTR-TEC-2026', unit: 'RACHI Tec', name: 'Suporte de TI & Gestão de Infraestrutura', sla: '4 Horas Úteis', renewal: '15/12/2026', status: 'Ativo' },
-                    { id: 'CTR-PRT-2026', unit: 'RACHI Print', name: 'Fornecimento Contínuo de Material Gráfico & Suprimentos', sla: 'Prioridade VIP', renewal: '31/01/2027', status: 'Ativo' }
-                ],
-                addToCart(p) {
-                    this.cart.push(p);
-                    this.cartDrawer = true;
-                },
+
                 removeFromCart(idx) {
                     this.cart.splice(idx, 1);
                 },
-                checkoutSimulated() {
-                    RachiToast.info('Pedido realizado com sucesso! Gerada fatura proforma para pagamento via Multicaixa.');
-                    this.cart = [];
-                    this.cartDrawer = false;
-                },
-                async refreshCustomerRequests() {
-                    try {
-                        const response = await fetch('/solicitacoes/conversas', {
-                            headers: { 'Accept': 'application/json' },
-                            credentials: 'same-origin'
-                        });
-                        if (!response.ok) return;
-                        const data = await response.json();
-                        if (data && data.requests && data.requests.length > 0) {
-                            this.customerRequests = data.requests;
-                            if (this.selectedRequest) {
-                                const currentId = this.selectedRequest.id;
-                                const currentProto = this.selectedRequest.protocol;
-                                const found = this.customerRequests.find(r => r.id === currentId || r.protocol === currentProto);
-                                if (found) {
-                                    this.selectedRequest = found;
-                                }
-                            }
-                        }
-                    } catch(e) {
-                        console.error('Erro ao atualizar solicitações:', e);
+
+                processCartCheckout() {
+                    if (!this.currentUser) {
+                        this.cartCheckoutStep = 'identity';
+                        return;
                     }
+                    this.submitProformaOrder();
                 },
-                async submitRequest() {
-                    if (!this.newRequest.title || !this.newRequest.description) {
-                        RachiToast.info('Por favor, preencha o título e a descrição da solicitação.');
+
+                submitProformaOrder() {
+                    const clientName = this.currentUser ? this.currentUser.name : (this.checkoutForm.name || 'Cliente');
+                    const clientEmail = this.currentUser ? this.currentUser.email : (this.checkoutForm.email || 'contacto@cliente.ao');
+
+                    if (!this.currentUser && (!this.checkoutForm.name || !this.checkoutForm.email || !this.checkoutForm.phone)) {
+                        RachiToast.warning('Por favor, preencha o Nome, E-mail e Telefone para emissão da Factura Proforma.');
                         return;
                     }
 
-                    try {
-                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                        const response = await fetch('/solicitacoes/nova', {
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': token || ''
-                            },
-                            body: JSON.stringify({
-                                title: this.newRequest.title,
-                                description: this.newRequest.description,
-                                unit_id: this.newRequest.unit || 1,
-                                priority: this.newRequest.priority || 'normal'
-                            })
-                        });
+                    const proformaNumber = 'PRF-2026-' + Math.floor(10000 + Math.random() * 90000);
+                    RachiToast.success('Factura Proforma ' + proformaNumber + ' gerada com sucesso para ' + clientName + '! Coordenadas de pagamento Multicaixa Express enviadas para ' + clientEmail + '.');
+                    this.cart = [];
+                    this.cartDrawer = false;
+                    this.cartCheckoutStep = 'cart';
 
-                        const data = await response.json();
-                        if (data && data.success && data.request) {
-                            this.customerRequests.unshift(data.request);
-                            this.selectedRequest = data.request;
-                            this.customerTab = 'view_request';
-                            RachiToast.info(data.message || `Solicitação ${data.request.protocol} criada com sucesso!`);
-                            this.newRequest = { unit: '', title: '', description: '', priority: 'normal', date: '' };
-
-                            try {
-                                if (typeof BroadcastChannel !== 'undefined') {
-                                    const bc = new BroadcastChannel('rachi_request_channel');
-                                    bc.postMessage({ type: 'new_request', request: data.request, timestamp: Date.now() });
-                                    bc.close();
-                                }
-                            } catch(e) {}
-                            return;
-                        }
-                    } catch(e) {
-                        console.error('Falha ao submeter solicitação ao servidor:', e);
-                    }
-
-                    // Fallback local se a rede falhar
-                    const nextId = this.customerRequests.length + 1;
-                    const protocol = `SOL-2026-${String(nextId).padStart(6, '0')}`;
-                    const unitNames = { '1': 'RACHI Tec', '2': 'RACHI Print', '3': 'RACHI Academy', '4': 'RACHI Human Capital' };
-
-                    const newReq = {
-                        id: nextId,
-                        protocol: protocol,
-                        unit: unitNames[this.newRequest.unit] || 'Geral',
-                        title: this.newRequest.title,
-                        description: this.newRequest.description,
-                        status: 'new',
-                        statusLabel: 'Nova',
-                        priority: this.newRequest.priority,
-                        date: new Date().toLocaleDateString('pt-PT'),
-                        timeline: [
-                            { date: new Date().toLocaleString('pt-PT'), title: `Solicitação Criada (${protocol})` }
-                        ],
-                        messages: []
-                    };
-
-                    this.customerRequests.unshift(newReq);
-                    this.selectedRequest = newReq;
-                    this.customerTab = 'view_request';
-                    RachiToast.info(`Solicitação ${protocol} criada com sucesso!`);
-                    this.newRequest = { unit: '', title: '', description: '', priority: 'normal', date: '' };
-                },
-                openRequestWithPreselection(unitId, title) {
-                    this.currentView = 'customer';
-                    this.customerTab = 'new_request';
-                    this.newRequest.unit = String(unitId);
-                    this.newRequest.title = title;
-                },
-                enrollCourse(c) {
-                    const title = c && c.title ? encodeURIComponent(c.title) : '';
-                    const price = c && c.price ? encodeURIComponent(c.price) : '';
-                    window.location.href = `/academy/login?curso=${title}&preco=${price}&modo=register&urlAfterLogin=${encodeURIComponent(window.location.href)}`;
-                },
-                async sendChatMessage() {
-                    if (!this.chatInput.trim() || !this.selectedRequest) return;
-                    const msgText = this.chatInput.trim();
-                    this.chatInput = '';
-
-                    const tempMsg = {
-                        id: Date.now(),
-                        sender: 'Cliente',
-                        fromUser: true,
-                        text: msgText,
-                        message: msgText,
-                        data: new Date().toLocaleDateString('pt-PT') + ' ' + new Date().toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })
-                    };
-                    if (!this.selectedRequest.messages) this.selectedRequest.messages = [];
-                    this.selectedRequest.messages.push(tempMsg);
-
-                    try {
-                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                        const targetId = this.selectedRequest.id || this.selectedRequest.protocol;
-                        const response = await fetch(`/solicitacoes/${targetId}/mensagem`, {
-                            method: 'POST',
-                            credentials: 'same-origin',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRF-TOKEN': token || ''
-                            },
-                            body: JSON.stringify({ message: msgText })
-                        });
-                        const data = await response.json();
-                        if (data && data.success && data.message) {
-                            const lastIdx = this.selectedRequest.messages.length - 1;
-                            if (lastIdx >= 0) {
-                                this.selectedRequest.messages[lastIdx] = data.message;
-                            }
-                            try {
-                                if (typeof BroadcastChannel !== 'undefined') {
-                                    const bc = new BroadcastChannel('rachi_request_channel');
-                                    bc.postMessage({ type: 'new_message', requestId: this.selectedRequest.id, message: data.message, timestamp: Date.now() });
-                                    bc.close();
-                                }
-                            } catch(e) {}
-                        }
-                    } catch(e) {
-                        console.error('Erro ao enviar mensagem:', e);
+                    if (this.currentUser) {
+                        setTimeout(() => {
+                            window.location.href = '/portal#orders';
+                        }, 1200);
                     }
                 },
-                approveQuote(q) {
-                    q.status = 'approved';
-                    const req = this.customerRequests.find(r => r.protocol === q.protocol);
-                    if (req) {
-                        req.status = 'in_progress';
-                        req.statusLabel = 'Em Execução';
-                        req.timeline.push({
-                            date: new Date().toLocaleString('pt-PT'),
-                            title: `Orçamento ${q.number} aprovado. Serviço em execução.`
-                        });
-                    }
-                    RachiToast.info('Orçamento aprovado com sucesso! A equipa iniciou a execução do serviço.');
-                },
-                updateRequestStatus(r, newStatus) {
-                    r.status = newStatus;
-                    const labels = {
-                        new: 'Nova',
-                        in_analysis: 'Em análise',
-                        quoted: 'Orçado',
-                        in_progress: 'Em execução',
-                        completed: 'Concluída'
-                    };
-                    r.statusLabel = labels[newStatus] || newStatus;
-                    r.timeline.push({
-                        date: new Date().toLocaleString('pt-PT'),
-                        title: `Estado alterado para: ${r.statusLabel}`
-                    });
-                },
-                openSendQuote(r) {
-                    const price = prompt('Digite o valor do orçamento em Kwanzas (AOA):', '150000');
-                    if (price) {
-                        const newQ = {
-                            number: `ORC-2026-${String(this.customerQuotes.length + 1).padStart(4, '0')}`,
-                            protocol: r.protocol,
-                            total: parseFloat(price),
-                            validUntil: '15 dias',
-                            status: 'sent'
-                        };
-                        this.customerQuotes.push(newQ);
-                        this.updateRequestStatus(r, 'quoted');
-                        RachiToast.info(`Orçamento ${newQ.number} emitido para a solicitação ${r.protocol}!`);
-                    }
-                },
-                activeFaq: null,
-                filteredCustomerRequests() {
-                    let list = this.customerRequests;
-                    if (this.customerFilterStatus && this.customerFilterStatus !== 'all') {
-                        list = list.filter(r => r.status === this.customerFilterStatus);
-                    }
-                    if (this.customerSearchQuery && this.customerSearchQuery.trim()) {
-                        const q = this.customerSearchQuery.toLowerCase();
-                        list = list.filter(r => 
-                            (r.protocol && r.protocol.toLowerCase().includes(q)) ||
-                            (r.title && r.title.toLowerCase().includes(q)) ||
-                            (r.unit && r.unit.toLowerCase().includes(q)) ||
-                            (r.description && r.description.toLowerCase().includes(q))
-                        );
-                    }
-                    return list;
-                },
-                mockDownloadDoc(docName) {
-                    RachiToast.info(`O download do documento "${docName}" foi iniciado em formato PDF oficial com carimbo do Grupo RACHI.`);
-                },
-                getStatusBadgeClass(status) {
-                    switch (status) {
-                        case 'new': return 'bg-blue-100 text-blue-800 border border-blue-200';
-                        case 'in_analysis': return 'bg-amber-100 text-amber-800 border border-amber-200';
-                        case 'quoted': return 'bg-purple-100 text-purple-800 border border-purple-200';
-                        case 'in_progress': return 'bg-indigo-100 text-indigo-800 border border-indigo-200';
-                        case 'completed': return 'bg-emerald-100 text-emerald-800 border border-emerald-200';
-                        case 'cancelled': return 'bg-rose-100 text-rose-800 border border-rose-200';
-                        default: return 'bg-slate-100 text-slate-800 border border-slate-200';
-                    }
-                },
-                quickFillAuth(type) {
+
+                async submitUnifiedLogin() {
+                    this.authErrors.email = '';
+                    this.authErrors.password = '';
                     this.authError = '';
-                    if (!this.authForm) this.authForm = { email: '', password: '' };
-                    if (type === 'admin' || type === 'aluno_matriculado') {
-                        this.authForm.email = 'casimirogundja@outlook.com';
-                        this.authForm.password = 'Admin@2026';
-                    } else if (type === 'cliente_sem_matricula' || type === 'cliente') {
-                        this.authForm.email = 'cliente@empresa.ao';
-                        this.authForm.password = 'Cliente@2026';
-                    } else if (type === 'funcionario' || type === 'aluno') {
-                        this.authForm.email = 'pedro@email.com';
-                        this.authForm.password = '123456';
+
+                    const email = this.authForm.email.trim();
+                    const password = this.authForm.password;
+
+                    if (!email) {
+                        this.authErrors.email = 'Por favor, introduza o seu endereço de e-mail.';
+                        return;
+                    }
+                    if (!password) {
+                        this.authErrors.password = 'Por favor, introduza a palavra-passe.';
+                        return;
+                    }
+
+                    this.authLoading = true;
+                    try {
+                        this.currentUser = await RachiSession.login(email, password);
+                        this.isLoggedIn = !!this.currentUser;
+                        this.loginModal = false;
+                        RachiToast.success('Sessão iniciada com sucesso. Bem-vindo(a), ' + (this.currentUser.name || 'Cliente') + '!');
+                    } catch(e) {
+                        this.authError = e.message || 'As credenciais fornecidas não conferem com os nossos registos.';
+                    } finally {
+                        this.authLoading = false;
                     }
                 },
-                async submitUnifiedLogin() { this.authLoading = true; this.authError = ''; try { this.currentUser = await RachiSession.login(this.authForm.email.trim(), this.authForm.password); this.loginModal = false; } catch(e) { RachiToast.error(e.message); } finally { this.authLoading = false; } },
-                async authenticateServerSession(email, password) {
+
+                async submitRegister() {
+                    this.authError = '';
+                    const f = this.registerForm;
+
+                    if (!f.nome.trim()) {
+                        this.authError = 'Por favor, introduza o seu nome completo ou nome da empresa.';
+                        return;
+                    }
+                    if (!f.email.trim()) {
+                        this.authError = 'Por favor, introduza um endereço de e-mail válido.';
+                        return;
+                    }
+                    if (!f.password || f.password.length < 6) {
+                        this.authError = 'A palavra-passe deve conter pelo menos 6 caracteres.';
+                        return;
+                    }
+                    if (f.password !== f.password_confirmation) {
+                        this.authError = 'A confirmação da palavra-passe não confere.';
+                        return;
+                    }
+                    if (!f.terms_accepted) {
+                        this.authError = 'Deverá aceitar os Termos de Uso e a Política de Privacidade (Lei 22/11).';
+                        return;
+                    }
+
+                    this.authLoading = true;
                     try {
-                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                        const response = await fetch('/login', {
+                        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+                        const payload = {
+                            name: f.nome.trim(),
+                            email: f.email.trim().toLowerCase(),
+                            password: f.password,
+                            password_confirmation: f.password_confirmation,
+                            type: f.tipo_cliente === 'empresa' ? 'company' : 'individual',
+                            document: f.nif ? f.nif.trim() : null,
+                            phone: f.telefone ? f.telefone.trim() : null
+                        };
+
+                        const response = await fetch('/registro', {
                             method: 'POST',
                             credentials: 'same-origin',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': token || ''
+                                'X-CSRF-TOKEN': token
                             },
-                            body: JSON.stringify({ email, password, remember: false })
+                            body: JSON.stringify(payload)
                         });
+
                         const data = await response.json().catch(() => ({}));
-                        if (data.csrf_token) {
-                            const metaCsrf = document.querySelector('meta[name="csrf-token"]');
-                            if (metaCsrf) metaCsrf.setAttribute('content', data.csrf_token);
-                        }
+
                         if (response.ok && data.success) {
-                            return { success: true, redirect: data.redirect, user: data.user };
+                            RachiToast.success('Conta criada com sucesso! A aceder ao seu portal...');
+                            this.currentUser = data.user;
+                            this.isLoggedIn = true;
+                            this.loginModal = false;
+                            setTimeout(() => {
+                                window.location.href = data.redirect || '/portal';
+                            }, 800);
+                        } else {
+                            let msg = data.message || 'Não foi possível concluir o registo. Verifique os dados.';
+                            if (data.errors) {
+                                msg = Object.values(data.errors).flat().join(' ');
+                            }
+                            this.authError = msg;
                         }
-                        return { success: false, message: data.message || 'Credenciais inválidas.' };
-                    } catch (error) {
-                        return { success: false, message: 'Não foi possível contactar o serviço de autenticação.' };
+                    } catch(err) {
+                        this.authError = 'Erro de ligação ao servidor. Tente novamente.';
+                    } finally {
+                        this.authLoading = false;
                     }
                 },
+
                 isAdminUser() {
                     if (!this.currentUser) return false;
                     const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
-                    const role = String(this.currentUser.role || '').toLowerCase().trim();
                     const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
-                    const allowedSlugs = ['admin', 'super_admin', 'super-admin'];
-                    if (allowedSlugs.includes(roleSlug)) return true;
-                    if (tipo === 'admin' || tipo === 'super_admin' || tipo === 'super-admin') return true;
-                    const allowedNames = ['admin', 'super admin', 'super_admin', 'super-admin', 'administrador', 'super administrador'];
-                    return allowedNames.includes(role);
+                    return ['admin', 'super_admin', 'super-admin'].includes(roleSlug) || tipo === 'admin';
                 },
+
                 isStudentUser() {
                     if (!this.currentUser) return false;
                     const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
-                    const role = String(this.currentUser.role || '').toLowerCase().trim();
-                    const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
-                    return roleSlug === 'student' || roleSlug === 'aluno' || tipo === 'aluno' || role === 'aluno' || role === 'student';
+                    return roleSlug === 'student' || roleSlug === 'aluno' || this.currentUser.tipo === 'aluno';
                 },
+
                 isCustomerUser() {
                     if (!this.currentUser) return false;
-                    const roleSlug = String(this.currentUser.role_slug || '').toLowerCase().trim();
-                    const role = String(this.currentUser.role || '').toLowerCase().trim();
-                    const tipo = String(this.currentUser.tipo || '').toLowerCase().trim();
-                    return roleSlug === 'customer' || roleSlug === 'cliente' || tipo === 'cliente' || role === 'cliente' || role === 'customer';
+                    return !this.isAdminUser();
                 },
-                hasActiveEnrollment() {
-                    if (!this.currentUser) return false;
-                    return !!(this.currentUser.has_matricula === true || this.currentUser.has_matricula === 'true' || this.currentUser.has_active_enrollment === true);
-                },
+
                 canAccessStudentPortal() {
-                    return this.isAdminUser() || this.hasActiveEnrollment();
+                    return this.isAdminUser() || !!(this.currentUser && (this.currentUser.has_matricula || this.currentUser.has_active_enrollment));
                 },
-                canAccessCustomerPortal() {
-                    return !!this.currentUser;
-                },
+
                 openAdminDashboard() {
                     this.userMenuDropdown = false;
                     if (!this.isAdminUser()) {
-                        if (typeof this.showLoginToast === 'function') {
-                            this.showLoginToast('Acesso Restrito', 'Apenas utilizadores com permissão de Administrador ou Super Administrador podem aceder ao Painel Administrativo.', 'warning', 4500);
-                        }
+                        RachiToast.warning('Acesso Restrito: Apenas administradores podem aceder ao Painel Administrativo.');
                         return;
                     }
                     window.location.assign('/admin-dashboard');
                 },
-                submitRegister() { window.location.href = '/registro'; },
+
                 openAcademyAluno() {
                     this.userMenuDropdown = false;
                     if (this.canAccessStudentPortal()) {
-
                         window.location.href = '/aluno-dashboard';
                     } else {
                         this.matriculaModalOpen = true;
                     }
                 },
-                async logout() { await window.RachiSession.logout(); },
-                loginAs(role) {
-                    if (role === 'customer') {
-                        this.quickFillAuth('cliente_sem_matricula');
-                        this.submitUnifiedLogin();
-                    } else if (role === 'employee') {
-                        this.quickFillAuth('funcionario');
-                        this.submitUnifiedLogin();
-                    } else if (role === 'admin') {
-                        this.quickFillAuth('admin');
-                        this.submitUnifiedLogin();
-                    }
+
+                async logout() {
+                    await window.RachiSession.logout();
                 }
             };
         }
-
-        window.scrollToSection = function (id) {
-            const app = document.querySelector('[x-data]');
-            if (app && app._x_dataStack && app._x_dataStack[0]) {
-                if (id === 'contacto') {
-                    window.location.href = '/contacto';
-                    return;
-                }
-                app._x_dataStack[0].scrollToSection(id);
-                return;
-            }
-            if (id === 'contacto') {
-                window.location.href = '/contacto';
-                return;
-            }
-            if (id === 'home' || id === 'inicio' || !id) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
-            setTimeout(() => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const headerOffset = 75;
-                    const elementPosition = el.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 50);
-        };
-
-        window.goToHome = function () {
-            window.scrollToSection('home');
-        };
-
-        function handleUrlHash() {
-            if (window.location.hash) {
-                const targetId = window.location.hash.replace('#', '');
-                const app = document.querySelector('[x-data]');
-                if (targetId === 'academy') {
-                    window.location.replace('/academy');
-                    return;
-                }
-                if (['capital', 'tec', 'print'].includes(targetId)) {
-                    window.location.replace('/' + targetId);
-                    return;
-                }
-                if (targetId === 'contacto') {
-                    window.location.replace('/contacto');
-                    return;
-                }
-                if (window.scrollToSection) {
-                    window.scrollToSection(targetId);
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
-            setTimeout(handleUrlHash, 250);
-        });
-
-        window.addEventListener('hashchange', handleUrlHash);
     </script>
-<script src="/worker-public.js"></script>    @include('components.theme-toggle-fab')
+    @include('components.theme-toggle-fab')
 </body>
-
 </html>

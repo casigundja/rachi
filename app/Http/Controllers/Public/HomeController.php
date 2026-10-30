@@ -27,6 +27,11 @@ class HomeController extends Controller
         return view('public.about');
     }
 
+    public function differential(): View
+    {
+        return view('public.differential');
+    }
+
     public function whatWeDo(): View
     {
         return view('public.what-we-do');

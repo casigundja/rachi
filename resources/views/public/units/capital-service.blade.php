@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -359,7 +359,7 @@
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                         <img src="/images/areas/rachi-human-capital.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
                              alt="RACHI Human Capital" 
                              class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
@@ -650,7 +650,7 @@
             <div class="mt-8 p-4 rounded-2xl bg-slate-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 flex items-start gap-3 text-xs text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
                 <i data-lucide="info" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
                 <div>
-                    <strong>Transparência Contratual:</strong> Não existem taxas ocultas. Para demandas que envolvam volumes elevados de pessoal ou sociedades comerciais com objetos múltiplos, elaboramos proposta técnica customizada e cronograma detalhado de execução.
+                    <strong>Transparência Contratual:</strong> Não existem taxas ocultas. Para demandas que envolvam volumes elevados de pessoal ou sociedades comerciais com objetos múltiplos, elaboramos proposta técnica personalizada e cronograma detalhado de execução.
                 </div>
             </div>
         </section>
@@ -892,7 +892,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                             <img src="/images/areas/rachi-human-capital.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
                                  alt="RACHI Human Capital" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(255,255,255,0.35)] group-hover:scale-105 transition-all">
                         </picture>

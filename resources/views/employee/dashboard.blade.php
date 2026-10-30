@@ -18,7 +18,7 @@
     </a>
     <a href="{{ route('employee.stock') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
         <i data-lucide="boxes" class="w-5 h-5"></i>
-        <span>Controle de Estoque</span>
+        <span>Controlo de Stock</span>
     </a>
 @endsection
 

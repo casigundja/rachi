@@ -27,6 +27,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'logout',
             'contacto',
             'contacto/*',
+            'reclamacoes-e-denuncia',
+            'reclamacoes-e-denuncia/*',
             'checkout',
             'solicitacoes',
             'solicitacoes/*',

@@ -10046,10 +10046,10 @@ html:not(.dark) .site-header .header-dropdown .dropdown-desc,
 
 /* RACHI FLOATING ACTION BUTTON (FAB) - WITH THEME LABEL (LEGENDA) */
 .rachi-theme-fab {
-    position: fixed !important;
-    bottom: 1.5rem !important;
-    right: 1.5rem !important;
-    z-index: 9999 !important;
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: auto !important;
     width: auto !important;
     min-width: unset !important;
     height: 2.75rem !important;

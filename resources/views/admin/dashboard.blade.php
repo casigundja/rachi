@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-AO" :class="{'dark': theme === 'dark'}" :data-bs-theme="theme" class="h-full">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>RACHI — Painel de Gestão & Administração</title>
+<title>RACHI ” Painel de Gestão & Administração</title>
 <meta name="description" content="Painel de controlo visual e intuitivo da RACHI: métricas, negócios, clientes, solicitações e relatórios.">
 <link rel="icon" type="image/png" href="/images/logo-rachi-light.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/toast.css">
 <script src="/toast.js"></script>
 <script src="/auth-session.js"></script>
-<link rel="stylesheet" href="/worker-marketing.css">
+<link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
 
 <!-- Alpine.js & Lucide Icons -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -570,7 +570,7 @@ a { text-decoration: none !important; }
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
                class="h-9 w-auto max-w-[185px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
-               onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'">
+               onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
                class="h-9 w-auto max-w-[185px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
@@ -584,7 +584,7 @@ a { text-decoration: none !important; }
       </a>
     </div>
 
-    <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
+    <!-- BOTÃƒO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
        class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/80 dark:border-blue-500/20 transition group shadow-sm"
        title="Voltar ao Site RACHI">
@@ -667,7 +667,7 @@ a { text-decoration: none !important; }
         </div>
         <div @click="setPage('loja-estoque')" :class="currentPage==='loja-estoque'?'active':''" class="sidebar-sub-item">
           <span class="sidebar-sub-dot"></span>
-          <span class="sl">Controlo de Estoque</span>
+          <span class="sl">Controlo de Stock</span>
         </div>
       </div>
     </div>
@@ -780,7 +780,7 @@ a { text-decoration: none !important; }
 
     <!-- AÇÕES DO CABEÇALHO -->
     <div class="flex items-center gap-2.5">
-      <!-- BOTÃO TOGGLE DARK/LIGHT MODE -->
+      <!-- BOTÃƒO TOGGLE DARK/LIGHT MODE -->
       <button @click="toggleTheme()" 
               class="hdr-btn"
               :title="theme==='dark'?'Modo Claro':'Modo Escuro'">
@@ -821,7 +821,7 @@ a { text-decoration: none !important; }
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-3 max-w-2xl">
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight" style="font-family:Outfit">
-              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! 👋
+              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! ðŸ‘‹
             </h1>
             <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
               Bem-vindo ao centro integrado da RACHI. Você tem <strong class="text-white underline decoration-amber-400 decoration-2"><span x-text="requests ? requests.length : {{ $stats['total_requests'] ?? 0 }}"></span> solicitações</strong> na Central e <strong class="text-white underline decoration-emerald-400 decoration-2"><span x-text="tecOrders ? tecOrders.length : {{ $stats['total_orders'] ?? 0 }}"></span> pedidos</strong> em processamento hoje.
@@ -880,7 +880,7 @@ a { text-decoration: none !important; }
             </div>
             <p class="text-xs text-slate-500 mt-1">Capacitação, Cursos & Ensino Executivo</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['academy_courses'] ?? 0 }} {{ ($stats['academy_courses'] ?? 0) == 1 ? 'Curso' : 'Cursos' }} • {{ $stats['academy_students'] ?? 0 }} {{ ($stats['academy_students'] ?? 0) == 1 ? 'Aluno' : 'Alunos' }}</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['academy_courses'] ?? 0 }} {{ ($stats['academy_courses'] ?? 0) == 1 ? 'Curso' : 'Cursos' }} —¢ {{ $stats['academy_students'] ?? 0 }} {{ ($stats['academy_students'] ?? 0) == 1 ? 'Aluno' : 'Alunos' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-indigo-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -898,7 +898,7 @@ a { text-decoration: none !important; }
             </div>
             <p class="text-xs text-slate-500 mt-1">Hardware, Notebooks & TI Corporativa</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['tec_items'] ?? 0 }} {{ ($stats['tec_items'] ?? 0) == 1 ? 'Item' : 'Itens' }} • {{ $stats['tec_orders'] ?? 0 }} {{ ($stats['tec_orders'] ?? 0) == 1 ? 'Pedido' : 'Pedidos' }}</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['tec_items'] ?? 0 }} {{ ($stats['tec_items'] ?? 0) == 1 ? 'Item' : 'Itens' }} —¢ {{ $stats['tec_orders'] ?? 0 }} {{ ($stats['tec_orders'] ?? 0) == 1 ? 'Pedido' : 'Pedidos' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-sky-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -934,7 +934,7 @@ a { text-decoration: none !important; }
             </div>
             <p class="text-xs text-slate-500 mt-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['print_products'] ?? 0 }} {{ ($stats['print_products'] ?? 0) == 1 ? 'Catálogo' : 'Catálogos' }} • AOA {{ $stats['print_revenue_formatted'] ?? '0,00' }}</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['print_products'] ?? 0 }} {{ ($stats['print_products'] ?? 0) == 1 ? 'Catálogo' : 'Catálogos' }} —¢ AOA {{ $stats['print_revenue_formatted'] ?? '0,00' }}</span>
               <i data-lucide="arrow-right" class="w-4 h-4 text-amber-500 group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -961,14 +961,14 @@ a { text-decoration: none !important; }
         </template>
       </div>
 
-      <!-- SEÇÃO VISUAL: GRÁFICO INTERATIVO & STATUS DAS SOLICITAÇÕES -->
+      <!-- SEÇÃƒO VISUAL: GRÁFICO INTERATIVO & STATUS DAS SOLICITAÇÕES -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- GRÁFICO INTERATIVO DE FATURAMENTO / ATIVIDADE -->
+        <!-- GRÁFICO INTERATIVO DE FACTURAÇÃO / ATIVIDADE -->
         <div class="sc2 lg:col-span-2">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-white/5 gap-2">
             <div>
               <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <i data-lucide="line-chart" class="w-4 h-4 text-blue-600"></i> Desempenho e Faturamento Mensal (AOA)
+                <i data-lucide="line-chart" class="w-4 h-4 text-blue-600"></i> Desempenho e Facturação Mensal (AOA)
               </h3>
               <p class="text-xs text-slate-500 mt-0.5">Evolução de receitas consolidadas das 4 unidades em 2026</p>
             </div>
@@ -983,7 +983,7 @@ a { text-decoration: none !important; }
           </div>
         </div>
 
-        <!-- GRÁFICO DE PIZZA / DISTRIBUIÇÃO DAS SOLICITAÇÕES -->
+        <!-- GRÁFICO DE PIZZA / DISTRIBUIÇÃƒO DAS SOLICITAÇÕES -->
         <div class="sc2 flex flex-col justify-between">
           <div>
             <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
@@ -1283,7 +1283,7 @@ a { text-decoration: none !important; }
                       </div>
                     </template>
                     <template x-if="u.is_deleted">
-                      <span class="text-xs text-slate-400 italic px-3">—</span>
+                      <span class="text-xs text-slate-400 italic px-3">”</span>
                     </template>
                   </td>
 
@@ -1321,7 +1321,7 @@ a { text-decoration: none !important; }
                       </div>
                     </template>
                     <template x-if="u.is_deleted">
-                      <span class="text-xs text-slate-300 dark:text-slate-600 italic">—</span>
+                      <span class="text-xs text-slate-300 dark:text-slate-600 italic">”</span>
                     </template>
                   </td>
 
@@ -1352,7 +1352,7 @@ a { text-decoration: none !important; }
                             <i :data-lucide="u.status === 'Ativo' ? 'lock' : 'unlock'" class="w-4 h-4"></i>
                           </button>
 
-                          <!-- Redefinir Senha -->
+                          <!-- Redefinir Palavra-passe -->
                           <button @click="openResetPasswordModal(u)"
                             class="p-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 transition cursor-pointer"
                             title="Redefinir Palavra-passe">
@@ -1363,7 +1363,7 @@ a { text-decoration: none !important; }
                           <template x-if="u.id !== 1 && u.email !== 'admin@rachi.ao' && u.email !== 'casimirogundja@outlook.com'">
                             <button @click="confirmDeleteUser(u)"
                               class="p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 transition cursor-pointer"
-                              title="Excluir Utilizador">
+                              title="Eliminar Utilizador">
                               <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>
                           </template>
@@ -1467,7 +1467,7 @@ a { text-decoration: none !important; }
               <h1 class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="'Solicitação #' + selectedRequest.id"></h1>
               <div class="flex items-center gap-2 mt-1">
                 <span class="badge2" :class="selectedRequest.sc" x-text="selectedRequest.status"></span>
-                <span class="text-xs text-slate-500 font-semibold" x-text="selectedRequest.servico + ' • ' + selectedRequest.data"></span>
+                <span class="text-xs text-slate-500 font-semibold" x-text="selectedRequest.servico + ' —¢ ' + selectedRequest.data"></span>
               </div>
             </div>
           </div>
@@ -1551,7 +1551,7 @@ a { text-decoration: none !important; }
               </div>
               <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 space-y-2">
                 <textarea placeholder="Adicionar nota técnica interna..." class="ia resize-none h-20 text-xs"></textarea>
-                <button class="bap w-full justify-center text-xs">Salvar Nota Interna</button>
+                <button class="bap w-full justify-center text-xs">Guardar Nota Interna</button>
               </div>
             </div>
           </div>
@@ -1656,7 +1656,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy — Cursos & Certificações</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy ” Cursos & Certificações</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão do catálogo de formações presenciais e online em Angola.</p>
           </div>
         </div>
@@ -1703,7 +1703,7 @@ a { text-decoration: none !important; }
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">🎓 RACHI Academy — Alunos & Solicitações de Matrícula</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸŽ“ RACHI Academy ” Alunos & Solicitações de Matrícula</h1>
             <span x-show="pendingEnrollmentsCount > 0" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1 animate-pulse">
               <span class="w-2 h-2 rounded-full bg-amber-500"></span>
               <span x-text="pendingEnrollmentsCount + ' pendente(s)'"></span>
@@ -1919,7 +1919,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Catálogo de Produtos</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Catálogo de Produtos</h1>
             <p class="text-slate-500 text-sm mt-0.5">Equipamentos, computadores, consumíveis e suprimentos de TI.</p>
           </div>
         </div>
@@ -1929,14 +1929,14 @@ a { text-decoration: none !important; }
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['tec_items'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['tec_critical_stock'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['tec_critical_stock'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Item</th><th>SKU</th><th>Categoria</th><th>Valor Unitário</th><th>Estoque</th><th>Saídas</th><th>Status</th></tr></thead>
+            <thead><tr><th>Item</th><th>SKU</th><th>Categoria</th><th>Valor Unitário</th><th>Stock</th><th>Saídas</th><th>Status</th></tr></thead>
             <tbody>
               <template x-for="p in sProducts" :key="p.id">
                 <tr>
@@ -1958,7 +1958,7 @@ a { text-decoration: none !important; }
     <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-6">
       <div class="flex items-center justify-between gap-3">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Solicitações & Consultoria</h1>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Solicitações & Consultoria</h1>
           <p class="text-sm text-slate-500 mt-1">Pedidos enviados pela página Human Capital e pelas suas páginas de serviços.</p>
         </div>
         <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
@@ -1988,7 +1988,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Vagas & Recrutamento</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Vagas & Recrutamento</h1>
             <p class="text-slate-500 text-sm mt-0.5">Processos de atração, seleção e consultoria de recursos humanos.</p>
           </div>
         </div>
@@ -2033,7 +2033,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Gestão da Produção Gráfica</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print ” Gestão da Produção Gráfica</h1>
             <p class="text-slate-500 text-sm mt-0.5">Controlo de tiragens, acabamentos, prazos e entregas gráficas.</p>
           </div>
         </div>
@@ -2072,14 +2072,14 @@ a { text-decoration: none !important; }
     <!-- FINANCEIRO -->
     <section x-show="currentPage==='financeiro'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">💰 Gestão Financeira Consolidada</h1>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ’° Gestão Financeira Consolidada</h1>
         <p class="text-slate-500 text-sm mt-0.5">Fluxo de caixa, recebimentos por unidade de negócio e saldos.</p>
       </div>
 
       <div class="sc2 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white border-blue-500/30 shadow-xl">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Faturamento Total Acumulado ({{ now()->format('Y') }})</div>
+            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Facturação Total Acumulada ({{ now()->format('Y') }})</div>
             <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA {{ number_format($stats['total_revenue'] ?? 0, 2, ',', '.') }}</div>
             <div class="text-sm text-emerald-300 font-bold flex items-center gap-1.5 mt-2">
               <i data-lucide="trending-up" class="w-4 h-4"></i> Valores sincronizados com a base de dados
@@ -2119,7 +2119,7 @@ a { text-decoration: none !important; }
                 <div class="w-11 h-11 rounded-2xl bg-white dark:bg-white/10 flex items-center justify-center text-xl shadow-sm" x-text="t.icon"></div>
                 <div>
                   <div class="text-sm font-bold text-slate-900 dark:text-white" x-text="t.desc"></div>
-                  <div class="text-xs text-slate-500 font-medium" x-text="t.cli + ' • ' + t.data"></div>
+                  <div class="text-xs text-slate-500 font-medium" x-text="t.cli + ' —¢ ' + t.data"></div>
                 </div>
               </div>
               <div class="text-right">
@@ -2144,7 +2144,7 @@ a { text-decoration: none !important; }
     <section x-show="currentPage==='relatorios'" x-cloak class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">📈 Central de Relatórios Executivos</h1>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ“ˆ Central de Relatórios Executivos</h1>
           <p class="text-slate-500 text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade de negócio.</p>
         </div>
       </div>
@@ -2175,8 +2175,8 @@ a { text-decoration: none !important; }
     <!-- NOTIFICAÇÕES -->
     <section x-show="currentPage==='notificacoes'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">🔔 Centro de Notificações</h1>
-        <p class="text-slate-500 text-sm mt-0.5">Alertas de clientes, novos pedidos, estoques e tarefas pendentes.</p>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ”” Centro de Notificações</h1>
+        <p class="text-slate-500 text-sm mt-0.5">Alertas de clientes, novos pedidos, stocks e tarefas pendentes.</p>
       </div>
       <div class="sc2 space-y-3.5">
         <template x-for="(n,idx) in notifs" :key="idx">
@@ -2202,13 +2202,13 @@ a { text-decoration: none !important; }
     <!-- CONFIGURAÇÕES -->
     <section x-show="currentPage==='configuracoes'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">⚙️ Parâmetros & Configurações</h1>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">âš™ï¸ Parâmetros & Configurações</h1>
         <p class="text-slate-500 text-sm mt-0.5">Dados institucionais, preferências de aparência e segurança.</p>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="sc2 space-y-4">
           <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dados da Organização</h3>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI — Soluções Inteligentes Lda." class="ia"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI ” Soluções Inteligentes Lda." class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">NIF / Identificação Fiscal</label><input type="text" value="5417000000" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">E-mail Corporativo</label><input type="email" value="geral@rachi.ao" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label><input type="text" value="+244 972 888 585" class="ia"></div>
@@ -2252,7 +2252,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos & Formulários de TI</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Pedidos & Formulários de TI</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão de vendas da loja e de formulários preenchidos em /tec e sub-páginas.</p>
           </div>
         </div>
@@ -2284,7 +2284,7 @@ a { text-decoration: none !important; }
       <div x-show="tecTab === 'pedidos'" class="space-y-6">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
           <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
           <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
         </div>
@@ -2292,7 +2292,7 @@ a { text-decoration: none !important; }
         <div class="sc2 p-0 overflow-hidden">
           <div class="overflow-x-auto min-h-[280px]">
             <table class="at">
-              <thead><tr><th>Nº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
+              <thead><tr><th>NÂº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
               <tbody>
                 <template x-for="o in tecOrders" :key="o.id">
                   <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
@@ -2400,27 +2400,27 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo & Alertas de Estoque</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de estoque crítico da loja.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Controlo & Alertas de Stock</h1>
+            <p class="text-slate-500 text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de stock crítico da loja.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
           <button type="button" @click="openStockModal(null, 'add')" class="bap cursor-pointer flex items-center gap-2">
             <i data-lucide="plus" class="w-4 h-4"></i>
-            <span>Nova Entrada de Estoque</span>
+            <span>Nova Entrada em Stock</span>
           </button>
         </div>
       </div>
 
-      <!-- 4 Cards de Métricas de Estoque -->
+      <!-- 4 Cards de Métricas de Stock -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="sProducts.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Linhas de Produto</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="sProducts.reduce((acc, p) => acc + (p.est || 0), 0)"></div><div class="text-xs text-slate-500 mt-1 font-bold">Unidades em Depósito</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="sProducts.filter(p => (p.est || 0) <= (p.min_est || 5)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Estoque Crítico / Reposição</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="sProducts.filter(p => (p.est || 0) <= (p.min_est || 5)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico / Reposição</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-rose-500" style="font-family:Outfit" x-text="sProducts.filter(p => p.status !== 'Ativo' || (p.est || 0) === 0).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Itens Indisponíveis / Esgotados</div></div>
       </div>
 
-      <!-- Barra de Filtros Rápidos de Estoque -->
+      <!-- Barra de Filtros Rápidos de Stock -->
       <div class="sc2 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div class="flex items-center gap-2.5 flex-1 max-w-md">
           <div class="relative w-full">
@@ -2432,14 +2432,14 @@ a { text-decoration: none !important; }
           <span class="text-xs font-bold text-slate-500">Filtrar:</span>
           <select x-model="stockFilter" class="ia text-xs font-semibold py-1.5 px-3">
             <option value="all">Todos os Produtos</option>
-            <option value="critico">Apenas Estoque Crítico</option>
+            <option value="critico">Apenas Stock Crítico</option>
             <option value="esgotado">Apenas Esgotados / Indisponíveis</option>
             <option value="disponivel">Apenas Disponíveis na Loja</option>
           </select>
         </div>
       </div>
 
-      <!-- Tabela de Controlo de Estoque Completa -->
+      <!-- Tabela de Controlo de Stock Completa -->
       <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto min-h-[320px]">
           <table class="at">
@@ -2447,9 +2447,9 @@ a { text-decoration: none !important; }
               <tr>
                 <th>Produto & Categoria</th>
                 <th>SKU</th>
-                <th>Estoque Atual</th>
+                <th>Stock Atual</th>
                 <th>Mínimo Exigido</th>
-                <th>Nível de Estoque</th>
+                <th>Nível de Stock</th>
                 <th>Situação</th>
                 <th>Disponibilidade na Loja</th>
                 <th class="text-right">Ações de Gestão</th>
@@ -2482,7 +2482,7 @@ a { text-decoration: none !important; }
                   <td>
                     <span class="px-2.5 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'">
                       <span class="w-1.5 h-1.5 rounded-full" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'"></span>
-                      <span x-text="p.est <= (p.min_est || 5) ? 'Estoque Baixo' : 'Normal'"></span>
+                      <span x-text="p.est <= (p.min_est || 5) ? 'Stock Baixo' : 'Normal'"></span>
                     </span>
                   </td>
                   <td>
@@ -2507,7 +2507,7 @@ a { text-decoration: none !important; }
                   </td>
                   <td class="text-right whitespace-nowrap">
                     <div class="flex items-center justify-end gap-1.5">
-                      <button type="button" @click="openStockModal(p, 'add')" class="bap text-xs py-1 px-2.5 flex items-center gap-1 cursor-pointer" title="Adicionar / Ajustar Estoque">
+                      <button type="button" @click="openStockModal(p, 'add')" class="bap text-xs py-1 px-2.5 flex items-center gap-1 cursor-pointer" title="Adicionar / Ajustar Stock">
                         <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
                         <span>Ajustar</span>
                       </button>
@@ -2539,7 +2539,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Banco de Talentos</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Banco de Talentos</h1>
             <p class="text-slate-500 text-sm mt-0.5">Perfis qualificados, banco curricular e candidatos a oportunidades corporativas.</p>
           </div>
         </div>
@@ -2547,7 +2547,7 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos Cadastrados</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos Registados</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Disponíveis Imediatos</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['capital_services'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Processos em Aberto</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Taxa de Conformidade</div></div>
@@ -2581,7 +2581,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Orçamentos & Ordens de Produção</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print ” Orçamentos & Ordens de Produção</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão de orçamentos gráficos solicitados por empresas e aprovações de tiragem.</p>
           </div>
         </div>
@@ -2590,7 +2590,7 @@ a { text-decoration: none !important; }
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="printQuotes.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="printRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Faturamento (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
       </div>
 
@@ -2625,7 +2625,7 @@ a { text-decoration: none !important; }
       <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto min-h-[280px]">
           <table class="at">
-            <thead><tr><th>Nº Orçamento</th><th>Cliente / Empresa</th><th>Valor Previsto</th><th>Data</th><th>Status</th></tr></thead>
+            <thead><tr><th>NÂº Orçamento</th><th>Cliente / Empresa</th><th>Valor Previsto</th><th>Data</th><th>Status</th></tr></thead>
             <tbody>
               <template x-for="q in printQuotes" :key="q.id">
                 <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
@@ -2669,7 +2669,7 @@ a { text-decoration: none !important; }
 
         <form @submit.prevent="saveNewStudent()" class="space-y-3.5">
           <div class="p-3 rounded-2xl bg-blue-50/70 dark:bg-blue-500/5 border border-blue-100 dark:border-blue-500/20 space-y-2">
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">Pesquisar utilizador cadastrado</label>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">Pesquisar utilizador registado</label>
             <div class="relative">
               <input type="search" x-model="academyUserSearch" :disabled="!!newStudentForm.user_id" placeholder="Nome ou e-mail do perfil"
                 class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0050f0] disabled:opacity-60">
@@ -2679,7 +2679,7 @@ a { text-decoration: none !important; }
               <template x-for="user in matchingAcademyUsers" :key="user.id">
                 <button type="button" @click="selectRegisteredAcademyUser(user)" class="w-full text-left px-3 py-2.5 border-b last:border-b-0 border-slate-100 dark:border-white/5 hover:bg-blue-50 dark:hover:bg-white/5 transition">
                   <span class="block text-xs font-bold text-slate-800 dark:text-white" x-text="user.nome"></span>
-                  <span class="block text-[11px] text-slate-500" x-text="user.email + (user.telefone ? ' · ' + user.telefone : '')"></span>
+                  <span class="block text-[11px] text-slate-500" x-text="user.email + (user.telefone ? ' Â· ' + user.telefone : '')"></span>
                 </button>
               </template>
               <p x-show="matchingAcademyUsers.length === 0" class="px-3 py-3 text-xs text-slate-500">Nenhum utilizador disponível encontrado.</p>
@@ -2814,7 +2814,7 @@ a { text-decoration: none !important; }
         <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100 dark:border-white/10">
           <div>
             <h3 class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Novo Utilizador</h3>
-            <p class="text-xs text-slate-500">Cadastre um utilizador e defina suas credenciais e perfil de acesso.</p>
+            <p class="text-xs text-slate-500">Registe um utilizador e defina suas credenciais e perfil de acesso.</p>
           </div>
           <button @click="showCreateUserModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
             <i data-lucide="x" class="w-4 h-4"></i>
@@ -3038,7 +3038,7 @@ a { text-decoration: none !important; }
             <button @click="showUserProfileModal = false; openResetPasswordModal(selectedUser)"
               class="px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-500/10 dark:hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold text-xs flex items-center gap-1.5 transition cursor-pointer">
               <i data-lucide="key" class="w-3.5 h-3.5"></i>
-              <span>Nova Senha</span>
+              <span>Nova Palavra-passe</span>
             </button>
           </div>
           <button @click="showUserProfileModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold transition cursor-pointer">
@@ -3072,7 +3072,7 @@ a { text-decoration: none !important; }
                 class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-sm font-mono font-bold text-[#0050f0] dark:text-[#00a3e0] focus:outline-hidden">
               <button type="button" @click="resetPassData.newPassword = 'Rachi@' + Math.floor(1000 + Math.random() * 9000) + '!'"
                 class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-xs font-bold text-slate-700 dark:text-white transition cursor-pointer"
-                title="Gerar outra senha">
+                title="Gerar outra palavra-passe">
                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
               </button>
               <button type="button" @click="copyResetPassword()"
@@ -3114,7 +3114,7 @@ a { text-decoration: none !important; }
       </div>
     </div>
 
-    <!-- MODAL 7: CONFIRMAR EXCLUSÃO DE UTILIZADOR -->
+    <!-- MODAL 7: CONFIRMAR EXCLUSÃƒO DE UTILIZADOR -->
     <div x-show="showDeleteUserModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
       <div @click="showDeleteUserModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
       <div class="relative w-full max-w-md bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden z-10 text-left">
@@ -3125,13 +3125,13 @@ a { text-decoration: none !important; }
             <i data-lucide="alert-triangle" class="w-6 h-6"></i>
           </div>
           <div>
-            <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Excluir Utilizador</h3>
+            <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Eliminar Utilizador</h3>
             <p class="text-xs text-slate-500">Esta ação é irreversível.</p>
           </div>
         </div>
 
         <p class="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-          Tem certeza de que deseja excluir permanentemente o utilizador
+          Tem certeza de que deseja eliminar permanentemente o utilizador
           <strong class="text-slate-900 dark:text-white" x-text="userToDelete?.nome"></strong>
           (<span class="font-mono text-slate-500" x-text="userToDelete?.email"></span>)?
           Todos os acessos e permissões desta conta serão revogados.
@@ -3145,13 +3145,13 @@ a { text-decoration: none !important; }
           <button type="button" @click="executeDeleteUser()"
             class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
-            <span>Sim, Excluir Utilizador</span>
+            <span>Sim, Eliminar Utilizador</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- MODAL 8: SELEÇÃO MODERNA DE PERFIL DE ACESSO -->
+    <!-- MODAL 8: SELEÇÃƒO MODERNA DE PERFIL DE ACESSO -->
     <div x-show="showQuickRoleModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
       <div @click="showQuickRoleModal = false" class="fixed inset-0 bg-slate-950/75 backdrop-blur-xs transition-opacity"></div>
       <div class="relative w-full max-w-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-[#0050f0]/30 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
@@ -3239,7 +3239,7 @@ a { text-decoration: none !important; }
       </div>
     </div>
 
-    <!-- MODAL 9: NOVA ORDEM DE SERVIÇO / SOLICITAÇÃO -->
+    <!-- MODAL 9: NOVA ORDEM DE SERVIÇO / SOLICITAÇÃƒO -->
     <div x-show="showCreateOrderModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
       <div @click="showCreateOrderModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
       <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
@@ -3264,10 +3264,10 @@ a { text-decoration: none !important; }
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Unidade de Negócio *</label>
               <select x-model.number="newOrder.business_unit_id" class="ia w-full" required>
-                <option value="1">💻 RACHI Tec</option>
-                <option value="2">🖨️ RACHI Print</option>
-                <option value="3">🎓 RACHI Academy</option>
-                <option value="4">👥 RACHI Human Capital</option>
+                <option value="1">ðŸ’» RACHI Tec</option>
+                <option value="2">ðŸ–¨ï¸ RACHI Print</option>
+                <option value="3">ðŸŽ“ RACHI Academy</option>
+                <option value="4">ðŸ‘¥ RACHI Human Capital</option>
               </select>
             </div>
             <div>
@@ -3329,7 +3329,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Publicar Vaga Corporativa</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Human Capital — Gestão de Oportunidades & Recrutamento.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Human Capital ” Gestão de Oportunidades & Recrutamento.</p>
             </div>
           </div>
           <button @click="showCreateJobModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3401,7 +3401,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto TI</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Cadastro de Hardware, Equipamentos & Suprimentos.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec ” Cadastro de Hardware, Equipamentos & Suprimentos.</p>
             </div>
           </div>
           <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3432,11 +3432,11 @@ a { text-decoration: none !important; }
               <input type="number" step="0.01" x-model="newProduct.preco" placeholder="185000" class="ia w-full font-bold" required>
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Inicial</label>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Inicial</label>
               <input type="number" x-model.number="newProduct.est" class="ia w-full font-bold">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Mínimo</label>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Mínimo</label>
               <input type="number" x-model.number="newProduct.min_est" class="ia w-full font-bold">
             </div>
           </div>
@@ -3452,7 +3452,7 @@ a { text-decoration: none !important; }
       </div>
     </div>
 
-    <!-- MODAL: AJUSTE DE ESTOQUE RACHI TEC (showStockModal) -->
+    <!-- MODAL: AJUSTE DE STOCK RACHI TEC (showStockModal) -->
     <div x-show="showStockModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
       <div @click="showStockModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
       <div class="relative w-full max-w-lg bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
@@ -3463,8 +3463,8 @@ a { text-decoration: none !important; }
               <i data-lucide="package-check" class="w-5 h-5"></i>
             </div>
             <div>
-              <h3 class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão & Ajuste de Estoque</h3>
-              <p class="text-xs text-slate-500">RACHI Tec — Entrada, saída e disponibilidade na loja</p>
+              <h3 class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão & Ajuste de Stock</h3>
+              <p class="text-xs text-slate-500">RACHI Tec ” Entrada, saída e disponibilidade na loja</p>
             </div>
           </div>
           <button type="button" @click="showStockModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 cursor-pointer">
@@ -3477,7 +3477,7 @@ a { text-decoration: none !important; }
             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Produto da Loja *</label>
             <select x-model="stockForm.product_id" required class="ia w-full text-xs font-semibold">
               <template x-for="p in sProducts" :key="p.id">
-                <option :value="p.id" x-text="p.nome + ' (' + p.sku + ') — Estoque Atual: ' + p.est + ' un.'"></option>
+                <option :value="p.id" x-text="p.nome + ' (' + p.sku + ') ” Stock Atual: ' + p.est + ' un.'"></option>
               </template>
             </select>
           </div>
@@ -3486,9 +3486,9 @@ a { text-decoration: none !important; }
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Tipo de Movimento *</label>
               <select x-model="stockForm.action" class="ia w-full text-xs font-semibold">
-                <option value="add">➕ Entrada / Adicionar ao Estoque</option>
-                <option value="remove">➖ Saída / Baixa no Estoque</option>
-                <option value="set">🔄 Definir Saldo Absoluto</option>
+                <option value="add">âž• Entrada / Adicionar ao Stock</option>
+                <option value="remove">âž– Saída / Baixa de Stock</option>
+                <option value="set">ðŸ”„ Definir Saldo Absoluto</option>
               </select>
             </div>
             <div>
@@ -3499,7 +3499,7 @@ a { text-decoration: none !important; }
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Estoque Mínimo de Alerta</label>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Mínimo de Alerta</label>
               <input type="number" min="0" max="1000" x-model="stockForm.minimum_stock" placeholder="Ex: 3" class="ia w-full text-xs">
             </div>
             <div>
@@ -3511,7 +3511,7 @@ a { text-decoration: none !important; }
           <div class="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/10 flex items-center justify-between">
             <div class="pr-3">
               <span class="text-xs font-bold text-slate-800 dark:text-slate-200 block">Pausar se ficar zerado</span>
-              <span class="text-[11px] text-slate-500 block">Muda automaticamente o produto para indisponível caso o estoque chegue a zero.</span>
+              <span class="text-[11px] text-slate-500 block">Muda automaticamente o produto para indisponível caso o stock chegue a zero.</span>
             </div>
             <input type="checkbox" x-model="stockForm.auto_disable" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
           </div>
@@ -3520,7 +3520,7 @@ a { text-decoration: none !important; }
             <button type="button" @click="showStockModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
             <button type="submit" :disabled="stockForm.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
               <i data-lucide="check" class="w-4 h-4" x-show="!stockForm.isSubmitting"></i>
-              <span x-text="stockForm.isSubmitting ? 'A processar...' : 'Atualizar Estoque'"></span>
+              <span x-text="stockForm.isSubmitting ? 'A processar...' : 'Atualizar Stock'"></span>
             </button>
           </div>
         </form>
@@ -3539,7 +3539,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Novo Item / Ordem Gráfica</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Print — Cadastrar tiragem gráfica, material ou acabamento.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Print ” Cadastrar tiragem gráfica, material ou acabamento.</p>
             </div>
           </div>
           <button @click="showCreatePrintModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3594,7 +3594,7 @@ a { text-decoration: none !important; }
         </form>
     </div>
 
-    <!-- MODAL 13: CRIAR NOVO CURSO / FORMAÇÃO (ACADEMY) -->
+    <!-- MODAL 13: CRIAR NOVO CURSO / FORMAÇÃƒO (ACADEMY) -->
     <div x-show="showCreateCourseModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
       <div @click="showCreateCourseModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
       <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
@@ -3606,7 +3606,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Criar Nova Formação</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Academy — Cadastrar novo curso ou trilha no catálogo.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Academy ” Registar novo curso ou trilha no catálogo.</p>
             </div>
           </div>
           <button @click="showCreateCourseModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3664,7 +3664,7 @@ a { text-decoration: none !important; }
             <button type="button" @click="showCreateCourseModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
             <button type="submit" :disabled="newCourse.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
               <i data-lucide="check" class="w-4 h-4" x-show="!newCourse.isSubmitting"></i>
-              <span x-text="newCourse.isSubmitting ? 'A registar...' : 'Cadastrar Curso'"></span>
+              <span x-text="newCourse.isSubmitting ? 'A registar...' : 'Registar Curso'"></span>
             </button>
           </div>
         </form>
@@ -3741,7 +3741,7 @@ function renderCharts(theme) {
   const textColor = isDark ? '#94a3b8' : '#64748b';
   const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.05)';
 
-  // 1. Gráfico de Faturamento (Área)
+  // 1. Gráfico de Facturação (Área)
   const ctxRev = document.getElementById('revenueChart');
   if (ctxRev) {
     if (revChartInstance) revChartInstance.destroy();
@@ -4073,7 +4073,7 @@ function adminApp() {
           item.status = 'active';
           if (window.lucide) this.$nextTick(() => lucide.createIcons());
           this.notifs.unshift({
-            icon: '🎓',
+            icon: 'ðŸŽ“',
             ib: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400',
             titulo: 'Matrícula Aprovada',
             msg: `O aluno ${item.nome} foi aprovado e ativado no curso ${item.curso}.`,
@@ -4133,7 +4133,7 @@ function adminApp() {
           if (window.lucide) this.$nextTick(() => lucide.createIcons());
           this.showAlert('success', 'Matrícula Excluída', data.message || `A matrícula de ${item.nome} foi excluída com sucesso.`);
         } else {
-          this.showAlert('error', 'Falha ao Excluir', data.message || 'Não foi possível excluir a matrícula.');
+          this.showAlert('error', 'Falha ao Eliminar', data.message || 'Não foi possível excluir a matrícula.');
         }
       } catch (err) {
         console.error(err);
@@ -4170,7 +4170,7 @@ function adminApp() {
           this.academyUserSearch = '';
           if (window.lucide) this.$nextTick(() => lucide.createIcons());
           this.notifs.unshift({
-            icon: '🎓',
+            icon: 'ðŸŽ“',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Novo Aluno Matriculado',
             msg: `${studentName} matriculado manualmente com sucesso.`,
@@ -4256,7 +4256,7 @@ function adminApp() {
           this.users.unshift(data.user);
           this.showCreateUserModal = false;
           this.notifs.unshift({
-            icon: '👤',
+            icon: 'ðŸ‘¤',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Novo Utilizador Criado',
             msg: `${data.user.nome} adicionado com o perfil ${data.user.tipo}.`,
@@ -4312,7 +4312,7 @@ function adminApp() {
           }
           this.showEditUserModal = false;
           this.notifs.unshift({
-            icon: '✏️',
+            icon: 'âœï¸',
             ib: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400',
             titulo: 'Utilizador Atualizado',
             msg: `Informações de ${data.user.nome} foram gravadas com sucesso.`,
@@ -4361,7 +4361,7 @@ function adminApp() {
           }
           Object.assign(u, data.user);
           this.notifs.unshift({
-            icon: '🛡️',
+            icon: 'ðŸ›¡ï¸',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Perfil Alterado',
             msg: `O perfil de ${data.user.nome} foi alterado para ${data.user.tipo}.`,
@@ -4404,7 +4404,7 @@ function adminApp() {
             this.users[idx] = data.user;
           }
           this.notifs.unshift({
-            icon: '🛡️',
+            icon: 'ðŸ›¡ï¸',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Perfil Alterado',
             msg: `O perfil de ${data.user.nome} foi alterado para ${data.user.tipo}.`,
@@ -4439,7 +4439,7 @@ function adminApp() {
           u.sk = data.user.sk;
           u.raw_status = data.user.raw_status;
           this.notifs.unshift({
-            icon: u.status === 'Ativo' ? '🔓' : '🔒',
+            icon: u.status === 'Ativo' ? 'ðŸ”“' : 'ðŸ”’',
             ib: u.status === 'Ativo' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600',
             titulo: 'Estado de Acesso Alterado',
             msg: data.message,
@@ -4507,7 +4507,7 @@ function adminApp() {
 
     confirmDeleteUser(u) {
       if (u.id === 1 || u.email === 'admin@rachi.ao' || u.email === 'casimirogundja@outlook.com') {
-        this.showAlert('warning', 'Ação Bloqueada', 'Não é permitido excluir o Administrador Master do sistema.');
+        this.showAlert('warning', 'Ação Bloqueada', 'Não é permitido eliminar o Administrador Master do sistema.');
         return;
       }
       this.userToDelete = u;
@@ -4534,7 +4534,7 @@ function adminApp() {
           this.showDeleteUserModal = false;
           this.userToDelete = null;
           this.notifs.unshift({
-            icon: '🗑️',
+            icon: 'ðŸ—‘ï¸',
             ib: 'bg-rose-50 text-rose-600',
             titulo: 'Utilizador Excluído',
             msg: data.message,
@@ -4545,11 +4545,11 @@ function adminApp() {
           await this.refreshUsers(false);
           this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
         } else {
-          this.showAlert('error', 'Falha ao Excluir', data.message || 'Não foi possível excluir o utilizador.');
+          this.showAlert('error', 'Falha ao Eliminar', data.message || 'Não foi possível eliminar o utilizador.');
         }
       } catch (err) {
         console.error(err);
-        this.showAlert('error', 'Erro de Conexão', 'Erro ao excluir utilizador.');
+        this.showAlert('error', 'Erro de Conexão', 'Erro ao eliminar utilizador.');
       }
     },
 
@@ -4578,17 +4578,17 @@ function adminApp() {
         'usuarios': 'Perfis',
         'clientes': 'Base de Clientes',
         'solicitacoes': 'Central de Solicitações',
-        'academy-cursos': 'RACHI Academy — Cursos',
-        'academy-alunos': 'RACHI Academy — Alunos',
-        'academy-matriculas': 'RACHI Academy — Matrículas',
-        'loja-produtos': 'RACHI Store — Produtos',
-        'loja-pedidos': 'RACHI Store — Pedidos',
-        'loja-estoque': 'RACHI Store — Estoque',
-        'rh-solicitacoes': 'Human Capital — Solicitações',
-        'rh-vagas': 'Human Capital — Vagas',
-        'rh-candidatos': 'Human Capital — Candidatos',
-        'grafica-produtos': 'RACHI Print — Produtos',
-        'grafica-orcamentos': 'RACHI Print — Orçamentos',
+        'academy-cursos': 'RACHI Academy ” Cursos',
+        'academy-alunos': 'RACHI Academy ” Alunos',
+        'academy-matriculas': 'RACHI Academy ” Matrículas',
+        'loja-produtos': 'RACHI Store ” Produtos',
+        'loja-pedidos': 'RACHI Store ” Pedidos',
+        'loja-estoque': 'RACHI Store ” Stock',
+        'rh-solicitacoes': 'Human Capital ” Solicitações',
+        'rh-vagas': 'Human Capital ” Vagas',
+        'rh-candidatos': 'Human Capital ” Candidatos',
+        'grafica-produtos': 'RACHI Print ” Produtos',
+        'grafica-orcamentos': 'RACHI Print ” Orçamentos',
         'financeiro': 'Gestão Financeira',
         'relatorios': 'Central de Relatórios',
         'notificacoes': 'Notificações',
@@ -4878,7 +4878,7 @@ function adminApp() {
       { label: 'Clientes Ativos na Base', value: {!! json_encode($stats['kpi_clients_val'] ?? '0') !!}, trend: {{ $stats['kpi_clients_trend'] ?? 0 }}, icon: 'users', iconBg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', iconColor: 'text-blue-600 dark:text-blue-400' },
       { label: 'Novas Solicitações no Mês', value: {!! json_encode($stats['kpi_requests_val'] ?? '0') !!}, trend: {{ $stats['kpi_requests_trend'] ?? 0 }}, icon: 'clipboard-list', iconBg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', iconColor: 'text-amber-600 dark:text-orange-400' },
       { label: 'Pedidos da Loja Processados', value: {!! json_encode($stats['kpi_orders_val'] ?? '0') !!}, trend: {{ $stats['kpi_orders_trend'] ?? 0 }}, icon: 'shopping-cart', iconBg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', iconColor: 'text-purple-600 dark:text-purple-400' },
-      { label: 'Faturamento Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '0,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 0 }}, icon: 'banknote', iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400', iconColor: 'text-emerald-600 dark:text-emerald-400' }
+      { label: 'Facturação Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '0,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 0 }}, icon: 'banknote', iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400', iconColor: 'text-emerald-600 dark:text-emerald-400' }
     ],
 
     wfStatuses: [
@@ -4971,7 +4971,7 @@ function adminApp() {
         if (data.success && data.request) {
           this.requests.unshift(data.request);
           this.showCreateOrderModal = false;
-          this.showAlert('success', 'Ordem Criada', data.message || 'Nova ordem de serviço cadastrada com sucesso!');
+          this.showAlert('success', 'Ordem Criada', data.message || 'Nova ordem de serviço registada com sucesso!');
           this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
         } else {
           this.showAlert('error', 'Erro', data.message || 'Não foi possível registar a ordem.');
@@ -5124,10 +5124,10 @@ function adminApp() {
           this.aCourses.unshift(data.course);
           this.coursesList.unshift(data.course);
           this.showCreateCourseModal = false;
-          this.showAlert('success', 'Formação Criada', data.message || 'Curso cadastrado com sucesso na RACHI Academy!');
+          this.showAlert('success', 'Formação Criada', data.message || 'Curso registado com sucesso na RACHI Academy!');
           this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
         } else {
-          this.showAlert('error', 'Erro', data.message || 'Não foi possível cadastrar o curso.');
+          this.showAlert('error', 'Erro', data.message || 'Não foi possível registar o curso.');
         }
       } catch (err) {
         this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
@@ -5165,7 +5165,7 @@ function adminApp() {
           rows.push([c.id, c.titulo, c.cat, c.dur, c.preco, c.alunos, c.status]);
         });
       } else {
-        rows.push(['Unidade', 'Faturamento AOA', 'Percentual']);
+        rows.push(['Unidade', 'Facturação AOA', 'Percentual']);
         (this.finMods || []).forEach(f => {
           rows.push([f.label, f.value, f.pct + '%']);
         });
@@ -5266,9 +5266,9 @@ function adminApp() {
             this.sProducts[idx] = data.product;
           }
           this.showStockModal = false;
-          this.showAlert('success', 'Estoque Atualizado', data.message);
+          this.showAlert('success', 'Stock Atualizado', data.message);
         } else {
-          this.showAlert('error', 'Erro', data.message || 'Falha ao atualizar estoque.');
+          this.showAlert('error', 'Erro', data.message || 'Falha ao atualizar stock.');
         }
       } catch (err) {
         this.showAlert('error', 'Erro', 'Erro ao processar requisição: ' + err.message);
@@ -5322,7 +5322,7 @@ function adminApp() {
             product_id: product.id,
             action: action,
             quantity: 1,
-            reason: step > 0 ? 'Entrada rápida de estoque (+1 un.)' : 'Baixa rápida de estoque (-1 un.)'
+            reason: step > 0 ? 'Entrada rápida de stock (+1 un.)' : 'Baixa rápida de stock (-1 un.)'
           })
         });
         const data = await res.json();
@@ -5345,28 +5345,28 @@ function adminApp() {
     printQuotes: @json($printQuotes ?? []),
 
     finMods: [
-      { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
-      { label: 'RACHI Academy', icon: '🎓', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
-      { label: 'RACHI Print', icon: '🖨️', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
-      { label: 'Human Capital', icon: '👥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
+      { label: 'RACHI Store / Tec', icon: 'ðŸ›’', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
+      { label: 'RACHI Academy', icon: 'ðŸŽ“', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
+      { label: 'RACHI Print', icon: 'ðŸ–¨ï¸', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
+      { label: 'Human Capital', icon: 'ðŸ‘¥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
     ],
 
     txs: @json($recentTransactions ?? []),
 
     reports: [
-      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} cadastros sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
-      { key: 'financeiro', icon: '💰', label: 'Faturamento & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} faturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
-      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
-      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
-      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
-      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
+      { key: 'clientes', icon: 'ðŸ‘¤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} registos sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
+      { key: 'financeiro', icon: 'ðŸ’°', label: 'Facturação & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} facturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
+      { key: 'pedidos', icon: 'ðŸ“¦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
+      { key: 'solicitacoes', icon: 'ðŸ“‹', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
+      { key: 'academy', icon: 'ðŸŽ“', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
+      { key: 'capital', icon: 'ðŸ‘¥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
     ],
 
     notifs: [
-      { icon: '📋', ib: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', titulo: 'Nova Demanda Corporativa', msg: 'A Empresa Alpha Lda. cadastrou uma nova demanda de recrutamento de TI.', data: '21/09/2026 09:00', lida: false },
-      { icon: '🎓', ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', titulo: 'Nova Matrícula na Academy', msg: 'Pedro Alves matriculou-se em Cibersegurança e Proteção de Dados.', data: '21/09/2026 08:45', lida: false },
-      { icon: '🛒', ib: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', titulo: 'Novo Pedido Loja #154', msg: 'Inov Quimua solicitou compra corporativa de 10 notebooks ThinkPad.', data: '21/09/2026 08:30', lida: false },
-      { icon: '⚠️', ib: 'bg-yellow-50 text-yellow-600 dark:bg-yellow-500/10 dark:text-yellow-400', titulo: 'Alerta de Estoque Mínimo', msg: 'Monitor LG 27" — restam apenas 3 unidades no estoque central.', data: '20/09/2026 18:00', lida: false }
+      { icon: 'ðŸ“‹', ib: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', titulo: 'Nova Demanda Corporativa', msg: 'A Empresa Alpha Lda. registou uma nova solicitação de recrutamento de TI.', data: '21/09/2026 09:00', lida: false },
+      { icon: 'ðŸŽ“', ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', titulo: 'Nova Matrícula na Academy', msg: 'Pedro Alves matriculou-se em Cibersegurança e Proteção de Dados.', data: '21/09/2026 08:45', lida: false },
+      { icon: 'ðŸ›’', ib: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', titulo: 'Novo Pedido Loja #154', msg: 'Inov Quimua solicitou compra corporativa de 10 notebooks ThinkPad.', data: '21/09/2026 08:30', lida: false },
+      { icon: 'âš ï¸', ib: 'bg-yellow-50 text-yellow-600 dark:bg-yellow-500/10 dark:text-yellow-400', titulo: 'Alerta de Stock Mínimo', msg: 'Monitor LG 27" ” restam apenas 3 unidades no stock central.', data: '20/09/2026 18:00', lida: false }
     ]
   };
 }

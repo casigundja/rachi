@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -398,7 +398,7 @@
                     <picture class="flex items-center">
                         <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                         <img src="/images/areas/rachi-human-capital.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
                              alt="RACHI Human Capital" 
                              class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
@@ -1055,7 +1055,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
                             <img src="/images/areas/rachi-human-capital.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-human-capital.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
                                  alt="RACHI Human Capital" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(255,255,255,0.35)] group-hover:scale-105 transition-all">
                         </picture>
@@ -1081,6 +1081,7 @@
                         <li><a href="#servicos-capital" class="hover:text-slate-900 dark:hover:text-white transition">Os nossos serviços</a></li>
                         <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Sobre a RACHI</a></li>
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Contacto</a></li>
+                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition">Reclamações e Denúncia</a></li>
                     </ul>
                 </div>
                 <div>

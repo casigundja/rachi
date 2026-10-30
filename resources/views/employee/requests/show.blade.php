@@ -18,7 +18,7 @@
     </a>
     <a href="{{ route('employee.stock') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
         <i data-lucide="boxes" class="w-5 h-5"></i>
-        <span>Controle de Estoque</span>
+        <span>Controlo de Stock</span>
     </a>
 @endsection
 
@@ -28,7 +28,7 @@
 @endsection
 
 @section('page-title')
-    Gerenciar Solicitação <span class="font-mono text-amber-600">#{{ $request->protocol }}</span>
+    Gerir Solicitação <span class="font-mono text-amber-600">#{{ $request->protocol }}</span>
 @endsection
 
 @section('page-actions')
@@ -197,7 +197,7 @@
                 </div>
                 <div class="flex justify-end gap-3">
                     <button type="button" @click="showStatusModal = false" class="px-4 py-2 border rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-bold">Salvar Estado</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-bold">Guardar Estado</button>
                 </div>
             </form>
         </div>

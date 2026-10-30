@@ -403,18 +403,18 @@ class BusinessUnitController extends Controller
                     'Classificação, conferência e lançamento sistemático de documentos',
                     'Apuramento e submissão mensal das declarações de IVA e IRT',
                     'Emissão de balancetes mensais analíticos e mapas de exploração',
-                    'Reconciliação bancária periódica e controle de amortizações',
+                    'Reconciliação bancária periódica e controlo de amortizações',
                     'Preparação de Relatório de Gestão e Contas Anual para a AGT',
                     'Assinatura técnica por Perito Contabilista habilitado'
                 ],
                 'steps' => [
-                    ['num' => '01', 'title' => 'Recolha Documental', 'desc' => 'Organização e classificação de faturas de compras, vendas, extratos e recibos.'],
+                    ['num' => '01', 'title' => 'Recolha Documental', 'desc' => 'Organização e classificação de facturas de compras, vendas, extratos e recibos.'],
                     ['num' => '02', 'title' => 'Lançamento & Reconciliação', 'desc' => 'Escrituração no software certificado e reconciliação bancária minuciosa.'],
                     ['num' => '03', 'title' => 'Obrigações Fiscais (AGT)', 'desc' => 'Cálculo de IVA, IRT, Imposto do Selo e retenções na fonte com submissão tempestiva.'],
                     ['num' => '04', 'title' => 'Relatórios de Gestão', 'desc' => 'Disponibilização de balancetes mensais e demonstrações de resultados para a diretoria.']
                 ],
                 'plans' => [
-                    ['name' => 'Microempresa (Simplificado)', 'price' => '95.000 Kz', 'period' => '/mês', 'desc' => 'Para empresas até 5 colaboradores com volume moderado de faturação.', 'popular' => false, 'features' => ['Classificação e lançamento de faturas', 'Apuramento de impostos mensais', 'Balancete trimestral', 'Suporte fiscal por email/WhatsApp']],
+                    ['name' => 'Microempresa (Simplificado)', 'price' => '95.000 Kz', 'period' => '/mês', 'desc' => 'Para empresas até 5 colaboradores com volume moderado de facturação.', 'popular' => false, 'features' => ['Classificação e lançamento de facturas', 'Apuramento de impostos mensais', 'Balancete trimestral', 'Suporte fiscal por email/WhatsApp']],
                     ['name' => 'PME (Regime Geral - IVA)', 'price' => '180.000 Kz', 'period' => '/mês', 'desc' => 'Apuramento periódico de IVA, balancetes mensais analíticos e fecho anual de contas.', 'popular' => true, 'features' => ['Declaração periódica de IVA', 'Submissão de mapa de amortizações', 'Balancetes mensais analíticos', 'Dossier fiscal completo para a AGT', 'Assinatura por Perito Contabilista']],
                     ['name' => 'Reconstrução de Contabilidade', 'price' => '350.000 Kz', 'period' => 'por exercício fiscal', 'desc' => 'Regularização e fecho de exercícios contabilísticos em atraso com auditoria prévia.', 'popular' => false, 'features' => ['Auditoria documental de exercícios passados', 'Reconstrução integral da escrita', 'Retificação de declarações fiscais', 'Emissão do Relatório e Contas']]
                 ],
@@ -451,13 +451,13 @@ class BusinessUnitController extends Controller
                 ],
                 'steps' => [
                     ['num' => '01', 'title' => 'Reunião de Documentos', 'desc' => 'Coleta da certidão comercial, NIF e BI dos trabalhadores e sócios-gerentes.'],
-                    ['num' => '02', 'title' => 'Inscrição da Entidade', 'desc' => 'Cadastro formal da entidade empregadora e validação nos serviços do INSS.'],
-                    ['num' => '03', 'title' => 'Cadastro dos Trabalhadores', 'desc' => 'Inscrição individual de cada colaborador e geração do número de segurado.'],
+                    ['num' => '02', 'title' => 'Inscrição da Entidade', 'desc' => 'Registo formal da entidade empregadora e validação nos serviços do INSS.'],
+                    ['num' => '03', 'title' => 'Registo dos Trabalhadores', 'desc' => 'Inscrição individual de cada colaborador e geração do número de segurado.'],
                     ['num' => '04', 'title' => 'Emissão de Guias & Certidão', 'desc' => 'Processamento da folha inicial de remunerações e obtenção da certidão de quitação.']
                 ],
                 'plans' => [
                     ['name' => 'Inscrição Inicial (até 5 trabalhadores)', 'price' => '65.000 Kz', 'period' => 'taxa única', 'desc' => 'Inscrição da empresa e primeiro lote de trabalhadores no INSS.', 'popular' => false, 'features' => ['Número de contribuinte da empresa', 'Inscrição de até 5 colaboradores', 'Acesso ao portal digital do INSS', 'Emissão da 1ª guia de pagamento']],
-                    ['name' => 'Inscrição Corporativa (até 20 colaboradores)', 'price' => '110.000 Kz', 'period' => 'taxa única', 'desc' => 'Cadastro massivo com conferência de documentação individual e emissão de cartões.', 'popular' => true, 'features' => ['Inscrição de até 20 funcionários', 'Regularização de pendências cadastrais', 'Parametrização no portal do INSS', 'Certidão de Não Devedor incluída']],
+                    ['name' => 'Inscrição Corporativa (até 20 colaboradores)', 'price' => '110.000 Kz', 'period' => 'taxa única', 'desc' => 'Registo massivo com conferência de documentação individual e emissão de cartões.', 'popular' => true, 'features' => ['Inscrição de até 20 funcionários', 'Regularização de pendências de registo', 'Parametrização no portal do INSS', 'Certidão de Não Devedor incluída']],
                     ['name' => 'Gestão Mensal de Guias & Folhas', 'price' => '45.000 Kz', 'period' => '/mês', 'desc' => 'Submissão mensal das declarações de remunerações e guias de pagamento.', 'popular' => false, 'features' => ['Submissão da folha mensal de salários', 'Geração pontual da guia de 11%', 'Tratamento de admissões e baixas', 'Acompanhamento de benefícios dos trabalhadores']]
                 ],
                 'whatsapp_msg' => 'Olá! Preciso de apoio para o Registo e Regularização no INSS com a RACHI Human Capital.'
@@ -621,7 +621,7 @@ class BusinessUnitController extends Controller
                     'Desenho da nova rotina digital sem necessidade de impressões ou deslocações físicas',
                     'Criação de formulários eletrónicos dinâmicos com validação automática de dados',
                     'Fluxos de aprovação automáticos com notificações em tempo real para gestores',
-                    'Repositório centralizado e seguro na nuvem com controle de permissões e histórico',
+                    'Repositório centralizado e seguro na nuvem com controlo de permissões e histórico',
                     'Formação prática de utilizadores com elaboração de guia passo a passo'
                 ],
                 'steps' => [
@@ -631,8 +631,8 @@ class BusinessUnitController extends Controller
                     ['num' => '04', 'title' => 'Testes & Virada', 'desc' => 'Simulação prática com utilizadores, formação da equipa e entrada em produção.']
                 ],
                 'plans' => [
-                    ['name' => 'Automação de Fluxo Único', 'price' => '140.000 Kz', 'period' => 'projeto base', 'desc' => 'Digitalização de 1 processo crítico (ex: requisições de compras, pedidos de férias ou despesas).', 'popular' => false, 'features' => ['Mapeamento de 1 fluxo de ponta a ponta', 'Formulário digital com aprovação', 'Notificações automáticas por email', 'Treinamento de utilizadores']],
-                    ['name' => 'Pacote Operacional Integrado', 'price' => '280.000 Kz', 'period' => 'projeto base', 'desc' => 'Digitalização de até 3 processos vitais da rotina da sua empresa.', 'popular' => true, 'features' => ['Até 3 fluxos automatizados integrados', 'Repositório digital com controle de acesso', 'Dashboard de status das solicitações', 'Regras avançadas de aprovação', 'Suporte assistido por 60 dias']],
+                    ['name' => 'Automação de Fluxo Único', 'price' => '140.000 Kz', 'period' => 'projeto base', 'desc' => 'Digitalização de 1 processo crítico (ex: requisições de compras, pedidos de férias ou despesas).', 'popular' => false, 'features' => ['Mapeamento de 1 fluxo de ponta a ponta', 'Formulário digital com aprovação', 'Notificações automáticas por email', 'Formação de utilizadores']],
+                    ['name' => 'Pacote Operacional Integrado', 'price' => '280.000 Kz', 'period' => 'projeto base', 'desc' => 'Digitalização de até 3 processos vitais da rotina da sua empresa.', 'popular' => true, 'features' => ['Até 3 fluxos automatizados integrados', 'Repositório digital com controlo de acesso', 'Dashboard de status das solicitações', 'Regras avançadas de aprovação', 'Suporte assistido por 60 dias']],
                     ['name' => 'Transformação Corporativa 360°', 'price' => 'Sob Cotação', 'period' => 'projeto corporativo', 'desc' => 'Eliminação total de papel e digitalização de todos os departamentos da empresa.', 'popular' => false, 'features' => ['Mapeamento empresarial completo', 'Integração com sistemas ERP existentes', 'Fluxos com assinatura eletrónica', 'SLA corporativo dedicado']]
                 ],
                 'whatsapp_msg' => 'Olá! Tenho interesse em digitalizar e automatizar os processos da minha empresa com a RACHI Tec.'
@@ -644,15 +644,15 @@ class BusinessUnitController extends Controller
                 'tag' => '04 • ERP & GESTÃO',
                 'title' => 'Implementação de sistemas de gestão',
                 'short_desc' => 'Implementação e configuração de sistemas de gestão adaptados à realidade da sua empresa.',
-                'full_desc' => 'Implementamos sistemas de gestão comercial e ERP adaptados às exigências legais e fiscais de Angola. Faturação certificada pela AGT com emissão de QR Code e ficheiro SAF-T, controle rigoroso de estoques, contas correntes, tesouraria e formação presencial da sua equipa.',
+                'full_desc' => 'Implementamos sistemas de gestão comercial e ERP adaptados às exigências legais e fiscais de Angola. Faturação certificada pela AGT com emissão de QR Code e ficheiro SAF-T, controlo rigoroso de stocks, contas correntes, tesouraria e formação presencial da sua equipa.',
                 'icon' => 'database',
                 'image' => 'images/services/service-implementacao-sistemas-gestao.jpg',
                 'color' => 'emerald',
                 'starting_price' => '160.000 Kz',
-                'price_period' => 'implantação base',
+                'price_period' => 'implementação base',
                 'cta_label' => 'Implementar Sistema',
                 'prazo' => '15 a 45 dias úteis',
-                'garantia' => 'Faturação 100% conforme regras da AGT com suporte no 1º fecho',
+                'garantia' => 'Facturação 100% conforme regras da AGT com suporte no 1º fecho',
                 'bullets' => [
                     'Sistemas sob medida',
                     'Integração com processos actuais',
@@ -660,24 +660,24 @@ class BusinessUnitController extends Controller
                 ],
                 'includes' => [
                     'Instalação e parametrização do software de gestão conforme o regime fiscal da empresa',
-                    'Configuração do módulo de Faturação Certificada pela AGT (QR Code e ficheiro SAF-T)',
+                    'Configuração do módulo de Facturação Certificada pela AGT (QR Code e ficheiro SAF-T)',
                     'Configuração de controlo de stocks, preços, clientes, fornecedores e tesouraria',
-                    'Importação e higienização dos cadastros históricos de artigos e clientes',
+                    'Importação e higienização dos registos históricos de artigos e clientes',
                     'Perfis de acesso personalizados para vendedores, operadores de caixa e gerentes',
                     'Formação prática presencial/remota e acompanhamento presencial no primeiro dia de uso'
                 ],
                 'steps' => [
                     ['num' => '01', 'title' => 'Levantamento Fiscal & Operacional', 'desc' => 'Compreensão das regras de tributação (IVA, retenções) e categorias de produtos/serviços.'],
-                    ['num' => '02', 'title' => 'Parametrização & Cadastros', 'desc' => 'Configuração completa do sistema e importação dos dados iniciais da empresa.'],
-                    ['num' => '03', 'title' => 'Formação & Homologação', 'desc' => 'Capacitação prática dos operadores, testes de emissão de faturas e notas de crédito.'],
+                    ['num' => '02', 'title' => 'Parametrização & Registos', 'desc' => 'Configuração completa do sistema e importação dos dados iniciais da empresa.'],
+                    ['num' => '03', 'title' => 'Formação & Homologação', 'desc' => 'Capacitação prática dos operadores, testes de emissão de facturas e notas de crédito.'],
                     ['num' => '04', 'title' => 'Entrada em Produção', 'desc' => 'Início oficial da operação com assistência técnica dedicada em tempo real.']
                 ],
                 'plans' => [
-                    ['name' => 'Faturação Essencial AGT', 'price' => '160.000 Kz', 'period' => 'implantação base', 'desc' => 'Para estabelecimentos comerciais e prestadores de serviços que necessitam de faturação legal rápida.', 'popular' => false, 'features' => ['Software certificado pela AGT', 'Emissão de faturas, recibos e guias', 'Configuração de impressora térmica ou A4', 'Geração de ficheiro SAF-T mensal', 'Treinamento de operadores']],
-                    ['name' => 'Gestão Comercial & Estoques', 'price' => '320.000 Kz', 'period' => 'implantação base', 'desc' => 'Controlo completo de vendas, stocks múltiplos, caixa diário e contas correntes.', 'popular' => true, 'features' => ['Todos os recursos de Faturação AGT', 'Gestão multi-armazém e inventário', 'Contas a receber, a pagar e tesouraria', 'Relatórios financeiros e lucratividade', 'Suporte prioritário no primeiro fecho']],
+                    ['name' => 'Facturação Essencial AGT', 'price' => '160.000 Kz', 'period' => 'implementação base', 'desc' => 'Para estabelecimentos comerciais e prestadores de serviços que necessitam de facturação legal rápida.', 'popular' => false, 'features' => ['Software certificado pela AGT', 'Emissão de faturas, recibos e guias', 'Configuração de impressora térmica ou A4', 'Geração de ficheiro SAF-T mensal', 'Formação de operadores']],
+                    ['name' => 'Gestão Comercial & Stocks', 'price' => '320.000 Kz', 'period' => 'implementação base', 'desc' => 'Controlo completo de vendas, stocks múltiplos, caixa diário e contas correntes.', 'popular' => true, 'features' => ['Todos os recursos de Facturação AGT', 'Gestão multi-armazém e inventário', 'Contas a receber, a pagar e tesouraria', 'Relatórios financeiros e rentabilidade', 'Suporte prioritário no primeiro fecho']],
                     ['name' => 'ERP Corporativo Avançado', 'price' => 'Sob Cotação', 'period' => 'implantação sob medida', 'desc' => 'Para médias e grandes empresas com múltiplas sucursais, produção ou departamentos integrados.', 'popular' => false, 'features' => ['Múltiplas lojas interligadas em tempo real', 'Módulo de Recursos Humanos / Salários', 'Contabilidade geral integrada', 'Desenvolvimento de relatórios customizados', 'SLA de manutenção VIP']]
                 ],
-                'whatsapp_msg' => 'Olá! Gostaria de solicitar informações sobre a Implementação de Sistema de Gestão / Faturação AGT com a RACHI Tec.'
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar informações sobre a Implementação de Sistema de Gestão / Facturação AGT com a RACHI Tec.'
             ],
             [
                 'id' => 5,
@@ -727,6 +727,114 @@ class BusinessUnitController extends Controller
     public static function getPrintServices(): array
     {
         return [
+            [
+                'id' => 5,
+                'slug' => 'design-identidade-visual',
+                'num' => '05',
+                'tag' => 'BRANDING & IDENTIDADE VISUAL',
+                'title' => 'Design de Identidade Visual & Branding',
+                'short_desc' => 'Criação de logótipos exclusivos, rebranding corporativo, Manual de Identidade Visual (Brandbook) e universo gráfico institucional.',
+                'full_desc' => 'Desenvolvemos sistemas de identidade visual completos, estratégicos e intemporais para novas empresas e organizações em fase de modernização (rebranding). Da concepção geométrica do logótipo e definição de escalas cromáticas Pantone, CMYK e RGB à criação do Manual de Normas Gráficas (Brandbook), estacionário executivo, templates digitais e desdobramento visual para todos os suportes físicos e digitais.',
+                'icon' => 'palette',
+                'image' => 'images/services/service-print-identidade-branding.jpg',
+                'color' => 'amber',
+                'starting_price' => '120.000 Kz',
+                'price_period' => 'projecto completo de marca',
+                'cta_label' => 'Solicitar Proposta de Branding',
+                'prazo' => '5 a 12 dias úteis (conforme pacote)',
+                'garantia' => 'Entrega de ficheiros abertos vectoriais (AI, EPS, PDF, SVG, PNG) & cessão de direitos',
+                'bullets' => [
+                    'Criação de logótipo original com grelha construtiva',
+                    'Manual de Normas Gráficas (Brandbook) completo',
+                    'Estacionário, Kit Redes Sociais e Apresentações'
+                ],
+                'applications' => 'Criação de Marca do Zero, Rebranding Corporativo, Manual de Identidade Visual, Papelaria Executiva, Assinaturas de E-mail, Templates Social Media e Pitch Decks.',
+                'includes' => [
+                    'Diagnóstico de posicionamento de marca, estudo de mercado e referências estratégicas',
+                    'Apresentação de propostas conceptuais de logótipo com simulações reais (mockups 3D)',
+                    'Definição técnica de paleta cromática oficial nas escalas Pantone, CMYK, RGB e HEX',
+                    'Selecção de família tipográfica principal e secundária para documentos e plataformas digitais',
+                    'Manual de Normas Gráficas (Brandbook) com regras de redução, área de protecção e usos incorrectos',
+                    'Pacote completo de ficheiros vectoriais editáveis e prontos para gráfica e web (AI, PDF/X-1a, SVG, PNG)'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Briefing & Diagnóstico Estratégico', 'desc' => 'Imersão na essência do negócio, público-alvo, valores institucionais e objectivos de posicionamento.'],
+                    ['num' => '02', 'title' => 'Concepção Criativa & Grelha', 'desc' => 'Desenho vectorial de conceitos exclusivos, tipografia e sistema de cores com rigor geométrico.'],
+                    ['num' => '03', 'title' => 'Apresentação em Mockups Reais', 'desc' => 'Visualização da marca aplicada em papelaria, fachadas, viaturas, vestuário e ambiente digital.'],
+                    ['num' => '04', 'title' => 'Brandbook & Fecho de Ficheiros', 'desc' => 'Consolidação do Manual de Identidade Visual e entrega de todos os activos prontos para produção.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Identidade Essencial / Startup',
+                        'price' => '120.000 Kz',
+                        'period' => 'pacote de arranque de marca',
+                        'desc' => 'Ideal para novas empresas que precisam nascer com uma marca profissional, forte e credível.',
+                        'popular' => false,
+                        'features' => ['2 propostas exclusivas de logótipo', 'Guia rápido de cores (CMYK/RGB/HEX) e tipografia', 'Design de cartão de visita, papel timbrado e assinatura de e-mail', 'Entrega de todos os ficheiros vectoriais e PNG fundo transparente']
+                    ],
+                    [
+                        'name' => 'Branding Corporativo & Brandbook',
+                        'price' => '245.000 Kz',
+                        'period' => 'sistema completo de marca',
+                        'desc' => 'Solução completa de identidade visual institucional com manual técnico e estacionário completo.',
+                        'popular' => true,
+                        'features' => ['3 propostas conceptuais de marca ou rebranding', 'Manual de Identidade Visual (Brandbook) completo (25+ páginas)', 'Design de papelaria completa (cartão, pasta, envelope, timbrado, crachá)', 'Kit Redes Sociais (perfil, capas e 6 templates editáveis)', 'Arte de apresentação institucional (PowerPoint / PDF)']
+                    ],
+                    [
+                        'name' => 'Rebranding 360º & Arquitectura de Marca',
+                        'price' => 'Sob Cotação',
+                        'period' => 'grupos empresariais & submarcas',
+                        'desc' => 'Para grupos económicos, holdings ou empresas com múltiplas unidades de negócio e pontos físicos.',
+                        'popular' => false,
+                        'features' => ['Arquitectura de marca-mãe e submarcas (unidades de negócio)', 'Projecto visual de sinalética interna, fachada e frota', 'Design de linha de vestuário corporativo e kits VIP', 'Acompanhamento de produção gráfica dos primeiros lotes']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Manual de Identidade Visual (Brandbook)',
+                        'image' => 'images/services/service-print-identidade-branding.jpg',
+                        'tag' => 'Normas Gráficas & Pantone',
+                        'desc' => 'Documento técnico oficial que padroniza a construção geométrica da marca, versões cromáticas, tipografia, margens de segurança e aplicações.',
+                        'specs' => ['Formato: PDF interactivo + versão impressa opcional', 'Escalas de Cor: Pantone Solid Coated, CMYK, RGB e HEX', 'Regras: Grelha construtiva, redução mínima e fundos', 'Activos: Biblioteca vectorial AI, EPS, SVG e PNG HD']
+                    ],
+                    [
+                        'name' => 'Design de Estacionário & Papelaria Corporativa',
+                        'image' => 'images/portfolio-print/papelaria-corporativa.jpg',
+                        'tag' => 'Identidade Institucional',
+                        'desc' => 'Desenvolvimento coordenado de toda a linha de expediente: cartões de visita, pastas executivas, envelopes, papel timbrado, agendas e blocos.',
+                        'specs' => ['Peças: Cartão, Pasta A4, Papel Timbrado, Envelope DL/C4 e Bloco', 'Ficheiros: Fechados em PDF/X-1a prontos para impressão offset', 'Acabamentos: Máscaras técnicas para Verniz UV e Hot-Stamping', 'Padronização: Alinhamento absoluto às cores da marca']
+                    ],
+                    [
+                        'name' => 'Projecto Visual de Sinalética & Recepção',
+                        'image' => 'images/portfolio-print/sinaletica-fachada-recepcao.jpg',
+                        'tag' => 'Branding Ambiental & 3D',
+                        'desc' => 'Desdobramento da identidade visual para fachadas externas, recepção corporativa retroiluminada, placas direccionais, vidros e wall graphics.',
+                        'specs' => ['Ambientes: Fachada comercial, lobby, salas de reunião e corredores', 'Simulação: Fotomontagem realista em escala arquitectónica', 'Materiais: Especificação de ACM, acrílico, inox, LED e vinil jateado', 'Execução: Produção e instalação pela equipa RACHI Print']
+                    ],
+                    [
+                        'name' => 'Ecossistema de Merchandising & Submarcas',
+                        'image' => 'images/portfolio-print/kit-merchandising-completo.jpg',
+                        'tag' => 'Universo Visual 360º',
+                        'desc' => 'Criação de linguagem gráfica proprietária (grafismos, ícones e padrões) aplicada a kits promocionais, sacolas, vestuário e brindes.',
+                        'specs' => ['Elementos: Ícones proprietários, padrões geométricos e selos', 'Aplicações: Vestuário, tote bags, canecas, crachás e cadernos', 'Coerência: Unidade visual em todos os pontos de contacto', 'Guias: Cotas exactas para serigrafia, bordado e laser']
+                    ],
+                    [
+                        'name' => 'Design de Frotas, Outdoors & Campanha Externa',
+                        'image' => 'images/portfolio-print/comunicacao-externa-frotas.jpg',
+                        'tag' => 'Comunicação de Alto Impacto',
+                        'desc' => 'Layout técnico para envelopamento de viaturas comerciais, lonas publicitárias, outdoors de rodovia e mobiliário urbano (MUPIs).',
+                        'specs' => ['Viaturas: Planificação lateral, traseira e capô à escala real', 'Mídia Exterior: Artes em alta resolução para Outdoor e MUPI', 'Legibilidade: Hierarquia tipográfica optimizada para leitura rápida', 'Arte-Final: Pronta para impressão solvente/UV de grande formato']
+                    ],
+                    [
+                        'name' => 'Identidade para Academias, Eventos & Kits VIP',
+                        'image' => 'images/portfolio-print/kit-formacao-academy.jpg',
+                        'tag' => 'Submarcas & Certificações',
+                        'desc' => 'Identidade dedicada para programas corporativos, academias de formação, certificados oficiais, credenciais, manuais e kits executivos.',
+                        'specs' => ['Peças: Certificados, crachás PVC, manuais, roll-ups e painéis', 'Segurança: Selos institucionais e chancelas vectoriais', 'Apresentação: Templates editáveis para formadores e gestores', 'Flexibilidade: Adaptável a eventos anuais e conferências']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar uma proposta para Design de Identidade Visual / Branding na RACHI Print.'
+            ],
             [
                 'id' => 1,
                 'slug' => 'documentos-institucionais',
@@ -863,7 +971,7 @@ class BusinessUnitController extends Controller
                     'Catálogo alargado com opções ecológicas (cortiça, bambu), metálicas e tecidos respiráveis',
                     'Composição e personalização de caixas rígidas personalizadas para kits onboarding VIP',
                     'Controlo de qualidade minucioso e teste de abrasão nas gravações antes da embalagem final',
-                    'Emissão de fatura comercial com dedução de IVA e entrega corporativa direta'
+                    'Emissão de factura comercial com dedução de IVA e entrega corporativa direta'
                 ],
                 'steps' => [
                     ['num' => '01', 'title' => 'Escolha do Item no Catálogo', 'desc' => 'Selecione os artigos promocionais pretendidos, quantidade e paleta de cores corporativa.'],
@@ -1002,7 +1110,7 @@ class BusinessUnitController extends Controller
                         'period' => 'contrato corporativo com reposição',
                         'desc' => 'Abastecimento contínuo para bancos, seguradoras, petrolíferas e órgãos públicos.',
                         'popular' => false,
-                        'features' => ['Produção em grande escala com desconto de volume', 'Garantia de reposição de stock em 48h úteis', 'Linha de atendimento corporativo dedicada', 'Faturação com prazos de crédito negociados']
+                        'features' => ['Produção em grande escala com desconto de volume', 'Garantia de reposição de stock em 48h úteis', 'Linha de atendimento corporativo dedicada', 'Facturação com prazos de crédito negociados']
                     ]
                 ],
                 'products' => [
@@ -1036,14 +1144,14 @@ class BusinessUnitController extends Controller
                     ],
                     [
                         'name' => 'Decoração de Frotas, Outdoors & MUPIs',
-                        'image' => 'images/Produção gráfica corporativa/WhatsApp Image 2026-10-06 at 21.17.41 (4).jpeg',
+                        'image' => 'images/portfolio-print/comunicacao-externa-frotas.jpg',
                         'tag' => 'Viaturas, Lonas & MUPIs',
                         'desc' => 'Vinil automotivo de alta conformabilidade para frotas de carrinhas, lonas com ilhós de grande resistência, painéis de outdoor e MUPIs urbanos.',
                         'specs' => ['Vinil: Automotivo polimérico com laminação UV anti-risco', 'Remoção: Sem resíduos nem danos na pintura original', 'Impressão: Tintas solventes resistentes a sol e intempéries', 'Garantia: Durabilidade de 2 a 5 anos']
                     ],
                     [
                         'name' => 'Bonés Corporativos Trucker Premium',
-                        'image' => 'images/Produção gráfica corporativa/WhatsApp Image 2026-10-06 at 21.23.39 (3).jpeg',
+                        'image' => 'images/portfolio-print/bones-corporativos-rachi.jpg',
                         'tag' => 'Rede Respirável 4 Cores',
                         'desc' => 'Bonés respiráveis tipo trucker com rede traseira e estampagem nítida do logótipo institucional em 4 opções de cores (Branco, Preto, Azul e Amarelo).',
                         'specs' => ['Modelo: Trucker com fecho ajustável snapback', 'Frente: Sarja acolchoada estruturada', 'Traseira: Rede mesh respirável de alto conforto', 'Personalização: Bordado 3D ou patch emborrachado']
@@ -1172,7 +1280,268 @@ class BusinessUnitController extends Controller
                     ]
                 ],
                 'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Produção Gráfica de Eventos e Sinalética da RACHI Print.'
-            ]
+            ],
+            [
+                'id' => 6,
+                'slug' => 'embalagens-cartonagem-rotulos',
+                'num' => '06',
+                'tag' => 'EMBALAGENS, CARTONAGEM & RÓTULOS',
+                'title' => 'Embalagens, Cartonagem, Sacolas & Rótulos',
+                'short_desc' => 'Produção de embalagens em cartonagem, caixas rígidas personalizadas, sacolas corporativas e rótulos adesivos em alta definição.',
+                'full_desc' => 'Valorize a apresentação e protecção dos seus produtos e presentes institucionais com soluções de embalagem sob medida. Produzimos caixas em cartonagem estruturada, caixas rígidas magnéticas de luxo, sacolas personalizadas em papel couché ou kraft com alças em cordão trançado, além de rótulos adesivos resistentes à humidade, etiquetas em bobina e selos de garantia.',
+                'icon' => 'package',
+                'image' => 'images/services/service-print-embalagens-rotulos.jpg',
+                'color' => 'amber',
+                'starting_price' => '35.000 Kz',
+                'price_period' => 'preço base por lote',
+                'cta_label' => 'Solicitar Cotação de Embalagens',
+                'prazo' => '4 a 8 dias úteis (conforme faca e tiragem)',
+                'garantia' => 'Protótipo / faca técnica validada antes da produção em série',
+                'bullets' => [
+                    'Caixas em cartonagem e caixas rígidas magnéticas VIP',
+                    'Sacolas personalizadas em couché plastificado ou kraft',
+                    'Rótulos adesivos em vinil/BOPP, etiquetas e selos'
+                ],
+                'applications' => 'Caixas de Produto, Caixas Rígidas para Kits VIP, Sacolas de Loja e Eventos, Cintas (Sleeves), Rótulos de Bebidas/Cosméticos/Alimentos e Selos de Segurança.',
+                'includes' => [
+                    'Desenvolvimento da planta técnica (faca de corte e vinco) ajustada às dimensões exactas do produto',
+                    'Cartolinas triplex, papel kraft natural e cartão rígido empastado de elevada resistência mecânica',
+                    'Acabamentos premium: plastificação mate/brilho, Soft-Touch, Hot-Stamping dourado/prateado e verniz UV',
+                    'Sacolas reforçadas no fundo e nas dobras com ilhós metálicos e cordão de nylon, algodão ou fita de cetim',
+                    'Impressão de rótulos e etiquetas em vinil branco, transparente ou metalizado com meio-corte electrónico',
+                    'Controlo rigoroso de colagem, vinco e resistência para transporte e exposição em ponto de venda'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Medidas & Estrutura da Embalagem', 'desc' => 'Definimos as dimensões internas, peso do produto a acondicionar, tipo de cartão e acabamento.'],
+                    ['num' => '02', 'title' => 'Planta Técnica (Faca) & Mockup', 'desc' => 'Criamos a planificação da faca com a arte aplicada para validação visual antes do corte.'],
+                    ['num' => '03', 'title' => 'Impressão, Laminação & Troquelagem', 'desc' => 'Impressão de alta definição seguida de plastificação, corte e vinco de precisão milimétrica.'],
+                    ['num' => '04', 'title' => 'Montagem, Colagem & Entrega', 'desc' => 'Acabamento manual ou automático, colocação de cordões/berços e entrega acondicionada.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Rótulos, Etiquetas & Selos Adesivos',
+                        'price' => '18.000 Kz',
+                        'period' => 'lote inicial personalizado',
+                        'desc' => 'Ideal para rotulagem de produtos comerciais, frascos, caixas de envio e selos de fecho.',
+                        'popular' => false,
+                        'features' => ['Impressão HD em vinil resistente à água ou papel couché adesivo', 'Recorte electrónico em qualquer formato (redondo, oval, especial)', 'Opção transparente, branco brilho, mate ou metalizado', 'Entrega em cartelas prontas a destacar ou bobinas']
+                    ],
+                    [
+                        'name' => 'Sacolas Corporativas & Cartonagem',
+                        'price' => '65.000 Kz',
+                        'period' => 'lote institucional (50 a 100 un.)',
+                        'desc' => 'Sacolas elegantes e embalagens dobráveis para eventos, lojas, brindes e entregas executivas.',
+                        'popular' => true,
+                        'features' => ['Papel Couché 250g laminado mate/brilho ou Kraft 200g', 'Reforço estrutural na base e na aba das alças', 'Alças em cordão trançado ou fita acetinada coordenada', 'Opção de verniz UV localizado no logótipo']
+                    ],
+                    [
+                        'name' => 'Caixas Rígidas VIP & Linha Industrial',
+                        'price' => 'Sob Cotação',
+                        'period' => 'projecto sob medida',
+                        'desc' => 'Caixas rígidas com fecho magnético e berço interno ou grandes tiragens de cartonagem comercial.',
+                        'popular' => false,
+                        'features' => ['Cartão rígido 2mm empastado com toque aveludado Soft-Touch', 'Berço interior em espuma EVA recortada à medida dos itens', 'Hot-Stamping metálico ou baixo-relevo na tampa', 'Condições especiais para grandes tiragens comerciais']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Caixas Rígidas Magnéticas & Cartonagem VIP',
+                        'image' => 'images/services/service-print-embalagens-rotulos.jpg',
+                        'tag' => 'Fecho Magnético & Hot-Stamping',
+                        'desc' => 'Caixas estruturadas rígidas em cartão empastado para kits executivos, lançamentos de produtos e presentes institucionais de alto prestígio.',
+                        'specs' => ['Estrutura: Cartão rígido 2.0mm a 2.5mm forrado', 'Fecho: Íman oculto na pala frontal ou tampa e fundo', 'Interior: Berço em EVA ou cartão moldado sob medida', 'Acabamento: Soft-Touch + Hot-Stamping dourado/prateado']
+                    ],
+                    [
+                        'name' => 'Sacolas Corporativas de Luxo & Kraft',
+                        'image' => 'images/portfolio-print/kit-corporativo-vip.jpg',
+                        'tag' => 'Cordão Trançado & Fundo Reforçado',
+                        'desc' => 'Sacolas institucionais personalizadas em múltiplos tamanhos para eventos, lojas, conferências e entrega de propostas e brindes.',
+                        'specs' => ['Papel: Couché 250g plastificado ou Kraft natural', 'Alças: Cordão sintético, algodão torcido ou fita gorgurão', 'Acabamento: Ilhós metálicos opcionais e reforço de fundo', 'Formatos: Pequeno (brindes), Médio (A4) e Grande (kits)']
+                    ],
+                    [
+                        'name' => 'Rótulos em Vinil, BOPP & Etiquetas Adesivas',
+                        'image' => 'images/print-products/vinil-adesivo.png',
+                        'tag' => 'À Prova de Água & Recorte Especial',
+                        'desc' => 'Rótulos autocolantes de alta aderência para garrafas, cosméticos, produtos alimentares, embalagens logísticas e selos de autenticidade.',
+                        'specs' => ['Substrato: Vinil branco/transparente, BOPP ou Couché adesivo', 'Resistência: Impermeável, resistente a refrigeração e fricção', 'Corte: Meio-corte computadorizado em qualquer contorno', 'Fornecimento: Cartelas planas ou rolos/bobinas']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Embalagens, Cartonagem, Sacolas ou Rótulos na RACHI Print.'
+            ],
+            [
+                'id' => 7,
+                'slug' => 'vestuario-bordados-textil',
+                'num' => '07',
+                'tag' => 'VESTUÁRIO CORPORATIVO & BORDADOS',
+                'title' => 'Vestuário Corporativo, Bordados & Estampagem',
+                'short_desc' => 'Polos, camisas sociais, coletes, t-shirts e bonés personalizados com bordado computadorizado, DTF têxtil e serigrafia.',
+                'full_desc' => 'Uniformize a sua equipa com conforto, durabilidade e apresentação impecável. Fornecemos e personalizamos vestuário corporativo e promocional — polos em malha piquet, camisas sociais executivas, coletes acolchoados e operacionais, t-shirts 100% algodão e bonés — utilizando bordado industrial computadorizado de alta densidade, transferência DTF e serigrafia.',
+                'icon' => 'shirt',
+                'image' => 'images/portfolio-print/prancha-vestuario-branding.jpg',
+                'color' => 'blue',
+                'starting_price' => '28.000 Kz',
+                'price_period' => 'lote inicial personalizado',
+                'cta_label' => 'Solicitar Cotação de Vestuário',
+                'prazo' => '3 a 7 dias úteis',
+                'garantia' => 'Costuras reforçadas, bordados que não desfiam e estampas resistentes à lavagem',
+                'bullets' => [
+                    'Polos piquet, camisas sociais e coletes bordados',
+                    'T-shirts promocionais em algodão com DTF ou serigrafia',
+                    'Bonés estruturados, sacos de pano (tote bags) e fitas'
+                ],
+                'applications' => 'Uniformes de Escritório e Atendimento, Equipas Técnicas e de Campo, Vestuário para Feiras e Campanhas, Kits de Integração de Colaboradores.',
+                'includes' => [
+                    'Programação de matriz de bordado (picotagem digital) para relevo e nitidez perfeitos do logótipo',
+                    'Tecidos seleccionados adequados ao clima de Angola: algodão penteado, piquet respirável e sarja',
+                    'Personalização em múltiplas posições: peito esquerdo, mangas, costas e gola',
+                    'Grade completa de tamanhos femininos e masculinos (S, M, L, XL, XXL e 3XL)',
+                    'Estampagem DTF sem limite de cores para logótipos com gradientes ou detalhes fotográficos',
+                    'Embalamento individual dobrado por tamanho para fácil distribuição interna'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Escolha das Peças & Grade', 'desc' => 'Selecção dos modelos (polos, camisas, t-shirts, coletes ou bonés), cores e tamanhos da equipa.'],
+                    ['num' => '02', 'title' => 'Layout Técnico & Posicionamento', 'desc' => 'Simulação digital exacta das dimensões e posições dos bordados ou estampas em cada peça.'],
+                    ['num' => '03', 'title' => 'Bordado / Estampagem Industrial', 'desc' => 'Execução em máquinas de bordar multicabeças ou prensas térmicas DTF/serigrafia calibradas.'],
+                    ['num' => '04', 'title' => 'Revisão & Entrega por Tamanhos', 'desc' => 'Controlo peça a peça, acabamento de linhas, passagem a vapor e entrega organizada.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Lote T-Shirts & Bonés de Campanha',
+                        'price' => '28.000 Kz',
+                        'period' => 'a partir de 10 unidades',
+                        'desc' => 'Excelente relação qualidade-preço para acções de marketing, activações de rua e eventos.',
+                        'popular' => false,
+                        'features' => ['T-shirts 100% algodão macio ou Dry-Fit desportivo', 'Estampagem frontal e costas em DTF HD ou serigrafia', 'Opção de bonés personalizados coordenados', 'Entrega rápida para eventos']
+                    ],
+                    [
+                        'name' => 'Uniformização Executiva (Polos & Camisas)',
+                        'price' => '95.000 Kz',
+                        'period' => 'pacote corporativo (15 a 25 peças)',
+                        'desc' => 'Apresentação institucional elegante para equipas comerciais, técnicas e administrativas.',
+                        'popular' => true,
+                        'features' => ['Polos em malha piquet de alta gramagem ou camisas Oxford', 'Bordado computadorizado no peito e na manga', 'Matriz de bordado gratuita incluída no pacote', 'Modelagem masculina e feminina do S ao XXL']
+                    ],
+                    [
+                        'name' => 'Fardamento Completo / Grandes Equipas',
+                        'price' => 'Sob Cotação',
+                        'period' => 'orçamento por escala',
+                        'desc' => 'Soluções completas de fardamento anual para médias e grandes empresas e operações.',
+                        'popular' => false,
+                        'features' => ['Combinação de camisas, polos, coletes acolchoados/operacionais e bonés', 'Amostra física prévia para aprovação da administração', 'Descontos progressivos para lotes acima de 50 unidades', 'Reposição garantida com a mesma matriz e padrão de cor']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Polos, Camisas Sociais & Coletes Executivos',
+                        'image' => 'images/portfolio-print/vestuario-corporativo.jpg',
+                        'tag' => 'Bordado Computadorizado HD',
+                        'desc' => 'Linha executiva de coletes acolchoados, polos piquet com detalhes contrastantes na gola, camisas sociais de manga comprida e t-shirts institucionais.',
+                        'specs' => ['Tecidos: Piquet 220g, Algodão Oxford e Microfibra acolchoada', 'Personalização: Bordado de alta densidade no peito e manga', 'Tamanhos: S, M, L, XL, XXL e 3XL', 'Durabilidade: Cores firmes que não desbotam']
+                    ],
+                    [
+                        'name' => 'Prancha Completa de Uniformização de Marca',
+                        'image' => 'images/portfolio-print/prancha-vestuario-branding.jpg',
+                        'tag' => 'Padronização Frente & Costas',
+                        'desc' => 'Sistema coordenado de fardamento frente e verso garantindo unidade visual entre equipas técnicas, comerciais e atendimento.',
+                        'specs' => ['Inclui: Colete, Polo, Camisa, T-Shirt e Boné', 'Aplicação: Logótipo frontal + assinatura institucional nas mangas/costas', 'Tecnologia: Combinação de bordado + DTF têxtil', 'Consultoria: Adequação à paleta oficial da empresa']
+                    ],
+                    [
+                        'name' => 'Bonés Corporativos Bordados & Trucker',
+                        'image' => 'images/portfolio-print/bones-corporativos-rachi.jpg',
+                        'tag' => '4 Cores Oficiais & Ajuste Snapback',
+                        'desc' => 'Bonés estruturados em sarja de algodão ou modelo trucker com rede respirável, personalizados com bordado 3D ou estampa de alta definição.',
+                        'specs' => ['Modelos: Americano 6 gomos em sarja ou Trucker com rede', 'Cores: Azul-marinho, Branco, Preto, Amarelo e cores sob encomenda', 'Fecho: Fivela metálica ajustável ou snapback', 'Personalização: Bordado frontal plano/3D ou DTF']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Vestuário Corporativo, Bordados e Estampagem na RACHI Print.'
+            ],
+            [
+                'id' => 8,
+                'slug' => 'sinaletica-comunicacao-visual',
+                'num' => '08',
+                'tag' => 'SINALÉTICA, LETRAS 3D & FROTAS',
+                'title' => 'Sinalética Corporativa, Letras 3D & Frotas',
+                'short_desc' => 'Fachadas em ACM, logótipos 3D retroiluminados para recepção, placas direccionais, películas jateadas, decoração de frotas e outdoors.',
+                'full_desc' => 'Transforme as instalações e viaturas da sua empresa em potentes activos de comunicação institucional. Projectamos, produzimos e instalamos letreiros 3D em acrílico, PVC expandido e aço inox com iluminação LED, revestimento de fachadas em ACM, placas direccionais internas, aplicação de vinil jateado em divisórias de vidro, decoração integral de frotas, lonas, outdoors e MUPIs.',
+                'icon' => 'building-2',
+                'image' => 'images/portfolio-print/sinaletica-fachada-recepcao.jpg',
+                'color' => 'emerald',
+                'starting_price' => '45.000 Kz',
+                'price_period' => 'projecto sob medida',
+                'cta_label' => 'Solicitar Cotação de Sinalética',
+                'prazo' => '3 a 10 dias úteis (inclui opção de instalação)',
+                'garantia' => 'Materiais com protecção UV, LEDs de alto brilho e acabamento arquitectónico',
+                'bullets' => [
+                    'Logótipos 3D retroiluminados LED para recepção e fachada',
+                    'Placas direccionais, totens, vidro jateado e wall graphics',
+                    'Envelopamento de viaturas/frotas, lonas, outdoors e MUPIs'
+                ],
+                'applications' => 'Recepções de Escritórios, Fachadas de Lojas e Sedes, Salas de Reunião (Vidro Jateado), Sinalética de Portas e Pisos, Carrinhas Comerciais e Outdoors.',
+                'includes' => [
+                    'Levantamento técnico de medidas e fotomontagem prévia no espaço ou viatura real do cliente',
+                    'Corte CNC router e laser de precisão em acrílico cristal, PVC expandido, ACM e inox escovado',
+                    'Sistemas de retroiluminação LED de baixo consumo com transformadores ocultos de longa vida útil',
+                    'Vinil polimérico automotivo e vinil fosco jateado (frosted glass) para privacidade elegante em escritórios',
+                    'Impressão em grande formato UV e eco-solvente resistente ao sol intenso e chuvas',
+                    'Equipa técnica própria para aplicação e instalação limpa nas instalações do cliente em Luanda'
+                ],
+                'steps' => [
+                    ['num' => '01', 'title' => 'Levantamento de Medidas & Fotos', 'desc' => 'Avaliamos as dimensões da parede, fachada, vidros ou viatura para dimensionamento exacto.'],
+                    ['num' => '02', 'title' => 'Simulação 3D / Fotomontagem', 'desc' => 'Apresentamos a visualização realista de como a sinalética ficará instalada no local.'],
+                    ['num' => '03', 'title' => 'Fabricação CNC, LED & Impressão', 'desc' => 'Recorte computadorizado das letras caixa, pintura automotiva, cablagem LED e impressão UV.'],
+                    ['num' => '04', 'title' => 'Instalação Técnica Especializada', 'desc' => 'Fixação nivelada com gabarito técnico no seu escritório, loja ou frota empresarial.']
+                ],
+                'plans' => [
+                    [
+                        'name' => 'Sinalética Interna & Vidros Jateados',
+                        'price' => '45.000 Kz',
+                        'period' => 'a partir de / ambiente',
+                        'desc' => 'Identificação de salas, portas, directórios de piso e películas de privacidade para escritórios.',
+                        'popular' => false,
+                        'features' => ['Placas de porta e sinalética direccional em acrílico ou PVC/inox', 'Aplicação de vinil jateado com recorte do logótipo em divisórias de vidro', 'Mural institucional (wall graphic) com missão e valores', 'Instalação limpa sem interromper o expediente']
+                    ],
+                    [
+                        'name' => 'Logótipo 3D de Recepção & Fachada',
+                        'price' => '165.000 Kz',
+                        'period' => 'projecto executivo de destaque',
+                        'desc' => 'Impacto imediato logo na entrada da sua sede com letras caixa tridimensionais e luz LED.',
+                        'popular' => true,
+                        'features' => ['Logótipo 3D em acrílico/PVC/inox com acabamento premium', 'Opção de halo retroiluminado em LED branco quente, frio ou azul', 'Gabarito de montagem milimétrico e fonte de alimentação oculta', 'Montagem completa incluída em Luanda']
+                    ],
+                    [
+                        'name' => 'Fachada Integral ACM & Frota Corporativa',
+                        'price' => 'Sob Cotação',
+                        'period' => 'projecto arquitectónico / frota',
+                        'desc' => 'Para edifícios empresariais, redes de agências/lojas e frotas de viaturas comerciais.',
+                        'popular' => false,
+                        'features' => ['Revestimento de fachada em ACM com caixa de luz ou letras 3D', 'Totens exteriores autoportantes iluminados', 'Decoração parcial ou integral de viaturas com vinil laminado UV', 'Garantia de durabilidade exterior e manutenção técnica']
+                    ]
+                ],
+                'products' => [
+                    [
+                        'name' => 'Fachada Externa, Recepção 3D & Vidro Jateado',
+                        'image' => 'images/portfolio-print/sinaletica-fachada-recepcao.jpg',
+                        'tag' => 'Letras 3D LED & Acrílico',
+                        'desc' => 'Solução integrada de arquitectura de marca: placa externa, parede de recepção com logótipo 3D, directório iluminado, vidro jateado e wall graphic.',
+                        'specs' => ['Materiais: ACM, Acrílico Cristal, PVC Expandido e Inox', 'Iluminação: Fita e módulos LED de alta eficiência', 'Vidros: Película fosca jateada com recorte electrónico', 'Acabamento: Pintura lacada nas cores exactas da marca']
+                    ],
+                    [
+                        'name' => 'Totens Arquitectónicos & Recepção Corporativa',
+                        'image' => 'images/services/service-print-sinaletica-comunicacao.jpg',
+                        'tag' => 'Wayfinding & Lobby Executivo',
+                        'desc' => 'Totens direccionais de recepção (wayfinding) e letras caixa metálicas retroiluminadas para edifícios corporativos, bancos, clínicas e sedes.',
+                        'specs' => ['Estrutura: Alumínio composto escovado e aço inox', 'Visibilidade: Tipografia de alto contraste e pictogramas universais', 'Fixação: Pinos distanciadores ocultos ou base autoportante', 'Ambiente: Interior corporativo e entradas de edifícios']
+                    ],
+                    [
+                        'name' => 'Decoração de Frotas, Outdoors & MUPIs',
+                        'image' => 'images/portfolio-print/comunicacao-externa-frotas.jpg',
+                        'tag' => 'Vinil Automotivo & Exterior',
+                        'desc' => 'Transforme as carrinhas e viaturas da empresa em mídia móvel diária, complementada por lonas de fachada, outdoors e MUPIs.',
+                        'specs' => ['Vinil Frota: Polimérico conformável com laminação protectora UV', 'Lonas: Frontlight/Backlight de alta tenacidade com bainha e ilhós', 'Durabilidade: Resistente a sol intenso, chuva e lavagens', 'Remoção: Preserva a pintura original da viatura']
+                    ]
+                ],
+                'whatsapp_msg' => 'Olá! Gostaria de solicitar cotação para Sinalética Corporativa, Letras 3D ou Decoração de Frotas na RACHI Print.'
+            ],
         ];
     }
 

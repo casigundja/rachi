@@ -275,7 +275,7 @@ class ServiceRequestSeeder extends Seeder
                 'business_unit_id' => $tecUnit?->id ?? 1,
                 'assigned_to' => $techEmployee?->id,
                 'title' => 'Implementação de Servidor Local & Firewall Perimetral',
-                'description' => 'Fornecimento e parametrização de firewall com VPN corporativa, backup redundante e controle de tráfego.',
+                'description' => 'Fornecimento e parametrização de firewall com VPN corporativa, backup redundante e controlo de tráfego.',
                 'priority' => 'normal',
                 'status' => 'quoted',
                 'requested_date' => Carbon::create(2026, 9, 18),

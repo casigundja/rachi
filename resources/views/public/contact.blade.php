@@ -7,14 +7,14 @@
     <script src="/auth-session.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto — Fale Connosco — RACHI Soluções Inteligentes</title>
+    <title>Contacto ” Fale Connosco ” RACHI Soluções Inteligentes</title>
     <meta name="description" content="Entre em contacto com a RACHI. Conte-nos o seu desafio e receba a solução ideal em tecnologia, gráfica, formação e capital humano em Angola.">
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -495,7 +495,7 @@
 
 
     <!-- ============================================================== -->
-    <!-- VIEW 1: PUBLIC PORTAL (EXACT CLONE OF https://hom.rachi.ao/)   -->
+    <!-- VIEW 1: PUBLIC PORTAL (EXACT CLONE OF https://rachi.ao/)   -->
     <!-- ============================================================== -->
     <div x-show="currentView === 'public'">
         
@@ -507,7 +507,7 @@
                     <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'"
+                             onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"
                              alt="RACHI" 
                              class="brand-logo-img logo-light filter drop-shadow-sm group-hover:drop-shadow-[0_0_12px_rgba(0,163,224,0.3)] transition-all">
                         <!-- Dark Logo (for light header when scrolled) -->
@@ -553,7 +553,19 @@
                                 </span>
                                 <span class="font-medium text-xs dropdown-title">O que fazemos</span>
                             </a>
-                            <a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                                        <a href="/#diferencial" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">O nosso diferencial</span>
+                            </a>
+                            <a href="/#missao" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="compass" class="w-4 h-4"></i>
+                                </span>
+                                <span class="font-medium text-xs dropdown-title">Missão, visão e valores</span>
+                            </a>
+<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); open = false; solutionsOpen = false" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-blue-600/20 transition">
                                 <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="handshake" class="w-4 h-4"></i>
                                 </span>
@@ -563,7 +575,7 @@
                                 <span class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0">
                                     <i data-lucide="message-square" class="w-4 h-4"></i>
                                 </span>
-                                <span class="font-medium text-xs dropdown-title">Depoimentos</span>
+                                <span class="font-medium text-xs dropdown-title">Testemunhos</span>
                             </a>
                         </div>
                     </div>
@@ -703,7 +715,7 @@
                         <a href="/#sobre" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Quem somos</a>
                         <a href="/#o-que-fazemos" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">O que fazemos</a>
                         <a href="/#parceiros" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Parceiros</a>
-                        <a href="/#depoimentos" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Depoimentos</a>
+                        <a href="/#depoimentos" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Testemunhos</a>
                     </div>
                 </div>
                 <div class="border-t border-slate-200 dark:border-white/10 pt-2">
@@ -862,11 +874,11 @@
                                         </div>
                                         <div class="min-w-0">
                                             <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Sede Administrativa</div>
-                                            <div class="text-sm font-bold text-slate-900 dark:text-white truncate">Luanda, Angola</div>
-                                            <div class="text-[11px] text-slate-500 dark:text-slate-400 truncate">Segunda a Sexta: 08h — 17h</div>
+                                            <div class="text-sm font-bold text-slate-900 dark:text-white truncate">Rua Ndunduma, Miramar</div>
+                                            <div class="text-[11px] text-slate-500 dark:text-slate-400 truncate">Luanda, Angola &bull; Por detrás do BFA</div>
                                         </div>
                                     </div>
-                                    <a href="https://maps.google.com/?q=Luanda,Angola" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-[#0050f0]/10 dark:hover:bg-sky-500/20 text-xs font-bold text-[#0050f0] dark:text-sky-400 transition shrink-0 ml-2 flex items-center gap-1.5">
+                                    <a href="https://maps.google.com/?q=Rua+Ndunduma+Miramar+Luanda+Angola" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-[#0050f0]/10 dark:hover:bg-sky-500/20 text-xs font-bold text-[#0050f0] dark:text-sky-400 transition shrink-0 ml-2 flex items-center gap-1.5">
                                         <span>Maps</span>
                                         <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                                     </a>
@@ -962,10 +974,10 @@
                                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                                 </span>
                                                 <select x-model="formData.unidade" class="contact-input w-full pl-10 pr-9 py-2.5 rounded-xl text-xs sm:text-sm appearance-none cursor-pointer">
-                                                    <option value="RACHI Tec">🌐 RACHI Tec — Tecnologia, Redes e TI</option>
-                                                    <option value="RACHI Print">🖨️ RACHI Print — Produção Gráfica e Brindes</option>
-                                                    <option value="RACHI Academy">🎓 RACHI Academy — Formação Executiva</option>
-                                                    <option value="RACHI Human Capital">👥 RACHI Human Capital — RH &amp; Gestão</option>
+                                                    <option value="RACHI Tec">ðŸŒ RACHI Tec ” Tecnologia, Redes e TI</option>
+                                                    <option value="RACHI Print">ðŸ–¨ï¸ RACHI Print ” Produção Gráfica e Brindes</option>
+                                                    <option value="RACHI Academy">ðŸŽ“ RACHI Academy ” Formação Executiva</option>
+                                                    <option value="RACHI Human Capital">ðŸ‘¥ RACHI Human Capital ” RH &amp; Gestão</option>
                                                 </select>
                                                 <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                                                     <i data-lucide="chevron-down" class="w-4 h-4"></i>
@@ -1019,7 +1031,7 @@
                 </div>
             </section>
 
-            <!-- SEÇÃO: FAQ - PERGUNTAS FREQUENTES -->
+            <!-- SEÇÃƒO: FAQ - PERGUNTAS FREQUENTES -->
             <section class="py-16 bg-[#f8fafc] dark:bg-[#071326] border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-10">
@@ -1039,7 +1051,7 @@
                                 <i data-lucide="chevron-down" class="w-4 h-4 transition-transform shrink-0 ml-3" :class="activeFaq === 1 ? 'rotate-180 text-[#00a3e0]' : ''"></i>
                             </button>
                             <div x-show="activeFaq === 1" x-collapse class="px-4.5 sm:px-5 pb-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3.5">
-                                Para a maioria dos produtos da loja e serviços de consultoria padrão, o orçamento detalhado em PDF e com fatura pró-forma é emitido no mesmo dia útil (geralmente em menos de 2 a 4 horas). Projetos complexos de TI, infraestrutura de redes ou grandes tiragens gráficas levam até 24 a 48 horas úteis após o levantamento técnico dos requisitos.
+                                Para a maioria dos produtos da loja e serviços de consultoria padrão, o orçamento detalhado em PDF e com factura pró-forma é emitido no mesmo dia útil (geralmente em menos de 2 a 4 horas). Projetos complexos de TI, infraestrutura de redes ou grandes tiragens gráficas levam até 24 a 48 horas úteis após o levantamento técnico dos requisitos.
                             </div>
                         </div>
 
@@ -1072,8 +1084,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
-                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
+                        <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
+                        <img src="/images/logo-rachi.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
                         <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                             Um ecossistema de soluções inteligentes para impulsionar negócios e pessoas em Angola e no mundo.
                         </p>
@@ -1088,18 +1100,20 @@
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Sobre Nós</h4>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Institucional &amp; Legal</h4>
                         <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                            <li><a href="/#sobre" class="hover:text-slate-900 dark:hover:text-white transition">Quem somos</a></li>
-                            <li><a href="/#o-que-fazemos" class="hover:text-slate-900 dark:hover:text-white transition">O que fazemos</a></li>
-                            <li><a href="/#parceiros" class="hover:text-slate-900 dark:hover:text-white transition">Parceiros</a></li>
+                            <li><a href="/privacidade" class="hover:text-slate-900 dark:hover:text-white transition font-semibold">Política de Privacidade (Lei 22/11)</a></li>
+                            <li><a href="/termos" class="hover:text-slate-900 dark:hover:text-white transition font-semibold">Termos e Condições de Uso</a></li>
+                            <li><a href="/cookies" class="hover:text-slate-900 dark:hover:text-white transition">Política de Cookies</a></li>
+                            <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition font-semibold">Reclamações e Denúncia</a></li>
                             <li><a href="/#etica" class="hover:text-slate-900 dark:hover:text-white transition">Ética e Compliance</a></li>
-                            <li><a href="/contacto" class="text-amber-400 font-bold hover:text-white">Contacto</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Localização</h4>
-                        <p class="text-xs text-slate-600 dark:text-slate-400">Luanda — Angola</p>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">Sede &amp; Contactos</h4>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-semibold">Rua Ndunduma</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">Miramar – Luanda, Angola</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Por detrás do BFA</p>
                         <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Horário: Seg-Sex 08h às 17h</p>
                     </div>
                 </div>
@@ -1110,7 +1124,7 @@
                         <span class="text-slate-500 opacity-60">|</span>
                         <button type="button" onclick="setRachiLanguage('en')" data-rachi-lang="en" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="English">EN</button>
                         <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="中文 (Mandarim)">中文</button>
+                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="ä¸­æ–‡ (Mandarim)">ä¸­æ–‡</button>
                     </div>
                 </div>
             </div>

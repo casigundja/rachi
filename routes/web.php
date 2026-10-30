@@ -7,6 +7,7 @@ use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\ServiceController;
 use App\Http\Controllers\Public\CourseController;
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\ComplaintReportController;
 use App\Http\Controllers\Admin\AdminRequestController;
 
 /*
@@ -18,10 +19,34 @@ use App\Http\Controllers\Admin\AdminRequestController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sobre', [HomeController::class, 'about'])->name('about');
 Route::get('/sobre-nos', [HomeController::class, 'about'])->name('about.alt');
+Route::get('/diferencial', fn() => redirect('/#diferencial'))->name('differential');
+Route::get('/o-nosso-diferencial', fn() => redirect('/#diferencial'))->name('differential.alt');
+Route::get('/sobre/diferencial', fn() => redirect('/#diferencial'))->name('differential.sub');
+Route::get('/missao', fn() => redirect('/#missao'))->name('missao');
+Route::get('/visao', fn() => redirect('/#missao'))->name('visao');
+Route::get('/valores', fn() => redirect('/#missao'))->name('valores');
+Route::get('/identidade', fn() => redirect('/#missao'))->name('identidade');
+Route::get('/missao-visao-valores', fn() => redirect('/#missao'))->name('missao.alt');
 Route::get('/o-que-fazemos', [HomeController::class, 'whatWeDo'])->name('what-we-do');
 Route::get('/parceiros', [HomeController::class, 'partners'])->name('partners');
 Route::get('/depoimentos', [HomeController::class, 'testimonials'])->name('testimonials');
 Route::get('/etica', [HomeController::class, 'ethics'])->name('ethics');
+
+// Páginas de Conformidade Legal (Lei 22/11 e Lei 15/03 de Angola)
+Route::get('/privacidade', fn() => view('public.legal.privacy'))->name('legal.privacy');
+Route::get('/termos', fn() => view('public.legal.terms'))->name('legal.terms');
+Route::get('/cookies', fn() => view('public.legal.cookies'))->name('legal.cookies');
+
+// Canal Oficial de Reclamações e Denúncia (Ouvidoria & Compliance)
+Route::get('/reclamacoes-e-denuncia', [ComplaintReportController::class, 'index'])->name('legal.complaints');
+Route::post('/reclamacoes-e-denuncia', [ComplaintReportController::class, 'store'])->name('legal.complaints.store');
+Route::post('/api/reclamacoes-denuncia', [ComplaintReportController::class, 'store'])->name('api.legal.complaints.store');
+Route::get('/api/reclamacoes-denuncia/consultar', [ComplaintReportController::class, 'lookup'])->name('api.legal.complaints.lookup');
+Route::redirect('/reclamacoes', '/reclamacoes-e-denuncia');
+Route::redirect('/livro-de-reclamacoes', '/reclamacoes-e-denuncia?tipo=reclamacao');
+Route::redirect('/denuncia', '/reclamacoes-e-denuncia?tipo=denuncia');
+Route::redirect('/denuncias', '/reclamacoes-e-denuncia?tipo=denuncia');
+Route::redirect('/canal-de-denuncia', '/reclamacoes-e-denuncia?tipo=denuncia');
 
 Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
 Route::get('/contato', [ContactController::class, 'index'])->name('contact.alt');

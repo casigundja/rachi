@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
     <!-- Alpine.js -->
     <script defer src="/libs/alpine.js"></script>
     <!-- Lucide Icons -->
@@ -245,6 +245,40 @@
             box-shadow: 0 6px 20px rgba(245, 168, 0, 0.5);
             color: #050d1a;
         }
+        .header-theme-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+        html:not(.dark) .header-theme-pill {
+            background: rgba(15, 23, 42, 0.04) !important;
+            border: 1px solid rgba(15, 23, 42, 0.10) !important;
+            color: #0f172a !important;
+        }
+        html:not(.dark) .header-theme-pill:hover {
+            background: rgba(245, 158, 11, 0.12) !important;
+            border-color: rgba(217, 119, 6, 0.35) !important;
+            color: #b45309 !important;
+        }
+        html.dark .header-theme-pill {
+            background: rgba(255, 255, 255, 0.07) !important;
+            border: 1px solid rgba(251, 191, 36, 0.32) !important;
+            color: #fbbf24 !important;
+        }
+        html.dark .header-theme-pill:hover {
+            background: rgba(251, 191, 36, 0.16) !important;
+            border-color: #fbbf24 !important;
+            color: #fef08a !important;
+        }
+        html:not(.dark) .header-theme-pill .icon-for-light { display: block !important; }
+        html:not(.dark) .header-theme-pill .icon-for-dark { display: none !important; }
+        html.dark .header-theme-pill .icon-for-light { display: none !important; }
+        html.dark .header-theme-pill .icon-for-dark { display: block !important; }
     </style>
     <link rel="stylesheet" href="/css/print-services.css?v=20261011-2">
 
@@ -253,7 +287,8 @@
         function printServiceStudio() {
             return {
                 mobileMenuOpen: false, 
-                solutionsOpen: false,                 activeModalImage: null,
+                solutionsOpen: false, 
+                activeModalImage: null,
                 activeModalTitle: '',
                 activeModalDesc: '',
                 activeModalTag: '',
@@ -483,7 +518,7 @@
                     <picture>
                         <source srcset="/images/areas/rachi-print.webp" type="image/webp">
                         <img src="/images/areas/rachi-print.png" 
-                             onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
                              alt="RACHI Print" 
                              class="h-9 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
                     </picture>
@@ -534,7 +569,7 @@
                                 <span class="w-8 h-8 rounded-lg bg-indigo-500/15 text-indigo-500 dark:text-indigo-400 flex items-center justify-center font-black text-xs">02</span>
                                 <div>
                                     <div class="font-bold text-xs dropdown-title">RACHI Academy</div>
-                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação &amp; Treinamento</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Educação &amp; Formação</div>
                                 </div>
                             </div>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
@@ -576,8 +611,20 @@
             </nav>
 
             <!-- Header Actions -->
-            <div class="flex items-center gap-2.5 sm:gap-3">
-                
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <button type="button"
+                        onclick="toggleRachiTheme()"
+                        class="header-theme-pill"
+                        aria-label="Alternar entre Modo Claro e Modo Escuro"
+                        title="Alternar Modo Claro / Modo Escuro">
+                    <svg class="icon-for-light w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <svg class="icon-for-dark w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                </button>
 
                 <button type="button" @click="openQuoteModal()" class="btn-cta-amber group cursor-pointer">
                     <i data-lucide="printer" class="w-4 h-4"></i>
@@ -1172,7 +1219,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-print.webp" type="image/webp">
                             <img src="/images/areas/rachi-print.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-print.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
                                  alt="RACHI Print" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(245,168,0,0.35)] group-hover:scale-105 transition-all">
                         </picture>

@@ -32,7 +32,7 @@
     @if (file_exists(public_path('build/manifest.json')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
-    <link rel="stylesheet" href="/worker-marketing.css">
+    <link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
 
     <!-- Tailwind Config (MUST BE BEFORE TAILWIND CDN SCRIPT) -->
     <script>
@@ -405,7 +405,7 @@
                                 @endif
                             </div>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                                Possibilidade de pagamento parcelado ou fatura empresarial proforma.
+                                Possibilidade de pagamento parcelado ou factura empresarial pró-forma.
                             </p>
                         </div>
 
@@ -438,7 +438,7 @@
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span class="w-5 h-5 rounded-md bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 text-[#0050f0] dark:text-[#00a3e0] flex items-center justify-center font-bold text-[11px] shrink-0">✓</span>
-                                    <span>Material didático e apostilas em formato digital</span>
+                                    <span>Material didático e manuais de formação em formato digital</span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span class="w-5 h-5 rounded-md bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 text-[#0050f0] dark:text-[#00a3e0] flex items-center justify-center font-bold text-[11px] shrink-0">✓</span>
@@ -657,7 +657,7 @@
                         <picture class="flex items-center">
                             <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
                             <img src="/images/areas/rachi-academy.png" 
-                                 onerror="this.onerror=null; this.src='https://hom.rachi.ao/assets/img/areas/rachi-academy.png'" 
+                                 onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'" 
                                  alt="RACHI Academy" 
                                  class="h-8 w-auto object-contain filter drop-shadow-[0_0_4px_rgba(99,102,241,0.35)] group-hover:scale-105 transition-all">
                         </picture>

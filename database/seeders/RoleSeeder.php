@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
             ['name' => 'Administrador', 'slug' => 'admin', 'description' => 'Gestão geral da plataforma e relatórios'],
             ['name' => 'Gestor de Unidade', 'slug' => 'manager', 'description' => 'Gestão operacional de uma unidade de negócio'],
             ['name' => 'Funcionário / Técnico', 'slug' => 'employee', 'description' => 'Atendimento, execução de serviços e pedidos'],
-            ['name' => 'Atendente', 'slug' => 'attendant', 'description' => 'Triagem e primeiro contato com clientes'],
+            ['name' => 'Atendente', 'slug' => 'attendant', 'description' => 'Triagem e primeiro contacto com clientes'],
             ['name' => 'Cliente', 'slug' => 'customer', 'description' => 'Acesso ao portal de autoatendimento e pedidos'],
             ['name' => 'Aluno', 'slug' => 'student', 'description' => 'Acesso aos cursos da RACHI Academy'],
         ];
