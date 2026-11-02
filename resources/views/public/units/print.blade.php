@@ -1226,10 +1226,29 @@
 
         @media (max-width: 767px) {
             #print-hero-banner {
-                min-height: 440px;
+                min-height: 400px;
             }
             #print-hero-banner .print-hero-bg {
                 object-position: 68% center;
+            }
+            #print-hero-banner .print-hero-inner {
+                padding: 2rem 1.25rem !important;
+            }
+            #print-hero-banner .print-hero-heading {
+                font-size: 1.5rem !important;
+            }
+            #print-hero-banner .print-hero-line-top {
+                font-size: clamp(1.15rem, 4.5vw, 1.5rem) !important;
+            }
+            #print-hero-banner .print-hero-box-amber {
+                font-size: clamp(1.45rem, 6vw, 2.2rem) !important;
+            }
+            #print-hero-banner .print-hero-line-bottom {
+                font-size: clamp(1.45rem, 6vw, 2.2rem) !important;
+            }
+            #print-hero-banner .print-hero-desc {
+                font-size: 0.825rem !important;
+                line-height: 1.45 !important;
             }
             html:not(.dark) #print-hero-banner .print-hero-scrim {
                 background:
@@ -2319,9 +2338,9 @@
         }
 
         @media (max-width: 640px) {
-            .site-header .brand-logo-box { display: none !important; }
+            
             .site-header .brand-logo-text { font-size: 1rem !important; }
-            .site-header .brand-subtitle { font-size: 8.5px !important; }
+            
         }
 </style>
 
@@ -2652,22 +2671,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex items-center justify-between">
             
             <!-- Brand Logo Oficial RACHI Print -->
-            <a href="/" class="flex items-center gap-3 group text-decoration-none" title="Ir para a página inicial (Portal RACHI)">
-                <div class="brand-logo-box h-12 px-2.5 py-1 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
-                    <picture class="flex items-center">
-                        <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                        <img src="/images/areas/rachi-print.png" 
-                             onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
-                             alt="RACHI Print" 
-                             class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
-                    </picture>
-                </div>
-                <div class="flex flex-col">
-                    <span class="brand-logo-text font-display font-black text-lg tracking-wider flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#d97706] dark:text-[#f5a800] text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">PRINT</span>
-                    </span>
-                    <span class="brand-subtitle text-[10px] tracking-widest uppercase font-medium transition-colors">Gráfica &amp; Produção</span>
-                </div>
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
+                <picture class="flex items-center shrink-0">
+                    <source srcset="/images/areas/rachi-print.webp" type="image/webp">
+                    <img src="/images/areas/rachi-print.png" 
+                         onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
+                         alt="RACHI Print" 
+                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(245,168,0,0.35)]">
+                </picture>
+                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                    RACHI <span class="text-[#d97706] dark:text-[#f5a800]">Print</span>
+                </span>
             </a>
 
             <!-- Central Nav Links (Capsule System) -->

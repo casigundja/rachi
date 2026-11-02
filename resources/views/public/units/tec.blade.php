@@ -497,9 +497,9 @@
         }
 
         @media (max-width: 640px) {
-            .site-header .brand-logo-box { display: none !important; }
+            
             .site-header .brand-logo-text { font-size: 1rem !important; }
-            .site-header .brand-subtitle { font-size: 8.5px !important; }
+            
         }
 </style>
 
@@ -513,22 +513,17 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Brand Logo Oficial RACHI Tec -->
-            <a href="/" class="flex items-center gap-3 group text-decoration-none" title="Ir para a página inicial (Portal RACHI)">
-                <div class="brand-logo-box h-12 px-2 py-1 rounded-xl border group-hover:border-sky-400/40 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
-                    <picture class="flex items-center">
-                        <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
-                        <img src="/images/areas/rachi-tec.png" 
-                             onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
-                             alt="RACHI Tec" 
-                             class="h-10 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
-                    </picture>
-                </div>
-                <div class="flex flex-col">
-                    <span class="brand-logo-text font-display font-black text-lg tracking-wider flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#00a3e0] text-xs font-bold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">TEC</span>
-                    </span>
-                    <span class="brand-subtitle text-[10px] tracking-widest uppercase font-medium transition-colors">Tecnologia &amp; Sistemas</span>
-                </div>
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
+                <picture class="flex items-center shrink-0">
+                    <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
+                    <img src="/images/areas/rachi-tec.png" 
+                         onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
+                         alt="RACHI Tec" 
+                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,163,224,0.35)]">
+                </picture>
+                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                    RACHI <span class="text-[#00a3e0]">Tec</span>
+                </span>
             </a>
 
             <!-- Main Navigation -->
@@ -725,12 +720,12 @@
             </div>
 
             <!-- Faixa CTA Mobile Direta da Loja -->
-            <div class="sm:hidden bg-[#071326] border-b border-white/10 px-4 py-2.5 flex items-center justify-between text-xs">
-                <span class="text-slate-300 flex items-center gap-1.5 font-medium">
+            <div class="sm:hidden bg-slate-100 dark:bg-[#071326] border-b border-slate-200 dark:border-white/10 px-4 py-2.5 flex items-center justify-between text-xs">
+                <span class="text-slate-700 dark:text-slate-300 flex items-center gap-1.5 font-medium">
                     <span class="text-[#d4ee30]">⚡</span>
                     Equipamentos &amp; Produtos TI
                 </span>
-                <a href="/loja" class="inline-flex items-center gap-1 font-bold text-[#d4ee30] hover:underline">
+                <a href="/loja" class="inline-flex items-center gap-1 font-bold text-[#00a3e0] hover:underline">
                     <span>Ver Loja</span>
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </a>

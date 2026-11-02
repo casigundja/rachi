@@ -400,18 +400,17 @@
                 </a>
                 <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
                 <a href="/"
-                    class="flex items-center gap-2.5 group cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                    class="flex items-center gap-2.5 sm:gap-3 group cursor-pointer transition-transform duration-200 hover:scale-[1.02] select-none"
                     title="Ir para a página inicial (Portal RACHI)">
-                    <!-- Logo Dark Mode (Branco) -->
-                    <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI Academy" class="h-8 lg:h-9 w-auto object-contain hidden dark:block">
-                    <!-- Logo Light Mode (Escuro) -->
-                    <img src="/images/logo-rachi-dark.png"
-                        onerror="this.onerror=null; this.src='/images/logo-rachi.png'"
-                        alt="RACHI Academy"
-                        class="h-8 lg:h-9 w-auto object-contain filter drop-shadow-sm group-hover:drop-shadow-[0_0_14px_rgba(0,80,240,0.3)] transition-all block dark:hidden">
-                    <span
-                        class="text-[10px] uppercase font-heading font-black tracking-[0.2em] text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/30 dark:border-[#00a3e0]/40 px-2 py-0.5 rounded-full bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 shadow-xs">
-                        ACADEMY
+                    <picture class="flex items-center shrink-0">
+                        <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
+                        <img src="/images/areas/rachi-academy.png" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'" 
+                             alt="RACHI Academy" 
+                             class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,80,240,0.35)]">
+                    </picture>
+                    <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                        RACHI <span class="text-[#0050f0] dark:text-[#00a3e0]">Academy</span>
                     </span>
                 </a>
             </div>
@@ -542,7 +541,7 @@
 
                 <!-- Título Oficial Cibersegurança -->
                 <h1
-                    class="text-3xl sm:text-4xl lg:text-[44px] xl:text-[46px] font-sans font-bold text-slate-900 dark:text-white tracking-tight leading-[1.18] mb-3">
+                    class="text-2xl sm:text-4xl lg:text-[44px] xl:text-[46px] font-sans font-bold text-slate-900 dark:text-white tracking-tight leading-[1.18] mb-3">
                     Seu próximo upgrade pode vir<br class="hidden sm:inline" /> com a Cibersegurança.
                 </h1>
 
@@ -597,28 +596,30 @@
             </div>
 
             <!-- COLUNA DA DIREITA (ESCUDO 3D DE CIBERSEGURANÇA + MEDALHA) -->
-            <div class="w-full lg:w-[45%] relative min-h-[360px] lg:min-h-[560px] flex items-center justify-center">
+            <div class="w-full lg:w-[45%] relative min-h-[300px] sm:min-h-[360px] lg:min-h-[560px] flex items-center justify-center">
 
-                <!-- MEDALHA 3D CIRCULAR AZUL: "ATÉ 40% OFF" SOBRE A DIVISÓRIA -->
-                <div class="absolute top-2 right-2 sm:top-1/2 sm:left-[-45px] sm:-translate-y-1/2 lg:left-[-70px] z-40">
-                    <div
-                        class="w-24 h-24 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-full bg-gradient-to-b from-[#005bf8] via-[#003db3] to-[#001d68] p-2 sm:p-3 shadow-[0_15px_35px_rgba(0,30,100,0.6)] dark:shadow-[0_0_40px_rgba(0,163,224,0.45)] flex items-center justify-center border-2 sm:border-4 border-[#0047d4] dark:border-[#00a3e0] ring-2 ring-[#002277] dark:ring-[#00a3e0]/30 transform hover:scale-105 transition-transform duration-300">
+                <div class="relative w-fit mx-auto flex items-center justify-center">
+                    <!-- MEDALHA 3D CIRCULAR AZUL: "ATÉ 40% OFF" -->
+                    <div class="absolute -top-3 -right-2 sm:top-1/2 sm:left-[-45px] sm:-translate-y-1/2 lg:left-[-70px] z-40">
                         <div
-                            class="w-full h-full rounded-full border border-sky-400/40 flex flex-col items-center justify-center text-white select-none">
-                            <span class="text-[10px] sm:text-sm font-bold tracking-widest uppercase text-sky-100">ATÉ</span>
-                            <span
-                                class="text-2xl sm:text-5xl font-black leading-none tracking-tight text-white my-0.5 drop-shadow-md">40%</span>
-                            <span class="text-[10px] sm:text-sm font-black tracking-widest uppercase text-sky-100">OFF</span>
+                            class="w-20 h-20 sm:w-36 sm:h-36 lg:w-44 lg:h-44 rounded-full bg-gradient-to-b from-[#005bf8] via-[#003db3] to-[#001d68] p-1.5 sm:p-3 shadow-[0_10px_25px_rgba(0,30,100,0.6)] dark:shadow-[0_0_35px_rgba(0,163,224,0.45)] flex items-center justify-center border-2 sm:border-4 border-[#0047d4] dark:border-[#00a3e0] ring-2 ring-[#002277] dark:ring-[#00a3e0]/30 transform hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="w-full h-full rounded-full border border-sky-400/40 flex flex-col items-center justify-center text-white select-none">
+                                <span class="text-[9px] sm:text-sm font-bold tracking-widest uppercase text-sky-100">ATÉ</span>
+                                <span
+                                    class="text-xl sm:text-4xl lg:text-5xl font-black leading-none tracking-tight text-white my-0.5 drop-shadow-md">40%</span>
+                                <span class="text-[9px] sm:text-sm font-black tracking-widest uppercase text-sky-100">OFF</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- ESCUDO 3D DE DEFESA & SEGURANÇA DIGITAL -->
-                <div class="relative z-20 flex flex-col items-center justify-center pt-8 lg:pt-0">
-                    <div class="relative group">
-                        <img src="/images/cybersecurity-shield-transparent.png"
-                            alt="Cibersegurança e Defesa Digital RACHI Academy"
-                            class="h-[280px] sm:h-[360px] lg:h-[420px] xl:h-[440px] w-auto object-contain filter drop-shadow-[0_20px_40px_rgba(0,100,240,0.35)] dark:drop-shadow-[0_0_50px_rgba(0,163,224,0.35)] transform group-hover:scale-105 transition-transform duration-500" />
+                    <!-- ESCUDO 3D DE DEFESA & SEGURANÇA DIGITAL -->
+                    <div class="relative z-20 flex flex-col items-center justify-center pt-2 sm:pt-8 lg:pt-0">
+                        <div class="relative group">
+                            <img src="/images/cybersecurity-shield-transparent.png"
+                                alt="Cibersegurança e Defesa Digital RACHI Academy"
+                                class="h-[220px] sm:h-[340px] lg:h-[420px] xl:h-[440px] w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,100,240,0.35)] dark:drop-shadow-[0_0_45px_rgba(0,163,224,0.35)] transform group-hover:scale-105 transition-transform duration-500" />
+                        </div>
                     </div>
                 </div>
 

@@ -373,23 +373,18 @@
     <header id="navbar" class="site-header py-3.5 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Brand Logo -->
-            <a href="/tec" class="flex items-center gap-3 group focus:outline-none" title="RACHI Tec">
-                <div class="brand-logo-box h-10 w-10 rounded-xl p-1.5 flex items-center justify-center transition-all duration-200 group-hover:scale-105 shadow-sm">
-                    <picture>
-                        <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
-                        <img src="/images/areas/rachi-tec.png" 
-                             onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
-                             alt="RACHI Tec" 
-                             class="h-7 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
-                    </picture>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-display font-black text-lg tracking-wider brand-logo-text flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#0077c2] dark:text-[#00a3e0] text-xs font-bold px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20">TEC</span>
-                    </span>
-                    <span class="text-[10px] brand-subtitle tracking-widest uppercase font-medium">Tecnologia &amp; Sistemas</span>
-                </div>
+            <!-- Brand Logo Oficial RACHI Tec -->
+            <a href="/tec" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Voltar à página RACHI Tec">
+                <picture class="flex items-center shrink-0">
+                    <source srcset="/images/areas/rachi-tec.webp" type="image/webp">
+                    <img src="/images/areas/rachi-tec.png" 
+                         onerror="this.onerror=null; this.src='/images/areas/rachi-tec.png'" 
+                         alt="RACHI Tec" 
+                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,163,224,0.35)]">
+                </picture>
+                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                    RACHI <span class="text-[#00a3e0]">Tec</span>
+                </span>
             </a>
 
             <!-- Main Navigation -->

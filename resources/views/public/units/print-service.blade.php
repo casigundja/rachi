@@ -522,23 +522,18 @@
     <header id="main-site-header" class="site-header py-3.5 px-4 sm:px-6 lg:px-8 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Brand Logo RACHI Print -->
-            <a href="/print" class="flex items-center gap-3 group focus:outline-none">
-                <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-[#f5a800]/20 to-[#080c16] p-1.5 flex items-center justify-center border border-[#f5a800]/30 shadow-md group-hover:scale-105 transition-transform duration-300">
-                    <picture>
-                        <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                        <img src="/images/areas/rachi-print.png" 
-                             onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
-                             alt="RACHI Print" 
-                             class="h-9 w-auto object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]">
-                    </picture>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-display font-black text-lg tracking-wider text-slate-900 dark:text-white brand-logo-text flex items-center gap-1.5 transition-colors">
-                        RACHI <span class="text-[#f5a800] text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">PRINT</span>
-                    </span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400 tracking-widest uppercase font-medium">Gráfica &amp; Produção</span>
-                </div>
+            <!-- Brand Logo Oficial RACHI Print -->
+            <a href="/print" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Voltar à página RACHI Print">
+                <picture class="flex items-center shrink-0">
+                    <source srcset="/images/areas/rachi-print.webp" type="image/webp">
+                    <img src="/images/areas/rachi-print.png" 
+                         onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
+                         alt="RACHI Print" 
+                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(245,168,0,0.35)]">
+                </picture>
+                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                    RACHI <span class="text-[#d97706] dark:text-[#f5a800]">Print</span>
+                </span>
             </a>
 
             <!-- Main Navigation -->

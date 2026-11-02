@@ -10579,9 +10579,13 @@ html.dark .user-menu-badge-inactive {
         gap: 0.5rem !important;
     }
 
-    /* Brand Logo Box on Unit Pages: Hide awkward empty container on mobile */
-    .site-header .brand-logo-box {
-        display: none !important;
+    /* Unit Brand Logo on Mobile: Clean, proportional mark */
+    .site-header .unit-brand-logo,
+    .site-header picture img {
+        max-height: 34px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        display: block !important;
     }
 
     /* Official RACHI Logo Image */
