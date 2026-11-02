@@ -2313,7 +2313,17 @@
             border-color: rgba(255, 255, 255, 0.14) !important;
             box-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.65) !important;
         }
-    </style>
+    
+        @media (max-width: 1023px) {
+            .site-header .main-nav-capsule, html.dark .site-header .main-nav-capsule, html:not(.dark) .site-header .main-nav-capsule { display: none !important; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header .brand-logo-box { display: none !important; }
+            .site-header .brand-logo-text { font-size: 1rem !important; }
+            .site-header .brand-subtitle { font-size: 8.5px !important; }
+        }
+</style>
 
     <!-- Alpine Store & Global Modal Logic (Loaded before body parsing) -->
     <script>
@@ -2639,7 +2649,7 @@
     <!-- NAVIGATION (Standardized RACHI Capsule Header System)         -->
     <!-- ============================================================ -->
     <header class="site-header" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex items-center justify-between">
             
             <!-- Brand Logo Oficial RACHI Print -->
             <a href="/" class="flex items-center gap-3 group text-decoration-none" title="Ir para a página inicial (Portal RACHI)">

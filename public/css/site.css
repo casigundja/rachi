@@ -10547,24 +10547,122 @@ html.dark .user-menu-badge-inactive {
 
 
 
-/* Mobile Header Optimization */
+/* ============================================================ */
+/* MASTER MOBILE & TABLET HEADER RESPONSIVENESS & POLISH        */
+/* ============================================================ */
+
+/* 1. Strictly hide desktop navigation capsules on mobile & tablet (< 1024px) */
+@media (max-width: 1023px) {
+    .site-header .main-nav-capsule,
+    nav.main-nav-capsule,
+    html.dark .site-header .main-nav-capsule,
+    html:not(.dark) .site-header .main-nav-capsule,
+    .site-header.header-top-dark .main-nav-capsule,
+    .site-header.header-scrolled-light .main-nav-capsule {
+        display: none !important;
+    }
+}
+
+/* 2. Premium Ergonomic Mobile Header System (<= 640px) */
 @media (max-width: 640px) {
     .site-header {
-        padding: 0.6rem 0.75rem !important;
+        padding: 0.5rem 0.85rem !important;
+        min-height: 56px !important;
+        height: auto !important;
     }
-    .header-col-logo {
-        padding-left: 0.25rem !important;
+    
+    .site-header > div,
+    .site-header .max-w-7xl,
+    .site-header .site-header-inner {
+        height: auto !important;
+        min-height: 40px !important;
+        gap: 0.5rem !important;
     }
-    .brand-logo-img {
-        height: 32px !important;
-        max-width: 135px !important;
+
+    /* Brand Logo Box on Unit Pages: Hide awkward empty container on mobile */
+    .site-header .brand-logo-box {
+        display: none !important;
     }
-    .btn-entrar-nav {
-        padding: 0.4rem 0.75rem !important;
-        font-size: 0.72rem !important;
+
+    /* Official RACHI Logo Image */
+    .site-header .brand-logo-img {
+        height: 28px !important;
+        max-width: 120px !important;
+        width: auto !important;
+        object-fit: contain !important;
+    }
+
+    /* Typographic Unit Brand Titles on Mobile */
+    .site-header .brand-logo-text {
+        font-size: 0.98rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .site-header .brand-subtitle {
+        font-size: 8.5px !important;
         letter-spacing: 0.04em !important;
     }
-    .mobile-menu-btn {
-        padding: 0.4rem !important;
+
+    /* Unified Sleek Action Buttons (Matching Apple / Stripe Glass Capsule Standards) */
+    .site-header .btn-entrar-nav {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 34px !important;
+        padding: 0 0.85rem !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.05em !important;
+        border-radius: 9999px !important;
+        gap: 0.35rem !important;
+        white-space: nowrap !important;
+    }
+
+    .site-header .btn-entrar-nav svg {
+        width: 13px !important;
+        height: 13px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Cohesive Mobile Menu Hamburger Button (Matching Pill Height & Glass Styling) */
+    .site-header .mobile-menu-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+        padding: 0 !important;
+        border-radius: 9999px !important;
+        border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        flex-shrink: 0 !important;
+    }
+
+    html:not(.dark) .site-header .mobile-menu-btn,
+    .site-header.header-scrolled-light .mobile-menu-btn {
+        background: rgba(11, 26, 46, 0.05) !important;
+        border: 1px solid rgba(11, 26, 46, 0.1) !important;
+        color: #0b1a2e !important;
+    }
+
+    .site-header .mobile-menu-btn svg,
+    .site-header .mobile-menu-btn i {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    /* Theme Toggle Button on Unit Headers */
+    .site-header .header-theme-pill {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        border-radius: 9999px !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
     }
 }

@@ -352,7 +352,17 @@
         html.dark main .bg-slate-100 strong {
             color: #ffffff !important;
         }
-    </style>
+    
+        @media (max-width: 1023px) {
+            .site-header .main-nav-capsule, html.dark .site-header .main-nav-capsule, html:not(.dark) .site-header .main-nav-capsule { display: none !important; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header .brand-logo-box { display: none !important; }
+            .site-header .brand-logo-text { font-size: 1rem !important; }
+            .site-header .brand-subtitle { font-size: 8.5px !important; }
+        }
+</style>
 
 </head>
 <body x-data="rachiServicePage()" class="antialiased">
@@ -469,7 +479,7 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 
 
-                <a href="#solicitar" class="btn-cta-blue group">
+                <a href="#solicitar" class="btn-cta-blue group hidden sm:inline-flex">
                     <i data-lucide="cpu" class="w-4 h-4"></i>
                     <span>Aderir Agora</span>
                 </a>

@@ -381,7 +381,17 @@
         html.dark .bullet-amber   { background-color: rgba(120, 53, 15, 0.6); color: #fbbf24; }
         html.dark .bullet-sky     { background-color: rgba(12, 74, 110, 0.6); color: #38bdf8; }
         html.dark .bullet-teal    { background-color: rgba(19, 78, 74, 0.6); color: #2dd4bf; }
-    </style>
+    
+        @media (max-width: 1023px) {
+            .site-header .main-nav-capsule, html.dark .site-header .main-nav-capsule, html:not(.dark) .site-header .main-nav-capsule { display: none !important; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header .brand-logo-box { display: none !important; }
+            .site-header .brand-logo-text { font-size: 1rem !important; }
+            .site-header .brand-subtitle { font-size: 8.5px !important; }
+        }
+</style>
     <script src="/capital-requests.js?v=20261011"></script>
 </head>
 <body x-data="{ mobileMenuOpen: false }">
@@ -498,7 +508,7 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 
 
-                <a href="#solicitar-cotacao" class="btn-cta-emerald group">
+                <a href="#solicitar-cotacao" class="btn-cta-emerald group hidden sm:inline-flex">
                     <i data-lucide="users" class="w-4 h-4"></i>
                     <span>Consultoria RH</span>
                 </a>

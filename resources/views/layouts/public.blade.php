@@ -329,6 +329,71 @@
             border-color: #00a3e0 !important;
             color: #0077c2 !important;
         }
+
+        /* Mobile Header Cohesive System */
+        @media (max-width: 640px) {
+            .site-header {
+                padding: 0.5rem 0.85rem !important;
+                min-height: 56px !important;
+                height: auto !important;
+            }
+            .site-header .site-header-inner,
+            .site-header > div,
+            .site-header .max-w-7xl {
+                min-height: 40px !important;
+                height: auto !important;
+                gap: 0.5rem !important;
+            }
+            .site-header .brand-logo-img {
+                height: 28px !important;
+                max-width: 120px !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+            .site-header .btn-entrar-nav {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 34px !important;
+                padding: 0 0.85rem !important;
+                font-size: 0.72rem !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.05em !important;
+                border-radius: 9999px !important;
+                gap: 0.35rem !important;
+                white-space: nowrap !important;
+            }
+            .site-header .btn-entrar-nav svg {
+                width: 13px !important;
+                height: 13px !important;
+            }
+            .site-header .mobile-menu-btn {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 34px !important;
+                height: 34px !important;
+                min-width: 34px !important;
+                min-height: 34px !important;
+                padding: 0 !important;
+                border-radius: 9999px !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+            }
+            html:not(.dark) .site-header .mobile-menu-btn,
+            .site-header.header-scrolled-light .mobile-menu-btn {
+                background: rgba(11, 26, 46, 0.05) !important;
+                border: 1px solid rgba(11, 26, 46, 0.1) !important;
+                color: #0b1a2e !important;
+            }
+            .site-header .mobile-menu-btn svg {
+                width: 18px !important;
+                height: 18px !important;
+            }
+        }
+
 </style>
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 </head>

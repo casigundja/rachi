@@ -341,7 +341,17 @@
         html.dark main .bg-slate-100 strong {
             color: #ffffff !important;
         }
-    </style>
+    
+        @media (max-width: 1023px) {
+            .site-header .main-nav-capsule, html.dark .site-header .main-nav-capsule, html:not(.dark) .site-header .main-nav-capsule { display: none !important; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header .brand-logo-box { display: none !important; }
+            .site-header .brand-logo-text { font-size: 1rem !important; }
+            .site-header .brand-subtitle { font-size: 8.5px !important; }
+        }
+</style>
 
     <script src="/capital-requests.js?v=20261011"></script>
 </head>
@@ -396,7 +406,7 @@
                 <!-- Theme Toggle Button -->
                 
 
-                <a href="#solicitar" class="btn-cta-emerald group">
+                <a href="#solicitar" class="btn-cta-emerald group hidden sm:inline-flex">
                     <i data-lucide="send" class="w-4 h-4"></i>
                     <span>Pedir Proposta</span>
                 </a>

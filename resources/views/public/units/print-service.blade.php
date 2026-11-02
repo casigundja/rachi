@@ -279,7 +279,17 @@
         html:not(.dark) .header-theme-pill .icon-for-dark { display: none !important; }
         html.dark .header-theme-pill .icon-for-light { display: none !important; }
         html.dark .header-theme-pill .icon-for-dark { display: block !important; }
-    </style>
+    
+        @media (max-width: 1023px) {
+            .site-header .main-nav-capsule, html.dark .site-header .main-nav-capsule, html:not(.dark) .site-header .main-nav-capsule { display: none !important; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header .brand-logo-box { display: none !important; }
+            .site-header .brand-logo-text { font-size: 1rem !important; }
+            .site-header .brand-subtitle { font-size: 8.5px !important; }
+        }
+</style>
     <link rel="stylesheet" href="/css/print-services.css?v=20261011-2">
 
     <!-- Alpine Store & Global Modal Logic (Loaded before body parsing) -->
@@ -626,7 +636,7 @@
                     </svg>
                 </button>
 
-                <button type="button" @click="openQuoteModal()" class="btn-cta-amber group cursor-pointer">
+                <button type="button" @click="openQuoteModal()" class="btn-cta-amber group cursor-pointer hidden sm:inline-flex">
                     <i data-lucide="printer" class="w-4 h-4"></i>
                     <span>Solicitar Cotação</span>
                 </button>
