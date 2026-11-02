@@ -340,17 +340,7 @@
                 padding-top: 34.66%;
             }
         }
-        @media (max-width: 640px) {
-            .hero-carousel-container {
-                aspect-ratio: auto !important;
-                height: 250px !important;
-                min-height: 250px !important;
-            }
-            .hero-carousel-container img {
-                object-fit: cover !important;
-                object-position: 18% center !important;
-            }
-        }
+        
 
         /* 4 Feature Cards Strip */
         .feature-cards-strip {
@@ -726,14 +716,24 @@
                     <span class="absolute inset-0 rounded-2xl transition-all duration-300 tec-hotspot-pulse group-hover:shadow-[0_0_35px_rgba(212,238,48,0.9)] pointer-events-none"></span>
                 </a>
 
-                <!-- CTA Mobile Botão Visível Touch-Friendly -->
-                <div class="sm:hidden absolute bottom-3.5 left-4 z-20">
-                    <a href="/loja"
-                       class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs bg-[#d4ee30] text-[#071326] shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
-                        <span>Ver Loja RACHI Tec</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                </div>
+                <!-- Link Touch Overlay no Mobile (Toda a área do banner ativa a loja) -->
+                <a href="/loja"
+                   class="sm:hidden absolute inset-0 z-10 cursor-pointer"
+                   title="Explorar Loja RACHI Tec"
+                   aria-label="Ver Loja RACHI Tec">
+                </a>
+            </div>
+
+            <!-- Faixa CTA Mobile Direta da Loja -->
+            <div class="sm:hidden bg-[#071326] border-b border-white/10 px-4 py-2.5 flex items-center justify-between text-xs">
+                <span class="text-slate-300 flex items-center gap-1.5 font-medium">
+                    <span class="text-[#d4ee30]">⚡</span>
+                    Equipamentos &amp; Produtos TI
+                </span>
+                <a href="/loja" class="inline-flex items-center gap-1 font-bold text-[#d4ee30] hover:underline">
+                    <span>Ver Loja</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </a>
             </div>
         </section>
 
@@ -844,11 +844,11 @@
                     Os nossos serviços
                 </span>
                 
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-4 tracking-tight">
+                <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white mt-4 tracking-tight">
                     Escolha o serviço ideal para impulsionar o seu negócio
                 </h2>
 
-                <p class="text-slate-600 text-base sm:text-lg mt-3.5 leading-relaxed">
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-lg mt-3.5 leading-relaxed">
                     Soluções completas e especializadas para apoiar todas as etapas da sua empresa.
                 </p>
             </div>
@@ -1135,7 +1135,7 @@
         <!-- 3. CTA SECTION (Contacto & Proposta)                     -->
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 tec-reveal delay-100">
-            <div class="relative rounded-3xl p-10 sm:p-14 bg-gradient-to-br from-[#071326] via-[#0d1f3d] to-[#071326] border border-sky-500/30 overflow-hidden shadow-2xl text-center text-white">
+            <div class="relative rounded-3xl p-6 sm:p-14 bg-gradient-to-br from-[#071326] via-[#0d1f3d] to-[#071326] border border-sky-500/30 overflow-hidden shadow-2xl text-center text-white">
                 <div class="absolute -top-20 -right-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
