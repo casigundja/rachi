@@ -821,22 +821,42 @@ body {
 
 @media (max-width: 640px) {
     .rachi-fab-dock {
-        bottom: 1.25rem !important;
-        right: 1.25rem !important;
+        bottom: 1rem !important;
+        right: 1rem !important;
         gap: 0.45rem !important;
+        z-index: 9999 !important;
     }
     .rachi-lang-fab {
-        height: 2.5rem !important;
-        padding: 0 0.85rem !important;
+        height: 2.35rem !important;
+        padding: 0 0.65rem !important;
+        gap: 0.25rem !important;
+        font-size: 0.72rem !important;
+    }
+    .rachi-lang-fab svg.w-3 {
+        display: none !important;
     }
     .rachi-theme-fab {
-        width: auto !important;
-        height: 2.5rem !important;
-        padding: 0 0.95rem !important;
+        width: 2.35rem !important;
+        height: 2.35rem !important;
+        padding: 0 !important;
+        border-radius: 9999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .rachi-theme-fab .fab-label {
+        display: none !important;
+    }
+    .rachi-theme-fab span.fab-light-content,
+    .rachi-theme-fab span.fab-dark-content {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     .rachi-lang-menu {
-        width: 13.5rem !important;
+        width: 13rem !important;
         right: 0 !important;
+        bottom: 3.2rem !important;
     }
 }
 

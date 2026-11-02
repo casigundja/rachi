@@ -702,19 +702,18 @@
 
         /* Hero Main Title: Balanced Executive Sizing (Dual Theme) */
         .hero-home .hero-title {
-            display: flex;
-            flex-direction: column;
-            gap: 0.08em;
+            display: block;
             margin: 0;
             color: #071326;
             font-size: clamp(1.65rem, 3.1vw, 2.65rem);
             font-weight: 850;
             letter-spacing: -0.028em;
-            line-height: 1.08;
+            line-height: 1.15;
             text-transform: uppercase;
             position: relative;
             z-index: 12;
             transition: color 0.4s ease;
+            isolation: isolate;
         }
 
         html.dark .hero-home .hero-title {
@@ -722,7 +721,8 @@
         }
 
         .hero-title-line {
-            display: inline-block;
+            display: block;
+            margin-bottom: 0.15rem;
             transition: transform 0.3s ease;
         }
 
@@ -732,17 +732,20 @@
             background: linear-gradient(115deg, #f59e0b 0%, #fbbf24 25%, #fef08a 50%, #fbbf24 75%, #d97706 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 10px rgba(245, 158, 11, 0.4));
+            color: transparent;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            transform: translateZ(0);
             animation: textGradientShift 7s ease infinite;
             position: relative;
             cursor: default;
-            transition: filter 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .hero-highlight--gold:hover {
             transform: translateY(-2px) scale(1.02);
-            filter: drop-shadow(0 4px 22px rgba(245, 158, 11, 0.65));
         }
 
         /* Blue Gradient & Shimmer for INTELIGENTES */
@@ -751,17 +754,20 @@
             background: linear-gradient(115deg, #0284c7 0%, #00a3e0 25%, #38bdf8 50%, #00a3e0 75%, #0369a1 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 10px rgba(0, 163, 224, 0.4));
+            color: transparent;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            transform: translateZ(0);
             animation: textGradientShift 7s ease infinite 2.5s;
             position: relative;
             cursor: default;
-            transition: filter 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .hero-highlight--blue:hover {
             transform: translateY(-2px) scale(1.02);
-            filter: drop-shadow(0 4px 22px rgba(0, 163, 224, 0.65));
         }
 
         @keyframes textGradientShift {
@@ -1554,27 +1560,143 @@
             }
         }
 
+        @media (max-width: 640px) {
+            .site-header {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+                padding-top: 0.65rem !important;
+                padding-bottom: 0.65rem !important;
+            }
+            .header-col-logo {
+                padding-left: 0.25rem;
+            }
+            .brand-logo-img {
+                height: 32px !important;
+                max-width: 140px !important;
+            }
+            .btn-entrar-nav {
+                padding: 0.42rem 0.85rem !important;
+                font-size: 0.74rem !important;
+                letter-spacing: 0.04em !important;
+            }
+            .mobile-menu-btn {
+                padding: 0.4rem !important;
+            }
+        }
+
         @media (max-width: 575.98px) {
             .hero-home {
-                padding-top: 2.2rem;
+                padding-top: 4.8rem !important;
+                padding-bottom: 2.2rem !important;
             }
 
-            .hero-visual-wrap {
-                margin-top: -1rem;
-                width: 100%;
+            .hero-home-container {
+                padding-top: 0 !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
             }
 
             .hero-home .hero-title {
-                font-size: clamp(1.35rem, 6.2vw, 1.75rem);
+                font-size: clamp(1.4rem, 6.2vw, 1.85rem) !important;
+                line-height: 1.15 !important;
             }
 
-            .hero-pillars-quick {
-                gap: 0.3rem;
+            .hero-title-line {
+                display: block !important;
+                margin-bottom: 0.2rem !important;
+            }
+
+            .hero-subtitle-box {
+                margin: 0.75rem auto 0 !important;
+                max-width: 22rem !important;
+                padding: 0 0.25rem !important;
+            }
+
+            .hero-home .hero-subtitle {
+                font-size: 0.86rem !important;
+                line-height: 1.5 !important;
+                gap: 0.35rem 0.45rem !important;
+                justify-content: center !important;
+            }
+
+            .hero-inline-badge {
+                padding: 0.15rem 0.65rem !important;
+                font-size: 0.82em !important;
             }
 
             .hero-ecosystem-cta {
-                width: 100%;
-                min-width: 0;
+                width: 100% !important;
+                max-width: 19rem !important;
+                min-width: 0 !important;
+                margin: 1.15rem auto 0 !important;
+                padding: 0.72rem 1.6rem !important;
+                font-size: 0.82rem !important;
+            }
+
+            .hero-visual-wrap {
+                margin-top: 0.5rem !important;
+                width: 100% !important;
+                max-width: 26rem !important;
+                margin-inline: auto !important;
+            }
+
+            .hero-visual {
+                width: 100% !important;
+                height: auto !important;
+                min-height: auto !important;
+                max-height: 320px !important;
+                object-fit: contain !important;
+                object-position: center !important;
+                border: none !important;
+                -webkit-mask-image: none !important;
+                mask-image: none !important;
+                filter: drop-shadow(0 14px 24px rgba(7, 19, 38, 0.12)) !important;
+            }
+
+            .hero-video-link {
+                position: relative !important;
+                right: auto !important;
+                bottom: auto !important;
+                display: inline-flex !important;
+                width: auto !important;
+                max-width: fit-content !important;
+                margin: 0.85rem auto 0 !important;
+                padding: 0.4rem 1.25rem 0.4rem 0.45rem !important;
+                font-size: 0.8rem !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(16px) !important;
+                -webkit-backdrop-filter: blur(16px) !important;
+                border: 1px solid rgba(0, 163, 224, 0.35) !important;
+                box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
+            }
+
+            .hero-pillars-quick {
+                gap: 0.3rem !important;
+            }
+
+            .hero-pillars {
+                grid-template-columns: 1fr !important;
+                gap: 0.85rem !important;
+                margin-top: 1.5rem !important;
+            }
+
+            .hero-pillar {
+                padding: 1.25rem 1.15rem !important;
+                min-height: 0 !important;
+                gap: 1.1rem !important;
+            }
+
+            .hero-pillar-icon {
+                width: 3.25rem !important;
+                height: 3.25rem !important;
+            }
+
+            .hero-pillar h2 {
+                font-size: 1.05rem !important;
+            }
+
+            .hero-pillar p {
+                font-size: 0.82rem !important;
             }
         }
 
@@ -2557,7 +2679,7 @@
         <!-- SUB-PAGE: HOME -->
         <div x-show="currentTab === 'home'">
             <!-- HERO SECTION EXACT MATCH TO PRINT & HOM.RACHI.AO -->
-            <section id="home" class="hero hero-home">
+            <section id="home" class="hero-home">
                 <!-- Ambient Pulsing Glow behind Hero -->
                 <div class="hero-ambient-orb" aria-hidden="true"></div>
 
