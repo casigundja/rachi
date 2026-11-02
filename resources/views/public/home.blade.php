@@ -13,7 +13,12 @@
     <title>RACHI — Soluções Inteligentes em Tecnologia, Gráfica, Formação & Gestão</title>
     <meta name="description" content="Ecossistema empresarial em Angola: RACHI Tec (tecnologia, websites e suporte de TI), RACHI Print (gráfica e brindes), RACHI Academy (formações executivas) e RACHI Human Capital (RH, contabilidade e legalização).">
     <link rel="canonical" href="https://rachi.ao/">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-rachi-light.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
 
     <!-- Open Graph / Redes Sociais -->
     <meta property="og:type" content="website">
