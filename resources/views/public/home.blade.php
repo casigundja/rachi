@@ -2910,18 +2910,18 @@
 
                     <!-- Stats Bar -->
                     <div
-                        class="grid grid-cols-3 gap-4 mt-12 py-8 px-6 bg-[#071326] text-white rounded-2xl shadow-xl text-center">
-                        <div>
+                        class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 mt-12 py-6 sm:py-8 px-4 sm:px-6 bg-[#071326] text-white rounded-2xl shadow-xl text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-700/80">
+                        <div class="pb-4 sm:pb-0">
                             <div class="text-3xl md:text-5xl font-black text-amber-400">04</div>
                             <div class="text-xs md:text-sm text-slate-300 font-medium mt-1 uppercase tracking-wider">
                                 Áreas de actuação</div>
                         </div>
-                        <div class="border-x border-slate-700/80">
+                        <div class="pt-4 sm:pt-0">
                             <div class="text-3xl md:text-5xl font-black text-cyan-400">100%</div>
                             <div class="text-xs md:text-sm text-slate-300 font-medium mt-1 uppercase tracking-wider">
                                 Foco em resultados</div>
                         </div>
-                        <div>
+                        <div class="pt-4 sm:pt-0">
                             <div class="text-3xl md:text-5xl font-black text-emerald-400">360º</div>
                             <div class="text-xs md:text-sm text-slate-300 font-medium mt-1 uppercase tracking-wider">
                                 Soluções integradas</div>

@@ -600,15 +600,15 @@
             <div class="w-full lg:w-[45%] relative min-h-[360px] lg:min-h-[560px] flex items-center justify-center">
 
                 <!-- MEDALHA 3D CIRCULAR AZUL: "ATÉ 40% OFF" SOBRE A DIVISÓRIA -->
-                <div class="absolute left-[-24px] sm:left-[-45px] lg:left-[-70px] top-1/2 -translate-y-1/2 z-40">
+                <div class="absolute top-2 right-2 sm:top-1/2 sm:left-[-45px] sm:-translate-y-1/2 lg:left-[-70px] z-40">
                     <div
-                        class="w-32 h-32 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-full bg-gradient-to-b from-[#005bf8] via-[#003db3] to-[#001d68] p-3 shadow-[0_15px_35px_rgba(0,30,100,0.6)] dark:shadow-[0_0_40px_rgba(0,163,224,0.45)] flex items-center justify-center border-4 border-[#0047d4] dark:border-[#00a3e0] ring-2 ring-[#002277] dark:ring-[#00a3e0]/30 transform hover:scale-105 transition-transform duration-300">
+                        class="w-24 h-24 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-full bg-gradient-to-b from-[#005bf8] via-[#003db3] to-[#001d68] p-2 sm:p-3 shadow-[0_15px_35px_rgba(0,30,100,0.6)] dark:shadow-[0_0_40px_rgba(0,163,224,0.45)] flex items-center justify-center border-2 sm:border-4 border-[#0047d4] dark:border-[#00a3e0] ring-2 ring-[#002277] dark:ring-[#00a3e0]/30 transform hover:scale-105 transition-transform duration-300">
                         <div
                             class="w-full h-full rounded-full border border-sky-400/40 flex flex-col items-center justify-center text-white select-none">
-                            <span class="text-xs sm:text-sm font-bold tracking-widest uppercase text-sky-100">ATÉ</span>
+                            <span class="text-[10px] sm:text-sm font-bold tracking-widest uppercase text-sky-100">ATÉ</span>
                             <span
-                                class="text-4xl sm:text-5xl font-black leading-none tracking-tight text-white my-0.5 drop-shadow-md">40%</span>
-                            <span class="text-xs sm:text-sm font-black tracking-widest uppercase text-sky-100">OFF</span>
+                                class="text-2xl sm:text-5xl font-black leading-none tracking-tight text-white my-0.5 drop-shadow-md">40%</span>
+                            <span class="text-[10px] sm:text-sm font-black tracking-widest uppercase text-sky-100">OFF</span>
                         </div>
                     </div>
                 </div>

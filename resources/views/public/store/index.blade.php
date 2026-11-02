@@ -1002,13 +1002,13 @@
     <!-- ============================================================== -->
     <header class="store-main-header sticky top-0 z-40 bg-white dark:bg-[#071326] border-b border-slate-200 dark:border-white/10 shadow-sm transition-all duration-200 text-slate-800 dark:text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between gap-3 sm:gap-6 py-5 lg:py-6">
+            <div class="flex items-center justify-between gap-2.5 sm:gap-6 py-3 sm:py-5 lg:py-6">
                 
                 <!-- Logótipo da Loja RACHI Tec -->
                 <div class="shrink-0">
                     <a href="/" class="flex items-center gap-2 focus:outline-none" title="RACHI — Ir para a página inicial">
-                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain dark:hidden" onerror="this.src='/images/logo-rachi-dark.png'">
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.src='/images/logo-rachi-light.png'">
+                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 sm:h-9 w-auto object-contain dark:hidden" onerror="this.src='/images/logo-rachi-dark.png'">
+                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-7 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.src='/images/logo-rachi-light.png'">
                         <span class="store-brand-text hidden sm:inline-block font-black text-xs uppercase tracking-widest text-[#071326] dark:text-white border-l-2 border-[#f5a800] pl-2.5 py-0.5">
                             Tec Loja
                         </span>
@@ -1020,7 +1020,7 @@
                     <div class="relative flex items-center w-full">
                         <input type="search" x-model="searchQuery" @input="filterProducts()"
                             placeholder="O que procura hoje?"
-                            class="store-search-input w-full pl-5 pr-11 py-2.5 bg-slate-100 hover:bg-slate-200/80 focus:bg-white text-xs sm:text-sm text-slate-900 placeholder-slate-400 rounded-full border border-slate-200 focus:border-[#f5a800] focus:ring-2 focus:ring-[#f5a800]/25 transition-all outline-none shadow-2xs dark:bg-slate-900/90 dark:hover:bg-slate-900 dark:focus:bg-slate-950 dark:text-white dark:border-slate-700">
+                            class="store-search-input w-full pl-4 sm:pl-5 pr-10 sm:pr-11 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200/80 focus:bg-white text-xs sm:text-sm text-slate-900 placeholder-slate-400 rounded-full border border-slate-200 focus:border-[#f5a800] focus:ring-2 focus:ring-[#f5a800]/25 transition-all outline-none shadow-2xs dark:bg-slate-900/90 dark:hover:bg-slate-900 dark:focus:bg-slate-950 dark:text-white dark:border-slate-700">
                         
                         <button @click="filterProducts()"
                             class="absolute right-3.5 text-slate-400 hover:text-[#f5a800] transition"
@@ -1031,14 +1031,18 @@
                 </div>
 
                 <!-- Ações Direitas: Ajuda + Localização + Utilizador + Carrinho -->
-                <div class="flex items-center gap-2 sm:gap-3.5 shrink-0">
+                <div class="flex items-center gap-1.5 sm:gap-3.5 shrink-0">
                     
 
                     <!-- Perfil de Utilizador Executivo & Moderno -->
                     <div class="relative">
                         <button type="button" @click="userMenuOpen = !userMenuOpen"
-                            class="store-user-btn flex items-center gap-2 py-1.5 px-3 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all cursor-pointer select-none">
-                            <div class="text-left text-xs leading-tight">
+                            class="store-user-btn flex items-center gap-1.5 sm:gap-2 py-1.5 px-2 sm:px-3 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all cursor-pointer select-none"
+                            title="Conta RACHI">
+                            <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-700 dark:text-slate-200 sm:hidden">
+                                <i data-lucide="user" class="w-4 h-4"></i>
+                            </div>
+                            <div class="hidden sm:block text-left text-xs leading-tight">
                                 <div class="flex items-center gap-1">
                                     <span class="store-user-name text-xs font-bold text-slate-800 dark:text-white" x-text="userLoggedIn ? 'Olá, ' + currentUserFirstName : 'Iniciar Sessão'">Iniciar Sessão</span>
                                     <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform duration-200" :class="{ 'rotate-180': userMenuOpen }"></i>
@@ -1325,9 +1329,9 @@
                         <div class="absolute -bottom-6 right-16 w-24 h-24 bg-red-700/25 rounded-none pointer-events-none hidden sm:block"></div>
 
                         <!-- Card Vitrine com Produto Otaku Transparente -->
-                        <div class="relative z-10 p-6 bg-white/80 dark:bg-white/5 backdrop-blur-md rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-white/10 group cursor-pointer"
+                        <div class="relative z-10 p-4 sm:p-6 bg-white/80 dark:bg-white/5 backdrop-blur-md rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-100 dark:border-white/10 group cursor-pointer"
                              @click="openQuickView(products.find(p => p.slug === 'tshirt-saitama-serious-punch'))">
-                            <img src="/images/otaku/tshirt-saitama-punch.png" alt="T-Shirt Saitama Serious Punch — One Punch Man" class="h-64 sm:h-72 w-auto object-contain mx-auto drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
+                            <img src="/images/otaku/tshirt-saitama-punch.png" alt="T-Shirt Saitama Serious Punch — One Punch Man" class="h-48 sm:h-72 w-auto object-contain mx-auto drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
                         </div>
                     </div>
                 </div>

@@ -286,7 +286,7 @@
                     </p>
 
                     <!-- Pílulas de Métricas e Especificações -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
                         <div class="p-3.5 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 shadow-xs">
                             <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs mb-1">
                                 <i data-lucide="clock" class="w-4 h-4 text-[#00a3e0]"></i>

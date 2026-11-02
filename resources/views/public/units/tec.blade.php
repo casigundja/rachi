@@ -340,6 +340,17 @@
                 padding-top: 34.66%;
             }
         }
+        @media (max-width: 640px) {
+            .hero-carousel-container {
+                aspect-ratio: auto !important;
+                height: 250px !important;
+                min-height: 250px !important;
+            }
+            .hero-carousel-container img {
+                object-fit: cover !important;
+                object-position: 18% center !important;
+            }
+        }
 
         /* 4 Feature Cards Strip */
         .feature-cards-strip {
@@ -696,14 +707,23 @@
                      alt="TECNOLOGIA PARA CRESCER — AS MELHORES SOLUÇÕES PASSAM PELA RACHI TEC"
                      class="w-full h-full object-cover block dark:hidden select-none pointer-events-none">
 
-                <!-- Hotspot: VER LOJA RACHI TEC -->
+                <!-- Hotspot Desktop: VER LOJA RACHI TEC -->
                 <a href="/loja"
-                   class="absolute z-20 group rounded-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer"
+                   class="hidden sm:block absolute z-20 group rounded-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer"
                    style="left: 7.76%; top: 82.39%; width: 15.23%; height: 8.17%; outline: none !important; border: none !important; box-shadow: none !important; -webkit-tap-highlight-color: transparent;"
                    title="Explorar Loja RACHI Tec"
                    aria-label="Ver Loja RACHI Tec">
                     <span class="absolute inset-0 rounded-2xl transition-all duration-300 tec-hotspot-pulse group-hover:shadow-[0_0_35px_rgba(212,238,48,0.9)] pointer-events-none"></span>
                 </a>
+
+                <!-- CTA Mobile Botão Visível Touch-Friendly -->
+                <div class="sm:hidden absolute bottom-3.5 left-4 z-20">
+                    <a href="/loja"
+                       class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-xs bg-[#d4ee30] text-[#071326] shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
+                        <span>Ver Loja RACHI Tec</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -807,9 +827,9 @@
         <!-- ======================================================== -->
         <!-- 2. OS NOSSOS SERVIÇOS (As 5 Soluções Especializadas)    -->
         <!-- ======================================================== -->
-        <section id="servicos-tec" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="servicos-tec" class="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="text-center max-w-3xl mx-auto mb-16 tec-reveal">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16 tec-reveal">
                 <span class="tag-services-pill text-[#00a3e0] font-bold text-xs uppercase tracking-widest bg-sky-50 px-3.5 py-1.5 rounded-full border border-sky-200">
                     Os nossos serviços
                 </span>
