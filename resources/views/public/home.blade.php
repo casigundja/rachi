@@ -1584,121 +1584,313 @@
             }
         }
 
-        @media (max-width: 575.98px) {
-            .hero-home {
-                padding-top: 4.8rem !important;
-                padding-bottom: 2.2rem !important;
-            }
+/* ==========================================================================
+   MOBILE HERO EXACT MATCH TO USER SPECIFICATION (PRINT 2 LIGHT / PRINT 3 DARK)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 1. Eliminate any Safari blur/gradient artifact permanently */
+    .hero-ambient-orb,
+    .hero-home .hero-content::before,
+    .hero-visual-wrap::before,
+    html.dark .hero-visual-wrap::after {
+        display: none !important;
+        filter: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
 
-            .hero-home-container {
-                padding-top: 0 !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
+    /* 2. Container & Section Paddings */
+    .hero-home {
+        padding-top: 5.25rem !important;
+        padding-bottom: 2.75rem !important;
+        overflow: hidden !important;
+        transition: background 0.4s ease, color 0.4s ease !important;
+    }
 
-            .hero-home .hero-title {
-                font-size: clamp(1.4rem, 6.2vw, 1.85rem) !important;
-                line-height: 1.15 !important;
-            }
+    .hero-home-container {
+        padding-top: 0 !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
 
-            .hero-title-line {
-                display: block !important;
-                margin-bottom: 0.2rem !important;
-            }
+    /* --- MODO CLARO (EXACT MATCH PRINT 2) --- */
+    html:not(.dark) .hero-home,
+    body:not(.dark) .hero-home {
+        background: linear-gradient(180deg, #e8f0f7 0%, #edf6f5 35%, #f4f8fb 70%, #ffffff 100%) !important;
+        color: #071326 !important;
+    }
 
-            .hero-subtitle-box {
-                margin: 0.75rem auto 0 !important;
-                max-width: 22rem !important;
-                padding: 0 0.25rem !important;
-            }
+    /* Header in Light Mode Mobile */
+    html:not(.dark) .site-header {
+        background: rgba(255, 255, 255, 0.96) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+        backdrop-filter: blur(16px) !important;
+    }
+    html:not(.dark) .site-header .btn-entrar-nav {
+        background: #00a3e0 !important;
+        color: #ffffff !important;
+        border: none !important;
+        box-shadow: 0 4px 14px rgba(0, 163, 224, 0.35) !important;
+    }
+    html:not(.dark) .site-header .mobile-menu-btn {
+        background: rgba(0, 0, 0, 0.05) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        color: #071326 !important;
+    }
 
-            .hero-home .hero-subtitle {
-                font-size: 0.86rem !important;
-                line-height: 1.5 !important;
-                gap: 0.35rem 0.45rem !important;
-                justify-content: center !important;
-            }
+    /* Title in Light Mode */
+    html:not(.dark) .hero-home .hero-title,
+    html:not(.dark) .hero-home .hero-title-line {
+        color: #071326 !important;
+    }
+    html:not(.dark) .hero-home .hero-highlight--gold {
+        color: #f5a800 !important;
+        -webkit-text-fill-color: #f5a800 !important;
+        background: none !important;
+        text-shadow: none !important;
+    }
+    html:not(.dark) .hero-home .hero-highlight--blue {
+        color: #00a3e0 !important;
+        -webkit-text-fill-color: #00a3e0 !important;
+        background: none !important;
+        text-shadow: none !important;
+    }
 
-            .hero-inline-badge {
-                padding: 0.15rem 0.65rem !important;
-                font-size: 0.82em !important;
-            }
+    /* Subtitle in Light Mode */
+    html:not(.dark) .hero-home .hero-subtitle-lead {
+        color: #0f172a !important;
+        font-weight: 600 !important;
+    }
+    html:not(.dark) .hero-home .hero-subtitle-conjunction {
+        color: #64748b !important;
+    }
+    html:not(.dark) .hero-inline-badge--gold {
+        background: rgba(254, 243, 199, 0.85) !important;
+        border: 1px solid rgba(245, 158, 11, 0.45) !important;
+        color: #92400e !important;
+    }
+    html:not(.dark) .hero-inline-badge--blue {
+        background: rgba(224, 242, 254, 0.85) !important;
+        border: 1px solid rgba(0, 163, 224, 0.4) !important;
+        color: #0369a1 !important;
+    }
 
-            .hero-ecosystem-cta {
-                width: 100% !important;
-                max-width: 19rem !important;
-                min-width: 0 !important;
-                margin: 1.15rem auto 0 !important;
-                padding: 0.72rem 1.6rem !important;
-                font-size: 0.82rem !important;
-            }
+    /* Primary CTA in Light Mode */
+    html:not(.dark) .hero-ecosystem-cta {
+        background: #f5a800 !important;
+        color: #071326 !important;
+        box-shadow: 0 8px 25px rgba(245, 168, 0, 0.35) !important;
+    }
 
-            .hero-visual-wrap {
-                margin-top: 0.5rem !important;
-                width: 100% !important;
-                max-width: 26rem !important;
-                margin-inline: auto !important;
-            }
+    /* Conheça a RACHI Pill in Light Mode */
+    html:not(.dark) .hero-video-link {
+        background: #ffffff !important;
+        border: 1.5px solid rgba(0, 163, 224, 0.35) !important;
+        color: #071326 !important;
+        box-shadow: 0 8px 25px rgba(0, 163, 224, 0.16) !important;
+    }
+    html:not(.dark) .hero-video-link span:not(.hero-video-play) {
+        color: #071326 !important;
+    }
 
-            .hero-visual {
-                width: 100% !important;
-                height: auto !important;
-                min-height: auto !important;
-                max-height: 320px !important;
-                object-fit: contain !important;
-                object-position: center !important;
-                border: none !important;
-                -webkit-mask-image: none !important;
-                mask-image: none !important;
-                filter: drop-shadow(0 14px 24px rgba(7, 19, 38, 0.12)) !important;
-            }
+    /* --- MODO ESCURO (EXACT MATCH PRINT 3) --- */
+    html.dark .hero-home,
+    body.dark .hero-home {
+        background-color: #071326 !important;
+        background-image: 
+            radial-gradient(circle at 50% 28%, rgba(245, 168, 0, 0.16) 0%, transparent 55%),
+            radial-gradient(circle at 50% 65%, rgba(0, 163, 224, 0.18) 0%, transparent 65%),
+            linear-gradient(180deg, #071326 0%, #0a1b33 35%, #07152c 70%, #050d1a 100%) !important;
+        color: #ffffff !important;
+    }
 
-            .hero-video-link {
-                position: relative !important;
-                right: auto !important;
-                bottom: auto !important;
-                display: inline-flex !important;
-                width: auto !important;
-                max-width: fit-content !important;
-                margin: 0.85rem auto 0 !important;
-                padding: 0.4rem 1.25rem 0.4rem 0.45rem !important;
-                font-size: 0.8rem !important;
-                background: rgba(255, 255, 255, 0.95) !important;
-                backdrop-filter: blur(16px) !important;
-                -webkit-backdrop-filter: blur(16px) !important;
-                border: 1px solid rgba(0, 163, 224, 0.35) !important;
-                box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
-            }
+    /* Header in Dark Mode Mobile */
+    html.dark .site-header {
+        background: rgba(7, 19, 38, 0.96) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(16px) !important;
+    }
+    html.dark .site-header .btn-entrar-nav {
+        background: rgba(0, 163, 224, 0.12) !important;
+        border: 1.5px solid rgba(0, 163, 224, 0.45) !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 16px rgba(0, 163, 224, 0.25) !important;
+    }
+    html.dark .site-header .mobile-menu-btn {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        color: #ffffff !important;
+    }
 
-            .hero-pillars-quick {
-                gap: 0.3rem !important;
-            }
+    /* Title in Dark Mode */
+    html.dark .hero-home .hero-title,
+    html.dark .hero-home .hero-title-line {
+        color: #ffffff !important;
+    }
+    html.dark .hero-home .hero-highlight--gold {
+        color: #f5a800 !important;
+        -webkit-text-fill-color: #f5a800 !important;
+        background: none !important;
+        text-shadow: 0 0 20px rgba(245, 168, 0, 0.4) !important;
+    }
+    html.dark .hero-home .hero-highlight--blue {
+        color: #00a3e0 !important;
+        -webkit-text-fill-color: #00a3e0 !important;
+        background: none !important;
+        text-shadow: 0 0 20px rgba(0, 163, 224, 0.4) !important;
+    }
 
-            .hero-pillars {
-                grid-template-columns: 1fr !important;
-                gap: 0.85rem !important;
-                margin-top: 1.5rem !important;
-            }
+    /* Subtitle in Dark Mode */
+    html.dark .hero-home .hero-subtitle-lead {
+        color: #cbd5e1 !important;
+        font-weight: 500 !important;
+    }
+    html.dark .hero-home .hero-subtitle-conjunction {
+        color: #94a3b8 !important;
+    }
+    html.dark .hero-inline-badge--gold {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(245, 158, 11, 0.55) !important;
+        color: #fef08a !important;
+    }
+    html.dark .hero-inline-badge--blue {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(0, 163, 224, 0.55) !important;
+        color: #38bdf8 !important;
+    }
 
-            .hero-pillar {
-                padding: 1.25rem 1.15rem !important;
-                min-height: 0 !important;
-                gap: 1.1rem !important;
-            }
+    /* Primary CTA in Dark Mode */
+    html.dark .hero-ecosystem-cta {
+        background: linear-gradient(135deg, #f5a800 0%, #e09900 100%) !important;
+        color: #071326 !important;
+        box-shadow: 0 0 35px rgba(245, 168, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+    }
 
-            .hero-pillar-icon {
-                width: 3.25rem !important;
-                height: 3.25rem !important;
-            }
+    /* Conheça a RACHI Pill in Dark Mode */
+    html.dark .hero-video-link {
+        background: rgba(7, 25, 51, 0.95) !important;
+        border: 1.5px solid rgba(0, 163, 224, 0.5) !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 25px rgba(0, 163, 224, 0.35) !important;
+    }
+    html.dark .hero-video-link span:not(.hero-video-play) {
+        color: #ffffff !important;
+    }
 
-            .hero-pillar h2 {
-                font-size: 1.05rem !important;
-            }
+    /* --- SHARED STRUCTURE & TYPOGRAPHY --- */
+    .hero-home .hero-title {
+        font-size: clamp(1.45rem, 6.4vw, 1.95rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.02em !important;
+        text-align: center !important;
+        margin-bottom: 0.35rem !important;
+    }
 
-            .hero-pillar p {
-                font-size: 0.82rem !important;
-            }
-        }
+    .hero-title-line {
+        display: block !important;
+        margin-bottom: 0.15rem !important;
+    }
+
+    .hero-subtitle-box {
+        margin: 0.65rem auto 0 !important;
+        max-width: 24rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    .hero-home .hero-subtitle {
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.35rem 0.45rem !important;
+    }
+
+    .hero-inline-badge {
+        padding: 0.2rem 0.75rem !important;
+        border-radius: 9999px !important;
+        font-size: 0.82em !important;
+        font-weight: 700 !important;
+    }
+
+    /* Primary CTA Button: Yellow/Amber Pill */
+    .hero-home .hero-actions {
+        margin: 1.15rem 0 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .hero-ecosystem-cta {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        width: auto !important;
+        max-width: 90% !important;
+        padding: 0.85rem 2.2rem !important;
+        font-size: 0.85rem !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        border-radius: 9999px !important;
+        border: none !important;
+        text-decoration: none !important;
+    }
+
+    /* Artwork Container */
+    .hero-visual-wrap {
+        width: 100% !important;
+        max-width: 330px !important;
+        margin: 1.25rem auto 0 !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .hero-visual {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 250px !important;
+        object-fit: contain !important;
+        border: none !important;
+        filter: none !important;
+    }
+
+    /* Secondary Action Button (Conheça a RACHI Pill) */
+    .hero-video-link {
+        position: relative !important;
+        right: auto !important;
+        bottom: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        width: auto !important;
+        margin: 1rem auto 0 !important;
+        padding: 0.4rem 1.4rem 0.4rem 0.45rem !important;
+        border-radius: 9999px !important;
+        font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        text-decoration: none !important;
+    }
+
+    .hero-video-play {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 50% !important;
+        background: #00a3e0 !important;
+        color: #ffffff !important;
+        display: grid !important;
+        place-items: center !important;
+        box-shadow: 0 2px 8px rgba(0, 163, 224, 0.4) !important;
+    }
+
+    .hero-video-play svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
 
         /* ------------------------------------------------------------ */
         /* COMPREHENSIVE DARK MODE: PARCEIROS, CARDS & SECTIONS         */
