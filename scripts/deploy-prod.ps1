@@ -12,7 +12,7 @@ $projectRoot = (Resolve-Path "$PSScriptRoot\..").Path
 Push-Location "$projectRoot"
 try {
     Write-Host "Criando pacote de deploy..." -ForegroundColor DarkGray
-    tar.exe -czf deploy-pack.tar.gz --exclude="deploy-pack.tar.gz" --exclude="node_modules" --exclude="vendor" --exclude=".git" --exclude="scratch" --exclude=".wrangler" --exclude="caneca" --exclude="bin" --exclude="storage" --exclude="bootstrap/cache/*.php" --exclude=".env" --exclude=".env.*" .
+    tar.exe -czf deploy-pack.tar.gz --exclude="deploy-pack*.tar.gz" --exclude="node_modules" --exclude="vendor" --exclude=".git" --exclude="scratch" --exclude=".wrangler" --exclude="caneca" --exclude="bin" --exclude="storage" --exclude="public/images" --exclude="bootstrap/cache/*.php" --exclude=".env" --exclude=".env.*" .
     Write-Host "Enviando pacote para a VPS via SCP..." -ForegroundColor DarkGray
     scp -B -q -i "$key" deploy-pack.tar.gz "${server}:/opt/rachi/prod/deploy-pack.tar.gz"
     Write-Host "Extraindo arquivos no servidor..." -ForegroundColor DarkGray
