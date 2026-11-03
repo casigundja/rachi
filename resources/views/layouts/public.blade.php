@@ -402,9 +402,14 @@
     <!-- HEADER DUAL-THEME: ESCURO NO TOPO, CLARO AO ROLAR (ESTILO KLASSE.AO) -->
         <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-5 lg:py-6 transition-all duration-300">
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-                <!-- Coluna 1 (Esquerda): Logótipo RACHI -->
-                <div class="flex-1 flex items-center justify-start min-w-0">
-                    <a href="#home" @click.prevent="goToHome(); solutionsOpen = false" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
+                <!-- Coluna 1 (Esquerda): Logótipo RACHI & Voltar -->
+                <div class="flex-1 flex items-center justify-start min-w-0 gap-2 sm:gap-3">
+                    <a href="/" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors group" title="Voltar para a página inicial">
+                        <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                        <span class="sr-only">Voltar para Início</span>
+                    </a>
+                    <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
+                    <a href="/" class="flex items-center group cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
                         <!-- Light Logo (for dark header at top) -->
                         <img src="/images/logo-rachi-light.png" 
                              onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'"

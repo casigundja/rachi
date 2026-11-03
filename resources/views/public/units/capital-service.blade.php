@@ -363,16 +363,23 @@
     <header id="main-site-header" class="site-header px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Brand Logo Oficial RACHI Human Capital -->
-            <a href="/capital" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Voltar à página RACHI Human Capital">
-                <picture class="flex items-center shrink-0">
-                    <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
-                    <img src="/images/areas/rachi-human-capital.png" 
-                         onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
-                         alt="RACHI Human Capital" 
-                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]">
-                </picture>
-            </a>
+            <!-- Logo Oficial & Voltar para Unidade -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="/capital" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#10b981] dark:hover:text-[#10b981] transition-colors group" title="Voltar para RACHI Human Capital">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    <span class="sr-only">Voltar para RACHI Human Capital</span>
+                </a>
+                <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
+                <a href="/capital" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Voltar à página RACHI Human Capital">
+                    <picture class="flex items-center shrink-0">
+                        <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
+                        <img src="/images/areas/rachi-human-capital.png" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
+                             alt="RACHI Human Capital" 
+                             class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]">
+                    </picture>
+                </a>
+            </div>
 
             <!-- Main Navigation -->
             <nav class="hidden lg:flex items-center main-nav-capsule">

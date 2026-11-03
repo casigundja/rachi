@@ -1644,14 +1644,14 @@
         color: #071326 !important;
     }
     html:not(.dark) .hero-home .hero-highlight--gold {
-        color: #f5a800 !important;
-        -webkit-text-fill-color: #f5a800 !important;
+        color: #d97706 !important;
+        -webkit-text-fill-color: #d97706 !important;
         background: none !important;
         text-shadow: none !important;
     }
     html:not(.dark) .hero-home .hero-highlight--blue {
-        color: #00a3e0 !important;
-        -webkit-text-fill-color: #00a3e0 !important;
+        color: #0284c7 !important;
+        -webkit-text-fill-color: #0284c7 !important;
         background: none !important;
         text-shadow: none !important;
     }

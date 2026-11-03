@@ -819,9 +819,9 @@ body {
     box-shadow: none !important;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .rachi-fab-dock {
-        bottom: 1rem !important;
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
         right: 1rem !important;
         gap: 0.45rem !important;
         z-index: 9999 !important;
@@ -831,6 +831,19 @@ body {
         padding: 0 0.65rem !important;
         gap: 0.25rem !important;
         font-size: 0.72rem !important;
+        border-radius: 9999px !important;
+    }
+    html:not(.dark) .rachi-lang-fab {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(203, 213, 225, 0.9) !important;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12) !important;
+        color: #0f172a !important;
+    }
+    html.dark .rachi-lang-fab {
+        background: rgba(15, 23, 42, 0.95) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5) !important;
+        color: #ffffff !important;
     }
     .rachi-lang-fab svg.w-3 {
         display: none !important;
@@ -847,8 +860,30 @@ body {
     .rachi-theme-fab .fab-label {
         display: none !important;
     }
-    .rachi-theme-fab span.fab-light-content,
-    .rachi-theme-fab span.fab-dark-content {
+    html:not(.dark) .rachi-theme-fab {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(203, 213, 225, 0.9) !important;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12) !important;
+        color: #1e293b !important;
+    }
+    html:not(.dark) .rachi-theme-fab span.fab-light-content {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    html:not(.dark) .rachi-theme-fab span.fab-dark-content {
+        display: none !important;
+    }
+    html.dark .rachi-theme-fab {
+        background: rgba(15, 23, 42, 0.95) !important;
+        border: 1px solid rgba(245, 158, 11, 0.35) !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(245, 158, 11, 0.2) !important;
+        color: #fef08a !important;
+    }
+    html.dark .rachi-theme-fab span.fab-light-content {
+        display: none !important;
+    }
+    html.dark .rachi-theme-fab span.fab-dark-content {
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -856,7 +891,7 @@ body {
     .rachi-lang-menu {
         width: 13rem !important;
         right: 0 !important;
-        bottom: 3.2rem !important;
+        bottom: calc(3.2rem + env(safe-area-inset-bottom, 0px)) !important;
     }
 }
 

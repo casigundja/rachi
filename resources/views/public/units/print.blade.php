@@ -2342,6 +2342,31 @@
             .site-header .brand-logo-text { font-size: 1rem !important; }
             
         }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.75rem !important;
+            }
+            html:not(.dark) .site-header {
+                background: rgba(255, 255, 255, 0.98) !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+            }
+            html:not(.dark) .site-header .mobile-menu-btn {
+                background: rgba(0, 0, 0, 0.05) !important;
+                border: 1px solid rgba(0, 0, 0, 0.08) !important;
+                color: #071326 !important;
+            }
+            html.dark .site-header {
+                background: rgba(7, 19, 38, 0.98) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .site-header .mobile-menu-btn {
+                background: rgba(255, 255, 255, 0.08) !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                color: #ffffff !important;
+            }
+        }
 </style>
 
     <!-- Alpine Store & Global Modal Logic (Loaded before body parsing) -->
@@ -2670,16 +2695,23 @@
     <header class="site-header" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex items-center justify-between">
             
-            <!-- Brand Logo Oficial RACHI Print -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
-                <picture class="flex items-center shrink-0">
-                    <source srcset="/images/areas/rachi-print.webp" type="image/webp">
-                    <img src="/images/areas/rachi-print.png" 
-                         onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
-                         alt="RACHI Print" 
-                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(245,168,0,0.35)]">
-                </picture>
-            </a>
+            <!-- Logo Oficial & Voltar para Início -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="/" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#f5a800] dark:hover:text-[#f5a800] transition-colors group" title="Voltar para a página inicial">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    <span class="sr-only">Voltar para Início</span>
+                </a>
+                <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
+                <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
+                    <picture class="flex items-center shrink-0">
+                        <source srcset="/images/areas/rachi-print.webp" type="image/webp">
+                        <img src="/images/areas/rachi-print.png" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-print.png'" 
+                             alt="RACHI Print" 
+                             class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(245,168,0,0.35)]">
+                    </picture>
+                </a>
+            </div>
 
             <!-- Central Nav Links (Capsule System) -->
             <nav class="hidden lg:flex items-center main-nav-capsule">
@@ -2785,8 +2817,8 @@
             </div>
         </div>
 
-        <!-- Mobile Dropdown -->
-        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="lg:hidden bg-white/98 dark:bg-[#080c16]/98 border-b border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-xl transition-colors">
+        <!-- Mobile Dropdown (Floating Overlay) -->
+        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="header-dropdown absolute top-full left-3 right-3 mt-2 lg:hidden bg-white/98 dark:bg-[#080c16]/98 border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-xl rounded-2xl transition-colors z-50">
             <a href="/" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-white">Home</a>
             <div class="pt-2 border-t border-slate-200 dark:border-white/10 space-y-1">
                 <span class="text-xs uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Soluções</span>

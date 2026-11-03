@@ -391,6 +391,31 @@
             .site-header .brand-logo-text { font-size: 1rem !important; }
             
         }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.75rem !important;
+            }
+            html:not(.dark) .site-header {
+                background: rgba(255, 255, 255, 0.98) !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+            }
+            html:not(.dark) .site-header .mobile-menu-btn {
+                background: rgba(0, 0, 0, 0.05) !important;
+                border: 1px solid rgba(0, 0, 0, 0.08) !important;
+                color: #071326 !important;
+            }
+            html.dark .site-header {
+                background: rgba(7, 19, 38, 0.98) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .site-header .mobile-menu-btn {
+                background: rgba(255, 255, 255, 0.08) !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                color: #ffffff !important;
+            }
+        }
 </style>
     <script src="/capital-requests.js?v=20261011"></script>
 </head>
@@ -402,16 +427,23 @@
     <header id="main-site-header" class="site-header px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Brand Logo Oficial RACHI Human Capital -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
-                <picture class="flex items-center shrink-0">
-                    <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
-                    <img src="/images/areas/rachi-human-capital.png" 
-                         onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
-                         alt="RACHI Human Capital" 
-                         class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]">
-                </picture>
-            </a>
+            <!-- Logo Oficial & Voltar para Início -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="/" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#10b981] dark:hover:text-[#10b981] transition-colors group" title="Voltar para a página inicial">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    <span class="sr-only">Voltar para Início</span>
+                </a>
+                <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
+                <a href="/" class="flex items-center gap-2.5 sm:gap-3 group text-decoration-none select-none" title="Ir para a página inicial (Portal RACHI)">
+                    <picture class="flex items-center shrink-0">
+                        <source srcset="/images/areas/rachi-human-capital.webp" type="image/webp">
+                        <img src="/images/areas/rachi-human-capital.png" 
+                             onerror="this.onerror=null; this.src='/images/areas/rachi-human-capital.png'" 
+                             alt="RACHI Human Capital" 
+                             class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]">
+                    </picture>
+                </a>
+            </div>
 
             <!-- Main Navigation -->
             <nav class="hidden lg:flex items-center main-nav-capsule">
@@ -500,13 +532,10 @@
             <div class="flex items-center gap-2.5 sm:gap-3">
                 
 
-                <a href="#solicitar-cotacao" class="btn-cta-emerald group hidden sm:inline-flex">
-                    <i data-lucide="users" class="w-4 h-4"></i>
-                    <span>Consultoria RH</span>
-                </a>
+                
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-white hover:text-[#10b981] focus:outline-none" aria-label="Menu Principal">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-slate-800 dark:text-white hover:text-[#10b981] focus:outline-none" aria-label="Menu Principal">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -514,8 +543,8 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl border-t border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+        <!-- Mobile Menu Dropdown (Floating Overlay) -->
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown absolute top-full left-3 right-3 mt-2 lg:hidden bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl rounded-2xl z-50">
             <a href="/" class="block font-medium py-1.5 text-slate-900 dark:text-white hover:text-[#10b981]">Home</a>
             <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-[#10b981] tracking-wider">Soluções</span>
@@ -539,23 +568,14 @@
             function updateHeaderScroll() {
                 var header = document.getElementById('main-site-header') || document.querySelector('.site-header');
                 if (!header) return;
-                var isDark = document.documentElement.classList.contains('dark');
-                if (isDark) {
-                    header.classList.remove('header-scrolled-light');
-                    header.classList.add('header-top-dark');
-                    return;
-                }
-                if (window.scrollY > 30) {
-                    header.classList.remove('header-top-dark');
-                    header.classList.add('header-scrolled-light');
+                if (window.scrollY > 20) {
+                    header.classList.add('header-scrolled');
                 } else {
-                    header.classList.remove('header-scrolled-light');
-                    header.classList.add('header-top-dark');
+                    header.classList.remove('header-scrolled');
                 }
             }
             window.addEventListener('scroll', updateHeaderScroll, { passive: true });
             window.addEventListener('DOMContentLoaded', updateHeaderScroll);
-            window.addEventListener('rachi-theme-changed', updateHeaderScroll);
             updateHeaderScroll();
         })();
     </script>

@@ -158,16 +158,17 @@
     <header class="sticky top-0 z-50 bg-white/95 dark:bg-[#070f1e]/95 backdrop-blur-xl border-b border-slate-200/90 dark:border-white/10 shadow-[0_4px_25px_rgba(15,23,42,0.08),0_1px_4px_rgba(15,23,42,0.05)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)] transition-colors duration-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
             <!-- Logo & Voltar -->
-            <div class="flex items-center gap-4 sm:gap-6">
-                <a href="/academy" class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] text-sm font-semibold transition-colors group">
-                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-                    <span class="hidden sm:inline">Voltar para Academy</span>
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="/academy" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors group" title="Voltar para Academy">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    <span class="sr-only">Voltar para Academy</span>
                 </a>
                 <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
-                <a href="/" class="flex items-center gap-2.5">
-                    <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 w-auto dark:block hidden">
-                    <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 w-auto dark:hidden block">
-                    <span class="text-xs font-bold tracking-widest px-2 py-0.5 rounded-md bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/20 dark:border-[#00a3e0]/30 uppercase">Academy</span>
+                <a href="/academy" class="flex items-center gap-2.5 select-none" title="RACHI Academy">
+                    <picture class="flex items-center shrink-0">
+                        <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
+                        <img src="/images/areas/rachi-academy.png" onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'" alt="RACHI Academy" class="h-7 sm:h-9 w-auto object-contain">
+                    </picture>
                 </a>
             </div>
 
