@@ -411,9 +411,6 @@
                          alt="RACHI Human Capital" 
                          class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(16,185,129,0.35)]">
                 </picture>
-                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
-                    RACHI <span class="text-[#10b981]">Human Capital</span>
-                </span>
             </a>
 
             <!-- Main Navigation -->

@@ -409,9 +409,6 @@
                              alt="RACHI Academy" 
                              class="h-7 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,80,240,0.35)]">
                     </picture>
-                    <span class="font-display font-black text-sm sm:text-base lg:text-lg tracking-wider text-slate-900 dark:text-white transition-colors whitespace-nowrap">
-                        RACHI <span class="text-[#0050f0] dark:text-[#00a3e0]">Academy</span>
-                    </span>
                 </a>
             </div>
 

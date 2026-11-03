@@ -2597,7 +2597,7 @@
         }
 
 </style>
-    <link rel="stylesheet" href="/css/site.css?v=1790340043">
+    <link rel="stylesheet" href="/css/site.css?v=1793664000">
 </head>
 
 <body x-data="rachiApp()" class="min-h-screen flex flex-col justify-between">
@@ -2867,27 +2867,21 @@
 
             <!-- Mobile Menu Dropdown -->
             <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak
-                class="header-dropdown lg:hidden bg-white/95 dark:bg-[#071326]/95 text-slate-800 dark:text-white backdrop-blur-2xl border-t border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+                class="header-dropdown lg:hidden bg-white dark:bg-[#071326] text-slate-800 dark:text-white border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
                 <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                     class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
-                <div class="border-t border-white/10 pt-2">
+                <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-amber-400 tracking-wider">Sobre Nós</span>
                     <div class="pl-3 mt-1 space-y-1.5">
-                        <a href="#sobre" @click.prevent="scrollToSection('sobre'); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white">Quem somos</a>
-                        <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white">O que fazemos</a>
-                                                <a href="#diferencial" @click.prevent="scrollToSection('diferencial'); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white transition">O nosso diferencial</a>
-                        <a href="#missao" @click.prevent="openIdentityModal(); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white transition">Missão, visão e valores</a>
-<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white">Parceiros</a>
-                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); mobileMenuOpen = false"
-                            class="block text-sm text-slate-400 hover:text-white">Testemunhos</a>
+                        <a href="#sobre" @click.prevent="scrollToSection('sobre'); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Quem somos</a>
+                        <a href="#o-que-fazemos" @click.prevent="scrollToSection('o-que-fazemos'); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">O que fazemos</a>
+                                                <a href="#diferencial" @click.prevent="scrollToSection('diferencial'); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">O nosso diferencial</a>
+                        <a href="#missao" @click.prevent="openIdentityModal(); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">Missão, visão e valores</a>
+<a href="#parceiros" @click.prevent="scrollToSection('parceiros'); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Parceiros</a>
+                        <a href="#depoimentos" @click.prevent="scrollToSection('depoimentos'); mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Testemunhos</a>
                     </div>
                 </div>
-                <div class="border-t border-white/10 pt-2">
+                <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-[#00a3e0] tracking-wider">Soluções</span>
                     <div class="pl-3 mt-1 space-y-1.5">
                         <a href="/capital" @click="mobileMenuOpen = false"
@@ -2934,7 +2928,7 @@
             <!-- HERO SECTION EXACT MATCH TO PRINT & HOM.RACHI.AO -->
             <section id="home" class="hero-home">
                 <!-- Ambient Pulsing Glow behind Hero -->
-                <div class="hero-ambient-orb" aria-hidden="true"></div>
+                
 
                 <div class="container hero-home-container">
                     <div class="hero-content text-center">

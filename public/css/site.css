@@ -10703,8 +10703,19 @@ html.dark .user-menu-badge-inactive {
     /* --- MODO CLARO (EXACT MATCH PRINT 2) --- */
     html:not(.dark) .hero-home,
     body:not(.dark) .hero-home {
-        background: linear-gradient(180deg, #e8f0f7 0%, #edf6f5 35%, #f4f8fb 70%, #ffffff 100%) !important;
+        background: linear-gradient(180deg, #f0f6fa 0%, #edf4f8 40%, #ffffff 100%) !important;
+        background-color: #f0f6fa !important;
+        background-image: none !important;
         color: #071326 !important;
+    }
+
+    html:not(.dark) .hero-home *,
+    body:not(.dark) .hero-home .hero-content,
+    body:not(.dark) .hero-home .hero-title,
+    body:not(.dark) .hero-home .hero-title-line,
+    body:not(.dark) .hero-home .hero-subtitle-box {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
 
     /* Header in Light Mode Mobile */

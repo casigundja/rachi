@@ -531,9 +531,6 @@
                          alt="RACHI Print" 
                          class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(245,168,0,0.35)]">
                 </picture>
-                <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
-                    RACHI <span class="text-[#d97706] dark:text-[#f5a800]">Print</span>
-                </span>
             </a>
 
             <!-- Main Navigation -->
