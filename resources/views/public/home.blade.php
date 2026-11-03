@@ -5835,8 +5835,8 @@
     <script>
         function rachiApp() {
             return {
-                currentUser: @json(auth()->user() ? ['id' => auth()->user()->id, 'nome' => auth()->user()->name, 'email' => auth()->user()->email, 'avatar' => strtoupper(substr(auth()->user()->name, 0, 1)), 'role' => auth()->user()->role ?? 'user'] : null) || (window.AUTH_USER || null),
-                isLoggedIn: {{ auth()->check() ? 'true' : 'false' }},
+                currentUser: null,
+                isLoggedIn: false,
                 currentView: 'public',
                 currentTab: 'home',
                 identityModalOpen: false,
