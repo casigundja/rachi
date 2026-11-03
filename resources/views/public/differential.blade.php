@@ -1125,7 +1125,7 @@
         </section>
 
     </main>
-<footer class="diff-footer py-12 px-6 transition-colors duration-300">
+<footer class="diff-footer pt-12 pb-28 sm:pb-12 px-6 transition-colors duration-300">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">

@@ -10677,10 +10677,16 @@ html.dark .user-menu-badge-inactive {
 @media (max-width: 768px) {
     /* 1. Eliminate any Safari blur/gradient artifact permanently */
     .hero-ambient-orb,
+    .ambient-blur-orb,
+    .ambient-orb,
     .hero-home .hero-content::before,
     .hero-visual-wrap::before,
     html.dark .hero-visual-wrap::after,
-    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
+    div.blur-3xl:not([class*="backdrop-blur"]),
+    div.blur-2xl:not([class*="backdrop-blur"]),
+    div.blur-xl:not([class*="backdrop-blur"]),
+    span.blur-3xl:not([class*="backdrop-blur"]),
+    span.blur-2xl:not([class*="backdrop-blur"]) {
         display: none !important;
         filter: none !important;
         -webkit-filter: none !important;

@@ -1041,7 +1041,7 @@
 
                     <!-- Perfil de Utilizador Executivo & Moderno -->
                     <div class="relative">
-                        <button type="button" @click="userMenuOpen = !userMenuOpen"
+                        <button type="button" @click.stop="userMenuOpen = !userMenuOpen"
                             class="store-user-btn flex items-center gap-1.5 sm:gap-2 py-1.5 px-2 sm:px-3 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all cursor-pointer select-none"
                             title="Conta RACHI">
                             <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-700 dark:text-slate-200 sm:hidden">
@@ -1157,7 +1157,7 @@
                     </button>
 
                     <!-- Mobile Hamburger -->
-                    <button @click="mobileNavOpen = !mobileNavOpen" class="lg:hidden p-1.5 text-slate-600 dark:text-slate-300 hover:text-[#071326] dark:hover:text-white">
+                    <button @click.stop="mobileNavOpen = !mobileNavOpen" class="lg:hidden p-1.5 text-slate-600 dark:text-slate-300 hover:text-[#071326] dark:hover:text-white">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </div>
@@ -1256,7 +1256,7 @@
         </div>
 
         <!-- Mobile Drawer Menu -->
-        <div x-show="mobileNavOpen" x-cloak class="lg:hidden bg-white dark:bg-[#071326] border-t border-slate-200 dark:border-white/10 px-4 py-4 space-y-3 shadow-lg text-slate-800 dark:text-slate-200">
+        <div x-show="mobileNavOpen" @click.outside="mobileNavOpen = false" x-cloak class="lg:hidden bg-white dark:bg-[#071326] border-t border-slate-200 dark:border-white/10 px-4 py-4 space-y-3 shadow-lg text-slate-800 dark:text-slate-200">
             <div class="font-bold text-xs uppercase text-slate-400 tracking-wider">Departamentos</div>
             <div class="grid grid-cols-2 gap-2">
                 <template x-for="cat in categories" :key="cat.id">
@@ -2460,7 +2460,7 @@
     <!-- ============================================================== -->
     <!-- 13. RODAPÉ E-COMMERCE COMPLETO (DUAL-THEME: LIGHT & DARK)       -->
     <!-- ============================================================== -->
-    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-14 pb-10 border-t border-slate-200 dark:border-white/10 transition-colors duration-300 mt-12">
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-14 pb-28 sm:pb-12 border-t border-slate-200 dark:border-white/10 transition-colors duration-300 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-200 dark:border-white/10">

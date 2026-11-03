@@ -838,7 +838,14 @@ body {
     html.dark header#main-site-header {
         background: #071326 !important;
     }
-    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-3xl"], [class*="blur-2xl"] {
+    .hero-ambient-orb,
+    .ambient-blur-orb,
+    .ambient-orb,
+    div.blur-3xl:not([class*="backdrop-blur"]),
+    div.blur-2xl:not([class*="backdrop-blur"]),
+    div.blur-xl:not([class*="backdrop-blur"]),
+    span.blur-3xl:not([class*="backdrop-blur"]),
+    span.blur-2xl:not([class*="backdrop-blur"]) {
         display: none !important;
         filter: none !important;
         -webkit-filter: none !important;

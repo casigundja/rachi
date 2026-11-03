@@ -1590,10 +1590,16 @@
 @media (max-width: 768px) {
     /* 1. Eliminate any Safari blur/gradient artifact permanently */
     .hero-ambient-orb,
+    .ambient-blur-orb,
+    .ambient-orb,
     .hero-home .hero-content::before,
     .hero-visual-wrap::before,
     html.dark .hero-visual-wrap::after,
-    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
+    div.blur-3xl:not([class*="backdrop-blur"]),
+    div.blur-2xl:not([class*="backdrop-blur"]),
+    div.blur-xl:not([class*="backdrop-blur"]),
+    span.blur-3xl:not([class*="backdrop-blur"]),
+    span.blur-2xl:not([class*="backdrop-blur"]) {
         display: none !important;
         filter: none !important;
         -webkit-filter: none !important;
@@ -2751,7 +2757,7 @@
 
                     <!-- Entrar / Perfil do Utilizador Autenticado (Com Template x-if para remoção garantida do DOM quando autenticado) -->
                     <template x-if="!currentUser">
-                        <button @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
+                        <button @click.stop="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
                                 class="group-hover:translate-x-0.5 transition-transform">
@@ -5123,7 +5129,7 @@
 
 
                 <!-- FOOTER CORPORATIVO OFICIAL RACHI -->
-        <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 mt-20">
+        <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-16 pb-28 sm:pb-12 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                     <div>
@@ -5829,8 +5835,8 @@
     <script>
         function rachiApp() {
             return {
-                currentUser: null,
-                isLoggedIn: false,
+                currentUser: @json(auth()->user() ? ['id' => auth()->user()->id, 'nome' => auth()->user()->name, 'email' => auth()->user()->email, 'avatar' => strtoupper(substr(auth()->user()->name, 0, 1)), 'role' => auth()->user()->role ?? 'user'] : null) || (window.AUTH_USER || null),
+                isLoggedIn: {{ auth()->check() ? 'true' : 'false' }},
                 currentView: 'public',
                 currentTab: 'home',
                 identityModalOpen: false,
