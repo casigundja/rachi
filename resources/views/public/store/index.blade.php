@@ -2460,83 +2460,119 @@
     <!-- ============================================================== -->
     <!-- 13. RODAPÉ E-COMMERCE COMPLETO (DUAL-THEME: LIGHT & DARK)       -->
     <!-- ============================================================== -->
-    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-14 pb-28 sm:pb-12 border-t border-slate-200 dark:border-white/10 transition-colors duration-300 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-slate-200 dark:border-white/10">
+    <footer class="bg-slate-100 dark:bg-[#071326] text-slate-700 dark:text-slate-300 pt-10 sm:pt-14 pb-28 sm:pb-12 border-t border-slate-200 dark:border-white/10 transition-colors duration-300 mt-16 sm:mt-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="lg:col-span-2">
-                    <a href="/" class="inline-block mb-3" title="RACHI — Ir para a página inicial">
-                        <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-10 w-auto object-contain dark:hidden" onerror="this.src='/images/logo-rachi-dark.png'">
-                        <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-10 w-auto object-contain hidden dark:block" onerror="this.src='/images/logo-rachi-light.png'">
-                    </a>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
-                        A Loja RACHI Tec é o canal oficial de suprimentos corporativos, equipamentos de informática, cabos, redes e acessórios de tecnologia da RACHI em Angola.
-                    </p>
-                    <div class="mt-4 text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                        <p>📍 <strong class="text-slate-800 dark:text-slate-200">Localização:</strong> Rua Ndunduma, Miramar – Luanda (Por detrás do BFA)</p>
-                        <p>📧 <strong class="text-slate-800 dark:text-slate-200">Email de Vendas:</strong> tec@rachi.ao / loja@rachi.ao</p>
-                        <p>🕒 <strong class="text-slate-800 dark:text-slate-200">Atendimento:</strong> Segunda a Sexta, 08h às 17h</p>
+                <!-- 1. BLOCO SUPERIOR: IDENTIDADE & APOIO AO CLIENTE -->
+                <div class="space-y-3.5">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <img src="/images/logo-rachi.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain dark:hidden" onerror="this.onerror=null; this.src='/images/logo-rachi-dark.png'">
+                            <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 sm:h-9 w-auto object-contain hidden dark:block" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
+                            <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight">Loja RACHI Tec — Loja Corporativa Oficial</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-2xl leading-relaxed">
+                            Canal oficial de suprimentos corporativos, equipamentos de informática, cabos, redes e tecnologia da RACHI em Angola.
+                        </p>
+                    </div>
+
+                    <div class="pt-1">
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Apoio ao Cliente & Vendas</h4>
+                        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 flex flex-wrap items-center gap-x-4 gap-y-1">
+                            <a href="https://wa.me/244923000001" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold transition-colors">
+                                <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.396-9.416c-4.284 0-7.766 3.481-7.766 7.766 0 1.371.357 2.658 1.018 3.782l-1.082 3.95 4.053-1.063c1.076.598 2.316.931 3.777.931 4.284 0 7.766-3.482 7.766-7.766 0-4.284-3.482-7.766-7.766-7.766z"/></svg>
+                                <span>Atendimento Comercial WhatsApp</span>
+                            </a>
+                            <span class="text-slate-400 dark:text-slate-600 hidden sm:inline">•</span>
+                            <span class="text-slate-500 dark:text-slate-400">Segunda a Sexta, 08h às 17h</span>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Departamentos</h4>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="#catalogo" @click="selectCategory('informatica')" class="hover:text-slate-900 dark:hover:text-white transition">Laptops &amp; Computadores</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('conectividade')" class="hover:text-slate-900 dark:hover:text-white transition">Cabos Console &amp; Redes</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('gadgets')" class="hover:text-slate-900 dark:hover:text-white transition">Smartwatches &amp; TV Box</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('audio')" class="hover:text-slate-900 dark:hover:text-white transition">Áudio &amp; Consumíveis</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('promocional')" class="hover:text-slate-900 dark:hover:text-white transition">Material Promocional</a></li>
-                        <li><a href="#catalogo" @click="selectCategory('otaku')" class="hover:text-slate-900 dark:hover:text-white transition">Universo Otaku &amp; Anime</a></li>
+                <!-- LINHA DIVISÓRIA -->
+                <div class="border-t border-slate-200/80 dark:border-white/10 my-6"></div>
 
-                    </ul>
-                </div>
+                <!-- 2. BLOCO MÉDIO -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 sm:gap-8">
+                    <!-- Sede & Contactos -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Sede &amp; Contactos</h4>
+                        <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                            <p class="flex items-start gap-2.5">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span>Rua Ndunduma, Miramar – Luanda, Angola (Por detrás do BFA)</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                <span>+244 972 888 585 / 923 000 001</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <span>loja@rachi.ao / tec@rachi.ao</span>
+                            </p>
+                        </div>
+                    </div>
 
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Atendimento ao Cliente</h4>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                    <!-- Formas de Pagamento -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Formas de Pagamento</h4>
+                        <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                            <p class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                <span>Multicaixa Express / TPA</span>
+                            </p>
+                            <p class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+                                <span>Transferência Bancária (IBAN)</span>
+                            </p>
+                            <p class="flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400">
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span>Facturação a 30 dias (Empresas)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 3 -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Departamentos</h4>
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                        <li><a href="/loja#catalogo" class="hover:text-amber-500 dark:hover:text-amber-400 transition font-medium">Laptops &amp; Computadores</a></li>
+                        <li><a href="/loja#catalogo" class="hover:text-amber-500 dark:hover:text-amber-400 transition font-medium">Cabos Console &amp; Redes</a></li>
+                        <li><a href="/loja#catalogo" class="hover:text-amber-500 dark:hover:text-amber-400 transition font-medium">Smartwatches &amp; TV Box</a></li>
+                        <li><a href="/loja#catalogo" class="hover:text-amber-500 dark:hover:text-amber-400 transition font-medium">Áudio &amp; Consumíveis</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Coluna 4 -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Atendimento ao Cliente</h4>
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Falar Connosco</a></li>
                         <li><a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Pedir Cotação em Lote</a></li>
                         <li><a href="/termos" class="hover:text-slate-900 dark:hover:text-white transition">Termos &amp; Condições</a></li>
                         <li><a href="/privacidade" class="hover:text-slate-900 dark:hover:text-white transition">Política de Privacidade</a></li>
-                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition font-semibold">Reclamações e Denúncia</a></li>
-                    </ul>
+                        <li><a href="/reclamacoes-e-denuncia" class="hover:text-slate-900 dark:hover:text-white transition">Reclamações e Denúncia</a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d97706] dark:text-[#f5a800] mb-4 font-black">Formas de Pagamento</h4>
-                    <div class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="credit-card" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
-                            <span>Multicaixa Express / TPA</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="arrow-left-right" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
-                            <span>Transferência Bancária (IBAN)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="file-check" class="w-4 h-4 text-[#d97706] dark:text-[#f5a800]"></i>
-                            <span>Facturação a 30 dias (Empresas)</span>
-                        </div>
+                <!-- LINHA DIVISÓRIA -->
+                <div class="border-t border-slate-200/80 dark:border-white/10 my-6"></div>
+
+                <!-- 3. BLOCO INFERIOR: COPYRIGHT CENTRADO -->
+                <div class="flex flex-col items-center justify-center text-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                    <p>&copy; 2026 <strong class="text-slate-800 dark:text-slate-200">RACHI Tec</strong> — Loja Corporativa Oficial. Todos os direitos reservados.</p>
+                    <div class="flex items-center justify-center gap-3 text-xs pt-1">
+                        <a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Ecossistema RACHI</a>
+                        <span>•</span>
+                        <a href="/loja" class="hover:text-slate-900 dark:hover:text-white transition">Loja Online</a>
+                        <span>•</span>
+                        <a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Suporte</a>
                     </div>
                 </div>
 
             </div>
-
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-                <p>&copy; 2026 RACHI Tec — Loja Corporativa Oficial. Todos os direitos reservados.</p>
-                <div class="flex items-center gap-3">
-                    <a href="/" class="hover:text-slate-900 dark:hover:text-white transition">Ecossistema RACHI</a>
-                    <span>•</span>
-                    <a href="/tec" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec</a>
-                    <span>•</span>
-                    <a href="/contacto" class="hover:text-slate-900 dark:hover:text-white transition">Suporte</a>
-                </div>
-            </div>
-
-        </div>
-    </footer>
+        </footer>
 
     <!-- ============================================================== -->
     <!-- JAVASCRIPT & APP LOGIC (ALPINE.JS)                             -->
