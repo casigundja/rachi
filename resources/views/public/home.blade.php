@@ -2560,7 +2560,7 @@
                 object-fit: contain !important;
             }
             .site-header .btn-entrar-nav {
-                display: inline-flex !important;
+                display: inline-flex;
                 align-items: center !important;
                 justify-content: center !important;
                 height: 34px !important;
@@ -2749,17 +2749,19 @@
                 <div class="header-col-auth w-auto lg:w-[140px] flex-shrink-0 flex items-center justify-end gap-2 sm:gap-3 z-10">
                     
 
-                    <!-- Entrar / Perfil do Utilizador Autenticado (Renderizado estaticamente para zero layout shift) -->
-                    <button x-show="!currentUser" @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-                            class="group-hover:translate-x-0.5 transition-transform">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                            <polyline points="10 17 15 12 10 7" />
-                            <line x1="15" y1="12" x2="3" y2="12" />
-                        </svg>
-                        <span>ENTRAR</span>
-                    </button>
+                    <!-- Entrar / Perfil do Utilizador Autenticado (Com Template x-if para remoção garantida do DOM quando autenticado) -->
+                    <template x-if="!currentUser">
+                        <button @click="loginModal = true; authTab = 'login'; authError = ''" class="btn-entrar-nav group">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                class="group-hover:translate-x-0.5 transition-transform">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                                <polyline points="10 17 15 12 10 7" />
+                                <line x1="15" y1="12" x2="3" y2="12" />
+                            </svg>
+                            <span>ENTRAR</span>
+                        </button>
+                    </template>
 
                     <div x-show="currentUser" x-cloak class="relative" x-data="{ userMenuDropdown: false }" @click.away="userMenuDropdown = false">
                         <button @click="userMenuDropdown = !userMenuDropdown"

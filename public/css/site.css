@@ -10609,7 +10609,7 @@ html.dark .user-menu-badge-inactive {
 
     /* Unified Sleek Action Buttons (Matching Apple / Stripe Glass Capsule Standards) */
     .site-header .btn-entrar-nav {
-        display: inline-flex !important;
+        display: inline-flex;
         align-items: center !important;
         justify-content: center !important;
         height: 34px !important;
@@ -10718,6 +10718,13 @@ html.dark .user-menu-badge-inactive {
     body:not(.dark) .hero-home .hero-subtitle-box {
         -webkit-backdrop-filter: none !important;
         backdrop-filter: none !important;
+    }
+
+    .site-header .btn-entrar-nav[style*="display: none"],
+    .site-header .btn-entrar-nav[style*="display:none"],
+    .btn-entrar-nav[style*="display: none"],
+    .btn-entrar-nav[style*="display:none"] {
+        display: none !important;
     }
 
     /* Header in Light Mode Mobile */

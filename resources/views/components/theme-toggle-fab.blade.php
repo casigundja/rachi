@@ -836,6 +836,12 @@ body {
         filter: none !important;
         -webkit-filter: none !important;
     }
+    .site-header .btn-entrar-nav[style*="display: none"],
+    .site-header .btn-entrar-nav[style*="display:none"],
+    .btn-entrar-nav[style*="display: none"],
+    .btn-entrar-nav[style*="display:none"] {
+        display: none !important;
+    }
     .rachi-fab-dock {
         bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
         right: 1rem !important;
