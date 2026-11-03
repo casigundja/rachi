@@ -10728,7 +10728,10 @@ html.dark .user-menu-badge-inactive {
     }
 
     /* Header in Light Mode Mobile */
-    html:not(.dark) .site-header {
+    html:not(.dark) .site-header,
+    html:not(.dark) header#main-site-header,
+    .site-header,
+    header#main-site-header {
         background: #ffffff !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
         -webkit-backdrop-filter: none !important;
@@ -10813,7 +10816,8 @@ html.dark .user-menu-badge-inactive {
     }
 
     /* Header in Dark Mode Mobile */
-    html.dark .site-header {
+    html.dark .site-header,
+    html.dark header#main-site-header {
         background: #071326 !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
         -webkit-backdrop-filter: none !important;

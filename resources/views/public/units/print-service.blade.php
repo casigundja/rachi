@@ -641,7 +641,7 @@
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-slate-700 dark:text-white hover:text-amber-500 focus:outline-none" aria-label="Menu Principal">
+                <button @click.stop="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-slate-700 dark:text-white hover:text-amber-500 focus:outline-none" aria-label="Menu Principal">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -650,7 +650,7 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden bg-white/98 dark:bg-[#080c16]/98 backdrop-blur-2xl border-b border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl transition-colors">
+        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="header-dropdown lg:hidden absolute top-full left-3 right-3 mt-2 bg-white/98 dark:bg-[#080c16]/98 backdrop-blur-2xl border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl rounded-2xl transition-colors z-50">
             <a href="/" class="block font-medium py-1.5 text-slate-800 dark:text-white hover:text-amber-600 dark:hover:text-amber-400">Home</a>
             <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-amber-600 dark:text-amber-400 tracking-wider">Soluções</span>

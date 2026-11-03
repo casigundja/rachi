@@ -503,7 +503,10 @@
         }
 
         @media (max-width: 768px) {
-            .site-header {
+            .site-header,
+            html:not(.dark) .site-header,
+            html.dark .site-header,
+            header#main-site-header {
                 padding-top: 0.75rem !important;
                 padding-bottom: 0.75rem !important;
                 -webkit-backdrop-filter: none !important;
@@ -570,7 +573,7 @@
                 
                 <!-- Soluções Dropdown -->
                 <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false" >
-                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                    <button @click.stop="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active cursor-pointer">
                         <span>Soluções</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#00a3e0]' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -652,7 +655,7 @@
                 
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl hover:text-[#00a3e0] focus:outline-none" aria-label="Menu Principal">
+                <button @click.stop="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl hover:text-[#00a3e0] focus:outline-none cursor-pointer" aria-label="Menu Principal">
                     <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
@@ -661,7 +664,7 @@
         </div>
 
         <!-- Mobile Menu Dropdown (Floating Overlay) -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak class="header-dropdown absolute top-full left-3 right-3 mt-2 lg:hidden bg-white/98 dark:bg-[#071326]/98 text-slate-800 dark:text-white backdrop-blur-2xl border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl rounded-2xl transition-colors z-50">
+        <div x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false" x-cloak class="header-dropdown absolute top-full left-3 right-3 mt-2 lg:hidden bg-white/98 dark:bg-[#071326]/98 text-slate-800 dark:text-white backdrop-blur-2xl border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl rounded-2xl transition-colors z-50">
             <a href="/" class="block font-medium py-1.5 text-slate-800 dark:text-white hover:text-[#00a3e0]">Home</a>
             <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-[#00a3e0] tracking-wider">Soluções</span>

@@ -230,18 +230,46 @@
         /* HEADER DUAL-THEME STYLES (COR E COMPORTAMENTO DO PORTAL)       */
         /* ============================================================== */
         .site-header {
-            position: fixed !important;
+            position: sticky !important;
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
+            transition: all 0.3s ease !important;
+        }
+        html.dark .site-header {
             background: rgba(7, 19, 38, 0.94) !important;
+            backdrop-filter: blur(20px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45) !important;
+        }
+        html:not(.dark) .site-header {
+            background: rgba(255, 255, 255, 0.96) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-            transition: all 0.3s ease !important;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+            box-shadow: 0 4px 25px rgba(15, 23, 42, 0.06) !important;
+        }
+        @media (max-width: 768px) {
+            .site-header,
+            html:not(.dark) .site-header,
+            html.dark .site-header,
+            header#main-site-header {
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+            }
+            html:not(.dark) .site-header,
+            html:not(.dark) header#main-site-header {
+                background: #ffffff !important;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+            }
+            html.dark .site-header,
+            html.dark header#main-site-header {
+                background: #071326 !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
         }
 
         .brand-logo-img {
@@ -389,7 +417,7 @@
     <!-- 1. NAVBAR SUPERIOR OFICIAL (EXATA DO MODELO DO PRINT DA ALURA) -->
     <!-- ============================================================== -->
     <header id="main-site-header"
-        class="relative w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
+        class="site-header relative w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
 
             <!-- Logo Oficial & Voltar para Início -->
@@ -422,6 +450,69 @@
                 class="hidden lg:flex items-center justify-center bg-slate-100 dark:bg-white/[0.08] border border-slate-200/90 dark:border-white/15 rounded-full p-1 shadow-xs dark:shadow-md shadow-slate-950/20 gap-0.5 text-[13px] tracking-tight transition-all">
                 <a href="#home" class="px-4 py-1.5 rounded-full bg-white dark:bg-white/15 text-[#0050f0] dark:text-white font-bold transition-all shadow-xs border border-slate-200/60 dark:border-transparent">Home</a>
 
+                <!-- Soluções Dropdown -->
+                <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false">
+                    <button type="button" @click.stop="openSol = !openSol" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all flex items-center gap-1.5 select-none focus:outline-none cursor-pointer" :class="openSol ? 'bg-white shadow-xs font-bold dark:bg-white/15 text-[#0050f0] dark:text-white' : ''">
+                        <span>Soluções</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-[#0050f0]' : ''">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div x-show="openSol" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         x-cloak 
+                         class="header-dropdown absolute top-full left-0 mt-3 w-80 bg-white/95 dark:bg-[#071326]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-2xl shadow-2xl p-2.5 z-50 text-sm space-y-1.5 text-left">
+                        <a href="/capital" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-500/15 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-300 transition group">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-xs">01</span>
+                                <div>
+                                    <div class="font-bold text-xs dropdown-title">RACHI Human Capital</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Pessoas &amp; Gestão</div>
+                                </div>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                        </a>
+
+                        <a href="/academy" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-blue-50 dark:bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] transition group font-bold">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] flex items-center justify-center font-black text-xs">02</span>
+                                <div>
+                                    <div class="font-bold text-xs dropdown-title text-[#0050f0] dark:text-[#00a3e0]">RACHI Academy</div>
+                                    <div class="text-[11px] text-[#0050f0]/80 dark:text-[#00a3e0]/80 dropdown-desc">Capacitação &amp; Ensino</div>
+                                </div>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-100 transition"></i>
+                        </a>
+
+                        <a href="/tec" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-sky-50 dark:hover:bg-sky-500/15 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-300 transition group">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center font-black text-xs">03</span>
+                                <div>
+                                    <div class="font-bold text-xs dropdown-title">RACHI Tec</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Sistemas &amp; TI</div>
+                                </div>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                        </a>
+
+                        <a href="/print" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-500/15 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-300 transition group">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-xs">04</span>
+                                <div>
+                                    <div class="font-bold text-xs dropdown-title">RACHI Print</div>
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 dropdown-desc">Gráfica &amp; Produção</div>
+                                </div>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition"></i>
+                        </a>
+                    </div>
+                </div>
+
                 <a href="#cursos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Curso Especializado</a>
                 <a href="#modalidades" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Modalidades &amp; Preços</a>
                 <a href="#contactos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Contactos</a>
@@ -447,8 +538,8 @@
                 </a>
 
                 <!-- Botão Menu Mobile -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen"
-                    class="lg:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 dark:text-white flex items-center justify-center transition border border-slate-200/80 dark:border-white/[0.12] cursor-pointer"
+                <button @click.stop="mobileMenuOpen = !mobileMenuOpen"
+                    class="mobile-menu-btn lg:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 dark:text-white flex items-center justify-center transition border border-slate-200/80 dark:border-white/[0.12] cursor-pointer"
                     aria-label="Abrir Menu">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -467,7 +558,7 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
              x-transition:leave-end="opacity-0 -translate-y-2 scale-98"
-             @click.away="mobileMenuOpen = false" 
+             @click.outside="mobileMenuOpen = false" 
              x-cloak
              class="header-dropdown lg:hidden absolute top-full left-3 right-3 sm:left-6 sm:right-6 mt-1.5 p-5 bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl rounded-2xl border border-slate-200/90 dark:border-white/15 space-y-3 text-sm shadow-2xl transition-all z-50 text-slate-800 dark:text-white">
             

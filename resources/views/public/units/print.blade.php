@@ -2344,12 +2344,18 @@
         }
 
         @media (max-width: 768px) {
-            .site-header {
+            .site-header,
+            html:not(.dark) .site-header,
+            html.dark .site-header,
+            header#navbar {
                 padding-top: 0.75rem !important;
                 padding-bottom: 0.75rem !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
             }
-            html:not(.dark) .site-header {
-                background: rgba(255, 255, 255, 0.98) !important;
+            html:not(.dark) .site-header,
+            html:not(.dark) header#navbar {
+                background: #ffffff !important;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
             }
             html:not(.dark) .site-header .mobile-menu-btn {
@@ -2721,7 +2727,7 @@
                 
                 <!-- Solutions Dropdown -->
                 <div class="relative" x-data="{ openSol: false }" @click.outside="openSol = false" @keydown.escape.window="openSol = false">
-                    <button @click="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active">
+                    <button @click.stop="openSol = !openSol" class="nav-link flex items-center gap-1.5 focus:outline-none active cursor-pointer">
                         <span>Soluções</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="opacity-70 transition-transform duration-200" :class="openSol ? 'rotate-180 text-amber-500' : ''">
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -2811,7 +2817,7 @@
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors" aria-label="Abrir menu">
+                <button @click.stop="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl transition-colors cursor-pointer" aria-label="Abrir menu">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>

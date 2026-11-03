@@ -821,14 +821,21 @@ body {
 
 @media (max-width: 768px) {
     /* UNIVERSAL SAFARI/WEBKIT GPU TILE DEFENSE ON MOBILE */
-    .site-header {
+    .site-header,
+    html:not(.dark) .site-header,
+    html.dark .site-header,
+    header#main-site-header,
+    html:not(.dark) header#main-site-header,
+    html.dark header#main-site-header {
         -webkit-backdrop-filter: none !important;
         backdrop-filter: none !important;
     }
-    html:not(.dark) .site-header {
+    html:not(.dark) .site-header,
+    html:not(.dark) header#main-site-header {
         background: #ffffff !important;
     }
-    html.dark .site-header {
+    html.dark .site-header,
+    html.dark header#main-site-header {
         background: #071326 !important;
     }
     .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-3xl"], [class*="blur-2xl"] {

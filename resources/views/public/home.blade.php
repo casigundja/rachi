@@ -2645,7 +2645,7 @@
 
                     <!-- Sobre Nós Dropdown -->
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false; solutionsOpen = false" @keydown.escape.window="open = false; solutionsOpen = false" >
-                        <button type="button" @click="open = !open; solutionsOpen = false"
+                        <button type="button" @click.stop="open = !open; solutionsOpen = false"
                             class="nav-link flex items-center gap-1.5 focus:outline-none"
                             :class="open ? 'nav-link-open' : ''">
                             <span>Sobre Nós</span>
@@ -2763,8 +2763,8 @@
                         </button>
                     </template>
 
-                    <div x-show="currentUser" x-cloak class="relative" x-data="{ userMenuDropdown: false }" @click.away="userMenuDropdown = false">
-                        <button @click="userMenuDropdown = !userMenuDropdown"
+                    <div x-show="currentUser" x-cloak class="relative" x-data="{ userMenuDropdown: false }" @click.outside="userMenuDropdown = false">
+                        <button @click.stop="userMenuDropdown = !userMenuDropdown"
                             class="user-menu-capsule flex items-center gap-2 sm:gap-2.5 py-1.5 pl-2 pr-3 sm:pr-3.5 rounded-full transition-all duration-200 cursor-pointer group"
                             aria-label="Menu do Utilizador"
                             :aria-expanded="userMenuDropdown">
@@ -2863,7 +2863,7 @@
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    <button @click.stop="mobileMenuOpen = !mobileMenuOpen"
                         class="mobile-menu-btn lg:hidden p-2 rounded-xl text-slate-800 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] focus:outline-none transition"
                         aria-label="Menu Principal">
                         <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2882,9 +2882,9 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                  x-transition:leave-end="opacity-0 -translate-y-2 scale-98"
-                 @click.away="mobileMenuOpen = false" 
+                 @click.outside="mobileMenuOpen = false" 
                  x-cloak
-                class="header-dropdown lg:hidden bg-white dark:bg-[#071326] text-slate-800 dark:text-white border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
+                class="header-dropdown lg:hidden absolute top-full left-3 right-3 sm:left-6 sm:right-6 bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl text-slate-800 dark:text-white border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl z-50">
                 <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                     class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
                 <div class="border-t border-slate-200 dark:border-white/10 pt-2">

@@ -507,8 +507,8 @@
      x-transition:leave-start="opacity-100 translate-y-0 scale-100"
      x-transition:leave-end="opacity-0 -translate-y-3 scale-[0.99]"
      @keydown.escape.window="solutionsOpen = false"
-     @click.window="if (solutionsOpen && !($event.target.closest && $event.target.closest('#btn-nav-solutions, .solutions-trigger-btn, .solutions-unit-card'))) { solutionsOpen = false; }"
-     @click="if (!$event.target.closest('.solutions-unit-card, .solutions-close-btn')) { solutionsOpen = false; }" class="solutions-mega-panel"
+     @click.outside="solutionsOpen = false"
+     class="solutions-mega-panel"
      x-cloak>
 
     <!-- ============================================================== -->
