@@ -544,10 +544,10 @@
                 <div class="border-t border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-[#00a3e0] tracking-wider">Soluções</span>
                     <div class="pl-3 mt-1 space-y-1.5">
-                        <a href="/capital" @click.prevent="openUnitPage('capital')" class="block text-sm text-slate-400 hover:text-emerald-400">01 RACHI Human Capital (Pessoas &amp; Gestão)</a>
-                        <a href="/academy" @click.prevent="openUnitPage('academy')" class="block text-sm text-slate-400 hover:text-indigo-400">02 RACHI Academy (Capacitação &amp; Ensino)</a>
-                        <a href="/tec" @click.prevent="openUnitPage('tec')" class="block text-sm text-slate-400 hover:text-sky-400">03 RACHI Tec (Tecnologia &amp; TI)</a>
-                        <a href="/print" @click.prevent="openUnitPage('print')" class="block text-sm text-slate-400 hover:text-amber-400">04 RACHI Print (Gráfica &amp; Produção)</a>
+                        <a href="/capital" @click.prevent="openUnitPage('capital')" class="block text-sm text-slate-400 hover:text-emerald-400">RACHI Human Capital</a>
+                        <a href="/academy" @click.prevent="openUnitPage('academy')" class="block text-sm text-slate-400 hover:text-indigo-400">RACHI Academy</a>
+                        <a href="/tec" @click.prevent="openUnitPage('tec')" class="block text-sm text-slate-400 hover:text-sky-400">RACHI Tec</a>
+                        <a href="/print" @click.prevent="openUnitPage('print')" class="block text-sm text-slate-400 hover:text-amber-400">RACHI Print</a>
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2 space-y-2">

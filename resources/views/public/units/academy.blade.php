@@ -389,39 +389,38 @@
     <!-- 1. NAVBAR SUPERIOR OFICIAL (EXATA DO MODELO DO PRINT DA ALURA) -->
     <!-- ============================================================== -->
     <header
-        class="w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-4 sm:px-6 lg:px-8 py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        class="w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
 
             <!-- Logo Oficial & Voltar para Início -->
-            <div class="flex items-center gap-3 sm:gap-5 shrink-0">
-                <a href="/" class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] text-xs sm:text-sm font-semibold transition-colors group" title="Voltar para a página inicial">
-                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-                    <span class="hidden sm:inline">Voltar para Início</span>
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <a href="/" class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors group" title="Voltar para a página inicial">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    <span class="sr-only">Voltar para Início</span>
                 </a>
                 <span class="h-5 w-px bg-slate-200 dark:bg-white/10 hidden sm:block"></span>
                 <a href="/"
-                    class="flex items-center gap-2.5 sm:gap-3 group cursor-pointer transition-transform duration-200 hover:scale-[1.02] select-none"
+                    class="flex items-center gap-2 sm:gap-2.5 group cursor-pointer transition-transform duration-200 hover:scale-[1.02] select-none"
                     title="Ir para a página inicial (Portal RACHI)">
                     <picture class="flex items-center shrink-0">
                         <source srcset="/images/areas/rachi-academy.webp" type="image/webp">
                         <img src="/images/areas/rachi-academy.png" 
                              onerror="this.onerror=null; this.src='/images/areas/rachi-academy.png'" 
                              alt="RACHI Academy" 
-                             class="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,80,240,0.35)]">
+                             class="h-7 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,80,240,0.35)]">
                     </picture>
-                    <span class="font-display font-black text-base sm:text-lg tracking-wider text-slate-900 dark:text-white transition-colors">
+                    <span class="font-display font-black text-sm sm:text-base lg:text-lg tracking-wider text-slate-900 dark:text-white transition-colors whitespace-nowrap">
                         RACHI <span class="text-[#0050f0] dark:text-[#00a3e0]">Academy</span>
                     </span>
                 </a>
             </div>
 
-            
             @php
                 $catalogCourses = (isset($courses) && $courses->count() > 0)
                     ? $courses
                     : \App\Models\Course::where('status', 'published')->with('category')->get();
             @endphp
-<!-- Menu Central Cápsula Escura Premium -->
+            <!-- Menu Central Cápsula Escura Premium -->
             <nav
                 class="hidden lg:flex items-center justify-center bg-slate-100 dark:bg-white/[0.08] border border-slate-200/90 dark:border-white/15 rounded-full p-1 shadow-xs dark:shadow-md shadow-slate-950/20 gap-0.5 text-[13px] tracking-tight transition-all">
                 <a href="#home" class="px-4 py-1.5 rounded-full bg-white dark:bg-white/15 text-[#0050f0] dark:text-white font-bold transition-all shadow-xs border border-slate-200/60 dark:border-transparent">Home</a>
@@ -431,30 +430,28 @@
                 <a href="#contactos" class="px-3.5 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 font-semibold transition-all">Contactos</a>
             </nav>
 
-            <!-- Botões da Direita (Portal do Aluno, Tema, Busca, CTA, Menu Mobile) -->
-            <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-                <!-- Botão Portal do Aluno (Padrão Unificado RACHI Academy) -->
-                <a href="/academy/login" class="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 hover:bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/20 dark:border-[#00a3e0]/30 transition inline-flex items-center gap-1.5 shadow-sm">
+            <!-- Botões da Direita -->
+            <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+                <!-- Botão Portal do Aluno -->
+                <a href="/academy/login" class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#0050f0]/10 dark:bg-[#00a3e0]/10 hover:bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] border border-[#0050f0]/20 dark:border-[#00a3e0]/30 transition inline-flex items-center gap-1.5 shadow-sm whitespace-nowrap">
                     <i data-lucide="user" class="w-3.5 h-3.5"></i>
-                    <span>Portal do Aluno</span>
+                    <span class="hidden sm:inline">Portal do Aluno</span>
+                    <span class="sm:hidden">Portal</span>
                 </a>
-
-                
 
                 <!-- Botão Busca Circular -->
                 <a href="#cursos"
-                    class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all duration-200 border border-slate-200/80 hover:border-[#0050f0]/40 dark:border-white/[0.12] dark:hover:border-[#00a3e0]/40 shadow-sm hover:shadow-md hover:shadow-[#0050f0]/15 dark:hover:shadow-[#00a3e0]/15 hover:-translate-y-0.5 group"
+                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-all duration-200 border border-slate-200/80 hover:border-[#0050f0]/40 dark:border-white/[0.12] dark:hover:border-[#00a3e0]/40 shadow-sm"
                     title="Buscar Cursos">
-                    <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </a>
 
-
-                <!-- Botão Menu Mobile (Apenas em telas menores que lg!) -->
+                <!-- Botão Menu Mobile -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen"
-                    class="lg:hidden w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 dark:text-white flex items-center justify-center transition border border-slate-200/80 dark:border-white/[0.12] cursor-pointer"
+                    class="lg:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.12] text-slate-700 dark:text-white flex items-center justify-center transition border border-slate-200/80 dark:border-white/[0.12] cursor-pointer"
                     aria-label="Abrir Menu">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -466,28 +463,49 @@
         </div>
 
         <!-- Menu Mobile Dropdown -->
-        <div x-show="mobileMenuOpen" x-cloak
-            class="xl:hidden mt-3 p-4 bg-white dark:bg-[#0a1428] rounded-2xl border border-slate-200 dark:border-white/10 space-y-2 text-sm shadow-xl">
-            <a href="#home" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-900 dark:text-white font-bold">Home</a>
-            <a href="#cursos" @click="mobileMenuOpen = false"
-                class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Curso Especializado</a>
-            <a href="#modalidades" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Modalidades &amp; Preços</a>
-            <a href="#contactos" @click="mobileMenuOpen = false" class="block py-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Contactos</a>
-            <template x-if="!isLoggedIn">
-                <a href="/academy/login" class="block py-1.5 text-[#0050f0] dark:text-[#00a3e0] font-bold">Entrar na Conta</a>
-            </template>
-            <template x-if="isLoggedIn">
-                <div class="pt-2 border-t border-slate-100 dark:border-white/10 space-y-1">
-                    <a href="/aluno-dashboard"
-                        class="block py-1.5 text-[#0050f0] dark:text-[#00a3e0] font-bold flex items-center justify-between">
-                        <span>Meu Dashboard</span>
-                        <span class="text-xs bg-[#0050f0]/30 px-2 py-0.5 rounded text-white"
-                            x-text="currentUser ? currentUser.nome.split(' ')[0] : 'Aluno'"></span>
-                    </a>
-                    <button @click="logout()" class="block w-full text-left py-1 text-rose-500 dark:text-rose-400 text-xs">Sair da
-                        Conta</button>
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak
+            class="lg:hidden mt-3 p-4 sm:p-5 bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl rounded-2xl border border-slate-200 dark:border-white/10 space-y-3 text-sm shadow-2xl transition-colors">
+            
+            <a href="/" class="block font-medium py-1 text-slate-800 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors">Home (Portal RACHI)</a>
+
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2">
+                <span class="text-xs uppercase font-bold text-[#0050f0] dark:text-[#00a3e0] tracking-wider">Soluções</span>
+                <div class="pl-3 mt-1.5 space-y-1.5">
+                    <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors">RACHI Human Capital</a>
+                    <a href="/academy" class="block text-sm text-[#0050f0] dark:text-[#00a3e0] font-bold">RACHI Academy</a>
+                    <a href="/tec" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-sky-500 transition-colors">RACHI Tec</a>
+                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors">RACHI Print</a>
                 </div>
-            </template>
+            </div>
+
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2">
+                <span class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider">RACHI Academy</span>
+                <div class="pl-3 mt-1.5 space-y-1.5">
+                    <a href="#cursos" @click="mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white transition-colors">Curso Especializado</a>
+                    <a href="#modalidades" @click="mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white transition-colors">Modalidades &amp; Preços</a>
+                    <a href="#contactos" @click="mobileMenuOpen = false" class="block text-sm text-slate-600 dark:text-slate-300 hover:text-[#0050f0] dark:hover:text-white transition-colors">Contactos</a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2.5">
+                <template x-if="!isLoggedIn">
+                    <a href="/academy/login" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#0050f0] to-[#00a3e0] text-white font-bold text-xs shadow-md hover:brightness-110 transition">
+                        <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                        <span>Entrar no Portal do Aluno</span>
+                    </a>
+                </template>
+                <template x-if="isLoggedIn">
+                    <div class="space-y-1.5">
+                        <a href="/aluno-dashboard"
+                            class="block py-1.5 text-[#0050f0] dark:text-[#00a3e0] font-bold flex items-center justify-between">
+                            <span>Meu Dashboard</span>
+                            <span class="text-xs bg-[#0050f0]/20 text-[#0050f0] dark:text-[#00a3e0] px-2 py-0.5 rounded"
+                                x-text="currentUser ? currentUser.nome.split(' ')[0] : 'Aluno'"></span>
+                        </a>
+                        <button @click="logout()" class="block w-full text-left py-1 text-rose-500 text-xs cursor-pointer">Sair da Conta</button>
+                    </div>
+                </template>
+            </div>
         </div>
     </header>
 
@@ -506,14 +524,14 @@
     <!-- 2. HERO CAMPAIGN BANNER: CIBERSEGURANÇA (100% FULL BLEED)       -->
     <!-- ============================================================== -->
     <section id="home"
-        class="relative w-full overflow-hidden bg-white dark:bg-[#060e1d] min-h-[500px] lg:min-h-[560px] flex items-stretch transition-colors duration-300">
+        class="relative w-full overflow-hidden bg-white dark:bg-[#060e1d] min-h-0 lg:min-h-[560px] flex items-stretch transition-colors duration-300 pt-2 pb-14 sm:py-8 lg:py-0">
 
         <!-- FUNDO AZUL: IMAGEM OFICIAL DAS ONDAS 3D (100% WIDTH COM FUSÃO SUAVE NO DARK MODE) -->
         <div class="absolute inset-0 w-full h-full">
             <img src="/images/set-bg-hero2.png" alt="Fundo Ondas 3D Cibersegurança"
                 class="w-full h-full object-cover object-right opacity-95 dark:opacity-85" />
             <!-- Gradiente horizontal suave: garante leitura impecável no texto e fusão perfeita no Dark Mode -->
-            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/40 lg:to-transparent dark:from-[#060e1d] dark:via-[#060e1d]/85 dark:to-transparent/30 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-white via-white/95 to-white/70 lg:from-white lg:via-white/90 lg:to-white/40 dark:from-[#060e1d] dark:via-[#060e1d]/90 dark:to-[#060e1d]/60 pointer-events-none"></div>
             <!-- Luzes ambientes e orbes de brilho neon no Dark Mode -->
             <div class="hidden dark:block absolute top-1/4 left-10 w-96 h-96 bg-[#00a3e0]/15 rounded-full blur-[130px] pointer-events-none"></div>
             <div class="hidden dark:block absolute bottom-10 left-1/3 w-80 h-80 bg-[#0050f0]/20 rounded-full blur-[140px] pointer-events-none"></div>
@@ -533,15 +551,15 @@
 
         <!-- CONTEÚDO PRINCIPAL EM GRID / FLEX -->
         <div
-            class="relative z-20 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-center justify-between min-h-[500px] lg:min-h-[560px]">
+            class="relative z-20 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-center justify-between min-h-0 lg:min-h-[560px]">
 
             <!-- COLUNA DA ESQUERDA (CIBERSEGURANÇA DUAL-MODE) -->
             <div
-                class="w-full lg:w-[55%] px-6 sm:px-12 lg:pl-16 xl:pl-28 lg:pr-8 py-8 lg:py-12 text-slate-900 dark:text-white flex flex-col justify-center transition-colors duration-300">
+                class="w-full lg:w-[55%] px-5 sm:px-12 lg:pl-16 xl:pl-28 lg:pr-8 pt-6 pb-4 sm:py-8 lg:py-12 text-slate-900 dark:text-white flex flex-col justify-center transition-colors duration-300">
 
                 <!-- Título Oficial Cibersegurança -->
                 <h1
-                    class="text-2xl sm:text-4xl lg:text-[44px] xl:text-[46px] font-sans font-bold text-slate-900 dark:text-white tracking-tight leading-[1.18] mb-3">
+                    class="text-2xl sm:text-4xl lg:text-[44px] xl:text-[46px] font-sans font-bold text-slate-900 dark:text-white tracking-tight leading-snug sm:leading-[1.18] mb-3">
                     Seu próximo upgrade pode vir<br class="hidden sm:inline" /> com a Cibersegurança.
                 </h1>
 
@@ -582,7 +600,7 @@
                 <!-- Botão CTA Oficial com Gradiente RACHI -->
                 <div>
                     <a href="#cursos"
-                        class="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl bg-gradient-to-r from-[#0050f0] via-[#0066ff] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] text-white font-extrabold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-[#0050f0]/35 hover:shadow-xl hover:shadow-[#00a3e0]/50 hover:scale-105 active:scale-95 border border-white/20 cursor-pointer group">
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl bg-gradient-to-r from-[#0050f0] via-[#0066ff] to-[#00a3e0] hover:from-[#0042c7] hover:to-[#008ec4] text-white font-extrabold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-[#0050f0]/35 hover:shadow-xl hover:shadow-[#00a3e0]/50 hover:scale-105 active:scale-95 border border-white/20 cursor-pointer group">
                         <svg class="w-4 h-4 text-cyan-200 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
@@ -596,11 +614,11 @@
             </div>
 
             <!-- COLUNA DA DIREITA (ESCUDO 3D DE CIBERSEGURANÇA + MEDALHA) -->
-            <div class="w-full lg:w-[45%] relative min-h-[300px] sm:min-h-[360px] lg:min-h-[560px] flex items-center justify-center">
+            <div class="w-full lg:w-[45%] relative min-h-0 sm:min-h-[320px] lg:min-h-[560px] flex items-center justify-center pt-4 pb-8 sm:py-6 lg:py-0">
 
-                <div class="relative w-fit mx-auto flex items-center justify-center">
+                <div class="relative w-fit mx-auto flex items-center justify-center px-4">
                     <!-- MEDALHA 3D CIRCULAR AZUL: "ATÉ 40% OFF" -->
-                    <div class="absolute -top-3 -right-2 sm:top-1/2 sm:left-[-45px] sm:-translate-y-1/2 lg:left-[-70px] z-40">
+                    <div class="absolute -top-3 right-0 sm:top-1/2 sm:left-[-40px] sm:-translate-y-1/2 lg:left-[-70px] z-30">
                         <div
                             class="w-20 h-20 sm:w-36 sm:h-36 lg:w-44 lg:h-44 rounded-full bg-gradient-to-b from-[#005bf8] via-[#003db3] to-[#001d68] p-1.5 sm:p-3 shadow-[0_10px_25px_rgba(0,30,100,0.6)] dark:shadow-[0_0_35px_rgba(0,163,224,0.45)] flex items-center justify-center border-2 sm:border-4 border-[#0047d4] dark:border-[#00a3e0] ring-2 ring-[#002277] dark:ring-[#00a3e0]/30 transform hover:scale-105 transition-transform duration-300">
                             <div
@@ -614,11 +632,11 @@
                     </div>
 
                     <!-- ESCUDO 3D DE DEFESA & SEGURANÇA DIGITAL -->
-                    <div class="relative z-20 flex flex-col items-center justify-center pt-2 sm:pt-8 lg:pt-0">
+                    <div class="relative z-20 flex flex-col items-center justify-center pt-2 sm:pt-4 lg:pt-0">
                         <div class="relative group">
                             <img src="/images/cybersecurity-shield-transparent.png"
                                 alt="Cibersegurança e Defesa Digital RACHI Academy"
-                                class="h-[220px] sm:h-[340px] lg:h-[420px] xl:h-[440px] w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,100,240,0.35)] dark:drop-shadow-[0_0_45px_rgba(0,163,224,0.35)] transform group-hover:scale-105 transition-transform duration-500" />
+                                class="h-[200px] sm:h-[300px] lg:h-[420px] xl:h-[440px] w-auto max-w-[85vw] object-contain filter drop-shadow-[0_15px_30px_rgba(0,100,240,0.35)] dark:drop-shadow-[0_0_45px_rgba(0,163,224,0.35)] transform group-hover:scale-105 transition-transform duration-500" />
                         </div>
                     </div>
                 </div>
@@ -1643,10 +1661,10 @@
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#00a3e0] mb-3">Soluções RACHI</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="/capital" class="hover:text-emerald-400 transition">01 RACHI Human Capital</a></li>
-                        <li><a href="/academy" class="hover:text-indigo-400 transition text-[#0050f0] dark:text-[#00a3e0] font-bold">02 RACHI Academy</a></li>
-                        <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
-                        <li><a href="/print" class="hover:text-amber-400 transition">04 RACHI Print</a></li>
+                        <li><a href="/capital" class="hover:text-emerald-400 transition">RACHI Human Capital</a></li>
+                        <li><a href="/academy" class="hover:text-indigo-400 transition text-[#0050f0] dark:text-[#00a3e0] font-bold">RACHI Academy</a></li>
+                        <li><a href="/tec" class="hover:text-sky-400 transition">RACHI Tec</a></li>
+                        <li><a href="/print" class="hover:text-amber-400 transition">RACHI Print</a></li>
                     </ul>
                 </div>
                 <div>

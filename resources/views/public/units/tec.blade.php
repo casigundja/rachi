@@ -633,10 +633,10 @@
             <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                 <span class="text-xs uppercase font-bold text-[#00a3e0] tracking-wider">Soluções</span>
                 <div class="pl-3 mt-1 space-y-1.5">
-                    <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-400">01 RACHI Human Capital</a>
-                    <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-400">02 RACHI Academy</a>
-                    <a href="/tec" class="block text-sm text-sky-400 font-bold">03 RACHI Tec</a>
-                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-400">04 RACHI Print</a>
+                    <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-400">RACHI Human Capital</a>
+                    <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-400">RACHI Academy</a>
+                    <a href="/tec" class="block text-sm text-sky-400 font-bold">RACHI Tec</a>
+                    <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-400">RACHI Print</a>
                 </div>
             </div>
             <div class="border-t border-white/10 pt-2 space-y-1">
@@ -1185,10 +1185,10 @@
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#00a3e0] mb-3">Soluções RACHI</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="/capital" class="hover:text-emerald-400 transition">01 RACHI Human Capital</a></li>
-                        <li><a href="/academy" class="hover:text-indigo-400 transition">02 RACHI Academy</a></li>
-                        <li><a href="/tec" class="hover:text-sky-400 transition text-sky-400 font-bold">03 RACHI Tec</a></li>
-                        <li><a href="/print" class="hover:text-amber-400 transition">04 RACHI Print</a></li>
+                        <li><a href="/capital" class="hover:text-emerald-400 transition">RACHI Human Capital</a></li>
+                        <li><a href="/academy" class="hover:text-indigo-400 transition">RACHI Academy</a></li>
+                        <li><a href="/tec" class="hover:text-sky-400 transition text-sky-400 font-bold">RACHI Tec</a></li>
+                        <li><a href="/print" class="hover:text-amber-400 transition">RACHI Print</a></li>
                     </ul>
                 </div>
                 <div>

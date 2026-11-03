@@ -786,10 +786,10 @@
                 <div class="border-t border-slate-200 dark:border-white/10 pt-2">
                     <span class="text-xs uppercase font-bold text-[#0077c2] dark:text-[#00a3e0] tracking-wider">Soluções</span>
                     <div class="pl-3 mt-1 space-y-1.5">
-                        <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500">01 RACHI Human Capital (Pessoas &amp; Gestão)</a>
-                        <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-500">02 RACHI Academy (Capacitação &amp; Ensino)</a>
-                        <a href="/tec" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-sky-500">03 RACHI Tec (Tecnologia &amp; TI)</a>
-                        <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-500">04 RACHI Print (Gráfica &amp; Produção)</a>
+                        <a href="/capital" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500">RACHI Human Capital</a>
+                        <a href="/academy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-500">RACHI Academy</a>
+                        <a href="/tec" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-sky-500">RACHI Tec</a>
+                        <a href="/print" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-amber-500">RACHI Print</a>
                     </div>
                 </div>
                 <div class="border-t border-slate-200 dark:border-white/10 pt-2 space-y-2">

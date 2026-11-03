@@ -910,10 +910,10 @@
                 <div>
                     <h4 class="text-sm font-bold uppercase tracking-wider text-[#10b981] mb-3">Soluções RACHI</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="/capital" class="hover:text-emerald-400 transition text-emerald-400 font-bold">01 RACHI Human Capital</a></li>
-                        <li><a href="/academy" class="hover:text-indigo-400 transition">02 RACHI Academy</a></li>
-                        <li><a href="/tec" class="hover:text-sky-400 transition">03 RACHI Tec</a></li>
-                        <li><a href="/print" class="hover:text-amber-400 transition">04 RACHI Print</a></li>
+                        <li><a href="/capital" class="hover:text-emerald-400 transition text-emerald-400 font-bold">RACHI Human Capital</a></li>
+                        <li><a href="/academy" class="hover:text-indigo-400 transition">RACHI Academy</a></li>
+                        <li><a href="/tec" class="hover:text-sky-400 transition">RACHI Tec</a></li>
+                        <li><a href="/print" class="hover:text-amber-400 transition">RACHI Print</a></li>
                     </ul>
                 </div>
                 <div>
