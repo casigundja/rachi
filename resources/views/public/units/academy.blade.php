@@ -388,8 +388,8 @@
     <!-- ============================================================== -->
     <!-- 1. NAVBAR SUPERIOR OFICIAL (EXATA DO MODELO DO PRINT DA ALURA) -->
     <!-- ============================================================== -->
-    <header
-        class="w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
+    <header id="main-site-header"
+        class="relative w-full bg-white dark:bg-[#071326] border-b border-slate-200/90 dark:border-white/10 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_4px_25px_rgba(15,23,42,0.09),0_1px_4px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
 
             <!-- Logo Oficial & Voltar para Início -->
@@ -459,9 +459,17 @@
 
         </div>
 
-        <!-- Menu Mobile Dropdown -->
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak
-            class="lg:hidden mt-3 p-4 sm:p-5 bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl rounded-2xl border border-slate-200 dark:border-white/10 space-y-3 text-sm shadow-2xl transition-colors">
+        <!-- Menu Mobile Dropdown (Mesmo comportamento padronizado das outras páginas, sobrepondo sem empurrar) -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2 scale-98"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+             x-transition:leave-end="opacity-0 -translate-y-2 scale-98"
+             @click.away="mobileMenuOpen = false" 
+             x-cloak
+             class="header-dropdown lg:hidden absolute top-full left-3 right-3 sm:left-6 sm:right-6 mt-1.5 p-5 bg-white/98 dark:bg-[#071326]/98 backdrop-blur-2xl rounded-2xl border border-slate-200/90 dark:border-white/15 space-y-3 text-sm shadow-2xl transition-all z-50 text-slate-800 dark:text-white">
             
             <a href="/" class="block font-medium py-1 text-slate-800 dark:text-white hover:text-[#0050f0] dark:hover:text-[#00a3e0] transition-colors">Home (Portal RACHI)</a>
 
@@ -505,6 +513,23 @@
             </div>
         </div>
     </header>
+    <!-- Header Scroll Script Padronizado -->
+    <script>
+        (function() {
+            function updateHeaderScroll() {
+                var header = document.getElementById('main-site-header');
+                if (!header) return;
+                if (window.scrollY > 20) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }
+            window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+            updateHeaderScroll();
+        })();
+    </script>
+
 
     <!-- BREADCRUMBS (Padrão Corporativo Unificado RACHI) -->
     <nav class="bg-slate-100/60 dark:bg-[#0c1527]/50 border-b border-slate-200/80 dark:border-white/5 py-3">

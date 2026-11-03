@@ -2866,7 +2866,15 @@
             </div>
 
             <!-- Mobile Menu Dropdown -->
-            <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-cloak
+            <div x-show="mobileMenuOpen" 
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 -translate-y-2 scale-98"
+                 x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                 x-transition:leave-end="opacity-0 -translate-y-2 scale-98"
+                 @click.away="mobileMenuOpen = false" 
+                 x-cloak
                 class="header-dropdown lg:hidden bg-white dark:bg-[#071326] text-slate-800 dark:text-white border border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-2xl mt-2 rounded-2xl">
                 <a href="#home" @click.prevent="goToHome(); solutionsOpen = false"
                     class="block font-medium py-1.5 hover:text-[#00a3e0]">Home</a>
