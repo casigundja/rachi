@@ -1592,9 +1592,11 @@
     .hero-ambient-orb,
     .hero-home .hero-content::before,
     .hero-visual-wrap::before,
-    html.dark .hero-visual-wrap::after {
+    html.dark .hero-visual-wrap::after,
+    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
         display: none !important;
         filter: none !important;
+        -webkit-filter: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
     }
@@ -1616,15 +1618,19 @@
     /* --- MODO CLARO (EXACT MATCH PRINT 2) --- */
     html:not(.dark) .hero-home,
     body:not(.dark) .hero-home {
-        background: linear-gradient(180deg, #e8f0f7 0%, #edf6f5 35%, #f4f8fb 70%, #ffffff 100%) !important;
+        background: #f8fafc !important;
+        background-image: none !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
         color: #071326 !important;
     }
 
     /* Header in Light Mode Mobile */
     html:not(.dark) .site-header {
-        background: rgba(255, 255, 255, 0.96) !important;
+        background: #ffffff !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
     html:not(.dark) .site-header .btn-entrar-nav {
         background: #00a3e0 !important;
@@ -1697,18 +1703,19 @@
     html.dark .hero-home,
     body.dark .hero-home {
         background-color: #071326 !important;
-        background-image: 
-            radial-gradient(circle at 50% 28%, rgba(245, 168, 0, 0.16) 0%, transparent 55%),
-            radial-gradient(circle at 50% 65%, rgba(0, 163, 224, 0.18) 0%, transparent 65%),
-            linear-gradient(180deg, #071326 0%, #0a1b33 35%, #07152c 70%, #050d1a 100%) !important;
+        background: #071326 !important;
+        background-image: none !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
         color: #ffffff !important;
     }
 
     /* Header in Dark Mode Mobile */
     html.dark .site-header {
-        background: rgba(7, 19, 38, 0.96) !important;
+        background: #071326 !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
     html.dark .site-header .btn-entrar-nav {
         background: rgba(0, 163, 224, 0.12) !important;
@@ -3330,10 +3337,10 @@
                         class="mt-16 bg-white p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-200/80 shadow-2xl relative overflow-hidden">
                         <!-- Subtle background illumination -->
                         <div
-                            class="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none">
+                            class="hidden md:block absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none">
                         </div>
                         <div
-                            class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none">
+                            class="hidden md:block absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none">
                         </div>
 
                         <div class="text-center mb-10 relative z-10">

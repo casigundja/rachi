@@ -252,8 +252,8 @@
     <!-- ============================================================ -->
     <section class="relative pt-10 pb-16 overflow-hidden">
         <!-- Efeito ambiente de fundo -->
-        <div class="absolute top-0 right-1/4 w-96 h-96 bg-[#00a3e0]/10 dark:bg-[#00a3e0]/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
-        <div class="absolute top-20 left-10 w-72 h-72 bg-[#0050f0]/10 dark:bg-[#0050f0]/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <div class="hidden md:block absolute top-0 right-1/4 w-96 h-96 bg-[#00a3e0]/10 dark:bg-[#00a3e0]/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <div class="hidden md:block absolute top-20 left-10 w-72 h-72 bg-[#0050f0]/10 dark:bg-[#0050f0]/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">

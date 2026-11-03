@@ -396,9 +396,11 @@
             .site-header {
                 padding-top: 0.75rem !important;
                 padding-bottom: 0.75rem !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
             }
             html:not(.dark) .site-header {
-                background: rgba(255, 255, 255, 0.98) !important;
+                background: #ffffff !important;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
             }
             html:not(.dark) .site-header .mobile-menu-btn {
@@ -407,13 +409,18 @@
                 color: #071326 !important;
             }
             html.dark .site-header {
-                background: rgba(7, 19, 38, 0.98) !important;
+                background: #071326 !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
             html.dark .site-header .mobile-menu-btn {
                 background: rgba(255, 255, 255, 0.08) !important;
                 border: 1px solid rgba(255, 255, 255, 0.14) !important;
                 color: #ffffff !important;
+            }
+            .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
+                display: none !important;
+                filter: none !important;
+                -webkit-filter: none !important;
             }
         }
 </style>
@@ -589,9 +596,9 @@
         <!-- 1. HERO BANNER: RACHI Human Capital                      -->
         <!-- ======================================================== -->
         <section class="bg-gradient-to-b from-slate-50 via-white to-slate-50/80 dark:from-[#071326] dark:via-[#0c182c] dark:to-[#071326] text-slate-900 dark:text-white pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
-            <!-- Ambient Glow Gradients -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.22),transparent_70%)] pointer-events-none"></div>
-            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <!-- Ambient Glow Gradients (Desktop only to prevent Safari WebKit black tile artifact on mobile) -->
+            <div class="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.12),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(16,185,129,0.22),transparent_70%)] pointer-events-none"></div>
+            <div class="hidden md:block absolute top-1/3 -right-20 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto relative z-10">
                 
@@ -1035,8 +1042,8 @@
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
             <div class="relative rounded-3xl p-10 sm:p-14 bg-gradient-to-br from-[#071326] via-[#0d2238] to-[#071326] border border-emerald-500/30 overflow-hidden shadow-2xl text-center text-white">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -top-20 -right-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 max-w-2xl mx-auto space-y-6">
                     <span class="text-xs font-bold uppercase tracking-widest text-[#10b981] px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30">

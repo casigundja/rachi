@@ -820,6 +820,22 @@ body {
 }
 
 @media (max-width: 768px) {
+    /* UNIVERSAL SAFARI/WEBKIT GPU TILE DEFENSE ON MOBILE */
+    .site-header {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+    html:not(.dark) .site-header {
+        background: #ffffff !important;
+    }
+    html.dark .site-header {
+        background: #071326 !important;
+    }
+    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-3xl"], [class*="blur-2xl"] {
+        display: none !important;
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
     .rachi-fab-dock {
         bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
         right: 1rem !important;

@@ -506,9 +506,11 @@
             .site-header {
                 padding-top: 0.75rem !important;
                 padding-bottom: 0.75rem !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
             }
             html:not(.dark) .site-header {
-                background: rgba(255, 255, 255, 0.98) !important;
+                background: #ffffff !important;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
             }
             html:not(.dark) .site-header .mobile-menu-btn {
@@ -517,8 +519,13 @@
                 color: #071326 !important;
             }
             html.dark .site-header {
-                background: rgba(7, 19, 38, 0.98) !important;
+                background: #071326 !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
+                display: none !important;
+                filter: none !important;
+                -webkit-filter: none !important;
             }
             html.dark .site-header .mobile-menu-btn {
                 background: rgba(255, 255, 255, 0.08) !important;
@@ -1157,8 +1164,8 @@
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 tec-reveal delay-100">
             <div class="relative rounded-3xl p-6 sm:p-14 bg-gradient-to-br from-[#071326] via-[#0d1f3d] to-[#071326] border border-sky-500/30 overflow-hidden shadow-2xl text-center text-white">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -top-20 -right-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 max-w-2xl mx-auto space-y-6">
                     <span class="text-xs font-bold uppercase tracking-widest text-[#00a3e0] px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/30">

@@ -694,8 +694,8 @@
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
             <div class="print-service-hero relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-br from-[#080c16] via-[#101a2f] to-[#080c16] border border-amber-500/25 overflow-hidden shadow-2xl text-white">
-                <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -top-24 -right-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -bottom-24 -left-24 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div class="lg:col-span-8 space-y-6">

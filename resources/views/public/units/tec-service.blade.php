@@ -533,8 +533,8 @@
         <!-- ======================================================== -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
             <div class="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-br from-white via-sky-50/40 to-slate-50 border border-slate-200/90 shadow-2xl shadow-sky-950/5 text-slate-900 dark:from-[#071326] dark:via-[#092244] dark:to-[#071326] dark:border-sky-500/25 dark:text-white overflow-hidden transition-colors duration-300">
-                <div class="absolute -top-24 -right-24 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -top-24 -right-24 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div class="{{ !empty($service['image']) ? 'lg:col-span-7' : 'lg:col-span-8' }} space-y-6">

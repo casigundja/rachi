@@ -10679,9 +10679,11 @@ html.dark .user-menu-badge-inactive {
     .hero-ambient-orb,
     .hero-home .hero-content::before,
     .hero-visual-wrap::before,
-    html.dark .hero-visual-wrap::after {
+    html.dark .hero-visual-wrap::after,
+    .blur-3xl, .blur-2xl, .blur-xl, [class*="blur-"] {
         display: none !important;
         filter: none !important;
+        -webkit-filter: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
     }
@@ -10720,9 +10722,10 @@ html.dark .user-menu-badge-inactive {
 
     /* Header in Light Mode Mobile */
     html:not(.dark) .site-header {
-        background: rgba(255, 255, 255, 0.96) !important;
+        background: #ffffff !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
     html:not(.dark) .site-header .btn-entrar-nav {
         background: #00a3e0 !important;
@@ -10795,18 +10798,19 @@ html.dark .user-menu-badge-inactive {
     html.dark .hero-home,
     body.dark .hero-home {
         background-color: #071326 !important;
-        background-image: 
-            radial-gradient(circle at 50% 28%, rgba(245, 168, 0, 0.16) 0%, transparent 55%),
-            radial-gradient(circle at 50% 65%, rgba(0, 163, 224, 0.18) 0%, transparent 65%),
-            linear-gradient(180deg, #071326 0%, #0a1b33 35%, #07152c 70%, #050d1a 100%) !important;
+        background: #071326 !important;
+        background-image: none !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
         color: #ffffff !important;
     }
 
     /* Header in Dark Mode Mobile */
     html.dark .site-header {
-        background: rgba(7, 19, 38, 0.96) !important;
+        background: #071326 !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
     html.dark .site-header .btn-entrar-nav {
         background: rgba(0, 163, 224, 0.12) !important;

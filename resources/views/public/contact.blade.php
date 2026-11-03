@@ -835,9 +835,9 @@
             <!-- Hero Banner Executivo com suporte total a Modo Claro e Escuro -->
             <section class="bg-gradient-to-b from-slate-100/70 via-white to-blue-50/30 dark:from-[#071326] dark:via-[#071326] dark:to-[#071326] text-slate-900 dark:text-white pt-12 pb-14 sm:pt-14 sm:pb-16 relative overflow-hidden border-b border-slate-200/90 dark:border-slate-800/80 transition-colors duration-300">
                 <!-- Luzes ambientes corporativas suaves -->
-                <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/10 dark:bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute top-1/2 right-0 w-96 h-96 bg-[#00a3e0]/10 dark:bg-[#00a3e0]/15 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 left-1/3 w-80 h-80 bg-[#f5a800]/5 dark:bg-[#f5a800]/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -top-24 -left-24 w-96 h-96 bg-blue-400/10 dark:bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute top-1/2 right-0 w-96 h-96 bg-[#00a3e0]/10 dark:bg-[#00a3e0]/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="hidden md:block absolute -bottom-24 left-1/3 w-80 h-80 bg-[#f5a800]/5 dark:bg-[#f5a800]/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <!-- Breadcrumbs -->
