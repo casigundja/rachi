@@ -1125,51 +1125,7 @@
         </section>
 
     </main>
-<footer class="diff-footer pt-12 pb-28 sm:pb-12 px-6 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-                <img src="/images/logo-rachi-light.png" onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'" alt="RACHI" class="h-10 mb-4 hidden dark:block">
-                <img src="/images/logo-rachi-dark.png" onerror="this.onerror=null; this.src='/images/logo-rachi.png'" alt="RACHI" class="h-10 mb-4 dark:hidden">
-                <p class="text-sm">
-                    Soluções inteligentes em tecnologia, comunicação visual, formação profissional e recursos humanos.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-bold text-sm tracking-wider uppercase mb-3">Unidades</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/solucoes/tec" class="transition">RACHI Tec — Loja de TI</a></li>
-                    <li><a href="/solucoes/print" class="transition">RACHI Print — Artes &amp; Logótipos</a></li>
-                    <li><a href="/solucoes/academy" class="transition">RACHI Academy — Cursos</a></li>
-                    <li><a href="/solucoes/capital" class="transition">RACHI Capital — Sites &amp; Suporte TI</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-sm tracking-wider uppercase mb-3">Links Úteis</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/loja" class="transition">Loja Online</a></li>
-                    <li><a href="/#etica" class="transition">Ética e Compliance</a></li>
-                    <li><a href="/contacto" class="transition">Contactos</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-sm tracking-wider uppercase mb-3">Contacto</h4>
-                <p class="text-sm">Rua Ndunduma, Miramar — Luanda, Angola</p>
-                <p class="text-sm mt-0.5">Por detrás do BFA</p>
-                <p class="text-sm mt-1">geral@rachi.ao</p>
-                <p class="text-sm mt-1">+244 972 888 585</p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> ” Soluções Inteligentes. Todos os direitos reservados.</div>
-            <div class="flex gap-3 items-center text-xs">
-                        <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt" class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition" title="Português">PT</button>
-                        <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('en')" data-rachi-lang="en" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="English">EN</button>
-                        <span class="text-slate-500 opacity-60">|</span>
-                        <button type="button" onclick="setRachiLanguage('zh-CN')" data-rachi-lang="zh-CN" class="cursor-pointer opacity-70 hover:opacity-100 hover:text-amber-500 dark:hover:text-amber-400 transition" title="ä¸­æ–‡ (Mandarim)">ä¸­æ–‡</button>
-                    </div>
-        </div>
-    </footer>
+<x-public-footer unit="global" />
 
     <script>
         lucide.createIcons();
