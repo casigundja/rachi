@@ -67,7 +67,7 @@
             } catch(e) {}
         }
 
-        // Estilos Visuais Modernos e Fieis ao Padrão
+        // Estilos Visuais Modernos, Translúcidos e Fieis ao Padrão
         const styleEl = document.createElement('style');
         styleEl.id = 'rachi-chat-styles';
         styleEl.textContent = `
@@ -129,7 +129,7 @@
                 box-shadow: 0 0 6px rgba(16, 185, 129, 0.8) !important;
             }
 
-            /* Janela Modal do Chat */
+            /* Janela Modal do Chat - Elegante e Levemente Translúcida (Glassmorphism) */
             .rachi-chat-window {
                 position: fixed !important;
                 bottom: 96px !important;
@@ -138,9 +138,12 @@
                 max-width: calc(100vw - 32px) !important;
                 height: 560px !important;
                 max-height: calc(100vh - 120px) !important;
-                background: #FFFFFF !important;
+                background: rgba(255, 255, 255, 0.88) !important;
+                backdrop-filter: blur(20px) saturate(190%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.6) !important;
                 border-radius: 20px !important;
-                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
                 display: flex !important;
                 flex-direction: column !important;
                 overflow: hidden !important;
@@ -150,7 +153,10 @@
             }
 
             html.dark .rachi-chat-window {
-                background: #0B111A !important;
+                background: rgba(11, 17, 26, 0.85) !important;
+                backdrop-filter: blur(20px) saturate(190%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
                 box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
             }
 
@@ -161,9 +167,11 @@
                 pointer-events: none !important;
             }
 
-            /* Header Pitch Black */
+            /* Header Pitch Black Levemente Translúcido */
             .rachi-chat-header {
-                background: #000000 !important;
+                background: rgba(0, 0, 0, 0.92) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
                 padding: 14px 18px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -238,7 +246,7 @@
                 transform: scale(1.05) !important;
             }
 
-            /* Corpo das Mensagens */
+            /* Corpo das Mensagens Translúcido */
             .rachi-chat-body {
                 flex: 1 !important;
                 padding: 16px !important;
@@ -246,12 +254,14 @@
                 display: flex !important;
                 flex-direction: column !important;
                 gap: 12px !important;
-                background: #F8FAFC !important;
+                background: rgba(248, 250, 252, 0.72) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
                 scroll-behavior: smooth !important;
             }
 
             html.dark .rachi-chat-body {
-                background: #0B111A !important;
+                background: rgba(11, 17, 26, 0.75) !important;
             }
 
             .rachi-chat-body::-webkit-scrollbar {
@@ -273,7 +283,8 @@
 
             .rachi-chat-bubble.rachi-bot {
                 align-self: flex-start !important;
-                background: #FFFFFF !important;
+                background: rgba(255, 255, 255, 0.94) !important;
+                backdrop-filter: blur(8px) !important;
                 color: #0F172A !important;
                 border-radius: 18px 18px 18px 4px !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
@@ -281,14 +292,14 @@
             }
 
             html.dark .rachi-chat-bubble.rachi-bot {
-                background: #151F2E !important;
+                background: rgba(21, 31, 46, 0.9) !important;
                 color: #F1F5F9 !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
             }
 
             .rachi-chat-bubble.rachi-user {
                 align-self: flex-end !important;
-                background: #071326 !important;
+                background: rgba(7, 19, 38, 0.95) !important;
                 color: #FFFFFF !important;
                 border-radius: 18px 18px 4px 18px !important;
                 font-weight: 500 !important;
@@ -306,7 +317,8 @@
                 align-items: center !important;
                 gap: 5px !important;
                 padding: 12px 18px !important;
-                background: #FFFFFF !important;
+                background: rgba(255, 255, 255, 0.94) !important;
+                backdrop-filter: blur(8px) !important;
                 border-radius: 18px 18px 18px 4px !important;
                 width: fit-content !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
@@ -314,7 +326,7 @@
             }
 
             html.dark .rachi-typing-indicator {
-                background: #151F2E !important;
+                background: rgba(21, 31, 46, 0.9) !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
             }
 
@@ -345,7 +357,7 @@
 
             /* WhatsApp Card */
             .rachi-whatsapp-card {
-                background: #F0FDF4 !important;
+                background: rgba(240, 253, 244, 0.92) !important;
                 border: 1.5px solid #10B981 !important;
                 border-radius: 14px !important;
                 padding: 12px 14px !important;
@@ -355,7 +367,7 @@
             }
 
             html.dark .rachi-whatsapp-card {
-                background: #062017 !important;
+                background: rgba(6, 32, 23, 0.9) !important;
                 border-color: #059669 !important;
             }
 
@@ -385,18 +397,20 @@
                 box-shadow: 0 5px 14px rgba(37, 211, 102, 0.45) !important;
             }
 
-            /* Input Inferior com Botão Âmbar */
+            /* Input Inferior com Botão Âmbar e Efeito de Vidro */
             .rachi-chat-footer {
                 padding: 12px 16px 16px 16px !important;
-                background: #FFFFFF !important;
-                border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+                background: rgba(255, 255, 255, 0.88) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
                 display: flex !important;
                 align-items: center !important;
                 gap: 10px !important;
             }
 
             html.dark .rachi-chat-footer {
-                background: #0B111A !important;
+                background: rgba(11, 17, 26, 0.88) !important;
                 border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
             }
 
@@ -404,8 +418,8 @@
                 flex: 1 !important;
                 height: 44px !important;
                 border-radius: 9999px !important;
-                border: 1.5px solid #E2E8F0 !important;
-                background: #FFFFFF !important;
+                border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+                background: rgba(255, 255, 255, 0.92) !important;
                 padding: 0 18px !important;
                 font-size: 13.5px !important;
                 color: #0F172A !important;
@@ -414,13 +428,14 @@
             }
 
             html.dark .rachi-chat-input-pill {
-                background: #151F2E !important;
+                background: rgba(21, 31, 46, 0.85) !important;
                 border-color: rgba(255, 255, 255, 0.15) !important;
                 color: #FFFFFF !important;
             }
 
             .rachi-chat-input-pill:focus {
                 border-color: #eba72d !important;
+                background: #FFFFFF !important;
                 box-shadow: 0 0 0 3px rgba(235, 167, 45, 0.2) !important;
             }
 
@@ -657,8 +672,31 @@
             }
         }
 
-        fabBtn.addEventListener('click', () => toggleChat());
-        closeBtn.addEventListener('click', () => toggleChat(false));
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleChat();
+        });
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleChat(false);
+        });
+
+        // Fechar ao clicar fora da janela do chat (Dispensar ao clicar fora)
+        document.addEventListener('pointerdown', (e) => {
+            if (!state.isOpen) return;
+            // Se o clique foi fora do modal e fora do botão FAB, oculta o chat
+            if (!modal.contains(e.target) && !fabBtn.contains(e.target)) {
+                toggleChat(false);
+            }
+        });
+
+        // Fechar ao pressionar a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && state.isOpen) {
+                toggleChat(false);
+            }
+        });
 
         function renderWhatsAppCard(customText) {
             const textToEncode = customText || 'Olá! Estive a falar no chat interativo da RACHI e gostaria de falar com um consultor humano.';
