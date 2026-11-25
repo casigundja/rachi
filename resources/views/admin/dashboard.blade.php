@@ -611,17 +611,17 @@ a { text-decoration: none !important; }
     <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" title="Perfis">
       <i data-lucide="users" class="si"></i>
       <span class="sl">Perfis</span>
-      <span class="sb2 badge bg-blue-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="userStats.total || users.length || 10"></span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="userStats.total || users.length || 10"></span>
     </div>
     <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" title="Base de Clientes">
       <i data-lucide="building-2" class="si"></i>
       <span class="sl">Base de Clientes</span>
-      <span class="sb2 badge bg-cyan-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="totalClientsCount"></span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="totalClientsCount"></span>
     </div>
     <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" title="Solicitações & Ordens">
       <i data-lucide="clipboard-list" class="si"></i>
       <span class="sl">Solicitações & Ordens</span>
-      <span class="sb2 badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 rounded-full ms-auto" x-text="totalRequestsCount"></span>
+      <span class="sb2 badge bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="totalRequestsCount"></span>
     </div>
 
     <div class="sg">Unidades</div>
@@ -818,177 +818,179 @@ a { text-decoration: none !important; }
     <!-- DASHBOARD GERAL / HOME -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- BANNER DE BOAS-VINDAS EXECUTIVO SINCRONIZADO -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#071326] via-[#0b1c38] to-[#040c18] text-white p-7 sm:p-8 lg:p-9 shadow-2xl shadow-blue-950/20 border border-white/10 dark:border-blue-500/20">
-        <!-- Ambient Radial Glows -->
-        <div class="absolute -right-16 -top-16 w-96 h-96 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/0 blur-3xl pointer-events-none"></div>
-        <div class="absolute right-1/3 -bottom-20 w-80 h-80 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none"></div>
-        <div class="absolute -left-10 -bottom-10 w-72 h-72 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40"></div>
-        
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="space-y-4 max-w-3xl">
-            <!-- Pill de Status Operacional Executivo -->
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold text-slate-200">
-              <span class="w-2 h-2 rounded-full bg-[#FFA525] animate-pulse"></span>
-              <span class="text-amber-300 font-bold uppercase tracking-wider text-[11px]">Portal de Comando</span>
-              <span class="text-white/40">•</span>
-              <span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 inline"></i> Sistema Online</span>
+      <!-- CABEÇALHO EXECUTIVO SÓBRIO & CORPORATIVO -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 sm:p-7 shadow-xs">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-1.5 max-w-2xl">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <span>Portal Executivo</span>
+              <span class="text-slate-300 dark:text-slate-600">/</span>
+              <span class="text-slate-900 dark:text-white font-bold">Visão Geral</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 ml-1"></span>
+              <span class="text-emerald-700 dark:text-emerald-400 font-semibold text-[11px]">Sistema Operacional</span>
             </div>
-
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight flex items-center gap-3" style="font-family:Outfit">
-              Olá, <span class="bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent" x-text="adminUser.nome || '{{ auth()->user()?->name ?? 'Super Administrador RACHI' }}'"></span>! 👋
+            
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family: Outfit, sans-serif;">
+              Painel de Controlo Corporativo
             </h1>
-
-            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Bem-vindo ao centro integrado de operações da <strong class="text-white font-black">RACHI</strong>. Você tem <strong class="text-amber-300 bg-amber-400/15 border border-amber-400/30 px-2 py-0.5 rounded-lg"><span x-text="totalRequestsCount"></span> solicitações</strong> na Central e <strong class="text-emerald-300 bg-emerald-400/15 border border-emerald-400/30 px-2 py-0.5 rounded-lg"><span x-text="totalOrdersCount"></span> pedidos</strong> em processamento hoje.
+            
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Centro integrado de operações da RACHI. Atualmente existem <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalRequestsCount"></span> solicitações</strong> na Central e <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalOrdersCount"></span> pedidos</strong> em processamento.
             </p>
-
-            <!-- Micro-indicadores sincronizados em tempo real com a base de dados -->
-            <div class="flex flex-wrap items-center gap-2.5 pt-1">
-              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15 shadow-sm hover:bg-white/15 transition">
-                <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]"></span>
-                <span class="text-slate-300">Solicitações:</span>
-                <strong class="text-white font-black text-sm" x-text="totalRequestsCount"></strong>
-              </div>
-              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15 shadow-sm hover:bg-white/15 transition">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
-                <span class="text-slate-300">Pedidos Loja:</span>
-                <strong class="text-white font-black text-sm" x-text="totalOrdersCount"></strong>
-              </div>
-              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md text-xs font-semibold text-white/90 border border-white/15 shadow-sm hover:bg-white/15 transition">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]"></span>
-                <span class="text-slate-300">Clientes Ativos:</span>
-                <strong class="text-white font-black text-sm" x-text="totalClientsCount"></strong>
-              </div>
-            </div>
           </div>
 
-          <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
-            <button @click="openCreateOrderModal()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#FFA525] to-[#DD8F20] hover:from-[#ffb44a] hover:to-[#FFA525] text-slate-950 font-black text-xs shadow-lg shadow-amber-500/25 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer border-0">
-              <i data-lucide="plus-circle" class="w-4 h-4 text-slate-950"></i>
+          <div class="flex items-center gap-2.5 shrink-0">
+            <button @click="setPage('solicitacoes')" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition shadow-xs flex items-center gap-2 cursor-pointer">
+              <i data-lucide="clipboard-list" class="w-4 h-4 text-slate-500"></i>
+              Central de Solicitações
+            </button>
+            <button @click="openCreateOrderModal()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 text-xs font-semibold transition shadow-sm flex items-center gap-2 cursor-pointer border-0">
+              <i data-lucide="plus" class="w-4 h-4"></i>
               Nova Ordem
             </button>
-            <button @click="setPage('solicitacoes')" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 backdrop-blur-md shadow-sm transition-all duration-200 transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer">
-              <i data-lucide="clipboard-check" class="w-4 h-4 text-amber-300"></i>
-              Revisar Solicitações
-            </button>
+          </div>
+        </div>
+
+        <!-- Métricas Rápidas de Operação (Clean, Minimal & Monocromático) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-white/5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <i data-lucide="inbox" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Solicitações</div>
+              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalRequestsCount"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Pedidos Loja</div>
+              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalOrdersCount"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <i data-lucide="users" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Clientes Ativos</div>
+              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalClientsCount"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Status</div>
+              <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">99.9% Online</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- UNIDADES DA RACHI (CARDS ILUSTRATIVOS E AMIGÁVEIS) -->
+      <!-- UNIDADES DA RACHI (CARDS EXECUTIVOS SÓBRIOS) -->
       <div>
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <i data-lucide="grid" class="w-4 h-4 text-blue-600"></i> Unidades RACHI
+          <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="grid" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i> Unidades RACHI
           </h2>
-          <span class="text-xs text-slate-500 font-semibold">Acesso rápido aos módulos</span>
+          <span class="text-xs text-slate-500 font-medium">Acesso aos módulos operacionais</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- 1. ACADEMY -->
-          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-3xl p-5 sm:p-6 bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-            <div class="flex items-start justify-between mb-3.5">
-              <div class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 p-2.5 flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
+          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
               </div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span> Ativo</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Ativo</span>
             </div>
-            <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition" style="font-family:Outfit">
+            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
               RACHI Academy
             </div>
-            <p class="text-xs text-slate-500 mt-1">Capacitação, Cursos & Ensino Executivo</p>
+            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Capacitação, Cursos & Ensino Executivo</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['academy_courses'] ?? 12 }} {{ ($stats['academy_courses'] ?? 12) == 1 ? 'Curso' : 'Cursos' }} — {{ $stats['academy_students'] ?? 48 }} {{ ($stats['academy_students'] ?? 48) == 1 ? 'Aluno' : 'Alunos' }}</span>
-              <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white transition">
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
+              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['academy_courses'] ?? 12 }} Cursos · {{ $stats['academy_students'] ?? 48 }} Alunos</span>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
             </div>
           </div>
 
           <!-- 2. TEC -->
-          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-3xl p-5 sm:p-6 bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 to-blue-600"></div>
-            <div class="flex items-start justify-between mb-3.5">
-              <div class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 p-2.5 flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
+          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
               </div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span> Loja Aberta</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Loja Operacional</span>
             </div>
-            <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition" style="font-family:Outfit">
+            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
               RACHI Tec
             </div>
-            <p class="text-xs text-slate-500 mt-1">Hardware, Notebooks & TI Corporativa</p>
+            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Hardware, Notebooks & TI Corporativa</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['tec_items'] ?? 24 }} {{ ($stats['tec_items'] ?? 24) == 1 ? 'Item' : 'Itens' }} — {{ $stats['tec_orders'] ?? 15 }} {{ ($stats['tec_orders'] ?? 15) == 1 ? 'Pedido' : 'Pedidos' }}</span>
-              <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition">
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
+              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['tec_items'] ?? 24 }} Itens · {{ $stats['tec_orders'] ?? 15 }} Pedidos</span>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
             </div>
           </div>
 
           <!-- 3. HUMAN CAPITAL -->
-          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-3xl p-5 sm:p-6 bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
-            <div class="flex items-start justify-between mb-3.5">
-              <div class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 p-2.5 flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
+          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
               </div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> {{ $stats['capital_services'] ?? 8 }} {{ ($stats['capital_services'] ?? 8) == 1 ? 'Solução' : 'Soluções' }}</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">{{ $stats['capital_services'] ?? 8 }} Soluções</span>
             </div>
-            <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition" style="font-family:Outfit">
+            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
               RACHI Human Capital
             </div>
-            <p class="text-xs text-slate-500 mt-1">Recrutamento, Gestão de Pessoas & RH</p>
+            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Recrutamento, Gestão de Pessoas & RH</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['capital_requests'] ?? 6 }} {{ ($stats['capital_requests'] ?? 6) == 1 ? 'Demanda Ativa' : 'Demandas Ativas' }}</span>
-              <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition">
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
+              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['capital_requests'] ?? 6 }} Demandas Ativas</span>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
             </div>
           </div>
 
           <!-- 4. PRINT -->
-          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-3xl p-5 sm:p-6 bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500"></div>
-            <div class="flex items-start justify-between mb-3.5">
-              <div class="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 p-2.5 flex items-center justify-center group-hover:scale-105 group-hover:shadow-md transition-all duration-300">
-                <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-12 w-auto max-w-full object-contain drop-shadow-sm">
+          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
               </div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"><span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span> Produção Ativa</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Produção Ativa</span>
             </div>
-            <div class="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition" style="font-family:Outfit">
+            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
               RACHI Print
             </div>
-            <p class="text-xs text-slate-500 mt-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
+            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">{{ $stats['print_products'] ?? 18 }} {{ ($stats['print_products'] ?? 18) == 1 ? 'Catálogo' : 'Catálogos' }} — AOA {{ $stats['print_revenue_formatted'] ?? '450.000,00' }}</span>
-              <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition">
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
+              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['print_products'] ?? 18 }} Catálogos · AOA {{ $stats['print_revenue_formatted'] ?? '450.000,00' }}</span>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- KPIS EXECUTIVOS COM ÍCONES E TENDÊNCIAS -->
+      <!-- KPIS EXECUTIVOS COM PALETA SÓBRIA E MODERNA -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <template x-for="kpi in kpis" :key="kpi.label">
-          <div class="kc rounded-3xl p-5 bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300">
+          <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm" :class="kpi.iconBg">
-                <i :data-lucide="kpi.icon" :class="kpi.iconColor" class="w-5 h-5"></i>
+              <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 flex items-center justify-center font-medium">
+                <i :data-lucide="kpi.icon" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i>
               </div>
-              <span class="text-xs font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1" 
-                    :class="kpi.trend>0 ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20' : 'bg-rose-50 text-rose-600 dark:bg-rose-500/10 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20'">
-                <i :data-lucide="kpi.trend>0 ? 'trending-up' : 'trending-down'" class="w-3.5 h-3.5"></i>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+                <i data-lucide="trending-up" class="w-3 h-3"></i>
                 <span x-text="(kpi.trend>0?'+':'')+kpi.trend+'%'"></span>
               </span>
             </div>
-            <div class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="kpi.value"></div>
-            <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1" x-text="kpi.label"></div>
+            <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit" x-text="kpi.value"></div>
+            <div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1" x-text="kpi.label"></div>
           </div>
         </template>
       </div>
@@ -1027,22 +1029,22 @@ a { text-decoration: none !important; }
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
-            <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-bold uppercase">Academy</div>
-              <div class="text-sm font-black text-indigo-600 dark:text-indigo-400">{{ $stats['dist_academy'] ?? 0 }} reqs</div>
+          <div class="grid grid-cols-2 gap-2.5 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
+              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Academy</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_academy'] ?? 0 }} reqs</div>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-bold uppercase">Loja / Tec</div>
-              <div class="text-sm font-black text-sky-600 dark:text-sky-400">{{ $stats['dist_tec'] ?? 0 }} reqs</div>
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
+              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Loja / Tec</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_tec'] ?? 0 }} reqs</div>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-bold uppercase">RH Capital</div>
-              <div class="text-sm font-black text-emerald-600 dark:text-emerald-400">{{ $stats['dist_capital'] ?? 0 }} reqs</div>
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
+              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">RH Capital</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_capital'] ?? 0 }} reqs</div>
             </div>
-            <div class="p-2 rounded-xl bg-slate-50 dark:bg-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-bold uppercase">Print</div>
-              <div class="text-sm font-black text-amber-500">{{ $stats['dist_print'] ?? 0 }} reqs</div>
+            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
+              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Print</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_print'] ?? 0 }} reqs</div>
             </div>
           </div>
         </div>
@@ -4928,10 +4930,10 @@ function adminApp() {
     },
 
     kpis: [
-      { label: 'Clientes Ativos na Base', value: {!! json_encode($stats['kpi_clients_val'] ?? '142') !!}, trend: {{ $stats['kpi_clients_trend'] ?? 12 }}, icon: 'users', iconBg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', iconColor: 'text-blue-600 dark:text-blue-400' },
-      { label: 'Novas Solicitações no Mês', value: {!! json_encode($stats['kpi_requests_val'] ?? '28') !!}, trend: {{ $stats['kpi_requests_trend'] ?? 18 }}, icon: 'clipboard-list', iconBg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', iconColor: 'text-amber-600 dark:text-orange-400' },
-      { label: 'Pedidos da Loja Processados', value: {!! json_encode($stats['kpi_orders_val'] ?? '35') !!}, trend: {{ $stats['kpi_orders_trend'] ?? 24 }}, icon: 'shopping-cart', iconBg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', iconColor: 'text-purple-600 dark:text-purple-400' },
-      { label: 'Facturação Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '4.850.000,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 15 }}, icon: 'banknote', iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400', iconColor: 'text-emerald-600 dark:text-emerald-400' }
+      { label: 'Clientes Ativos na Base', value: {!! json_encode($stats['kpi_clients_val'] ?? '142') !!}, trend: {{ $stats['kpi_clients_trend'] ?? 12 }}, icon: 'users' },
+      { label: 'Novas Solicitações no Mês', value: {!! json_encode($stats['kpi_requests_val'] ?? '28') !!}, trend: {{ $stats['kpi_requests_trend'] ?? 18 }}, icon: 'clipboard-list' },
+      { label: 'Pedidos da Loja Processados', value: {!! json_encode($stats['kpi_orders_val'] ?? '35') !!}, trend: {{ $stats['kpi_orders_trend'] ?? 24 }}, icon: 'shopping-cart' },
+      { label: 'Facturação Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '4.850.000,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 15 }}, icon: 'banknote' }
     ],
 
     wfStatuses: [
