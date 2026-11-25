@@ -29,7 +29,7 @@
             officialDisplayPhone: '+244 972 888 585',
             chatApi: '/api/chat',
             crmLeadApi: '/api/crm/lead',
-            storageKey: 'rachi_pure_chat_v1',
+            storageKey: 'rachi_chat_clean_v2',
         };
 
         // Estado da Conversa Interativa (100% Livre e Natural)
@@ -45,7 +45,7 @@
             messages: [
                 {
                     sender: 'bot',
-                    text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola. 🇦🇴\n\nSou o consultor virtual da RACHI. Como posso apoiar a sua empresa hoje? Sinta-se à vontade para me dizer o que procura ou perguntar sobre os nossos serviços em **Tecnologia (Tec)**, **Gráfica & Brindes (Print)**, **Cursos Executivos (Academy)** ou **RH & Contabilidade (Capital)**!'
+                    text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola. 🇦🇴\n\nSou o consultor virtual da RACHI. Como posso apoiar a sua empresa hoje? Sinta-se à vontade para me dizer o que procura ou fazer a sua pergunta!'
                 }
             ]
         };
@@ -717,7 +717,7 @@
                 // Resposta de fallback elegante e calorosa
                 state.messages.push({
                     sender: 'bot',
-                    text: 'A **RACHI** é um ecossistema empresarial integrado em Angola, atuando com soluções completas em **Tecnologia & TI (RACHI Tec)**, **Gráfica & Brindes (RACHI Print)**, **Formações Executivas (RACHI Academy)** e **Recursos Humanos & Contabilidade (RACHI Human Capital)**.\n\nComo posso detalhar melhor a solução que a sua empresa procura?',
+                    text: 'A **RACHI** é um ecossistema empresarial integrado em Angola, preparado para apoiar o seu negócio com soluções inovadoras e personalizadas.\n\nComo posso apoiar a sua empresa hoje? Sinta-se à vontade para me falar sobre o seu projeto ou necessidade!',
                     isWhatsAppCard: true,
                     whatsAppText: `Olá! Estive a falar no chat do site da RACHI e gostaria de solicitar informações e proposta.`
                 });
