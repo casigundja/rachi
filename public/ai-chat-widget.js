@@ -6,8 +6,17 @@
 (function() {
     'use strict';
 
-    if (window.__GundjaAIChatInitialized) return;
-    window.__GundjaAIChatInitialized = true;
+    function initGundjaAIChat() {
+        if (window.__GundjaAIChatInitialized) return;
+        if (!document.body) {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGundjaAIChat);
+            } else {
+                window.addEventListener('load', initGundjaAIChat);
+            }
+            return;
+        }
+        window.__GundjaAIChatInitialized = true;
 
     // Configurações Oficiais
     const CONFIG = {
@@ -1006,5 +1015,11 @@ Data: ${new Date().toLocaleString('pt-PT')}`
 
     // Inicialização da interface
     renderMessages();
+    }
 
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGundjaAIChat);
+    } else {
+        initGundjaAIChat();
+    }
 })();

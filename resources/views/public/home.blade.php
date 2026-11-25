@@ -6414,5 +6414,7 @@
         }
     </script>
     @include('components.theme-toggle-fab')
+    <!-- Assistente IA CRM Chat Widget (GundjaTech) -->
+    <script src="/ai-chat-widget.js" defer></script>
 </body>
 </html>
