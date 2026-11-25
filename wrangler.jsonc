@@ -7,6 +7,12 @@
     "nodejs_compat"
   ],
   "workers_dev": true,
+  "routes": [
+    "rachi.ao/*",
+    "www.rachi.ao/*",
+    "admin.rachi.ao/*",
+    "api.rachi.ao/*"
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",

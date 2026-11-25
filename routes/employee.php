@@ -6,7 +6,7 @@ use App\Http\Controllers\Employee\EmployeeRequestController;
 
 /*
 |--------------------------------------------------------------------------
-| Rotas do Portal do Funcionário
+| Rotas do Portal do Funcionário (Sincronizadas com Cloud / SPA)
 |--------------------------------------------------------------------------
 */
 
@@ -14,7 +14,7 @@ Route::middleware(['auth', 'role:employee|manager|admin|super_admin'])
     ->prefix('funcionario')
     ->name('employee.')
     ->group(function () {
-        Route::get('/dashboard', [EmployeeDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', fn () => redirect('/portal#requests'))->name('dashboard');
 
         // Atendimento de Solicitações
         Route::get('/solicitacoes', [EmployeeRequestController::class, 'index'])->name('requests');
@@ -27,6 +27,6 @@ Route::middleware(['auth', 'role:employee|manager|admin|super_admin'])
         Route::post('/orcamentos', [EmployeeRequestController::class, 'storeQuote'])->name('quotes.store');
 
         // Pedidos & Estoque
-        Route::get('/pedidos', [EmployeeDashboardController::class, 'orders'])->name('orders');
-        Route::get('/estoque', [EmployeeDashboardController::class, 'stock'])->name('stock');
+        Route::get('/pedidos', fn () => redirect('/portal#orders'))->name('orders');
+        Route::get('/estoque', fn () => redirect('/portal#stock'))->name('stock');
     });

@@ -10515,6 +10515,12 @@ __name(html, "html");
 var index_default = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url), path = url.pathname.replace(/\/$/, "") || "/", get = ["GET", "HEAD"].includes(request.method);
+    if (url.hostname.startsWith("admin.") && path === "/") {
+      return Response.redirect(new URL("/admin-dashboard", url).toString(), 302);
+    }
+    if (url.hostname.startsWith("api.") && path === "/") {
+      return Response.json({ status: "ok", name: "RACHI API", version: "1.0" });
+    }
     if (get) {
       if (["/toast.js", "/toast.css"].includes(path)) return env.ASSETS.fetch(request);
       if (path === "/up") return Response.json({ status: "ok", runtime: "cloudflare-worker" });
@@ -10542,10 +10548,17 @@ var index_default = {
         url.pathname = "/_session-page/" + pages[path];
         return app.fetch(new Request(url, request), env, ctx);
       }
-      if (pages[path]) return env.ASSETS.fetch(new Request(new URL("/pages/" + pages[path] + ".html", url), request));
+      const serveHtml = async (assetPath) => {
+        const res = await env.ASSETS.fetch(new Request(new URL(assetPath, url), request));
+        if (!res.ok) return res;
+        const h = new Headers(res.headers);
+        h.set("Content-Type", "text/html; charset=utf-8");
+        return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
+      };
+      if (pages[path]) return serveHtml("/pages/" + pages[path] + ".html");
       if (/^\/(tec|capital|print)\/servicos\/[^/]+$/.test(path)) {
         const parts = path.split("/");
-        return env.ASSETS.fetch(new Request(new URL("/pages/" + parts[1] + "-service-" + parts[3] + ".html", url), request));
+        return serveHtml("/pages/" + parts[1] + "-service-" + parts[3] + ".html");
       }
       if (portals[path]) return Response.redirect(new URL((path.startsWith("/admin") ? "/admin-dashboard#" : "/portal#") + portals[path], url).toString(), 302);
       if (path === "/login") return html(loginPage());

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Painel Administrativo Â· RACHI</title>
-  <meta name="description" content="Autenticação segura e gestão integrada das unidades TEC, PRINT, ACADEMY e HUMAN CAPITAL ” RACHI.">
+  <meta name="description" content="Autenticação segura e gestão integrada das unidades TEC, PRINT, ACADEMY e HUMAN CAPITAL — RACHI.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -668,7 +668,7 @@
             Tecnologia, Indústria Gráfica, Formação e <span>Capital Humano</span>
           </h2>
           <p class="showcase-lead">
-            A <strong>RACHI ” Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
+            A <strong>RACHI — Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
           </p>
         </header>
 
@@ -682,7 +682,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box tec">ðŸ’»</div>
+                <div class="unit-icon-box tec">💻 </div>
                 <div class="unit-name-wrap">
                   <h3>RACHI TEC</h3>
                   <span class="unit-tag">Tecnologia & Infraestrutura</span>
@@ -696,7 +696,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box print">ðŸ–¨ï¸</div>
+                <div class="unit-icon-box print">🖨️</div>
                 <div class="unit-name-wrap">
                   <h3>RACHI PRINT</h3>
                   <span class="unit-tag">Indústria Gráfica & Merchandising</span>
@@ -710,7 +710,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box academy">ðŸŽ“</div>
+                <div class="unit-icon-box academy">🎓 </div>
                 <div class="unit-name-wrap">
                   <h3>RACHI ACADEMY</h3>
                   <span class="unit-tag">Formação Profissional & LMS</span>
@@ -724,7 +724,7 @@
           <article class="unit-card">
             <div>
               <div class="unit-card-header">
-                <div class="unit-icon-box capital">ðŸ‘¥</div>
+                <div class="unit-icon-box capital">👥 </div>
                 <div class="unit-name-wrap">
                   <h3>RACHI HUMAN CAPITAL</h3>
                   <span class="unit-tag">Gestão Estratégica de Talentos</span>

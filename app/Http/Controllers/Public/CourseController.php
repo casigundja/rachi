@@ -17,8 +17,11 @@ use Illuminate\Http\RedirectResponse;
 
 class CourseController extends Controller
 {
-    public function dashboard(Request $request): View
+    public function dashboard(Request $request): View|RedirectResponse
     {
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
         $allCourses = Course::where('status', 'published')
             ->with(['category', 'modules.lessons'])
             ->get()

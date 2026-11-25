@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'RACHI ” Soluções inteligentes')</title>
+    <title>@yield('title', 'RACHI — Soluções inteligentes')</title>
     <meta name="description" content="RACHI — soluções inteligentes em tecnologia, educação e serviços empresariais.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -397,7 +397,16 @@
 </style>
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 </head>
-<body class="min-h-screen flex flex-col justify-between" x-data="{ solutionsOpen: false, mobileMenuOpen: false, currentTab: '' }">
+<body class="min-h-screen flex flex-col justify-between" x-data="{ 
+    solutionsOpen: false, 
+    mobileMenuOpen: false, 
+    currentTab: '',
+    goToHome() { window.location.href = '/'; },
+    scrollToSection(section) { window.location.href = '/#' + section; },
+    openUnitPage(unit) { window.location.href = '/' + unit; },
+    openStore() { window.location.href = '/loja'; },
+    openContacto() { window.location.href = '/contacto'; }
+}">
     <!-- EXACT NAV BAR -->
     <!-- HEADER DUAL-THEME: ESCURO NO TOPO, CLARO AO ROLAR (ESTILO KLASSE.AO) -->
         <header id="main-site-header" class="site-header header-top-dark px-4 sm:px-6 lg:px-8 py-5 lg:py-6 transition-all duration-300">
@@ -509,7 +518,7 @@
                     <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="nav-link" :class="currentTab === 'etica' ? 'active' : ''">
                         <span>Ética e Compliance</span>
                     </a>
-                    <a href="#loja" @click.prevent="openStore(); solutionsOpen = false" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
+                    <a href="/loja" @click="solutionsOpen = false" class="nav-link" :class="currentTab === 'loja' ? 'active' : ''">
                         <span>Loja</span>
                     </a>
                     <a href="/contacto" @click.prevent="openContacto(); solutionsOpen = false" class="nav-link" :class="currentTab === 'contacto' ? 'active' : ''">
@@ -522,7 +531,41 @@
             <div class="flex-1 flex items-center justify-end min-w-0 gap-2.5 sm:gap-3">
                 
 
-                <!-- Entrar button -->
+                <!-- Header Auth State -->
+                @auth
+                <div class="relative" x-data="{ userMenuDropdown: false }" @click.outside="userMenuDropdown = false">
+                    <button @click.stop="userMenuDropdown = !userMenuDropdown"
+                        class="flex items-center gap-2 py-1.5 px-3.5 sm:px-4 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 transition cursor-pointer"
+                        aria-label="Menu do Utilizador">
+                        <span class="text-xs font-bold text-slate-800 dark:text-white max-w-[130px] truncate inline-block">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div x-show="userMenuDropdown" x-cloak class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-[#071326] border border-slate-200 dark:border-white/15 rounded-2xl shadow-2xl p-2 z-50 text-xs space-y-1">
+                        <div class="px-3 py-2 border-b border-slate-100 dark:border-white/10">
+                            <p class="font-bold text-slate-900 dark:text-white truncate">{{ auth()->user()->name }}</p>
+                            <p class="text-[10px] text-slate-500 truncate">{{ auth()->user()->email }}</p>
+                        </div>
+                        <a href="/portal" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
+                            <span>Portal do Cliente</span>
+                        </a>
+                        @if(auth()->user()->isAdmin())
+                        <a href="/admin-dashboard" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-950/30 text-amber-600 font-medium">
+                            <span>Painel Administrativo</span>
+                        </a>
+                        @endif
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="w-full text-left flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 text-rose-600 font-medium cursor-pointer">
+                                <span>Terminar Sessão</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                @else
                 <a href="/?login=1" class="btn-entrar-nav group">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
                         <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
@@ -531,6 +574,7 @@
                     </svg>
                     <span>ENTRAR</span>
                 </a>
+                @endauth
 
                 <!-- Mobile Menu Button -->
                 <button @click.stop="mobileMenuOpen = !mobileMenuOpen" class="mobile-menu-btn lg:hidden p-2 rounded-xl text-white hover:text-[#00a3e0] focus:outline-none" aria-label="Menu Principal">
@@ -563,9 +607,9 @@
                     </div>
                 </div>
                 <div class="border-t border-white/10 pt-2 space-y-2">
-                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
-                    <a href="#loja" @click.prevent="openStore(); mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Loja</a>
-                    <a href="/contacto" @click.prevent="openContacto(); mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]" :class="currentTab === 'contacto' ? 'text-[#00a3e0]' : ''">Contacto</a>
+                    <a href="#etica" @click.prevent="scrollToSection('etica'); solutionsOpen = false; mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Ética e Compliance</a>
+                    <a href="/loja" @click="mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]">Loja</a>
+                    <a href="/contacto" @click="mobileMenuOpen = false" class="block font-medium py-1 hover:text-[#00a3e0]" :class="currentTab === 'contacto' ? 'text-[#00a3e0]' : ''">Contacto</a>
                 </div>
             </div>
         </header>
@@ -617,10 +661,10 @@
             <div>
                 <h4 class="font-bold text-sm tracking-wider uppercase text-amber-400 mb-3">Unidades</h4>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li><a href="{{ route('unit.show', 'tec') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec ” Loja de TI</a></li>
-                    <li><a href="{{ route('unit.show', 'print') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print ” Artes &amp; Logótipos</a></li>
-                    <li><a href="{{ route('unit.show', 'academy') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy ” Cursos</a></li>
-                    <li><a href="{{ route('unit.show', 'capital') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Capital ” Sites &amp; Suporte TI</a></li>
+                    <li><a href="{{ route('unit.show', 'tec') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Tec — Loja de TI</a></li>
+                    <li><a href="{{ route('unit.show', 'print') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Print — Artes &amp; Logótipos</a></li>
+                    <li><a href="{{ route('unit.show', 'academy') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Academy — Cursos</a></li>
+                    <li><a href="{{ route('unit.show', 'capital') }}" class="hover:text-slate-900 dark:hover:text-white transition">RACHI Capital — Sites &amp; Suporte TI</a></li>
                 </ul>
             </div>
             <div>
@@ -641,7 +685,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> ” Soluções Inteligentes. Todos os direitos reservados.</div>
+            <div>&copy; 2026 <strong class="text-slate-900 dark:text-white">RACHI</strong> — Soluções Inteligentes. Todos os direitos reservados.</div>
             <div class="flex gap-3 items-center text-xs">
                         <button type="button" onclick="setRachiLanguage('pt')" data-rachi-lang="pt" class="cursor-pointer font-bold text-amber-500 dark:text-amber-400 hover:opacity-100 transition" title="Português">PT</button>
                         <span class="text-slate-500 opacity-60">|</span>

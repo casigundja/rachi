@@ -385,7 +385,7 @@
 
                         <!-- Imagem do Curso -->
                         <div class="h-44 w-full rounded-2xl overflow-hidden mb-5 relative border border-slate-200/80 dark:border-white/10 shadow-sm">
-                            <img src="/images/courses/{{ $course->slug }}.jpg" alt="{{ $course->name }}" class="w-full h-full object-cover">
+                            <img src="/images/courses/{{ $course->slug }}.jpg" alt="{{ $course->name }}" onerror="this.onerror=null; this.src='/images/courses/ciberseguranca.jpg'" class="w-full h-full object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#0c1527]/80 via-transparent to-transparent"></div>
                             <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-[#071326]/90 text-[#00a3e0] border border-[#00a3e0]/40 backdrop-blur-md">
                                 ★ Formação Oficial RACHI

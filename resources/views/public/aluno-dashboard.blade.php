@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Dashboard | RACHI Academy ” Portal do Aluno</title>
+    <title>Meu Dashboard | RACHI Academy — Portal do Aluno</title>
     <meta name="description" content="Dashboard do Aluno RACHI Academy: continue seus estudos, acompanhe formações, ganhe XP e emita seus certificados.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -174,7 +174,7 @@
             <h4 class="text-sm font-bold text-slate-900 dark:text-white" x-text="toast.title"></h4>
             <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5" x-text="toast.message"></p>
         </div>
-        <button @click="toast.visible = false" class="text-slate-400 hover:text-slate-600 text-xs font-bold">âœ•</button>
+        <button @click="toast.visible = false" class="text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
     </div>
 
     <!-- ================================================================ -->
@@ -346,7 +346,7 @@
             <!-- Mobile Close Button -->
             <div class="flex items-center justify-between mb-4 lg:hidden">
                 <span class="font-heading font-black text-sm text-slate-900 dark:text-white uppercase tracking-wider">Navegação</span>
-                <button @click="sidebarOpen = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">âœ•</button>
+                <button @click="sidebarOpen = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-700">✕</button>
             </div>
 
             <div class="space-y-4">
@@ -593,7 +593,7 @@
                                               x-text="curso.categoria"></span>
                                         <span :class="curso.progresso === 100 ? 'bg-emerald-500 text-white' : 'bg-white/95 text-slate-900'"
                                               class="text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs"
-                                              x-text="curso.progresso === 100 ? 'âœ“ Concluído' : curso.progresso + '%'"></span>
+                                              x-text="curso.progresso === 100 ? '✓ Concluído' : curso.progresso + '%'"></span>
                                     </div>
                                     <div class="relative z-20 text-white font-semibold text-xs flex items-center justify-between drop-shadow-md">
                                         <span class="flex items-center gap-1 font-mono text-[11px]">
@@ -763,11 +763,11 @@
                 <button @click="toggleLessonStatus(activeLesson)" 
                         :class="activeLesson?.concluida ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'bg-[#0050f0] text-white hover:bg-[#0042c7]'"
                         class="px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5 shadow-sm cursor-pointer">
-                    <span x-show="activeLesson?.concluida">âœ“ Aula Concluída</span>
+                    <span x-show="activeLesson?.concluida">✓ Aula Concluída</span>
                     <span x-show="!activeLesson?.concluida">Marcar como Concluída</span>
                 </button>
 
-                <button @click="classroomModal = false" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white cursor-pointer font-bold">âœ•</button>
+                <button @click="classroomModal = false" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white cursor-pointer font-bold">✕</button>
             </div>
         </header>
 
@@ -839,7 +839,7 @@
                     <i data-lucide="award" class="w-5 h-5"></i>
                     <span class="text-xs uppercase tracking-wider">Certificado Oficial RACHI Academy</span>
                 </div>
-                <button @click="certificateModalOpen = false" class="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-pointer">âœ•</button>
+                <button @click="certificateModalOpen = false" class="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-pointer">✕</button>
             </div>
 
             <div id="printable-certificate" class="bg-gradient-to-br from-[#faf8f2] via-[#ffffff] to-[#f7f4ec] border-4 border-double border-amber-500/50 rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden shadow-lg">
@@ -892,7 +892,7 @@
                     <i data-lucide="sparkles" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Modo Entrevista Técnica (IA)</h3>
                 </div>
-                <button @click="interviewModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
+                <button @click="interviewModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 Pratique entrevistas reais simuladas com perguntas técnicas de TI, Cibersegurança, Finanças e Gestão Corporativa com feedbacks em tempo real.
@@ -918,7 +918,7 @@
                     <i data-lucide="book-open" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Os Meus Livros &amp; Manuais</h3>
                 </div>
-                <button @click="booksModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
+                <button @click="booksModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300">Aceda e faça download das manuais de formação oficiais, guias práticos e referências bibliográficas do seu curso:</p>
             <div class="space-y-2 text-xs">
@@ -953,7 +953,7 @@
                     <i data-lucide="calendar" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Agenda de Eventos e Mentorias</h3>
                 </div>
-                <button @click="eventsModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
+                <button @click="eventsModalOpen = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
             </div>
             <div class="space-y-3 text-xs">
                 <div class="p-3.5 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
@@ -982,7 +982,7 @@
                     <i data-lucide="shield-check" class="w-5 h-5"></i>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white">Histórico de Acessos &amp; Sessões</h3>
                 </div>
-                <button @click="accessLogsModal = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">âœ•</button>
+                <button @click="accessLogsModal = false" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
             </div>
 
             <p class="text-xs text-slate-600 dark:text-slate-300">Registros de segurança de autenticação do seu usuário na RACHI Academy:</p>
@@ -1062,7 +1062,7 @@
                 formations: [
                     {
                         id: 1,
-                        icon: 'ðŸ›¡ï¸',
+                        icon: '🛡️',
                         title: 'Formação Cibersegurança & Defesa Ativa',
                         description: 'Trilha completa cobrindo governança de segurança, prevenção a ameaças cibernéticas e conformidade com a APD.',
                         totalHours: 115,
@@ -1077,7 +1077,7 @@
                     },
                     {
                         id: 2,
-                        icon: 'ðŸ“ˆ',
+                        icon: '📈 ',
                         title: 'Formação Gestão Financeira & Liderança Corporativa',
                         description: 'Domínio de DRE, valuation, fluxo de caixa estratégico e liderança de equipas.',
                         totalHours: 100,
@@ -1092,7 +1092,7 @@
                     },
                     {
                         id: 3,
-                        icon: 'âš¡',
+                        icon: '⚡',
                         title: 'Formação Automação de Escritório & Produtividade com IA',
                         description: 'Trabalho colaborativo em nuvem, automação com inteligência artificial e Power BI.',
                         totalHours: 66,

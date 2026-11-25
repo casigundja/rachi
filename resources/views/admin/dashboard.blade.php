@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>RACHI ” Painel de Gestão & Administração</title>
+<title>RACHI — Painel de Gestão & Administração</title>
 <meta name="description" content="Painel de controlo visual e intuitivo da RACHI: métricas, negócios, clientes, solicitações e relatórios.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -826,7 +826,7 @@ a { text-decoration: none !important; }
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-3 max-w-2xl">
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight" style="font-family:Outfit">
-              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! ðŸ‘‹
+              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! 👋
             </h1>
             <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
               Bem-vindo ao centro integrado da RACHI. Você tem <strong class="text-white underline decoration-amber-400 decoration-2"><span x-text="requests ? requests.length : {{ $stats['total_requests'] ?? 0 }}"></span> solicitações</strong> na Central e <strong class="text-white underline decoration-emerald-400 decoration-2"><span x-text="tecOrders ? tecOrders.length : {{ $stats['total_orders'] ?? 0 }}"></span> pedidos</strong> em processamento hoje.
@@ -1661,7 +1661,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy ” Cursos & Certificações</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy — Cursos & Certificações</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão do catálogo de formações presenciais e online em Angola.</p>
           </div>
         </div>
@@ -1708,7 +1708,7 @@ a { text-decoration: none !important; }
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸŽ“ RACHI Academy ” Alunos & Solicitações de Matrícula</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">🎓 RACHI Academy — Alunos & Solicitações de Matrícula</h1>
             <span x-show="pendingEnrollmentsCount > 0" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1 animate-pulse">
               <span class="w-2 h-2 rounded-full bg-amber-500"></span>
               <span x-text="pendingEnrollmentsCount + ' pendente(s)'"></span>
@@ -1924,7 +1924,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Catálogo de Produtos</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Catálogo de Produtos</h1>
             <p class="text-slate-500 text-sm mt-0.5">Equipamentos, computadores, consumíveis e suprimentos de TI.</p>
           </div>
         </div>
@@ -1963,7 +1963,7 @@ a { text-decoration: none !important; }
     <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-6">
       <div class="flex items-center justify-between gap-3">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Solicitações & Consultoria</h1>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Solicitações & Consultoria</h1>
           <p class="text-sm text-slate-500 mt-1">Pedidos enviados pela página Human Capital e pelas suas páginas de serviços.</p>
         </div>
         <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
@@ -1993,7 +1993,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Vagas & Recrutamento</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Vagas & Recrutamento</h1>
             <p class="text-slate-500 text-sm mt-0.5">Processos de atração, seleção e consultoria de recursos humanos.</p>
           </div>
         </div>
@@ -2038,7 +2038,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print ” Gestão da Produção Gráfica</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Gestão da Produção Gráfica</h1>
             <p class="text-slate-500 text-sm mt-0.5">Controlo de tiragens, acabamentos, prazos e entregas gráficas.</p>
           </div>
         </div>
@@ -2077,7 +2077,7 @@ a { text-decoration: none !important; }
     <!-- FINANCEIRO -->
     <section x-show="currentPage==='financeiro'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ’° Gestão Financeira Consolidada</h1>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">💰 Gestão Financeira Consolidada</h1>
         <p class="text-slate-500 text-sm mt-0.5">Fluxo de caixa, recebimentos por unidade de negócio e saldos.</p>
       </div>
 
@@ -2149,7 +2149,7 @@ a { text-decoration: none !important; }
     <section x-show="currentPage==='relatorios'" x-cloak class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ“ˆ Central de Relatórios Executivos</h1>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">📈 Central de Relatórios Executivos</h1>
           <p class="text-slate-500 text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade de negócio.</p>
         </div>
       </div>
@@ -2180,7 +2180,7 @@ a { text-decoration: none !important; }
     <!-- NOTIFICAÇÕES -->
     <section x-show="currentPage==='notificacoes'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">ðŸ”” Centro de Notificações</h1>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">🔔 Centro de Notificações</h1>
         <p class="text-slate-500 text-sm mt-0.5">Alertas de clientes, novos pedidos, stocks e tarefas pendentes.</p>
       </div>
       <div class="sc2 space-y-3.5">
@@ -2207,13 +2207,13 @@ a { text-decoration: none !important; }
     <!-- CONFIGURAÇÕES -->
     <section x-show="currentPage==='configuracoes'" x-cloak class="space-y-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">âš™ï¸ Parâmetros & Configurações</h1>
+        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">⚙️ Parâmetros & Configurações</h1>
         <p class="text-slate-500 text-sm mt-0.5">Dados institucionais, preferências de aparência e segurança.</p>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="sc2 space-y-4">
           <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dados da Organização</h3>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI ” Soluções Inteligentes Lda." class="ia"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI — Soluções Inteligentes Lda." class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">NIF / Identificação Fiscal</label><input type="text" value="5417000000" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">E-mail Corporativo</label><input type="email" value="geral@rachi.ao" class="ia"></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label><input type="text" value="+244 972 888 585" class="ia"></div>
@@ -2257,7 +2257,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Pedidos & Formulários de TI</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos & Formulários de TI</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão de vendas da loja e de formulários preenchidos em /tec e sub-páginas.</p>
           </div>
         </div>
@@ -2405,7 +2405,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec ” Controlo & Alertas de Stock</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo & Alertas de Stock</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de stock crítico da loja.</p>
           </div>
         </div>
@@ -2544,7 +2544,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital ” Banco de Talentos</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Banco de Talentos</h1>
             <p class="text-slate-500 text-sm mt-0.5">Perfis qualificados, banco curricular e candidatos a oportunidades corporativas.</p>
           </div>
         </div>
@@ -2586,7 +2586,7 @@ a { text-decoration: none !important; }
             <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print ” Orçamentos & Ordens de Produção</h1>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Orçamentos & Ordens de Produção</h1>
             <p class="text-slate-500 text-sm mt-0.5">Gestão de orçamentos gráficos solicitados por empresas e aprovações de tiragem.</p>
           </div>
         </div>
@@ -3269,10 +3269,10 @@ a { text-decoration: none !important; }
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Unidade de Negócio *</label>
               <select x-model.number="newOrder.business_unit_id" class="ia w-full" required>
-                <option value="1">ðŸ’» RACHI Tec</option>
-                <option value="2">ðŸ–¨ï¸ RACHI Print</option>
-                <option value="3">ðŸŽ“ RACHI Academy</option>
-                <option value="4">ðŸ‘¥ RACHI Human Capital</option>
+                <option value="1">💻 RACHI Tec</option>
+                <option value="2">🖨️ RACHI Print</option>
+                <option value="3">🎓 RACHI Academy</option>
+                <option value="4">👥 RACHI Human Capital</option>
               </select>
             </div>
             <div>
@@ -3334,7 +3334,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Publicar Vaga Corporativa</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Human Capital ” Gestão de Oportunidades & Recrutamento.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Human Capital — Gestão de Oportunidades & Recrutamento.</p>
             </div>
           </div>
           <button @click="showCreateJobModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3406,7 +3406,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto TI</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec ” Cadastro de Hardware, Equipamentos & Suprimentos.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Cadastro de Hardware, Equipamentos & Suprimentos.</p>
             </div>
           </div>
           <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3469,7 +3469,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão & Ajuste de Stock</h3>
-              <p class="text-xs text-slate-500">RACHI Tec ” Entrada, saída e disponibilidade na loja</p>
+              <p class="text-xs text-slate-500">RACHI Tec — Entrada, saída e disponibilidade na loja</p>
             </div>
           </div>
           <button type="button" @click="showStockModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 cursor-pointer">
@@ -3482,7 +3482,7 @@ a { text-decoration: none !important; }
             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Produto da Loja *</label>
             <select x-model="stockForm.product_id" required class="ia w-full text-xs font-semibold">
               <template x-for="p in sProducts" :key="p.id">
-                <option :value="p.id" x-text="p.nome + ' (' + p.sku + ') ” Stock Atual: ' + p.est + ' un.'"></option>
+                <option :value="p.id" x-text="p.nome + ' (' + p.sku + ') — Stock Atual: ' + p.est + ' un.'"></option>
               </template>
             </select>
           </div>
@@ -3493,7 +3493,7 @@ a { text-decoration: none !important; }
               <select x-model="stockForm.action" class="ia w-full text-xs font-semibold">
                 <option value="add">âž• Entrada / Adicionar ao Stock</option>
                 <option value="remove">âž– Saída / Baixa de Stock</option>
-                <option value="set">ðŸ”„ Definir Saldo Absoluto</option>
+                <option value="set">🔄 Definir Saldo Absoluto</option>
               </select>
             </div>
             <div>
@@ -3544,7 +3544,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Novo Item / Ordem Gráfica</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Print ” Cadastrar tiragem gráfica, material ou acabamento.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Print — Cadastrar tiragem gráfica, material ou acabamento.</p>
             </div>
           </div>
           <button @click="showCreatePrintModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -3611,7 +3611,7 @@ a { text-decoration: none !important; }
             </div>
             <div>
               <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Criar Nova Formação</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Academy ” Registar novo curso ou trilha no catálogo.</p>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Academy — Registar novo curso ou trilha no catálogo.</p>
             </div>
           </div>
           <button @click="showCreateCourseModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
@@ -4078,7 +4078,7 @@ function adminApp() {
           item.status = 'active';
           if (window.lucide) this.$nextTick(() => lucide.createIcons());
           this.notifs.unshift({
-            icon: 'ðŸŽ“',
+            icon: '🎓',
             ib: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400',
             titulo: 'Matrícula Aprovada',
             msg: `O aluno ${item.nome} foi aprovado e ativado no curso ${item.curso}.`,
@@ -4175,7 +4175,7 @@ function adminApp() {
           this.academyUserSearch = '';
           if (window.lucide) this.$nextTick(() => lucide.createIcons());
           this.notifs.unshift({
-            icon: 'ðŸŽ“',
+            icon: '🎓',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Novo Aluno Matriculado',
             msg: `${studentName} matriculado manualmente com sucesso.`,
@@ -4261,7 +4261,7 @@ function adminApp() {
           this.users.unshift(data.user);
           this.showCreateUserModal = false;
           this.notifs.unshift({
-            icon: 'ðŸ‘¤',
+            icon: '👤',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Novo Utilizador Criado',
             msg: `${data.user.nome} adicionado com o perfil ${data.user.tipo}.`,
@@ -4317,7 +4317,7 @@ function adminApp() {
           }
           this.showEditUserModal = false;
           this.notifs.unshift({
-            icon: 'âœï¸',
+            icon: '✏️',
             ib: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400',
             titulo: 'Utilizador Atualizado',
             msg: `Informações de ${data.user.nome} foram gravadas com sucesso.`,
@@ -4366,7 +4366,7 @@ function adminApp() {
           }
           Object.assign(u, data.user);
           this.notifs.unshift({
-            icon: 'ðŸ›¡ï¸',
+            icon: '🛡️',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Perfil Alterado',
             msg: `O perfil de ${data.user.nome} foi alterado para ${data.user.tipo}.`,
@@ -4409,7 +4409,7 @@ function adminApp() {
             this.users[idx] = data.user;
           }
           this.notifs.unshift({
-            icon: 'ðŸ›¡ï¸',
+            icon: '🛡️',
             ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400',
             titulo: 'Perfil Alterado',
             msg: `O perfil de ${data.user.nome} foi alterado para ${data.user.tipo}.`,
@@ -4444,7 +4444,7 @@ function adminApp() {
           u.sk = data.user.sk;
           u.raw_status = data.user.raw_status;
           this.notifs.unshift({
-            icon: u.status === 'Ativo' ? 'ðŸ”“' : 'ðŸ”’',
+            icon: u.status === 'Ativo' ? '🔓' : '🔒',
             ib: u.status === 'Ativo' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600',
             titulo: 'Estado de Acesso Alterado',
             msg: data.message,
@@ -4539,7 +4539,7 @@ function adminApp() {
           this.showDeleteUserModal = false;
           this.userToDelete = null;
           this.notifs.unshift({
-            icon: 'ðŸ—‘ï¸',
+            icon: '🗑️',
             ib: 'bg-rose-50 text-rose-600',
             titulo: 'Utilizador Excluído',
             msg: data.message,
@@ -4583,17 +4583,17 @@ function adminApp() {
         'usuarios': 'Perfis',
         'clientes': 'Base de Clientes',
         'solicitacoes': 'Central de Solicitações',
-        'academy-cursos': 'RACHI Academy ” Cursos',
-        'academy-alunos': 'RACHI Academy ” Alunos',
-        'academy-matriculas': 'RACHI Academy ” Matrículas',
-        'loja-produtos': 'RACHI Store ” Produtos',
-        'loja-pedidos': 'RACHI Store ” Pedidos',
-        'loja-estoque': 'RACHI Store ” Stock',
-        'rh-solicitacoes': 'Human Capital ” Solicitações',
-        'rh-vagas': 'Human Capital ” Vagas',
-        'rh-candidatos': 'Human Capital ” Candidatos',
-        'grafica-produtos': 'RACHI Print ” Produtos',
-        'grafica-orcamentos': 'RACHI Print ” Orçamentos',
+        'academy-cursos': 'RACHI Academy — Cursos',
+        'academy-alunos': 'RACHI Academy — Alunos',
+        'academy-matriculas': 'RACHI Academy — Matrículas',
+        'loja-produtos': 'RACHI Store — Produtos',
+        'loja-pedidos': 'RACHI Store — Pedidos',
+        'loja-estoque': 'RACHI Store — Stock',
+        'rh-solicitacoes': 'Human Capital — Solicitações',
+        'rh-vagas': 'Human Capital — Vagas',
+        'rh-candidatos': 'Human Capital — Candidatos',
+        'grafica-produtos': 'RACHI Print — Produtos',
+        'grafica-orcamentos': 'RACHI Print — Orçamentos',
         'financeiro': 'Gestão Financeira',
         'relatorios': 'Central de Relatórios',
         'notificacoes': 'Notificações',
@@ -5350,28 +5350,28 @@ function adminApp() {
     printQuotes: @json($printQuotes ?? []),
 
     finMods: [
-      { label: 'RACHI Store / Tec', icon: 'ðŸ›’', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
-      { label: 'RACHI Academy', icon: 'ðŸŽ“', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
-      { label: 'RACHI Print', icon: 'ðŸ–¨ï¸', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
-      { label: 'Human Capital', icon: 'ðŸ‘¥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
+      { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
+      { label: 'RACHI Academy', icon: '🎓', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
+      { label: 'RACHI Print', icon: '🖨️', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
+      { label: 'Human Capital', icon: '👥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
     ],
 
     txs: @json($recentTransactions ?? []),
 
     reports: [
-      { key: 'clientes', icon: 'ðŸ‘¤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} registos sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
-      { key: 'financeiro', icon: 'ðŸ’°', label: 'Facturação & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} facturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
-      { key: 'pedidos', icon: 'ðŸ“¦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
-      { key: 'solicitacoes', icon: 'ðŸ“‹', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
-      { key: 'academy', icon: 'ðŸŽ“', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
-      { key: 'capital', icon: 'ðŸ‘¥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
+      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} registos sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
+      { key: 'financeiro', icon: '💰', label: 'Facturação & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} facturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
+      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
+      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
+      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
+      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
     ],
 
     notifs: [
-      { icon: 'ðŸ“‹', ib: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', titulo: 'Nova Demanda Corporativa', msg: 'A Empresa Alpha Lda. registou uma nova solicitação de recrutamento de TI.', data: '21/09/2026 09:00', lida: false },
-      { icon: 'ðŸŽ“', ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', titulo: 'Nova Matrícula na Academy', msg: 'Pedro Alves matriculou-se em Cibersegurança e Proteção de Dados.', data: '21/09/2026 08:45', lida: false },
-      { icon: 'ðŸ›’', ib: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', titulo: 'Novo Pedido Loja #154', msg: 'Inov Quimua solicitou compra corporativa de 10 notebooks ThinkPad.', data: '21/09/2026 08:30', lida: false },
-      { icon: 'âš ï¸', ib: 'bg-yellow-50 text-yellow-600 dark:bg-yellow-500/10 dark:text-yellow-400', titulo: 'Alerta de Stock Mínimo', msg: 'Monitor LG 27" ” restam apenas 3 unidades no stock central.', data: '20/09/2026 18:00', lida: false }
+      { icon: '📋', ib: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400', titulo: 'Nova Demanda Corporativa', msg: 'A Empresa Alpha Lda. registou uma nova solicitação de recrutamento de TI.', data: '21/09/2026 09:00', lida: false },
+      { icon: '🎓', ib: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400', titulo: 'Nova Matrícula na Academy', msg: 'Pedro Alves matriculou-se em Cibersegurança e Proteção de Dados.', data: '21/09/2026 08:45', lida: false },
+      { icon: '🛒', ib: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400', titulo: 'Novo Pedido Loja #154', msg: 'Inov Quimua solicitou compra corporativa de 10 notebooks ThinkPad.', data: '21/09/2026 08:30', lida: false },
+      { icon: '⚠️', ib: 'bg-yellow-50 text-yellow-600 dark:bg-yellow-500/10 dark:text-yellow-400', titulo: 'Alerta de Stock Mínimo', msg: 'Monitor LG 27" — restam apenas 3 unidades no stock central.', data: '20/09/2026 18:00', lida: false }
     ]
   };
 }

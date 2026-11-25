@@ -156,6 +156,7 @@
         overflow: hidden;
         border: 1px solid rgba(15, 23, 42, 0.09);
         box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
     }
     html.dark .solutions-unit-card {
         background: #071326;
@@ -568,7 +569,7 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; align-items: stretch;">
                 
                 <!-- CARD 01: RACHI HUMAN CAPITAL -->
-                <div class="group solutions-unit-card solutions-card-capital">
+                <div class="group solutions-unit-card solutions-card-capital cursor-pointer" @click="solutionsOpen = false; window.location.href = '/capital'" role="link" tabindex="0" @keydown.enter="solutionsOpen = false; window.location.href = '/capital'">
                     <!-- Barra de Destaque Superior -->
                     <div class="solutions-card-accent-bar solutions-bar-capital"></div>
 
@@ -624,7 +625,7 @@
                 </div>
 
                 <!-- CARD 02: RACHI ACADEMY -->
-                <div class="group solutions-unit-card solutions-card-academy">
+                <div class="group solutions-unit-card solutions-card-academy cursor-pointer" @click="solutionsOpen = false; window.location.href = '/academy'" role="link" tabindex="0" @keydown.enter="solutionsOpen = false; window.location.href = '/academy'">
                     <!-- Barra de Destaque Superior -->
                     <div class="solutions-card-accent-bar solutions-bar-academy"></div>
 
@@ -680,7 +681,7 @@
                 </div>
 
                 <!-- CARD 03: RACHI TEC -->
-                <div class="group solutions-unit-card solutions-card-tec">
+                <div class="group solutions-unit-card solutions-card-tec cursor-pointer" @click="solutionsOpen = false; window.location.href = '/tec'" role="link" tabindex="0" @keydown.enter="solutionsOpen = false; window.location.href = '/tec'">
                     <!-- Barra de Destaque Superior -->
                     <div class="solutions-card-accent-bar solutions-bar-tec"></div>
 
@@ -740,7 +741,7 @@
                 </div>
 
                 <!-- CARD 04: RACHI PRINT -->
-                <div class="group solutions-unit-card solutions-card-print">
+                <div class="group solutions-unit-card solutions-card-print cursor-pointer" @click="solutionsOpen = false; window.location.href = '/print'" role="link" tabindex="0" @keydown.enter="solutionsOpen = false; window.location.href = '/print'">
                     <!-- Barra de Destaque Superior -->
                     <div class="solutions-card-accent-bar solutions-bar-print"></div>
 

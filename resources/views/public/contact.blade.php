@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/toast.css">
     <script src="/toast.js"></script>
     <script src="/auth-session.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto ” Fale Connosco ” RACHI Soluções Inteligentes</title>
+    <title>Contacto — Fale Connosco — RACHI Soluções Inteligentes</title>
     <meta name="description" content="Entre em contacto com a RACHI. Conte-nos o seu desafio e receba a solução ideal em tecnologia, gráfica, formação e capital humano em Angola.">
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -689,26 +689,61 @@
                     
 
                     <template x-if="!currentUser">
-                        <a href="/?login=1" class="btn-entrar-nav group">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
-                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                                <polyline points="10 17 15 12 10 7"/>
-                                <line x1="15" y1="12" x2="3" y2="12"/>
-                            </svg>
-                            <span>ENTRAR</span>
+                        @auth
+                <div class="relative" x-data="{ userMenuDropdown: false }" @click.outside="userMenuDropdown = false">
+                    <button @click.stop="userMenuDropdown = !userMenuDropdown"
+                        class="flex items-center gap-2 py-1.5 pl-2 pr-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 transition cursor-pointer"
+                        aria-label="Menu do Utilizador">
+                        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                        </div>
+                        <span class="text-xs font-bold text-slate-800 dark:text-white max-w-[110px] truncate hidden sm:inline-block">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div x-show="userMenuDropdown" x-cloak class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-[#071326] border border-slate-200 dark:border-white/15 rounded-2xl shadow-2xl p-2 z-50 text-xs space-y-1">
+                        <div class="px-3 py-2 border-b border-slate-100 dark:border-white/10">
+                            <p class="font-bold text-slate-900 dark:text-white truncate">{{ auth()->user()->name }}</p>
+                            <p class="text-[10px] text-slate-500 truncate">{{ auth()->user()->email }}</p>
+                        </div>
+                        <a href="/portal" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
+                            <span>Portal do Cliente</span>
                         </a>
+                        @if(auth()->user()->isAdmin())
+                        <a href="/admin-dashboard" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-950/30 text-amber-600 font-medium">
+                            <span>Painel Administrativo</span>
+                        </a>
+                        @endif
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button type="submit" class="w-full text-left flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 text-rose-600 font-medium cursor-pointer">
+                                <span>Terminar Sessão</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                @else
+                <a href="/?login=1" class="btn-entrar-nav group">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                        <polyline points="10 17 15 12 10 7"/>
+                        <line x1="15" y1="12" x2="3" y2="12"/>
+                    </svg>
+                    <span>ENTRAR</span>
+                </a>
+                @endauth
                     </template>
 
                     <template x-if="currentUser">
                         <div class="relative" x-data="{ userMenuDropdown: false }" @click.outside="userMenuDropdown = false">
                             <button @click="userMenuDropdown = !userMenuDropdown"
-                                    class="flex items-center gap-2 sm:gap-2.5 py-1.5 pl-2 pr-3 sm:pr-3.5 rounded-full bg-white hover:bg-slate-50 dark:bg-[#0c1829] dark:hover:bg-[#112240] border border-slate-200/90 dark:border-white/10 hover:border-[#00a3e0]/50 dark:hover:border-[#00a3e0]/50 text-slate-800 dark:text-white transition-all duration-200 shadow-xs hover:shadow-md cursor-pointer group focus:outline-none focus:ring-2 focus:ring-[#00a3e0]/30"
+                                    class="flex items-center gap-2 sm:gap-2.5 py-1.5 px-3.5 sm:px-4 rounded-full bg-white hover:bg-slate-50 dark:bg-[#0c1829] dark:hover:bg-[#112240] border border-slate-200/90 dark:border-white/10 hover:border-[#00a3e0]/50 dark:hover:border-[#00a3e0]/50 text-slate-800 dark:text-white transition-all duration-200 shadow-xs hover:shadow-md cursor-pointer group focus:outline-none focus:ring-2 focus:ring-[#00a3e0]/30"
                                     aria-label="Menu do Utilizador"
                                     :aria-expanded="userMenuDropdown">
-                                <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs shrink-0 ring-1 ring-black/5 dark:ring-white/10">
-                                    <span x-text="currentUser.avatar || 'CG'"></span>
-                                </div>
-                                <span class="text-xs font-bold leading-none max-w-[130px] truncate text-slate-800 dark:text-slate-100 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors hidden sm:inline-block" x-text="currentUser.nome || currentUser.name || 'Minha Conta'"></span>
+                                <span class="text-xs font-bold leading-none max-w-[130px] truncate text-slate-800 dark:text-slate-100 group-hover:text-[#0050f0] dark:group-hover:text-[#00a3e0] transition-colors inline-block" x-text="currentUser.nome || currentUser.name || 'Minha Conta'"></span>
                                 <svg class="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-white transition-transform duration-200 shrink-0" :class="userMenuDropdown ? 'rotate-180 text-[#00a3e0] dark:text-[#00a3e0]' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"/></svg>
                             </button>
 
@@ -1044,10 +1079,10 @@
                                                     <i data-lucide="layers" class="w-4 h-4"></i>
                                                 </span>
                                                 <select x-model="formData.unidade" class="contact-input w-full pl-10 pr-9 py-2.5 rounded-xl text-xs sm:text-sm appearance-none cursor-pointer">
-                                                    <option value="RACHI Tec">ðŸŒ RACHI Tec ” Tecnologia, Redes e TI</option>
-                                                    <option value="RACHI Print">ðŸ–¨ï¸ RACHI Print ” Produção Gráfica e Brindes</option>
-                                                    <option value="RACHI Academy">ðŸŽ“ RACHI Academy ” Formação Executiva</option>
-                                                    <option value="RACHI Human Capital">ðŸ‘¥ RACHI Human Capital ” RH &amp; Gestão</option>
+                                                    <option value="RACHI Tec">RACHI Tec — Tecnologia, Redes e TI</option>
+                                                    <option value="RACHI Print">RACHI Print — Produção Gráfica e Brindes</option>
+                                                    <option value="RACHI Academy">RACHI Academy — Formação Executiva</option>
+                                                    <option value="RACHI Human Capital">RACHI Human Capital — RH &amp; Gestão</option>
                                                 </select>
                                                 <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                                                     <i data-lucide="chevron-down" class="w-4 h-4"></i>

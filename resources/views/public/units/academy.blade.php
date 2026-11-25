@@ -646,8 +646,8 @@
             <!-- Gradiente horizontal suave: garante leitura impecável no texto e fusão perfeita no Dark Mode -->
             <div class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-white via-white/95 to-white/70 lg:from-white lg:via-white/90 lg:to-white/40 dark:from-[#060e1d] dark:via-[#060e1d]/90 dark:to-[#060e1d]/60 pointer-events-none"></div>
             <!-- Luzes ambientes e orbes de brilho neon no Dark Mode -->
-            <div class="hidden dark:block absolute top-1/4 left-10 w-96 h-96 bg-[#00a3e0]/15 rounded-full blur-[130px] pointer-events-none"></div>
-            <div class="hidden dark:block absolute bottom-10 left-1/3 w-80 h-80 bg-[#0050f0]/20 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="hidden md:dark:block absolute top-1/4 left-10 w-96 h-96 bg-[#00a3e0]/15 rounded-full blur-[130px] pointer-events-none"></div>
+            <div class="hidden md:dark:block absolute bottom-10 left-1/3 w-80 h-80 bg-[#0050f0]/20 rounded-full blur-[140px] pointer-events-none"></div>
         </div>
 
         <!-- CURVA ORGÂNICA SVG: ATIVA NO MODO CLARO (Oculta no Dark Mode para fusão contínua sem cortes artificiais) -->
@@ -785,8 +785,8 @@
     }">
         
         <!-- Luzes ambientes com efeitos glow premium -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#00a3e0]/10 rounded-full blur-[150px] pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-72 h-72 bg-[#0050f0]/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="hidden md:block absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] max-w-full h-[400px] bg-[#00a3e0]/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="hidden md:block absolute bottom-10 right-10 w-72 h-72 bg-[#0050f0]/15 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
             
@@ -1183,8 +1183,8 @@
             <div class="pt-4" id="contactos">
                 <div class="rounded-3xl bg-gradient-to-br from-[#071326] via-[#091b38] to-[#040914] border border-white/15 p-8 sm:p-10 lg:p-12 text-white relative overflow-hidden shadow-2xl">
                     <!-- Glow decorativo -->
-                    <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-[#00a3e0]/20 rounded-full blur-[100px] pointer-events-none"></div>
-                    <div class="absolute -left-20 -top-20 w-80 h-80 bg-[#0050f0]/30 rounded-full blur-[90px] pointer-events-none"></div>
+                    <div class="hidden md:block absolute -right-20 -bottom-20 w-96 h-96 bg-[#00a3e0]/20 rounded-full blur-[100px] pointer-events-none"></div>
+                    <div class="hidden md:block absolute -left-20 -top-20 w-80 h-80 bg-[#0050f0]/30 rounded-full blur-[90px] pointer-events-none"></div>
 
                     <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-7 space-y-4">
@@ -1361,7 +1361,7 @@
              @mouseleave="isHovered = false">
         
         <!-- Luz ambiente sutil de fundo -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[300px] bg-[#00a3e0]/10 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] max-w-full h-[300px] bg-[#00a3e0]/10 rounded-full blur-[130px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

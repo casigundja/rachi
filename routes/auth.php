@@ -47,6 +47,7 @@ if (!function_exists('formatPublicUser')) {
             'name' => $user->name,
             'nome' => $user->name,
             'email' => $user->email,
+            'avatar' => strtoupper(mb_substr($user->name, 0, 1, 'UTF-8')),
             'phone' => $user->phone ?? '',
             'role' => $user->role?->name ?? ($isAdm ? 'Super Administrador' : 'Cliente'),
             'role_slug' => $user->role?->slug ?? ($isAdm ? 'super_admin' : 'customer'),

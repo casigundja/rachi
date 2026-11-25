@@ -1499,7 +1499,7 @@
                 },
 
                 // ==============================================================
-                // ETAPA 1 & 2: LOGIN COM RESTRIÇÃO ESTRITA DE USUÁRIO NO BANCO
+                // LOGIN UNIFICADO E AUTÊNTICO (BACKEND & SESSÃO REAL)
                 // ==============================================================
                 async submitLogin() {
                     this.errorMessage = '';
@@ -1507,136 +1507,48 @@
                     const passwordInput = (this.loginForm.password || '').trim();
 
                     if (!emailInput || !passwordInput) {
-                        this.setErrorMessage('Informe o e-mail ou utilizador e a senha de acesso.');
+                        this.setErrorMessage('Informe o e-mail e a palavra-passe de acesso.');
                         return;
                     }
 
                     this.loading = true;
-                    await new Promise(r => setTimeout(r, 450));
 
-                    // 1. CONSULTA AO BANCO DE DADOS DE USUÁRIOS
-                    const allUsers = this.getRegisteredUsers();
-                    const foundUser = allUsers.find(u => u.email.toLowerCase() === emailInput);
-
-                    // SE O USUÁRIO NÃO ESTIVER CADASTRADO NO BANCO -> ACESSO NEGADO!
-                    if (!foundUser) {
-                        this.loading = false;
-                        this.setErrorMessage('Utilizador não registado na base de dados. Verifique os dados ou crie uma conta.');
-                        return;
-                    }
-
-                    // 2. VALIDAÇÃO DE SENHA
-                    const isAcceptedAdminPass = (emailInput === 'admin@rachi.ao' && (passwordInput === 'admin123' || passwordInput === 'Rachi@2026!' || passwordInput === '123456'));
-                    if (!isAcceptedAdminPass && foundUser.senha && passwordInput !== foundUser.senha && passwordInput !== '123456') {
-                        this.loading = false;
-                        this.setErrorMessage('Palavra-passe incorreta para o utilizador indicado.');
-                        return;
-                    }
-
-                    // 3. VALIDAÇÃO DE STATUS
-                    if (foundUser.status && foundUser.status !== 'ativo') {
-                        this.loading = false;
-                        this.setErrorMessage('Este utilizador encontra-se inativo ou bloqueado no sistema.');
-                        return;
-                    }
-
-                    // 4. RESTRIÇÃO ESTRITA: SÓ REALIZA LOGIN QUEM TEM MATRÍCULA ATIVA NO BANCO!
-                    const isMatriculaAtiva = (foundUser.has_matricula === true || foundUser.has_matricula === 'true') && 
-                        (foundUser.matricula_status === 'ativa' || foundUser.matricula_status === 'active' || foundUser.tipo === 'admin' || foundUser.role === 'admin');
-
-                    if (!isMatriculaAtiva) {
-                        this.loading = false;
-                        this.setErrorMessage('Acesso restrito: Para entrar no Portal da Academy é obrigatório possuir uma matrícula ativa no base de dados. Caso ainda não tenha concluído a sua inscrição, matricule-se em um dos cursos.');
-                        return;
-                    }
-
-                    // ==============================================================
-                    // ETAPA 4: REGISTRAR ACESSO NO BANCO (TABELA 'acessos')
-                    // ==============================================================
-                    const now = new Date();
-                    const dataStr = now.toLocaleDateString('pt-AO');
-                    const horaStr = now.toLocaleTimeString('pt-AO', { hour: '2-digit', minute: '2-digit' });
-
-                    const newAccessLog = {
-                        id: this.accessHistory.length + 1,
-                        usuario_id: foundUser.id,
-                        data_acesso: dataStr,
-                        hora_acesso: horaStr,
-                        ip: '192.168.1.' + Math.floor(100 + Math.random() * 90),
-                        user_agent: navigator.userAgent.includes('Windows') ? 'Chrome Desktop (Windows 11)' : 'Navegador Aluno'
-                    };
-                    this.accessHistory.unshift(newAccessLog);
-                    this.lastAccessInfo = newAccessLog;
-
-                    // ETAPA 5: DEFINIR PERFIL DO ALUNO CADASTRADO E CARREGAR MATRÍCULAS
-                    this.currentUser = {
-                        id: foundUser.id,
-                        aluno_id: foundUser.aluno_id || (foundUser.id + 100),
-                        nome: foundUser.nome,
-                        name: foundUser.nome,
-                        email: foundUser.email,
-                        tipo: foundUser.tipo || 'aluno',
-                        role: 'customer',
-                        has_matricula: true,
-                        status: foundUser.status || 'ativo'
-                    };
-
-                    const unified = {
-                        ...this.currentUser,
-                        loggedIn: true,
-                        user: this.currentUser
-                    };
-
-                    localStorage.setItem('rachi_academy_auth', 'true');
-                    localStorage.setItem('rachi_user_session', JSON.stringify(unified));
                     try {
-                        if (typeof BroadcastChannel !== 'undefined') {
-                            const bc = new BroadcastChannel('rachi_auth_channel');
-                            bc.postMessage({ action: 'login', user: unified, timestamp: Date.now() });
-                            bc.close();
+                        let userSession = null;
+                        if (window.RachiSession) {
+                            userSession = await window.RachiSession.login(emailInput, passwordInput);
+                        } else {
+                            const res = await fetch('/login', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                                body: JSON.stringify({ email: emailInput, password: passwordInput }),
+                                credentials: 'same-origin'
+                            });
+                            const data = await res.json();
+                            if (!res.ok || !data.success) throw new Error(data.message || 'Credenciais inválidas.');
+                            userSession = data.user;
                         }
-                        localStorage.setItem('rachi_auth_sync', Date.now().toString());
-                    } catch(e) {}
 
-                    // Regras de "Lembrar-me" e último acesso:
-                    if (this.loginForm.remember) {
-                        localStorage.setItem('rachi_remember_me', 'true');
-                        localStorage.setItem('rachi_saved_email', emailInput);
-                        const rememberedData = {
-                            email: emailInput,
-                            nome: foundUser.nome,
-                            data_acesso: dataStr,
-                            hora_acesso: horaStr,
-                            ip: newAccessLog.ip,
-                            timestamp: Date.now()
-                        };
-                        localStorage.setItem('rachi_last_access_log', JSON.stringify(rememberedData));
-                        this.lastRememberedAccess = rememberedData;
-                    } else {
-                        localStorage.setItem('rachi_remember_me', 'false');
-                        localStorage.removeItem('rachi_saved_email');
-                        localStorage.removeItem('rachi_last_access_log');
-                        this.lastRememberedAccess = null;
-                    }
+                        if (this.loginForm.remember) {
+                            localStorage.setItem('rachi_remember_me', 'true');
+                            localStorage.setItem('rachi_saved_email', emailInput);
+                        } else {
+                            localStorage.setItem('rachi_remember_me', 'false');
+                            localStorage.removeItem('rachi_saved_email');
+                        }
 
-                    this.loading = false;
-                    // REDIRECIONAR CONFORME O PERFIL
-                    if (foundUser.tipo === 'admin' || foundUser.role === 'admin' || emailInput === 'admin@rachi.ao') {
-                        window.location.href = '/admin-dashboard';
-                    } else {
-                        window.location.href = '/aluno-dashboard';
+                        this.loading = false;
+                        const role = userSession?.role_slug || userSession?.role;
+                        const isAdmin = ['admin', 'super_admin'].includes(role) || userSession?.is_admin;
+                        if (isAdmin) {
+                            window.location.href = '/admin-dashboard';
+                        } else {
+                            window.location.href = '/aluno-dashboard';
+                        }
+                    } catch (e) {
+                        this.loading = false;
+                        this.setErrorMessage(e.message || 'Credenciais incorretas ou utilizador inativo.');
                     }
-                },
-
-                loginWithDemo(tipo) {
-                    if (tipo === 'admin') {
-                        this.loginForm.email = 'admin@rachi.ao';
-                        this.loginForm.password = 'admin123';
-                    } else {
-                        this.loginForm.email = 'aluno@rachi.ao';
-                        this.loginForm.password = '123456';
-                    }
-                    this.submitLogin();
                 },
 
                 async submitRegister() {
