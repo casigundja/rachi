@@ -7949,6 +7949,8 @@ var D1DB = class {
     out = out.replace(/::[a-zA-Z0-9_]+/g, '');
     out = out.replace(/\bnow\(\)\s*\+\s*interval\s+'([^']+)'/gi, "datetime('now', '+$1')");
     out = out.replace(/\bnow\(\)/gi, "datetime('now')");
+    out = out.replace(/to_char\(([^,]+),\s*'[^']+'\)/gi, "$1");
+    out = out.replace(/lpad\(([^,]+),\s*\d+,\s*'0'\)/gi, "$1");
     return out;
   }
   async query(sql, params = []) {
@@ -9024,14 +9026,32 @@ catalog.get("/api/academy/enrollments", async (c) => {
 catalog.get("/api/courses/:slug", async (c) => {
   const db = c.get("db"), course = await db.one("SELECT id,name,slug,description,price,duration_hours,level,thumbnail FROM courses WHERE slug=$1 AND status='published' AND deleted_at IS NULL", [c.req.param("slug")]);
   if (!course) return fail(404, "Curso n\xE3o encontrado.");
-  const modules = await db.query(`SELECT m.id,m.title,m.sort_order,COALESCE(json_agg(json_build_object('id',l.id,'title',l.title,'duration_minutes',l.duration_minutes) ORDER BY l.sort_order) FILTER(WHERE l.id IS NOT NULL),'[]') lessons FROM course_modules m LEFT JOIN course_lessons l ON l.course_module_id=m.id AND l.status='active' WHERE m.course_id=$1 AND m.status='active' GROUP BY m.id ORDER BY m.sort_order`, [course.id]);
+  const modules = await db.query("SELECT id,title,sort_order FROM course_modules WHERE course_id=$1 AND status='active' ORDER BY sort_order", [course.id]);
+  const lessons = await db.query("SELECT id,course_module_id,title,duration_minutes,sort_order FROM course_lessons WHERE course_module_id IN (SELECT id FROM course_modules WHERE course_id=$1) AND status='active' ORDER BY sort_order", [course.id]);
+  const lessonsByModule = {};
+  for (const l of lessons) {
+    lessonsByModule[l.course_module_id] = lessonsByModule[l.course_module_id] || [];
+    lessonsByModule[l.course_module_id].push(l);
+  }
+  for (const m of modules) {
+    m.lessons = lessonsByModule[m.id] || [];
+  }
   return c.json({ course, modules });
 });
 catalog.get("/academy/cursos/:slug", async (c) => {
   const db = c.get("db"), slug = c.req.param("slug");
   const course = await db.one("SELECT c.id,c.name,c.slug,c.description,c.short_description,c.price,c.duration_hours,c.level,c.thumbnail,cat.name category_name FROM courses c LEFT JOIN categories cat ON cat.id=c.category_id WHERE c.slug=$1 AND c.status='published' AND c.deleted_at IS NULL", [slug]);
   if (!course) return c.redirect("/academy");
-  const modules = await db.query(`SELECT m.id,m.title,m.description,m.sort_order,COALESCE(json_agg(json_build_object('id',l.id,'title',l.title,'duration_minutes',l.duration_minutes) ORDER BY l.sort_order) FILTER(WHERE l.id IS NOT NULL),'[]') lessons FROM course_modules m LEFT JOIN course_lessons l ON l.course_module_id=m.id AND l.status='active' WHERE m.course_id=$1 AND m.status='active' GROUP BY m.id,m.title,m.description,m.sort_order ORDER BY m.sort_order`, [course.id]);
+  const modules = await db.query("SELECT id,title,description,sort_order FROM course_modules WHERE course_id=$1 AND status='active' ORDER BY sort_order", [course.id]);
+  const lessons = await db.query("SELECT id,course_module_id,title,duration_minutes,sort_order FROM course_lessons WHERE course_module_id IN (SELECT id FROM course_modules WHERE course_id=$1) AND status='active' ORDER BY sort_order", [course.id]);
+  const lessonsByModule = {};
+  for (const l of lessons) {
+    lessonsByModule[l.course_module_id] = lessonsByModule[l.course_module_id] || [];
+    lessonsByModule[l.course_module_id].push(l);
+  }
+  for (const m of modules) {
+    m.lessons = lessonsByModule[m.id] || [];
+  }
   const related = await db.query("SELECT id,name,slug,duration_hours FROM courses WHERE id!=$1 AND status='published' AND deleted_at IS NULL ORDER BY id DESC LIMIT 4", [course.id]);
   const matSuccess = c.req.query("matricula_sucesso") ? { name: c.req.query("nome") || "Aluno", course: course.name, code: c.req.query("codigo") || "RAC-00001", whatsappUrl: c.req.query("wa") || `https://wa.me/244972888585?text=${encodeURIComponent("Ol\xE1! Gostaria de confirmar minha matr\xEDcula.")}` } : null;
   return c.html(renderCourseShow(course, modules, related, matSuccess));
@@ -9317,12 +9337,53 @@ async function list(c, unitSlug = null) {
   const uid = u ? u.id : 0;
   const eid = u ? u.employee_id : null;
   const eunit = u ? u.employee_unit : null;
-  const rows = await db.query(`SELECT s.*,cu.company_name,cu.trade_name,cuu.name customer_name,b.name unit,eu.name responsible,
-    COALESCE((SELECT json_agg(json_build_object('id',m.id,'user_id',m.user_id,'message',m.message,'text',m.message,'nome',mu.name,'sender',mu.name,'data',to_char(m.created_at,'DD/MM/YYYY HH24:MI'),'is_staff',COALESCE(mr.slug IN ('admin','super_admin','manager','employee','attendant'),false),'fromUser',NOT COALESCE(mr.slug IN ('admin','super_admin','manager','employee','attendant'),false)) ORDER BY m.id) FROM messages m JOIN users mu ON mu.id=m.user_id LEFT JOIN roles mr ON mr.id=mu.role_id WHERE m.service_request_id=s.id),'[]') messages,
-    COALESCE((SELECT json_agg(json_build_object('title',h.comment,'desc',h.comment,'data',to_char(h.created_at,'DD/MM/YYYY HH24:MI'),'date',to_char(h.created_at,'DD/MM/YYYY HH24:MI')) ORDER BY h.id) FROM service_request_status_histories h WHERE h.service_request_id=s.id),'[]') timeline
-    FROM service_requests s JOIN customers cu ON cu.id=s.customer_id JOIN users cuu ON cuu.id=cu.user_id JOIN business_units b ON b.id=s.business_unit_id LEFT JOIN employees e ON e.id=s.assigned_to LEFT JOIN users eu ON eu.id=e.user_id
-    WHERE s.deleted_at IS NULL AND ($6::text IS NULL OR b.slug=$6) AND ($2::boolean OR cu.user_id=$1 OR ($3::boolean AND (s.assigned_to=$4 OR s.business_unit_id=$5))) ORDER BY s.id DESC ${unitSlug ? '' : 'LIMIT 200'}`, [uid, isAdmin, isStaff, eid, eunit, unitSlug]);
-  return rows.map((r) => ({ ...r, titulo: r.title, descricao: r.description, cliente: r.company_name || r.customer_name, empresa: r.company_name || r.trade_name || r.customer_name, servico: r.unit, responsavel: r.responsible || "Por atribuir", status_key: r.status, status: labels[r.status] ?? r.status, statusLabel: labels[r.status] ?? r.status, sc: "s-analise", dot: "bg-blue-500", unitBadge: "bg-slate-100 text-slate-700" }));
+
+  let querySql = `SELECT s.*, cu.company_name, cu.trade_name, cuu.name as customer_name, b.name as unit, eu.name as responsible
+    FROM service_requests s
+    JOIN customers cu ON cu.id = s.customer_id
+    JOIN users cuu ON cuu.id = cu.user_id
+    JOIN business_units b ON b.id = s.business_unit_id
+    LEFT JOIN employees e ON e.id = s.assigned_to
+    LEFT JOIN users eu ON eu.id = e.user_id
+    WHERE s.deleted_at IS NULL`;
+
+  let params = [];
+  if (unitSlug) {
+    params.push(unitSlug);
+    querySql += ` AND b.slug = $${params.length}`;
+  }
+
+  if (!isAdmin) {
+    if (isStaff) {
+      params.push(uid, eid, eunit);
+      querySql += ` AND (cu.user_id = $${params.length - 2} OR s.assigned_to = $${params.length - 1} OR s.business_unit_id = $${params.length})`;
+    } else {
+      params.push(uid);
+      querySql += ` AND cu.user_id = $${params.length}`;
+    }
+  }
+
+  querySql += ` ORDER BY s.id DESC ${unitSlug ? '' : 'LIMIT 200'}`;
+
+  const rows = await db.query(querySql, params);
+
+  return rows.map((r) => ({
+    ...r,
+    messages: [],
+    timeline: [],
+    titulo: r.title,
+    descricao: r.description,
+    cliente: r.company_name || r.customer_name,
+    empresa: r.company_name || r.trade_name || r.customer_name,
+    servico: r.unit,
+    responsavel: r.responsible || "Por atribuir",
+    status_key: r.status,
+    status: labels[r.status] ?? r.status,
+    statusLabel: labels[r.status] ?? r.status,
+    sc: "s-analise",
+    dot: "bg-blue-500",
+    unitBadge: "bg-slate-100 text-slate-700"
+  }));
 }
 __name(list, "list");
 requests.get("/solicitacoes/conversas", async (c) => c.json({ success: true, requests: await list(c) }));
@@ -9642,7 +9703,7 @@ management.on(["POST", "DELETE"], "/admin/users/:id/delete", async (c) => {
   return done(c, { message: `Utilizador ${u.name || ""} exclu\xEDdo com sucesso!` });
 });
 management.get("/admin/academy/enrollments", async (c) => c.json({
-  enrollments: await c.get("db").query(`SELECT e.id, e.customer_id aluno_id, u.id user_id, u.name nome, u.email, cu.phone telefone, c.name curso, c.slug curso_slug, c.id curso_id, e.status, to_char(e.created_at,'DD/MM/YYYY HH24:MI') data, 'RAC-'||lpad(e.id::text,5,'0') codigo FROM course_enrollments e JOIN customers cu ON cu.id=e.customer_id JOIN users u ON u.id=cu.user_id JOIN courses c ON c.id=e.course_id WHERE cu.deleted_at IS NULL AND u.deleted_at IS NULL ORDER BY e.id DESC`)
+  enrollments: await c.get("db").query(`SELECT e.id, e.customer_id aluno_id, u.id user_id, u.name nome, u.email, cu.phone telefone, c.name curso, c.slug curso_slug, c.id curso_id, e.status, e.created_at data, ('RAC-' || e.id) codigo FROM course_enrollments e JOIN customers cu ON cu.id=e.customer_id JOIN users u ON u.id=cu.user_id JOIN courses c ON c.id=e.course_id WHERE cu.deleted_at IS NULL AND u.deleted_at IS NULL ORDER BY e.id DESC`)
 }));
 management.post("/admin/academy/enrollments/:id/status", async (c) => {
   const d = await body(c);
@@ -9677,7 +9738,7 @@ management.get("/admin/data/:entity", async (c) => {
     services: "SELECT id, name, base_price, status FROM services WHERE deleted_at IS NULL",
     courses: "SELECT id, name, slug, price, status, duration_hours FROM courses WHERE deleted_at IS NULL",
     contacts: "SELECT id, name, email, phone, subject, message, created_at FROM worker_contacts ORDER BY id DESC LIMIT 200",
-    audit: "SELECT a.id, a.action, a.description, to_char(a.created_at, 'DD/MM/YYYY HH24:MI') data, COALESCE(u.name, 'Sistema') autor, a.ip_address FROM activity_logs a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.id DESC LIMIT 100",
+    audit: "SELECT a.id, a.action, a.description, a.created_at data, COALESCE(u.name, 'Sistema') autor, a.ip_address FROM activity_logs a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.id DESC LIMIT 100",
     reports: "SELECT (SELECT count(*) FROM users WHERE deleted_at IS NULL) users, (SELECT count(*) FROM service_requests WHERE deleted_at IS NULL) requests, (SELECT count(*) FROM course_enrollments) enrollments, (SELECT COALESCE(sum(total),0) FROM orders WHERE payment_status='paid') revenue"
   };
   const query = sql[c.req.param("entity")];
@@ -9735,8 +9796,27 @@ commerce.post("/checkout", async (c) => {
   return done(c, { order: order2, message: "Pedido registado. Pagamento pendente de confirma\xE7\xE3o." });
 });
 commerce.get("/api/orders", async (c) => {
-  const u = user(c);
-  return c.json({ orders: await c.get("db").query(`SELECT o.*,COALESCE((SELECT json_agg(i ORDER BY id) FROM order_items i WHERE i.order_id=o.id),'[]') items FROM orders o JOIN customers cu ON cu.id=o.customer_id WHERE cu.user_id=$1 OR $2::boolean ORDER BY o.id DESC LIMIT 200`, [u.id, admin(u)]) });
+  const u = user(c), db = c.get("db");
+  const isAdmin = admin(u);
+  const orders = await db.query(
+    isAdmin
+      ? `SELECT o.* FROM orders o ORDER BY o.id DESC LIMIT 200`
+      : `SELECT o.* FROM orders o JOIN customers cu ON cu.id=o.customer_id WHERE cu.user_id=$1 ORDER BY o.id DESC LIMIT 200`,
+    isAdmin ? [] : [u.id]
+  );
+  const orderIds = orders.map(o => o.id);
+  const itemsByOrder = {};
+  if (orderIds.length > 0) {
+    const items = await db.query(`SELECT i.*, p.name FROM order_items i LEFT JOIN products p ON p.id = i.product_id WHERE i.order_id IN (${orderIds.join(',')}) ORDER BY i.id`);
+    for (const item of items) {
+      itemsByOrder[item.order_id] = itemsByOrder[item.order_id] || [];
+      itemsByOrder[item.order_id].push(item);
+    }
+  }
+  for (const o of orders) {
+    o.items = itemsByOrder[o.id] || [];
+  }
+  return c.json({ orders });
 });
 commerce.post("/api/orders/:id/paid", async (c) => {
   user(c, "admin");
@@ -9751,8 +9831,27 @@ commerce.post("/api/orders/:id/paid", async (c) => {
   return done(c, {});
 });
 commerce.get("/api/quotes", async (c) => {
-  const u = user(c);
-  return c.json({ quotes: await c.get("db").query(`SELECT q.*,COALESCE((SELECT json_agg(i ORDER BY id) FROM quote_items i WHERE i.quote_id=q.id),'[]') items FROM quotes q JOIN customers cu ON cu.id=q.customer_id WHERE cu.user_id=$1 OR $2::boolean OR q.created_by=$1 ORDER BY q.id DESC LIMIT 200`, [u.id, admin(u)]) });
+  const u = user(c), db = c.get("db");
+  const isAdmin = admin(u);
+  const quotes = await db.query(
+    isAdmin
+      ? `SELECT q.* FROM quotes q ORDER BY q.id DESC LIMIT 200`
+      : `SELECT q.* FROM quotes q JOIN customers cu ON cu.id=q.customer_id WHERE cu.user_id=$1 OR q.created_by=$1 ORDER BY q.id DESC LIMIT 200`,
+    isAdmin ? [] : [u.id]
+  );
+  const quoteIds = quotes.map(q => q.id);
+  const itemsByQuote = {};
+  if (quoteIds.length > 0) {
+    const items = await db.query(`SELECT * FROM quote_items WHERE quote_id IN (${quoteIds.join(',')}) ORDER BY id`);
+    for (const item of items) {
+      itemsByQuote[item.quote_id] = itemsByQuote[item.quote_id] || [];
+      itemsByQuote[item.quote_id].push(item);
+    }
+  }
+  for (const q of quotes) {
+    q.items = itemsByQuote[q.id] || [];
+  }
+  return c.json({ quotes });
 });
 commerce.post("/funcionario/orcamentos", async (c) => {
   const u = user(c, "staff"), d = await body(c), db = c.get("db");
