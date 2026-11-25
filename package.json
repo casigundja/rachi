@@ -4,7 +4,13 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "deploy:staging": "wrangler deploy --env staging",
+        "deploy:prod": "wrangler deploy --env production",
+        "export": "php bin/export-site-to-worker.php",
+        "test": "php artisan test",
+        "d1:staging": "wrangler d1 execute rachi-db-staging --remote",
+        "d1:prod": "wrangler d1 execute rachi-db --remote"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.7",

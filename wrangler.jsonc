@@ -31,5 +31,42 @@
   },
   "observability": {
     "enabled": true
+  },
+  "env": {
+    "staging": {
+      "name": "rachi-staging",
+      "workers_dev": true,
+      "routes": [],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "rachi-db-staging",
+          "database_id": "902a75e4-bbb5-493b-97aa-46afd39b353a"
+        }
+      ],
+      "ai": {
+        "binding": "AI"
+      }
+    },
+    "production": {
+      "name": "rachi",
+      "workers_dev": true,
+      "routes": [
+        "rachi.ao/*",
+        "www.rachi.ao/*",
+        "admin.rachi.ao/*",
+        "api.rachi.ao/*"
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "rachi-db",
+          "database_id": "3d45fd42-a83d-44fa-a3f9-c50e01746538"
+        }
+      ],
+      "ai": {
+        "binding": "AI"
+      }
+    }
   }
 }
