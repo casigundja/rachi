@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'RACHI — Soluções inteligentes')</title>
     <meta name="description" content="RACHI — soluções inteligentes em tecnologia, educação e serviços empresariais.">
+    <!-- Open Graph / Redes Sociais (WhatsApp, Facebook, LinkedIn, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rachi.ao/">
+    <meta property="og:site_name" content="RACHI">
+    <meta property="og:title" content="RACHI — Soluções Inteligentes em Angola">
+    <meta property="og:description" content="Ecossistema empresarial integrado: Tecnologia &amp; TI, Produção Gráfica, Formação Executiva e Consultoria em Gestão de Pessoas.">
+    <meta property="og:image" content="https://rachi.ao/images/og-rachi.png">
+    <meta property="og:image:secure_url" content="https://rachi.ao/images/og-rachi.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="RACHI — Soluções Inteligentes em Angola">
+    <meta property="og:locale" content="pt_AO">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RACHI — Soluções Inteligentes em Angola">
+    <meta name="twitter:description" content="Ecossistema integrado: Tecnologia &amp; TI, Produção Gráfica, Formação Executiva e Capital Humano.">
+    <meta name="twitter:image" content="https://rachi.ao/images/og-rachi.png">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">

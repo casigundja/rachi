@@ -9,6 +9,19 @@
     <script src="/auth-session.js"></script>
     <title>Contacto — Fale Connosco — RACHI Soluções Inteligentes</title>
     <meta name="description" content="Entre em contacto com a RACHI. Conte-nos o seu desafio e receba a solução ideal em tecnologia, gráfica, formação e capital humano em Angola.">
+    <!-- Open Graph / Redes Sociais (WhatsApp, Facebook, LinkedIn, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rachi.ao/contacto">
+    <meta property="og:site_name" content="RACHI">
+    <meta property="og:title" content="Contacto — RACHI Soluções Inteligentes">
+    <meta property="og:description" content="Entre em contacto com a RACHI. Soluções de alta performance em tecnologia, gráfica, formação executiva e capital humano em Angola.">
+    <meta property="og:image" content="https://rachi.ao/images/og-rachi.png">
+    <meta property="og:image:secure_url" content="https://rachi.ao/images/og-rachi.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Contacto — RACHI Soluções Inteligentes">
+    <meta property="og:locale" content="pt_AO">
     <!-- Google Fonts: Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
