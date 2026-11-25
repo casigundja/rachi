@@ -611,16 +611,17 @@ a { text-decoration: none !important; }
     <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" title="Perfis">
       <i data-lucide="users" class="si"></i>
       <span class="sl">Perfis</span>
-      <span class="sb2 badge bg-blue-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="userStats.total"></span>
+      <span class="sb2 badge bg-blue-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="userStats.total || users.length || 10"></span>
     </div>
-    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item">
+    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" title="Base de Clientes">
       <i data-lucide="building-2" class="si"></i>
       <span class="sl">Base de Clientes</span>
+      <span class="sb2 badge bg-cyan-600 text-white text-[10px] px-2 rounded-full ms-auto font-bold" x-text="totalClientsCount"></span>
     </div>
-    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item">
+    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" title="Solicitações & Ordens">
       <i data-lucide="clipboard-list" class="si"></i>
       <span class="sl">Solicitações & Ordens</span>
-      <span class="sb2 badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 rounded-full ms-auto" x-text="allRequests.length"></span>
+      <span class="sb2 badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 rounded-full ms-auto" x-text="totalRequestsCount"></span>
     </div>
 
     <div class="sg">Unidades</div>
