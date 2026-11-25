@@ -92,4 +92,22 @@ class ContactController extends Controller
             'message' => 'Lead registado com sucesso no CRM!',
         ]);
     }
+
+    public function chatResponse(Request $request)
+    {
+        $raw = json_decode($request->getContent(), true);
+        if (is_array($raw)) {
+            $request->merge($raw);
+        }
+
+        $messages = (array)$request->input('messages', []);
+        $lastMsg = end($messages)['content'] ?? $request->input('message', '');
+        $isWhatsApp = preg_match('/humano|atendente|whatsapp|ligar/i', (string)$lastMsg);
+
+        return response()->json([
+            'success' => true,
+            'reply' => 'Olá! A RACHI — Soluções Inteligentes atua com excelência em Tecnologia (RACHI Tec), Gráfica e Brindes (RACHI Print), Formações Executivas (RACHI Academy) e Consultoria de RH (RACHI Human Capital). Em que podemos apoiar a sua empresa hoje?',
+            'isWhatsAppSuggested' => (bool)$isWhatsApp,
+        ]);
+    }
 }

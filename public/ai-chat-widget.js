@@ -1,8 +1,7 @@
 /**
- * RACHI — Assistente Virtual Inteligente & CRM de Atendimento
- * Adaptado com a Identidade Visual Oficial da RACHI (Azul Royal, Cyan Elétrico e Âmbar Dourado).
- * Abrange as 4 unidades de negócio: RACHI Tec, RACHI Print, RACHI Academy e RACHI Human Capital.
- * Transbordo Humano direto para WhatsApp (+244 972 888 585) e sincronização com o banco CRM.
+ * RACHI — Assistente Virtual Conversacional Inteligente (IA Interativa)
+ * Comunicação fluida e interativa em tempo real com conhecimento de todo o ecossistema RACHI.
+ * Permite diálogo natural, consultoria executiva, qualificação de leads e transbordo para WhatsApp (+244 972 888 585).
  */
 (function() {
     'use strict';
@@ -19,55 +18,53 @@
         }
         window.__RachiAIChatInitialized = true;
 
-        // Limpar instância antiga se houver
-        const oldRoot = document.getElementById('gt-chat-widget-root') || document.getElementById('rachi-chat-widget-root');
+        // Limpeza de instâncias anteriores
+        const oldRoot = document.getElementById('rachi-chat-widget-root') || document.getElementById('gt-chat-widget-root');
         if (oldRoot) oldRoot.remove();
-        const oldStyles = document.getElementById('gt-chat-styles') || document.getElementById('rachi-chat-styles');
+        const oldStyles = document.getElementById('rachi-chat-styles') || document.getElementById('gt-chat-styles');
         if (oldStyles) oldStyles.remove();
 
         const CONFIG = {
             officialWhatsApp: '244972888585',
             officialDisplayPhone: '+244 972 888 585',
+            chatApi: '/api/chat',
             crmLeadApi: '/api/crm/lead',
-            fallbackContactApi: '/contacto',
-            storageKey: 'rachi_ai_chat_session_v2',
+            storageKey: 'rachi_interactive_chat_v3',
         };
 
-        // Estado da Conversa Oficial RACHI
+        // Estado da Conversa Interativa
         let state = {
             isOpen: false,
-            step: 'INIT', // INIT, UNIT_TEC, UNIT_PRINT, UNIT_ACADEMY, UNIT_CAPITAL, PRICE_SELECT, ASK_NAME, ASK_PHONE, COMPLETED, HUMAN_HANDOFF
+            isLoading: false,
             leadData: {
-                unit: 'Geral',
-                service: '',
-                objective: '',
                 name: '',
                 phone: '',
                 company: '',
-                notes: ''
+                interest: ''
             },
             messages: [
-                { sender: 'bot', text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola.' },
-                { sender: 'bot', text: 'Como podemos potenciar a sua empresa hoje? Escolha uma das nossas 4 unidades ou solicite atendimento:' }
+                {
+                    sender: 'bot',
+                    text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola. 🇦🇴\n\nSou o consultor virtual da RACHI. Como posso apoiar a sua empresa hoje? Sinta-se à vontade para me fazer perguntas sobre os nossos serviços de **Tecnologia (Tec)**, **Gráfica & Brindes (Print)**, **Formação (Academy)** ou **Recursos Humanos & Contabilidade (Capital)**!'
+                }
             ],
             chips: [
-                { label: '💻 RACHI Tec (Tecnologia & TI)', action: 'unit_tec' },
-                { label: '🖨️ RACHI Print (Gráfica & Brindes)', action: 'unit_print' },
-                { label: '🎓 RACHI Academy (Cursos)', action: 'unit_academy' },
-                { label: '👥 RACHI Capital (RH & Gestão)', action: 'unit_capital' },
-                { label: '💰 Pedir Cotação / Orçamento', action: 'solicitar_orcamento' },
-                { label: '💬 Falar com Atendente Humano', action: 'falar_humano' }
+                { label: '💡 Quanto custa um website?', text: 'Quanto custa desenvolver um website para a minha empresa?' },
+                { label: '💻 Equipamentos & Suporte TI', text: 'Quais computadores e serviços de TI vocês fornecem?' },
+                { label: '🖨️ Brindes & Produção Gráfica', text: 'Gostaria de saber sobre brindes corporativos e materiais gráficos' },
+                { label: '🎓 Cursos da RACHI Academy', text: 'Quais formações e cursos estão disponíveis na Academy?' },
+                { label: '👥 Recrutamento & RH', text: 'Como funciona o serviço de RH e recrutamento de pessoal?' },
+                { label: '💬 Falar com Atendente Humano', text: 'Gostaria de falar com um atendente humano no WhatsApp' }
             ]
         };
 
-        // Restaurar sessão
+        // Restaurar histórico de sessão
         try {
             const saved = sessionStorage.getItem(CONFIG.storageKey);
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed && Array.isArray(parsed.messages) && parsed.messages.length > 0) {
                     state.messages = parsed.messages;
-                    state.step = parsed.step || state.step;
                     state.leadData = parsed.leadData || state.leadData;
                     state.chips = parsed.chips || state.chips;
                 }
@@ -77,15 +74,14 @@
         function persistState() {
             try {
                 sessionStorage.setItem(CONFIG.storageKey, JSON.stringify({
-                    step: state.step,
-                    leadData: state.leadData,
                     messages: state.messages,
+                    leadData: state.leadData,
                     chips: state.chips
                 }));
             } catch(e) {}
         }
 
-        // Estilos CSS Oficiais RACHI (Azul Profundo #071326, Cyan #00a3e0, Royal Blue #0050f0, Âmbar Dourado #eba72d)
+        // Estilos Visuais Oficiais da RACHI
         const styleEl = document.createElement('style');
         styleEl.id = 'rachi-chat-styles';
         styleEl.textContent = `
@@ -150,9 +146,9 @@
                 position: fixed !important;
                 bottom: 90px !important;
                 right: 20px !important;
-                width: 380px !important;
+                width: 385px !important;
                 max-width: calc(100vw - 32px) !important;
-                height: 570px !important;
+                height: 575px !important;
                 max-height: calc(100vh - 120px) !important;
                 background: #FFFFFF !important;
                 border-radius: 20px !important;
@@ -269,7 +265,7 @@
                 overflow-y: auto !important;
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 10px !important;
+                gap: 11px !important;
                 background: #F8FAFC !important;
                 scroll-behavior: smooth !important;
             }
@@ -284,9 +280,6 @@
             .rachi-chat-body::-webkit-scrollbar-thumb {
                 background: rgba(0, 80, 240, 0.2) !important;
                 border-radius: 9999px !important;
-            }
-            html.dark .rachi-chat-body::-webkit-scrollbar-thumb {
-                background: rgba(0, 163, 224, 0.3) !important;
             }
 
             .rachi-chat-bubble {
@@ -322,7 +315,7 @@
                 box-shadow: 0 3px 12px rgba(0, 80, 240, 0.35) !important;
             }
 
-            /* Chips / Opções da RACHI */
+            /* Chips / Sugestões Conversacionais */
             .rachi-chat-chips-container {
                 display: flex !important;
                 flex-wrap: wrap !important;
@@ -359,20 +352,6 @@
                 color: #FFFFFF !important;
                 transform: translateY(-2px) !important;
                 box-shadow: 0 4px 12px rgba(0, 80, 240, 0.35) !important;
-            }
-
-            .rachi-chat-chip.rachi-chip-gold {
-                border-color: #eba72d !important;
-                color: #b45309 !important;
-            }
-            html.dark .rachi-chat-chip.rachi-chip-gold {
-                color: #fbbf24 !important;
-                border-color: #eba72d !important;
-            }
-            .rachi-chat-chip.rachi-chip-gold:hover {
-                background: #eba72d !important;
-                border-color: #eba72d !important;
-                color: #0B0B0B !important;
             }
 
             .rachi-chat-chip.rachi-chip-human {
@@ -509,12 +488,12 @@
                 stroke-width: 2.8 !important;
             }
 
-            /* Indicador de Digitação */
+            /* Indicador de Digitação / Pensando */
             .rachi-typing-indicator {
                 display: flex !important;
                 align-items: center !important;
                 gap: 4px !important;
-                padding: 8px 12px !important;
+                padding: 9px 13px !important;
                 background: #FFFFFF !important;
                 border-radius: 14px !important;
                 width: fit-content !important;
@@ -543,7 +522,6 @@
                 to { opacity: 1; transform: translateY(0); }
             }
 
-            /* Ajustes Mobile e Dock */
             @media (min-width: 640px) {
                 .rachi-fab-dock {
                     right: 5.75rem !important;
@@ -577,20 +555,20 @@
             </svg>
         `;
 
-        // Criar Elementos no DOM
+        // Criar Estrutura DOM
         const root = document.createElement('div');
         root.id = 'rachi-chat-widget-root';
         root.innerHTML = `
-            <!-- Floating FAB RACHI -->
-            <button type="button" id="rachi-chat-fab-btn" class="rachi-chat-fab" aria-label="Abrir Chat de Atendimento RACHI" title="Falar com Assistente Virtual RACHI">
+            <!-- Botão Flutuante (FAB) -->
+            <button type="button" id="rachi-chat-fab-btn" class="rachi-chat-fab" aria-label="Abrir Chat Interativo RACHI" title="Conversar com a IA da RACHI">
                 <div class="rachi-chat-fab-badge"></div>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                 </svg>
             </button>
 
-            <!-- Chat Modal Window RACHI -->
-            <div id="rachi-chat-modal" class="rachi-chat-window rachi-hidden" role="dialog" aria-modal="true" aria-label="Chat de Atendimento RACHI">
+            <!-- Janela do Chat Interativo -->
+            <div id="rachi-chat-modal" class="rachi-chat-window rachi-hidden" role="dialog" aria-modal="true" aria-label="Chat Interativo RACHI">
                 <!-- Header -->
                 <div class="rachi-chat-header">
                     <div class="rachi-chat-header-brand">
@@ -602,7 +580,7 @@
                             <span class="rachi-subtitle">Soluções Inteligentes</span>
                             <div class="rachi-chat-status">
                                 <span class="rachi-chat-dot"></span>
-                                <span>Atendimento Online</span>
+                                <span>Consultor Virtual Online</span>
                             </div>
                         </div>
                     </div>
@@ -617,9 +595,9 @@
                 <!-- Messages Body -->
                 <div id="rachi-chat-messages" class="rachi-chat-body"></div>
 
-                <!-- Footer Input -->
+                <!-- Footer Input Interativo -->
                 <form id="rachi-chat-form" class="rachi-chat-footer">
-                    <input type="text" id="rachi-chat-input" class="rachi-chat-input-pill" placeholder="Digite sua mensagem ou escolha uma opção..." autocomplete="off" />
+                    <input type="text" id="rachi-chat-input" class="rachi-chat-input-pill" placeholder="Digite sua mensagem livremente..." autocomplete="off" />
                     <button type="submit" id="rachi-chat-submit" class="rachi-chat-send-btn" aria-label="Enviar mensagem">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -657,7 +635,7 @@
         function scrollToBottom() {
             setTimeout(() => {
                 messagesEl.scrollTop = messagesEl.scrollHeight;
-            }, 50);
+            }, 60);
         }
 
         function renderMessages() {
@@ -665,7 +643,12 @@
             state.messages.forEach(msg => {
                 const bubble = document.createElement('div');
                 bubble.className = `rachi-chat-bubble ${msg.sender === 'bot' ? 'rachi-bot' : 'rachi-user'}`;
-                bubble.innerHTML = msg.text.replace(/\n/g, '<br>');
+                
+                // Formatação simples de Markdown (negrito e quebras de linha)
+                let formatted = msg.text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\n/g, '<br>');
+                bubble.innerHTML = formatted;
                 messagesEl.appendChild(bubble);
 
                 if (msg.isWhatsAppCard) {
@@ -673,18 +656,18 @@
                 }
             });
 
-            if (state.chips && state.chips.length > 0) {
+            // Renderizar Sugestões Conversacionais (se houver e não estiver carregando)
+            if (!state.isLoading && state.chips && state.chips.length > 0) {
                 const chipsContainer = document.createElement('div');
                 chipsContainer.className = 'rachi-chat-chips-container';
                 state.chips.forEach(chip => {
                     const btn = document.createElement('button');
                     btn.type = 'button';
-                    let chipClass = 'rachi-chat-chip';
-                    if (chip.action === 'falar_humano') chipClass += ' rachi-chip-human';
-                    else if (chip.action === 'solicitar_orcamento') chipClass += ' rachi-chip-gold';
-                    btn.className = chipClass;
+                    btn.className = `rachi-chat-chip ${chip.isHuman ? 'rachi-chip-human' : ''}`;
                     btn.textContent = chip.label;
-                    btn.addEventListener('click', () => handleChipClick(chip));
+                    btn.addEventListener('click', () => {
+                        handleSendMessage(chip.text || chip.label);
+                    });
                     chipsContainer.appendChild(btn);
                 });
                 messagesEl.appendChild(chipsContainer);
@@ -694,7 +677,7 @@
         }
 
         function renderWhatsAppCard(customText) {
-            const textToEncode = customText || `Olá! Estive a falar no chat do site da RACHI e gostaria de falar com um consultor humano.`;
+            const textToEncode = customText || `Olá! Estive a falar no chat interativo da RACHI e gostaria de falar com um consultor humano.`;
             const waUrl = `https://wa.me/${CONFIG.officialWhatsApp}?text=${encodeURIComponent(textToEncode)}`;
 
             const card = document.createElement('div');
@@ -705,19 +688,20 @@
                     Atendimento Humano RACHI no WhatsApp
                 </div>
                 <div style="font-size: 12px; color: #065F46; margin-top: 3px;">
-                    Fale agora com um dos nossos consultores executivos em Luanda:
+                    Prefere falar diretamente com a nossa equipa em Luanda?
                 </div>
                 <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="rachi-whatsapp-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                     </svg>
-                    Abrir WhatsApp (+244 972 888 585)
+                    Continuar no WhatsApp (+244 972 888 585)
                 </a>
             `;
             messagesEl.appendChild(card);
         }
 
         function showTyping() {
+            state.isLoading = true;
             const ind = document.createElement('div');
             ind.id = 'rachi-typing-node';
             ind.className = 'rachi-typing-indicator';
@@ -731,355 +715,154 @@
         }
 
         function hideTyping() {
+            state.isLoading = false;
             const ind = document.getElementById('rachi-typing-node');
             if (ind) ind.remove();
         }
 
-        function addBotMessage(text, newChips, isWhatsApp, customWhatsAppText) {
-            showTyping();
-            setTimeout(() => {
-                hideTyping();
-                const msgObj = { sender: 'bot', text };
-                if (isWhatsApp) {
-                    msgObj.isWhatsAppCard = true;
-                    msgObj.whatsAppText = customWhatsAppText;
-                }
-                state.messages.push(msgObj);
-                state.chips = newChips || [];
-                persistState();
-                renderMessages();
-            }, 550);
+        // Sugestões Conversacionais Dinâmicas baseadas no tema discutido
+        function getDynamicSuggestions(userText) {
+            const lower = (userText || '').toLowerCase();
+
+            if (/site|website|loja|software|ti|tec/i.test(lower)) {
+                return [
+                    { label: '💰 Quanto custa uma Landing Page?', text: 'Quanto custa uma Landing Page comercial na RACHI Tec?' },
+                    { label: '🛒 Como funciona a Loja Virtual?', text: 'Como funciona a criação de loja virtual com pagamentos?' },
+                    { label: '💻 Equipamentos corporativos', text: 'Quais equipamentos de TI e laptops vocês têm disponíveis?' },
+                    { label: '💬 Falar no WhatsApp', text: 'Gostaria de falar com um consultor humano da RACHI Tec no WhatsApp', isHuman: true }
+                ];
+            }
+
+            if (/gráfica|grafica|brinde|cartão|banner|print/i.test(lower)) {
+                return [
+                    { label: '📇 Orçar Cartões de Visita', text: 'Gostaria de um orçamento para cartões de visita corporativos' },
+                    { label: '🎁 Catálogo de Brindes', text: 'Quais brindes corporativos vocês personalizam?' },
+                    { label: '🎨 Criação de Logótipo', text: 'Como funciona a criação de marca e logótipo?' },
+                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com a equipa da RACHI Print no WhatsApp', isHuman: true }
+                ];
+            }
+
+            if (/curso|formação|treinamento|academy/i.test(lower)) {
+                return [
+                    { label: '📚 Cursos de TI & Redes', text: 'Quais cursos de TI e Cibersegurança estão abertos?' },
+                    { label: '👔 Formação para Empresas', text: 'Como funcionam as formações corporativas in-company?' },
+                    { label: '📜 Certificação e Valores', text: 'Os cursos têm certificado reconhecido e quais são os valores?' },
+                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com a secretaria da RACHI Academy no WhatsApp', isHuman: true }
+                ];
+            }
+
+            if (/rh|recrutamento|cedência|contabilidade|inss|capital/i.test(lower)) {
+                return [
+                    { label: '👥 Recrutamento de Pessoal', text: 'Como funciona o processo de recrutamento e selecção?' },
+                    { label: '📑 Legalização de Empresa', text: 'Preciso de apoio para legalizar e constituir uma empresa' },
+                    { label: '💼 Contabilidade & INSS', text: 'Como funciona a assessoria contabilística e regularização no INSS?' },
+                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com um consultor da RACHI Human Capital no WhatsApp', isHuman: true }
+                ];
+            }
+
+            // Sugestões Gerais
+            return [
+                { label: '💻 Conhecer a RACHI Tec', text: 'Quais os principais serviços da RACHI Tec?' },
+                { label: '🖨️ Conhecer a RACHI Print', text: 'O que a RACHI Print pode produzir para o meu negócio?' },
+                { label: '🎓 Conhecer a RACHI Academy', text: 'Que cursos a RACHI Academy oferece?' },
+                { label: '👥 Conhecer a RACHI Capital', text: 'Quais serviços de RH e contabilidade vocês prestam?' },
+                { label: '💬 Falar com Atendente Humano', text: 'Gostaria de falar com um consultor humano no WhatsApp', isHuman: true }
+            ];
         }
 
-        function addUserMessage(text) {
+        // Envio e Processamento de Mensagens com a API de IA
+        async function handleSendMessage(userText) {
+            const text = (userText || '').trim();
+            if (!text || state.isLoading) return;
+
+            // 1. Adicionar mensagem do utilizador
             state.messages.push({ sender: 'user', text });
             state.chips = [];
-            persistState();
             renderMessages();
-        }
-
-        // Salvar Lead no CRM (worker_contacts)
-        async function syncLeadToCrm() {
-            const payload = {
-                name: state.leadData.name || 'Visitante Chat RACHI',
-                phone: state.leadData.phone || 'Não informado',
-                company: state.leadData.company || '',
-                subject: `[Lead CRM RACHI] ${state.leadData.unit}: ${state.leadData.service || 'Interesse Comercial'}`,
-                message: `Lead gerado pelo Chat Virtual da RACHI:
-- Unidade: ${state.leadData.unit}
-- Serviço de Interesse: ${state.leadData.service}
-- Objetivo / Detalhe: ${state.leadData.objective || 'N/A'}
-- Nome: ${state.leadData.name}
-- Telefone / WhatsApp: ${state.leadData.phone}
-- Empresa: ${state.leadData.company || 'N/A'}
-- Notas: ${state.leadData.notes || 'Registado pelo fluxo automatizado da RACHI'}
-Data/Hora: ${new Date().toLocaleString('pt-PT')}`
-            };
-
-            try {
-                const resp = await fetch(CONFIG.crmLeadApi, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (!resp.ok) {
-                    await fetch(CONFIG.fallbackContactApi, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                }
-            } catch (err) {
-                console.warn('[RACHI CRM Chat] Falha ao enviar lead:', err);
-            }
-        }
-
-        // Transbordo Humano
-        function triggerHumanHandoff(contextReason) {
-            state.step = 'HUMAN_HANDOFF';
-            const visitorName = state.leadData.name ? `, ${state.leadData.name}` : '';
-            const unitMention = state.leadData.unit && state.leadData.unit !== 'Geral' ? ` da *${state.leadData.unit}*` : '';
-            const serviceMention = state.leadData.service ? ` sobre *${state.leadData.service}*` : '';
-            const waMsg = `Olá! Estive a falar no chat do site da RACHI e gostaria de falar com um consultor humano${unitMention}${serviceMention}. ${state.leadData.name ? '(Meu nome: ' + state.leadData.name + ')' : ''}`;
-
-            addBotMessage(
-                `Com certeza${visitorName}! Estou a transferir a sua solicitação para a nossa equipa de consultores especializados da RACHI no WhatsApp (+244 972 888 585). 💬\n\nClique no botão verde abaixo para iniciar a conversa:`,
-                [
-                    { label: 'Voltar ao Menu Principal', action: 'reset_flow' }
-                ],
-                true,
-                waMsg
-            );
-
-            if (state.leadData.name || state.leadData.phone) {
-                state.leadData.notes += ' [Transferido para atendimento humano no WhatsApp]';
-                syncLeadToCrm();
-            }
-        }
-
-        // Gerenciamento de Opções Rápidas por Unidade RACHI
-        function handleChipClick(chip) {
-            addUserMessage(chip.label);
-
-            switch (chip.action) {
-                case 'unit_tec':
-                    state.leadData.unit = 'RACHI Tec';
-                    state.step = 'UNIT_TEC';
-                    addBotMessage(
-                        'A **RACHI Tec** é o nosso braço de Tecnologia & Inovação. Oferecemos hardware corporativo, criação de websites de alta conversão, lojas virtuais, sistemas de faturação certificados pela AGT e suporte de TI.\n\nQual destas soluções procura?',
-                        [
-                            { label: 'Criação de Website / Landing Page', action: 'tec_website' },
-                            { label: 'Loja Virtual / E-commerce', action: 'tec_loja' },
-                            { label: 'Hardware & Equipamentos de TI', action: 'tec_hardware' },
-                            { label: 'Suporte Técnico & Manutenção TI', action: 'tec_suporte' },
-                            { label: 'Falar com Consultor Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                case 'unit_print':
-                    state.leadData.unit = 'RACHI Print';
-                    state.step = 'UNIT_PRINT';
-                    addBotMessage(
-                        'A **RACHI Print** é especialista em comunicação visual, gráfica rápida e brindes corporativos de alto padrão. Cuidamos desde cartões de visita e banners até fardamentos e brindes personalizados para eventos.\n\nO que deseja orçar?',
-                        [
-                            { label: 'Brindes Corporativos & Eventos', action: 'print_brindes' },
-                            { label: 'Cartões, Flyers & Folhetos', action: 'print_papelaria' },
-                            { label: 'Banners & Grandes Formatos', action: 'print_banners' },
-                            { label: 'Criação de Logótipo & Marca', action: 'print_branding' },
-                            { label: 'Falar com Consultor Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                case 'unit_academy':
-                    state.leadData.unit = 'RACHI Academy';
-                    state.step = 'UNIT_ACADEMY';
-                    addBotMessage(
-                        'A **RACHI Academy** desenvolve competências estratégicas através de formações executivas práticas nas áreas de Tecnologia, Gestão Empresarial, Finanças e Atendimento ao Cliente, com certificação.\n\nQual é a sua necessidade formativa?',
-                        [
-                            { label: 'Treinamento Corporativo (In-Company)', action: 'academy_empresa' },
-                            { label: 'Cursos de TI & Redes', action: 'academy_ti' },
-                            { label: 'Gestão, Finanças & Liderança', action: 'academy_gestao' },
-                            { label: 'Consultar Calendário de Turmas', action: 'academy_calendario' },
-                            { label: 'Falar com Atendente Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                case 'unit_capital':
-                    state.leadData.unit = 'RACHI Human Capital';
-                    state.step = 'UNIT_CAPITAL';
-                    addBotMessage(
-                        'A **RACHI Human Capital** oferece soluções completas de consultoria em RH: recrutamento e selecção de talentos, cedência temporária de trabalhadores, organização de contabilidade, legalização de empresas e regularização no INSS.\n\nEm que área necessita de assessoria?',
-                        [
-                            { label: 'Recrutamento & Selecção de Pessoal', action: 'capital_recrutamento' },
-                            { label: 'Cedência Temporária de Colaboradores', action: 'capital_cedencia' },
-                            { label: 'Constituição & Legalização de Empresa', action: 'capital_legalizacao' },
-                            { label: 'Contabilidade & Regularização INSS', action: 'capital_contabilidade' },
-                            { label: 'Falar com Consultor Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                case 'solicitar_orcamento':
-                    state.step = 'PRICE_SELECT';
-                    addBotMessage(
-                        'Perfeito! Na RACHI estruturamos propostas transparentes e sob medida para a realidade do seu negócio.\n\nPara qual das nossas áreas gostaria de receber cotação?',
-                        [
-                            { label: 'Tecnologia / Sites / TI', action: 'unit_tec' },
-                            { label: 'Produção Gráfica / Brindes', action: 'unit_print' },
-                            { label: 'Cursos / Formação', action: 'unit_academy' },
-                            { label: 'RH / Contabilidade / Legalização', action: 'unit_capital' },
-                            { label: 'Falar com Atendente Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                case 'falar_humano':
-                    triggerHumanHandoff('Opção falar com humano');
-                    break;
-
-                case 'reset_flow':
-                    state.step = 'INIT';
-                    addBotMessage(
-                        'Como podemos potenciar a sua organização hoje? Escolha uma das opções abaixo:',
-                        [
-                            { label: '💻 RACHI Tec (Tecnologia & TI)', action: 'unit_tec' },
-                            { label: '🖨️ RACHI Print (Gráfica & Brindes)', action: 'unit_print' },
-                            { label: '🎓 RACHI Academy (Cursos)', action: 'unit_academy' },
-                            { label: '👥 RACHI Capital (RH & Gestão)', action: 'unit_capital' },
-                            { label: '💬 Falar com Atendente Humano', action: 'falar_humano' }
-                        ]
-                    );
-                    break;
-
-                // Captura do Serviço Específico
-                case 'tec_website':
-                case 'tec_loja':
-                case 'tec_hardware':
-                case 'tec_suporte':
-                case 'print_brindes':
-                case 'print_papelaria':
-                case 'print_banners':
-                case 'print_branding':
-                case 'academy_empresa':
-                case 'academy_ti':
-                case 'academy_gestao':
-                case 'academy_calendario':
-                case 'capital_recrutamento':
-                case 'capital_cedencia':
-                case 'capital_legalizacao':
-                case 'capital_contabilidade':
-                    state.leadData.service = chip.label;
-                    state.step = 'ASK_NAME';
-                    addBotMessage(
-                        `Excelente escolha! Para que a equipa da **${state.leadData.unit}** prepare a proposta detalhada, por favor, **qual é o seu nome** (ou da sua empresa)?`
-                    );
-                    break;
-
-                default:
-                    state.step = 'ASK_NAME';
-                    addBotMessage('Entendido! Por favor, informe o seu nome para prosseguirmos:');
-                    break;
-            }
-        }
-
-        // Processar Mensagens Livres
-        function handleUserInput(userText) {
-            const text = userText.trim();
-            if (!text) return;
-
-            addUserMessage(text);
             input.value = '';
 
-            const lower = text.toLowerCase();
-
-            // 1. Transbordo Humano
-            if (
-                lower.includes('humano') ||
-                lower.includes('atendente') ||
-                lower.includes('pessoa') ||
-                lower.includes('alguém') ||
-                lower.includes('whatsapp') ||
-                lower.includes('zap') ||
-                lower.includes('ligar') ||
-                lower.includes('telefone') ||
-                lower.includes('falar com')
-            ) {
-                triggerHumanHandoff(text);
-                return;
-            }
-
-            // 2. Fluxo de Captura de Lead (CRM)
-            if (state.step === 'ASK_NAME') {
-                state.leadData.name = text;
-                state.step = 'ASK_PHONE';
-                addBotMessage(
-                    `Muito obrigado, **${text}**! 👍\n\nPor favor, informe o seu número de **WhatsApp ou Telefone** (ex: 972 888 585) para enviarmos o resumo e a cotação formal:`
-                );
-                return;
-            }
-
-            if (state.step === 'ASK_PHONE') {
-                const cleanDigits = text.replace(/\D/g, '');
-                if (cleanDigits.length < 8) {
-                    addBotMessage(
-                        'Por favor, indique um contacto telefónico ou WhatsApp válido (com pelo menos 9 dígitos) para que possamos enviar a proposta da RACHI:'
-                    );
-                    return;
+            // Detectar Nome informado no diálogo
+            const nameMatch = text.match(/(?:chamo-me|me chamo|meu nome é|aqui é(?: o| a)?|sou o|sou a)\s+([^,!\?]+)/i);
+            if (nameMatch && nameMatch[1]) {
+                const words = nameMatch[1].trim().split(/\s+/);
+                const stopWords = new Set(['de','da','do','dos','das','em','na','no','com','e','que','para','gostaria','queria','preciso','estou','sou','tenho','um','uma']);
+                const resWords = [];
+                for (const w of words) {
+                    const cleanWord = w.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\.]/g, '');
+                    if (!cleanWord || stopWords.has(cleanWord.toLowerCase().replace(/\./g, ''))) break;
+                    resWords.push(cleanWord);
+                    if (resWords.length >= 3) break;
                 }
-
-                state.leadData.phone = text;
-                state.step = 'COMPLETED';
-
-                // Sincronizar com o banco D1 / CRM
-                syncLeadToCrm();
-
-                const waMsg = `Olá! Meu nome é ${state.leadData.name}. Deixei meu contacto (${state.leadData.phone}) no chat da RACHI referente a: ${state.leadData.unit} - ${state.leadData.service || 'Soluções Integradas'}.`;
-
-                addBotMessage(
-                    `Perfeito, **${state.leadData.name}**! 🎉\n\nOs seus dados foram registados no nosso **sistema CRM da RACHI**. A equipa responsável pela **${state.leadData.unit}** já foi notificada e entrará em contacto muito brevemente.\n\nSe preferir atendimento imediato, clique no botão abaixo para falar no WhatsApp:`,
-                    [
-                        { label: 'Falar no WhatsApp Agora', action: 'falar_humano' },
-                        { label: 'Consultar outro serviço', action: 'reset_flow' }
-                    ],
-                    true,
-                    waMsg
-                );
-                return;
+                if (resWords.length > 0) {
+                    state.leadData.name = resWords.join(' ');
+                }
             }
 
-            // 3. IA de Resposta Contextual para RACHI
-            if (lower.includes('site') || lower.includes('software') || lower.includes('ti') || lower.includes('computador') || lower.includes('tec') || lower.includes('hardware')) {
-                state.leadData.unit = 'RACHI Tec';
-                state.leadData.service = 'Tecnologia & TI';
-                state.step = 'ASK_NAME';
-                addBotMessage(
-                    'A **RACHI Tec** desenvolve websites de alto desempenho, lojas virtuais, sistemas de gestão e fornece equipamentos e manutenção de TI.\n\nPara lhe enviarmos um orçamento sob medida, **qual é o seu nome**?'
-                );
-                return;
+            // Detectar Telefone informado no diálogo
+            const phoneMatch = text.match(/(?:\+?244\s*)?(?:9\d{2}[\s.-]?\d{3}[\s.-]?\d{3}|9\d{8})/);
+            if (phoneMatch) {
+                state.leadData.phone = phoneMatch[0].trim();
             }
 
-            if (lower.includes('grafica') || lower.includes('gráfica') || lower.includes('brinde') || lower.includes('banner') || lower.includes('cartão') || lower.includes('print')) {
-                state.leadData.unit = 'RACHI Print';
-                state.leadData.service = 'Produção Gráfica';
-                state.step = 'ASK_NAME';
-                addBotMessage(
-                    'A **RACHI Print** produz materiais gráficos de excelência, brindes corporativos, lonas, roll-ups e identidade visual completa.\n\nQual é o seu nome para prepararmos uma estimativa de produção?'
-                );
-                return;
-            }
+            showTyping();
 
-            if (lower.includes('curso') || lower.includes('formação') || lower.includes('formacao') || lower.includes('academy') || lower.includes('aula') || lower.includes('aluno')) {
-                state.leadData.unit = 'RACHI Academy';
-                state.leadData.service = 'Cursos Executivos';
-                state.step = 'ASK_NAME';
-                addBotMessage(
-                    'A **RACHI Academy** oferece formações corporativas e cursos certificados em Gestão, Finanças, Redes e Tecnologia.\n\nQual é o seu nome e qual o curso do seu interesse?'
-                );
-                return;
-            }
+            try {
+                // Preparar histórico para a API
+                const payloadMessages = state.messages.slice(-8).map(m => ({
+                    role: m.sender === 'bot' ? 'assistant' : 'user',
+                    content: m.text
+                }));
 
-            if (lower.includes('rh') || lower.includes('recrutamento') || lower.includes('contabilidade') || lower.includes('inss') || lower.includes('empresa') || lower.includes('capital')) {
-                state.leadData.unit = 'RACHI Human Capital';
-                state.leadData.service = 'Gestão de Pessoas & Consultoria';
-                state.step = 'ASK_NAME';
-                addBotMessage(
-                    'A **RACHI Human Capital** apoia a sua empresa em recrutamento especializado, cedência temporária, contabilidade organizada e regularização legal/INSS.\n\nQual é o seu nome para direcionarmos ao nosso consultor?'
-                );
-                return;
-            }
+                const response = await fetch(CONFIG.chatApi, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: payloadMessages,
+                        leadData: state.leadData
+                    })
+                });
 
-            if (lower.includes('preço') || lower.includes('preco') || lower.includes('custa') || lower.includes('orçamento') || lower.includes('orcamento') || lower.includes('valor')) {
-                state.step = 'PRICE_SELECT';
-                addBotMessage(
-                    'A RACHI oferece soluções personalizadas para micro, pequenas e grandes empresas em Angola. Desenvolvemos propostas transparentes com excelente custo-benefício.\n\nPara qual das nossas áreas procura cotação?',
-                    [
-                        { label: '💻 RACHI Tec (Tecnologia)', action: 'unit_tec' },
-                        { label: '🖨️ RACHI Print (Gráfica)', action: 'unit_print' },
-                        { label: '🎓 RACHI Academy (Cursos)', action: 'unit_academy' },
-                        { label: '👥 RACHI Capital (RH & Contabilidade)', action: 'unit_capital' },
-                        { label: '💬 Falar com Atendente Humano', action: 'falar_humano' }
-                    ]
-                );
-                return;
-            }
+                hideTyping();
 
-            // Resposta Padrão RACHI
-            state.leadData.notes = (state.leadData.notes ? state.leadData.notes + ' | ' : '') + text;
-            state.step = 'ASK_NAME';
-            addBotMessage(
-                'Entendi perfeitamente! Para que os consultores da RACHI possam analisar a sua solicitação com todo o rigor, **qual é o seu nome**?',
-                [
-                    { label: 'Falar com Atendente Humano', action: 'falar_humano' }
-                ]
-            );
+                if (response.ok) {
+                    const data = await response.json();
+                    const replyText = data.reply || 'Olá! Como posso ajudar a sua empresa hoje?';
+                    const isWhatsApp = data.isWhatsAppSuggested || /humano|atendente|whatsapp|ligar/i.test(text);
+
+                    state.messages.push({
+                        sender: 'bot',
+                        text: replyText,
+                        isWhatsAppCard: isWhatsApp,
+                        whatsAppText: `Olá! Estive a conversar no chat do site da RACHI e gostaria de falar com um consultor humano sobre os meus projetos.`
+                    });
+
+                    state.chips = getDynamicSuggestions(text);
+                    persistState();
+                    renderMessages();
+                } else {
+                    throw new Error('Falha na resposta da API');
+                }
+            } catch (err) {
+                hideTyping();
+                // Resposta de fallback elegante e calorosa
+                state.messages.push({
+                    sender: 'bot',
+                    text: 'A **RACHI** é um ecossistema empresarial integrado em Angola, atuando com soluções completas em **Tecnologia & TI (RACHI Tec)**, **Gráfica & Brindes (RACHI Print)**, **Formações Executivas (RACHI Academy)** e **Recursos Humanos & Contabilidade (RACHI Human Capital)**.\n\nComo posso detalhar melhor a solução que a sua empresa procura?',
+                    isWhatsAppCard: true,
+                    whatsAppText: `Olá! Estive a falar no chat do site da RACHI e gostaria de solicitar informações e proposta.`
+                });
+                state.chips = getDynamicSuggestions(text);
+                persistState();
+                renderMessages();
+            }
         }
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            handleUserInput(input.value);
+            handleSendMessage(input.value);
         });
 
         renderMessages();

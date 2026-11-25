@@ -9125,6 +9125,173 @@ catalog.post("/api/crm/lead", async (c) => {
   return c.json({ success: true, message: "Lead registado com sucesso no CRM!" });
 });
 
+function extractRachiLeadName(text) {
+  if (!text) return null;
+  const m = text.match(/(?:chamo-me|me chamo|meu nome é|aqui é(?: o| a)?|sou o|sou a)\s+([^,!\?]+)/i);
+  if (!m) return null;
+  const words = m[1].trim().split(/\s+/);
+  const stopWords = new Set(['de','da','do','dos','das','em','na','no','com','e','que','para','gostaria','queria','preciso','estou','sou','tenho','um','uma']);
+  const result = [];
+  for (const w of words) {
+    const cleanWord = w.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\.]/g, '');
+    if (!cleanWord || stopWords.has(cleanWord.toLowerCase().replace(/\./g, ''))) break;
+    result.push(cleanWord);
+    if (result.length >= 3) break;
+  }
+  return result.length > 0 ? result.join(' ') : null;
+}
+
+function generateRachiConversationalReply(userText, messages, leadData) {
+  const lower = (userText || "").toLowerCase().trim();
+  let greetingPart = "";
+
+  // 1. Detecção e Saudação com Nome
+  const extractedName = extractRachiLeadName(userText) || leadData.name;
+  if (extractedName && extractedName.length >= 2) {
+    greetingPart = `Muito prazer, **${extractedName}**! É uma grande satisfação conversar consigo na **RACHI — Soluções Inteligentes**. 🤝\n\n`;
+  }
+
+  // 2. Telefone / WhatsApp detectado
+  const phoneMatch = userText.match(/(?:\+?244\s*)?(?:9\d{2}[\s.-]?\d{3}[\s.-]?\d{3}|9\d{8})/);
+  if (phoneMatch) {
+    return `${greetingPart}Excelente! Já registei o seu contacto telefónico (**${phoneMatch[0]}**) no sistema da RACHI. 🎯\n\nA nossa equipa comercial entrará em contacto muito brevemente para lhe apresentar a proposta detalhada. Se necessitar de falar connosco agora mesmo, clique no botão abaixo para conversar no WhatsApp!`;
+  }
+
+  // 3. Pedido de Atendimento Humano / WhatsApp
+  if (/humano|atendente|pessoa|alguém|falar com|whatsapp|zap|ligar|telefone/i.test(lower)) {
+    return `${greetingPart}Com certeza! Estou a transferir a sua solicitação para os nossos consultores especializados da RACHI no WhatsApp oficial (**+244 972 888 585**). 💬\n\nClique no botão verde abaixo para abrir a conversa direta com a nossa equipa!`;
+  }
+
+  // 4. Pergunta sobre Websites, Clínicas, Lojas, Sistemas ou TI
+  if (/site|website|loja|e-commerce|software|sistema|informática|informatica|hardware|computador|laptop|suporte|ti|tec|tecnologia|consulta/i.test(lower)) {
+    if (/loja|e-commerce|vender/i.test(lower)) {
+      return `${greetingPart}Excelente iniciativa! A **RACHI Tec** desenvolve lojas virtuais completas e modernas, preparadas para receber pagamentos locais por Multicaixa Express e cartões, com catálogo inteligente e controlo de entregas em Luanda e restantes províncias. 🛒\n\nA sua loja venderá que tipo de produtos? Já dispõe de catálogo ou fotografias dos artigos?`;
+    }
+    if (/clínica|clinica|médica|medica|agendamento|marcação|marcacao/i.test(lower)) {
+      return `${greetingPart}Podemos criar um website moderno e profissional para a sua clínica ou consultório com sistema integrado de marcação online de consultas, apresentação do corpo clínico, especialidades, localização no mapa e botão direto de WhatsApp. 🩺💻\n\nAs Landing Pages comerciais têm valores a partir de **95.000 Kz** e os sites institucionais completos com marcação são orçados sob medida. Gostaria que a nossa equipa preparasse uma proposta formal para a sua clínica?`;
+    }
+    if (/computador|laptop|hardware|equipamento/i.test(lower)) {
+      return `${greetingPart}Fornecemos computadores de secretária, portáteis corporativos de alto rendimento (HP, Dell, Lenovo), servidores e periféricos com garantia oficial e entrega em Luanda. Também realizamos contratos de manutenção preventiva de TI para empresas. 💻\n\nQuantos equipamentos a sua organização necessita de equipar ou renovar?`;
+    }
+    return `${greetingPart}A **RACHI Tec** é a nossa unidade especializada em tecnologia e desenvolvimento digital: 🚀\n\n• **Websites & Landing Pages**: Páginas modernas, ultra-rápidas e otimizadas para o Google (a partir de 95.000 Kz).\n• **Lojas Virtuais**: E-commerce integrado com Multicaixa Express e cartões.\n• **Sistemas de Faturação**: Software certificado pela AGT.\n• **Gestão & Suporte TI**: Manutenção preventiva e segurança para o seu escritório.\n\nQual destas vertentes melhor atende aos objetivos atuais do seu negócio?`;
+  }
+
+  // 5. Preços e Orçamentos Gerais
+  if (/preço|preco|quanto custa|valor|cotação|cotacao|orçamento|orcamento/i.test(lower)) {
+    return `${greetingPart}Na **RACHI**, trabalhamos com orçamentos transparentes e ajustados à realidade das empresas em Angola: 💡\n\n• **RACHI Tec**: Landing Pages comerciais a partir de **95.000 Kz**, e sites completos ou e-commerce sob medida.\n• **RACHI Capital**: Planos de assessoria contabilística a partir de **95.000 Kz/mês** e serviços de legalização.\n• **RACHI Print**: Valores de gráfica e brindes sob medida de acordo com a tiragem e materiais.\n\nQual serviço tem interesse em orçar neste momento?`;
+  }
+
+  // 6. Produção Gráfica e Brindes (RACHI Print)
+  if (/gráfica|grafica|brinde|cartão|cartao|banner|lona|roll-up|rollup|flyer|panfleto|agenda|fardamento|polo|camisete|logótipo|logotipo|marca|print/i.test(lower)) {
+    return `${greetingPart}A **RACHI Print** é a nossa unidade gráfica e de brindes corporativos de alto padrão em Luanda: 🖨️✨\n\n• **Brindes Personalizados**: Canetas, garrafas, cadernos, mochilas e brindes para congressos e eventos.\n• **Papelaria Institucional**: Cartões de visita com laminação mate ou verniz localizado, flyers e pastas.\n• **Grandes Formatos**: Lonas, banners de alta resolução e roll-ups.\n• **Design & Branding**: Criação de logótipos e manuais de identidade corporativa.\n\nQue quantidade e formato de materiais gostaria de produzir?`;
+  }
+
+  // 7. Cursos e Formações (RACHI Academy)
+  if (/curso|formação|formacao|treinamento|capacitação|capacitacao|aula|aluno|academy/i.test(lower)) {
+    return `${greetingPart}A **RACHI Academy** oferece capacitação executiva prática com certificação: 🎓📚\n\n• **Tecnologia & TI**: Redes de Computadores, Linux, Cibersegurança e Programação.\n• **Gestão & Negócios**: Gestão Financeira, Liderança e Vendas Corporativas.\n• **Programas In-Company**: Formação personalizada ministrada diretamente para os colaboradores da sua empresa.\n\nProcura formação individual para si ou um plano corporativo para a sua equipa?`;
+  }
+
+  // 8. Recursos Humanos, Contabilidade e Legalização (RACHI Human Capital)
+  if (/rh|recursos humanos|recrutamento|selecção|selecao|trabalhador|cedência|cedencia|contabilidade|inss|empresa|legalização|legalizacao|capital/i.test(lower)) {
+    return `${greetingPart}A **RACHI Human Capital** oferece assessoria estratégica e operacional em Luanda: 👥📑\n\n• **Recrutamento & Selecção**: Identificação e seleção de profissionais qualificados.\n• **Cedência Temporária**: Disponibilização imediata de mão-de-obra especializada.\n• **Legalização de Empresas**: Constituição e registo ágil no Guichê Único.\n• **Contabilidade & Regularização**: Fecho de contas, apuramento de impostos e regularização no INSS.\n\nQual é a necessidade prioritária da sua organização hoje?`;
+  }
+
+  // 9. Localização e Contactos
+  if (/onde fica|endereço|endereco|localização|localizacao|onde vocês estão|sede|miramar/i.test(lower)) {
+    return `${greetingPart}A nossa sede fica em Luanda, na **Rua Ndunduma, Miramar** (por detrás do edifício do BFA). 📍🇦🇴\n\nAtendemos de segunda a sexta-feira, das 08h às 17h. O nosso WhatsApp oficial é o **+244 972 888 585** e o e-mail é **geral@rachi.ao**.\n\nGostaria de agendar uma visita ou prefere que conversemos diretamente pelo WhatsApp?`;
+  }
+
+  // 10. Saudações
+  if (/olá|ola|bom dia|boa tarde|boa noite|oi|hey|saudações/i.test(lower)) {
+    return `${greetingPart || "Olá! "}É um enorme prazer falar consigo. Sou o consultor virtual da **RACHI — Soluções Inteligentes**. 🇦🇴\n\nComo posso ajudar a sua empresa hoje? Sinta-se à vontade para me falar sobre o que procura ou perguntar sobre os nossos serviços em **Tecnologia (Tec)**, **Gráfica & Brindes (Print)**, **Cursos (Academy)** ou **RH & Contabilidade (Capital)**!`;
+  }
+
+  // 11. Resposta Consultiva Padrão
+  if (greetingPart) {
+    return `${greetingPart}Como posso ajudar a sua empresa hoje? Trabalhamos com **Tecnologia & TI**, **Produção Gráfica**, **Formação Executiva (Academy)** e **Consultoria em Recursos Humanos & Contabilidade**. Diga-me o que tem em mente!`;
+  }
+
+  return `Compreendo perfeitamente o seu ponto! Na **RACHI**, combinamos Pessoas, Processos e Tecnologia para entregar exactamente o que a sua empresa precisa. 🎯\n\nPoderia detalhar um pouco mais o seu objetivo, ou prefere que a nossa equipa de especialistas entre em contacto consigo diretamente pelo WhatsApp (+244 972 888 585) para apresentar uma proposta sob medida?`;
+}
+
+catalog.post("/api/chat", async (c) => {
+  await limit(c, "ai_chat", 60);
+  const d = await body(c);
+  const messages = Array.isArray(d.messages) ? d.messages : [];
+  const leadData = typeof d.leadData === "object" && d.leadData !== null ? d.leadData : {};
+  const lastUserMsg = [...messages].reverse().find(m => m.role === "user" || m.sender === "user")?.content || d.message || "";
+
+  let aiReply = null;
+
+  // 1. Tentar executar Cloudflare Workers AI se disponível
+  if (c.env && c.env.AI) {
+    try {
+      const systemPrompt = `Você é o Consultor Virtual Executivo da RACHI — Soluções Inteligentes em Angola (rachi.ao).
+Atue como um consultor e atendente humano experiente, caloroso, altamente profissional, conhecedor profundo de Angola e do ecossistema empresarial da RACHI.
+Converse de forma natural, fluida, interativa e empática (NÃO use questionários mecânicos ou listas robóticas).
+
+Informações Oficiais da RACHI:
+- Sede: Rua Ndunduma, Miramar, Luanda (por detrás do BFA). Telefone e WhatsApp: +244 972 888 585. E-mail: geral@rachi.ao.
+- RACHI Tec: Websites e Landing Pages de alta conversão (a partir de 95.000 Kz), lojas virtuais (e-commerce), hardware corporativo (HP, Dell, Lenovo), suporte técnico de TI e software de faturação certificado pela AGT.
+- RACHI Print: Gráfica rápida, cartões de visita premium, flyers, banners, roll-ups, brindes corporativos e criação de logótipos/marcas.
+- RACHI Academy: Centro executivo de capacitação prática e certificações em TI, redes, gestão empresarial, liderança e finanças.
+- RACHI Human Capital: Recrutamento e selecção, cedência temporária de colaboradores, constituição de empresas, contabilidade organizada (a partir de 95.000 Kz/mês) e regularização no INSS.
+
+Instruções:
+- Responda diretamente ao que o usuário perguntou com clareza e empatia.
+- Mantenha a resposta concisa e conversacional (2 a 3 parágrafos curtos).
+- Faça perguntas de acompanhamento naturais e convide o usuário a partilhar o nome ou contacto de WhatsApp quando oportuno.
+- Se o usuário pedir para falar com humano ou WhatsApp, responda prontamente indicando o WhatsApp oficial (+244 972 888 585).`;
+
+      const aiMessages = [
+        { role: "system", content: systemPrompt },
+        ...messages.slice(-6).map(m => ({
+          role: m.role || (m.sender === "bot" ? "assistant" : "user"),
+          content: m.content || m.text || ""
+        }))
+      ];
+
+      const aiRes = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+        messages: aiMessages,
+        max_tokens: 350,
+        temperature: 0.65
+      });
+      if (aiRes && aiRes.response) {
+        aiReply = aiRes.response.trim();
+      }
+    } catch (e) {
+      console.warn("Workers AI indisponível, usando fallback conversacional RACHI:", e);
+    }
+  }
+
+  // 2. Se a IA externa não respondeu, usar o motor conversacional contextual RACHI
+  if (!aiReply) {
+    aiReply = generateRachiConversationalReply(lastUserMsg, messages, leadData);
+  }
+
+  // 3. Extração automática de lead para o CRM
+  const phoneDetected = lastUserMsg.match(/(?:\+?244\s*)?(?:9\d{2}[\s.-]?\d{3}[\s.-]?\d{3}|9\d{8})/);
+  if (phoneDetected) {
+    const rawPhone = phoneDetected[0].trim();
+    const cleanDigits = rawPhone.replace(/\D/g, "");
+    const leadEmail = `lead-${cleanDigits || Date.now()}@chat.rachi.ao`;
+    try {
+      await c.get("db").query(
+        "INSERT INTO worker_contacts(name,email,phone,subject,message,created_at) VALUES($1,$2,$3,$4,$5,now())",
+        [leadData.name || "Visitante Chat RACHI", leadEmail, rawPhone, "[Lead Conversa IA] Atendimento Interativo RACHI", `Mensagem recebida na conversa: ${lastUserMsg}`]
+      );
+    } catch (err) {}
+  }
+
+  const isWhatsAppSuggested = /humano|atendente|whatsapp|falar com pessoa|ligar|telefone|urgente/i.test(lastUserMsg);
+
+  return c.json({
+    success: true,
+    reply: aiReply,
+    isWhatsAppSuggested
+  });
+});
+
 import { receivePrintQuote } from './print-quotes.js';
 import { receiveCapitalRequest } from './capital-requests.js';
 catalog.post('/print/solicitar-cotacao', (c) => receivePrintQuote(c, {body, text, email, limit, randomToken, fail}));
