@@ -1,4 +1,4 @@
-﻿# Script para Alternância de Ambiente Local: Homologação vs Produção
+# Script para Alternância de Ambiente Local: Homologação vs Produção
 param (
     [Parameter(Mandatory=$true)]
     [ValidateSet('staging', 'homologacao', 'prod', 'production')]
