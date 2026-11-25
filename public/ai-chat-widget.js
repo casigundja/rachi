@@ -29,10 +29,10 @@
             officialDisplayPhone: '+244 972 888 585',
             chatApi: '/api/chat',
             crmLeadApi: '/api/crm/lead',
-            storageKey: 'rachi_interactive_chat_v3',
+            storageKey: 'rachi_pure_chat_v1',
         };
 
-        // Estado da Conversa Interativa
+        // Estado da Conversa Interativa (100% Livre e Natural)
         let state = {
             isOpen: false,
             isLoading: false,
@@ -45,16 +45,8 @@
             messages: [
                 {
                     sender: 'bot',
-                    text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola. 🇦🇴\n\nSou o consultor virtual da RACHI. Como posso apoiar a sua empresa hoje? Sinta-se à vontade para me fazer perguntas sobre os nossos serviços de **Tecnologia (Tec)**, **Gráfica & Brindes (Print)**, **Formação (Academy)** ou **Recursos Humanos & Contabilidade (Capital)**!'
+                    text: 'Olá! Seja bem-vindo à **RACHI — Soluções Inteligentes** em Angola. 🇦🇴\n\nSou o consultor virtual da RACHI. Como posso apoiar a sua empresa hoje? Sinta-se à vontade para me dizer o que procura ou perguntar sobre os nossos serviços em **Tecnologia (Tec)**, **Gráfica & Brindes (Print)**, **Cursos Executivos (Academy)** ou **RH & Contabilidade (Capital)**!'
                 }
-            ],
-            chips: [
-                { label: '💡 Quanto custa um website?', text: 'Quanto custa desenvolver um website para a minha empresa?' },
-                { label: '💻 Equipamentos & Suporte TI', text: 'Quais computadores e serviços de TI vocês fornecem?' },
-                { label: '🖨️ Brindes & Produção Gráfica', text: 'Gostaria de saber sobre brindes corporativos e materiais gráficos' },
-                { label: '🎓 Cursos da RACHI Academy', text: 'Quais formações e cursos estão disponíveis na Academy?' },
-                { label: '👥 Recrutamento & RH', text: 'Como funciona o serviço de RH e recrutamento de pessoal?' },
-                { label: '💬 Falar com Atendente Humano', text: 'Gostaria de falar com um atendente humano no WhatsApp' }
             ]
         };
 
@@ -66,7 +58,6 @@
                 if (parsed && Array.isArray(parsed.messages) && parsed.messages.length > 0) {
                     state.messages = parsed.messages;
                     state.leadData = parsed.leadData || state.leadData;
-                    state.chips = parsed.chips || state.chips;
                 }
             }
         } catch(e) {}
@@ -75,8 +66,7 @@
             try {
                 sessionStorage.setItem(CONFIG.storageKey, JSON.stringify({
                     messages: state.messages,
-                    leadData: state.leadData,
-                    chips: state.chips
+                    leadData: state.leadData
                 }));
             } catch(e) {}
         }
@@ -313,60 +303,6 @@
                 border-radius: 16px 16px 4px 16px !important;
                 font-weight: 600 !important;
                 box-shadow: 0 3px 12px rgba(0, 80, 240, 0.35) !important;
-            }
-
-            /* Chips / Sugestões Conversacionais */
-            .rachi-chat-chips-container {
-                display: flex !important;
-                flex-wrap: wrap !important;
-                gap: 7px !important;
-                margin-top: 6px !important;
-                margin-bottom: 4px !important;
-                animation: rachiFadeIn 0.3s ease !important;
-            }
-
-            .rachi-chat-chip {
-                background: #FFFFFF !important;
-                border: 1.5px solid #00a3e0 !important;
-                color: #0050f0 !important;
-                padding: 7px 14px !important;
-                border-radius: 9999px !important;
-                font-size: 12.5px !important;
-                font-weight: 600 !important;
-                cursor: pointer !important;
-                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-                box-shadow: 0 2px 6px rgba(0, 163, 224, 0.12) !important;
-                outline: none !important;
-                text-align: left !important;
-            }
-
-            html.dark .rachi-chat-chip {
-                background: #0d1e38 !important;
-                color: #38bdf8 !important;
-                border-color: #0284c7 !important;
-            }
-
-            .rachi-chat-chip:hover {
-                background: #0050f0 !important;
-                border-color: #0050f0 !important;
-                color: #FFFFFF !important;
-                transform: translateY(-2px) !important;
-                box-shadow: 0 4px 12px rgba(0, 80, 240, 0.35) !important;
-            }
-
-            .rachi-chat-chip.rachi-chip-human {
-                border-color: #10B981 !important;
-                color: #059669 !important;
-                background: #F0FDF4 !important;
-            }
-            html.dark .rachi-chat-chip.rachi-chip-human {
-                background: rgba(16, 185, 129, 0.12) !important;
-                color: #34D399 !important;
-            }
-            .rachi-chat-chip.rachi-chip-human:hover {
-                background: #10B981 !important;
-                color: #FFFFFF !important;
-                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
             }
 
             /* WhatsApp Card */
@@ -656,23 +592,6 @@
                 }
             });
 
-            // Renderizar Sugestões Conversacionais (se houver e não estiver carregando)
-            if (!state.isLoading && state.chips && state.chips.length > 0) {
-                const chipsContainer = document.createElement('div');
-                chipsContainer.className = 'rachi-chat-chips-container';
-                state.chips.forEach(chip => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = `rachi-chat-chip ${chip.isHuman ? 'rachi-chip-human' : ''}`;
-                    btn.textContent = chip.label;
-                    btn.addEventListener('click', () => {
-                        handleSendMessage(chip.text || chip.label);
-                    });
-                    chipsContainer.appendChild(btn);
-                });
-                messagesEl.appendChild(chipsContainer);
-            }
-
             scrollToBottom();
         }
 
@@ -720,64 +639,13 @@
             if (ind) ind.remove();
         }
 
-        // Sugestões Conversacionais Dinâmicas baseadas no tema discutido
-        function getDynamicSuggestions(userText) {
-            const lower = (userText || '').toLowerCase();
-
-            if (/site|website|loja|software|ti|tec/i.test(lower)) {
-                return [
-                    { label: '💰 Quanto custa uma Landing Page?', text: 'Quanto custa uma Landing Page comercial na RACHI Tec?' },
-                    { label: '🛒 Como funciona a Loja Virtual?', text: 'Como funciona a criação de loja virtual com pagamentos?' },
-                    { label: '💻 Equipamentos corporativos', text: 'Quais equipamentos de TI e laptops vocês têm disponíveis?' },
-                    { label: '💬 Falar no WhatsApp', text: 'Gostaria de falar com um consultor humano da RACHI Tec no WhatsApp', isHuman: true }
-                ];
-            }
-
-            if (/gráfica|grafica|brinde|cartão|banner|print/i.test(lower)) {
-                return [
-                    { label: '📇 Orçar Cartões de Visita', text: 'Gostaria de um orçamento para cartões de visita corporativos' },
-                    { label: '🎁 Catálogo de Brindes', text: 'Quais brindes corporativos vocês personalizam?' },
-                    { label: '🎨 Criação de Logótipo', text: 'Como funciona a criação de marca e logótipo?' },
-                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com a equipa da RACHI Print no WhatsApp', isHuman: true }
-                ];
-            }
-
-            if (/curso|formação|treinamento|academy/i.test(lower)) {
-                return [
-                    { label: '📚 Cursos de TI & Redes', text: 'Quais cursos de TI e Cibersegurança estão abertos?' },
-                    { label: '👔 Formação para Empresas', text: 'Como funcionam as formações corporativas in-company?' },
-                    { label: '📜 Certificação e Valores', text: 'Os cursos têm certificado reconhecido e quais são os valores?' },
-                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com a secretaria da RACHI Academy no WhatsApp', isHuman: true }
-                ];
-            }
-
-            if (/rh|recrutamento|cedência|contabilidade|inss|capital/i.test(lower)) {
-                return [
-                    { label: '👥 Recrutamento de Pessoal', text: 'Como funciona o processo de recrutamento e selecção?' },
-                    { label: '📑 Legalização de Empresa', text: 'Preciso de apoio para legalizar e constituir uma empresa' },
-                    { label: '💼 Contabilidade & INSS', text: 'Como funciona a assessoria contabilística e regularização no INSS?' },
-                    { label: '💬 Falar no WhatsApp', text: 'Quero falar com um consultor da RACHI Human Capital no WhatsApp', isHuman: true }
-                ];
-            }
-
-            // Sugestões Gerais
-            return [
-                { label: '💻 Conhecer a RACHI Tec', text: 'Quais os principais serviços da RACHI Tec?' },
-                { label: '🖨️ Conhecer a RACHI Print', text: 'O que a RACHI Print pode produzir para o meu negócio?' },
-                { label: '🎓 Conhecer a RACHI Academy', text: 'Que cursos a RACHI Academy oferece?' },
-                { label: '👥 Conhecer a RACHI Capital', text: 'Quais serviços de RH e contabilidade vocês prestam?' },
-                { label: '💬 Falar com Atendente Humano', text: 'Gostaria de falar com um consultor humano no WhatsApp', isHuman: true }
-            ];
-        }
-
-        // Envio e Processamento de Mensagens com a API de IA
+        // Envio e Processamento de Mensagens com a API de IA (Diálogo 100% Livre)
         async function handleSendMessage(userText) {
             const text = (userText || '').trim();
             if (!text || state.isLoading) return;
 
             // 1. Adicionar mensagem do utilizador
             state.messages.push({ sender: 'user', text });
-            state.chips = [];
             renderMessages();
             input.value = '';
 
@@ -839,7 +707,6 @@
                         whatsAppText: `Olá! Estive a conversar no chat do site da RACHI e gostaria de falar com um consultor humano sobre os meus projetos.`
                     });
 
-                    state.chips = getDynamicSuggestions(text);
                     persistState();
                     renderMessages();
                 } else {
@@ -854,7 +721,6 @@
                     isWhatsAppCard: true,
                     whatsAppText: `Olá! Estive a falar no chat do site da RACHI e gostaria de solicitar informações e proposta.`
                 });
-                state.chips = getDynamicSuggestions(text);
                 persistState();
                 renderMessages();
             }
