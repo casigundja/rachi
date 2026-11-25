@@ -37,6 +37,7 @@ var __toESM = (mod, isNodeMode, target2) => (target2 = mod != null ? __create(__
 
 // node-built-in-modules:events
 import libDefault from "events";
+import bcrypt from "bcryptjs";
 var require_events = __commonJS({
   "node-built-in-modules:events"(exports, module) {
     module.exports = libDefault;
@@ -7935,6 +7936,36 @@ var DB = class {
     }
   }
 };
+var D1DB = class {
+  static {
+    __name(this, "D1DB");
+  }
+  d1;
+  constructor(d1) {
+    this.d1 = d1;
+  }
+  normalize(sql) {
+    let out = sql.replace(/\$(\d+)/g, '?$1');
+    out = out.replace(/::[a-zA-Z0-9_]+/g, '');
+    out = out.replace(/\bnow\(\)\s*\+\s*interval\s+'([^']+)'/gi, "datetime('now', '+$1')");
+    out = out.replace(/\bnow\(\)/gi, "datetime('now')");
+    return out;
+  }
+  async query(sql, params = []) {
+    const s = this.normalize(sql);
+    const stmt = this.d1.prepare(s);
+    const bound = params.length > 0 ? stmt.bind(...params) : stmt;
+    const res = await bound.all();
+    return res.results || [];
+  }
+  async one(sql, params = []) {
+    const rows = await this.query(sql, params);
+    return rows[0];
+  }
+  async transaction(action) {
+    return await action();
+  }
+};
 
 // node_modules/hono/dist/utils/cookie.js
 var validCookieNameRegEx = /^[\w!#$%&'*.^`|~+-]+$/;
@@ -8246,8 +8277,14 @@ auth.post("/login", async (c) => {
   await limit(c, "login");
   const d = await body(c), address = email(d), password = text(d, "password", 200);
   const db = c.get("db");
-  const u = await db.one(`SELECT id FROM users WHERE lower(email)=$1 AND status='active' AND deleted_at IS NULL
-    AND replace(password,'$2y$','$2a$')=extensions.crypt($2,replace(password,'$2y$','$2a$'))`, [address, password]);
+  const candidate = await db.one(`SELECT id, password FROM users WHERE lower(email)=$1 AND status='active' AND deleted_at IS NULL`, [address]);
+  let u = null;
+  if (candidate && candidate.password) {
+    const cleanHash = String(candidate.password).replace(/^\$2y\$/, '$2a$');
+    if (bcrypt.compareSync(password, cleanHash)) {
+      u = { id: candidate.id };
+    }
+  }
   if (!u) return fail(422, "E-mail ou palavra-passe incorretos.");
   await loginSession(c, u.id);
   await db.query("UPDATE users SET last_login_at=now() WHERE id=$1", [u.id]);
@@ -8269,8 +8306,9 @@ auth.post("/registro", async (c) => {
   const u = await db.transaction(async () => {
     if (await db.one("SELECT id FROM users WHERE lower(email)=$1", [address])) return fail(409, "E-mail j\xE1 cadastrado.");
     const role = await db.one("SELECT id FROM roles WHERE slug='customer'");
+    const hashedPw = bcrypt.hashSync(password, 10);
     const u2 = await db.one(`INSERT INTO users(name,email,password,phone,role_id,status,created_at,updated_at)
-      VALUES($1,$2,extensions.crypt($3,extensions.gen_salt('bf',12)),$4,$5,'active',now(),now()) RETURNING id`, [name, address, password, text(d, "phone", 30, false), role?.id]);
+      VALUES($1,$2,$3,$4,$5,'active',now(),now()) RETURNING id`, [name, address, hashedPw, text(d, "phone", 30, false), role?.id]);
     await db.query(`INSERT INTO customers(user_id,type,document,company_name,phone,status,created_at,updated_at) VALUES($1,$2,$3,$4,$5,'active',now(),now())`, [u2.id, choice(d.type, ["individual", "company"], "individual"), text(d, "document", 30, false), text(d, "company_name", 255, false), text(d, "phone", 30, false)]);
     return u2;
   });
@@ -8286,9 +8324,12 @@ auth.post("/api/account/password", async (c) => {
   await limit(c, "password", 5);
   const current = text(d, "current_password", 200), next = text(d, "password", 72);
   if (next.length < 10 || new TextEncoder().encode(next).length > 72 || next !== d.password_confirmation) return fail(422, "Confirme a nova palavra-passe (10 a 72 bytes).");
-  const result = await c.get("db").one(`UPDATE users SET password=extensions.crypt($1,extensions.gen_salt('bf',12)),updated_at=now()
-    WHERE id=$2 AND replace(password,'$2y$','$2a$')=extensions.crypt($3,replace(password,'$2y$','$2a$')) RETURNING id`, [next, u.id, current]);
-  if (!result) return fail(422, "Palavra-passe atual incorreta.");
+  const userRec = await c.get("db").one("SELECT password FROM users WHERE id=$1", [u.id]);
+  if (!userRec || !bcrypt.compareSync(current, String(userRec.password).replace(/^\$2y\$/, '$2a$'))) {
+    return fail(422, "Palavra-passe atual incorreta.");
+  }
+  const hashedNext = bcrypt.hashSync(next, 10);
+  await c.get("db").query("UPDATE users SET password=$1, updated_at=now() WHERE id=$2", [hashedNext, u.id]);
   await c.get("db").query("DELETE FROM worker_sessions WHERE user_id=$1", [u.id]);
   await loginSession(c, u.id);
   return c.json({ success: true });
@@ -9317,12 +9358,13 @@ management.post("/admin/users", async (c) => {
   const uPhone = text({ ...d, phone: d.phone ?? d.telefone }, "phone", 30, false);
   const uStatus = choice(d.status, ["active", "inactive", "blocked"], "active");
   const currentUser = user(c);
+  const hashedUserPw = bcrypt.hashSync(password, 10);
   const inserted = await db.transaction(async () => {
     const row = await db.one(
       `INSERT INTO users(name, email, password, phone, role_id, status, created_at, updated_at)
-       VALUES($1, $2, extensions.crypt($3, extensions.gen_salt('bf', 12)), $4, $5, $6, now(), now())
+       VALUES($1, $2, $3, $4, $5, $6, now(), now())
        RETURNING id`,
-      [uName, uEmail, password, uPhone, roleId, uStatus]
+      [uName, uEmail, hashedUserPw, uPhone, roleId, uStatus]
     );
     if (["customer", "student"].includes(roleSlug)) {
       await db.query(
@@ -9360,7 +9402,8 @@ management.post("/admin/users/:id/update", async (c) => {
     if (d.password) {
       const password = text(d, "password", 72);
       if (password.length < 10 || new TextEncoder().encode(password).length > 72) return fail(422, "Palavra-passe inv\xE1lida.");
-      await db.query("UPDATE users SET password=extensions.crypt($1,extensions.gen_salt('bf',12)) WHERE id=$2", [password, t.id]);
+      const hashedUpdatePw = bcrypt.hashSync(password, 10);
+      await db.query("UPDATE users SET password=$1 WHERE id=$2", [hashedUpdatePw, t.id]);
     }
     await db.query("DELETE FROM worker_sessions WHERE user_id=$1", [t.id]);
   });
@@ -9385,8 +9428,9 @@ management.post("/admin/users/:id/reset-password", async (c) => {
   const t = await target(c), d = await body(c), currentUser = user(c), db = c.get("db");
   const password = d.password ? text(d, "password", 72) : randomToken().slice(0, 20);
   if (password.length < 10 || new TextEncoder().encode(password).length > 72) return fail(422, "Palavra-passe inv\xE1lida.");
+  const hashedResetPw = bcrypt.hashSync(password, 10);
   await db.transaction(async () => {
-    await db.query("UPDATE users SET password=extensions.crypt($1,extensions.gen_salt('bf',12)), updated_at=now() WHERE id=$2", [password, t.id]);
+    await db.query("UPDATE users SET password=$1, updated_at=now() WHERE id=$2", [hashedResetPw, t.id]);
     await db.query("DELETE FROM worker_sessions WHERE user_id=$1", [t.id]);
   });
   await logActivity(db, currentUser.id, "password_reset", "App\\Models\\User", t.id, `Palavra-passe do utilizador ${t.name || "#" + t.id} redefinida pelo administrador.`, c.req);
@@ -10228,7 +10272,7 @@ function loginPage(register = false) {
       <!-- Rodap\xE9 da Barra Esquerda -->
       <footer class="auth-footer">
         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        <span>Sess\xE3o Encriptada TLS 1.3 &bull; Cloudflare Hyperdrive</span>
+        <span>Sess\xE3o Encriptada TLS 1.3 &bull; Cloudflare D1 Edge</span>
       </footer>
     </aside>
 
@@ -10452,15 +10496,18 @@ app.use("*", async (c, next) => {
     const origin = c.req.header("origin");
     if (origin !== new URL(c.req.url).origin || c.req.header("sec-fetch-site") === "cross-site") return fail(403, "Origem do pedido n\xE3o autorizada.");
   }
-  const db = new DB(c.env.HYPERDRIVE.connectionString);
+  const db = c.env.DB ? new D1DB(c.env.DB) : (c.env.HYPERDRIVE ? new DB(c.env.HYPERDRIVE.connectionString) : null);
   c.set("db", db);
-  try {
+  if (db?.client?.connect) {
     await db.client.connect();
+  }
+  try {
     await authenticate(c);
     await next();
   } finally {
-    await db.client.end().catch(() => {
-    });
+    if (db?.client?.end) {
+      await db.client.end().catch(() => {});
+    }
   }
 });
 app.route("/", auth);
@@ -10470,7 +10517,7 @@ app.route("/", management);
 app.route("/", commerce);
 app.get("/health/database", async (c) => {
   await c.get("db").query("SELECT 1");
-  return c.json({ status: "ok" });
+  return c.json({ status: "ok", engine: c.env.DB ? "cloudflare-d1" : "hyperdrive" });
 });
 app.get("/portal", (c) => c.get("user") ? c.html(portalPage()) : c.redirect("/login"));
 app.get("/_session-page/:page", async (c) => {

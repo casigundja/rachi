@@ -826,7 +826,7 @@ a { text-decoration: none !important; }
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-3 max-w-2xl">
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight" style="font-family:Outfit">
-              Olá, <span x-text="adminUser.nome || '{{ auth()->user()->name }}'"></span>! 👋
+              Olá, <span x-text="adminUser.nome || '{{ auth()->user()?->name ?? 'Administrador' }}'"></span>! 👋
             </h1>
             <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
               Bem-vindo ao centro integrado da RACHI. Você tem <strong class="text-white underline decoration-amber-400 decoration-2"><span x-text="requests ? requests.length : {{ $stats['total_requests'] ?? 0 }}"></span> solicitações</strong> na Central e <strong class="text-white underline decoration-emerald-400 decoration-2"><span x-text="tecOrders ? tecOrders.length : {{ $stats['total_orders'] ?? 0 }}"></span> pedidos</strong> em processamento hoje.

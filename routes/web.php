@@ -109,7 +109,6 @@ Route::prefix('academy')->name('academy.')->group(function () {
                     'aluno_id' => $e->customer_id ?? $e->id,
                     'nome' => $e->customer->user->name ?? $e->customer->name ?? 'Aluno RACHI',
                     'email' => strtolower($e->customer->user->email ?? ''),
-                    'senha' => '123456',
                     'tipo' => 'aluno',
                     'status' => 'ativo',
                     'has_matricula' => true,

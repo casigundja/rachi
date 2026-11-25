@@ -19,11 +19,11 @@
     "html_handling": "none",
     "run_worker_first": true
   },
-  "hyperdrive": [
+  "d1_databases": [
     {
-      "binding": "HYPERDRIVE",
-      "id": "af1ee16f6ff540ccac0a627d886b2f1f",
-      "localConnectionString": "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
+      "binding": "DB",
+      "database_name": "rachi-db",
+      "database_id": "3d45fd42-a83d-44fa-a3f9-c50e01746538"
     }
   ],
   "observability": {
