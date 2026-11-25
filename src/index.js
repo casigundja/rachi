@@ -9106,8 +9106,23 @@ catalog.post("/api/lessons/:id/progress", async (c) => {
 catalog.post("/contacto", async (c) => {
   await limit(c, "contact", 5);
   const d = await body(c);
-  await c.get("db").query("INSERT INTO worker_contacts(name,email,phone,subject,message) VALUES($1,$2,$3,$4,$5)", [text(d, "name"), email(d), text(d, "phone", 30, false), text(d, "subject"), text(d, "message", 3e3)]);
+  await c.get("db").query("INSERT INTO worker_contacts(name,email,phone,subject,message,created_at) VALUES($1,$2,$3,$4,$5,now())", [text(d, "name"), email(d), text(d, "phone", 30, false), text(d, "subject"), text(d, "message", 3e3)]);
   return done(c, { message: "Mensagem recebida. A nossa equipa responder\xE1 em breve." }, "/contacto?enviado=1");
+});
+catalog.post("/api/crm/lead", async (c) => {
+  await limit(c, "crm_lead", 15);
+  const d = await body(c);
+  const name = text(d, "name", 120, false) || "Visitante Chat IA";
+  const rawEmail = text(d, "email", 120, false);
+  const phone = text(d, "phone", 40, false) || "Não informado";
+  const cleanDigits = phone.replace(/\D/g, "");
+  const userEmail = rawEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail)
+    ? rawEmail.toLowerCase()
+    : (cleanDigits ? `lead-${cleanDigits}@chat.rachi.ao` : "lead.chat@rachi.ao");
+  const subject = text(d, "subject", 150, false) || "Lead Capturado — Chat IA CRM";
+  const message = text(d, "message", 5000, false) || "Lead gerado pelo Chat IA no website.";
+  await c.get("db").query("INSERT INTO worker_contacts(name,email,phone,subject,message,created_at) VALUES($1,$2,$3,$4,$5,now())", [name, userEmail, phone, subject, message]);
+  return c.json({ success: true, message: "Lead registado com sucesso no CRM!" });
 });
 
 import { receivePrintQuote } from './print-quotes.js';
@@ -10616,7 +10631,7 @@ var index_default = {
       if (/^\/(tec|print|capital)\/(servicos|produtos)$/.test(path)) return html(catalogPage(path.endsWith("produtos") ? "products" : "services"));
       if (/^\/solucoes\/(tec|print|academy|capital)$/.test(path)) return Response.redirect(new URL("/" + path.split("/")[2], url).toString(), 302);
       if (/^\/(cliente|funcionario)\/solicitacoes\/\d+$/.test(path) || /^\/cliente\/pedidos\/\d+$/.test(path)) return Response.redirect(new URL("/portal#" + (path.includes("pedidos") ? "orders" : "requests"), url).toString(), 302);
-      if (/^\/(images|css|build|libs)\//.test(path) || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/favicon.ico", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
+      if (/^\/(images|css|build|libs)\//.test(path) || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/ai-chat-widget.js", "/favicon.ico", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
     }
     const aliases = { "/cliente/solicitacoes": "/solicitacoes/nova", "/admin/solicitacoes/conversas": "/solicitacoes/conversas" };
     let rewritten = aliases[path] ?? path;

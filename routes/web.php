@@ -51,6 +51,7 @@ Route::redirect('/canal-de-denuncia', '/reclamacoes-e-denuncia?tipo=denuncia');
 Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
 Route::get('/contato', [ContactController::class, 'index'])->name('contact.alt');
 Route::post('/contacto', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/api/crm/lead', [ContactController::class, 'crmLead'])->name('api.crm.lead');
 
 // Aliases para Serviços e Formações
 Route::get('/servicos/{slug}', function (string $slug) {
