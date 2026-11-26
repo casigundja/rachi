@@ -2621,56 +2621,7 @@ html.dark .panze-hdr-pill {
             <span>Novo Usuário</span>
           </button>
         </div>
-      </div>
-
-            <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Card 1: SUPER ADMIN -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">SUPER ADMIN</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">NÍVEL MÁXIMO</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</span>
-          </div>
-        </div>
-
-        <!-- Card 2: ADMINISTRADORES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">ADMINISTRADORES</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">ADMIN</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</span>
-          </div>
-        </div>
-
-        <!-- Card 3: EQUIPE OPERACIONAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EQUIPE OPERACIONAL</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/80 dark:border-purple-800/40 uppercase">OPERACIONAL</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</span>
-          </div>
-        </div>
-
-        <!-- Card 4: CLIENTES NO PORTAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES NO PORTAL</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">CLIENTE</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      </div>      <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -2838,56 +2789,7 @@ html.dark .panze-hdr-pill {
           <i data-lucide="plus" class="w-4 h-4"></i>
           <span>Novo Cliente</span>
         </button>
-      </div>
-
-            <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <!-- Card 1: TOTAL GERAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TOTAL GERAL</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">TODOS</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.total">9</span>
-          </div>
-        </div>
-
-        <!-- Card 2: CLIENTES ATIVOS -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES ATIVOS</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/40 uppercase">ATIVO</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.ativos">9</span>
-          </div>
-        </div>
-
-        <!-- Card 3: CONTAS EMPRESA -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CONTAS EMPRESA</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">EMPRESA</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.empresas">8</span>
-          </div>
-        </div>
-
-        <!-- Card 4: LEADS / PARTICULARES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">LEADS / PARTICULARES</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">LEAD</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.leads">1</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- TABELA DE CLIENTES NOVO MODELO (PRINT 1) -->
+      </div>      <!-- TABELA DE CLIENTES NOVO MODELO (PRINT 1) -->
       <div class="sc2 p-0 overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs">
         <!-- Barra de Filtros e Pesquisa -->
         <div class="p-4 border-b border-slate-200/80 dark:border-white/5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
@@ -3158,56 +3060,7 @@ html.dark .panze-hdr-pill {
                 Ver Orçamentos
               </button>
             </div>
-          </div>
-
-                    <!-- 4 KPIS -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Card 1: Total no Pipeline -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TOTAL NO PIPELINE</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">TOTAL</span>
-              </div>
-              <div class="mt-3">
-                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total">4</span>
-              </div>
-            </div>
-
-            <!-- Card 2: Novas / Pendentes -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">NOVAS / PENDENTES</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">TRIAGEM</span>
-              </div>
-              <div class="mt-3">
-                <span class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="pipelineStats.novas">0</span>
-              </div>
-            </div>
-
-            <!-- Card 3: Em Análise / Proposta -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EM ANÁLISE / PROPOSTA</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">ANÁLISE</span>
-              </div>
-              <div class="mt-3">
-                <span class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="pipelineStats.analise">0</span>
-              </div>
-            </div>
-
-            <!-- Card 4: Aprovadas / Concluídas -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">APROVADAS / CONCLUÍDAS</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/40 uppercase">APROVADO</span>
-              </div>
-              <div class="mt-3">
-                <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="pipelineStats.concluidas">1</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD CONTAINER COM FILTROS E TABELA -->
+          </div>          <!-- CARD CONTAINER COM FILTROS E TABELA -->
           <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
             <!-- TOP FILTER BAR -->
             <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-3">
@@ -3312,14 +3165,7 @@ html.dark .panze-hdr-pill {
         <button type="button" @click="openCreateCourseModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Criar Novo Curso</button>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="coursesList.length || 12"></div><div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="activeEnrollmentsCount || 48"></div><div class="text-xs text-slate-500 mt-1 font-bold">Turmas Ativas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="academyEnrollments.length || 48"></div><div class="text-xs text-slate-500 mt-1 font-bold">Matrículas Totais</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">38</div><div class="text-xs text-slate-500 mt-1 font-bold">Diplomas Emitidos</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
             <thead><tr><th>Título da Formação</th><th>Trilha</th><th>Formador</th><th>Inscritos</th><th>Carga</th><th>Preço</th><th>Aproveitamento</th><th>Status</th></tr></thead>
@@ -3370,29 +3216,7 @@ html.dark .panze-hdr-pill {
             <span>Matricular Aluno</span>
           </button>
         </div>
-      </div>
-
-      <!-- KPIs Rápidos -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center">
-          <div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="academyEnrollments.length"></div>
-          <div class="text-xs text-slate-500 mt-1 font-bold">Total de Inscrições</div>
-        </div>
-        <div class="kc text-center border-2 border-amber-500/30 bg-amber-500/[0.03]">
-          <div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="pendingEnrollmentsCount"></div>
-          <div class="text-xs text-amber-600 dark:text-amber-400 mt-1 font-bold">Solicitações Pendentes</div>
-        </div>
-        <div class="kc text-center border-2 border-emerald-500/30 bg-emerald-500/[0.03]">
-          <div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="activeEnrollmentsCount"></div>
-          <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-bold">Alunos Ativos / Matriculados</div>
-        </div>
-        <div class="kc text-center">
-          <div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="coursesList.length"></div>
-          <div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div>
-        </div>
-      </div>
-
-      <!-- Barra de Filtros e Busca -->
+      </div>      <!-- Barra de Filtros e Busca -->
       <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-white dark:bg-[#0d1627] p-3 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xs">
         <div class="flex flex-wrap items-center gap-1.5">
           <button type="button" @click="enrollmentFilter = 'all'"
@@ -3575,14 +3399,7 @@ html.dark .panze-hdr-pill {
         <button type="button" @click="openCreateProductModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Adicionar Produto</button>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">24</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">15</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">3</div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">2,10M</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
             <thead><tr><th>Item</th><th>SKU</th><th>Categoria</th><th>Valor Unitário</th><th>Stock</th><th>Saídas</th><th>Status</th></tr></thead>
@@ -3644,14 +3461,7 @@ html.dark .panze-hdr-pill {
         <button type="button" @click="openCreateJobModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Publicar Vaga</button>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Soluções Ativas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">6</div><div class="text-xs text-slate-500 mt-1 font-bold">Demandas & Processos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">4</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Atendimento</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">2</div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídos</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
             <thead><tr><th>Posição</th><th>Cliente Contratante</th><th>Local</th><th>Modelo</th><th>Faixa Salarial</th><th>Candidatos</th><th>Prazo</th><th>Status</th></tr></thead>
@@ -3689,14 +3499,7 @@ html.dark .panze-hdr-pill {
         <button type="button" @click="openCreatePrintModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Novo Pedido Gráfico</button>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">18</div><div class="text-xs text-slate-500 mt-1 font-bold">Formatos Disponíveis</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">12</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-yellow-500" style="font-family:Outfit">7</div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">450,0k</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
             <thead><tr><th>Serviço / Produto</th><th>Especificação</th><th>Tamanho</th><th>Tiragem Mínima</th><th>Preço</th><th>Prazo</th><th>Status</th></tr></thead>
@@ -3734,50 +3537,7 @@ html.dark .panze-hdr-pill {
             <span>Novo Serviço</span>
           </button>
         </div>
-      </div>
-
-            <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Card 1: Total de Serviços -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total de Serviços</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.total">7</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Catálogo</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Serviços Ativos -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Serviços Ativos</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="serviceStats.ativos">7</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Pausados / Inativos -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Pausados / Inativos</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.inativos">0</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">INATIVO</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Ticket Médio Base -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TICKET MÉDIO BASE</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">MÉDIA</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio">Kz 0,00</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      </div>      <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -3907,50 +3667,7 @@ html.dark .panze-hdr-pill {
             <span>Nova Fatura / Lançamento</span>
           </button>
         </div>
-      </div>
-
-            <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Card 1: Total Faturado -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total Faturado</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.totalFormatted">Kz 0,00</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500" x-text="finStats.totalCount + ' lanç.'"></span>
-          </div>
-        </div>
-
-        <!-- Card 2: Recebido em Caixa -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Recebido em Caixa</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.recebidoFormatted">Kz 0,00</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">RECEBIDO</span>
-          </div>
-        </div>
-
-        <!-- Card 3: A Receber (Pendente) -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">A Receber (Pendente)</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.pendenteFormatted">Kz 0,00</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">PENDENTE</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Em Atraso (Vencido) -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EM ATRASO (VENCIDO)</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200/80 dark:border-rose-800/40 uppercase">VENCIDO</span>
-          </div>
-          <div class="mt-3">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted">Kz 0,00</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      </div>      <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -4256,14 +3973,7 @@ html.dark .panze-hdr-pill {
 
       <!-- ABA 1: PEDIDOS DE VENDA DA LOJA -->
       <div x-show="tecTab === 'pedidos'" class="space-y-6">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">2,10M</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">15</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
-        </div>
-
-        <div class="sc2 p-0 overflow-hidden">
+                <div class="sc2 p-0 overflow-hidden">
           <div class="overflow-x-auto min-h-[280px]">
             <table class="at">
               <thead><tr><th>NÂº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
@@ -4387,14 +4097,7 @@ html.dark .panze-hdr-pill {
       </div>
 
       <!-- 4 Cards de Métricas de Stock -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="sProducts.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Linhas de Produto</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="sProducts.reduce((acc, p) => acc + (p.est || 0), 0)"></div><div class="text-xs text-slate-500 mt-1 font-bold">Unidades em Depósito</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="sProducts.filter(p => (p.est || 0) <= (p.min_est || 5)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico / Reposição</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-rose-500" style="font-family:Outfit" x-text="sProducts.filter(p => p.status !== 'Ativo' || (p.est || 0) === 0).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Itens Indisponíveis / Esgotados</div></div>
-      </div>
-
-      <!-- Barra de Filtros Rápidos de Stock -->
+            <!-- Barra de Filtros Rápidos de Stock -->
       <div class="sc2 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div class="flex items-center gap-2.5 flex-1 max-w-md">
           <div class="relative w-full">
@@ -4520,14 +4223,7 @@ html.dark .panze-hdr-pill {
         <button @click="openCreateUserModalWithRole('customer')" class="bap"><i data-lucide="user-plus" class="w-4 h-4"></i> Adicionar Candidato</button>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos Registados</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Disponíveis Imediatos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Processos em Aberto</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Taxa de Conformidade</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto min-h-[280px]">
           <table class="at">
             <thead><tr><th>Candidato / Perfil</th><th>Área de Especialidade</th><th>Nível de Carreira</th><th>Contacto</th><th>Estado</th></tr></thead>
@@ -4561,14 +4257,7 @@ html.dark .panze-hdr-pill {
         </div>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="printQuotes.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="printRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">450,0k</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">18</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
+            <div class="sc2 p-0 overflow-hidden">
         <div class="p-5 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-white/10">
           <div>
             <h2 class="font-bold text-slate-900 dark:text-white">Solicitações de Cotação</h2>
@@ -5719,41 +5408,7 @@ html.dark .panze-hdr-pill {
             <span>Novo Site</span>
           </button>
         </div>
-      </div>
-
-      <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">TOTAL DE SITES</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">87</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400">Cadastrados</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SITES ONLINE</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">85</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">97.7% UP</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EM MANUTENÇÃO</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit">2</div>
-            <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">STAGING</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CERTIFICADOS SSL</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">87</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">100% SEGURO</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabela de Sites -->
+      </div>      <!-- Tabela de Sites -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
           <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Websites Gerenciados pela RACHI</h3>
@@ -5820,41 +5475,7 @@ html.dark .panze-hdr-pill {
             <span>Registrar Domínio</span>
           </button>
         </div>
-      </div>
-
-      <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">DOMÍNIOS GERENCIADOS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">22</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400">Total</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">STATUS ATIVO</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">20</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">DNS OK</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">RENOVAÇÃO PRÓXIMA</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit">2</div>
-            <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">&lt; 30 DIAS</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">PROVEDORES DNS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">3</div>
-            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">CLOUDFLARE</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabela de Domínios -->
+      </div>      <!-- Tabela de Domínios -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
           <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Domínios Registrados</h3>
@@ -5914,41 +5535,7 @@ html.dark .panze-hdr-pill {
             <span>Nova Campanha</span>
           </button>
         </div>
-      </div>
-
-      <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">INVESTIMENTO MENSAL</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Kz 2.24M</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400">Total</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIQUES GERADOS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">37.5k</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">TRÁFEGO</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONVERSÕES TOTAIS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">771</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">LEADS</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CTR MÉDIO</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">7.98%</div>
-            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">ALTO ROI</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabela de Campanhas -->
+      </div>      <!-- Tabela de Campanhas -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
           <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Campanhas em Execução</h3>
@@ -6012,41 +5599,7 @@ html.dark .panze-hdr-pill {
             <span>Novo Projeto</span>
           </button>
         </div>
-      </div>
-
-      <!-- 4 KPIS -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">PROJETOS ATIVOS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">12</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400">Em curso</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONCLUÍDOS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">28</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">ENTREGUES</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EM HOMOLOGAÇÃO</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">3</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">QA / TESTES</span>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SLA NO PRAZO</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">98.4%</div>
-            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">PRECISÃO</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabela de Projetos -->
+      </div>      <!-- Tabela de Projetos -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
           <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Projetos em Execução</h3>
