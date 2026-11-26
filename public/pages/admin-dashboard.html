@@ -1211,13 +1211,6 @@ html.dark .panze-hdr-pill {
       </div>
     </div>
 
-    <!-- Projetos -->
-    <div @click="setPage('projetos')" :class="currentPage==='projetos'?'active':''" class="sidebar-item" data-legend="Projetos" title="Projetos">
-      <i data-lucide="folder-kanban" class="si"></i>
-      <span class="sl">Projetos</span>
-      <span class="sb2 badge bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">12</span>
-    </div>
-
     <!-- ==========================================
          ADMINISTRAÇÃO & GESTÃO
          ========================================== -->
