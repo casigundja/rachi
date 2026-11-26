@@ -1869,25 +1869,28 @@ html.dark .panze-hdr-pill {
          MESSENGER: CENTRAL UNIFICADA DE CHAT AO VIVO DO SITE & WHATSAPP
          ===================================================================== -->
     <section x-show="currentPage==='messenger'" x-cloak class="space-y-4">
-      <!-- HEADER COMPACTO & ELEGANTE -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 rounded-2xl p-4 sm:px-6 shadow-xs">
+      <!-- HEADER COM IDENTIDADE VISUAL RACHI -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl p-4 sm:px-6 shadow-xs">
         <div>
           <div class="flex items-center gap-2.5 flex-wrap">
+            <div class="w-8 h-8 rounded-xl bg-[#0050f0] text-white flex items-center justify-center shadow-xs">
+              <i data-lucide="message-square" class="w-4 h-4"></i>
+            </div>
             <h1 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit">Central de Atendimento & Live Chat</h1>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Omnichannel Ao Vivo
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-[#0050f0]/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#0050f0] animate-pulse"></span>
+              Omnichannel RACHI
             </span>
-            <span x-show="waitingHumanCount > 0" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 animate-pulse">
-              <i data-lucide="bell-ring" class="w-3 h-3"></i>
+            <span x-show="waitingHumanCount > 0" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30 animate-pulse">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#f5a800]"></span>
               <span x-text="waitingHumanCount + (waitingHumanCount === 1 ? ' Transbordo Pendente' : ' Transbordos Pendentes')"></span>
             </span>
           </div>
-          <p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Convergência em tempo real: Chat do Site, Portal do Cliente e WhatsApp Business com triagem por IA e transbordo humano.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Convergência executiva RACHI: Chat do Site, Portal do Cliente e WhatsApp Business com triagem por IA e transbordo humano.</p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
-          <button @click="simulateIncomingMessage()" type="button" class="border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700/60 text-slate-700 dark:text-slate-200 font-semibold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400"></i>
+          <button @click="simulateIncomingMessage()" type="button" class="border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0050f0] dark:text-[#38bdf8]"></i>
             <span>Simular Mensagem</span>
           </button>
           <a href="https://web.whatsapp.com" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-2xs transition">
@@ -1898,36 +1901,36 @@ html.dark .panze-hdr-pill {
       </div>
 
       <!-- MAIN OMNICHANNEL MESSENGER PANEL (2-COLUMN: INBOX LIST + ACTIVE CHAT WINDOW) -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-sm overflow-hidden flex flex-col md:flex-row h-[calc(100vh-210px)] min-h-[640px]">
+      <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 shadow-sm overflow-hidden flex flex-col md:flex-row h-[calc(100vh-210px)] min-h-[640px]">
         
         <!-- COLUNA ESQUERDA: LISTA DE CONVERSAS (LARGURA FIXA MODERNA) -->
-        <div class="w-full md:w-[350px] lg:w-[380px] shrink-0 border-r border-slate-200/70 dark:border-white/5 flex flex-col bg-slate-50/50 dark:bg-slate-900/40">
+        <div class="w-full md:w-[350px] lg:w-[380px] shrink-0 border-r border-slate-200/70 dark:border-white/5 flex flex-col bg-slate-50/50 dark:bg-[#071326]/60">
           <!-- BUSCA & FILTROS MODERNOS -->
-          <div class="p-3.5 border-b border-slate-200/70 dark:border-white/5 space-y-2.5 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xs">
+          <div class="p-3.5 border-b border-slate-200/70 dark:border-white/5 space-y-2.5 bg-white/70 dark:bg-[#0c1527]/70 backdrop-blur-xs">
             <div class="relative">
               <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-              <input type="text" x-model="messengerSearch" placeholder="Pesquisar conversa, cliente..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition">
+              <input type="text" x-model="messengerSearch" placeholder="Pesquisar conversa, cliente..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] transition">
             </div>
 
-            <!-- FILTROS POR CANAL (SEGMENTED PILLS) -->
+            <!-- FILTROS POR CANAL (SEGMENTED PILLS COM IDENTIDADE RACHI) -->
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] scrollbar-none">
-              <button @click="messengerFilter = 'all'" :class="messengerFilter === 'all' ? 'bg-purple-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 cursor-pointer">
+              <button @click="messengerFilter = 'all'" :class="messengerFilter === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 cursor-pointer">
                 Todas (<span x-text="conversations.length"></span>)
               </button>
-              <button @click="messengerFilter = 'waiting_human'" :class="messengerFilter === 'waiting_human' ? 'bg-rose-600 text-white font-bold shadow-2xs' : 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-800/40 hover:bg-rose-100'" class="px-2.5 py-1 rounded-lg font-bold transition shrink-0 flex items-center gap-1.5 cursor-pointer">
-                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+              <button @click="messengerFilter = 'waiting_human'" :class="messengerFilter === 'waiting_human' ? 'bg-[#f5a800] text-slate-950 font-bold shadow-2xs' : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'" class="px-2.5 py-1 rounded-lg font-bold transition shrink-0 flex items-center gap-1.5 cursor-pointer">
+                <span class="w-2 h-2 rounded-full bg-[#f5a800] animate-ping"></span>
                 Transbordo (<span x-text="waitingHumanCount"></span>)
               </button>
-              <button @click="messengerFilter = 'whatsapp'" :class="messengerFilter === 'whatsapp' ? 'bg-emerald-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 border border-slate-200 dark:border-white/5 hover:bg-emerald-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
-                <i data-lucide="phone" class="w-3 h-3"></i>
+              <button @click="messengerFilter = 'whatsapp'" :class="messengerFilter === 'whatsapp' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="phone" class="w-3 h-3 text-emerald-500"></i>
                 WhatsApp
               </button>
-              <button @click="messengerFilter = 'livechat'" :class="messengerFilter === 'livechat' ? 'bg-blue-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border border-slate-200 dark:border-white/5 hover:bg-blue-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
-                <i data-lucide="globe" class="w-3 h-3"></i>
+              <button @click="messengerFilter = 'livechat'" :class="messengerFilter === 'livechat' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="globe" class="w-3 h-3 text-[#0050f0]"></i>
                 Site
               </button>
-              <button @click="messengerFilter = 'portal'" :class="messengerFilter === 'portal' ? 'bg-amber-500 text-slate-950 font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-white/5 hover:bg-amber-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
-                <i data-lucide="user-check" class="w-3 h-3"></i>
+              <button @click="messengerFilter = 'portal'" :class="messengerFilter === 'portal' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="user-check" class="w-3 h-3 text-amber-500"></i>
                 Portal
               </button>
             </div>
@@ -1937,7 +1940,7 @@ html.dark .panze-hdr-pill {
           <div class="overflow-y-auto flex-1 divide-y divide-slate-100 dark:divide-white/5">
             <template x-for="c in filteredConversations" :key="c.id">
               <div @click="selectConversation(c)" 
-                   :class="activeChatId === c.id ? 'bg-white dark:bg-slate-800/90 border-l-4 border-purple-600 dark:border-purple-400 shadow-xs' : 'hover:bg-slate-100/70 dark:hover:bg-white/[0.03] border-l-4 border-transparent'" 
+                   :class="activeChatId === c.id ? 'bg-blue-50/70 dark:bg-[#0050f0]/10 border-l-4 border-l-[#0050f0] shadow-xs' : 'hover:bg-slate-100/70 dark:hover:bg-white/[0.03] border-l-4 border-transparent'" 
                    class="p-3.5 cursor-pointer transition-all flex items-start gap-3 relative group">
                 <!-- AVATAR COM CANAL BADGE -->
                 <div class="relative shrink-0">
@@ -1946,10 +1949,10 @@ html.dark .panze-hdr-pill {
                   <span x-show="c.channel === 'whatsapp'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[9px] shadow-xs" title="WhatsApp Oficial">
                     <i data-lucide="phone" class="w-2.5 h-2.5"></i>
                   </span>
-                  <span x-show="c.channel === 'livechat'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[9px] shadow-xs" title="Live Chat Site">
+                  <span x-show="c.channel === 'livechat'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#0050f0] text-white flex items-center justify-center text-[9px] shadow-xs" title="Live Chat Site">
                     <i data-lucide="globe" class="w-2.5 h-2.5"></i>
                   </span>
-                  <span x-show="c.channel === 'portal'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[9px] shadow-xs font-black" title="Portal do Cliente">
+                  <span x-show="c.channel === 'portal'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#f5a800] text-slate-950 flex items-center justify-center text-[9px] shadow-xs font-black" title="Portal do Cliente">
                     <i data-lucide="user-check" class="w-2.5 h-2.5"></i>
                   </span>
                 </div>
@@ -1963,20 +1966,20 @@ html.dark .panze-hdr-pill {
                   <!-- Indicador de Status IA vs Humano -->
                   <div class="flex items-center gap-1.5 mt-1">
                     <template x-if="c.aiMode === 'waiting_human'">
-                      <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400 border border-rose-200 dark:border-rose-800/50 flex items-center gap-1 animate-pulse">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                      <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#f5a800]/15 text-[#b45309] dark:text-[#fbbf24] border border-[#f5a800]/30 flex items-center gap-1 animate-pulse">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#f5a800]"></span>
                         TRANSBORDO HUMANO
                       </span>
                     </template>
                     <template x-if="c.aiMode === 'human_handling'">
-                      <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 flex items-center gap-1">
+                      <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-[#0050f0]/20 flex items-center gap-1">
                         <i data-lucide="user" class="w-2.5 h-2.5"></i>
                         EM ATENDIMENTO
                       </span>
                     </template>
                     <template x-if="c.aiMode === 'ai_handling'">
-                      <span class="px-2 py-0.5 rounded-full text-[9px] font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800/40 flex items-center gap-1">
-                        <i data-lucide="bot" class="w-2.5 h-2.5"></i>
+                      <span class="px-2 py-0.5 rounded-full text-[9px] font-semibold bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 flex items-center gap-1">
+                        <i data-lucide="bot" class="w-2.5 h-2.5 text-[#0050f0]"></i>
                         IA ATIVA
                       </span>
                     </template>
@@ -1985,9 +1988,9 @@ html.dark .panze-hdr-pill {
                   <div class="text-[11px] text-slate-600 dark:text-slate-300 truncate mt-1 leading-snug" :class="c.unread > 0 ? 'font-semibold text-slate-900 dark:text-white' : ''" x-text="c.messages[c.messages.length - 1]?.text || 'Sem mensagens'"></div>
                 </div>
 
-                <!-- BADGE NÃO LIDA -->
+                <!-- BADGE NÃO LIDA (RACHI BLUE) -->
                 <div x-show="c.unread > 0" class="shrink-0 pt-0.5">
-                  <span class="w-5 h-5 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs" x-text="c.unread"></span>
+                  <span class="w-5 h-5 rounded-full bg-[#0050f0] text-white text-[10px] font-bold flex items-center justify-center shadow-xs" x-text="c.unread"></span>
                 </div>
               </div>
             </template>
@@ -2000,8 +2003,9 @@ html.dark .panze-hdr-pill {
 
         <!-- COLUNA DIREITA: JANELA DO CHAT ATIVO (MODERNA E EXPANSIVA) -->
         <div class="flex-1 flex flex-col min-w-0 bg-white dark:bg-[#0c1527]">
-          <!-- CHAT HEADER -->
-          <div class="p-4 sm:px-5 border-b border-slate-200/70 dark:border-white/5 flex items-center justify-between gap-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xs z-10 shrink-0">
+          
+          <!-- CHAT HEADER COM IDENTIDADE RACHI -->
+          <div class="p-4 sm:px-5 border-b border-slate-200/70 dark:border-white/5 flex items-center justify-between gap-3 bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-xs z-10 shrink-0">
             <div class="flex items-center gap-3 min-w-0">
               <div class="w-10 h-10 rounded-full text-white font-bold text-xs flex items-center justify-center shadow-xs shrink-0" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
               <div class="min-w-0">
@@ -2012,7 +2016,7 @@ html.dark .panze-hdr-pill {
                   <span x-show="activeConversation.channel === 'whatsapp'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 flex items-center gap-1">
                     <i data-lucide="phone" class="w-3 h-3"></i> WhatsApp
                   </span>
-                  <span x-show="activeConversation.channel === 'livechat'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 flex items-center gap-1">
+                  <span x-show="activeConversation.channel === 'livechat'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] border border-blue-200 flex items-center gap-1">
                     <i data-lucide="globe" class="w-3 h-3"></i> Chat do Site
                   </span>
                   <span x-show="activeConversation.channel === 'portal'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-300 flex items-center gap-1">
@@ -2021,17 +2025,17 @@ html.dark .panze-hdr-pill {
 
                   <!-- Badge Estado do Atendimento IA -->
                   <template x-if="activeConversation.aiMode === 'waiting_human'">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white shadow-xs flex items-center gap-1 animate-pulse">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#f5a800] text-slate-950 shadow-xs flex items-center gap-1 animate-pulse">
                       🚨 TRANSBORDO SOLICITADO
                     </span>
                   </template>
                   <template x-if="activeConversation.aiMode === 'human_handling'">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs flex items-center gap-1">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0050f0] text-white shadow-xs flex items-center gap-1">
                       👤 ATENDIMENTO HUMANO
                     </span>
                   </template>
                   <template x-if="activeConversation.aiMode === 'ai_handling'">
-                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 border border-purple-300 flex items-center gap-1">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-[#0050f0]/20 flex items-center gap-1">
                       🤖 IA CONVERSANDO
                     </span>
                   </template>
@@ -2042,7 +2046,7 @@ html.dark .panze-hdr-pill {
                   <span>•</span>
                   <span class="font-mono text-slate-500 dark:text-slate-400 text-[10.5px]" x-text="activeConversation.phone"></span>
                   <template x-if="activeConversation.handoffReason">
-                    <span class="text-rose-600 dark:text-rose-400 font-semibold truncate" x-text="'(' + activeConversation.handoffReason + ')'"></span>
+                    <span class="text-[#d97706] dark:text-[#fbbf24] font-medium truncate" x-text="'(' + activeConversation.handoffReason + ')'"></span>
                   </template>
                 </div>
               </div>
@@ -2051,43 +2055,43 @@ html.dark .panze-hdr-pill {
             <!-- AÇÕES DO CHAT & CONTROLO IA / HUMANO -->
             <div class="flex items-center gap-2 flex-wrap shrink-0">
               <!-- STATUS LIVE SYNC -->
-              <span class="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40 hidden xl:inline-flex items-center gap-1.5 shadow-2xs" title="Sincronização em tempo real ativa com o Website, WhatsApp e Portal">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              <span class="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-[#0050f0]/20 hidden xl:inline-flex items-center gap-1.5 shadow-2xs" title="Sincronização em tempo real ativa com o Website, WhatsApp e Portal">
+                <span class="w-2 h-2 rounded-full bg-[#0050f0] animate-ping"></span>
                 <span>Live Sync Ativo</span>
               </span>
 
-              <!-- BOTÕES DE SIMULAÇÃO DE DEMONSTRAÇÃO AO VIVO -->
-              <button @click="simulateLiveVisitor('livechat')" type="button" class="px-2.5 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800/40 text-[11px] font-bold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular visitante conversando no chat do site até pedir atendente humano">
-                <i data-lucide="play" class="w-3 h-3"></i>
+              <!-- BOTÕES DE SIMULAÇÃO DE DEMONSTRAÇÃO AO VIVO (NEUTROS E ELEGANTES) -->
+              <button @click="simulateLiveVisitor('livechat')" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200 border border-slate-200 dark:border-white/10 text-[11px] font-semibold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular visitante conversando no chat do site até pedir atendente humano">
+                <i data-lucide="play" class="w-3 h-3 text-[#0050f0]"></i>
                 <span class="hidden sm:inline">Simular Site</span>
               </button>
-              <button @click="simulateLiveVisitor('whatsapp')" type="button" class="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 text-[11px] font-bold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular lead no WhatsApp pedindo proposta executiva">
-                <i data-lucide="play" class="w-3 h-3"></i>
+              <button @click="simulateLiveVisitor('whatsapp')" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-700 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200 border border-slate-200 dark:border-white/10 text-[11px] font-semibold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular lead no WhatsApp pedindo proposta executiva">
+                <i data-lucide="play" class="w-3 h-3 text-emerald-500"></i>
                 <span class="hidden sm:inline">Simular WhatsApp</span>
               </button>
 
-              <!-- BOTÃO ASSUMIR ATENDIMENTO / DEVOLVER PARA A IA -->
+              <!-- BOTÃO ASSUMIR ATENDIMENTO / DEVOLVER PARA A IA (ESTILO RACHI) -->
               <template x-if="activeConversation.aiMode === 'waiting_human' || activeConversation.aiMode === 'ai_handling'">
-                <button @click="assumeChat(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-black transition flex items-center gap-1.5 shadow-xs cursor-pointer animate-pulse" title="Pausar a IA e assumir o atendimento ao vivo">
-                  <i data-lucide="hand" class="w-3.5 h-3.5"></i>
+                <button @click="assumeChat(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#0050f0] hover:bg-[#0040d0] text-white text-xs font-black transition flex items-center gap-1.5 shadow-xs cursor-pointer" title="Pausar a IA e assumir o atendimento ao vivo">
+                  <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
                   <span>Assumir Atendimento</span>
                 </button>
               </template>
               <template x-if="activeConversation.aiMode === 'human_handling'">
-                <button @click="releaseChatToAi(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer" title="Reativar respostas automáticas da IA">
-                  <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                <button @click="releaseChatToAi(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer" title="Reativar respostas automáticas da IA">
+                  <i data-lucide="bot" class="w-3.5 h-3.5 text-[#00a3e0]"></i>
                   <span>Devolver para IA</span>
                 </button>
               </template>
 
               <!-- GERAR TICKET -->
-              <button @click="convertChatToTicket()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-2xs" title="Transformar atendimento em Ticket">
-                <i data-lucide="ticket" class="w-3.5 h-3.5 text-purple-600"></i>
+              <button @click="convertChatToTicket()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-2xs" title="Transformar atendimento em Ticket">
+                <i data-lucide="ticket" class="w-3.5 h-3.5 text-[#0050f0]"></i>
                 <span class="hidden sm:inline">Ticket</span>
               </button>
 
               <!-- LINK WHATSAPP -->
-              <a :href="'https://wa.me/' + (activeConversation.phone ? activeConversation.phone.replace(/[^0-9]/g,'') : '')" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-2xs" title="Abrir no WhatsApp Oficial">
+              <a :href="'https://wa.me/' + (activeConversation.phone ? activeConversation.phone.replace(/[^0-9]/g,'') : '')" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-2xs" title="Abrir no WhatsApp Oficial">
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                 <span class="hidden sm:inline">WhatsApp</span>
               </a>
@@ -2095,51 +2099,51 @@ html.dark .panze-hdr-pill {
           </div>
 
           <!-- STREAM DE MENSAGENS -->
-          <div id="chatMessagesScroll" class="flex-1 p-5 overflow-y-auto space-y-3.5 bg-slate-50/40 dark:bg-[#080e1c]">
+          <div id="chatMessagesScroll" class="flex-1 p-5 overflow-y-auto space-y-3.5 bg-slate-50/50 dark:bg-[#071326]/50">
             <!-- Evento de Conexão -->
             <div class="text-center my-2">
               <span class="px-3 py-1 rounded-full text-[10.5px] font-semibold bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/80 dark:border-white/10 inline-flex items-center gap-1.5 shadow-2xs">
-                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-500"></i>
-                Atendimento conectado via <strong x-text="activeConversation.channel === 'whatsapp' ? 'WhatsApp Oficial RACHI' : 'Chat ao Vivo do Site'"></strong>
+                <i data-lucide="shield-check" class="w-3 h-3 text-[#0050f0]"></i>
+                Atendimento conectado via <strong class="text-slate-700 dark:text-slate-200" x-text="activeConversation.channel === 'whatsapp' ? 'WhatsApp Oficial RACHI' : (activeConversation.channel === 'portal' ? 'Portal do Cliente RACHI' : 'Chat ao Vivo do Site')"></strong>
               </span>
             </div>
 
             <template x-for="(m, idx) in activeConversation.messages" :key="idx">
               <div>
-                <!-- MENSAGEM DO SISTEMA (CENTRALIZADA) -->
+                <!-- MENSAGEM DO SISTEMA (CENTRALIZADA EM ÂMBAR INSTITUCIONAL) -->
                 <div x-show="m.sender === 'system'" class="text-center my-2">
-                  <span class="px-3.5 py-1.5 rounded-full text-[10.5px] font-bold bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-800/40 inline-flex items-center gap-1.5 shadow-2xs" x-text="m.text"></span>
+                  <span class="px-3.5 py-1.5 rounded-full text-[10.5px] font-bold bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/40 inline-flex items-center gap-1.5 shadow-2xs" x-text="m.text"></span>
                 </div>
 
-                <!-- MENSAGEM DO BOT / IA (ESQUERDA COM BADGE ROXA) -->
+                <!-- MENSAGEM DO BOT / IA (RACHI ASSIST) -->
                 <div x-show="m.sender === 'bot'" class="flex items-end gap-2 max-w-xl">
-                  <div class="w-7 h-7 rounded-full bg-purple-600 text-white text-[10px] font-black flex items-center justify-center shrink-0 shadow-2xs">IA</div>
-                  <div class="rounded-2xl rounded-bl-xs bg-purple-50/90 dark:bg-purple-950/30 border border-purple-200/80 dark:border-purple-800/40 p-3.5 shadow-2xs text-xs text-purple-950 dark:text-purple-100 leading-relaxed">
-                    <div class="flex items-center gap-1.5 text-[9.5px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">
-                      <i data-lucide="bot" class="w-3 h-3"></i> Resposta Automática IA • Rachi Assist
+                  <div class="w-7 h-7 rounded-full bg-[#0050f0] text-white text-[10px] font-black flex items-center justify-center shrink-0 shadow-2xs">IA</div>
+                  <div class="rounded-2xl rounded-bl-xs bg-white dark:bg-[#0c1527] border border-blue-100 dark:border-blue-900/40 p-3.5 shadow-xs text-xs text-slate-800 dark:text-slate-100 leading-relaxed">
+                    <div class="flex items-center gap-1.5 text-[9.5px] font-bold text-[#0050f0] dark:text-[#38bdf8] uppercase tracking-wider mb-1">
+                      <i data-lucide="bot" class="w-3.5 h-3.5"></i> Resposta Automática IA • RACHI Assist
                     </div>
                     <p x-text="m.text"></p>
-                    <span class="block text-[9.5px] text-purple-500 dark:text-purple-400 text-right mt-1.5 font-medium" x-text="m.time"></span>
+                    <span class="block text-[9.5px] text-slate-400 dark:text-slate-500 text-right mt-1.5 font-medium" x-text="m.time"></span>
                   </div>
                 </div>
 
                 <!-- MENSAGEM DO CLIENTE (ESQUERDA COM AVATAR DO CLIENTE) -->
                 <div x-show="m.sender === 'customer'" class="flex items-end gap-2 max-w-xl">
                   <div class="w-7 h-7 rounded-full text-white text-[10px] font-bold flex items-center justify-center shrink-0 shadow-2xs" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
-                  <div class="rounded-2xl rounded-bl-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 p-3.5 shadow-2xs text-xs text-slate-800 dark:text-slate-100 leading-relaxed">
+                  <div class="rounded-2xl rounded-bl-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 p-3.5 shadow-xs text-xs text-slate-800 dark:text-slate-100 leading-relaxed">
                     <p x-text="m.text"></p>
                     <span class="block text-[9.5px] text-slate-400 text-right mt-1.5 font-medium" x-text="m.time"></span>
                   </div>
                 </div>
 
-                <!-- MENSAGEM DO AGENTE HUMANO / SUPORTE RACHI (DIREITA) -->
+                <!-- MENSAGEM DO AGENTE HUMANO / CONSULTOR RACHI (GRADIENTE OFICIAL RACHI) -->
                 <div x-show="m.sender === 'agent'" class="flex items-end justify-end gap-2 max-w-xl ml-auto">
-                  <div class="rounded-2xl rounded-br-xs bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-3.5 shadow-2xs text-xs leading-relaxed">
-                    <div class="flex items-center gap-1 text-[9px] font-bold text-purple-200 uppercase tracking-wider mb-1">
-                      <i data-lucide="user-check" class="w-3 h-3"></i> Consultor Casimiro Gundja
+                  <div class="rounded-2xl rounded-br-xs bg-gradient-to-r from-[#0050f0] to-[#003cb8] text-white p-3.5 shadow-xs text-xs leading-relaxed">
+                    <div class="flex items-center gap-1 text-[9px] font-bold text-blue-100 uppercase tracking-wider mb-1">
+                      <i data-lucide="user-check" class="w-3 h-3"></i> Consultor Casimiro Gundja • Direção RACHI
                     </div>
                     <p x-text="m.text"></p>
-                    <div class="flex items-center justify-end gap-1 mt-1.5 text-[9.5px] text-purple-200">
+                    <div class="flex items-center justify-end gap-1 mt-1.5 text-[9.5px] text-blue-100">
                       <span x-text="m.time"></span>
                       <span>✓✓</span>
                     </div>
@@ -2150,29 +2154,29 @@ html.dark .panze-hdr-pill {
           </div>
 
           <!-- RESPOSTAS RÁPIDAS & INPUT BAR -->
-          <div class="p-3.5 border-t border-slate-200/70 dark:border-white/5 bg-white dark:bg-slate-900 space-y-2.5 shrink-0">
+          <div class="p-3.5 border-t border-slate-200/70 dark:border-white/5 bg-white dark:bg-[#0c1527] space-y-2.5 shrink-0">
             <!-- Pílulas de Resposta Rápida -->
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] scrollbar-none">
               <span class="text-slate-400 font-bold shrink-0 text-[10px] uppercase">Rápidas:</span>
-              <button type="button" @click="sendQuickReply('Olá! Como podemos ajudar você hoje?')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-950/40 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+              <button type="button" @click="sendQuickReply('Olá! Como podemos ajudar você hoje?')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-[#0050f0] dark:bg-white/5 dark:hover:bg-blue-950/40 dark:hover:text-[#38bdf8] text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/5 transition shrink-0 cursor-pointer">
                 👋 Olá! Como podemos ajudar?
               </button>
-              <button type="button" @click="sendQuickReply('O seu orçamento foi formalizado e enviado por e-mail.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-950/40 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+              <button type="button" @click="sendQuickReply('O seu orçamento foi formalizado e enviado por e-mail.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-[#0050f0] dark:bg-white/5 dark:hover:bg-blue-950/40 dark:hover:text-[#38bdf8] text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/5 transition shrink-0 cursor-pointer">
                 📄 Orçamento enviado
               </button>
-              <button type="button" @click="sendQuickReply('Nossa equipe técnica já está verificando sua solicitação.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-950/40 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+              <button type="button" @click="sendQuickReply('Nossa equipe técnica já está verificando sua solicitação.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-[#0050f0] dark:bg-white/5 dark:hover:bg-blue-950/40 dark:hover:text-[#38bdf8] text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/5 transition shrink-0 cursor-pointer">
                 ⚙️ Equipe técnica verificando
               </button>
             </div>
 
-            <!-- Campo de Digitação e Botão de Envio (Híbrido: Painel + WhatsApp) -->
+            <!-- Campo de Digitação e Botão de Envio (Híbrido: Painel RACHI + WhatsApp) -->
             <form @submit.prevent="sendChatMessage(false)" class="flex items-center gap-2">
-              <input type="text" x-model="chatReplyText" :placeholder="'Responder ' + activeConversation.name + ' via ' + (activeConversation.channel === 'whatsapp' ? 'WhatsApp...' : 'Chat do Site...')" class="flex-1 px-4 py-2.5 text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition">
-              <button type="submit" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Registrar resposta no histórico">
+              <input type="text" x-model="chatReplyText" :placeholder="'Responder ' + activeConversation.name + ' via ' + (activeConversation.channel === 'whatsapp' ? 'WhatsApp...' : 'Chat do Site...')" class="flex-1 px-4 py-2.5 text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] transition">
+              <button type="submit" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-4 py-2.5 rounded-xl bg-[#0050f0] hover:bg-[#0040d0] disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Registrar resposta no histórico">
                 <span>Enviar</span>
                 <i data-lucide="send" class="w-3.5 h-3.5"></i>
               </button>
-              <button type="button" @click="sendChatMessage(true)" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Abrir conversa no WhatsApp com esta resposta preenchida">
+              <button type="button" @click="sendChatMessage(true)" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-3.5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Abrir conversa no WhatsApp com esta resposta preenchida">
                 <i data-lucide="phone" class="w-3.5 h-3.5"></i>
                 <span class="hidden sm:inline">WhatsApp</span>
               </button>
@@ -5858,7 +5862,7 @@ function adminApp() {
         handoffReason: "Solicitou reunião executiva de alinhamento",
         phone: "+244 972 888 585",
         avatar: "AS",
-        avatarBg: "bg-emerald-600",
+        avatarBg: "bg-[#071326]",
         status: "online",
         unread: 2,
         lastTime: "15:28",
@@ -5879,7 +5883,7 @@ function adminApp() {
         handoffReason: "Pediu proposta com desconto para 15 colaboradores",
         phone: "+244 930 133 850",
         avatar: "LA",
-        avatarBg: "bg-blue-600",
+        avatarBg: "bg-[#0050f0]",
         status: "online",
         unread: 1,
         lastTime: "15:15",
@@ -5900,7 +5904,7 @@ function adminApp() {
         handoffReason: "Solicitou alteração de escopo no projeto ativo",
         phone: "+244 923 000 000",
         avatar: "GU",
-        avatarBg: "bg-amber-600",
+        avatarBg: "bg-[#1e293b]",
         status: "online",
         unread: 1,
         lastTime: "14:50",
@@ -5920,7 +5924,7 @@ function adminApp() {
         handoffReason: null,
         phone: "+244 923 000 111",
         avatar: "CO",
-        avatarBg: "bg-purple-600",
+        avatarBg: "bg-[#0b2246]",
         status: "online",
         unread: 0,
         lastTime: "14:15",
@@ -5959,7 +5963,7 @@ function adminApp() {
         handoffReason: "Atendimento assumido por Casimiro Gundja",
         phone: "+244 923 333 804",
         avatar: "LA",
-        avatarBg: "bg-emerald-600",
+        avatarBg: "bg-[#071326]",
         status: "online",
         unread: 0,
         lastTime: "12:40",
