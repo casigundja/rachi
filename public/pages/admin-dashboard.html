@@ -114,26 +114,35 @@ html.dark body {
 
 #admin-sidebar {
   width: 270px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   background-color: var(--bg-sidebar);
   border-right: 1px solid var(--border-sidebar);
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
   z-index: 100;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+#admin-sidebar nav {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 
 #admin-sidebar.collapsed { 
   width: 76px; 
-  overflow: visible !important;
 }
 #admin-sidebar.collapsed nav { 
-  overflow: visible !important; 
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #admin-sidebar.collapsed .sl,
 #admin-sidebar.collapsed .sg,
@@ -641,54 +650,45 @@ a { text-decoration: none !important; }
 <!-- SIDEBAR -->
 <aside id="admin-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
-  <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
-    <div class="flex items-center justify-between min-h-[42px] w-full">
+  <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
+    <div class="flex items-center justify-between min-h-[40px] w-full" :class="{'flex-col justify-center gap-2': sidebarCollapsed}">
       <a href="/admin-dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Gestão Inteligente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center">
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[170px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[160px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[170px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[160px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
-        <div class="brand-emblem-collapsed hidden w-10 h-10 rounded-xl overflow-hidden items-center justify-start shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
-          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 max-w-none hidden dark:block" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
-          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
+        <div class="brand-emblem-collapsed hidden w-9 h-9 rounded-xl overflow-hidden items-center justify-center shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
+          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-7 max-w-none hidden dark:block" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
+          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
-      <!-- Botão de Recolher no topo da Sidebar (quando expandido) -->
+      <!-- Único Botão de Recolher / Expandir no Topo da Sidebar -->
       <button @click="sidebarCollapsed = !sidebarCollapsed"
               type="button"
-              class="hidden md:flex p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/60 dark:border-white/5 brand-full"
-              title="Recolher Menu">
-        <i data-lucide="panel-left-close" class="w-4 h-4"></i>
-      </button>
-    </div>
-
-    <!-- Botão de Expandir no topo da Sidebar (quando recolhido) -->
-    <div x-show="sidebarCollapsed" class="w-full flex justify-center pt-1" x-cloak>
-      <button @click="sidebarCollapsed = false"
-              type="button"
-              class="sidebar-item flex items-center justify-center w-10 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/10 shadow-sm"
-              data-legend="Expandir Menu"
-              title="Expandir Menu">
-        <i data-lucide="panel-left-open" class="w-4 h-4"></i>
+              class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/90 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/80 dark:border-white/10 cursor-pointer shadow-2xs"
+              :class="{'mx-auto mt-1': sidebarCollapsed}"
+              :data-legend="sidebarCollapsed ? 'Expandir Menu' : ''"
+              :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+        <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="w-4 h-4"></i>
       </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
-       class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/80 dark:border-blue-500/20 transition group shadow-sm"
+       class="site-back-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-blue-700 bg-blue-50/90 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/70 dark:border-blue-500/20 transition group shadow-2xs"
        data-legend="Voltar ao Site RACHI"
        title="Voltar ao Site RACHI">
-      <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
-      <span class="site-back-text">Voltar ao Site RACHI</span>
-      <i data-lucide="external-link" class="w-3.5 h-3.5 ms-auto opacity-70 site-back-text"></i>
+      <i data-lucide="arrow-left" class="w-3.5 h-3.5 flex-shrink-0 group-hover:-translate-x-0.5 transition duration-200"></i>
+      <span class="site-back-text">Voltar ao Site</span>
+      <i data-lucide="external-link" class="w-3 h-3 ms-auto opacity-70 site-back-text"></i>
     </a>
   </div>
 
@@ -842,18 +842,9 @@ a { text-decoration: none !important; }
     </div>
   </nav>
 
-  <!-- Sidebar Footer: Toggle & Logout -->
-  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-2.5 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
-    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
-    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition"
-         @click="sidebarCollapsed = !sidebarCollapsed"
-         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
-         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
-      <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="si"></i>
-      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"></span>
-    </div>
-
-    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors" 
+  <!-- Sidebar Footer: Logout -->
+  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02]">
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors cursor-pointer" 
          @click="logout()" 
          data-legend="Encerrar Sessão"
          title="Encerrar Sessão">
@@ -868,17 +859,16 @@ a { text-decoration: none !important; }
 <!-- MAIN CONTENT -->
 <div id="admin-main" :class="{'sc': sidebarCollapsed}">
   <header id="admin-header">
-    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400">
+    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 cursor-pointer">
       <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
-    <button @click="sidebarCollapsed=!sidebarCollapsed" class="hidden md:flex p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition">
-      <i data-lucide="panel-left-close" x-show="!sidebarCollapsed" class="w-5 h-5"></i>
-      <i data-lucide="panel-left-open" x-show="sidebarCollapsed" x-cloak class="w-5 h-5"></i>
     </button>
 
     <!-- Breadcrumb -->
     <div class="flex items-center gap-2 text-sm shrink-0">
       <span class="text-slate-400 dark:text-slate-500 font-semibold">Portal Executivo</span>
+      <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
+      <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
+    </div>
       <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
       <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
     </div>
@@ -927,181 +917,233 @@ a { text-decoration: none !important; }
     <!-- DASHBOARD GERAL / HOME -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- CABEÇALHO EXECUTIVO SÓBRIO & CORPORATIVO -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 sm:p-7 shadow-xs">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <!-- CABEÇALHO EXECUTIVO: ELEGANTE, DINÂMICO & SÓBRIO -->
+      <div class="relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-xs">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <div class="space-y-1.5 max-w-2xl">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-              <span>Portal Executivo</span>
-              <span class="text-slate-300 dark:text-slate-600">/</span>
-              <span class="text-slate-900 dark:text-white font-bold">Visão Geral</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 ml-1"></span>
-              <span class="text-emerald-700 dark:text-emerald-400 font-semibold text-[11px]">Sistema Operacional</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Núcleo Operacional Conectado
+              </span>
+              <span class="text-slate-300 dark:text-slate-600">·</span>
+              <span>4 Unidades Ativas</span>
             </div>
             
-            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family: Outfit, sans-serif;">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
               Painel de Controlo Corporativo
             </h1>
             
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Centro integrado de operações da RACHI. Atualmente existem <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalRequestsCount"></span> solicitações</strong> na Central e <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalOrdersCount"></span> pedidos</strong> em processamento.
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Consolidação executiva de operações, pedidos em loja e atendimentos técnicos da RACHI em tempo real.
             </p>
           </div>
 
-          <div class="flex items-center gap-2.5 shrink-0">
-            <button @click="setPage('solicitacoes')" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition shadow-xs flex items-center gap-2 cursor-pointer">
+          <div class="flex items-center gap-3 shrink-0">
+            <button @click="setPage('solicitacoes')" 
+                    type="button"
+                    class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50/80 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-xs flex items-center gap-2 cursor-pointer">
               <i data-lucide="clipboard-list" class="w-4 h-4 text-slate-500"></i>
-              Central de Solicitações
+              <span>Central de Solicitações</span>
+              <span class="px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-200/80 dark:bg-white/10 text-slate-800 dark:text-slate-200" x-text="totalRequestsCount"></span>
             </button>
-            <button @click="openCreateOrderModal()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 text-xs font-semibold transition shadow-sm flex items-center gap-2 cursor-pointer border-0">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-              Nova Ordem
+            <button @click="openCreateOrderModal()" 
+                    type="button"
+                    class="px-4 py-2.5 rounded-xl text-slate-950 text-xs font-bold transition-all duration-200 shadow-sm flex items-center gap-2 cursor-pointer border-0 hover:scale-[1.02] active:scale-[0.98]"
+                    style="background: linear-gradient(135deg, #FFA525, #DD8F20); color: #0B0B0B; box-shadow: 0 4px 14px rgba(255, 165, 37, 0.35);">
+              <i data-lucide="plus" class="w-4 h-4 stroke-[2.5]"></i>
+              <span>Nova Ordem</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Métricas Rápidas de Operação (Clean, Minimal & Monocromático) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-white/5">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="inbox" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Solicitações</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalRequestsCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Pedidos Loja</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalOrdersCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="users" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Clientes Ativos</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalClientsCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="shield-check" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Status</div>
-              <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">99.9% Online</div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- UNIDADES DA RACHI (CARDS EXECUTIVOS SÓBRIOS) -->
+      <!-- 4 KPIS ESTRATÉGICOS CONSOLIDADOS (SEM DUPLICAÇÃO DE DADOS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. Facturação Global -->
+        <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold border border-amber-500/20">
+              <i data-lucide="wallet" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+15.8%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">4,85M AOA</div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Facturação Total Consolidada</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Loja + Gráfica + Academy</span>
+            <span class="font-semibold text-emerald-600 dark:text-emerald-400">Em alta</span>
+          </div>
+        </div>
+
+        <!-- 2. Solicitações & Ordens Ativas -->
+        <div @click="setPage('solicitacoes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-blue-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold border border-blue-500/20">
+              <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              SLA 100%
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalRequestsCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Solicitações & Ordens</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Central de Atendimento</span>
+            <span class="font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Ver fila &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 3. Pedidos da Loja (RACHI Tec) -->
+        <div @click="setPage('loja-pedidos')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-cyan-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/20">
+              <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/60 dark:border-cyan-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+24%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalOrdersCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Pedidos de TI & Hardware</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Vendas corporativas</span>
+            <span class="font-semibold text-cyan-600 dark:text-cyan-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Gerir &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 4. Base de Clientes Corporativos -->
+        <div @click="setPage('clientes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-indigo-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold border border-indigo-500/20">
+              <i data-lucide="building-2" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+12.5%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalClientsCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Clientes Corporativos</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Contas ativas</span>
+            <span class="font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Directório &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECOSSISTEMA RACHI: 4 UNIDADES OPERACIONAIS -->
       <div>
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <i data-lucide="grid" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i> Unidades RACHI
+            <i data-lucide="layout-grid" class="w-4 h-4 text-amber-500"></i>
+            <span>Unidades RACHI</span>
           </h2>
-          <span class="text-xs text-slate-500 font-medium">Acesso aos módulos operacionais</span>
+          <span class="text-xs text-slate-500 font-medium">Módulos integrados de negócio</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- 1. ACADEMY -->
-          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/40">Ensino</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Ativo</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Academy
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Capacitação, trilhas executivas e formação corporativa em tecnologia.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Academy
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Capacitação, Cursos & Ensino Executivo</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">12 Cursos · 48 Alunos</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">12 Cursos · 48 Alunos</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 2. TEC -->
-          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-800/40">TI & Loja</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Loja Operacional</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Tec
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Hardware empresarial, notebooks, redes e infraestrutura de TI.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Tec
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Hardware, Notebooks & TI Corporativa</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">24 Itens · 15 Pedidos</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">24 Itens · 15 Pedidos</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 3. HUMAN CAPITAL -->
-          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">RH</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">8 Soluções</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Human Capital
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Recrutamento especializado, consultoria de RH e legalização.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Human Capital
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Recrutamento, Gestão de Pessoas & RH</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">6 Demandas Ativas</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">6 Demandas Ativas</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 4. PRINT -->
-          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50 dark:border-purple-800/40">Gráfica</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Produção Ativa</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Print
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Impressão corporativa, brindes, papelaria de luxo e sinalética.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Print
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">18 Catálogos · AOA 450,0k</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">18 Catálogos · AOA 450k</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- KPIS EXECUTIVOS COM PALETA SÓBRIA E MODERNA -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <template x-for="kpi in kpis" :key="kpi.label">
-          <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 flex items-center justify-center font-medium">
-                <i :data-lucide="kpi.icon" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i>
-              </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-                <i data-lucide="trending-up" class="w-3 h-3"></i>
-                <span x-text="(kpi.trend>0?'+':'')+kpi.trend+'%'"></span>
-              </span>
-            </div>
-            <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit" x-text="kpi.value"></div>
-            <div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1" x-text="kpi.label"></div>
-          </div>
-        </template>
       </div>
 
       <!-- SEÇÃƒO VISUAL: GRÁFICO INTERATIVO & STATUS DAS SOLICITAÇÕES -->
@@ -5550,6 +5592,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => {
     setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 70);
+  });
+
+  // Tooltip flutuante instantâneo para sidebar recolhido (não cortado por overflow)
+  const tip = document.createElement('div');
+  tip.id = 'sidebar-floating-legend';
+  tip.style.cssText = 'position:fixed;display:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:0.01em;white-space:nowrap;pointer-events:none;z-index:999999;transition:opacity 0.12s ease;';
+  document.body.appendChild(tip);
+
+  document.addEventListener('mouseover', (e) => {
+    const sidebar = document.getElementById('admin-sidebar') || document.getElementById('client-sidebar');
+    if (!sidebar || !sidebar.classList.contains('collapsed')) {
+      tip.style.display = 'none';
+      return;
+    }
+    const item = e.target.closest('[data-legend]');
+    if (!item || !sidebar.contains(item)) {
+      tip.style.display = 'none';
+      return;
+    }
+    const txt = item.getAttribute('data-legend');
+    if (!txt) {
+      tip.style.display = 'none';
+      return;
+    }
+    tip.textContent = txt;
+    const isDark = document.documentElement.classList.contains('dark');
+    tip.style.background = isDark ? '#071326' : '#ffffff';
+    tip.style.color = isDark ? '#f8fafc' : '#0f172a';
+    tip.style.border = isDark ? '1px solid rgba(0, 80, 240, 0.35)' : '1px solid #cbd5e1';
+    tip.style.boxShadow = isDark ? '0 10px 25px rgba(0,0,0,0.6)' : '0 10px 25px rgba(0,0,0,0.12)';
+    
+    const r = item.getBoundingClientRect();
+    tip.style.display = 'block';
+    tip.style.left = (r.right + 12) + 'px';
+    tip.style.top = (r.top + (r.height / 2) - 14) + 'px';
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('[data-legend]');
+    if (item) tip.style.display = 'none';
   });
 });
 </script>

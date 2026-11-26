@@ -111,26 +111,35 @@ html.dark body {
 
 #client-sidebar {
   width: 270px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   background-color: var(--bg-sidebar);
   border-right: 1px solid var(--border-sidebar);
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
   z-index: 100;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+#client-sidebar nav {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 
 #client-sidebar.collapsed { 
   width: 76px; 
-  overflow: visible !important;
 }
 #client-sidebar.collapsed nav { 
-  overflow: visible !important; 
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #client-sidebar.collapsed .sl,
 #client-sidebar.collapsed .sg,
@@ -441,55 +450,46 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
 <!-- SIDEBAR -->
 <aside id="client-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
-  <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
-    <div class="flex items-center justify-between min-h-[42px] w-full">
+  <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
+    <div class="flex items-center justify-between min-h-[40px] w-full" :class="{'flex-col justify-center gap-2': sidebarCollapsed}">
       <a href="/cliente/dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Área do Cliente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center gap-2">
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[155px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[145px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[155px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[145px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
-          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#f5a800]/20 text-[#f5a800] border border-[#f5a800]/30 shrink-0">CLIENTE</span>
+          <span class="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-[#f5a800]/20 text-[#f5a800] border border-[#f5a800]/30 shrink-0">CLIENTE</span>
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
-        <div class="brand-emblem-collapsed hidden w-10 h-10 rounded-xl overflow-hidden items-center justify-start shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
-          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 max-w-none hidden dark:block" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
-          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
+        <div class="brand-emblem-collapsed hidden w-9 h-9 rounded-xl overflow-hidden items-center justify-center shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
+          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-7 max-w-none hidden dark:block" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
+          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
-      <!-- Botão de Recolher no topo da Sidebar (quando expandido) -->
+      <!-- Único Botão de Recolher / Expandir no Topo da Sidebar -->
       <button @click="sidebarCollapsed = !sidebarCollapsed"
               type="button"
-              class="hidden md:flex p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/60 dark:border-white/5 brand-full"
-              title="Recolher Menu">
-        <i data-lucide="panel-left-close" class="w-4 h-4"></i>
-      </button>
-    </div>
-
-    <!-- Botão de Expandir no topo da Sidebar (quando recolhido) -->
-    <div x-show="sidebarCollapsed" class="w-full flex justify-center pt-1" x-cloak>
-      <button @click="sidebarCollapsed = false"
-              type="button"
-              class="sidebar-item flex items-center justify-center w-10 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/10 shadow-sm"
-              data-legend="Expandir Menu"
-              title="Expandir Menu">
-        <i data-lucide="panel-left-open" class="w-4 h-4"></i>
+              class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/90 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/80 dark:border-white/10 cursor-pointer shadow-2xs"
+              :class="{'mx-auto mt-1': sidebarCollapsed}"
+              :data-legend="sidebarCollapsed ? 'Expandir Menu' : ''"
+              :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+        <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="w-4 h-4"></i>
       </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
-       class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 dark:text-amber-300 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 border border-amber-200/80 dark:border-amber-500/20 transition group shadow-sm"
+       class="site-back-btn w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-amber-700 bg-amber-50/90 hover:bg-amber-100 dark:text-amber-300 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 border border-amber-200/70 dark:border-amber-500/20 transition group shadow-2xs"
        data-legend="Voltar ao Site RACHI"
        title="Voltar ao Site RACHI">
-      <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
-      <span class="site-back-text">Voltar ao Site RACHI</span>
-      <i data-lucide="external-link" class="w-3.5 h-3.5 ms-auto opacity-70 site-back-text"></i>
+      <i data-lucide="arrow-left" class="w-3.5 h-3.5 flex-shrink-0 group-hover:-translate-x-0.5 transition duration-200"></i>
+      <span class="site-back-text">Voltar ao Site</span>
+      <i data-lucide="external-link" class="w-3 h-3 ms-auto opacity-70 site-back-text"></i>
     </a>
   </div>
 
@@ -548,8 +548,8 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
     </template>
   </nav>
 
-  <!-- Sidebar Footer: Toggle & User & Logout -->
-  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+  <!-- Sidebar Footer: User & Logout -->
+  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
     <div class="flex items-center gap-3 px-1.5 py-1 mb-1">
       <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f5a800] to-[#0050f0] text-slate-950 font-black flex items-center justify-center text-xs shadow-sm shrink-0" x-text="user.name ? user.name.charAt(0).toUpperCase() : 'C'"></div>
       <div class="min-w-0 flex-1 sl">
@@ -558,16 +558,7 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
       </div>
     </div>
 
-    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar do Cliente -->
-    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition m-0 mb-1"
-         @click="sidebarCollapsed = !sidebarCollapsed"
-         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
-         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
-      <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="si"></i>
-      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"></span>
-    </div>
-
-    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors m-0" 
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors m-0 cursor-pointer" 
          @click="logout()" 
          data-legend="Terminar Sessão"
          title="Terminar Sessão">
@@ -582,12 +573,8 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
 <!-- MAIN CONTENT -->
 <div id="client-main" :class="{'sc': sidebarCollapsed}">
   <header id="client-header">
-    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400">
+    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 cursor-pointer">
       <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
-    <button @click="sidebarCollapsed=!sidebarCollapsed" class="hidden md:flex p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition">
-      <i data-lucide="panel-left-close" x-show="!sidebarCollapsed" class="w-5 h-5"></i>
-      <i data-lucide="panel-left-open" x-show="sidebarCollapsed" x-cloak class="w-5 h-5"></i>
     </button>
 
     <!-- Breadcrumb -->
@@ -1643,6 +1630,57 @@ function clienteApp() {
     }
   }
 }
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.lucide) lucide.createIcons();
+  document.addEventListener('alpine:initialized', () => {
+    if (window.lucide) lucide.createIcons();
+  });
+  document.addEventListener('click', () => {
+    setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 70);
+  });
+
+  // Tooltip flutuante instantâneo para sidebar recolhido (não cortado por overflow)
+  const tip = document.createElement('div');
+  tip.id = 'client-sidebar-floating-legend';
+  tip.style.cssText = 'position:fixed;display:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:0.01em;white-space:nowrap;pointer-events:none;z-index:999999;transition:opacity 0.12s ease;';
+  document.body.appendChild(tip);
+
+  document.addEventListener('mouseover', (e) => {
+    const sidebar = document.getElementById('client-sidebar');
+    if (!sidebar || !sidebar.classList.contains('collapsed')) {
+      tip.style.display = 'none';
+      return;
+    }
+    const item = e.target.closest('[data-legend]');
+    if (!item || !sidebar.contains(item)) {
+      tip.style.display = 'none';
+      return;
+    }
+    const txt = item.getAttribute('data-legend');
+    if (!txt) {
+      tip.style.display = 'none';
+      return;
+    }
+    tip.textContent = txt;
+    const isDark = document.documentElement.classList.contains('dark');
+    tip.style.background = isDark ? '#071326' : '#ffffff';
+    tip.style.color = isDark ? '#f8fafc' : '#0f172a';
+    tip.style.border = isDark ? '1px solid rgba(0, 80, 240, 0.35)' : '1px solid #cbd5e1';
+    tip.style.boxShadow = isDark ? '0 10px 25px rgba(0,0,0,0.6)' : '0 10px 25px rgba(0,0,0,0.12)';
+    
+    const r = item.getBoundingClientRect();
+    tip.style.display = 'block';
+    tip.style.left = (r.right + 12) + 'px';
+    tip.style.top = (r.top + (r.height / 2) - 14) + 'px';
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('[data-legend]');
+    if (item) tip.style.display = 'none';
+  });
+});
 </script>
 </body>
 </html>

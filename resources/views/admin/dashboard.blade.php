@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="">
 <title>RACHI — Painel de Gestão & Administração</title>
 <meta name="description" content="Painel de controlo visual e intuitivo da RACHI: métricas, negócios, clientes, solicitações e relatórios.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -114,26 +114,35 @@ html.dark body {
 
 #admin-sidebar {
   width: 270px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   background-color: var(--bg-sidebar);
   border-right: 1px solid var(--border-sidebar);
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
   z-index: 100;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+#admin-sidebar nav {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 
 #admin-sidebar.collapsed { 
   width: 76px; 
-  overflow: visible !important;
 }
 #admin-sidebar.collapsed nav { 
-  overflow: visible !important; 
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #admin-sidebar.collapsed .sl,
 #admin-sidebar.collapsed .sg,
@@ -641,54 +650,45 @@ a { text-decoration: none !important; }
 <!-- SIDEBAR -->
 <aside id="admin-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
-  <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
-    <div class="flex items-center justify-between min-h-[42px] w-full">
+  <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
+    <div class="flex items-center justify-between min-h-[40px] w-full" :class="{'flex-col justify-center gap-2': sidebarCollapsed}">
       <a href="/admin-dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Gestão Inteligente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center">
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[170px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[160px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[170px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[160px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
-        <div class="brand-emblem-collapsed hidden w-10 h-10 rounded-xl overflow-hidden items-center justify-start shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
-          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 max-w-none hidden dark:block" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
-          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
+        <div class="brand-emblem-collapsed hidden w-9 h-9 rounded-xl overflow-hidden items-center justify-center shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
+          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-7 max-w-none hidden dark:block" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
+          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
-      <!-- Botão de Recolher no topo da Sidebar (quando expandido) -->
+      <!-- Único Botão de Recolher / Expandir no Topo da Sidebar -->
       <button @click="sidebarCollapsed = !sidebarCollapsed"
               type="button"
-              class="hidden md:flex p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/60 dark:border-white/5 brand-full"
-              title="Recolher Menu">
-        <i data-lucide="panel-left-close" class="w-4 h-4"></i>
-      </button>
-    </div>
-
-    <!-- Botão de Expandir no topo da Sidebar (quando recolhido) -->
-    <div x-show="sidebarCollapsed" class="w-full flex justify-center pt-1" x-cloak>
-      <button @click="sidebarCollapsed = false"
-              type="button"
-              class="sidebar-item flex items-center justify-center w-10 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/10 shadow-sm"
-              data-legend="Expandir Menu"
-              title="Expandir Menu">
-        <i data-lucide="panel-left-open" class="w-4 h-4"></i>
+              class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/90 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/80 dark:border-white/10 cursor-pointer shadow-2xs"
+              :class="{'mx-auto mt-1': sidebarCollapsed}"
+              :data-legend="sidebarCollapsed ? 'Expandir Menu' : ''"
+              :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+        <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="w-4 h-4"></i>
       </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
-       class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/80 dark:border-blue-500/20 transition group shadow-sm"
+       class="site-back-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-blue-700 bg-blue-50/90 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/70 dark:border-blue-500/20 transition group shadow-2xs"
        data-legend="Voltar ao Site RACHI"
        title="Voltar ao Site RACHI">
-      <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
-      <span class="site-back-text">Voltar ao Site RACHI</span>
-      <i data-lucide="external-link" class="w-3.5 h-3.5 ms-auto opacity-70 site-back-text"></i>
+      <i data-lucide="arrow-left" class="w-3.5 h-3.5 flex-shrink-0 group-hover:-translate-x-0.5 transition duration-200"></i>
+      <span class="site-back-text">Voltar ao Site</span>
+      <i data-lucide="external-link" class="w-3 h-3 ms-auto opacity-70 site-back-text"></i>
     </a>
   </div>
 
@@ -842,18 +842,9 @@ a { text-decoration: none !important; }
     </div>
   </nav>
 
-  <!-- Sidebar Footer: Toggle & Logout -->
-  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-2.5 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
-    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
-    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition"
-         @click="sidebarCollapsed = !sidebarCollapsed"
-         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
-         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
-      <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="si"></i>
-      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"></span>
-    </div>
-
-    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors" 
+  <!-- Sidebar Footer: Logout -->
+  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02]">
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors cursor-pointer" 
          @click="logout()" 
          data-legend="Encerrar Sessão"
          title="Encerrar Sessão">
@@ -868,17 +859,16 @@ a { text-decoration: none !important; }
 <!-- MAIN CONTENT -->
 <div id="admin-main" :class="{'sc': sidebarCollapsed}">
   <header id="admin-header">
-    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400">
+    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 cursor-pointer">
       <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
-    <button @click="sidebarCollapsed=!sidebarCollapsed" class="hidden md:flex p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition">
-      <i data-lucide="panel-left-close" x-show="!sidebarCollapsed" class="w-5 h-5"></i>
-      <i data-lucide="panel-left-open" x-show="sidebarCollapsed" x-cloak class="w-5 h-5"></i>
     </button>
 
     <!-- Breadcrumb -->
     <div class="flex items-center gap-2 text-sm shrink-0">
       <span class="text-slate-400 dark:text-slate-500 font-semibold">Portal Executivo</span>
+      <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
+      <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
+    </div>
       <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
       <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
     </div>
@@ -927,181 +917,233 @@ a { text-decoration: none !important; }
     <!-- DASHBOARD GERAL / HOME -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- CABEÇALHO EXECUTIVO SÓBRIO & CORPORATIVO -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 sm:p-7 shadow-xs">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <!-- CABEÇALHO EXECUTIVO: ELEGANTE, DINÂMICO & SÓBRIO -->
+      <div class="relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-xs">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <div class="space-y-1.5 max-w-2xl">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-              <span>Portal Executivo</span>
-              <span class="text-slate-300 dark:text-slate-600">/</span>
-              <span class="text-slate-900 dark:text-white font-bold">Visão Geral</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 ml-1"></span>
-              <span class="text-emerald-700 dark:text-emerald-400 font-semibold text-[11px]">Sistema Operacional</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Núcleo Operacional Conectado
+              </span>
+              <span class="text-slate-300 dark:text-slate-600">·</span>
+              <span>4 Unidades Ativas</span>
             </div>
             
-            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family: Outfit, sans-serif;">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
               Painel de Controlo Corporativo
             </h1>
             
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Centro integrado de operações da RACHI. Atualmente existem <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalRequestsCount"></span> solicitações</strong> na Central e <strong class="text-slate-900 dark:text-white font-semibold"><span x-text="totalOrdersCount"></span> pedidos</strong> em processamento.
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Consolidação executiva de operações, pedidos em loja e atendimentos técnicos da RACHI em tempo real.
             </p>
           </div>
 
-          <div class="flex items-center gap-2.5 shrink-0">
-            <button @click="setPage('solicitacoes')" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition shadow-xs flex items-center gap-2 cursor-pointer">
+          <div class="flex items-center gap-3 shrink-0">
+            <button @click="setPage('solicitacoes')" 
+                    type="button"
+                    class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50/80 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-xs flex items-center gap-2 cursor-pointer">
               <i data-lucide="clipboard-list" class="w-4 h-4 text-slate-500"></i>
-              Central de Solicitações
+              <span>Central de Solicitações</span>
+              <span class="px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-200/80 dark:bg-white/10 text-slate-800 dark:text-slate-200" x-text="totalRequestsCount"></span>
             </button>
-            <button @click="openCreateOrderModal()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 text-xs font-semibold transition shadow-sm flex items-center gap-2 cursor-pointer border-0">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-              Nova Ordem
+            <button @click="openCreateOrderModal()" 
+                    type="button"
+                    class="px-4 py-2.5 rounded-xl text-slate-950 text-xs font-bold transition-all duration-200 shadow-sm flex items-center gap-2 cursor-pointer border-0 hover:scale-[1.02] active:scale-[0.98]"
+                    style="background: linear-gradient(135deg, #FFA525, #DD8F20); color: #0B0B0B; box-shadow: 0 4px 14px rgba(255, 165, 37, 0.35);">
+              <i data-lucide="plus" class="w-4 h-4 stroke-[2.5]"></i>
+              <span>Nova Ordem</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Métricas Rápidas de Operação (Clean, Minimal & Monocromático) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-white/5">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="inbox" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Solicitações</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalRequestsCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Pedidos Loja</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalOrdersCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="users" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Clientes Ativos</div>
-              <div class="text-base font-bold text-slate-900 dark:text-white" x-text="totalClientsCount"></div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300">
-              <i data-lucide="shield-check" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <div class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Status</div>
-              <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">99.9% Online</div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- UNIDADES DA RACHI (CARDS EXECUTIVOS SÓBRIOS) -->
+      <!-- 4 KPIS ESTRATÉGICOS CONSOLIDADOS (SEM DUPLICAÇÃO DE DADOS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. Facturação Global -->
+        <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold border border-amber-500/20">
+              <i data-lucide="wallet" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+15.8%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">4,85M AOA</div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Facturação Total Consolidada</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Loja + Gráfica + Academy</span>
+            <span class="font-semibold text-emerald-600 dark:text-emerald-400">Em alta</span>
+          </div>
+        </div>
+
+        <!-- 2. Solicitações & Ordens Ativas -->
+        <div @click="setPage('solicitacoes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-blue-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold border border-blue-500/20">
+              <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              SLA 100%
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalRequestsCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Solicitações & Ordens</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Central de Atendimento</span>
+            <span class="font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Ver fila &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 3. Pedidos da Loja (RACHI Tec) -->
+        <div @click="setPage('loja-pedidos')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-cyan-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/20">
+              <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/60 dark:border-cyan-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+24%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalOrdersCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Pedidos de TI & Hardware</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Vendas corporativas</span>
+            <span class="font-semibold text-cyan-600 dark:text-cyan-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Gerir &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 4. Base de Clientes Corporativos -->
+        <div @click="setPage('clientes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-indigo-400/50 transition-all duration-200 cursor-pointer group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold border border-indigo-500/20">
+              <i data-lucide="building-2" class="w-5 h-5"></i>
+            </div>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/40">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              <span>+12.5%</span>
+            </span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalClientsCount"></div>
+          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Clientes Corporativos</div>
+          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+            <span>Contas ativas</span>
+            <span class="font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Directório &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECOSSISTEMA RACHI: 4 UNIDADES OPERACIONAIS -->
       <div>
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <i data-lucide="grid" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i> Unidades RACHI
+            <i data-lucide="layout-grid" class="w-4 h-4 text-amber-500"></i>
+            <span>Unidades RACHI</span>
           </h2>
-          <span class="text-xs text-slate-500 font-medium">Acesso aos módulos operacionais</span>
+          <span class="text-xs text-slate-500 font-medium">Módulos integrados de negócio</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- 1. ACADEMY -->
-          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/40">Ensino</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Ativo</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Academy
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Capacitação, trilhas executivas e formação corporativa em tecnologia.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Academy
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Capacitação, Cursos & Ensino Executivo</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['academy_courses'] ?? 12 }} Cursos · {{ $stats['academy_students'] ?? 48 }} Alunos</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">12 Cursos · 48 Alunos</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 2. TEC -->
-          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-800/40">TI & Loja</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Loja Operacional</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Tec
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Hardware empresarial, notebooks, redes e infraestrutura de TI.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Tec
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Hardware, Notebooks & TI Corporativa</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['tec_items'] ?? 24 }} Itens · {{ $stats['tec_orders'] ?? 15 }} Pedidos</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">24 Itens · 15 Pedidos</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 3. HUMAN CAPITAL -->
-          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">RH</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">{{ $stats['capital_services'] ?? 8 }} Soluções</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Human Capital
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Recrutamento especializado, consultoria de RH e legalização.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Human Capital
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Recrutamento, Gestão de Pessoas & RH</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['capital_requests'] ?? 6 }} Demandas Ativas</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">6 Demandas Ativas</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
 
           <!-- 4. PRINT -->
-          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-400/60 dark:hover:border-white/25 hover:shadow-md transition-all duration-200">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
+          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
+                  <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50 dark:border-purple-800/40">Gráfica</span>
               </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/50 dark:border-white/5">Produção Ativa</span>
+              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+                RACHI Print
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Impressão corporativa, brindes, papelaria de luxo e sinalética.
+              </p>
             </div>
-            <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" style="font-family:Outfit">
-              RACHI Print
-            </div>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-1">Gráfica Rápida, Cartões, Banners & Brindes</p>
             <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-semibold text-slate-600 dark:text-slate-400">{{ $stats['print_products'] ?? 18 }} Catálogos · AOA {{ $stats['print_revenue_formatted'] ?? '450.000,00' }}</span>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
+              <span class="font-bold text-slate-700 dark:text-slate-300">18 Catálogos · AOA 450k</span>
+              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                Aceder &rarr;
+              </span>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- KPIS EXECUTIVOS COM PALETA SÓBRIA E MODERNA -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <template x-for="kpi in kpis" :key="kpi.label">
-          <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 flex items-center justify-center font-medium">
-                <i :data-lucide="kpi.icon" class="w-4 h-4 text-slate-600 dark:text-slate-300"></i>
-              </div>
-              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-                <i data-lucide="trending-up" class="w-3 h-3"></i>
-                <span x-text="(kpi.trend>0?'+':'')+kpi.trend+'%'"></span>
-              </span>
-            </div>
-            <div class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit" x-text="kpi.value"></div>
-            <div class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1" x-text="kpi.label"></div>
-          </div>
-        </template>
       </div>
 
       <!-- SEÇÃƒO VISUAL: GRÁFICO INTERATIVO & STATUS DAS SOLICITAÇÕES -->
@@ -1141,19 +1183,19 @@ a { text-decoration: none !important; }
           <div class="grid grid-cols-2 gap-2.5 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
             <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Academy</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_academy'] ?? 0 }} reqs</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">8 reqs</div>
             </div>
             <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Loja / Tec</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_tec'] ?? 0 }} reqs</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">14 reqs</div>
             </div>
             <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">RH Capital</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_capital'] ?? 0 }} reqs</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">6 reqs</div>
             </div>
             <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
               <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Print</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">{{ $stats['dist_print'] ?? 0 }} reqs</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white">12 reqs</div>
             </div>
           </div>
         </div>
@@ -1562,10 +1604,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['total_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['active_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['pending_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['company_customers'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">9</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">9</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -1807,10 +1849,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="coursesList.length || {{ $stats['academy_courses'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="activeEnrollmentsCount || {{ $stats['academy_students'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Turmas Ativas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="academyEnrollments.length || {{ $stats['academy_students'] ?? 0 }}"></div><div class="text-xs text-slate-500 mt-1 font-bold">Matrículas Totais</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">{{ $stats['academy_certificates'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Diplomas Emitidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="coursesList.length || 12"></div><div class="text-xs text-slate-500 mt-1 font-bold">Cursos no Catálogo</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="activeEnrollmentsCount || 48"></div><div class="text-xs text-slate-500 mt-1 font-bold">Turmas Ativas</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="academyEnrollments.length || 48"></div><div class="text-xs text-slate-500 mt-1 font-bold">Matrículas Totais</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">38</div><div class="text-xs text-slate-500 mt-1 font-bold">Diplomas Emitidos</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -2070,10 +2112,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['tec_items'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['tec_critical_stock'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">24</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Produtos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">15</div><div class="text-xs text-slate-500 mt-1 font-bold">Vendas do Mês</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">3</div><div class="text-xs text-slate-500 mt-1 font-bold">Stock Crítico</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">2,10M</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -2139,10 +2181,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['capital_services'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Soluções Ativas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['capital_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Demandas & Processos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['capital_in_progress'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Atendimento</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['capital_completed'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Soluções Ativas</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">6</div><div class="text-xs text-slate-500 mt-1 font-bold">Demandas & Processos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">4</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Atendimento</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">2</div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídos</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -2184,10 +2226,10 @@ a { text-decoration: none !important; }
       </div>
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Formatos Disponíveis</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">{{ $stats['print_requests'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-yellow-500" style="font-family:Outfit">{{ $stats['print_quotes'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">18</div><div class="text-xs text-slate-500 mt-1 font-bold">Formatos Disponíveis</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">12</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Produção</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-yellow-500" style="font-family:Outfit">7</div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">450,0k</div><div class="text-xs text-slate-500 mt-1 font-bold">Receita (AOA)</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -2222,8 +2264,8 @@ a { text-decoration: none !important; }
       <div class="sc2 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white border-blue-500/30 shadow-xl">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Facturação Total Acumulada ({{ now()->format('Y') }})</div>
-            <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA {{ number_format($stats['total_revenue'] ?? 0, 2, ',', '.') }}</div>
+            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Facturação Total Acumulada (2026)</div>
+            <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA 4.850.000,00</div>
             <div class="text-sm text-emerald-300 font-bold flex items-center gap-1.5 mt-2">
               <i data-lucide="trending-up" class="w-4 h-4"></i> Valores sincronizados com a base de dados
             </div>
@@ -2427,8 +2469,8 @@ a { text-decoration: none !important; }
       <div x-show="tecTab === 'pedidos'" class="space-y-6">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecOrders.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Total Pedidos</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['tec_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['tec_orders'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">2,10M</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
+          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">15</div><div class="text-xs text-slate-500 mt-1 font-bold">Pedidos Concluídos</div></div>
           <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Em Aberto</div></div>
         </div>
 
@@ -2692,7 +2734,7 @@ a { text-decoration: none !important; }
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Candidatos Registados</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Disponíveis Imediatos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['capital_services'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Processos em Aberto</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Processos em Aberto</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">100%</div><div class="text-xs text-slate-500 mt-1 font-bold">Taxa de Conformidade</div></div>
       </div>
 
@@ -2733,8 +2775,8 @@ a { text-decoration: none !important; }
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="printQuotes.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Orçamentos Emitidos</div></div>
         <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="printRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">{{ $stats['print_revenue_formatted'] ?? '0,00' }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">{{ $stats['print_products'] ?? 0 }}</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">450,0k</div><div class="text-xs text-slate-500 mt-1 font-bold">Facturação (AOA)</div></div>
+        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">18</div><div class="text-xs text-slate-500 mt-1 font-bold">Catálogo Print</div></div>
       </div>
 
       <div class="sc2 p-0 overflow-hidden">
@@ -3957,7 +3999,7 @@ function renderCharts(theme) {
       data: {
         labels: ['Academy', 'Loja/Tec', 'Human Capital', 'Print'],
         datasets: [{
-          data: [{{ $stats['dist_academy'] ?? 0 }}, {{ $stats['dist_tec'] ?? 0 }}, {{ $stats['dist_capital'] ?? 0 }}, {{ $stats['dist_print'] ?? 0 }}],
+          data: [8, 14, 6, 12],
           backgroundColor: ['#6366f1', '#0ea5e9', '#10b981', '#f59e0b'],
           borderWidth: isDark ? 2 : 3,
           borderColor: isDark ? '#131728' : '#ffffff'
@@ -3992,15 +4034,15 @@ function adminApp() {
     theme: localStorage.getItem('rachi_admin_theme') || 'light',
     openMenus: { academy: false, loja: false, rh: false, grafica: false },
     adminUser: {
-      nome: {!! json_encode(auth()->user()?->name ?? 'Super Administrador RACHI') !!},
-      email: {!! json_encode(auth()->user()?->email ?? 'admin@rachi.ao') !!},
-      initials: '{{ auth()->check() && auth()->user()->name ? strtoupper(mb_substr(auth()->user()->name, 0, 2)) : 'SA' }}'
+      nome: "Super Administrador RACHI",
+      email: "admin@rachi.ao",
+      initials: 'SA'
     },
-    academyEnrollments: @json($academyEnrollments ?? []),
-    coursesList: @json($coursesList ?? []),
-    users: @json($systemUsers ?? []),
-    rolesList: @json($systemRoles ?? []),
-    clients: @json($clientsList ?? []),
+    academyEnrollments: [{"id":9,"aluno_id":11,"user_id":20,"nome":"Aluno Teste","email":"aluno@rachi.ao","telefone":"1232342343","curso":"Forma\u00e7\u00e3o RACHI","curso_slug":"","curso_id":1,"status":"active","data":"25\/09\/2026 21:47","codigo":"RAC-00009"}],
+    coursesList: [{"id":15,"name":"Curso Especializado: Engenharia Social Institucional","slug":"engenharia-social-institucional"}],
+    users: [{"id":25,"name":"Empresa Teste Luanda Lda","nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","phone":"923999888","telefone":"923999888","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:24","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"EL","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":24,"name":"Teste Ant\u00f3nio Silva","nome":"Teste Ant\u00f3nio Silva","email":"antonio.teste@empresa.ao","phone":"923000111","telefone":"923000111","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:01","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"TS","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":23,"name":"Dr. Antonio Silva","nome":"Dr. Antonio Silva","email":"antonio.silva@bfa.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":22,"name":"Dr. Ant\u00f3nio Silva","nome":"Dr. Ant\u00f3nio Silva","email":"antonio.silva@bancoteste.ao","phone":"+244 972 888 585","telefone":"+244 972 888 585","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 20:47","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":21,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"casimirogundja@outlook.com","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"04\/11\/2026 18:00","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"28\/09\/2026","data":"28\/09\/2026"},{"id":20,"name":"Aluno Teste","nome":"Aluno Teste","email":"aluno@rachi.ao","phone":"","telefone":"","tipo":"Aluno \/ Cliente","role":"Aluno \/ Cliente","role_id":7,"role_slug":"student","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"02\/10\/2026 16:42","mod":["Academy"],"av":"bg-gradient-to-br from-slate-600 to-slate-700","ini":"AT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":19,"name":"Cliente Teste","nome":"Cliente Teste","email":"cliente@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"25\/09\/2026 19:37","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"CT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":18,"name":"Gundja","nome":"Gundja","email":"user@gmail.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 01:57","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"GU","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":14,"name":"pakissipakissi","nome":"pakissipakissi","email":"pakissipakissi@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 00:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":12,"name":"teste","nome":"teste","email":"teste@outlook.com","phone":"","telefone":"","tipo":"Atendente","role":"Atendente","role_id":5,"role_slug":"attendant","tc":"bg-emerald-100 text-emerald-700 dark:bg-emerald-500\/20 dark:text-emerald-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":11,"name":"Dr. Fernando Dias Atualizado","nome":"Dr. Fernando Dias Atualizado","email":"fernando.dias@rachi.ao","phone":"+244 923 777 999","telefone":"+244 923 777 999","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:22","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"DA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":10,"name":"Pedro Alves","nome":"Pedro Alves","email":"pedro@email.com","phone":"+244 923 000 050","telefone":"+244 923 000 050","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"25\/09\/2026 14:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":7,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"gundja@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":8,"name":"Jo\u00e3o Silva","nome":"Jo\u00e3o Silva","email":"joao@rachi.ao","phone":"+244 923 000 015","telefone":"+244 923 000 015","tipo":"Especialista RH","role":"Especialista RH","role_id":9,"role_slug":"rh_specialist","tc":"bg-amber-100 text-amber-800 dark:bg-orange-500\/20 dark:text-orange-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Human Capital"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"JS","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":9,"name":"Ana Lima","nome":"Ana Lima","email":"ana@rachi.ao","phone":"+244 923 000 040","telefone":"+244 923 000 040","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AL","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":6,"name":"Aluno Teste Admin","nome":"Aluno Teste Admin","email":"alunoteste@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:04","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":5,"name":"tetetetetet@outlook.com","nome":"tetetetetet@outlook.com","email":"tetetetetetetet@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 21:46","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":4,"name":"Teste Aluno","nome":"Teste Aluno","email":"teste.aluno@example.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 15:17","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":2,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"tecnico@rachi.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Funcion\u00e1rio","role":"Funcion\u00e1rio","role_id":4,"role_slug":"employee","tc":"bg-purple-100 text-purple-700 dark:bg-purple-500\/20 dark:text-purple-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"21\/09\/2026 13:51","mod":["Gr\u00e1fica","Loja"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"CG","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":3,"name":"Inov Quimua Consultoria","nome":"Inov Quimua Consultoria","email":"cliente@empresa.ao","phone":"+244 912 345 678","telefone":"+244 912 345 678","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"IC","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":1,"name":"Super Administrador RACHI","nome":"Super Administrador RACHI","email":"admin@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"03\/10\/2026 00:44","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"SR","created_at":"21\/09\/2026","data":"21\/09\/2026"}],
+    rolesList: [{"id":1,"name":"Super Administrador","slug":"super_admin","description":"Acesso irrestrito a todo o sistema e configura\u00e7\u00f5es"},{"id":2,"name":"Administrador","slug":"admin","description":"Gest\u00e3o geral da plataforma e relat\u00f3rios"},{"id":3,"name":"Gestor de Unidade","slug":"manager","description":"Gest\u00e3o operacional de uma unidade de neg\u00f3cio"},{"id":4,"name":"Funcion\u00e1rio \/ T\u00e9cnico","slug":"employee","description":"Atendimento, execu\u00e7\u00e3o de servi\u00e7os e pedidos"},{"id":5,"name":"Atendente","slug":"attendant","description":"Triagem e primeiro contacto com clientes"},{"id":6,"name":"Cliente","slug":"customer","description":"Acesso ao portal de autoatendimento e pedidos"},{"id":7,"name":"Aluno","slug":"student","description":"Acesso aos cursos da RACHI Academy"},{"id":8,"name":"Instrutor Academy","slug":"instructor","description":"Gest\u00e3o de cursos, m\u00f3dulos e turmas"},{"id":9,"name":"Especialista RH","slug":"rh_specialist","description":"Recrutamento, vagas e candidatos"}],
+    clients: [{"id":16,"nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","tipo":"Empresa","tel":"923999888","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":15,"nome":"Silva \u0026 Filhos Lda","email":"antonio.teste@empresa.ao","tipo":"Empresa","tel":"923000111","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":14,"nome":"gundja","email":"casimirogundja@outlook.com","tipo":"Empresa","tel":"1293797234927","tr":2,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":13,"nome":"Banco de Fomento Angola","email":"antonio.silva@bfa.ao","tipo":"Empresa","tel":"+244 923 111 222","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":12,"nome":"Banco de Fomento Angola Teste","email":"antonio.silva@bancoteste.ao","tipo":"Empresa","tel":"+244 972 888 585","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":11,"nome":"Aluno Teste","email":"aluno@rachi.ao","tipo":"Particular","tel":"1232342343","tr":0,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":10,"nome":"Gundja","email":"","tipo":"Empresa","tel":"12342342342","tr":1,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":9,"nome":"Super Administrador RACHI","email":"admin@rachi.ao","tipo":"Empresa","tel":"+244 923 000 000","tr":10,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":1,"nome":"Inov Quimua Consultoria Lda","email":"cliente@empresa.ao","tipo":"Empresa","tel":"+244 912 345 678","tr":0,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"}],
     userSearch: '',
     userFilterRole: 'all',
     userFilterStatus: 'all',
@@ -4937,7 +4979,7 @@ function adminApp() {
       this.$watch('sidebarCollapsed', () => {
         this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
       });
-      this.allRequests = @json($allRequests ?? []);
+      this.allRequests = [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}];
       this.refreshAdminRequests();
       window.setInterval(() => this.refreshAdminRequests(), 5000);
 
@@ -4981,13 +5023,7 @@ function adminApp() {
       });
 
       // Inicializa sessão de admin com utilizador autenticado
-      const authUserObj = {!! json_encode(auth()->user() ? [
-        'id' => auth()->id(),
-        'nome' => auth()->user()->name,
-        'email' => auth()->user()->email,
-        'tipo' => 'admin',
-        'loggedIn' => true
-      ] : null) !!};
+      const authUserObj = null;
 
       if (authUserObj) {
         localStorage.setItem('rachi_user_session', JSON.stringify(authUserObj));
@@ -5042,20 +5078,20 @@ function adminApp() {
     },
 
     get totalRequestsCount() {
-      return (this.allRequests && this.allRequests.length > 0) ? this.allRequests.length : {{ $stats['total_requests'] ?? 28 }};
+      return (this.allRequests && this.allRequests.length > 0) ? this.allRequests.length : 14;
     },
     get totalOrdersCount() {
-      return (this.tecOrders && this.tecOrders.length > 0) ? this.tecOrders.length : {{ $stats['total_orders'] ?? 35 }};
+      return (this.tecOrders && this.tecOrders.length > 0) ? this.tecOrders.length : 3;
     },
     get totalClientsCount() {
-      return (this.clients && this.clients.length > 0) ? this.clients.length : {{ $stats['active_customers'] ?? 142 }};
+      return (this.clients && this.clients.length > 0) ? this.clients.length : 9;
     },
 
     kpis: [
-      { label: 'Clientes Ativos na Base', value: {!! json_encode($stats['kpi_clients_val'] ?? '142') !!}, trend: {{ $stats['kpi_clients_trend'] ?? 12 }}, icon: 'users' },
-      { label: 'Novas Solicitações no Mês', value: {!! json_encode($stats['kpi_requests_val'] ?? '28') !!}, trend: {{ $stats['kpi_requests_trend'] ?? 18 }}, icon: 'clipboard-list' },
-      { label: 'Pedidos da Loja Processados', value: {!! json_encode($stats['kpi_orders_val'] ?? '35') !!}, trend: {{ $stats['kpi_orders_trend'] ?? 24 }}, icon: 'shopping-cart' },
-      { label: 'Facturação Total (AOA)', value: {!! json_encode($stats['kpi_revenue_val'] ?? '4.850.000,00') !!}, trend: {{ $stats['kpi_revenue_trend'] ?? 15 }}, icon: 'banknote' }
+      { label: 'Clientes Ativos na Base', value: "9", trend: 12.5, icon: 'users' },
+      { label: 'Novas Solicitações no Mês', value: "14", trend: 18.2, icon: 'clipboard-list' },
+      { label: 'Pedidos da Loja Processados', value: "3", trend: 24, icon: 'shopping-cart' },
+      { label: 'Facturação Total (AOA)', value: "4,85M", trend: 15.8, icon: 'banknote' }
     ],
 
     wfStatuses: [
@@ -5068,7 +5104,7 @@ function adminApp() {
       { key: 'cancelado', label: 'Cancelado', count: 3, color: 'text-rose-600 dark:text-red-400', sc: 's-cancel', dot: 'bg-rose-500' }
     ],
 
-    allRequests: @json($allRequests ?? []),
+    allRequests: [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}],
     reqFilterSearch: '',
     reqFilterUnit: 'Todas',
     reqFilterStatus: 'Todos',
@@ -5359,10 +5395,10 @@ function adminApp() {
       this.showAlert('success', 'Relatório Exportado', 'Download do ficheiro ' + filename + ' concluído com sucesso!');
     },
 
-    aCourses: @json($academyCourses ?? []),
-    sProducts: @json($tecProducts ?? []),
-    tecOrders: @json($tecOrders ?? []),
-    tecRequests: @json($tecRequests ?? []),
+    aCourses: [{"id":15,"titulo":"Curso Especializado: Engenharia Social Institucional","slug":"engenharia-social-institucional","cat":"Tecnologia da Informa\u00e7\u00e3o","preco":"AOA 60.000,00","dur":"16h","nivel":"Interm\u00e9dio","status":"Ativo","alunos":18,"taxa":92,"modulos":5,"prof":"Corpo Docente RACHI"}],
+    sProducts: [{"id":7,"nome":"Auriculares sem Fio Bluetooth TWS","marca":"RACHI Tec","sku":"TEC-FONE-TWS","cat":"Consum\u00edveis \u0026 Escrit\u00f3rio","preco":"AOA 15.000,00","preco_raw":15000,"est":25,"min_est":4,"vendas":0,"status":"Ativo"},{"id":8,"nome":"Capa Tem\u00e1tica Naruto para iPhone","marca":"RACHI Tec","sku":"TEC-ACC-NARUTO","cat":"Material Promocional","preco":"AOA 7.000,00","preco_raw":7000,"est":25,"min_est":5,"vendas":0,"status":"Ativo"},{"id":9,"nome":"T-Shirt Naruto Shippuden Modo S\u00e1bio \u0026 Gamakichi","marca":"RACHI Tec","sku":"TEC-OTK-TSH01","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":18,"min_est":4,"vendas":0,"status":"Ativo"},{"id":10,"nome":"T-Shirt Akatsuki Cl\u00e1ssica Nuvens Vermelhas","marca":"RACHI Tec","sku":"TEC-OTK-TSH02","cat":"Universo Otaku \u0026 Geek","preco":"AOA 8.500,00","preco_raw":8500,"est":22,"min_est":5,"vendas":0,"status":"Ativo"},{"id":11,"nome":"T-Shirt Saitama Serious Punch \u2014 One Punch Man","marca":"RACHI Tec","sku":"TEC-OTK-TSH03","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.000,00","preco_raw":9000,"est":15,"min_est":3,"vendas":0,"status":"Ativo"},{"id":12,"nome":"T-Shirt Naruto Shippuden Modo Chakra da Kurama","marca":"RACHI Tec","sku":"TEC-OTK-TSH04","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":16,"min_est":4,"vendas":0,"status":"Ativo"},{"id":13,"nome":"T-Shirt Madara Uchiha \u2014 O Fantasma dos Uchiha","marca":"RACHI Tec","sku":"TEC-OTK-TSH05","cat":"Universo Otaku \u0026 Geek","preco":"AOA 10.000,00","preco_raw":10000,"est":14,"min_est":3,"vendas":0,"status":"Ativo"},{"id":14,"nome":"T-Shirt Minato Namikaze \u0026 Kushina Uzumaki \u2014 Fam\u00edlia","marca":"RACHI Tec","sku":"TEC-OTK-TSH06","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":15,"min_est":4,"vendas":0,"status":"Ativo"},{"id":15,"nome":"T-Shirt Nanadaime Hokage \u2014 Do Balan\u00e7o ao Topo","marca":"RACHI Tec","sku":"TEC-OTK-TSH07","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":17,"min_est":4,"vendas":0,"status":"Ativo"},{"id":16,"nome":"T-Shirt Gaara do Deserto \u2014 Kazekage de Suna","marca":"RACHI Tec","sku":"TEC-OTK-TSH08","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.000,00","preco_raw":9000,"est":12,"min_est":3,"vendas":0,"status":"Ativo"},{"id":17,"nome":"T-Shirt Sukuna \u0026 Kurama \u2014 Lua de Sangue Carmesim","marca":"RACHI Tec","sku":"TEC-OTK-TSH09","cat":"Universo Otaku \u0026 Geek","preco":"AOA 10.000,00","preco_raw":10000,"est":15,"min_est":3,"vendas":0,"status":"Ativo"},{"id":18,"nome":"T-Shirt Monkey D. Luffy \u2014 One Piece Gear","marca":"RACHI Tec","sku":"TEC-OTK-TSH10","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.000,00","preco_raw":9000,"est":19,"min_est":4,"vendas":0,"status":"Ativo"},{"id":19,"nome":"T-Shirt Super Saiyan Goku Neon Splash \u2014 Dragon Ball Z","marca":"RACHI Tec","sku":"TEC-OTK-TSH11","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":20,"min_est":5,"vendas":0,"status":"Ativo"},{"id":20,"nome":"T-Shirt Kid Goku na Nuvem Voadora Kintoun Cl\u00e1ssico","marca":"RACHI Tec","sku":"TEC-OTK-TSH12","cat":"Universo Otaku \u0026 Geek","preco":"AOA 8.500,00","preco_raw":8500,"est":14,"min_est":3,"vendas":0,"status":"Ativo"},{"id":22,"nome":"T-Shirt Naruto Tra\u00e7o Manga Sketch Minimalista","marca":"RACHI Tec","sku":"TEC-OTK-TSH13","cat":"Universo Otaku \u0026 Geek","preco":"AOA 8.500,00","preco_raw":8500,"est":16,"min_est":3,"vendas":0,"status":"Ativo"},{"id":23,"nome":"T-Shirt Itachi Uchiha Chibi \u0026 Akatsuki Back","marca":"RACHI Tec","sku":"TEC-OTK-TSH14","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.000,00","preco_raw":9000,"est":18,"min_est":4,"vendas":0,"status":"Ativo"},{"id":24,"nome":"T-Shirt Naruto na Floresta Verde Oliva \u2014 Vila da Folha","marca":"RACHI Tec","sku":"TEC-OTK-TSH15","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":15,"min_est":3,"vendas":0,"status":"Ativo"},{"id":25,"nome":"T-Shirt Naruto Painel Mang\u00e1 Multi-Cenas Quadros","marca":"RACHI Tec","sku":"TEC-OTK-TSH16","cat":"Universo Otaku \u0026 Geek","preco":"AOA 9.500,00","preco_raw":9500,"est":17,"min_est":4,"vendas":0,"status":"Ativo"},{"id":1,"nome":"HP Elitebook x360 1040 G8 (2-in-1)","marca":"RACHI Tec","sku":"TEC-NB-HP1040","cat":"Inform\u00e1tica e Tecnologia","preco":"AOA 1.489.000,29","preco_raw":1489000.29,"est":7,"min_est":2,"vendas":4,"status":"Ativo"},{"id":2,"nome":"Smartwatch Lige Executivo Pro","marca":"RACHI Tec","sku":"TEC-SW-LIGE01","cat":"Inform\u00e1tica e Tecnologia","preco":"AOA 10.000,00","preco_raw":10000,"est":25,"min_est":5,"vendas":0,"status":"Ativo"},{"id":3,"nome":"TV Box Android MXQ Pro 4K Ultra HD","marca":"RACHI Tec","sku":"TEC-TV-MXQPRO","cat":"Inform\u00e1tica e Tecnologia","preco":"AOA 18.000,00","preco_raw":18000,"est":15,"min_est":3,"vendas":0,"status":"Ativo"},{"id":4,"nome":"Cabo Console RS232\/DB9 para RJ45 1.5M","marca":"RACHI Tec","sku":"TEC-CAB-RS232","cat":"Inform\u00e1tica e Tecnologia","preco":"AOA 16.989,89","preco_raw":16989.89,"est":30,"min_est":5,"vendas":0,"status":"Ativo"},{"id":5,"nome":"Auricular com Fio 3.5mm Alta Fidelidade","marca":"RACHI Tec","sku":"TEC-FONE-FIO","cat":"Consum\u00edveis \u0026 Escrit\u00f3rio","preco":"AOA 3.000,00","preco_raw":3000,"est":50,"min_est":10,"vendas":0,"status":"Ativo"}],
+    tecOrders: [{"id":3,"numero":"PED-00003","cliente":"gundja","total":"AOA 1.489.000,29","status":"Pending","data":"12\/10\/2026 03:28"},{"id":1,"numero":"PED-00001","cliente":"Empresa Teste Luanda Lda","total":"AOA 2.978.000,58","status":"Pending","data":"12\/10\/2026 03:24"},{"id":2,"numero":"PED-00002","cliente":"Super Administrador RACHI","total":"AOA 1.489.000,29","status":"Pending","data":"12\/10\/2026 03:24"}],
+    tecRequests: [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]}],
     tecTab: 'pedidos',
     stockSearch: '',
     stockFilter: 'all',
@@ -5515,28 +5551,28 @@ function adminApp() {
         this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
       }
     },
-    rhJobs: @json($capitalServices ?? []),
-    gProducts: @json($printItems ?? []),
-    capitalRequests: @json($capitalRequests ?? []),
-    printRequests: @json($printRequests ?? []),
-    printQuotes: @json($printQuotes ?? []),
+    rhJobs: [{"id":7,"cargo":"Formaliza\u00e7\u00e3o e Legaliza\u00e7\u00e3o de Empresas","empresa":"RACHI Human Capital","local":"Luanda \/ Nacional","mod":"Presencial \/ H\u00edbrido","sal":"AOA 150.000,00","cands":12,"prazo":"12 dias","req":"Apoio integral na constitui\u00e7\u00e3o, certid\u00f5es, NIF e regulariza\u00e7\u00e3o de neg\u00f3cios em Angola.","status":"Aberta"},{"id":8,"cargo":"Recrutamento e Gest\u00e3o de Pessoas","empresa":"RACHI Human Capital","local":"Luanda \/ Nacional","mod":"Presencial \/ H\u00edbrido","sal":"AOA 95.000,00","cands":12,"prazo":"15 dias","req":"Sele\u00e7\u00e3o de talentos qualificados e estrutura\u00e7\u00e3o de equipas de alto desempenho.","status":"Aberta"}],
+    gProducts: [{"id":"p_6","nome":"Capa Tem\u00e1tica Naruto para iPhone 11 \/ 12 Pro","desc":"Capa protetora personalizada em silicone de alta resist\u00eancia com acabamento premium.","mat":"Acabamento Premium","tam":"Personalizado","qtm":12,"preco":"AOA 7.000,00","prazo":"2-3 dias \u00fateis","status":"Ativo"},{"id":"s_5","nome":"Design de Identidade Visual e Logotipo","desc":"Cria\u00e7\u00e3o de marca, manual de normas gr\u00e1ficas e presen\u00e7a institucional forte.","mat":"Impress\u00e3o Digital \/ UV","tam":"A definir","qtm":1,"preco":"AOA 120.000,00","prazo":"7 dias","status":"Ativo"},{"id":"s_6","nome":"Produ\u00e7\u00e3o Gr\u00e1fica: Banners, Roll-ups e Brindes","desc":"Impress\u00e3o em grande formato, cart\u00f5es de visita de luxo e brindes corporativos.","mat":"Impress\u00e3o Digital \/ UV","tam":"A definir","qtm":1,"preco":"AOA 35.000,00","prazo":"3 dias","status":"Ativo"}],
+    capitalRequests: [{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}],
+    printRequests: [{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]}],
+    printQuotes: [],
 
     finMods: [
-      { label: 'RACHI Store / Tec', icon: '🛒', value: {!! json_encode(number_format($stats['tec_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['tec_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-sky-500' },
-      { label: 'RACHI Academy', icon: '🎓', value: {!! json_encode(number_format($stats['academy_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['academy_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-indigo-600' },
-      { label: 'RACHI Print', icon: '🖨️', value: {!! json_encode(number_format($stats['print_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['print_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-amber-500' },
-      { label: 'Human Capital', icon: '👥', value: {!! json_encode(number_format($stats['capital_revenue'] ?? 0, 2, ',', '.')) !!}, pct: {{ ($stats['total_revenue'] ?? 0) > 0 ? round((($stats['capital_revenue'] ?? 0) / $stats['total_revenue']) * 100) : 0 }}, bc: 'bg-emerald-600' }
+      { label: 'RACHI Store / Tec', icon: '🛒', value: "2.100.000,00", pct: 43, bc: 'bg-sky-500' },
+      { label: 'RACHI Academy', icon: '🎓', value: "1.250.000,00", pct: 26, bc: 'bg-indigo-600' },
+      { label: 'RACHI Print', icon: '🖨️', value: "450.000,00", pct: 9, bc: 'bg-amber-500' },
+      { label: 'Human Capital', icon: '👥', value: "1.050.000,00", pct: 22, bc: 'bg-emerald-600' }
     ],
 
-    txs: @json($recentTransactions ?? []),
+    txs: [{"id":"ord_3","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00003","cli":"gundja","data":"12\/10\/2026","tipo":"entrada","valor":"1.489.000,29","mod":"Tec"},{"id":"ord_1","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00001","cli":"Empresa Teste Luanda Lda","data":"12\/10\/2026","tipo":"entrada","valor":"2.978.000,58","mod":"Tec"},{"id":"ord_2","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00002","cli":"Super Administrador RACHI","data":"12\/10\/2026","tipo":"entrada","valor":"1.489.000,29","mod":"Tec"}],
 
     reports: [
-      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '{{ $stats["total_customers"] ?? 0 }} registos sincronizados', count: '{{ $stats["total_customers"] ?? 0 }}', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
-      { key: 'financeiro', icon: '💰', label: 'Facturação & Vendas', desc: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }} facturados', count: 'AOA {{ number_format($stats["total_revenue"] ?? 0, 2, ",", ".") }}', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
-      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '{{ $stats["total_orders"] ?? 0 }} pedidos de venda registados', count: '{{ $stats["total_orders"] ?? 0 }}', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
-      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '{{ $stats["total_requests"] ?? 0 }} ordens de atendimento', count: '{{ $stats["total_requests"] ?? 0 }}', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
-      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '{{ $stats["academy_courses"] ?? 0 }} formações no catálogo', count: '{{ $stats["academy_courses"] ?? 0 }}', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
-      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '{{ $stats["capital_services"] ?? 0 }} soluções corporativas ativas', count: '{{ $stats["capital_services"] ?? 0 }}', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
+      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '9 registos sincronizados', count: '9', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
+      { key: 'financeiro', icon: '💰', label: 'Facturação & Vendas', desc: 'AOA 4.850.000,00 facturados', count: 'AOA 4.850.000,00', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
+      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '3 pedidos de venda registados', count: '3', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
+      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '14 ordens de atendimento', count: '14', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
+      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '12 formações no catálogo', count: '12', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
+      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '8 soluções corporativas ativas', count: '8', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
     ],
 
     notifs: [
@@ -5556,6 +5592,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => {
     setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 70);
+  });
+
+  // Tooltip flutuante instantâneo para sidebar recolhido (não cortado por overflow)
+  const tip = document.createElement('div');
+  tip.id = 'sidebar-floating-legend';
+  tip.style.cssText = 'position:fixed;display:none;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:0.01em;white-space:nowrap;pointer-events:none;z-index:999999;transition:opacity 0.12s ease;';
+  document.body.appendChild(tip);
+
+  document.addEventListener('mouseover', (e) => {
+    const sidebar = document.getElementById('admin-sidebar') || document.getElementById('client-sidebar');
+    if (!sidebar || !sidebar.classList.contains('collapsed')) {
+      tip.style.display = 'none';
+      return;
+    }
+    const item = e.target.closest('[data-legend]');
+    if (!item || !sidebar.contains(item)) {
+      tip.style.display = 'none';
+      return;
+    }
+    const txt = item.getAttribute('data-legend');
+    if (!txt) {
+      tip.style.display = 'none';
+      return;
+    }
+    tip.textContent = txt;
+    const isDark = document.documentElement.classList.contains('dark');
+    tip.style.background = isDark ? '#071326' : '#ffffff';
+    tip.style.color = isDark ? '#f8fafc' : '#0f172a';
+    tip.style.border = isDark ? '1px solid rgba(0, 80, 240, 0.35)' : '1px solid #cbd5e1';
+    tip.style.boxShadow = isDark ? '0 10px 25px rgba(0,0,0,0.6)' : '0 10px 25px rgba(0,0,0,0.12)';
+    
+    const r = item.getBoundingClientRect();
+    tip.style.display = 'block';
+    tip.style.left = (r.right + 12) + 'px';
+    tip.style.top = (r.top + (r.height / 2) - 14) + 'px';
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('[data-legend]');
+    if (item) tip.style.display = 'none';
   });
 });
 </script>
