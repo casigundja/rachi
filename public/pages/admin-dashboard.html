@@ -1226,17 +1226,6 @@ html.dark .panze-hdr-pill {
     </div>
   </nav>
 
-  <!-- Promo Card (Modelo GundjaTech) -->
-  <div class="gtb-promo-card">
-    <div class="text-[10.5px] font-bold tracking-wider uppercase text-slate-800 dark:text-white/90 leading-snug">
-      GESTÃO CORPORATIVA<br />
-      <strong class="text-amber-500 dark:text-[#FFA525]">RACHI PRO ✦</strong>
-    </div>
-    <a href="#" @click.prevent="setPage('solicitacoes')" class="gtb-promo-btn">
-      <span>Ver Solicitações</span>
-      <span class="text-amber-500 dark:text-[#FFA525]">♛</span>
-    </a>
-  </div>
 
   <!-- Sidebar Footer: Toggle & Logout -->
   <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
