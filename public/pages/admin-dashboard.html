@@ -1026,8 +1026,8 @@ html.dark .panze-hdr-pill {
 
 <!-- SIDEBAR -->
 <aside id="admin-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
-  <!-- Brand & Return to Site -->
-  <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
+  <!-- Brand -->
+  <div class="sidebar-brand-box shrink-0 px-3.5 py-4 border-b border-slate-200/80 dark:border-white/5 flex items-center" :class="{'justify-center': sidebarCollapsed, 'justify-start': !sidebarCollapsed}">
     <div class="flex items-center min-h-[40px] w-full" :class="{'justify-center': sidebarCollapsed, 'justify-start': !sidebarCollapsed}">
       <a href="/admin-dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Gestão Inteligente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
@@ -1054,16 +1054,6 @@ html.dark .panze-hdr-pill {
         </div>
       </a>
     </div>
-
-    <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
-    <a href="/" 
-       class="site-back-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-blue-700 bg-blue-50/90 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/70 dark:border-blue-500/20 transition group shadow-2xs"
-       data-legend="Voltar ao Site RACHI"
-       title="Voltar ao Site RACHI">
-      <i data-lucide="arrow-left" class="w-3.5 h-3.5 flex-shrink-0 group-hover:-translate-x-0.5 transition duration-200"></i>
-      <span class="site-back-text">Voltar ao Site</span>
-      <i data-lucide="external-link" class="w-3 h-3 ms-auto opacity-70 site-back-text"></i>
-    </a>
   </div>
 
   <!-- NAVIGATION -->
@@ -1271,6 +1261,15 @@ html.dark .panze-hdr-pill {
 
     <!-- HORIZONTAL COMPACT CARDS & PILLS (MODELO REFERENCIA) -->
     <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+      <!-- Botão Voltar ao Site (Pílula Elegante no Header) -->
+      <a href="/" 
+         class="panze-hdr-pill !no-underline hover:border-blue-300 dark:hover:border-blue-500/40 hover:bg-blue-50/60 dark:hover:bg-blue-500/10 text-blue-700 dark:text-blue-300 transition group shadow-2xs" 
+         title="Voltar ao Site Principal da RACHI">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 group-hover:-translate-x-0.5 transition-transform"></i>
+        <span class="text-[11px] font-bold">Voltar ao Site</span>
+        <i data-lucide="external-link" class="w-3 h-3 opacity-60 text-blue-600 dark:text-blue-400"></i>
+      </a>
+
       <!-- 1. Cron run / Sincronização -->
       <div class="panze-hdr-pill cursor-pointer hover:border-slate-300 dark:hover:border-white/20" @click="refreshSync()" title="Executar sincronização">
         <button class="w-6 h-6 rounded-full bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:text-purple-600 transition" :class="isSyncing ? 'animate-spin text-purple-600' : ''">
