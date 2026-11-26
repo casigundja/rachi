@@ -129,6 +129,106 @@
                 box-shadow: 0 0 6px rgba(16, 185, 129, 0.8) !important;
             }
 
+            /* Balão Proativo / Tooltip de Boas-Vindas RACHI */
+            .rachi-chat-callout {
+                position: fixed !important;
+                bottom: 94px !important;
+                right: 24px !important;
+                width: 275px !important;
+                max-width: calc(100vw - 48px) !important;
+                background: #FFFFFF !important;
+                border-radius: 18px !important;
+                padding: 16px 18px !important;
+                box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+                border: 1px solid rgba(0, 80, 240, 0.06) !important;
+                z-index: 999997 !important;
+                cursor: pointer !important;
+                transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s !important;
+                transform-origin: bottom right !important;
+                animation: rachiCalloutIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+
+            html.dark .rachi-chat-callout {
+                background: #111B29 !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .rachi-chat-callout.rachi-hidden {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transform: scale(0.9) translateY(12px) !important;
+                pointer-events: none !important;
+            }
+
+            .rachi-chat-callout-header {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 10px !important;
+            }
+
+            .rachi-chat-callout-title {
+                font-size: 15px !important;
+                font-weight: 800 !important;
+                color: #0F172A !important;
+                margin: 0 !important;
+                line-height: 1.25 !important;
+            }
+
+            html.dark .rachi-chat-callout-title {
+                color: #FFFFFF !important;
+            }
+
+            .rachi-chat-callout-close {
+                width: 22px !important;
+                height: 22px !important;
+                border-radius: 9999px !important;
+                background: transparent !important;
+                color: #94A3B8 !important;
+                border: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                cursor: pointer !important;
+                padding: 0 !important;
+                transition: color 0.15s ease, background 0.15s ease !important;
+                flex-shrink: 0 !important;
+            }
+
+            .rachi-chat-callout-close:hover {
+                color: #475569 !important;
+                background: #F1F5F9 !important;
+            }
+
+            html.dark .rachi-chat-callout-close:hover {
+                color: #FFFFFF !important;
+                background: rgba(255, 255, 255, 0.1) !important;
+            }
+
+            .rachi-chat-callout-body {
+                font-size: 13.5px !important;
+                color: #475569 !important;
+                line-height: 1.45 !important;
+                margin: 6px 0 0 0 !important;
+                font-weight: 450 !important;
+            }
+
+            html.dark .rachi-chat-callout-body {
+                color: #94A3B8 !important;
+            }
+
+            @keyframes rachiCalloutIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.88) translateY(16px);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+
             /* Janela Modal do Chat - Elegante e Levemente Translúcida (Glassmorphism) */
             .rachi-chat-window {
                 position: fixed !important;
@@ -488,6 +588,11 @@
                     max-height: calc(100vh - 100px) !important;
                     width: calc(100vw - 24px) !important;
                 }
+                .rachi-chat-callout {
+                    right: 16px !important;
+                    bottom: 88px !important;
+                    max-width: calc(100vw - 32px) !important;
+                }
             }
         `;
         document.head.appendChild(styleEl);
@@ -509,6 +614,20 @@
         const root = document.createElement('div');
         root.id = 'rachi-chat-widget-root';
         root.innerHTML = `
+            <!-- Balão Proativo / Tooltip Adaptado para RACHI -->
+            <div id="rachi-chat-callout" class="rachi-chat-callout rachi-hidden" role="tooltip" aria-live="polite">
+                <div class="rachi-chat-callout-header">
+                    <h5 class="rachi-chat-callout-title">Olá! Precisa de ajuda?</h5>
+                    <button type="button" id="rachi-chat-callout-close" class="rachi-chat-callout-close" aria-label="Fechar aviso">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <p class="rachi-chat-callout-body">Posso apoiar a sua empresa com as soluções inteligentes da RACHI.</p>
+            </div>
+
             <!-- Botão Flutuante (FAB) Âmbar -->
             <button type="button" id="rachi-chat-fab-btn" class="rachi-chat-fab" aria-label="Abrir Chat Interativo RACHI" title="Conversar com a IA da RACHI">
                 <div class="rachi-chat-fab-badge"></div>
@@ -561,9 +680,51 @@
         const fabBtn = document.getElementById('rachi-chat-fab-btn');
         const modal = document.getElementById('rachi-chat-modal');
         const closeBtn = document.getElementById('rachi-chat-close-btn');
+        const callout = document.getElementById('rachi-chat-callout');
+        const calloutClose = document.getElementById('rachi-chat-callout-close');
         const messagesEl = document.getElementById('rachi-chat-messages');
         const form = document.getElementById('rachi-chat-form');
         const input = document.getElementById('rachi-chat-input');
+
+        function showCallout() {
+            let isDismissed = false;
+            try {
+                isDismissed = sessionStorage.getItem('rachi_chat_callout_dismissed') === '1';
+            } catch(e) {}
+
+            if (!isDismissed && !state.isOpen && callout) {
+                callout.classList.remove('rachi-hidden');
+            }
+        }
+
+        function hideCallout(permanent) {
+            if (callout) {
+                callout.classList.add('rachi-hidden');
+            }
+            if (permanent) {
+                try {
+                    sessionStorage.setItem('rachi_chat_callout_dismissed', '1');
+                } catch(e) {}
+            }
+        }
+
+        if (callout) {
+            callout.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideCallout(true);
+                toggleChat(true);
+            });
+        }
+
+        if (calloutClose) {
+            calloutClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideCallout(true);
+            });
+        }
+
+        // Exibir o balão proativo após 2.5 segundos
+        setTimeout(showCallout, 2500);
 
         function scrollToBottom() {
             setTimeout(() => {
@@ -595,7 +756,6 @@
         }
 
         function renderMessages() {
-            // Remove mensagens exceto o indicador de digitação se ativo
             const typingNode = document.getElementById('rachi-typing-node');
             messagesEl.innerHTML = '';
             
@@ -657,6 +817,7 @@
         function toggleChat(forceState) {
             state.isOpen = typeof forceState === 'boolean' ? forceState : !state.isOpen;
             if (state.isOpen) {
+                hideCallout(false);
                 modal.classList.remove('rachi-hidden');
                 setTimeout(() => {
                     input.focus();
