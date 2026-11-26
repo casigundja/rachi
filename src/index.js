@@ -11118,7 +11118,7 @@ var index_default = {
       if (/^\/cliente\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/solicitacoes", url).toString(), 302);
       if (/^\/cliente\/pedidos\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/pedidos", url).toString(), 302);
       if (/^\/funcionario\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/dashboard#solicitacoes", url).toString(), 302);
-      if (/^\/(images|css|build|libs)\//.test(path) || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/ai-chat-widget.js", "/favicon.ico", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
+      if (/^\/(images|css|build|libs|uploads)\//.test(path) || path.startsWith("/favicon") || path === "/apple-touch-icon.png" || path === "/site.webmanifest" || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/ai-chat-widget.js", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
     }
     const aliases = { "/cliente/solicitacoes": "/solicitacoes/nova", "/admin/solicitacoes/conversas": "/solicitacoes/conversas" };
     let rewritten = aliases[path] ?? path;
