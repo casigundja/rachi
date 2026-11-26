@@ -651,17 +651,17 @@ a { text-decoration: none !important; }
 <aside id="admin-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
   <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
-    <div class="flex items-center justify-between min-h-[40px] w-full" :class="{'flex-col justify-center gap-2': sidebarCollapsed}">
+    <div class="flex items-center min-h-[40px] w-full" :class="{'justify-center': sidebarCollapsed, 'justify-start': !sidebarCollapsed}">
       <a href="/admin-dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Gestão Inteligente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center">
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
-               class="h-8 w-auto max-w-[160px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[170px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
-               class="h-8 w-auto max-w-[160px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               class="h-8 w-auto max-w-[170px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
@@ -670,15 +670,6 @@ a { text-decoration: none !important; }
           <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
-      <!-- Único Botão de Recolher / Expandir no Topo da Sidebar -->
-      <button @click="sidebarCollapsed = !sidebarCollapsed"
-              type="button"
-              class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/90 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/80 dark:border-white/10 cursor-pointer shadow-2xs"
-              :class="{'mx-auto mt-1': sidebarCollapsed}"
-              :data-legend="sidebarCollapsed ? 'Expandir Menu' : ''"
-              :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
-        <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="w-4 h-4"></i>
-      </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
@@ -842,8 +833,18 @@ a { text-decoration: none !important; }
     </div>
   </nav>
 
-  <!-- Sidebar Footer: Logout -->
-  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02]">
+  <!-- Sidebar Footer: Toggle & Logout -->
+  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
+    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition"
+         @click="sidebarCollapsed = !sidebarCollapsed"
+         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
+         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+      <i x-show="!sidebarCollapsed" data-lucide="panel-left-close" class="si"></i>
+      <i x-show="sidebarCollapsed" data-lucide="panel-left-open" class="si" style="display: none;"></i>
+      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">Recolher Menu</span>
+    </div>
+
     <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors cursor-pointer" 
          @click="logout()" 
          data-legend="Encerrar Sessão"
@@ -866,9 +867,6 @@ a { text-decoration: none !important; }
     <!-- Breadcrumb -->
     <div class="flex items-center gap-2 text-sm shrink-0">
       <span class="text-slate-400 dark:text-slate-500 font-semibold">Portal Executivo</span>
-      <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
-      <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
-    </div>
       <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
       <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
     </div>

@@ -451,7 +451,7 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
 <aside id="client-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
   <div class="sidebar-brand-box shrink-0 p-3.5 border-b border-slate-200/80 dark:border-white/5 space-y-2.5">
-    <div class="flex items-center justify-between min-h-[40px] w-full" :class="{'flex-col justify-center gap-2': sidebarCollapsed}">
+    <div class="flex items-center min-h-[40px] w-full" :class="{'justify-center': sidebarCollapsed, 'justify-start': !sidebarCollapsed}">
       <a href="/cliente/dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Área do Cliente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center gap-2">
@@ -471,15 +471,6 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
           <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
-      <!-- Único Botão de Recolher / Expandir no Topo da Sidebar -->
-      <button @click="sidebarCollapsed = !sidebarCollapsed"
-              type="button"
-              class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/90 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/80 dark:border-white/10 cursor-pointer shadow-2xs"
-              :class="{'mx-auto mt-1': sidebarCollapsed}"
-              :data-legend="sidebarCollapsed ? 'Expandir Menu' : ''"
-              :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
-        <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="w-4 h-4"></i>
-      </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
@@ -548,8 +539,18 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
     </template>
   </nav>
 
-  <!-- Sidebar Footer: User & Logout -->
-  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+  <!-- Sidebar Footer: Toggle, User & Logout -->
+  <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
+    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition"
+         @click="sidebarCollapsed = !sidebarCollapsed"
+         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
+         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+      <i x-show="!sidebarCollapsed" data-lucide="panel-left-close" class="si"></i>
+      <i x-show="sidebarCollapsed" data-lucide="panel-left-open" class="si" style="display: none;"></i>
+      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">Recolher Menu</span>
+    </div>
+
     <div class="flex items-center gap-3 px-1.5 py-1 mb-1">
       <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f5a800] to-[#0050f0] text-slate-950 font-black flex items-center justify-center text-xs shadow-sm shrink-0" x-text="user.name ? user.name.charAt(0).toUpperCase() : 'C'"></div>
       <div class="min-w-0 flex-1 sl">
