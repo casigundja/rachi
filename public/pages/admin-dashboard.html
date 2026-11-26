@@ -1918,41 +1918,48 @@ html.dark .panze-hdr-pill {
             <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Card 1: SUPER ADMIN -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SUPER ADMIN</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">SUPER</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">SUPER ADMIN</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">NÍVEL MÁXIMO</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</span>
           </div>
         </div>
 
         <!-- Card 2: ADMINISTRADORES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">ADMINISTRADORES</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">ADMIN</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">ADMINISTRADORES</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">ADMIN</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</span>
           </div>
         </div>
 
         <!-- Card 3: EQUIPE OPERACIONAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EQUIPE OPERACIONAL</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</div>
-            <span class="text-xs font-bold tracking-wider text-purple-600 dark:text-purple-400 uppercase">EQUIPE</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EQUIPE OPERACIONAL</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/80 dark:border-purple-800/40 uppercase">OPERACIONAL</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</span>
           </div>
         </div>
 
         <!-- Card 4: CLIENTES NO PORTAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES NO PORTAL</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">PORTAL</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES NO PORTAL</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">CLIENTE</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</span>
           </div>
         </div>
-      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
@@ -2128,41 +2135,48 @@ html.dark .panze-hdr-pill {
             <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <!-- Card 1: TOTAL GERAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">TOTAL GERAL</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.total">9</div>
-            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Todos</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TOTAL GERAL</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">TODOS</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.total">9</span>
           </div>
         </div>
 
         <!-- Card 2: CLIENTES ATIVOS -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES ATIVOS</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
-            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES ATIVOS</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/40 uppercase">ATIVO</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.ativos">9</span>
           </div>
         </div>
 
         <!-- Card 3: CONTAS EMPRESA -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONTAS EMPRESA</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">EMPRESA</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CONTAS EMPRESA</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">EMPRESA</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.empresas">8</span>
           </div>
         </div>
 
         <!-- Card 4: LEADS / PARTICULARES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">LEADS / PARTICULARES</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.leads">1</div>
-            <span class="text-xs font-bold tracking-wider text-amber-600 dark:text-amber-400 uppercase">LEAD</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">LEADS / PARTICULARES</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">LEAD</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.leads">1</span>
           </div>
         </div>
-      </div>
       </div>
 
       <!-- TABELA DE CLIENTES NOVO MODELO (PRINT 1) -->
@@ -2441,41 +2455,48 @@ html.dark .panze-hdr-pill {
                     <!-- 4 KPIS -->
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Card 1: Total no Pipeline -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total no Pipeline</div>
-              <div class="flex items-center justify-between mt-3">
-                <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total">4</div>
-                <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Total</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TOTAL NO PIPELINE</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 uppercase">TOTAL</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total">4</span>
               </div>
             </div>
 
             <!-- Card 2: Novas / Pendentes -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Novas / Pendentes</div>
-              <div class="flex items-center justify-between mt-3">
-                <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="pipelineStats.novas">0</div>
-                <span class="text-xs font-bold tracking-wider text-slate-900 dark:text-white uppercase">TRIAGEM</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">NOVAS / PENDENTES</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/40 uppercase">TRIAGEM</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="pipelineStats.novas">0</span>
               </div>
             </div>
 
             <!-- Card 3: Em Análise / Proposta -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Em Análise / Proposta</div>
-              <div class="flex items-center justify-between mt-3">
-                <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="pipelineStats.analise">0</div>
-                <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">ANÁLISE</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EM ANÁLISE / PROPOSTA</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">ANÁLISE</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="pipelineStats.analise">0</span>
               </div>
             </div>
 
             <!-- Card 4: Aprovadas / Concluídas -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Aprovadas / Concluídas</div>
-              <div class="flex items-center justify-between mt-3">
-                <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="pipelineStats.concluidas">1</div>
-                <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">APROVADO</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">APROVADAS / CONCLUÍDAS</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/40 uppercase">APROVADO</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="pipelineStats.concluidas">1</span>
               </div>
             </div>
-          </div>
           </div>
 
           <!-- CARD CONTAINER COM FILTROS E TABELA -->
@@ -3037,14 +3058,15 @@ html.dark .panze-hdr-pill {
         </div>
 
         <!-- Card 4: Ticket Médio Base -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Ticket Médio Base</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio">Kz 0,00</div>
-            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">MÉDIA</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TICKET MÉDIO BASE</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/40 uppercase">MÉDIA</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio">Kz 0,00</span>
           </div>
         </div>
-      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
@@ -3209,14 +3231,15 @@ html.dark .panze-hdr-pill {
         </div>
 
         <!-- Card 4: Em Atraso (Vencido) -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
-          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Em Atraso (Vencido)</div>
-          <div class="flex items-center justify-between mt-3">
-            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted">Kz 0,00</div>
-            <span class="text-xs font-bold tracking-wider text-rose-600 dark:text-rose-400 uppercase">VENCIDO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EM ATRASO (VENCIDO)</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200/80 dark:border-rose-800/40 uppercase">VENCIDO</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted">Kz 0,00</span>
           </div>
         </div>
-      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
@@ -4835,6 +4858,7 @@ html.dark .panze-hdr-pill {
             </button>
           </div>
         </form>
+      </div>
     </div>
 
     <!-- MODAL 13: CRIAR NOVO CURSO / FORMAÇÃƒO (ACADEMY) -->
