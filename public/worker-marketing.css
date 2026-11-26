@@ -197,3 +197,24 @@ html.dark .rachi-theme-fab .fab-dark-content {
 .dark\:bg-\[radial-gradient\(ellipse_70\%_60\%_at_50\%_-10\%\,rgba\(16\,185\,129\,0\.22\)\,transparent_70\%\)\]:is(.dark *) {
     background-image: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(16, 185, 129, 0.22), transparent 70%) !important;
 }
+
+/* Ocultação total e graciosa de botões flutuantes (Dock e Chat) quando gavetas ou modais estão abertos */
+body.cart-drawer-open .rachi-fab-dock,
+body.cart-drawer-open #rachi-chat-widget-root,
+body.cart-drawer-open .rachi-chat-fab,
+body.cart-drawer-open .rachi-chat-callout,
+body.rachi-overlay-active .rachi-fab-dock,
+body.rachi-overlay-active #rachi-chat-widget-root,
+body.rachi-overlay-active .rachi-chat-fab,
+body.rachi-overlay-active .rachi-chat-callout,
+body.modal-open .rachi-fab-dock,
+body.modal-open #rachi-chat-widget-root,
+body.modal-open .rachi-chat-fab,
+body.modal-open .rachi-chat-callout {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    transform: translateY(24px) scale(0.96) !important;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s !important;
+}
+

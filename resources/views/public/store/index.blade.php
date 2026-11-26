@@ -1939,7 +1939,7 @@
     <!-- ============================================================== -->
     <!-- 10. SACOLA LATERAL (SLIDING CART DRAWER — ESTILO BOTICÁRIO)    -->
     <!-- ============================================================== -->
-    <div x-show="cartDrawerOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end">
+    <div x-show="cartDrawerOpen" x-cloak class="fixed inset-0 z-[1000000] overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end">
         <div @click.outside="cartDrawerOpen = false" 
              x-transition:enter="transition ease-out duration-300 transform"
              x-transition:enter-start="translate-x-full"
@@ -2042,7 +2042,7 @@
     <!-- ============================================================== -->
     <!-- 11. MODAL DE VISUALIZAÇÃO RÁPIDA (QUICK VIEW MODAL)             -->
     <!-- ============================================================== -->
-    <div x-show="quickViewOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div x-show="quickViewOpen" x-cloak class="fixed inset-0 z-[1000000] overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div @click.outside="quickViewOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative">
             <button @click="quickViewOpen = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
                 <i data-lucide="x" class="w-5 h-5"></i>
@@ -2095,7 +2095,7 @@
     <!-- ============================================================== -->
     <!-- 12. FLUXO DE CHECKOUT COMPLETO EM 4 ETAPAS (CONFORME NCR ANGOLA & LEIS DO CONSUMIDOR) -->
     <!-- ============================================================== -->
-    <div x-show="checkoutModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 lg:p-8">
+    <div x-show="checkoutModal" x-cloak class="fixed inset-0 z-[1000000] overflow-y-auto bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 lg:p-8">
         <div @click.outside="checkoutModal = false" class="bg-white dark:bg-slate-900 rounded-3xl max-w-5xl w-full shadow-2xl relative border border-slate-200 dark:border-slate-800 overflow-hidden my-auto">
             
             <!-- Botão Fechar -->
@@ -2636,7 +2636,7 @@
     <!-- MODAL DE PAGAMENTO INSTANTÂNEO & QR CODE MULTICAIXA EXPRESS    -->
     <!-- (TELAS 4 & 5 DE REFERÊNCIA - WIPAY / MULTICAIXA EXPRESS)       -->
     <!-- ============================================================== -->
-    <div x-show="paymentModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div x-show="paymentModalOpen" x-cloak class="fixed inset-0 z-[1000000] overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
         <div @click.outside="paymentModalOpen = false" class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center border border-slate-200 dark:border-slate-800">
             
             <!-- Botão Voltar -->
@@ -2775,7 +2775,7 @@
 
     <!-- 13. MODAL DE INÍCIO DE SESSÃO / REGISTO (ACEDER À MINHA CONTA) -->
     <!-- ============================================================== -->
-    <div x-show="loginModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div x-show="loginModalOpen" x-cloak class="fixed inset-0 z-[1000000] overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div @click.outside="loginModalOpen = false" class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <button @click="loginModalOpen = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
                 <i data-lucide="x" class="w-5 h-5"></i>
@@ -2863,7 +2863,7 @@
     <!-- ============================================================== -->
     <!-- 14. PAINEL DO CLIENTE (MEUS DADOS, PEDIDOS, FAVORITOS...)      -->
     <!-- ============================================================== -->
-    <div x-show="accountModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div x-show="accountModalOpen" x-cloak class="fixed inset-0 z-[1000000] overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div @click.outside="accountModalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">
             
             <!-- Botão Fechar -->
@@ -4239,6 +4239,29 @@
 
 
                     // Watchers do Alpine
+                    const updateOverlayState = () => {
+                        const isOverlayActive = Boolean(
+                            this.cartDrawerOpen || 
+                            this.checkoutModal || 
+                            this.paymentModalOpen || 
+                            this.quickViewOpen || 
+                            this.loginModalOpen || 
+                            this.accountModalOpen
+                        );
+                        if (isOverlayActive) {
+                            document.body.classList.add('rachi-overlay-active', 'cart-drawer-open');
+                            if (typeof window.RachiChatDismissBubble === 'function') {
+                                window.RachiChatDismissBubble();
+                            }
+                        } else {
+                            document.body.classList.remove('rachi-overlay-active', 'cart-drawer-open');
+                        }
+                    };
+
+                    this.$watch('cartDrawerOpen', () => updateOverlayState());
+                    this.$watch('checkoutModal', () => updateOverlayState());
+                    this.$watch('paymentModalOpen', () => updateOverlayState());
+                    this.$watch('quickViewOpen', () => updateOverlayState());
                     this.$watch('userMenuOpen', (val) => {
                         if (val && window.lucide) {
                             this.$nextTick(() => lucide.createIcons());

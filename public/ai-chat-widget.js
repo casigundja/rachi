@@ -594,6 +594,26 @@
                     max-width: calc(100vw - 32px) !important;
                 }
             }
+
+            /* Ocultação total e graciosa de botões flutuantes quando a sacola ou checkout estão ativos */
+            body.cart-drawer-open #rachi-chat-widget-root,
+            body.cart-drawer-open .rachi-chat-fab,
+            body.cart-drawer-open .rachi-chat-callout,
+            body.cart-drawer-open .rachi-fab-dock,
+            body.rachi-overlay-active #rachi-chat-widget-root,
+            body.rachi-overlay-active .rachi-chat-fab,
+            body.rachi-overlay-active .rachi-chat-callout,
+            body.rachi-overlay-active .rachi-fab-dock,
+            body.modal-open #rachi-chat-widget-root,
+            body.modal-open .rachi-chat-fab,
+            body.modal-open .rachi-chat-callout,
+            body.modal-open .rachi-fab-dock {
+                opacity: 0 !important;
+                pointer-events: none !important;
+                visibility: hidden !important;
+                transform: translateY(24px) scale(0.96) !important;
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s !important;
+            }
         `;
         document.head.appendChild(styleEl);
 
@@ -686,13 +706,19 @@
         const form = document.getElementById('rachi-chat-form');
         const input = document.getElementById('rachi-chat-input');
 
+        function isAnyOverlayActive() {
+            return document.body.classList.contains('cart-drawer-open') || 
+                   document.body.classList.contains('rachi-overlay-active') ||
+                   document.body.classList.contains('modal-open');
+        }
+
         function showCallout() {
             let isDismissed = false;
             try {
                 isDismissed = sessionStorage.getItem('rachi_chat_callout_dismissed') === '1';
             } catch(e) {}
 
-            if (!isDismissed && !state.isOpen && callout) {
+            if (!isDismissed && !state.isOpen && !isAnyOverlayActive() && callout) {
                 callout.classList.remove('rachi-hidden');
             }
         }
@@ -707,6 +733,23 @@
                 } catch(e) {}
             }
         }
+
+        window.RachiChatDismissBubble = function() {
+            hideCallout(true);
+        };
+
+        // Observa abertura do carrinho ou modais para recolher o chat e o balão instantaneamente
+        try {
+            const overlayObserver = new MutationObserver(() => {
+                if (isAnyOverlayActive()) {
+                    hideCallout(false);
+                    if (state.isOpen) {
+                        toggleChat(false);
+                    }
+                }
+            });
+            overlayObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        } catch(e) {}
 
         if (callout) {
             callout.addEventListener('click', (e) => {
