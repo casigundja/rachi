@@ -1080,26 +1080,6 @@ html.dark .panze-hdr-pill {
       <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="totalClientsCount"></span>
     </div>
 
-    <!-- Sites -->
-    <div @click="setPage('sites')" :class="currentPage==='sites'?'active':''" class="sidebar-item" data-legend="Sites" title="Sites">
-      <i data-lucide="globe" class="si"></i>
-      <span class="sl">Sites</span>
-      <span class="sb2 badge bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">87</span>
-    </div>
-
-    <!-- Domínios -->
-    <div @click="setPage('dominios')" :class="currentPage==='dominios'?'active':''" class="sidebar-item" data-legend="Domínios" title="Domínios">
-      <i data-lucide="link-2" class="si"></i>
-      <span class="sl">Domínios</span>
-      <span class="sb2 badge bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">22</span>
-    </div>
-
-    <!-- Tráfego Pago -->
-    <div @click="setPage('trafego')" :class="currentPage==='trafego'?'active':''" class="sidebar-item" data-legend="Tráfego Pago" title="Tráfego Pago">
-      <i data-lucide="trending-up" class="si"></i>
-      <span class="sl">Tráfego Pago</span>
-    </div>
-
     <!-- Solicitações (Expansível com Árvore) -->
     <div>
       <div @click="toggleMenu('tickets')" 
@@ -1302,8 +1282,8 @@ html.dark .panze-hdr-pill {
         <button @click="setPage('solicitacoes')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Tarefas e Pedidos">
           <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
         </button>
-        <button @click="setPage('sites')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Sites & Rede">
-          <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+        <button @click="setPage('servicos')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Serviços & Catálogo">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
         </button>
         <button @click="setPage('notificacoes')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-purple-600 transition relative" title="Notificações">
           <i data-lucide="bell" class="w-3.5 h-3.5"></i>
@@ -1363,22 +1343,22 @@ html.dark .panze-hdr-pill {
               <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Total de Clientes</span>
             </div>
 
-            <!-- 2. Sites Ativos -->
-            <div @click="setPage('sites')" class="panze-stat-pill cursor-pointer group" title="Ver Sites">
+            <!-- 2. Serviços no Catálogo -->
+            <div @click="setPage('servicos')" class="panze-stat-pill cursor-pointer group" title="Ver Catálogo de Serviços">
               <div class="flex items-baseline gap-1.5 flex-wrap">
                 <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors" style="font-family:Outfit">87</span>
                 <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(5 Novos)</span>
               </div>
-              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Sites Ativos</span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Serviços no Catálogo</span>
             </div>
 
-            <!-- 3. Domínios Gerenciados -->
-            <div @click="setPage('dominios')" class="panze-stat-pill cursor-pointer group" title="Ver Domínios">
+            <!-- 3. Cotações & Propostas -->
+            <div @click="setPage('grafica-orcamentos')" class="panze-stat-pill cursor-pointer group" title="Ver Cotações">
               <div class="flex items-baseline gap-1.5 flex-wrap">
                 <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors" style="font-family:Outfit">22</span>
-                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(2 Renovando)</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(2 Recentes)</span>
               </div>
-              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Domínios Gerenciados</span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Cotações & Propostas</span>
             </div>
 
             <!-- 4. Solicitações Recebidas -->
