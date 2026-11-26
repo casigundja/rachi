@@ -3132,40 +3132,116 @@ html.dark .panze-hdr-pill {
 
     <!-- MÓDULOS DE SUB-PÁGINAS (ACADEMY, LOJA, RH, PRINT, FINANÇAS, CONFIGURAÇÕES) -->
     <!-- ACADEMY -->
-    <section x-show="currentPage==='academy-cursos'" x-cloak class="space-y-6">
+    <!-- ACADEMY CURSOS -->
+    <section x-show="currentPage==='academy-cursos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy — Cursos & Certificações</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Gestão do catálogo de formações presenciais e online em Angola.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Academy — Cursos &amp; Certificações</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Formações corporativas, certificações executivas e capacitação técnica em TI.</p>
           </div>
         </div>
-        <button type="button" @click="openCreateCourseModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Criar Novo Curso</button>
+        <button type="button" @click="openCreateCourseModal()" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Registar Curso</span>
+        </button>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE FILTRO -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="courseCategoryTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="courseCategoryTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="aCourses.length"></span>)
+          </button>
+          <button @click="courseCategoryTab = 'Tecnologia da Informação & Redes'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="courseCategoryTab === 'Tecnologia da Informação & Redes' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Tecnologia &amp; Redes
+          </button>
+          <button @click="courseCategoryTab = 'Cibersegurança'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="courseCategoryTab === 'Cibersegurança' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Cibersegurança
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="courseSearch" placeholder="Buscar curso, formador ou trilha..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredCourses.length + ' cursos'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA DE CURSOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Título da Formação</th><th>Trilha</th><th>Formador</th><th>Inscritos</th><th>Carga</th><th>Preço</th><th>Aproveitamento</th><th>Status</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Título da Formação</th>
+                <th>Trilha / Área</th>
+                <th>Formador Responsável</th>
+                <th>Inscritos</th>
+                <th>Carga</th>
+                <th>Investimento</th>
+                <th>Status</th>
+                <th class="text-right">Ações</th>
+              </tr>
+            </thead>
             <tbody>
-              <template x-for="c in aCourses" :key="c.id">
-                <tr>
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="c.titulo"></div><div class="text-xs text-slate-500" x-text="c.modulos+' módulos de aula'"></div></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="c.cat"></td>
-                  <td class="text-slate-700 dark:text-slate-300 text-sm font-semibold" x-text="c.prof"></td>
-                  <td class="font-black text-slate-900 dark:text-white" x-text="c.alunos"></td>
-                  <td class="text-slate-500 text-xs font-medium" x-text="c.dur"></td>
-                  <td class="text-emerald-600 dark:text-emerald-400 font-extrabold text-sm" x-text="c.preco"></td>
+              <template x-for="c in filteredCourses" :key="c.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                   <td>
-                    <div class="flex items-center gap-2">
-                      <div class="pb flex-1" style="min-width:60px"><div class="pbf bg-indigo-500" :style="'width:'+c.taxa+'%'"></div></div>
-                      <span class="text-xs text-slate-500 font-bold" x-text="c.taxa+'%'"></span>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="c.titulo"></div>
+                        <div class="text-[11px] text-slate-400 font-medium font-mono" x-text="'SLUG: /' + c.slug"></div>
+                      </div>
                     </div>
                   </td>
-                  <td><span class="badge2" :class="c.status==='Ativo'?'s-ativo':'s-inativo'" x-text="c.status"></span></td>
+                  <td>
+                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="c.cat"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300" x-text="c.prof"></span>
+                  </td>
+                  <td>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-white/5">
+                      <i data-lucide="users" class="w-3 h-3 text-[#0050f0]"></i>
+                      <span x-text="c.alunos + ' alunos'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-bold text-slate-500 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded-md" x-text="c.dur"></span>
+                  </td>
+                  <td>
+                    <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="c.preco"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="c.status==='Ativo'?'s-ativo':'s-inativo'" x-text="c.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Curso', 'Gestão do curso ' + c.titulo)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Gerenciar</span>
+                    </button>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -3491,61 +3567,230 @@ html.dark .panze-hdr-pill {
       </div>
     </section>
 
-    <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-6">
-      <div class="flex items-center justify-between gap-3">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Solicitações & Consultoria</h1>
-          <p class="text-sm text-slate-500 mt-1">Pedidos enviados pela página Human Capital e pelas suas páginas de serviços.</p>
+    <!-- RH SOLICITAÇÕES -->
+    <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Solicitações &amp; Consultoria</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Pedidos de recrutamento, consultoria corporativa e terceirização de talentos.</p>
+          </div>
         </div>
-        <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
+        <button type="button" @click="refreshAdminRequests(true)" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          <span>Atualizar</span>
+        </button>
       </div>
-      <div class="kc"><span class="text-3xl font-black text-slate-900 dark:text-white" x-text="capitalRequests.length"></span><span class="text-sm text-slate-500 ml-3">Solicitações Recebidas</span></div>
-      <div class="sc2 p-0 overflow-hidden"><div class="overflow-x-auto"><table class="at">
-        <thead><tr><th>Protocolo</th><th>Cliente / Empresa</th><th>Serviço</th><th>Data</th><th>Estado</th><th>Atendimento</th></tr></thead>
-        <tbody>
-          <template x-for="r in capitalRequests" :key="r.id"><tr>
-            <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol"></td>
-            <td><div class="font-bold text-slate-900 dark:text-white" x-text="r.cliente"></div><div class="text-xs text-slate-500" x-text="r.empresa"></div></td>
-            <td class="text-sm text-slate-700 dark:text-slate-300" x-text="r.titulo"></td>
-            <td class="text-xs text-slate-500" x-text="r.data || r.created_at"></td>
-            <td><span class="badge2" :class="r.sc" x-text="r.statusLabel || r.status"></span></td>
-            <td><button type="button" @click="openReq(r)" class="bap text-xs">Ver solicitação</button></td>
-          </tr></template>
-          <tr x-show="capitalRequests.length === 0"><td colspan="6" class="text-center py-10 text-sm text-slate-500">Nenhuma solicitação Human Capital recebida.</td></tr>
-        </tbody>
-      </table></div></div>
+
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="capitalReqStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="capitalReqStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todas (<span x-text="capitalRequests.length"></span>)
+          </button>
+          <button @click="capitalReqStatusTab = 'Novo'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="capitalReqStatusTab === 'Novo' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Novas
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="capitalReqSearch" placeholder="Buscar por protocolo, cliente ou serviço..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredCapitalRequests.length + ' solicitações'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
+        <div class="overflow-x-auto min-h-[280px]">
+          <table class="at">
+            <thead>
+              <tr>
+                <th>Protocolo</th>
+                <th>Cliente / Empresa</th>
+                <th>Serviço Solicitado</th>
+                <th>Data</th>
+                <th>Estado</th>
+                <th class="text-right">Atendimento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="r in filteredCapitalRequests" :key="r.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0">
+                        <span x-text="(r.cliente || 'C').charAt(0).toUpperCase()"></span>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="r.cliente"></div>
+                        <div class="text-[11px] text-slate-400" x-text="r.empresa || 'Empresa Privada'"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="font-semibold text-xs text-slate-800 dark:text-slate-200" x-text="r.servico"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-500 font-medium" x-text="r.data"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="r.sc" x-text="r.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="openReq(r)" class="bap cursor-pointer text-xs py-1 px-2.5 inline-flex items-center gap-1.5">
+                      <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                      <span>Atender</span>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+              <tr x-show="!filteredCapitalRequests || filteredCapitalRequests.length === 0">
+                <td colspan="6" class="text-center py-12">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                    <i data-lucide="file-check" class="w-6 h-6"></i>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhuma solicitação de Human Capital pendente</h4>
+                  <p class="text-xs text-slate-500 mt-1">As propostas e contatos corporativos aparecerão listados aqui.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- RH VAGAS -->
-    <section x-show="currentPage==='rh-vagas'" x-cloak class="space-y-6">
+    <!-- RH VAGAS -->
+    <section x-show="currentPage==='rh-vagas'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Vagas & Recrutamento</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Processos de atração, seleção e consultoria de recursos humanos.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Vagas &amp; Recrutamento</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Gestão de processos seletivos, posições abertas e triagem de talentos.</p>
           </div>
         </div>
-        <button type="button" @click="openCreateJobModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Publicar Vaga</button>
+        <button type="button" @click="openCreateJobModal()" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Nova Vaga</span>
+        </button>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="jobStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="jobStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todas (<span x-text="rhJobs.length"></span>)
+          </button>
+          <button @click="jobStatusTab = 'Aberta'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="jobStatusTab === 'Aberta' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Abertas
+          </button>
+          <button @click="jobStatusTab = 'Em Triagem'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="jobStatusTab === 'Em Triagem' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Em Triagem
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="jobSearch" placeholder="Buscar por cargo, empresa ou cidade..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredJobs.length + ' vagas'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA DE VAGAS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Posição</th><th>Cliente Contratante</th><th>Local</th><th>Modelo</th><th>Faixa Salarial</th><th>Candidatos</th><th>Prazo</th><th>Status</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Posição / Cargo</th>
+                <th>Cliente Contratante</th>
+                <th>Localização &amp; Modelo</th>
+                <th>Faixa Salarial</th>
+                <th>Candidatos</th>
+                <th>Prazo</th>
+                <th>Status</th>
+                <th class="text-right">Ações</th>
+              </tr>
+            </thead>
             <tbody>
-              <template x-for="v in rhJobs" :key="v.id">
-                <tr>
-                  <td><div class="font-bold text-slate-900 dark:text-white" x-text="v.cargo"></div><div class="text-xs text-slate-500" x-text="v.req"></div></td>
-                  <td class="text-slate-700 dark:text-slate-300 font-semibold" x-text="v.empresa"></td>
-                  <td class="text-slate-500 text-xs" x-text="v.local"></td>
-                  <td><span class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 font-bold" x-text="v.mod"></span></td>
-                  <td class="text-emerald-600 dark:text-emerald-400 font-extrabold text-sm" x-text="v.sal"></td>
-                  <td class="font-black text-slate-900 dark:text-white" x-text="v.cands"></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="v.prazo"></td>
-                  <td><span class="badge2" :class="v.status==='Aberta'?'s-ativo':'s-inativo'" x-text="v.status"></span></td>
+              <template x-for="v in filteredJobs" :key="v.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="v.cargo"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="v.area || 'Recrutamento Executivo'"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-200" x-text="v.empresa"></span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="text-xs font-semibold px-2 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="v.local"></span>
+                      <span class="text-xs font-semibold px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400" x-text="v.modelo"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="v.sal"></span>
+                  </td>
+                  <td>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300">
+                      <i data-lucide="users" class="w-3 h-3 text-[#0050f0]"></i>
+                      <span x-text="v.cands + ' inscritos'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-500 font-medium" x-text="v.prazo"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="v.status==='Aberta'?'s-ativo':'s-inativo'" x-text="v.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Vaga', 'Processo seletivo para ' + v.cargo)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Candidatos</span>
+                    </button>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -3555,34 +3800,109 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- GRÁFICA PRODUTOS -->
-    <section x-show="currentPage==='grafica-produtos'" x-cloak class="space-y-6">
+    <!-- GRÁFICA PRODUTOS -->
+    <section x-show="currentPage==='grafica-produtos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
             <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Gestão da Produção Gráfica</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Controlo de tiragens, acabamentos, prazos e entregas gráficas.</p>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Controlo de tiragens, acabamentos, formatos fotográficos e produção publicitária.</p>
           </div>
         </div>
-        <button type="button" @click="openCreatePrintModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Novo Pedido Gráfico</button>
+        <button type="button" @click="openCreatePrintModal()" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Novo Pedido Gráfico</span>
+        </button>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE FORMATO -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="printProdTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="printProdTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="gProducts.length"></span>)
+          </button>
+          <button @click="printProdTab = 'promocional'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="printProdTab === 'promocional' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Brindes &amp; Promocionais
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="printProdSearch" placeholder="Buscar produto gráfico ou material..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredPrintProducts.length + ' itens'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA DE PRODUTOS GRÁFICOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Serviço / Produto</th><th>Especificação</th><th>Tamanho</th><th>Tiragem Mínima</th><th>Preço</th><th>Prazo</th><th>Status</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Serviço / Produto</th>
+                <th>Especificação / Material</th>
+                <th>Dimensões / Tamanho</th>
+                <th>Tiragem Mínima</th>
+                <th>Preço Unitário</th>
+                <th>Prazo Estimado</th>
+                <th>Status</th>
+                <th class="text-right">Ações</th>
+              </tr>
+            </thead>
             <tbody>
-              <template x-for="g in gProducts" :key="g.id">
-                <tr>
-                  <td><div class="font-bold text-slate-900 dark:text-white" x-text="g.nome"></div><div class="text-xs text-slate-500" x-text="g.desc"></div></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="g.mat"></td>
-                  <td class="text-slate-500 text-xs font-mono font-bold" x-text="g.tam"></td>
-                  <td class="text-slate-700 dark:text-slate-300 font-bold" x-text="g.qtm+' un.'"></td>
-                  <td class="text-emerald-600 dark:text-emerald-400 font-extrabold" x-text="g.preco"></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="g.prazo"></td>
-                  <td><span class="badge2" :class="g.status==='Ativo'?'s-ativo':'s-inativo'" x-text="g.status"></span></td>
+              <template x-for="g in filteredPrintProducts" :key="g.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="printer" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="g.nome"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="g.desc"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="g.mat"></span>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded-md" x-text="g.tam"></span>
+                  </td>
+                  <td>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300">
+                      <span x-text="g.qtm + ' un.'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="g.preco"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-500 font-medium" x-text="g.prazo"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="g.status==='Ativo'?'s-ativo':'s-inativo'" x-text="g.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Produto Gráfico', 'Configurar produto ' + g.nome)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Editar</span>
+                    </button>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -4006,59 +4326,115 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- LOJA PEDIDOS -->
-    <section x-show="currentPage==='loja-pedidos'" x-cloak class="space-y-6">
+    <!-- LOJA PEDIDOS -->
+    <section x-show="currentPage==='loja-pedidos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos & Formulários de TI</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Gestão de vendas da loja e de formulários preenchidos em /tec e sub-páginas.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Pedidos &amp; Formulários de TI</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Gestão unificada de vendas da loja de tecnologia e demandas preenchidas em /tec.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Atualizar</button>
+          <button type="button" @click="refreshAdminRequests(true)" class="bap cursor-pointer text-xs sm:text-sm">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <span>Atualizar</span>
+          </button>
         </div>
       </div>
 
-      <!-- Abas de Navegação entre Pedidos de Venda e Formulários /tec -->
-      <div class="flex items-center gap-3 border-b border-slate-200 dark:border-white/10 pb-1">
+      <!-- ABAS PRINCIPAIS: PEDIDOS DE VENDA vs FORMULÁRIOS /TEC -->
+      <div class="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-2">
         <button type="button" @click="tecTab = 'pedidos'"
-          class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer"
-          :class="tecTab === 'pedidos' ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
+          class="flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs transition cursor-pointer"
+          :class="tecTab === 'pedidos' ? 'bg-[#0050f0] text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
           <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-          <span>Pedidos de Venda Loja</span>
-          <span class="px-1.5 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'pedidos' ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'" x-text="tecOrders.length"></span>
+          <span>Pedidos de Venda da Loja</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'pedidos' ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'" x-text="tecOrders.length"></span>
         </button>
 
         <button type="button" @click="tecTab = 'propostas'"
-          class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer"
-          :class="tecTab === 'propostas' ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
+          class="flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs transition cursor-pointer"
+          :class="tecTab === 'propostas' ? 'bg-[#0050f0] text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'">
           <i data-lucide="file-text" class="w-4 h-4"></i>
-          <span>Formulários & Propostas /tec</span>
-          <span class="px-1.5 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'propostas' ? 'bg-white/20 text-white' : 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300'" x-text="tecRequests.length"></span>
+          <span>Formulários &amp; Propostas /tec</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black" :class="tecTab === 'propostas' ? 'bg-white/20 text-white' : 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300'" x-text="tecRequests.length"></span>
         </button>
       </div>
 
       <!-- ABA 1: PEDIDOS DE VENDA DA LOJA -->
-      <div x-show="tecTab === 'pedidos'" class="space-y-6">
-                <div class="sc2 p-0 overflow-hidden">
+      <div x-show="tecTab === 'pedidos'" class="space-y-4">
+        <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+        <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+            <button @click="tecOrderStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecOrderStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Todos (<span x-text="tecOrders.length"></span>)
+            </button>
+            <button @click="tecOrderStatusTab = 'Pago'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecOrderStatusTab === 'Pago' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Pagos
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2.5 w-full md:w-auto">
+            <div class="relative w-full md:w-72">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" x-model="tecOrderSearch" placeholder="Buscar por número do pedido ou cliente..."
+                     class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+            </div>
+            <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredTecOrders.length + ' pedidos'"></span>
+          </div>
+        </div>
+
+        <div class="sc2 p-0 overflow-hidden">
           <div class="overflow-x-auto min-h-[280px]">
             <table class="at">
-              <thead><tr><th>NÂº Pedido</th><th>Cliente</th><th>Valor Total</th><th>Data</th><th>Status</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Nº Pedido</th>
+                  <th>Cliente</th>
+                  <th>Valor Total</th>
+                  <th>Data da Venda</th>
+                  <th>Status</th>
+                  <th class="text-right">Ações</th>
+                </tr>
+              </thead>
               <tbody>
-                <template x-for="o in tecOrders" :key="o.id">
-                  <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                    <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="o.numero"></td>
-                    <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="o.cliente"></div></td>
-                    <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="o.total"></td>
-                    <td class="text-slate-500 text-xs" x-text="o.data"></td>
-                    <td><span class="badge2 s-ativo" x-text="o.status"></span></td>
+                <template x-for="o in filteredTecOrders" :key="o.id">
+                  <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                    <td>
+                      <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="o.numero"></span>
+                    </td>
+                    <td>
+                      <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="o.cliente"></div>
+                    </td>
+                    <td>
+                      <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="o.total"></span>
+                    </td>
+                    <td>
+                      <span class="text-slate-500 text-xs font-medium" x-text="o.data"></span>
+                    </td>
+                    <td>
+                      <span class="badge2 s-ativo" x-text="o.status"></span>
+                    </td>
+                    <td class="text-right">
+                      <button type="button" @click="showAlert('info', 'Pedido', 'Visualização do pedido ' + o.numero)" 
+                              class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                        <span>Detalhes</span>
+                      </button>
+                    </td>
                   </tr>
                 </template>
-                <tr x-show="!tecOrders || tecOrders.length === 0">
-                  <td colspan="5" class="text-center py-12">
+                <tr x-show="!filteredTecOrders || filteredTecOrders.length === 0">
+                  <td colspan="6" class="text-center py-12">
                     <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
                       <i data-lucide="shopping-cart" class="w-6 h-6"></i>
                     </div>
@@ -4072,35 +4448,70 @@ html.dark .panze-hdr-pill {
         </div>
       </div>
 
-      <!-- ABA 2: FORMULÁRIOS & PROPOSTAS PREENCHIDOS DA PÁGINA /TEC E SUB-PÁGINAS -->
-      <div x-show="tecTab === 'propostas'" class="space-y-6">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="tecRequests.length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Solicitações Recebidas</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="tecRequests.filter(r => (r.status_key === 'new' || (r.status || '').toLowerCase().includes('nov'))).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Novas Propostas</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="tecRequests.filter(r => ['in_analysis', 'in_progress', 'quoted'].includes(r.status_key)).length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Em Negociação</div></div>
-          <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="tecRequests.filter(r => r.status_key === 'completed').length"></div><div class="text-xs text-slate-500 mt-1 font-bold">Concluídas</div></div>
+      <!-- ABA 2: FORMULÁRIOS & PROPOSTAS /TEC -->
+      <div x-show="tecTab === 'propostas'" class="space-y-4">
+        <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL (SEM OS CARDS SUPERIORES) -->
+        <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+            <button @click="tecReqStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecReqStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Todas (<span x-text="tecRequests.length"></span>)
+            </button>
+            <button @click="tecReqStatusTab = 'new'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecReqStatusTab === 'new' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Novas
+            </button>
+            <button @click="tecReqStatusTab = 'in_progress'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecReqStatusTab === 'in_progress' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Em Negociação
+            </button>
+            <button @click="tecReqStatusTab = 'completed'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                    type="button"
+                    :class="tecReqStatusTab === 'completed' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+              Concluídas
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2.5 w-full md:w-auto">
+            <div class="relative w-full md:w-72">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" x-model="tecReqSearch" placeholder="Buscar por protocolo, cliente ou serviço..."
+                     class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+            </div>
+            <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredTecRequests.length + ' demandas'"></span>
+          </div>
         </div>
 
         <div class="sc2 p-0 overflow-hidden">
-          <div class="p-4 border-b border-slate-100 dark:border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <h2 class="font-bold text-slate-900 dark:text-white text-sm">Formulários de Serviços de TI (/tec)</h2>
-              <p class="text-xs text-slate-500">Demandas de consultoria, websites, sistemas de gestão, digitalização e suporte técnico.</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-slate-500" x-text="tecRequests.length + ' demanda(s) registada(s)'"></span>
-            </div>
-          </div>
           <div class="overflow-x-auto min-h-[280px]">
             <table class="at">
-              <thead><tr><th>Protocolo</th><th>Solicitante & Empresa</th><th>Serviço / Proposta</th><th>Contacto</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Protocolo</th>
+                  <th>Solicitante &amp; Empresa</th>
+                  <th>Serviço / Proposta</th>
+                  <th>Contacto</th>
+                  <th>Data</th>
+                  <th>Status</th>
+                  <th class="text-right">Ações</th>
+                </tr>
+              </thead>
               <tbody>
-                <template x-for="r in tecRequests" :key="r.id">
-                  <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                    <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol || ('#' + r.id)"></td>
+                <template x-for="r in filteredTecRequests" :key="r.id">
+                  <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                     <td>
-                      <div class="font-bold text-slate-900 dark:text-white text-sm" x-text="r.cliente"></div>
-                      <div class="text-xs text-slate-500" x-text="r.empresa || 'Cliente Particular'"></div>
+                      <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol || ('#' + r.id)"></span>
+                    </td>
+                    <td>
+                      <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="r.cliente"></div>
+                      <div class="text-[11px] text-slate-400" x-text="r.empresa || 'Cliente Particular'"></div>
                     </td>
                     <td>
                       <div class="font-semibold text-slate-800 dark:text-slate-200 text-xs" x-text="r.titulo || r.servico"></div>
@@ -4110,13 +4521,15 @@ html.dark .panze-hdr-pill {
                       <div class="text-xs font-mono font-bold text-slate-700 dark:text-slate-300" x-text="r.telefone || 'Não informado'"></div>
                       <div class="text-[11px] text-slate-400" x-text="r.email"></div>
                     </td>
-                    <td class="text-slate-500 text-xs whitespace-nowrap" x-text="r.data || r.created_at"></td>
+                    <td>
+                      <span class="text-slate-500 text-xs whitespace-nowrap" x-text="r.data || r.created_at"></span>
+                    </td>
                     <td>
                       <span class="badge2" :class="r.sc" x-text="r.status"></span>
                     </td>
-                    <td class="whitespace-nowrap">
-                      <div class="flex items-center gap-2">
-                        <button type="button" @click="openReq(r)" class="bap text-xs py-1 px-2.5 flex items-center gap-1.5 cursor-pointer">
+                    <td class="whitespace-nowrap text-right">
+                      <div class="flex items-center justify-end gap-1.5">
+                        <button type="button" @click="openReq(r)" class="bap cursor-pointer text-xs py-1 px-2.5 inline-flex items-center gap-1.5">
                           <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                           <span>Ver Proposta</span>
                         </button>
@@ -4130,7 +4543,7 @@ html.dark .panze-hdr-pill {
                     </td>
                   </tr>
                 </template>
-                <tr x-show="!tecRequests || tecRequests.length === 0">
+                <tr x-show="!filteredTecRequests || filteredTecRequests.length === 0">
                   <td colspan="7" class="text-center py-12">
                     <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
                       <i data-lucide="file-text" class="w-6 h-6"></i>
@@ -4279,28 +4692,40 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- RH CANDIDATOS / BANCO DE TALENTOS -->
-    <section x-show="currentPage==='rh-candidatos'" x-cloak class="space-y-6">
+    <!-- RH CANDIDATOS -->
+    <section x-show="currentPage==='rh-candidatos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
             <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Human Capital — Banco de Talentos</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Perfis qualificados, banco curricular e candidatos a oportunidades corporativas.</p>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Perfis qualificados, banco curricular e candidatos a oportunidades corporativas.</p>
           </div>
         </div>
-        <button @click="openCreateUserModalWithRole('customer')" class="bap"><i data-lucide="user-plus" class="w-4 h-4"></i> Adicionar Candidato</button>
+        <button type="button" @click="openCreateUserModalWithRole('customer')" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="user-plus" class="w-4 h-4"></i>
+          <span>Adicionar Candidato</span>
+        </button>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto min-h-[280px]">
           <table class="at">
-            <thead><tr><th>Candidato / Perfil</th><th>Área de Especialidade</th><th>Nível de Carreira</th><th>Contacto</th><th>Estado</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Candidato / Perfil</th>
+                <th>Área de Especialidade</th>
+                <th>Nível de Carreira</th>
+                <th>Contacto</th>
+                <th class="text-center">Estado</th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td colspan="5" class="text-center py-12">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center mx-auto mb-3 border border-blue-100 dark:border-blue-900/30">
                     <i data-lucide="users" class="w-6 h-6"></i>
                   </div>
                   <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum candidato registado no Banco de Talentos</h4>
@@ -4314,70 +4739,104 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- GRÁFICA ORÇAMENTOS -->
-    <section x-show="currentPage==='grafica-orcamentos'" x-cloak class="space-y-6">
+    <!-- GRÁFICA ORÇAMENTOS -->
+    <section x-show="currentPage==='grafica-orcamentos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Orçamentos & Ordens de Produção</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Gestão de orçamentos gráficos solicitados por empresas e aprovações de tiragem.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Print — Orçamentos &amp; Ordens de Produção</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Gestão de propostas comerciais gráficas, cotações de brindes e impressão corporativa.</p>
           </div>
         </div>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
-        <div class="p-5 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-white/10">
-          <div>
-            <h2 class="font-bold text-slate-900 dark:text-white">Solicitações de Cotação</h2>
-            <p class="text-xs text-slate-500 mt-1">Pedidos enviados pelo catálogo e pelas páginas de serviços da Print.</p>
-          </div>
-          <button type="button" @click="refreshAdminRequests(true)" class="bap text-xs">Atualizar</button>
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="printQuoteTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="printQuoteTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="printRequests.length"></span>)
+          </button>
+          <button @click="printQuoteTab = 'Novo'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="printQuoteTab === 'Novo' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Novos
+          </button>
+          <button @click="printQuoteTab = 'Em Produção'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="printQuoteTab === 'Em Produção' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Em Produção
+          </button>
         </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="printQuoteSearch" placeholder="Buscar por protocolo, cliente ou produto..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredPrintQuotes.length + ' orçamentos'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA DE ORÇAMENTOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Protocolo</th><th>Cliente / Empresa</th><th>Produto / Serviço</th><th>Data</th><th>Estado</th><th>Atendimento</th></tr></thead>
-            <tbody>
-              <template x-for="r in printRequests" :key="r.id">
-                <tr>
-                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="r.protocol"></td>
-                  <td><div class="font-bold text-slate-900 dark:text-white" x-text="r.cliente"></div><div class="text-xs text-slate-500" x-text="r.empresa"></div></td>
-                  <td class="text-sm text-slate-700 dark:text-slate-300" x-text="r.titulo"></td>
-                  <td class="text-xs text-slate-500" x-text="r.data || r.created_at"></td>
-                  <td><span class="badge2" :class="r.sc" x-text="r.statusLabel || r.status"></span></td>
-                  <td><button type="button" @click="openReq(r)" class="bap text-xs">Ver solicitação</button></td>
-                </tr>
-              </template>
-              <tr x-show="printRequests.length === 0"><td colspan="6" class="text-center py-10 text-sm text-slate-500">Nenhuma solicitação de cotação recebida.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto min-h-[280px]">
-          <table class="at">
-            <thead><tr><th>NÂº Orçamento</th><th>Cliente / Empresa</th><th>Valor Previsto</th><th>Data</th><th>Status</th></tr></thead>
-            <tbody>
-              <template x-for="q in printQuotes" :key="q.id">
-                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                  <td class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400" x-text="q.numero"></td>
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="q.cliente"></div></td>
-                  <td class="font-black text-emerald-600 dark:text-emerald-400" x-text="q.total"></td>
-                  <td class="text-slate-500 text-xs" x-text="q.data"></td>
-                  <td><span class="badge2 s-ativo" x-text="q.status"></span></td>
-                </tr>
-              </template>
-              <tr x-show="!printQuotes || printQuotes.length === 0">
-                <td colspan="5" class="text-center py-12">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
-                    <i data-lucide="printer" class="w-6 h-6"></i>
-                  </div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum orçamento gráfico registado</h4>
-                  <p class="text-xs text-slate-500 mt-1">Os orçamentos emitidos pela RACHI Print serão exibidos aqui.</p>
-                </td>
+            <thead>
+              <tr>
+                <th>Protocolo</th>
+                <th>Cliente / Solicitante</th>
+                <th>Produto / Especificação Gráfica</th>
+                <th>Data</th>
+                <th>Estado</th>
+                <th class="text-right">Atendimento</th>
               </tr>
+            </thead>
+            <tbody>
+              <template x-for="r in filteredPrintQuotes" :key="r.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0">
+                        <span x-text="(r.cliente || 'C').charAt(0).toUpperCase()"></span>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="r.cliente || 'Cliente Direto'"></div>
+                        <div class="text-[11px] text-slate-400" x-text="r.email || 'Solicitação Web'"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-slate-800 dark:text-slate-200 text-xs" x-text="r.title || r.produto || 'Brindes / Impressão Personalizada'"></div>
+                    <div class="text-[11px] text-slate-400 font-medium" x-text="r.detalhes || 'Orçamento e prazo sob análise'"></div>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-500 font-medium" x-text="r.data || 'Hoje'"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="r.status==='Aprovado'?'s-ativo':'s-analise'" x-text="r.status || 'Pendente'"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Orçamento', 'Atendimento do protocolo ' + r.protocol)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Visualizar</span>
+                    </button>
+                  </td>
+                </tr>
+              </template>
             </tbody>
           </table>
         </div>
@@ -5466,60 +5925,113 @@ html.dark .panze-hdr-pill {
     <!-- =====================================================================
          MÓDULO 1: SITES (SOLICITADO NO ITEM 8 DO BRIEFING)
          ===================================================================== -->
-    <section x-show="currentPage==='sites'" x-cloak class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gerenciador de Sites &amp; Aplicações</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Gestão de websites cadastrados, tecnologias, status operacional e certificados SSL.</p>
+    <!-- SITES -->
+    <section x-show="currentPage==='sites'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Gerenciador de Sites &amp; Aplicações</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Gestão de websites cadastrados, tecnologias, status operacional e certificados SSL.</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button @click="showAlert('info', 'Novo Site', 'Abrindo assistente de implantação de site...')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-            <span>Novo Site</span>
+        <button type="button" @click="showAlert('info', 'Novo Site', 'Abrindo assistente de implantação de site...')" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Novo Site</span>
+        </button>
+      </div>
+
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="siteStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="siteStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="sites.length"></span>)
+          </button>
+          <button @click="siteStatusTab = 'Online'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="siteStatusTab === 'Online' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Online
+          </button>
+          <button @click="siteStatusTab = 'Manutenção'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="siteStatusTab === 'Manutenção' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Manutenção
           </button>
         </div>
-      </div>      <!-- Tabela de Sites -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
-        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
-          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Websites Gerenciados pela RACHI</h3>
-          <span class="text-xs text-slate-400 font-semibold">5 de 87 sites listados</span>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="siteSearch" placeholder="Buscar por plataforma, URL ou cliente..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredSites.length + ' sites'"></span>
         </div>
+      </div>
+
+      <!-- TABELA DE SITES ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+          <table class="at">
+            <thead>
               <tr>
-                <th class="py-3 px-4 font-bold">Plataforma / Nome</th>
-                <th class="py-3 px-4 font-bold">URL</th>
-                <th class="py-3 px-4 font-bold">Cliente Responsável</th>
-                <th class="py-3 px-4 font-bold">Tecnologia</th>
-                <th class="py-3 px-4 font-bold text-center">SSL</th>
-                <th class="py-3 px-4 font-bold text-center">Status</th>
-                <th class="py-3 px-4 font-bold text-right">Ações</th>
+                <th>Plataforma / Nome</th>
+                <th>URL de Acesso</th>
+                <th>Cliente Responsável</th>
+                <th>Tecnologia</th>
+                <th class="text-center">SSL</th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Ações</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
-              <template x-for="s in sites" :key="s.id">
-                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="s.nome"></td>
-                  <td class="py-3.5 px-4">
-                    <a :href="s.url" target="_blank" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1">
+            <tbody>
+              <template x-for="s in filteredSites" :key="s.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="s.nome"></div>
+                        <div class="text-[11px] text-slate-400 font-mono" x-text="'ID: #' + s.id"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a :href="s.url" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0050f0] dark:text-[#38bdf8] hover:underline">
                       <span x-text="s.url"></span>
                       <i data-lucide="external-link" class="w-3 h-3"></i>
                     </a>
                   </td>
-                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-300 font-medium" x-text="s.cliente"></td>
-                  <td class="py-3.5 px-4 text-slate-500 font-mono" x-text="s.tech"></td>
-                  <td class="py-3.5 px-4 text-center">
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Ativo</span>
+                  <td>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-200" x-text="s.cliente"></span>
                   </td>
-                  <td class="py-3.5 px-4 text-center">
-                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
-                          :class="s.status === 'Online' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'"
-                          x-text="s.status"></span>
+                  <td>
+                    <span class="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-white/5" x-text="s.tech"></span>
                   </td>
-                  <td class="py-3.5 px-4 text-right">
-                    <button @click="showAlert('success', 'Site', 'Painel técnico do site acessado com sucesso!')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition" title="Gerenciar site">
-                      <i data-lucide="settings-2" class="w-3.5 h-3.5"></i>
+                  <td class="text-center">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                      <span>Ativo</span>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge2" :class="s.status==='Online'?'s-ativo':'s-analise'" x-text="s.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('success', 'Site', 'Painel técnico do site acessado com sucesso!')" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Gerenciar</span>
                     </button>
                   </td>
                 </tr>
@@ -5533,53 +6045,111 @@ html.dark .panze-hdr-pill {
     <!-- =====================================================================
          MÓDULO 2: DOMÍNIOS (SOLICITADO NO ITEM 8 DO BRIEFING)
          ===================================================================== -->
-    <section x-show="currentPage==='dominios'" x-cloak class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Domínios &amp; DNS</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Controle de zonas de DNS, expirações, renovações automáticas e proteção whois.</p>
+    <!-- DOMÍNIOS -->
+    <section x-show="currentPage==='dominios'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Gestão de Domínios &amp; DNS</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Controle de zonas de DNS, expirações, renovações automáticas e proteção whois.</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button @click="showAlert('info', 'Registrar Domínio', 'Assistente de consulta Whois aberto.')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
-            <i data-lucide="globe" class="w-4 h-4"></i>
-            <span>Registrar Domínio</span>
+        <button type="button" @click="showAlert('info', 'Registrar Domínio', 'Assistente de consulta Whois aberto.')" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span>Registrar Domínio</span>
+        </button>
+      </div>
+
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="domainStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="domainStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="dominios.length"></span>)
+          </button>
+          <button @click="domainStatusTab = 'Ativo'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="domainStatusTab === 'Ativo' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Ativos
+          </button>
+          <button @click="domainStatusTab = 'A Renovar'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="domainStatusTab === 'A Renovar' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            A Renovar
           </button>
         </div>
-      </div>      <!-- Tabela de Domínios -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
-        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
-          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Domínios Registrados</h3>
-          <span class="text-xs text-slate-400 font-semibold">Exibindo registros ativos</span>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="domainSearch" placeholder="Buscar por domínio ou cliente..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredDomains.length + ' domínios'"></span>
         </div>
+      </div>
+
+      <!-- TABELA DE DOMÍNIOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+          <table class="at">
+            <thead>
               <tr>
-                <th class="py-3 px-4 font-bold">Domínio</th>
-                <th class="py-3 px-4 font-bold">Cliente</th>
-                <th class="py-3 px-4 font-bold">Servidor DNS</th>
-                <th class="py-3 px-4 font-bold">Data Registro</th>
-                <th class="py-3 px-4 font-bold">Expiração</th>
-                <th class="py-3 px-4 font-bold text-center">Status</th>
-                <th class="py-3 px-4 font-bold text-right">Ações</th>
+                <th>Domínio Web</th>
+                <th>Cliente / Titular</th>
+                <th>Provedor DNS</th>
+                <th>Expiração</th>
+                <th class="text-center">Auto-Renovação</th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Ações</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
-              <template x-for="d in dominios" :key="d.id">
-                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3.5 px-4 font-bold font-mono text-purple-600 dark:text-purple-400" x-text="d.domain"></td>
-                  <td class="py-3.5 px-4 text-slate-800 dark:text-slate-200 font-semibold" x-text="d.cliente"></td>
-                  <td class="py-3.5 px-4 text-slate-500 font-medium" x-text="d.dns"></td>
-                  <td class="py-3.5 px-4 text-slate-500" x-text="d.registro"></td>
-                  <td class="py-3.5 px-4 font-semibold text-slate-700 dark:text-slate-300" x-text="d.expiracao"></td>
-                  <td class="py-3.5 px-4 text-center">
-                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
-                          :class="d.status === 'Ativo' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'"
-                          x-text="d.status"></span>
+            <tbody>
+              <template x-for="d in filteredDomains" :key="d.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="at-sign" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors font-mono" x-text="d.domain"></div>
+                        <div class="text-[11px] text-slate-400">Zona Gerenciada</div>
+                      </div>
+                    </div>
                   </td>
-                  <td class="py-3.5 px-4 text-right">
-                    <button @click="showAlert('success', 'DNS', 'Zonas de DNS carregadas.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition" title="Editar DNS">
-                      <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                  <td>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-200" x-text="d.cliente"></span>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="d.registrar"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-600 dark:text-slate-400 font-semibold" x-text="d.expiracao"></span>
+                  </td>
+                  <td class="text-center">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                          :class="d.autoRenov ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40' : 'bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-400'">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="d.autoRenov ? 'bg-emerald-500' : 'bg-slate-400'"></span>
+                      <span x-text="d.autoRenov ? 'Ativa' : 'Manual'"></span>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge2" :class="d.status==='Ativo'?'s-ativo':'s-analise'" x-text="d.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'DNS', 'Configurações de DNS para ' + d.domain)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Gerenciar DNS</span>
                     </button>
                   </td>
                 </tr>
@@ -5593,57 +6163,111 @@ html.dark .panze-hdr-pill {
     <!-- =====================================================================
          MÓDULO 3: TRÁFEGO PAGO (SOLICITADO NO ITEM 8 DO BRIEFING)
          ===================================================================== -->
-    <section x-show="currentPage==='trafego'" x-cloak class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Tráfego Pago &amp; Anúncios</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Campanhas ativas no Meta Ads, Google Ads e LinkedIn Ads com métricas de conversão e ROI.</p>
+    <!-- TRÁFEGO PAGO -->
+    <section x-show="currentPage==='trafego'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Gestão de Tráfego Pago &amp; Anúncios</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Campanhas ativas no Meta Ads, Google Ads e LinkedIn Ads com métricas de conversão e ROI.</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button @click="showAlert('info', 'Nova Campanha', 'Assistente de criação de campanha de tráfego iniciado.')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-            <span>Nova Campanha</span>
+        <button type="button" @click="showAlert('info', 'Nova Campanha', 'Assistente de criação de campanha de tráfego iniciado.')" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Nova Campanha</span>
+        </button>
+      </div>
+
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="campaignStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="campaignStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todas (<span x-text="campanhas.length"></span>)
+          </button>
+          <button @click="campaignStatusTab = 'Ativa'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="campaignStatusTab === 'Ativa' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Ativas
+          </button>
+          <button @click="campaignStatusTab = 'Pausada'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="campaignStatusTab === 'Pausada' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Pausadas
           </button>
         </div>
-      </div>      <!-- Tabela de Campanhas -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
-        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
-          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Campanhas em Execução</h3>
-          <span class="text-xs text-slate-400 font-semibold">Performance em tempo real</span>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="campaignSearch" placeholder="Buscar por campanha, cliente ou canal..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredCampaigns.length + ' campanhas'"></span>
         </div>
+      </div>
+
+      <!-- TABELA DE CAMPANHAS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+          <table class="at">
+            <thead>
               <tr>
-                <th class="py-3 px-4 font-bold">Campanha</th>
-                <th class="py-3 px-4 font-bold">Cliente / Conta</th>
-                <th class="py-3 px-4 font-bold">Plataforma</th>
-                <th class="py-3 px-4 font-bold">Investimento</th>
-                <th class="py-3 px-4 font-bold">Cliques</th>
-                <th class="py-3 px-4 font-bold">Conversões</th>
-                <th class="py-3 px-4 font-bold">CTR</th>
-                <th class="py-3 px-4 font-bold text-center">Status</th>
-                <th class="py-3 px-4 font-bold text-right">Ações</th>
+                <th>Nome da Campanha</th>
+                <th>Cliente Contratante</th>
+                <th>Plataforma</th>
+                <th>Orçamento Mensal</th>
+                <th>Cliques / Leads</th>
+                <th>Custo / Lead</th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Ações</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
-              <template x-for="cp in campanhas" :key="cp.id">
-                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="cp.nome"></td>
-                  <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-semibold" x-text="cp.cliente"></td>
-                  <td class="py-3.5 px-4 font-bold text-blue-600 dark:text-blue-400" x-text="cp.plataforma"></td>
-                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="cp.invest"></td>
-                  <td class="py-3.5 px-4 font-semibold text-slate-600 dark:text-slate-400" x-text="cp.cliques.toLocaleString()"></td>
-                  <td class="py-3.5 px-4 font-bold text-emerald-600 dark:text-emerald-400" x-text="cp.conv"></td>
-                  <td class="py-3.5 px-4 font-bold text-purple-600 dark:text-purple-400" x-text="cp.ctr"></td>
-                  <td class="py-3.5 px-4 text-center">
-                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
-                          :class="cp.status === 'Ativa' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200'"
-                          x-text="cp.status"></span>
+            <tbody>
+              <template x-for="c in filteredCampaigns" :key="c.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="c.nome"></div>
+                        <div class="text-[11px] text-slate-400">Performance Digital</div>
+                      </div>
+                    </div>
                   </td>
-                  <td class="py-3.5 px-4 text-right">
-                    <button @click="showAlert('info', 'Análise', 'Dashboard de conversão da campanha aberto.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition">
-                      <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+                  <td>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-200" x-text="c.cliente"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="c.plataforma"></span>
+                  </td>
+                  <td>
+                    <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="c.orcamento"></span>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-bold text-slate-700 dark:text-slate-300" x-text="c.cliques + ' cliques / ' + c.conversoes + ' leads'"></span>
+                  </td>
+                  <td>
+                    <span class="font-black text-xs text-[#0050f0] dark:text-[#38bdf8]" style="font-family:Outfit" x-text="c.cpl"></span>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge2" :class="c.status==='Ativa'?'s-ativo':'s-inativo'" x-text="c.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Campanha', 'Otimização de métricas da campanha ' + c.nome)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Métricas</span>
                     </button>
                   </td>
                 </tr>
@@ -5657,62 +6281,122 @@ html.dark .panze-hdr-pill {
     <!-- =====================================================================
          MÓDULO 4: PROJETOS (SOLICITADO NO ITEM 8 DO BRIEFING)
          ===================================================================== -->
-    <section x-show="currentPage==='projetos'" x-cloak class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Projetos &amp; Entregas</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Acompanhamento de cronogramas, tarefas concluídas, equipes alocadas e marcos contratuais.</p>
+    <!-- PROJETOS -->
+    <section x-show="currentPage==='projetos'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/rachi-symbol-logo-rachi-light.png" alt="RACHI" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI — Gestão de Projetos &amp; Entregas</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Acompanhamento de cronogramas, marcos contratuais, tarefas e equipes alocadas.</p>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button @click="showAlert('info', 'Novo Projeto', 'Assistente de criação de projeto aberto.')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-            <span>Novo Projeto</span>
+        <button type="button" @click="showAlert('info', 'Novo Projeto', 'Assistente de criação de projeto aberto.')" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Novo Projeto</span>
+        </button>
+      </div>
+
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE STATUS -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="projectStatusTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="projectStatusTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="projetos.length"></span>)
+          </button>
+          <button @click="projectStatusTab = 'Em Andamento'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="projectStatusTab === 'Em Andamento' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Em Andamento
+          </button>
+          <button @click="projectStatusTab = 'Em Testes'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="projectStatusTab === 'Em Testes' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Em Testes
+          </button>
+          <button @click="projectStatusTab = 'Concluído'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="projectStatusTab === 'Concluído' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Concluídos
           </button>
         </div>
-      </div>      <!-- Tabela de Projetos -->
-      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
-        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
-          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Projetos em Execução</h3>
-          <span class="text-xs text-slate-400 font-semibold">Cronogramas &amp; Prazos</span>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="projectSearch" placeholder="Buscar por projeto, cliente ou líder técnico..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredProjects.length + ' projetos'"></span>
         </div>
+      </div>
+
+      <!-- TABELA DE PROJETOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+          <table class="at">
+            <thead>
               <tr>
-                <th class="py-3 px-4 font-bold">Projeto</th>
-                <th class="py-3 px-4 font-bold">Cliente</th>
-                <th class="py-3 px-4 font-bold">Responsável</th>
-                <th class="py-3 px-4 font-bold">Início</th>
-                <th class="py-3 px-4 font-bold">Entrega</th>
-                <th class="py-3 px-4 font-bold">Progresso</th>
-                <th class="py-3 px-4 font-bold text-center">Status</th>
-                <th class="py-3 px-4 font-bold text-right">Ações</th>
+                <th>Nome do Projeto</th>
+                <th>Cliente Contratante</th>
+                <th>Líder do Projeto</th>
+                <th>Início</th>
+                <th>Previsão Entrega</th>
+                <th>Progresso Geral</th>
+                <th class="text-center">Status</th>
+                <th class="text-right">Ações</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
-              <template x-for="p in projetos" :key="p.id">
-                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
-                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="p.nome"></td>
-                  <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium" x-text="p.cliente"></td>
-                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400" x-text="p.responsavel"></td>
-                  <td class="py-3.5 px-4 text-slate-500" x-text="p.inicio"></td>
-                  <td class="py-3.5 px-4 font-semibold text-slate-800 dark:text-slate-200" x-text="p.entrega"></td>
-                  <td class="py-3.5 px-4 w-36">
-                    <div class="flex items-center gap-2">
-                      <div class="flex-1 h-2 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
-                        <div class="h-full bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full" :style="'width: ' + p.progresso + '%'"></div>
+            <tbody>
+              <template x-for="p in filteredProjects" :key="p.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="folder-kanban" class="w-4 h-4"></i>
                       </div>
-                      <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300" x-text="p.progresso + '%'"></span>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="p.nome"></div>
+                        <div class="text-[11px] text-slate-400 font-mono" x-text="'ID: #' + p.id"></div>
+                      </div>
                     </div>
                   </td>
-                  <td class="py-3.5 px-4 text-center">
-                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
-                          :class="p.status === 'Concluído' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : (p.status === 'Em Testes' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-purple-50 text-purple-700 border border-purple-200')"
-                          x-text="p.status"></span>
+                  <td>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-200" x-text="p.cliente"></span>
                   </td>
-                  <td class="py-3.5 px-4 text-right">
-                    <button @click="showAlert('info', 'Projeto', 'Quadro Kanban do projeto aberto.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition">
-                      <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                  <td>
+                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300" x-text="p.responsavel"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs text-slate-500 font-medium" x-text="p.inicio"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-bold text-slate-800 dark:text-slate-200" x-text="p.entrega"></span>
+                  </td>
+                  <td class="w-36">
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 h-2 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-[#0050f0] to-[#00a3e0] rounded-full" :style="'width: ' + p.progresso + '%'"></div>
+                      </div>
+                      <span class="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300" x-text="p.progresso + '%'"></span>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge2" :class="p.status==='Concluído'?'s-ativo':(p.status==='Em Testes'?'s-analise':'s-novo')" x-text="p.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="showAlert('info', 'Projeto', 'Quadro Kanban do projeto ' + p.nome)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                      <span>Kanban</span>
                     </button>
                   </td>
                 </tr>
@@ -8305,6 +8989,195 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
           (p.sku && p.sku.toLowerCase().includes(q)) ||
           (p.cat && p.cat.toLowerCase().includes(q)) ||
           (p.marca && p.marca.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    courseSearch: '',
+    courseCategoryTab: 'all',
+    get filteredCourses() {
+      let list = this.aCourses || [];
+      if (this.courseCategoryTab && this.courseCategoryTab !== 'all') {
+        list = list.filter(c => c.cat === this.courseCategoryTab);
+      }
+      if (this.courseSearch && this.courseSearch.trim()) {
+        const q = this.courseSearch.toLowerCase().trim();
+        list = list.filter(c =>
+          (c.titulo && c.titulo.toLowerCase().includes(q)) ||
+          (c.prof && c.prof.toLowerCase().includes(q)) ||
+          (c.cat && c.cat.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    jobSearch: '',
+    jobStatusTab: 'all',
+    get filteredJobs() {
+      let list = this.rhJobs || [];
+      if (this.jobStatusTab && this.jobStatusTab !== 'all') {
+        list = list.filter(j => j.status === this.jobStatusTab);
+      }
+      if (this.jobSearch && this.jobSearch.trim()) {
+        const q = this.jobSearch.toLowerCase().trim();
+        list = list.filter(j =>
+          (j.cargo && j.cargo.toLowerCase().includes(q)) ||
+          (j.empresa && j.empresa.toLowerCase().includes(q)) ||
+          (j.local && j.local.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    printProdSearch: '',
+    printProdTab: 'all',
+    get filteredPrintProducts() {
+      let list = this.gProducts || [];
+      if (this.printProdSearch && this.printProdSearch.trim()) {
+        const q = this.printProdSearch.toLowerCase().trim();
+        list = list.filter(g =>
+          (g.nome && g.nome.toLowerCase().includes(q)) ||
+          (g.desc && g.desc.toLowerCase().includes(q)) ||
+          (g.mat && g.mat.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    printQuoteSearch: '',
+    printQuoteTab: 'all',
+    get filteredPrintQuotes() {
+      let list = this.printRequests || [];
+      if (this.printQuoteTab && this.printQuoteTab !== 'all') {
+        list = list.filter(r => (r.status || 'Novo') === this.printQuoteTab);
+      }
+      if (this.printQuoteSearch && this.printQuoteSearch.trim()) {
+        const q = this.printQuoteSearch.toLowerCase().trim();
+        list = list.filter(r =>
+          (r.protocol && r.protocol.toLowerCase().includes(q)) ||
+          (r.cliente && r.cliente.toLowerCase().includes(q)) ||
+          (r.title && r.title.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    siteSearch: '',
+    siteStatusTab: 'all',
+    get filteredSites() {
+      let list = this.sites || [];
+      if (this.siteStatusTab && this.siteStatusTab !== 'all') {
+        list = list.filter(s => s.status === this.siteStatusTab);
+      }
+      if (this.siteSearch && this.siteSearch.trim()) {
+        const q = this.siteSearch.toLowerCase().trim();
+        list = list.filter(s =>
+          (s.nome && s.nome.toLowerCase().includes(q)) ||
+          (s.url && s.url.toLowerCase().includes(q)) ||
+          (s.cliente && s.cliente.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    domainSearch: '',
+    domainStatusTab: 'all',
+    get filteredDomains() {
+      let list = this.dominios || [];
+      if (this.domainStatusTab && this.domainStatusTab !== 'all') {
+        list = list.filter(d => d.status === this.domainStatusTab);
+      }
+      if (this.domainSearch && this.domainSearch.trim()) {
+        const q = this.domainSearch.toLowerCase().trim();
+        list = list.filter(d =>
+          (d.domain && d.domain.toLowerCase().includes(q)) ||
+          (d.cliente && d.cliente.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    campaignSearch: '',
+    campaignStatusTab: 'all',
+    get filteredCampaigns() {
+      let list = this.campanhas || [];
+      if (this.campaignStatusTab && this.campaignStatusTab !== 'all') {
+        list = list.filter(c => c.status === this.campaignStatusTab);
+      }
+      if (this.campaignSearch && this.campaignSearch.trim()) {
+        const q = this.campaignSearch.toLowerCase().trim();
+        list = list.filter(c =>
+          (c.nome && c.nome.toLowerCase().includes(q)) ||
+          (c.cliente && c.cliente.toLowerCase().includes(q)) ||
+          (c.plataforma && c.plataforma.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    projectSearch: '',
+    projectStatusTab: 'all',
+    get filteredProjects() {
+      let list = this.projetos || [];
+      if (this.projectStatusTab && this.projectStatusTab !== 'all') {
+        list = list.filter(p => p.status === this.projectStatusTab);
+      }
+      if (this.projectSearch && this.projectSearch.trim()) {
+        const q = this.projectSearch.toLowerCase().trim();
+        list = list.filter(p =>
+          (p.nome && p.nome.toLowerCase().includes(q)) ||
+          (p.cliente && p.cliente.toLowerCase().includes(q)) ||
+          (p.responsavel && p.responsavel.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    capitalReqSearch: '',
+    capitalReqStatusTab: 'all',
+    get filteredCapitalRequests() {
+      let list = this.capitalRequests || [];
+      if (this.capitalReqStatusTab && this.capitalReqStatusTab !== 'all') {
+        list = list.filter(r => (r.status || 'Novo') === this.capitalReqStatusTab);
+      }
+      if (this.capitalReqSearch && this.capitalReqSearch.trim()) {
+        const q = this.capitalReqSearch.toLowerCase().trim();
+        list = list.filter(r =>
+          (r.protocol && r.protocol.toLowerCase().includes(q)) ||
+          (r.cliente && r.cliente.toLowerCase().includes(q)) ||
+          (r.servico && r.servico.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    tecOrderSearch: '',
+    tecOrderStatusTab: 'all',
+    get filteredTecOrders() {
+      let list = this.tecOrders || [];
+      if (this.tecOrderStatusTab && this.tecOrderStatusTab !== 'all') {
+        list = list.filter(o => o.status === this.tecOrderStatusTab);
+      }
+      if (this.tecOrderSearch && this.tecOrderSearch.trim()) {
+        const q = this.tecOrderSearch.toLowerCase().trim();
+        list = list.filter(o =>
+          (o.numero && o.numero.toLowerCase().includes(q)) ||
+          (o.cliente && o.cliente.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    tecReqSearch: '',
+    tecReqStatusTab: 'all',
+    get filteredTecRequests() {
+      let list = this.tecRequests || [];
+      if (this.tecReqStatusTab && this.tecReqStatusTab !== 'all') {
+        if (this.tecReqStatusTab === 'new') {
+          list = list.filter(r => (r.status_key === 'new' || (r.status || '').toLowerCase().includes('nov')));
+        } else if (this.tecReqStatusTab === 'in_progress') {
+          list = list.filter(r => ['in_analysis', 'in_progress', 'quoted'].includes(r.status_key));
+        } else if (this.tecReqStatusTab === 'completed') {
+          list = list.filter(r => r.status_key === 'completed');
+        }
+      }
+      if (this.tecReqSearch && this.tecReqSearch.trim()) {
+        const q = this.tecReqSearch.toLowerCase().trim();
+        list = list.filter(r =>
+          (r.protocol && r.protocol.toLowerCase().includes(q)) ||
+          (r.cliente && r.cliente.toLowerCase().includes(q)) ||
+          (r.titulo && r.titulo.toLowerCase().includes(q)) ||
+          (r.servico && r.servico.toLowerCase().includes(q))
         );
       }
       return list;
