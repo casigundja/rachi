@@ -1065,92 +1065,9 @@ html.dark .panze-hdr-pill {
       <span class="sl font-bold">Dashboard</span>
     </div>
 
-    <div class="sg mt-2">ATENDIMENTO &amp; IA</div>
-    <!-- Chat ao Vivo (Central de Atendimento Omnichannel - Print 3) -->
-    <div @click="setPage('messenger')" :class="currentPage==='messenger'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Chat ao Vivo" title="Central de Atendimento & Live Chat">
-      <i data-lucide="message-square" class="si"></i>
-      <span class="sl font-semibold">Chat ao Vivo</span>
-      <span class="sb2 badge bg-blue-100 text-[#0050f0] dark:bg-blue-950/60 dark:text-blue-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="unreadMessengerCount">3</span>
-    </div>
-
-    <!-- Agente IA (CRM & Piloto Automático - Print 3) -->
-    <div @click="setPage('agente-ia')" :class="currentPage==='agente-ia'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Agente IA (CRM)" title="Agente IA (CRM) & Piloto Automático">
-      <i data-lucide="zap" class="si text-[#f5a800]"></i>
-      <span class="sl font-semibold">Agente IA (CRM)</span>
-      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ms-auto" title="Piloto Automático Ativo"></span>
-    </div>
-
-    <div class="sg mt-2">OPERAÇÕES &amp; SERVIÇOS</div>
-    <!-- Clientes -->
-    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" data-legend="Clientes" title="Clientes">
-      <i data-lucide="users" class="si"></i>
-      <span class="sl">Clientes</span>
-      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="totalClientsCount"></span>
-    </div>
-
-    <!-- Solicitações (Expansível com Árvore) -->
-    <div>
-      <div @click="toggleMenu('tickets')" 
-        :class="openMenus.tickets ? 'text-purple-600 dark:text-purple-400 font-bold' : (currentPage==='solicitacoes' ? 'active' : '')" 
-        class="sidebar-item"
-        data-legend="Solicitações">
-        <i data-lucide="ticket" class="si"></i>
-        <span class="sl">Solicitações</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0 transition-transform" :class="openMenus.tickets?'rotate-90':''"></i>
-      </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.tickets" x-transition>
-        <div @click="setPage('solicitacoes')" class="sidebar-sub-item" :class="currentPage==='solicitacoes'?'active':''">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Central de Demandas</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Nova'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Novas / Triagem</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Em Execução'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Em Andamento</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Concluída'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Concluídas</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projetos -->
-    <div @click="setPage('projetos')" :class="currentPage==='projetos'?'active':''" class="sidebar-item" data-legend="Projetos" title="Projetos">
-      <i data-lucide="folder-kanban" class="si"></i>
-      <span class="sl">Projetos</span>
-      <span class="sb2 badge bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">12</span>
-    </div>
-
-    <div class="sg mt-2">ADMINISTRAÇÃO &amp; GESTÃO</div>
-    <!-- Financeiro -->
-    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item" data-legend="Financeiro" title="Financeiro">
-      <i data-lucide="wallet" class="si"></i>
-      <span class="sl">Financeiro</span>
-    </div>
-
-    <!-- Relatórios -->
-    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item" data-legend="Relatórios" title="Relatórios">
-      <i data-lucide="bar-chart-2" class="si"></i>
-      <span class="sl">Relatórios</span>
-    </div>
-
-    <!-- Equipe e Usuários -->
-    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" data-legend="Equipe e Usuários" title="Equipe e Usuários">
-      <i data-lucide="user-check" class="si"></i>
-      <span class="sl">Equipe e Usuários</span>
-      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="users.length || 10"></span>
-    </div>
-
-    <!-- Configurações -->
-    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Configurações" title="Configurações">
-      <i data-lucide="settings" class="si"></i>
-      <span class="sl">Configurações</span>
-    </div>
-
+    <!-- ==========================================
+         UNIDADES OPERACIONAIS RACHI (DEBAIXO DO DASHBOARD)
+         ========================================== -->
     <div class="sg mt-2">UNIDADES RACHI</div>
     <!-- RACHI Tec -->
     <div>
@@ -1233,6 +1150,101 @@ html.dark .panze-hdr-pill {
           <span class="sidebar-sub-dot"></span><span class="sl">Solicitações de Cotação</span>
         </div>
       </div>
+    </div>
+
+    <!-- ==========================================
+         ATENDIMENTO & IA
+         ========================================== -->
+    <div class="sg mt-2">ATENDIMENTO &amp; IA</div>
+    <!-- Chat ao Vivo (Central de Atendimento Omnichannel - Print 3) -->
+    <div @click="setPage('messenger')" :class="currentPage==='messenger'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Chat ao Vivo" title="Central de Atendimento & Live Chat">
+      <i data-lucide="message-square" class="si"></i>
+      <span class="sl font-semibold">Chat ao Vivo</span>
+      <span class="sb2 badge bg-blue-100 text-[#0050f0] dark:bg-blue-950/60 dark:text-blue-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="unreadMessengerCount">3</span>
+    </div>
+
+    <!-- Agente IA (CRM & Piloto Automático - Print 3) -->
+    <div @click="setPage('agente-ia')" :class="currentPage==='agente-ia'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Agente IA (CRM)" title="Agente IA (CRM) & Piloto Automático">
+      <i data-lucide="zap" class="si text-[#f5a800]"></i>
+      <span class="sl font-semibold">Agente IA (CRM)</span>
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ms-auto" title="Piloto Automático Ativo"></span>
+    </div>
+
+    <!-- ==========================================
+         OPERAÇÕES & SERVIÇOS
+         ========================================== -->
+    <div class="sg mt-2">OPERAÇÕES &amp; SERVIÇOS</div>
+    <!-- Clientes -->
+    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" data-legend="Clientes" title="Clientes">
+      <i data-lucide="users" class="si"></i>
+      <span class="sl">Clientes</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="totalClientsCount"></span>
+    </div>
+
+    <!-- Solicitações (Expansível com Árvore) -->
+    <div>
+      <div @click="toggleMenu('tickets')" 
+        :class="openMenus.tickets ? 'text-purple-600 dark:text-purple-400 font-bold' : (currentPage==='solicitacoes' ? 'active' : '')" 
+        class="sidebar-item"
+        data-legend="Solicitações">
+        <i data-lucide="ticket" class="si"></i>
+        <span class="sl">Solicitações</span>
+        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0 transition-transform" :class="openMenus.tickets?'rotate-90':''"></i>
+      </div>
+      <div class="sidebar-sub-menu" x-show="openMenus.tickets" x-transition>
+        <div @click="setPage('solicitacoes')" class="sidebar-sub-item" :class="currentPage==='solicitacoes'?'active':''">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Central de Demandas</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Nova'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Novas / Triagem</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Em Execução'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Em Andamento</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Concluída'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Concluídas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projetos -->
+    <div @click="setPage('projetos')" :class="currentPage==='projetos'?'active':''" class="sidebar-item" data-legend="Projetos" title="Projetos">
+      <i data-lucide="folder-kanban" class="si"></i>
+      <span class="sl">Projetos</span>
+      <span class="sb2 badge bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">12</span>
+    </div>
+
+    <!-- ==========================================
+         ADMINISTRAÇÃO & GESTÃO
+         ========================================== -->
+    <div class="sg mt-2">ADMINISTRAÇÃO &amp; GESTÃO</div>
+    <!-- Financeiro -->
+    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item" data-legend="Financeiro" title="Financeiro">
+      <i data-lucide="wallet" class="si"></i>
+      <span class="sl">Financeiro</span>
+    </div>
+
+    <!-- Relatórios -->
+    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item" data-legend="Relatórios" title="Relatórios">
+      <i data-lucide="bar-chart-2" class="si"></i>
+      <span class="sl">Relatórios</span>
+    </div>
+
+    <!-- Equipe e Usuários -->
+    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" data-legend="Equipe e Usuários" title="Equipe e Usuários">
+      <i data-lucide="user-check" class="si"></i>
+      <span class="sl">Equipe e Usuários</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="users.length || 10"></span>
+    </div>
+
+    <!-- Configurações -->
+    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Configurações" title="Configurações">
+      <i data-lucide="settings" class="si"></i>
+      <span class="sl">Configurações</span>
     </div>
   </nav>
 
