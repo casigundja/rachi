@@ -1637,57 +1637,50 @@ a { text-decoration: none !important; }
         </div>
       </div>
 
-      <!-- 4 KPIS -->
+            <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Card 1: SUPER ADMIN -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Super Admin</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">SUPER</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SUPER ADMIN</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">SUPER</span>
           </div>
         </div>
 
         <!-- Card 2: ADMINISTRADORES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Administradores</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</div>
-            <span class="text-[10px] font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">ADMIN</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">ADMINISTRADORES</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">ADMIN</span>
           </div>
         </div>
 
         <!-- Card 3: EQUIPE OPERACIONAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Equipe Operacional</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</div>
-            <span class="text-[10px] font-bold tracking-wider text-purple-600 dark:text-purple-400 uppercase">Equipe</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EQUIPE OPERACIONAL</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</div>
+            <span class="text-xs font-bold tracking-wider text-purple-600 dark:text-purple-400 uppercase">EQUIPE</span>
           </div>
         </div>
 
         <!-- Card 4: CLIENTES NO PORTAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Clientes no Portal</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</div>
-            <span class="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">PORTAL</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES NO PORTAL</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">PORTAL</span>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
-        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <!-- PILL TABS -->
           <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="userTab = 'todos'" 
@@ -1854,51 +1847,44 @@ a { text-decoration: none !important; }
         </button>
       </div>
 
-      <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
+            <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <!-- Card 1: TOTAL GERAL -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">TOTAL GERAL</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.total">9</div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500">Todos</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">TOTAL GERAL</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.total">9</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Todos</span>
           </div>
         </div>
 
         <!-- Card 2: CLIENTES ATIVOS -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES ATIVOS</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
-            <span class="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIENTES ATIVOS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
           </div>
         </div>
 
         <!-- Card 3: CONTAS EMPRESA -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">CONTAS EMPRESA</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
-            <span class="text-[10px] font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">EMPRESA</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONTAS EMPRESA</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">EMPRESA</span>
           </div>
         </div>
 
         <!-- Card 4: LEADS / PARTICULARES -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">LEADS / PARTICULARES</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.leads">1</div>
-            <span class="text-[10px] font-bold tracking-wider text-amber-600 dark:text-amber-400 uppercase">LEAD</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">LEADS / PARTICULARES</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="clientStats.leads">1</div>
+            <span class="text-xs font-bold tracking-wider text-amber-600 dark:text-amber-400 uppercase">LEAD</span>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- TABELA DE CLIENTES NOVO MODELO (PRINT 1) -->
@@ -2174,57 +2160,50 @@ a { text-decoration: none !important; }
             </div>
           </div>
 
-          <!-- 4 KPIS -->
+                    <!-- 4 KPIS -->
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Card 1: Total no Pipeline -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Total no Pipeline</span>
-              </div>
-              <div class="flex items-baseline justify-between mt-2.5">
-                <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total">4</div>
-                <span class="text-[10px] font-bold tracking-wider text-slate-500">Total</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total no Pipeline</div>
+              <div class="flex items-center justify-between mt-3">
+                <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total">4</div>
+                <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Total</span>
               </div>
             </div>
 
             <!-- Card 2: Novas / Pendentes -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Novas / Pendentes</span>
-              </div>
-              <div class="flex items-baseline justify-between mt-2.5">
-                <div class="text-2xl font-black text-amber-500" style="font-family:Outfit" x-text="pipelineStats.novas">0</div>
-                <span class="text-[10px] font-black tracking-wider text-slate-900 dark:text-white uppercase">TRIAGEM</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Novas / Pendentes</div>
+              <div class="flex items-center justify-between mt-3">
+                <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="pipelineStats.novas">0</div>
+                <span class="text-xs font-bold tracking-wider text-slate-900 dark:text-white uppercase">TRIAGEM</span>
               </div>
             </div>
 
             <!-- Card 3: Em Análise / Proposta -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Em Análise / Proposta</span>
-              </div>
-              <div class="flex items-baseline justify-between mt-2.5">
-                <div class="text-2xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="pipelineStats.analise">0</div>
-                <span class="text-[10px] font-black tracking-wider text-blue-600 dark:text-blue-400 uppercase">ANÁLISE</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Em Análise / Proposta</div>
+              <div class="flex items-center justify-between mt-3">
+                <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="pipelineStats.analise">0</div>
+                <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">ANÁLISE</span>
               </div>
             </div>
 
             <!-- Card 4: Aprovadas / Concluídas -->
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Aprovadas / Concluídas</span>
-              </div>
-              <div class="flex items-baseline justify-between mt-2.5">
-                <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="pipelineStats.concluidas">1</div>
-                <span class="text-[10px] font-black tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">APROVADO</span>
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+              <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Aprovadas / Concluídas</div>
+              <div class="flex items-center justify-between mt-3">
+                <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="pipelineStats.concluidas">1</div>
+                <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">APROVADO</span>
               </div>
             </div>
+          </div>
           </div>
 
           <!-- CARD CONTAINER COM FILTROS E TABELA -->
           <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
             <!-- TOP FILTER BAR -->
-            <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-3">
+            <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-3">
               <div class="relative flex-1 w-full">
                 <input type="text" x-model="reqFilterSearch" placeholder="Buscar por protocolo, título ou cliente..."
                        class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
@@ -2750,57 +2729,50 @@ a { text-decoration: none !important; }
         </div>
       </div>
 
-      <!-- 4 KPIS -->
+            <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Card 1: Total de Serviços -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Total de Serviços</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.total">7</div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500">Catálogo</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total de Serviços</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.total">7</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">Catálogo</span>
           </div>
         </div>
 
         <!-- Card 2: Serviços Ativos -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Serviços Ativos</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="serviceStats.ativos">7</div>
-            <span class="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Serviços Ativos</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="serviceStats.ativos">7</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">ATIVO</span>
           </div>
         </div>
 
         <!-- Card 3: Pausados / Inativos -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Pausados / Inativos</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.inativos">0</div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">INATIVO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Pausados / Inativos</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.inativos">0</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">INATIVO</span>
           </div>
         </div>
 
         <!-- Card 4: Ticket Médio Base -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Ticket Médio Base</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio">Kz 0,00</div>
-            <span class="text-[10px] font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">MÉDIA</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Ticket Médio Base</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio">Kz 0,00</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">MÉDIA</span>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
-        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <!-- PILL TABS -->
           <div class="flex items-center gap-1.5">
             <button @click="serviceTab = 'todos'" 
@@ -2929,57 +2901,50 @@ a { text-decoration: none !important; }
         </div>
       </div>
 
-      <!-- 4 KPIS -->
+            <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Card 1: Total Faturado -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Total Faturado</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.totalFormatted">Kz 0,00</div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500" x-text="finStats.totalCount + ' lanç.'"></span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total Faturado</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.totalFormatted">Kz 0,00</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500" x-text="finStats.totalCount + ' lanç.'"></span>
           </div>
         </div>
 
         <!-- Card 2: Recebido em Caixa -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Recebido em Caixa</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.recebidoFormatted">Kz 0,00</div>
-            <span class="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">RECEBIDO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Recebido em Caixa</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.recebidoFormatted">Kz 0,00</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">RECEBIDO</span>
           </div>
         </div>
 
         <!-- Card 3: A Receber (Pendente) -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">A Receber (Pendente)</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.pendenteFormatted">Kz 0,00</div>
-            <span class="text-[10px] font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">PENDENTE</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">A Receber (Pendente)</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.pendenteFormatted">Kz 0,00</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 dark:text-blue-400 uppercase">PENDENTE</span>
           </div>
         </div>
 
         <!-- Card 4: Em Atraso (Vencido) -->
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div>
-            <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">Em Atraso (Vencido)</span>
-          </div>
-          <div class="flex items-baseline justify-between mt-2.5">
-            <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted">Kz 0,00</div>
-            <span class="text-[10px] font-bold tracking-wider text-rose-600 dark:text-rose-400 uppercase">VENCIDO</span>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Em Atraso (Vencido)</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted">Kz 0,00</div>
+            <span class="text-xs font-bold tracking-wider text-rose-600 dark:text-rose-400 uppercase">VENCIDO</span>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- CARD CONTAINER COM FILTROS E TABELA -->
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
         <!-- TOP FILTER BAR -->
-        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <!-- PILL TABS -->
           <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="finTab = 'todos'" 
