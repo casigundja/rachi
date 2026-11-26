@@ -1639,36 +1639,40 @@ a { text-decoration: none !important; }
 
       <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Super Admin</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Nível Máximo</span>
+        <!-- Card 1: SUPER ADMIN -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Super Admin</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wider">Nível Máximo</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins">2</div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Administradores</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Admin</span>
+        <!-- Card 2: ADMINISTRADORES -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Administradores</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 uppercase tracking-wider">Admin</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="userStatsPrint4.admins">2</div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Equipe Operacional</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 uppercase tracking-wider">Operacional</span>
+        <!-- Card 3: EQUIPE OPERACIONAL -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Equipe Operacional</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 uppercase tracking-wider">Operacional</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="userStatsPrint4.staff">1</div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Clientes no Portal</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Cliente</span>
+        <!-- Card 4: CLIENTES NO PORTAL -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Clientes no Portal</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">Cliente</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="userStatsPrint4.clients">5</div>
         </div>
       </div>
 
@@ -1845,39 +1849,39 @@ a { text-decoration: none !important; }
       <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <!-- Card 1: TOTAL GERAL -->
-        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">TOTAL GERAL</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">Todos</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10">Todos</span>
           </div>
-          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.total">9</div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="clientStats.total">9</div>
         </div>
 
         <!-- Card 2: CLIENTES ATIVOS -->
-        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">CLIENTES ATIVOS</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20">ATIVO</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20">ATIVO</span>
           </div>
-          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
         </div>
 
         <!-- Card 3: CONTAS EMPRESA -->
-        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">CONTAS EMPRESA</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 border border-blue-200/60 dark:border-blue-500/20">EMPRESA</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 border border-blue-200/60 dark:border-blue-500/20">EMPRESA</span>
           </div>
-          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
         </div>
 
         <!-- Card 4: LEADS / PARTICULARES -->
-        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">LEADS / PARTICULARES</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20">LEAD</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20">LEAD</span>
           </div>
-          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.leads">1</div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="clientStats.leads">1</div>
         </div>
       </div>
 
@@ -2156,36 +2160,40 @@ a { text-decoration: none !important; }
 
           <!-- 4 KPIS -->
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total no Pipeline</span>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Total</span>
+            <!-- Card 1: Total no Pipeline -->
+            <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Total no Pipeline</span>
+                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10 uppercase tracking-wider">Total</span>
               </div>
-              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total"></div>
+              <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="pipelineStats.total"></div>
             </div>
 
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Novas / Pendentes</span>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Triagem</span>
+            <!-- Card 2: Novas / Pendentes -->
+            <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Novas / Pendentes</span>
+                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wider">Triagem</span>
               </div>
-              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.novas"></div>
+              <div class="text-3xl md:text-4xl font-black text-amber-500 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="pipelineStats.novas"></div>
             </div>
 
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Em Análise / Proposta</span>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Análise</span>
+            <!-- Card 3: Em Análise / Proposta -->
+            <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Em Análise / Proposta</span>
+                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 uppercase tracking-wider">Análise</span>
               </div>
-              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.analise"></div>
+              <div class="text-3xl md:text-4xl font-black text-blue-600 dark:text-blue-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="pipelineStats.analise"></div>
             </div>
 
-            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Aprovadas / Concluídas</span>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Aprovado</span>
+            <!-- Card 4: Aprovadas / Concluídas -->
+            <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Aprovadas / Concluídas</span>
+                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">Aprovado</span>
               </div>
-              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.concluidas"></div>
+              <div class="text-3xl md:text-4xl font-black text-emerald-600 dark:text-emerald-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="pipelineStats.concluidas"></div>
             </div>
           </div>
 
@@ -2720,36 +2728,40 @@ a { text-decoration: none !important; }
 
       <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total de Serviços</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Total</span>
+        <!-- Card 1: Total de Serviços -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Total de Serviços</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10 uppercase tracking-wider">Total</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.total"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="serviceStats.total"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Serviços Ativos</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Ativos</span>
+        <!-- Card 2: Serviços Ativos -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Serviços Ativos</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">Ativos</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ativos"></div>
+          <div class="text-3xl md:text-4xl font-black text-emerald-600 dark:text-emerald-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="serviceStats.ativos"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Pausados / Inativos</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Pausados</span>
+        <!-- Card 3: Pausados / Inativos -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Pausados / Inativos</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10 uppercase tracking-wider">Pausados</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.inativos"></div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="serviceStats.inativos"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Ticket Médio Base</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Média</span>
+        <!-- Card 4: Ticket Médio Base -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Ticket Médio Base</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wider">Média</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio"></div>
+          <div class="text-3xl md:text-4xl font-black text-amber-500 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="serviceStats.ticketMedio"></div>
         </div>
       </div>
 
@@ -2887,36 +2899,40 @@ a { text-decoration: none !important; }
 
       <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total Faturado</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider" x-text="finStats.totalCount + ' lanç.'"></span>
+        <!-- Card 1: Total Faturado -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Total Faturado</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-white/10 uppercase tracking-wider" x-text="finStats.totalCount + ' lanç.'"></span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.totalFormatted"></div>
+          <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-3.5 tracking-tight" style="font-family:Outfit" x-text="finStats.totalFormatted"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Recebido em Caixa</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Recebido</span>
+        <!-- Card 2: Recebido em Caixa -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Recebido em Caixa</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">Recebido</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.recebidoFormatted"></div>
+          <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="finStats.recebidoFormatted"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">A Receber (Pendente)</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Pendente</span>
+        <!-- Card 3: A Receber (Pendente) -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">A Receber (Pendente)</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 uppercase tracking-wider">Pendente</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.pendenteFormatted"></div>
+          <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="finStats.pendenteFormatted"></div>
         </div>
 
-        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Em Atraso (Vencido)</span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-600 dark:text-rose-400 uppercase tracking-wider">Vencido</span>
+        <!-- Card 4: Em Atraso (Vencido) -->
+        <div class="kc p-5 sm:p-5.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between transition-all duration-200 min-h-[110px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Em Atraso (Vencido)</span>
+            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 uppercase tracking-wider">Vencido</span>
           </div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted"></div>
+          <div class="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 mt-3.5 tracking-tight" style="font-family:Outfit" x-text="finStats.vencidoFormatted"></div>
         </div>
       </div>
 
