@@ -9803,6 +9803,212 @@ commerce.post("/checkout", async (c) => {
   });
   return done(c, { order: order2, message: "Pedido registado. Pagamento pendente de confirma\xE7\xE3o." });
 });
+
+// Endpoint Oficial para Pedidos da Loja RACHI Tec (Compatível com D1 SQLite e PostgreSQL)
+commerce.post("/api/loja/pedidos", async (c) => {
+  const d = await body(c);
+  const db = c.get("db");
+  const items = Array.isArray(d.items) ? d.items : [];
+  if (!items.length) return fail(422, "A sua sacola de compras está vazia.");
+
+  const name = String(d.customer_name || d.name || "").trim();
+  const email = String(d.customer_email || d.email || "").trim();
+  const phone = String(d.customer_phone || d.phone || "").trim();
+  const nif = String(d.customer_nif || d.nif || "").trim();
+  const deliveryType = String(d.delivery_type || "address");
+  const address = String(d.delivery_address || d.address || "").trim();
+  const province = String(d.delivery_province || "Luanda").trim();
+  const municipality = String(d.delivery_municipality || "").trim();
+  const reference = String(d.delivery_reference || "").trim();
+  const recipient = String(d.delivery_recipient || "").trim();
+  const shippingOption = String(d.delivery_shipping_option || "normal");
+  const paymentMethod = String(d.payment_method || "multicaixa_express");
+  const companyName = String(d.company_name || "").trim();
+  const companyNif = String(d.company_nif || "").trim();
+
+  if (!name) return fail(422, "O nome do cliente é obrigatório.");
+  if (!email) return fail(422, "O e-mail para envio da fatura é obrigatório.");
+
+  // Obter usuário autenticado ou registrar usuário/cliente
+  let userId = null;
+  const authUser = c.get("user");
+  if (authUser && authUser.id) {
+    userId = authUser.id;
+  } else {
+    try {
+      const existingUser = await db.one("SELECT id FROM users WHERE email=$1", [email.toLowerCase()]);
+      if (existingUser && existingUser.id) {
+        userId = existingUser.id;
+      } else {
+        const insertedUser = await db.one(
+          "INSERT INTO users(name, email, phone, role_id, status, created_at, updated_at) VALUES($1, $2, $3, 6, 'active', now(), now()) RETURNING id",
+          [name, email.toLowerCase(), phone]
+        );
+        userId = insertedUser ? insertedUser.id : 1;
+      }
+    } catch (e) {
+      userId = 1;
+    }
+  }
+
+  // Obter ou criar customer
+  let customerId = null;
+  try {
+    const existingCust = await db.one("SELECT id FROM customers WHERE user_id=$1", [userId]);
+    if (existingCust && existingCust.id) {
+      customerId = existingCust.id;
+    } else {
+      const insertedCust = await db.one(
+        "INSERT INTO customers(user_id, type, trade_name, company_name, document, phone, whatsapp, status, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6, $7, 'active', now(), now()) RETURNING id",
+        [userId, (nif || companyNif) ? 'company' : 'individual', name, companyName || name, nif || companyNif || null, phone, phone]
+      );
+      customerId = insertedCust ? insertedCust.id : 1;
+    }
+  } catch (e) {
+    customerId = 1;
+  }
+
+  // Processar itens
+  let subtotal = 0;
+  const processedItems = [];
+  const updatedStock = [];
+
+  for (const it of items) {
+    const qty = Math.max(1, parseInt(it.quantity || it.qty || 1, 10));
+    const prodId = it.product_id || it.id;
+    let prod = null;
+    if (prodId) {
+      try { prod = await db.one("SELECT * FROM products WHERE id=$1", [prodId]); } catch(e) {}
+    }
+    if (!prod && it.slug) {
+      try { prod = await db.one("SELECT * FROM products WHERE slug=$1", [it.slug]); } catch(e) {}
+    }
+
+    const price = prod ? Number(prod.price) : Number(it.priceNum || it.price || 0);
+    const itemTotal = price * qty;
+    subtotal += itemTotal;
+
+    if (prod) {
+      const prevStock = Number(prod.stock_quantity || 0);
+      const newStock = Math.max(0, prevStock - qty);
+      try {
+        await db.query("UPDATE products SET stock_quantity=$1, updated_at=now() WHERE id=$2", [newStock, prod.id]);
+      } catch(e) {}
+      updatedStock.push({ id: prod.id, slug: prod.slug, stock_quantity: newStock, status: prod.status });
+    }
+
+    processedItems.push({
+      product_id: prod ? prod.id : null,
+      name: prod ? prod.name : (it.title || it.name || "Artigo de Informática"),
+      sku: prod ? prod.sku : ("TEC-" + Math.floor(1000 + Math.random() * 9000)),
+      quantity: qty,
+      unit_price: price,
+      total: itemTotal
+    });
+  }
+
+  const shipping = Number(d.shipping || 0);
+  const discount = Number(d.discount || 0);
+  const total = Math.max(0, (subtotal - discount) + shipping);
+
+  // Gerar número sequencial sem nextval de PostgreSQL
+  let nextId = 1;
+  try {
+    const maxRow = await db.one("SELECT COALESCE(MAX(id), 0) + 1 as next_id FROM orders");
+    if (maxRow && maxRow.next_id) nextId = maxRow.next_id;
+  } catch(e) {
+    nextId = Math.floor(1000 + Math.random() * 9000);
+  }
+  const orderNumber = "PED-" + (new Date()).getFullYear() + "-" + String(nextId).padStart(5, "0");
+
+  const notesParts = [
+    "Solicitação de Compra Loja Online RACHI Tec",
+    deliveryType === "pickup" ? "Levantamento em Loja (Sede RACHI - Miramar, Luanda)" : ("Entrega: " + address + ", " + municipality + ", " + province + (reference ? " (Ref: " + reference + ")" : "") + (recipient ? " (Destinatário: " + recipient + ")" : "")),
+    "Envio: " + (shippingOption === "express" ? "Express (Mesmo Dia)" : "Normal (24h-72h)"),
+    "Pagamento: " + paymentMethod.toUpperCase(),
+    nif ? ("NIF: " + nif) : null,
+    companyNif ? ("NIF Empresa: " + companyNif) : null,
+    companyName ? ("Empresa: " + companyName) : null
+  ].filter(Boolean);
+  const notes = notesParts.join(" | ");
+
+  let orderId = nextId;
+  try {
+    const orderRow = await db.one(
+      "INSERT INTO orders(number, customer_id, business_unit_id, status, payment_status, subtotal, discount, shipping, total, notes, created_at, updated_at) VALUES($1, $2, 1, 'pending', 'pending', $3, $4, $5, $6, $7, now(), now()) RETURNING id, number, total, status",
+      [orderNumber, customerId, subtotal, discount, shipping, total, notes]
+    );
+    if (orderRow && orderRow.id) orderId = orderRow.id;
+  } catch (err) {
+    console.error("Erro ao inserir order:", err);
+  }
+
+  // Inserir itens
+  for (const pi of processedItems) {
+    try {
+      await db.query(
+        "INSERT INTO order_items(order_id, product_id, name, sku, quantity, unit_price, total, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6, $7, now(), now())",
+        [orderId, pi.product_id, pi.name, pi.sku, pi.quantity, pi.unit_price, pi.total]
+      );
+    } catch(e) {}
+  }
+
+  // Inserir pagamento pendente
+  try {
+    await db.query(
+      "INSERT INTO payments(order_id, method, amount, status, created_at, updated_at) VALUES($1, $2, $3, 'pending', now(), now())",
+      [orderId, paymentMethod, total]
+    );
+  } catch(e) {}
+
+  // Sincronizar com worker_contacts (CRM e notificações do Admin)
+  try {
+    await db.query(
+      "INSERT INTO worker_contacts(name, email, phone, subject, message, created_at) VALUES($1, $2, $3, $4, $5, now())",
+      [name, email, phone, "[Pedido Loja] " + orderNumber + " - AOA " + total.toLocaleString('pt-AO'), notes]
+    );
+  } catch(e) {}
+
+  const formattedOrder = {
+    id: orderId,
+    numero: orderNumber,
+    cliente: name,
+    total: "AOA " + total.toLocaleString('pt-AO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    status: "Pendente",
+    data: (new Date()).toLocaleDateString('pt-PT') + " " + (new Date()).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })
+  };
+
+  return c.json({
+    success: true,
+    order_id: orderId,
+    order_number: orderNumber,
+    order: formattedOrder,
+    updated_stock: updatedStock,
+    message: "Pedido " + orderNumber + " finalizado com sucesso! Factura proforma registada em Pedidos de Venda."
+  });
+});
+
+// Endpoint para listar Pedidos da RACHI Tec no Painel Executivo (/admin/tec/orders)
+commerce.get("/admin/tec/orders", async (c) => {
+  const db = c.get("db");
+  try {
+    const orders = await db.query(
+      "SELECT o.*, cu.trade_name, cu.company_name, u.name as user_name, u.email as user_email FROM orders o LEFT JOIN customers cu ON cu.id = o.customer_id LEFT JOIN users u ON u.id = cu.user_id WHERE o.business_unit_id = 1 OR o.business_unit_id IS NULL ORDER BY o.id DESC LIMIT 200"
+    );
+    const formatted = orders.map(o => ({
+      id: o.id,
+      numero: o.number || ("PED-" + String(o.id).padStart(5, '0')),
+      cliente: o.trade_name || o.company_name || o.user_name || "Cliente Particular",
+      total: "AOA " + Number(o.total || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      status: (o.status || "Pendente").charAt(0).toUpperCase() + (o.status || "Pendente").slice(1),
+      data: o.created_at ? new Date(o.created_at).toLocaleString('pt-PT') : "—"
+    }));
+    return c.json({ orders: formatted });
+  } catch(e) {
+    return c.json({ orders: [] });
+  }
+});
+
 commerce.get("/api/orders", async (c) => {
   const u = user(c), db = c.get("db");
   const isAdmin = admin(u);

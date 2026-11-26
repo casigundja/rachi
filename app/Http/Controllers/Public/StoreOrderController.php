@@ -167,9 +167,28 @@ class StoreOrderController extends Controller
             $count = Order::whereYear('created_at', $year)->count() + 1;
             $orderNumber = sprintf('PED-%s-%05d', $year, $count);
 
-            $notes = "Solicitação de Factura Proforma via Loja Online RACHI Tec." .
-                ($nif ? " | NIF: {$nif}" : "") .
-                ($address ? " | Endereço de Entrega: {$address}" : "");
+            $deliveryType = trim($request->input('delivery_type', 'address'));
+            $province = trim($request->input('delivery_province', 'Luanda'));
+            $municipality = trim($request->input('delivery_municipality', ''));
+            $reference = trim($request->input('delivery_reference', ''));
+            $recipient = trim($request->input('delivery_recipient', ''));
+            $shippingOption = trim($request->input('delivery_shipping_option', 'normal'));
+            $paymentMethod = trim($request->input('payment_method', 'multicaixa_express'));
+            $companyName = trim($request->input('company_name', ''));
+            $companyNif = trim($request->input('company_nif', ''));
+
+            $notesParts = [
+                "Solicitação de Compra Loja Online RACHI Tec",
+                $deliveryType === 'pickup' 
+                    ? "Levantamento em Loja (Sede RACHI - Miramar, Luanda)" 
+                    : "Entrega: {$address}, {$municipality}, {$province}" . ($reference ? " (Ref: {$reference})" : "") . ($recipient ? " (Destinatário: {$recipient})" : ""),
+                "Envio: " . ($shippingOption === 'express' ? "Express (Mesmo Dia)" : "Normal (24h-72h)"),
+                "Pagamento: " . strtoupper($paymentMethod),
+                $nif ? "NIF: {$nif}" : ($companyNif ? "NIF Empresa: {$companyNif}" : null),
+                $companyName ? "Empresa: {$companyName}" : null,
+                "Conformidade: Lei n.º 15/03 de Defesa do Consumidor"
+            ];
+            $notes = implode(' | ', array_filter($notesParts));
 
             $order = Order::create([
                 'number' => $orderNumber,

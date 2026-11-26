@@ -2093,68 +2093,686 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- 12. MODAL DE FINALIZAÇÃO / CHECKOUT PROFORMA                   -->
+    <!-- 12. FLUXO DE CHECKOUT COMPLETO EM 4 ETAPAS (CONFORME NCR ANGOLA & LEIS DO CONSUMIDOR) -->
     <!-- ============================================================== -->
-    <div x-show="checkoutModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <div @click.outside="checkoutModal = false" class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
-            <button @click="checkoutModal = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
-                <i data-lucide="x" class="w-5 h-5"></i>
+    <div x-show="checkoutModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 lg:p-8">
+        <div @click.outside="checkoutModal = false" class="bg-white dark:bg-slate-900 rounded-3xl max-w-5xl w-full shadow-2xl relative border border-slate-200 dark:border-slate-800 overflow-hidden my-auto">
+            
+            <!-- Botão Fechar -->
+            <button @click="checkoutModal = false" class="absolute top-5 right-5 z-20 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-white flex items-center justify-center transition">
+                <i data-lucide="x" class="w-4 h-4"></i>
             </button>
 
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 rounded-full bg-amber-50 text-[#d97706] flex items-center justify-center mx-auto mb-2">
-                    <i data-lucide="file-text" class="w-6 h-6"></i>
+            <!-- Topo com Logo e Stepper de 4 Etapas (Idêntico aos Prints de Referência) -->
+            <div class="pt-7 pb-4 px-6 sm:px-10 border-b border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/60">
+                <div class="text-center mb-5">
+                    <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 mx-auto mb-1 dark:hidden">
+                    <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 mx-auto mb-1 hidden dark:block">
+                    <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Loja Oficial RACHI Tec · Luanda</p>
                 </div>
-                <h3 class="text-xl font-extrabold text-slate-900 font-display">Solicitação de Factura Proforma</h3>
-                <p class="text-xs text-slate-500 mt-1">Preencha os dados da sua empresa para receber a cotação oficial com NIF.</p>
+
+                <!-- Stepper Horizontal com 4 Fases Claras -->
+                <div class="max-w-xl mx-auto relative flex items-center justify-between px-4 sm:px-8">
+                    <!-- Linha Conectora de Fundo -->
+                    <div class="absolute top-5 left-10 right-10 h-0.5 bg-slate-200 dark:bg-slate-700 -z-0"></div>
+                    <!-- Linha Conectora de Progresso Ativa -->
+                    <div class="absolute top-5 left-10 h-0.5 bg-blue-600 transition-all duration-300 -z-0"
+                         :style="'width: ' + ((checkoutStep - 1) * 33.33) + '%'"></div>
+
+                    <!-- Fase 1: Carrinho -->
+                    <div class="flex flex-col items-center gap-1.5 relative z-10 cursor-pointer" @click="checkoutModal = false; cartDrawerOpen = true">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300">Carrinho</span>
+                    </div>
+
+                    <!-- Fase 2: Identificação -->
+                    <div class="flex flex-col items-center gap-1.5 relative z-10 cursor-pointer" @click="goToStep(2)">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition"
+                             :class="checkoutStep >= 2 ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-[11px] font-bold" :class="checkoutStep >= 2 ? 'text-blue-600 font-extrabold' : 'text-slate-400'">Identificação</span>
+                    </div>
+
+                    <!-- Fase 3: Entrega -->
+                    <div class="flex flex-col items-center gap-1.5 relative z-10 cursor-pointer" @click="checkoutStep > 2 ? goToStep(3) : null">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition"
+                             :class="checkoutStep >= 3 ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'">
+                            <i data-lucide="package" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-[11px] font-bold" :class="checkoutStep >= 3 ? 'text-blue-600 font-extrabold' : 'text-slate-400'">Entrega</span>
+                    </div>
+
+                    <!-- Fase 4: Pagamento -->
+                    <div class="flex flex-col items-center gap-1.5 relative z-10 cursor-pointer" @click="checkoutStep > 3 ? goToStep(4) : null">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center shadow-md transition"
+                             :class="checkoutStep >= 4 ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500'">
+                            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-[11px] font-bold" :class="checkoutStep >= 4 ? 'text-blue-600 font-extrabold' : 'text-slate-400'">Pagamento</span>
+                    </div>
+                </div>
             </div>
 
-            <form @submit.prevent="submitOrderForm()" class="space-y-3.5 text-xs">
-                <div>
-                    <label class="block font-bold text-slate-700 mb-1">Nome da Empresa / Cliente *</label>
-                    <input type="text" x-model="orderForm.name" required placeholder="Ex: Unitel, Sonangol, Banco BFA ou Particular" 
-                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
-                </div>
+            <!-- Corpo Principal: 2 Colunas de Etapas + 1 Coluna de Resumo do Pedido -->
+            <div class="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-50/30 dark:bg-slate-900/40 max-h-[75vh] overflow-y-auto">
+                
+                <!-- Coluna de Formulários das Fases (lg:col-span-8) -->
+                <div class="lg:col-span-8 space-y-5">
+                    
+                    <!-- ============================================== -->
+                    <!-- CARD 1: DADOS PESSOAIS (FASE 2)                -->
+                    <!-- ============================================== -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 border shadow-sm transition-all"
+                         :class="checkoutStep === 2 ? 'border-blue-500 ring-2 ring-blue-500/10' : 'border-slate-200 dark:border-slate-700'">
+                        
+                        <!-- Cabeçalho do Card -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h3 class="text-base font-extrabold text-slate-900 dark:text-white font-display">Dados pessoais</h3>
+                                <p x-show="checkoutStep === 2" class="text-xs text-slate-500 mt-0.5">
+                                    Solicitamos apenas as informações essenciais para a realização da compra.
+                                </p>
+                            </div>
+                            <!-- Botão Editar se já passou dessa fase -->
+                            <button type="button" x-show="checkoutStep > 2" @click="goToStep(2)" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Editar
+                            </button>
+                        </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">NIF da Empresa</label>
-                        <input type="text" x-model="orderForm.nif" placeholder="5400000000" 
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
+                        <!-- Resumo colapsado quando já avançou -->
+                        <div x-show="checkoutStep > 2" class="text-xs text-slate-600 dark:text-slate-300 space-y-1 bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-100 dark:border-slate-700/60">
+                            <p class="font-bold text-slate-800 dark:text-white" x-text="(checkoutData.firstName + ' ' + checkoutData.lastName).trim() || 'Cliente RACHI'"></p>
+                            <p x-text="checkoutData.email"></p>
+                            <p x-text="'Telefone: ' + (checkoutData.phoneCountry === 'AO' ? '+244 ' : '') + checkoutData.phone"></p>
+                            <p x-show="checkoutData.personalNif" x-text="'NIF Pessoal: ' + checkoutData.personalNif"></p>
+                            <p x-show="checkoutData.companyName" x-text="'Facturação: ' + checkoutData.companyName + (checkoutData.companyNif ? ' (NIF ' + checkoutData.companyNif + ')' : '')"></p>
+                        </div>
+
+                        <!-- Formulário ativo do Passo 2 -->
+                        <form x-show="checkoutStep === 2" @submit.prevent="goToDeliveryStep()" class="space-y-4 text-xs mt-3">
+                            <div>
+                                <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Email *</label>
+                                <input type="email" x-model="checkoutData.email" required placeholder="seu.email@exemplo.ao"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div>
+                                    <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Nome Pessoal *</label>
+                                    <input type="text" x-model="checkoutData.firstName" required placeholder="Primeiro nome"
+                                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20">
+                                </div>
+                                <div>
+                                    <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Apelido *</label>
+                                    <input type="text" x-model="checkoutData.lastName" required placeholder="Sobrenome"
+                                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20">
+                                </div>
+                            </div>
+
+                            <!-- Telemóvel com Abas Angola / Internacional -->
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <label class="font-bold text-slate-700 dark:text-slate-200">Telemóvel *</label>
+                                    <div class="flex text-[11px] font-bold gap-3">
+                                        <button type="button" @click="checkoutData.phoneCountry = 'AO'" :class="checkoutData.phoneCountry === 'AO' ? 'text-blue-600 underline' : 'text-slate-400 hover:text-slate-600'">Angola (+244)</button>
+                                        <button type="button" @click="checkoutData.phoneCountry = 'INT'" :class="checkoutData.phoneCountry === 'INT' ? 'text-blue-600 underline' : 'text-slate-400 hover:text-slate-600'">Internacional</button>
+                                    </div>
+                                </div>
+                                <div class="relative flex items-center">
+                                    <span x-show="checkoutData.phoneCountry === 'AO'" class="absolute left-3.5 text-slate-400 font-bold select-none">+244</span>
+                                    <input type="tel" x-model="checkoutData.phone" required :placeholder="checkoutData.phoneCountry === 'AO' ? '9xx xxx xxx' : '+000 000 000'"
+                                        :class="checkoutData.phoneCountry === 'AO' ? 'pl-16' : 'pl-3.5'"
+                                        class="w-full pr-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20">
+                                </div>
+                            </div>
+
+                            <!-- NIF Pessoal (Opcional) -->
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <label class="font-bold text-slate-700 dark:text-slate-200">NIF Pessoal (Opcional)</label>
+                                    <button type="button" @click="checkoutData.showPersonalNif = !checkoutData.showPersonalNif" class="text-xs text-blue-600 hover:underline">
+                                        <span x-text="checkoutData.showPersonalNif ? 'Ocultar NIF' : 'Adicionar NIF'"></span>
+                                    </button>
+                                </div>
+                                <div x-show="checkoutData.showPersonalNif" class="mt-1.5">
+                                    <input type="text" x-model="checkoutData.personalNif" placeholder="Número de Identificação Fiscal (NIF Particular)"
+                                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                </div>
+                            </div>
+
+                            <!-- Dados da Empresa (Facturação Corporativa / B2B) -->
+                            <div class="pt-2 border-t border-slate-100 dark:border-slate-700">
+                                <button type="button" @click="checkoutData.showCompanyData = !checkoutData.showCompanyData" class="font-bold text-blue-600 hover:underline flex items-center gap-1.5">
+                                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                                    <span x-text="checkoutData.showCompanyData ? 'Remover dados de empresa' : 'Adicionar dados para facturação da empresa'"></span>
+                                </button>
+
+                                <div x-show="checkoutData.showCompanyData" class="mt-3 space-y-3 bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Nome da Empresa / Razão Social</label>
+                                        <input type="text" x-model="checkoutData.companyName" placeholder="Ex: GundjaTech, Sonangol, Banco BAI..."
+                                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">NIF da Empresa</label>
+                                        <input type="text" x-model="checkoutData.companyNif" placeholder="Ex: 5400000000"
+                                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Aceitação dos Termos e Condições (Conformidade com a Lei de Defesa do Consumidor n.º 15/03) -->
+                            <div class="pt-3 border-t border-slate-100 dark:border-slate-700">
+                                <label class="flex items-start gap-2.5 cursor-pointer text-slate-600 dark:text-slate-300">
+                                    <input type="checkbox" x-model="checkoutData.termsAccepted" required class="mt-0.5 rounded text-blue-600 focus:ring-blue-600">
+                                    <span>
+                                        Aceito os <a href="/termos" target="_blank" class="text-blue-600 underline">termos e condições</a> de compra, garantia oficial de 12 meses e direito de livre resolução/devolução em até 7 dias úteis nos termos da <strong>Lei n.º 15/03 de Defesa do Consumidor de Angola</strong>.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- Botão Avançar para Entrega -->
+                            <button type="submit"
+                                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-600/25 transition cursor-pointer flex items-center justify-center gap-2">
+                                <span>Ir para a Entrega</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
                     </div>
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Telefone / WhatsApp *</label>
-                        <input type="tel" x-model="orderForm.phone" required placeholder="+244 9xx xxx xxx" 
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
+
+                    <!-- ============================================== -->
+                    <!-- CARD 2: ENTREGA (FASE 3)                       -->
+                    <!-- ============================================== -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 border shadow-sm transition-all"
+                         :class="checkoutStep === 3 ? 'border-blue-500 ring-2 ring-blue-500/10' : 'border-slate-200 dark:border-slate-700'">
+                        
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-base font-extrabold text-slate-900 dark:text-white font-display">Entrega</h3>
+                            <button type="button" x-show="checkoutStep > 3" @click="goToStep(3)" class="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Editar
+                            </button>
+                        </div>
+
+                        <!-- Estado Inativo (Aguardando Dados Pessoais) -->
+                        <div x-show="checkoutStep < 3" class="text-xs text-slate-400 py-2">
+                            Aguardando informações de dados pessoais
+                        </div>
+
+                        <!-- Resumo colapsado quando no passo 4 -->
+                        <div x-show="checkoutStep > 3" class="text-xs text-slate-600 dark:text-slate-300 space-y-1 bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-100 dark:border-slate-700/60">
+                            <template x-if="checkoutData.deliveryType === 'pickup'">
+                                <div>
+                                    <p class="font-bold text-slate-800 dark:text-white">🏢 Levantamento em Loja (Sede RACHI Miramar)</p>
+                                    <p class="text-slate-500">Rua Ndunduma, Miramar, Luanda (Segunda a Sexta, 08h-17h) · Grátis</p>
+                                </div>
+                            </template>
+                            <template x-if="checkoutData.deliveryType === 'address'">
+                                <div>
+                                    <p class="font-bold text-slate-800 dark:text-white" x-text="'🚚 ' + checkoutData.address + ', ' + checkoutData.municipality + ', ' + checkoutData.province"></p>
+                                    <p x-show="checkoutData.referencePoint" x-text="'Ponto de Ref: ' + checkoutData.referencePoint" class="text-slate-500"></p>
+                                    <p x-show="checkoutData.recipient" x-text="'Destinatário: ' + checkoutData.recipient"></p>
+                                    <p class="font-bold text-blue-600" x-text="checkoutData.shippingOption === 'express' ? 'Envio Express (No próprio dia) · 2.500 AOA' : 'Envio Normal (Até 72h) · ' + (shippingCost === 0 ? 'Grátis' : formatKz(shippingCost))"></p>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Formulário ativo do Passo 3 (Entrega) -->
+                        <form x-show="checkoutStep === 3" @submit.prevent="goToPaymentStep()" class="space-y-4 text-xs mt-3">
+                            <!-- Toggle Entregar no Endereço / Levantamento em Loja -->
+                            <div class="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl">
+                                <button type="button" @click="checkoutData.deliveryType = 'address'"
+                                    :class="checkoutData.deliveryType === 'address' ? 'bg-blue-600 text-white font-bold shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'"
+                                    class="py-2.5 rounded-lg transition text-xs">
+                                    Entregar no endereço
+                                </button>
+                                <button type="button" @click="checkoutData.deliveryType = 'pickup'"
+                                    :class="checkoutData.deliveryType === 'pickup' ? 'bg-blue-600 text-white font-bold shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'"
+                                    class="py-2.5 rounded-lg transition text-xs">
+                                    Levantamento em loja
+                                </button>
+                            </div>
+
+                            <!-- Caso: Levantamento em Loja -->
+                            <div x-show="checkoutData.deliveryType === 'pickup'" class="p-4 bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-900/40 rounded-xl space-y-2">
+                                <div class="flex items-center gap-2 text-blue-800 dark:text-blue-300 font-bold">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i>
+                                    Sede Executiva da RACHI — Soluções Inteligentes
+                                </div>
+                                <p class="text-slate-600 dark:text-slate-400 text-xs">
+                                    Rua Ndunduma, Miramar, Luanda (por detrás do BFA).<br>
+                                    <strong>Horário:</strong> Segunda a Sexta-feira, das 08h00 às 17h00.<br>
+                                    <strong>Custo:</strong> <span class="text-emerald-600 font-bold">Grátis</span>.
+                                </p>
+                            </div>
+
+                            <!-- Caso: Entregar no Endereço -->
+                            <div x-show="checkoutData.deliveryType === 'address'" class="space-y-3.5">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Província *</label>
+                                        <select x-model="checkoutData.province" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                            <option value="Luanda">Luanda</option>
+                                            <option value="Benguela">Benguela</option>
+                                            <option value="Huambo">Huambo</option>
+                                            <option value="Huíla">Huíla</option>
+                                            <option value="Cabinda">Cabinda</option>
+                                            <option value="Cuanza Sul">Cuanza Sul</option>
+                                            <option value="Outra Província">Outra Província</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Município / Zona *</label>
+                                        <select x-model="checkoutData.municipality" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                            <option value="Talatona">Talatona</option>
+                                            <option value="Belas">Belas / Kilamba</option>
+                                            <option value="Luanda">Luanda (Maianga, Ingombota, Rangel)</option>
+                                            <option value="Viana">Viana</option>
+                                            <option value="Cacuaco">Cacuaco</option>
+                                            <option value="Cazenga">Cazenga</option>
+                                            <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Endereço Completo (Bairro, Rua, Edifício/Casa) *</label>
+                                    <input type="text" x-model="checkoutData.address" :required="checkoutData.deliveryType === 'address'" placeholder="Ex: Bairro Miramar, Rua Ndunduma, Casa 24"
+                                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Ponto de Referência</label>
+                                        <input type="text" x-model="checkoutData.referencePoint" placeholder="Ex: Defronte à escola, por trás da bomba"
+                                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                    </div>
+                                    <div>
+                                        <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Nome do Destinatário</label>
+                                        <input type="text" x-model="checkoutData.recipient" placeholder="Nome de quem irá receber a encomenda"
+                                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 dark:text-white focus:outline-none focus:border-blue-600">
+                                    </div>
+                                </div>
+
+                                <!-- Opção de Envio (Normal vs Express) -->
+                                <div>
+                                    <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1.5">Opção de Envio</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center justify-between p-3.5 border rounded-xl cursor-pointer transition"
+                                               :class="checkoutData.shippingOption === 'normal' ? 'border-blue-500 bg-blue-50/40 dark:bg-blue-950/20' : 'border-slate-200 dark:border-slate-700'">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="shipping" value="normal" x-model="checkoutData.shippingOption" class="text-blue-600">
+                                                <div>
+                                                    <span class="font-black text-slate-900 dark:text-white">ENVIO NORMAL</span>
+                                                    <p class="text-[11px] text-slate-500">Entrega cuidada em até 24h a 72h úteis</p>
+                                                </div>
+                                            </div>
+                                            <span class="font-extrabold" :class="shippingCost === 0 ? 'text-emerald-600' : 'text-slate-700'" x-text="shippingCost === 0 ? 'Grátis' : formatKz(shippingCost)"></span>
+                                        </label>
+
+                                        <label class="flex items-center justify-between p-3.5 border rounded-xl cursor-pointer transition"
+                                               :class="checkoutData.shippingOption === 'express' ? 'border-blue-500 bg-blue-50/40 dark:bg-blue-950/20' : 'border-slate-200 dark:border-slate-700'">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="shipping" value="express" x-model="checkoutData.shippingOption" class="text-blue-600">
+                                                <div>
+                                                    <span class="font-black text-slate-900 dark:text-white">ENVIO EXPRESS (NO MESMO DIA)</span>
+                                                    <p class="text-[11px] text-slate-500">Entrega rápida em Luanda via motoboy dedicado</p>
+                                                </div>
+                                            </div>
+                                            <span class="font-extrabold text-blue-600">2.500,00 AOA</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-600/25 transition cursor-pointer flex items-center justify-center gap-2">
+                                <span>Ir para pagamento</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- CARD 3: PAGAMENTO (FASE 4)                     -->
+                    <!-- ============================================== -->
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 border shadow-sm transition-all"
+                         :class="checkoutStep === 4 ? 'border-blue-500 ring-2 ring-blue-500/10' : 'border-slate-200 dark:border-slate-700'">
+                        
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-base font-extrabold text-slate-900 dark:text-white font-display">Pagamento</h3>
+                        </div>
+
+                        <!-- Estado Inativo (Aguardando Dados) -->
+                        <div x-show="checkoutStep < 4" class="text-xs text-slate-400 py-2">
+                            Aguardando o preenchimento dos dados de entrega
+                        </div>
+
+                        <!-- Formulário ativo do Passo 4 (Pagamento) -->
+                        <div x-show="checkoutStep === 4" class="space-y-4 text-xs mt-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+                                <!-- Coluna de Seleção de Métodos -->
+                                <div class="sm:col-span-5 space-y-2">
+                                    <button type="button" @click="checkoutData.paymentMethod = 'multicaixa_express'"
+                                        :class="checkoutData.paymentMethod === 'multicaixa_express' ? 'border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 text-blue-600 font-extrabold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'"
+                                        class="w-full p-3 border rounded-xl text-left flex items-center gap-2.5 transition">
+                                        <span class="w-6 h-6 rounded-md bg-amber-500 text-white font-black text-[10px] flex items-center justify-center">EXP</span>
+                                        <span>Multicaixa Express (QR Code / Telemóvel)</span>
+                                    </button>
+
+                                    <button type="button" @click="checkoutData.paymentMethod = 'bai'"
+                                        :class="checkoutData.paymentMethod === 'bai' ? 'border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 text-blue-600 font-extrabold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'"
+                                        class="w-full p-3 border rounded-xl text-left flex items-center gap-2.5 transition">
+                                        <span class="w-6 h-6 rounded-md bg-sky-600 text-white font-black text-[10px] flex items-center justify-center">BAI</span>
+                                        <span>Transferência Banco BAI</span>
+                                    </button>
+
+                                    <button type="button" @click="checkoutData.paymentMethod = 'bfa'"
+                                        :class="checkoutData.paymentMethod === 'bfa' ? 'border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 text-blue-600 font-extrabold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'"
+                                        class="w-full p-3 border rounded-xl text-left flex items-center gap-2.5 transition">
+                                        <span class="w-6 h-6 rounded-md bg-orange-600 text-white font-black text-[10px] flex items-center justify-center">BFA</span>
+                                        <span>Transferência Banco BFA</span>
+                                    </button>
+
+                                    <button type="button" @click="checkoutData.paymentMethod = 'multicaixa_ref'"
+                                        :class="checkoutData.paymentMethod === 'multicaixa_ref' ? 'border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 text-blue-600 font-extrabold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'"
+                                        class="w-full p-3 border rounded-xl text-left flex items-center gap-2.5 transition">
+                                        <span class="w-6 h-6 rounded-md bg-emerald-600 text-white font-black text-[10px] flex items-center justify-center">REF</span>
+                                        <span>Referência Multicaixa (ATM / Homebanking)</span>
+                                    </button>
+
+                                    <button type="button" @click="checkoutData.paymentMethod = 'proforma'"
+                                        :class="checkoutData.paymentMethod === 'proforma' ? 'border-blue-600 bg-blue-50/50 dark:bg-blue-950/40 text-blue-600 font-extrabold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'"
+                                        class="w-full p-3 border rounded-xl text-left flex items-center gap-2.5 transition">
+                                        <span class="w-6 h-6 rounded-md bg-slate-700 text-white font-black text-[10px] flex items-center justify-center">DOC</span>
+                                        <span>Factura Proforma Corporativa (B2B)</span>
+                                    </button>
+                                </div>
+
+                                <!-- Coluna de Detalhes do Método Selecionado -->
+                                <div class="sm:col-span-7 bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                                    <template x-if="checkoutData.paymentMethod === 'multicaixa_express'">
+                                        <div>
+                                            <h4 class="font-extrabold text-slate-900 dark:text-white">Pagamento Instantâneo via Multicaixa Express</h4>
+                                            <p class="text-slate-500 mt-1">
+                                                Após clicar em <strong>Finalizar compra</strong>, será gerado o <strong>Código QR Multicaixa Express</strong> para leitura direta pela app e o envio da notificação push para o seu número.
+                                            </p>
+                                            <div class="mt-2 text-slate-700 dark:text-slate-300">
+                                                <p>• O valor total da sua compra é <strong x-text="formatKz(finalTotal)"></strong></p>
+                                                <p>• Moeda oficial: <strong>Kwanza (AOA)</strong></p>
+                                                <p>• Confirmação imediata e geração do comprovativo digital.</p>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template x-if="checkoutData.paymentMethod === 'bai'">
+                                        <div>
+                                            <h4 class="font-extrabold text-slate-900 dark:text-white">Transferência para o Banco BAI</h4>
+                                            <p class="text-slate-500 mt-1">Aqui está um breve resumo da sua compra:</p>
+                                            <div class="mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+                                                <p>• Valor total: <strong x-text="formatKz(finalTotal)"></strong></p>
+                                                <p>• Permitimos o pagamento por transferência bancária na moeda <strong>Kwanza</strong>.</p>
+                                                <p>• Os dados completos para Transferência (IBAN BAI e Beneficiário) serão exibidos após clicar em <strong>Finalizar Compra</strong>.</p>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template x-if="checkoutData.paymentMethod === 'bfa'">
+                                        <div>
+                                            <h4 class="font-extrabold text-slate-900 dark:text-white">Transferência para o Banco BFA</h4>
+                                            <p class="text-slate-500 mt-1">Aqui está um breve resumo da sua compra:</p>
+                                            <div class="mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+                                                <p>• Valor total: <strong x-text="formatKz(finalTotal)"></strong></p>
+                                                <p>• Pagamento por transferência direta para a conta BFA da RACHI.</p>
+                                                <p>• Os dados de IBAN BFA e Beneficiário serão exibidos após clicar em <strong>Finalizar Compra</strong>.</p>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template x-if="checkoutData.paymentMethod === 'multicaixa_ref'">
+                                        <div>
+                                            <h4 class="font-extrabold text-slate-900 dark:text-white">Pagamento por Referência Multicaixa</h4>
+                                            <p class="text-slate-500 mt-1">Pague no Multicaixa (ATM) ou Internet Banking:</p>
+                                            <div class="mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+                                                <p>• Entidade e Referência de 9 dígitos geradas automaticamente.</p>
+                                                <p>• Válida por 48 horas para liquidação segura.</p>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template x-if="checkoutData.paymentMethod === 'proforma'">
+                                        <div>
+                                            <h4 class="font-extrabold text-slate-900 dark:text-white">Factura Proforma Corporativa (B2B)</h4>
+                                            <p class="text-slate-500 mt-1">Ideal para aprovação interna e emissão de Ordem de Compra:</p>
+                                            <div class="mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+                                                <p>• Documento proforma com cotação oficial e NIF da RACHI.</p>
+                                                <p>• Permite pagamento via cheque, ordem bancária ou contra-entrega.</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Botão Finalizar Compra -->
+                            <button type="button" @click="submitCheckout()" :disabled="isSubmittingOrder"
+                                class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-600/30 transition cursor-pointer flex items-center justify-center gap-2">
+                                <i data-lucide="lock" class="w-4 h-4"></i>
+                                <span x-text="isSubmittingOrder ? 'A processar o seu pedido...' : 'Finalizar compra'"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Coluna da Direita: Resumo do Pedido (lg:col-span-4) -->
+                <div class="lg:col-span-4">
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-700 shadow-sm sticky top-4 space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-700">
+                            <h3 class="text-base font-extrabold text-slate-900 dark:text-white font-display">Resumo do pedido</h3>
+                            <button type="button" @click="checkoutModal = false; cartDrawerOpen = true" class="text-xs text-blue-600 hover:underline">
+                                Editar carrinho
+                            </button>
+                        </div>
+
+                        <!-- Lista de Itens no Resumo -->
+                        <div class="space-y-3 max-h-52 overflow-y-auto pr-1">
+                            <template x-for="(item, index) in cart" :key="index">
+                                <div class="flex items-center gap-3 text-xs py-1.5 border-b border-slate-50 dark:border-slate-700/50">
+                                    <div class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center p-1 relative border">
+                                        <img :src="item.image || '/images/products/placeholder.png'" class="max-h-full max-w-full object-contain">
+                                        <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-blue-600 text-white rounded-full text-[9px] font-black flex items-center justify-center" x-text="item.quantity || 1"></span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-bold text-slate-800 dark:text-white truncate" x-text="item.title || item.name"></p>
+                                        <p class="text-[10px] text-slate-400">Ref: <span x-text="item.sku || ('RCH-' + (item.id || index))"></span></p>
+                                    </div>
+                                    <div class="text-right font-bold text-slate-900 dark:text-white" x-text="formatKz((item.priceNum || item.price) * (item.quantity || 1))"></div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="button" @click="checkoutModal = false" class="text-xs text-blue-600 hover:underline">
+                                Escolher mais produtos
+                            </button>
+                        </div>
+
+                        <!-- Totais Financeiros -->
+                        <div class="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-700 text-xs">
+                            <div class="flex justify-between text-slate-500">
+                                <span>Subtotal:</span>
+                                <strong class="text-slate-900 dark:text-white" x-text="formatKz(cartTotalAmount)"></strong>
+                            </div>
+                            <div x-show="discountAmount > 0" class="flex justify-between text-emerald-600 font-bold">
+                                <span>Desconto:</span>
+                                <span x-text="'- ' + formatKz(discountAmount)"></span>
+                            </div>
+                            <div class="flex justify-between text-slate-500">
+                                <span>Entrega:</span>
+                                <span class="font-bold" :class="shippingCost === 0 ? 'text-emerald-600' : 'text-slate-900 dark:text-white'" x-text="shippingCost === 0 ? 'Grátis' : formatKz(shippingCost)"></span>
+                            </div>
+                            <div class="flex justify-between items-baseline pt-2 border-t border-slate-200 dark:border-slate-700">
+                                <span class="text-sm font-black text-slate-900 dark:text-white">Total:</span>
+                                <span class="text-lg font-black text-blue-600" x-text="formatKz(finalTotal)"></span>
+                            </div>
+                        </div>
+
+                        <!-- Nota Legal Obrigatória da AGT (Tributação de Angola) -->
+                        <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed border border-slate-100 dark:border-slate-800">
+                            <p class="font-bold text-slate-700 dark:text-slate-300 mb-0.5">Preço com IVA incluído à taxa em vigor excepto livros.</p>
+                            <p>Em conformidade com o <strong>Regime Geral de Facturação da AGT</strong> e com a <strong>Lei n.º 15/03 de Defesa do Consumidor</strong>. Garantia oficial de conformidade e assistência técnica em Luanda.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block font-bold text-slate-700 mb-1">E-mail para Envio da Factura *</label>
-                    <input type="email" x-model="orderForm.email" required placeholder="compras@suaempresa.ao" 
-                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
-                </div>
+            </div>
 
-                <div>
-                    <label class="block font-bold text-slate-700 mb-1">Morada de Entrega em Luanda</label>
-                    <input type="text" x-model="orderForm.address" placeholder="Bairro, Rua, Edifício, Luanda" 
-                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#f5a800]">
-                </div>
-
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span class="font-bold text-slate-600">Total do Pedido:</span>
-                    <strong class="text-base font-black text-[#071326]" x-text="formatKz(finalTotal)"></strong>
-                </div>
-
-                <button type="submit" :disabled="isSubmittingOrder"
-                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer">
-                    <span x-text="isSubmittingOrder ? 'A processar pedido...' : 'Confirmar Pedido & Gerar Proforma'"></span>
-                </button>
-            </form>
         </div>
     </div>
 
     <!-- ============================================================== -->
+    <!-- MODAL DE PAGAMENTO INSTANTÂNEO & QR CODE MULTICAIXA EXPRESS    -->
+    <!-- (TELAS 4 & 5 DE REFERÊNCIA - WIPAY / MULTICAIXA EXPRESS)       -->
+    <!-- ============================================================== -->
+    <div x-show="paymentModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+        <div @click.outside="paymentModalOpen = false" class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center border border-slate-200 dark:border-slate-800">
+            
+            <!-- Botão Voltar -->
+            <button @click="paymentModalOpen = false" class="absolute top-5 right-5 text-xs font-bold bg-black text-white hover:bg-slate-800 px-3 py-1.5 rounded-full flex items-center gap-1 transition">
+                <span>Voltar</span>
+                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+
+            <!-- Cabeçalho do Modal WiPay / Multicaixa com Logótipo e Total -->
+            <div class="mb-5">
+                <div class="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-2 border border-slate-200 dark:border-slate-700">
+                    <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-6 dark:hidden">
+                    <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-6 hidden dark:block">
+                </div>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">RACHI — SOLUÇÕES INTELIGENTES</p>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-1" x-text="confirmedOrder ? confirmedOrder.total : formatKz(finalTotal)"></h3>
+                <p class="text-[11px] text-slate-400 font-mono mt-0.5" x-text="'REF: ' + (confirmedOrder ? confirmedOrder.numero : 'RCH-PED-2026')"></p>
+            </div>
+
+            <!-- Abas de Pagamento (Express vs Multicaixa vs Transferência) -->
+            <div class="space-y-4">
+                <div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-bold">
+                    <button type="button" @click="paymentTab = 'express'" :class="paymentTab === 'express' ? 'bg-white dark:bg-slate-900 text-amber-600 shadow-sm' : 'text-slate-500 hover:text-slate-800'" class="flex-1 py-2 rounded-lg transition flex items-center justify-center gap-1.5">
+                        <span>Express</span>
+                    </button>
+                    <button type="button" @click="paymentTab = 'multicaixa'" :class="paymentTab === 'multicaixa' ? 'bg-white dark:bg-slate-900 text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-800'" class="flex-1 py-2 rounded-lg transition flex items-center justify-center gap-1.5">
+                        <span>Multicaixa</span>
+                    </button>
+                    <button type="button" @click="paymentTab = 'transfer'" :class="paymentTab === 'transfer' ? 'bg-white dark:bg-slate-900 text-sky-600 shadow-sm' : 'text-slate-500 hover:text-slate-800'" class="flex-1 py-2 rounded-lg transition flex items-center justify-center gap-1.5">
+                        <span>IBAN / BAI / BFA</span>
+                    </button>
+                </div>
+
+                <!-- Aba 1: Multicaixa Express (QR Code Dinâmico e Temporizador de 30 min) -->
+                <div x-show="paymentTab === 'express'" class="space-y-4">
+                    <div class="flex items-center justify-center gap-2 text-amber-600 font-black text-sm tracking-wider">
+                        <i data-lucide="qr-code" class="w-5 h-5"></i>
+                        <span>MULTICAIXA EXPRESS</span>
+                    </div>
+
+                    <p class="text-xs text-slate-600 dark:text-slate-400">
+                        Leia o código QR com a app <strong>Multicaixa Express</strong> e confirme o pagamento.
+                    </p>
+
+                    <!-- QR Code Renderizado Dinamicamente -->
+                    <div class="bg-white p-4 rounded-2xl inline-block border-2 border-slate-200 shadow-inner">
+                        <img :src="'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent('MCX|RACHI|' + (confirmedOrder ? confirmedOrder.numero : 'PED') + '|' + finalTotal)"
+                             alt="QR Code Multicaixa Express" class="w-44 h-44 mx-auto">
+                    </div>
+
+                    <!-- Temporizador Regressivo -->
+                    <div class="text-xs text-slate-500">
+                        <span>Expira em </span>
+                        <strong class="text-amber-600 font-black" x-text="expressTimerFormatted">29:59</strong>
+                        <p class="text-[11px] text-slate-400 mt-1">Por favor, não atualize a página.</p>
+                    </div>
+
+                    <!-- Alternativa por Número de Telemóvel associado ao Express -->
+                    <div class="pt-2 border-t border-slate-100 dark:border-slate-800 text-left">
+                        <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Ou confirme pelo número de telemóvel Express:</label>
+                        <div class="flex gap-2">
+                            <input type="tel" x-model="checkoutData.phone" placeholder="9xx xxx xxx"
+                                class="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white">
+                            <button type="button" @click="showToast('Notificação enviada para o seu telemóvel via Multicaixa Express!', 'Push Enviado', 'success')"
+                                class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba 2: Referência Multicaixa -->
+                <div x-show="paymentTab === 'multicaixa'" class="space-y-3 text-left bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Pague no Multicaixa (ATM) ou Internet Banking:</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between p-2 bg-white dark:bg-slate-900 rounded-lg border">
+                            <span class="text-slate-400">Entidade:</span>
+                            <strong class="font-mono text-slate-900 dark:text-white">00142</strong>
+                        </div>
+                        <div class="flex justify-between p-2 bg-white dark:bg-slate-900 rounded-lg border">
+                            <span class="text-slate-400">Referência:</span>
+                            <strong class="font-mono text-slate-900 dark:text-white" x-text="(confirmedOrder && confirmedOrder.id ? (980000000 + confirmedOrder.id) : 981240182)"></strong>
+                        </div>
+                        <div class="flex justify-between p-2 bg-white dark:bg-slate-900 rounded-lg border">
+                            <span class="text-slate-400">Montante:</span>
+                            <strong class="text-blue-600 font-bold" x-text="confirmedOrder ? confirmedOrder.total : formatKz(finalTotal)"></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba 3: Transferência Bancária (BAI / BFA) -->
+                <div x-show="paymentTab === 'transfer'" class="space-y-3 text-left bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-slate-700 dark:text-slate-300">Contas Oficiais da RACHI em Angola:</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="p-2.5 bg-white dark:bg-slate-900 rounded-lg border space-y-0.5">
+                            <span class="font-bold text-sky-700 dark:text-sky-400">Banco BAI</span>
+                            <p class="font-mono text-[11px] text-slate-700 dark:text-slate-200 select-all">AO06 0040 0000 1234 5678 9012 3</p>
+                        </div>
+                        <div class="p-2.5 bg-white dark:bg-slate-900 rounded-lg border space-y-0.5">
+                            <span class="font-bold text-orange-700 dark:text-orange-400">Banco BFA</span>
+                            <p class="font-mono text-[11px] text-slate-700 dark:text-slate-200 select-all">AO06 0006 0000 9876 5432 1012 4</p>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Beneficiário: <strong>RACHI — SOLUÇÕES INTELIGENTES LDA</strong></p>
+                    </div>
+                </div>
+
+                <!-- Ações de Encerramento e Acompanhamento -->
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                    <a :href="'https://wa.me/244972888585?text=' + encodeURIComponent('Olá RACHI! Acabei de realizar o pedido ' + (confirmedOrder ? confirmedOrder.numero : '') + ' no valor de ' + (confirmedOrder ? confirmedOrder.total : '') + '. Segue o meu comprovativo de pagamento.')"
+                       target="_blank" rel="noopener noreferrer"
+                       class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Enviar Comprovativo no WhatsApp (+244 972 888 585)</span>
+                    </a>
+
+                    <a href="/portal#orders"
+                       class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        <span>Acompanhar Solicitação no Portal do Cliente</span>
+                    </a>
+                </div>
+
+                <!-- Rodapé WiPay / RACHI Pay -->
+                <div class="pt-2 text-[10px] text-slate-400 flex items-center justify-center gap-1.5">
+                    <span>powered by</span>
+                    <strong class="text-slate-600 dark:text-slate-300 font-extrabold flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                        RACHI Pay / WiPay
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
     <!-- 13. MODAL DE INÍCIO DE SESSÃO / REGISTO (ACEDER À MINHA CONTA) -->
     <!-- ============================================================== -->
     <div x-show="loginModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -2609,6 +3227,42 @@
                 cartDrawerOpen: false,
                 quickViewOpen: false,
                 checkoutModal: false,
+                checkoutStep: 2,
+                paymentModalOpen: false,
+                confirmedOrder: null,
+                paymentTab: 'express',
+                expressTimer: 1800,
+                expressTimerFormatted: '29:59',
+                expressTimerInterval: null,
+                checkoutData: {
+                    email: '',
+                    firstName: '',
+                    lastName: '',
+                    phoneCountry: 'AO',
+                    phone: '',
+                    personalNif: '',
+                    showPersonalNif: false,
+                    showCompanyData: false,
+                    companyName: '',
+                    companyNif: '',
+                    termsAccepted: true,
+                    deliveryType: 'address',
+                    province: 'Luanda',
+                    municipality: 'Talatona',
+                    address: '',
+                    referencePoint: '',
+                    recipient: '',
+                    shippingOption: 'normal',
+                    paymentMethod: 'multicaixa_express'
+                },
+                get shippingCost() {
+                    if (this.checkoutData.deliveryType === 'pickup') return 0;
+                    if (this.checkoutData.shippingOption === 'express') return 2500;
+                    return this.cartTotalAmount >= 50000 ? 0 : 1500;
+                },
+                get finalTotal() {
+                    return Math.max(0, this.cartTotalAmount - this.discountAmount + this.shippingCost);
+                },
                 selectedProduct: null,
                 searchQuery: '',
                 activeCategory: 'todos',
