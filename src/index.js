@@ -8202,7 +8202,7 @@ async function body(c) {
 }
 __name(body, "body");
 var jsonRequest = /* @__PURE__ */ __name((c) => c.req.path.startsWith("/api/") || c.req.header("accept")?.includes("application/json") || c.req.header("content-type")?.includes("application/json"), "jsonRequest");
-var done = /* @__PURE__ */ __name((c, data, redirect = "/portal") => jsonRequest(c) ? c.json({ success: true, ...data }) : c.redirect(redirect, 303), "done");
+var done = /* @__PURE__ */ __name((c, data, redirect = "/cliente/dashboard") => jsonRequest(c) ? c.json({ success: true, ...data }) : c.redirect(redirect, 303), "done");
 var randomToken = /* @__PURE__ */ __name(() => Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) => b.toString(16).padStart(2, "0")).join(""), "randomToken");
 async function digest(value) {
   return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value))), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -8301,7 +8301,7 @@ auth.post("/login", async (c) => {
     LEFT JOIN customers cu ON cu.user_id=u.id AND cu.deleted_at IS NULL
     WHERE u.id=$1`, [u.id]);
   const isAdmin = ["admin", "super_admin"].includes(record?.role_slug);
-  const target2 = isAdmin ? "/admin-dashboard" : "/portal";
+  const target2 = isAdmin ? "/admin-dashboard" : "/cliente/dashboard";
   return done(c, { redirect: target2, user: publicUser(record) }, target2);
 });
 auth.post("/registro", async (c) => {
@@ -8319,7 +8319,7 @@ auth.post("/registro", async (c) => {
     return u2;
   });
   await loginSession(c, u.id);
-  return done(c, { redirect: "/portal" }, "/portal");
+  return done(c, { redirect: "/cliente/dashboard" }, "/cliente/dashboard");
 });
 auth.post("/logout", async (c) => {
   await logout(c);
@@ -10945,7 +10945,7 @@ function loginPage(register = false) {
           } else if (data.redirect) {
             window.location.href = data.redirect;
           } else {
-            window.location.href = '/portal';
+            window.location.href = '/cliente/dashboard';
           }
         }, 350);
 
@@ -11014,7 +11014,7 @@ app.get("/health/database", async (c) => {
   await c.get("db").query("SELECT 1");
   return c.json({ status: "ok", engine: c.env.DB ? "cloudflare-d1" : "hyperdrive" });
 });
-app.get("/portal", (c) => c.get("user") ? c.html(portalPage()) : c.redirect("/login"));
+app.get("/portal", (c) => c.redirect("/cliente/dashboard", 301));
 app.get("/_session-page/:page", async (c) => {
   const u = c.get("user"), page = c.req.param("page");
   if (!["admin-dashboard", "aluno-dashboard", "cliente-dashboard"].includes(page)) return c.notFound();
@@ -11107,7 +11107,7 @@ var index_default = {
         const parts = path.split("/");
         return serveHtml("/pages/" + parts[1] + "-service-" + parts[3] + ".html");
       }
-      if (portals[path]) return Response.redirect(new URL((path.startsWith("/admin") ? "/admin-dashboard#" : "/portal#") + portals[path], url).toString(), 302);
+      if (portals[path]) return Response.redirect(new URL((path.startsWith("/admin") ? "/admin-dashboard#" : "/cliente/dashboard#") + portals[path], url).toString(), 302);
       if (path === "/login") return html(loginPage());
       if (path === "/registro") return html(loginPage(true));
       if (path.startsWith("/loja/")) return Response.redirect(new URL("/loja", url).toString(), 302);
@@ -11117,7 +11117,7 @@ var index_default = {
       if (/^\/solucoes\/(tec|print|academy|capital)$/.test(path)) return Response.redirect(new URL("/" + path.split("/")[2], url).toString(), 302);
       if (/^\/cliente\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/solicitacoes", url).toString(), 302);
       if (/^\/cliente\/pedidos\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/pedidos", url).toString(), 302);
-      if (/^\/funcionario\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/portal#requests", url).toString(), 302);
+      if (/^\/funcionario\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/dashboard#solicitacoes", url).toString(), 302);
       if (/^\/(images|css|build|libs)\//.test(path) || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/ai-chat-widget.js", "/favicon.ico", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
     }
     const aliases = { "/cliente/solicitacoes": "/solicitacoes/nova", "/admin/solicitacoes/conversas": "/solicitacoes/conversas" };

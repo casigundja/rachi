@@ -14,7 +14,7 @@ Route::middleware(['auth', 'role:employee|manager|admin|super_admin'])
     ->prefix('funcionario')
     ->name('employee.')
     ->group(function () {
-        Route::get('/dashboard', fn () => redirect('/portal#requests'))->name('dashboard');
+        Route::get('/dashboard', fn () => redirect('/cliente/dashboard#solicitacoes'))->name('dashboard');
 
         // Atendimento de Solicitações
         Route::get('/solicitacoes', [EmployeeRequestController::class, 'index'])->name('requests');
@@ -27,6 +27,6 @@ Route::middleware(['auth', 'role:employee|manager|admin|super_admin'])
         Route::post('/orcamentos', [EmployeeRequestController::class, 'storeQuote'])->name('quotes.store');
 
         // Pedidos & Estoque
-        Route::get('/pedidos', fn () => redirect('/portal#orders'))->name('orders');
-        Route::get('/estoque', fn () => redirect('/portal#stock'))->name('stock');
+        Route::get('/pedidos', fn () => redirect('/cliente/dashboard#pedidos'))->name('orders');
+        Route::get('/estoque', fn () => redirect('/cliente/dashboard#stock'))->name('stock');
     });

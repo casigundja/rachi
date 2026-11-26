@@ -2858,7 +2858,7 @@
                                     </a>
                                 </template>
 
-                                <a href="/portal" @click="userMenuDropdown = false"
+                                <a href="/cliente/dashboard" @click="userMenuDropdown = false"
                                     class="w-full flex items-center justify-between py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/5 transition group text-left cursor-pointer">
                                     <div class="flex items-center gap-3 min-w-0">
                                         <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -6259,7 +6259,7 @@
 
                     if (this.currentUser) {
                         setTimeout(() => {
-                            window.location.href = '/portal#orders';
+                            window.location.href = '/cliente/dashboard#pedidos';
                         }, 1200);
                     }
                 },
@@ -6351,7 +6351,7 @@
                             this.isLoggedIn = true;
                             this.loginModal = false;
                             setTimeout(() => {
-                                window.location.href = data.redirect || '/portal';
+                                window.location.href = data.redirect || '/cliente/dashboard';
                             }, 800);
                         } else {
                             let msg = data.message || 'Não foi possível concluir o registo. Verifique os dados.';

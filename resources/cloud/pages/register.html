@@ -752,7 +752,7 @@
           fb.style.display = 'block';
           fb.textContent = 'Conta criada com sucesso! A redirecionar para o portal...';
           setTimeout(function() {
-            window.location.href = data.redirect || '/portal';
+            window.location.href = data.redirect || '/cliente/dashboard';
           }, 800);
         } else {
           fb.className = 'feedback-msg error';

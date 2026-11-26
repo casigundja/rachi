@@ -712,7 +712,7 @@ __name(renderCourseShow, "renderCourseShow");
 
 // worker/views.ts
 function shell(title, content) {
-  return `<!doctype html><html lang="pt"><head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} \xB7 RACHI</title><link rel="stylesheet" href="/worker.css"><script src="/worker-ui.js" defer><\/script></head><body><header><a class="brand" href="/">RACHI<span>Solu\xE7\xF5es inteligentes</span></a><nav><a href="/loja">Loja</a><a href="/academy/cursos">Academy</a><a href="/portal">Minha conta</a></nav></header><main>${content}</main><footer>RACHI \xB7 Tecnologia, forma\xE7\xE3o e servi\xE7os empresariais</footer></body></html>`;
+  return `<!doctype html><html lang="pt"><head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} \xB7 RACHI</title><link rel="stylesheet" href="/worker.css"><script src="/worker-ui.js" defer><\/script></head><body><header><a class="brand" href="/">RACHI<span>Solu\xE7\xF5es inteligentes</span></a><nav><a href="/loja">Loja</a><a href="/academy/cursos">Academy</a><a href="/cliente/dashboard">Minha conta</a></nav></header><main>${content}</main><footer>RACHI \xB7 Tecnologia, forma\xE7\xE3o e servi\xE7os empresariais</footer></body></html>`;
 }
 __name(shell, "shell");
 function loginPage(register = false) {
@@ -1547,7 +1547,7 @@ function loginPage(register = false) {
           } else if (data.redirect) {
             window.location.href = data.redirect;
           } else {
-            window.location.href = '/portal';
+            window.location.href = '/cliente/dashboard';
           }
         }, 350);
 
@@ -1569,7 +1569,7 @@ function loginPage(register = false) {
 }
 __name(loginPage, "loginPage");
 function portalPage() {
-  return shell("Portal", `<div class="portal"><aside><p class="eyebrow">\xC1REA RESERVADA</p><h2 id="user-name">Minha conta</h2><nav id="portal-nav"><button data-tab="requests">Solicita\xE7\xF5es</button><button data-tab="orders">Pedidos</button><button data-tab="quotes">Or\xE7amentos</button><button data-tab="courses">Meus cursos</button><button data-tab="password">Palavra-passe</button></nav><form data-api="/logout" data-redirect="/"><button class="secondary">Sair</button></form></aside><section><p class="eyebrow">RACHI / PORTAL</p><h1 id="section-title">Solicita\xE7\xF5es</h1><div id="portal-content" aria-live="polite">Carregando\u2026</div></section></div>`);
+  return shell("Painel do Cliente", `<div class="portal"><aside><p class="eyebrow">\xC1REA DO CLIENTE</p><h2 id="user-name">Minha conta</h2><nav id="portal-nav"><button data-tab="requests">Solicita\xE7\xF5es</button><button data-tab="orders">Pedidos</button><button data-tab="quotes">Or\xE7amentos</button><button data-tab="courses">Meus cursos</button><button data-tab="password">Palavra-passe</button></nav><form data-api="/logout" data-redirect="/"><button class="secondary">Sair</button></form></aside><section><p class="eyebrow" id="section-eyebrow">RACHI / CLIENTE</p><h1 id="section-title">Solicita\xE7\xF5es</h1><div id="portal-content" aria-live="polite">Carregando\u2026</div></section></div>`);
 }
 __name(portalPage, "portalPage");
 function catalogPage(kind, slug = "") {

@@ -58,7 +58,7 @@ final class CloudSyncTest extends TestCase
     {
         $owner = $this->account();
         $other = $this->account();
-        $this->actingAs($owner)->get('/portal')->assertOk()->assertSee('portal-content',false);
+        $this->actingAs($owner)->get('/portal')->assertRedirect('/cliente/dashboard');
         $this->actingAs($owner)->get('/cliente/dashboard')->assertOk()->assertSee('portal-content',false);
         $response = $this->postJson('/solicitacoes/nova',['title'=>'Pedido local','description'=>'Descrição de teste','unit_id'=>BusinessUnit::first()->id,'priority'=>'normal']);
         $response->assertOk();

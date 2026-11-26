@@ -722,8 +722,8 @@
                             <p class="font-bold text-slate-900 dark:text-white truncate">{{ auth()->user()->name }}</p>
                             <p class="text-[10px] text-slate-500 truncate">{{ auth()->user()->email }}</p>
                         </div>
-                        <a href="/portal" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
-                            <span>Portal do Cliente</span>
+                        <a href="/cliente/dashboard" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
+                            <span>Painel do Cliente</span>
                         </a>
                         @if(auth()->user()->isAdmin())
                         <a href="/admin-dashboard" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-amber-50 dark:hover:bg-amber-950/30 text-amber-600 font-medium">

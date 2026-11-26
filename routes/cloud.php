@@ -19,11 +19,11 @@ foreach (['login' => 'login', 'registro' => 'register', 'academy/login' => 'acad
 Route::get('/academy/cursos/{slug}', [\App\Http\Controllers\Public\CourseController::class, 'show'])->name('academy.course.show');
 Route::get('/loja/{slug}', fn () => redirect('/loja'));
 Route::get('/solucoes/{unit}', fn (string $unit) => in_array($unit, ['tec', 'print', 'academy', 'capital'], true) ? redirect('/'.$unit) : abort(404));
-Route::get('/portal', fn () => app(CloudPageController::class)->page('portal'))->middleware('auth');
+Route::get('/portal', fn () => redirect('/cliente/dashboard', 301))->middleware('auth');
 
 foreach (['funcionario/dashboard'=>'requests', 'funcionario/pedidos'=>'orders',
     'funcionario/estoque'=>'stock', 'funcionario/solicitacoes'=>'requests'] as $path => $tab) {
-    $route = Route::get('/'.$path, fn () => redirect('/portal#'.$tab))->middleware('auth');
+    $route = Route::get('/'.$path, fn () => redirect('/cliente/dashboard#'.$tab))->middleware('auth');
     $names = ['funcionario/dashboard'=>'employee.dashboard','funcionario/pedidos'=>'employee.orders',
         'funcionario/estoque'=>'employee.stock','funcionario/solicitacoes'=>'employee.requests'];
     $route->name($names[$path]);
@@ -32,7 +32,7 @@ foreach (['funcionario/dashboard'=>'requests', 'funcionario/pedidos'=>'orders',
 foreach (['cliente/dashboard'=>'requests', 'cliente/cursos'=>'courses',
     'cliente/pedidos'=>'orders', 'cliente/orcamentos'=>'quotes',
     'cliente/solicitacoes'=>'requests', 'cliente/solicitacoes/nova'=>'requests'] as $path => $tab) {
-    $route = Route::get('/'.$path, fn () => app(CloudPageController::class)->page('portal'))->middleware('auth');
+    $route = Route::get('/'.$path, fn () => app(CloudPageController::class)->page('cliente-dashboard'))->middleware('auth');
     $names = ['cliente/dashboard'=>'customer.dashboard',
         'cliente/cursos'=>'customer.courses','cliente/pedidos'=>'customer.orders',
         'cliente/orcamentos'=>'customer.quotes','cliente/solicitacoes'=>'customer.requests',
@@ -45,9 +45,9 @@ foreach (['utilizadores'=>'usuarios','funcionarios'=>'usuarios','clientes'=>'cli
     Route::get('/admin/'.$path, fn () => redirect('/admin-dashboard#'.$tab))->middleware(['auth','role:admin|super_admin']);
 }
 foreach (['cliente','funcionario'] as $area) {
-    Route::get('/'.$area.'/solicitacoes/{id}', fn () => redirect('/portal#requests'))->middleware('auth');
+    Route::get('/'.$area.'/solicitacoes/{id}', fn () => redirect('/cliente/dashboard#solicitacoes'))->middleware('auth');
 }
-Route::get('/cliente/pedidos/{id}', fn () => redirect('/portal#orders'))->middleware('auth');
+Route::get('/cliente/pedidos/{id}', fn () => redirect('/cliente/dashboard#pedidos'))->middleware('auth');
 Route::get('/api/catalog', [CloudApiController::class,'catalog']);
 Route::get('/api/courses/{slug}', [CloudApiController::class,'course']);
 Route::get('/api/academy/enrollments', [CloudApiController::class,'enrollments'])->middleware(['auth','role:admin|super_admin']);

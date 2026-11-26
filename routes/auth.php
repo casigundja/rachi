@@ -71,7 +71,7 @@ if (!function_exists('formatPublicUser')) {
 Route::get('/login', function () {
     if (Auth::check()) {
         $user = Auth::user();
-        return redirect($user->isAdmin() ? '/admin-dashboard' : '/portal');
+        return redirect($user->isAdmin() ? '/admin-dashboard' : '/cliente/dashboard');
     }
     return view('auth.login');
 })->name('login');
