@@ -2097,12 +2097,16 @@ html.dark .panze-hdr-pill {
               </button>
             </div>
 
-            <!-- Campo de Digitação e Botão de Envio -->
-            <form @submit.prevent="sendChatMessage()" class="flex items-center gap-2">
+            <!-- Campo de Digitação e Botão de Envio (Híbrido: Painel + WhatsApp) -->
+            <form @submit.prevent="sendChatMessage(false)" class="flex items-center gap-2">
               <input type="text" x-model="chatReplyText" :placeholder="'Responder ' + activeConversation.name + ' via ' + (activeConversation.channel === 'whatsapp' ? 'WhatsApp...' : 'Chat do Site...')" class="flex-1 px-4 py-2.5 text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-purple-500">
-              <button type="submit" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+              <button type="submit" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Registrar resposta no histórico">
                 <span>Enviar</span>
                 <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              </button>
+              <button type="button" @click="sendChatMessage(true)" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer" title="Abrir conversa no WhatsApp com esta resposta preenchida">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span class="hidden sm:inline">WhatsApp</span>
               </button>
             </form>
           </div>
@@ -5894,15 +5898,16 @@ function adminApp() {
         if (window.lucide) lucide.createIcons();
       });
     },
-    sendChatMessage() {
+    sendChatMessage(openWa = false) {
       if (!this.chatReplyText || !this.chatReplyText.trim()) return;
       const conv = this.activeConversation;
       if (!conv) return;
+      const msgText = this.chatReplyText.trim();
       const now = new Date();
       const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
       conv.messages.push({
         sender: 'agent',
-        text: this.chatReplyText.trim(),
+        text: msgText,
         time: time
       });
       conv.lastTime = time;
@@ -5912,7 +5917,15 @@ function adminApp() {
         if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
         if (window.lucide) lucide.createIcons();
       });
-      this.showAlert('success', 'Mensagem Enviada', 'Resposta enviada com sucesso para ' + conv.name + ' via ' + (conv.channel === 'whatsapp' ? 'WhatsApp' : 'Live Chat') + '.');
+
+      if (openWa && conv.phone) {
+        const cleanPhone = conv.phone.replace(/[^0-9]/g, '');
+        const waUrl = 'https://wa.me/' + cleanPhone + '?text=' + encodeURIComponent(msgText);
+        window.open(waUrl, '_blank');
+        this.showAlert('success', 'WhatsApp Aberto', 'Mensagem registrada e transferida para o WhatsApp de ' + conv.name + '.');
+      } else {
+        this.showAlert('success', 'Mensagem Enviada', 'Resposta enviada com sucesso para ' + conv.name + ' via ' + (conv.channel === 'whatsapp' ? 'WhatsApp' : 'Live Chat') + '.');
+      }
     },
     sendQuickReply(text) {
       this.chatReplyText = text;
