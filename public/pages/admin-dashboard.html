@@ -1065,11 +1065,11 @@ html.dark .panze-hdr-pill {
       <span class="sl font-bold">Dashboard</span>
     </div>
 
-    <!-- Messenger / Atendimento -->
-    <div @click="setPage('solicitacoes')" class="sidebar-item text-slate-600 dark:text-slate-400 hover:text-slate-900" data-legend="Messenger" title="Messenger">
+    <!-- Messenger / Central Unificada (Live Chat & WhatsApp) -->
+    <div @click="setPage('messenger')" :class="currentPage==='messenger'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Messenger" title="Central de Live Chat & WhatsApp">
       <i data-lucide="message-square" class="si"></i>
       <span class="sl">Messenger</span>
-      <span class="sb2 badge bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">3</span>
+      <span class="sb2 badge bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="unreadMessengerCount">3</span>
     </div>
 
     <div class="sg mt-2">OPERAÇÕES &amp; SERVIÇOS</div>
@@ -1863,6 +1863,253 @@ html.dark .panze-hdr-pill {
         </div>
       </div>
 
+    </section>
+
+    <!-- =====================================================================
+         MESSENGER: CENTRAL UNIFICADA DE CHAT AO VIVO DO SITE & WHATSAPP
+         ===================================================================== -->
+    <section x-show="currentPage==='messenger'" x-cloak class="space-y-6">
+      <!-- HEADER -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Central de Atendimento & Live Chat</h1>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Omnichannel Ativo
+            </span>
+          </div>
+          <p class="text-slate-500 text-sm mt-0.5">Centralização em tempo real de mensagens do Chat ao Vivo do Site e WhatsApp Oficial da RACHI.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="simulateIncomingMessage()" type="button" class="border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-700 dark:text-slate-300 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>Simular Mensagem</span>
+          </button>
+          <a href="https://web.whatsapp.com" target="_blank" rel="noopener" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-xs transition">
+            <i data-lucide="phone-call" class="w-4 h-4"></i>
+            <span>WhatsApp Business</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">MENSAGENS HOJE</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/80 uppercase">TOTAL</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="messengerStats.today">48</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">VIA WHATSAPP</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/80 uppercase">WHATSAPP</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="messengerStats.whatsapp">31</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">CHAT AO VIVO DO SITE</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/80 uppercase">LIVE CHAT</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit" x-text="messengerStats.livechat">17</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">AGUARDANDO RESPOSTA</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/80 uppercase">PENDENTE</span>
+          </div>
+          <div class="mt-3">
+            <span class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit" x-text="unreadMessengerCount">3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN OMNICHANNEL MESSENGER PANEL (2-COLUMN: INBOX LIST + ACTIVE CHAT WINDOW) -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden grid grid-cols-1 md:grid-cols-12 min-h-[640px]">
+        
+        <!-- COLUNA ESQUERDA: LISTA DE CONVERSAS (4 COLS) -->
+        <div class="md:col-span-4 border-r border-slate-100 dark:border-white/5 flex flex-col bg-slate-50/40 dark:bg-white/[0.01]">
+          <!-- BUSCA & FILTROS -->
+          <div class="p-3.5 border-b border-slate-100 dark:border-white/5 space-y-2.5">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input type="text" x-model="messengerSearch" placeholder="Pesquisar conversa, cliente..." class="w-full pl-9 pr-3 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-purple-500">
+            </div>
+
+            <!-- FILTROS POR CANAL -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1">
+              <button @click="messengerFilter = 'all'" :class="messengerFilter === 'all' ? 'bg-purple-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 cursor-pointer">
+                Todas (<span x-text="conversations.length">5</span>)
+              </button>
+              <button @click="messengerFilter = 'whatsapp'" :class="messengerFilter === 'whatsapp' ? 'bg-emerald-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 border border-slate-200/80 dark:border-white/5 hover:bg-emerald-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="phone" class="w-3 h-3"></i>
+                WhatsApp
+              </button>
+              <button @click="messengerFilter = 'livechat'" :class="messengerFilter === 'livechat' ? 'bg-blue-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border border-slate-200/80 dark:border-white/5 hover:bg-blue-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="globe" class="w-3 h-3"></i>
+                Site Live
+              </button>
+              <button @click="messengerFilter = 'unread'" :class="messengerFilter === 'unread' ? 'bg-amber-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-amber-700 dark:text-amber-400 border border-slate-200/80 dark:border-white/5 hover:bg-amber-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 cursor-pointer">
+                Pendentes
+              </button>
+            </div>
+          </div>
+
+          <!-- LISTA DE CARDS DE CONVERSA -->
+          <div class="overflow-y-auto flex-1 divide-y divide-slate-100 dark:divide-white/5 max-h-[540px]">
+            <template x-for="c in filteredConversations" :key="c.id">
+              <div @click="selectConversation(c)" 
+                   :class="activeChatId === c.id ? 'bg-white dark:bg-slate-800/90 border-l-4 border-purple-600 shadow-2xs' : 'hover:bg-white/80 dark:hover:bg-white/[0.02]'" 
+                   class="p-3.5 cursor-pointer transition flex items-start gap-3">
+                <!-- AVATAR COM CANAL BADGE -->
+                <div class="relative shrink-0">
+                  <div class="w-10 h-10 rounded-full text-white font-bold text-xs flex items-center justify-center shadow-xs" :class="c.avatarBg" x-text="c.avatar"></div>
+                  <!-- Ícone do Canal (WhatsApp verde ou Live Chat azul) -->
+                  <span x-show="c.channel === 'whatsapp'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[9px] shadow-xs" title="WhatsApp Oficial">
+                    <i data-lucide="phone" class="w-2.5 h-2.5"></i>
+                  </span>
+                  <span x-show="c.channel === 'livechat'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[9px] shadow-xs" title="Live Chat Site">
+                    <i data-lucide="message-circle" class="w-2.5 h-2.5"></i>
+                  </span>
+                </div>
+
+                <!-- INFO PRINCIPAL -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-1">
+                    <span class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="c.name"></span>
+                    <span class="text-[10px] text-slate-400 shrink-0" x-text="c.lastTime"></span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate mt-0.5" x-text="c.company"></div>
+                  <div class="text-[11px] text-slate-600 dark:text-slate-300 truncate mt-1 font-medium" x-text="c.messages[c.messages.length - 1]?.text || 'Sem mensagens'"></div>
+                </div>
+
+                <!-- BADGE NÃO LIDA -->
+                <div x-show="c.unread > 0" class="shrink-0 pt-1">
+                  <span class="w-5 h-5 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center" x-text="c.unread"></span>
+                </div>
+              </div>
+            </template>
+            <div x-show="filteredConversations.length === 0" class="p-8 text-center text-slate-400 text-xs">
+              Nenhuma conversa encontrada com os filtros selecionados.
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA DIREITA: JANELA DO CHAT ATIVO (8 COLS) -->
+        <div class="md:col-span-8 flex flex-col justify-between bg-white dark:bg-slate-900">
+          
+          <!-- CHAT HEADER -->
+          <div class="p-4 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-3 bg-slate-50/30 dark:bg-white/[0.01]">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full text-white font-bold text-xs flex items-center justify-center shadow-xs" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-slate-900 dark:text-white leading-tight" x-text="activeConversation.name"></h3>
+                  <!-- Badge Canal -->
+                  <span x-show="activeConversation.channel === 'whatsapp'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 flex items-center gap-1">
+                    <i data-lucide="phone" class="w-3 h-3"></i> WhatsApp
+                  </span>
+                  <span x-show="activeConversation.channel === 'livechat'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 flex items-center gap-1">
+                    <i data-lucide="globe" class="w-3 h-3"></i> Chat do Site
+                  </span>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-2">
+                  <span x-text="activeConversation.company"></span>
+                  <span>•</span>
+                  <span class="font-mono text-slate-600 dark:text-slate-400" x-text="activeConversation.phone"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- AÇÕES DO CHAT -->
+            <div class="flex items-center gap-2">
+              <button @click="convertChatToTicket()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-2xs" title="Transformar atendimento em Ticket">
+                <i data-lucide="ticket" class="w-3.5 h-3.5 text-purple-600"></i>
+                <span>Gerar Ticket</span>
+              </button>
+              <a :href="'https://wa.me/' + (activeConversation.phone ? activeConversation.phone.replace(/[^0-9]/g,'') : '')" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-2xs" title="Abrir no WhatsApp Oficial">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- STREAM DE MENSAGENS -->
+          <div id="chatMessagesScroll" class="flex-1 p-5 overflow-y-auto space-y-3.5 max-h-[440px] bg-slate-50/20 dark:bg-slate-950/20">
+            <!-- Evento de Conexão -->
+            <div class="text-center my-2">
+              <span class="px-3 py-1 rounded-full text-[10.5px] font-semibold bg-slate-100 dark:bg-white/5 text-slate-500 border border-slate-200/80 dark:border-white/5 inline-flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-500"></i>
+                Atendimento conectado via <strong x-text="activeConversation.channel === 'whatsapp' ? 'WhatsApp Oficial RACHI' : 'Chat ao Vivo do Site'"></strong>
+              </span>
+            </div>
+
+            <template x-for="(m, idx) in activeConversation.messages" :key="idx">
+              <div>
+                <!-- MENSAGEM DO CLIENTE (ESQUERDA) -->
+                <div x-show="m.sender === 'customer'" class="flex items-end gap-2 max-w-lg">
+                  <div class="w-7 h-7 rounded-full text-white text-[10px] font-bold flex items-center justify-center shrink-0 shadow-2xs" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
+                  <div class="rounded-2xl rounded-bl-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 p-3 shadow-2xs text-xs text-slate-800 dark:text-slate-100 leading-relaxed">
+                    <p x-text="m.text"></p>
+                    <span class="block text-[9.5px] text-slate-400 text-right mt-1" x-text="m.time"></span>
+                  </div>
+                </div>
+
+                <!-- MENSAGEM DO AGENTE / SUPORTE RACHI (DIREITA) -->
+                <div x-show="m.sender === 'agent'" class="flex items-end justify-end gap-2 max-w-lg ml-auto">
+                  <div class="rounded-2xl rounded-br-xs bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-3 shadow-2xs text-xs leading-relaxed">
+                    <p x-text="m.text"></p>
+                    <div class="flex items-center justify-end gap-1 mt-1 text-[9.5px] text-purple-200">
+                      <span x-text="m.time"></span>
+                      <span>✓✓</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <!-- RESPOSTAS RÁPIDAS & INPUT BAR -->
+          <div class="p-3.5 border-t border-slate-100 dark:border-white/5 bg-white dark:bg-slate-900 space-y-2.5">
+            <!-- Pílulas de Resposta Rápida -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px]">
+              <span class="text-slate-400 font-bold shrink-0 text-[10px] uppercase">Rápidas:</span>
+              <button type="button" @click="sendQuickReply('Olá! Como podemos ajudar você hoje?')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+                👋 Olá! Como podemos ajudar?
+              </button>
+              <button type="button" @click="sendQuickReply('O seu orçamento foi formalizado e enviado por e-mail.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+                📄 Orçamento enviado
+              </button>
+              <button type="button" @click="sendQuickReply('Nossa equipe técnica já está verificando sua solicitação.')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-50 hover:text-purple-700 dark:bg-white/5 text-slate-600 dark:text-slate-300 transition shrink-0 cursor-pointer">
+                ⚙️ Equipe técnica verificando
+              </button>
+            </div>
+
+            <!-- Campo de Digitação e Botão de Envio -->
+            <form @submit.prevent="sendChatMessage()" class="flex items-center gap-2">
+              <input type="text" x-model="chatReplyText" :placeholder="'Responder ' + activeConversation.name + ' via ' + (activeConversation.channel === 'whatsapp' ? 'WhatsApp...' : 'Chat do Site...')" class="flex-1 px-4 py-2.5 text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-purple-500">
+              <button type="submit" :disabled="!chatReplyText || !chatReplyText.trim()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+                <span>Enviar</span>
+                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
     </section>
 
         <!-- PERFIS / EQUIPE, COLABORADORES & USUÁRIOS (MODELO DO PRINT 4) -->
@@ -5524,6 +5771,176 @@ function adminApp() {
     ],
 
     currentPage: 'dashboard',
+    messengerFilter: 'all',
+    messengerSearch: '',
+    activeChatId: 1,
+    chatReplyText: '',
+    messengerStats: { today: 48, whatsapp: 31, livechat: 17 },
+    conversations: [
+      {
+        id: 1,
+        name: "Dr. António Silva",
+        company: "Banco de Fomento Angola",
+        channel: "whatsapp",
+        phone: "+244 972 888 585",
+        avatar: "AS",
+        avatarBg: "bg-emerald-600",
+        status: "online",
+        unread: 1,
+        lastTime: "14:42",
+        subject: "Implantação ERP Corporativo",
+        messages: [
+          { sender: "customer", text: "Boa tarde, Dr. Casimiro! Precisamos alinhar o cronograma da entrega dos módulos financeiros do ERP.", time: "14:38" },
+          { sender: "agent", text: "Boa tarde, Dr. António! Perfeito, já estamos com o relatório da sprint pronto para validação.", time: "14:40" },
+          { sender: "customer", text: "Excelente! Consegue me mandar a prévia das telas ainda hoje por aqui?", time: "14:42" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Laurindo Augusto Cakoyi",
+        company: "Instituto Técnico Saber",
+        channel: "livechat",
+        phone: "+244 930 133 850",
+        avatar: "LA",
+        avatarBg: "bg-blue-600",
+        status: "online",
+        unread: 2,
+        lastTime: "14:25",
+        subject: "Dúvida sobre Formação Academy",
+        messages: [
+          { sender: "customer", text: "Olá, estou na página de cursos e gostaria de saber se as aulas de Cibersegurança têm certificação internacional.", time: "14:20" },
+          { sender: "customer", text: "E se temos desconto para turma fechada de 15 alunos da nossa instituição.", time: "14:25" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Diretoria GundjaTech",
+        company: "GundjaTech",
+        channel: "whatsapp",
+        phone: "+244 923 000 000",
+        avatar: "GU",
+        avatarBg: "bg-amber-600",
+        status: "offline",
+        unread: 0,
+        lastTime: "13:50",
+        subject: "Aprovação de Proposta Gráfica",
+        messages: [
+          { sender: "agent", text: "Olá, segue o espelho do pedido gráfico aprovado na plataforma RACHI Print.", time: "13:40" },
+          { sender: "customer", text: "Perfeito, já recebemos e aprovamos a tiragem de 10.000 unidades. Podem rodar!", time: "13:50" }
+        ]
+      },
+      {
+        id: 4,
+        name: "Cotech Contabilidade",
+        company: "Cotech Contabilidade",
+        channel: "livechat",
+        phone: "+244 923 000 111",
+        avatar: "CO",
+        avatarBg: "bg-purple-600",
+        status: "online",
+        unread: 0,
+        lastTime: "11:15",
+        subject: "Manutenção do Portal do Cliente",
+        messages: [
+          { sender: "customer", text: "Bom dia! Tudo certo com a emissão das guias no portal?", time: "11:10" },
+          { sender: "agent", text: "Bom dia! Sim, sistema 100% operacional e com backup atualizado.", time: "11:15" }
+        ]
+      },
+      {
+        id: 5,
+        name: "Visitante Web (Luanda)",
+        company: "Lead Comercial",
+        channel: "livechat",
+        phone: "+244 923 888 777",
+        avatar: "VW",
+        avatarBg: "bg-slate-600",
+        status: "online",
+        unread: 0,
+        lastTime: "10:05",
+        subject: "Criação de Website Institucional",
+        messages: [
+          { sender: "customer", text: "Olá! Gostaria de um orçamento para criação de portal institucional e identidade visual para minha empresa.", time: "10:00" },
+          { sender: "agent", text: "Olá! Seja muito bem-vindo à RACHI. Um dos nossos especialistas comerciais já vai entrar em contato.", time: "10:05" }
+        ]
+      }
+    ],
+    get activeConversation() {
+      return this.conversations.find(c => c.id === this.activeChatId) || this.conversations[0];
+    },
+    get filteredConversations() {
+      let list = this.conversations || [];
+      if (this.messengerFilter === 'whatsapp') {
+        list = list.filter(c => c.channel === 'whatsapp');
+      } else if (this.messengerFilter === 'livechat') {
+        list = list.filter(c => c.channel === 'livechat');
+      } else if (this.messengerFilter === 'unread') {
+        list = list.filter(c => c.unread > 0);
+      }
+      if (this.messengerSearch) {
+        const q = this.messengerSearch.toLowerCase();
+        list = list.filter(c => c.name.toLowerCase().includes(q) || c.company.toLowerCase().includes(q) || (c.phone || '').includes(q));
+      }
+      return list;
+    },
+    get unreadMessengerCount() {
+      return (this.conversations || []).reduce((acc, c) => acc + (c.unread || 0), 0);
+    },
+    selectConversation(c) {
+      this.activeChatId = c.id;
+      c.unread = 0;
+      this.$nextTick(() => {
+        const chatBox = document.getElementById('chatMessagesScroll');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      });
+    },
+    sendChatMessage() {
+      if (!this.chatReplyText || !this.chatReplyText.trim()) return;
+      const conv = this.activeConversation;
+      if (!conv) return;
+      const now = new Date();
+      const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      conv.messages.push({
+        sender: 'agent',
+        text: this.chatReplyText.trim(),
+        time: time
+      });
+      conv.lastTime = time;
+      this.chatReplyText = '';
+      this.$nextTick(() => {
+        const chatBox = document.getElementById('chatMessagesScroll');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      });
+      this.showAlert('success', 'Mensagem Enviada', 'Resposta enviada com sucesso para ' + conv.name + ' via ' + (conv.channel === 'whatsapp' ? 'WhatsApp' : 'Live Chat') + '.');
+    },
+    sendQuickReply(text) {
+      this.chatReplyText = text;
+      this.sendChatMessage();
+    },
+    convertChatToTicket() {
+      const conv = this.activeConversation;
+      if (!conv) return;
+      this.showAlert('success', 'Ticket Criado', 'Conversa com ' + conv.name + ' convertida com sucesso em solicitação técnica.');
+      this.setPage('solicitacoes');
+    },
+    simulateIncomingMessage() {
+      const conv = this.activeConversation;
+      if (!conv) return;
+      const now = new Date();
+      const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      conv.messages.push({
+        sender: 'customer',
+        text: 'Entendido! Obrigado pela rápida resposta da equipe RACHI.',
+        time: time
+      });
+      conv.lastTime = time;
+      this.$nextTick(() => {
+        const chatBox = document.getElementById('chatMessagesScroll');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      });
+    },
     sidebarCollapsed: false,
     mobileMenuOpen: false,
     selectedRequest: null,
