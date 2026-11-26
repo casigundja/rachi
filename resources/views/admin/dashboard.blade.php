@@ -1591,45 +1591,205 @@ a { text-decoration: none !important; }
       </div>
     </section>
 
-    <!-- CLIENTES -->
+    <!-- CLIENTES (MODELO ADAPTADO DO PRINT 1 PARA RACHI) -->
     <section x-show="currentPage==='clientes'" x-cloak class="space-y-6">
+      <!-- Cabeçalho Principal (Print 1) -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Base de Clientes & Parceiros</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Empresas e particulares com histórico de contratação de serviços.</p>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit">Diretório de Clientes & Leads</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-0.5">Gestão centralizada de Clientes Ativos, Leads do Site e Contatos RACHI.</p>
         </div>
-        <button @click="openCreateUserModalWithRole('customer')" class="bap"><i data-lucide="plus" class="w-4 h-4"></i> Registar Cliente</button>
+        <button @click="openCreateUserModalWithRole('customer')" 
+                class="px-4 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-[#ffa525] hover:bg-[#dd8f20] shadow-sm flex items-center gap-2 transition cursor-pointer self-start sm:self-auto">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Novo Cliente</span>
+        </button>
       </div>
 
+      <!-- CARDS KPI DE RESUMO (MODELO PRINT 1) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="kc text-center"><div class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">9</div><div class="text-xs text-slate-500 mt-1 font-bold">Total Clientes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">9</div><div class="text-xs text-slate-500 mt-1 font-bold">Ativos</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-amber-500" style="font-family:Outfit">0</div><div class="text-xs text-slate-500 mt-1 font-bold">Pendentes</div></div>
-        <div class="kc text-center"><div class="text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">8</div><div class="text-xs text-slate-500 mt-1 font-bold">Contas Empresa</div></div>
+        <!-- Card 1: TOTAL GERAL -->
+        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">TOTAL GERAL</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">Todos</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.total">9</div>
+        </div>
+
+        <!-- Card 2: CLIENTES ATIVOS -->
+        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">CLIENTES ATIVOS</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20">ATIVO</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.ativos">9</div>
+        </div>
+
+        <!-- Card 3: CONTAS EMPRESA -->
+        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">CONTAS EMPRESA</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 border border-blue-200/60 dark:border-blue-500/20">EMPRESA</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.empresas">8</div>
+        </div>
+
+        <!-- Card 4: LEADS / PARTICULARES -->
+        <div class="kc p-4.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">LEADS / PARTICULARES</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20">LEAD</span>
+          </div>
+          <div class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mt-3" style="font-family:Outfit" x-text="clientStats.leads">1</div>
+        </div>
       </div>
 
-      <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto min-h-[320px]">
-          <table class="at">
-            <thead><tr><th>Nome</th><th>Segmento</th><th>Telefone</th><th>Ordens</th><th>Estado</th><th>Cliente Desde</th></tr></thead>
-            <tbody>
-              <template x-for="c in clients" :key="c.id">
-                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="c.nome"></div><div class="text-xs text-slate-500" x-text="c.email"></div></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="c.tipo"></td>
-                  <td class="text-slate-700 dark:text-slate-300 font-mono text-xs font-bold" x-text="c.tel"></td>
-                  <td><span class="font-extrabold text-slate-900 dark:text-white" x-text="c.tr"></span><span class="text-xs text-slate-500 ml-1">pedidos</span></td>
-                  <td><span class="badge2" :class="'s-'+c.sk" x-text="c.status"></span></td>
-                  <td class="text-slate-500 text-xs font-medium" x-text="c.desde"></td>
+      <!-- TABELA DE CLIENTES NOVO MODELO (PRINT 1) -->
+      <div class="sc2 p-0 overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs">
+        <!-- Barra de Filtros e Pesquisa -->
+        <div class="p-4 border-b border-slate-200/80 dark:border-white/5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <!-- Abas de Filtros Tipo Pílula -->
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button @click="clientFilterTab='todos'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
+                    :class="clientFilterTab==='todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Todos (<span x-text="clientStats.total"></span>)
+            </button>
+            <button @click="clientFilterTab='ativos'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
+                    :class="clientFilterTab==='ativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Ativos (<span x-text="clientStats.ativos"></span>)
+            </button>
+            <button @click="clientFilterTab='empresas'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
+                    :class="clientFilterTab==='empresas' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Empresas (<span x-text="clientStats.empresas"></span>)
+            </button>
+            <button @click="clientFilterTab='leads'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
+                    :class="clientFilterTab==='leads' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Leads / Particulares (<span x-text="clientStats.leads"></span>)
+            </button>
+          </div>
+
+          <!-- Campo de Busca -->
+          <div class="relative w-full sm:w-80">
+            <input type="text" x-model="clientSearch" placeholder="Filtrar por nome, empresa, e-mail..." 
+                   class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ffa525]/30 focus:border-[#ffa525] transition">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto min-h-[340px]">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-200/80 dark:border-white/5 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 bg-slate-50/60 dark:bg-white/[0.02]">
+                <th class="py-3.5 px-4 font-bold">Empresa / Contato</th>
+                <th class="py-3.5 px-4 font-bold">Canal / E-mail</th>
+                <th class="py-3.5 px-4 font-bold">Telefone</th>
+                <th class="py-3.5 px-4 font-bold">Categoria</th>
+                <th class="py-3.5 px-4 font-bold">Portal</th>
+                <th class="py-3.5 px-4 font-bold text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="c in filteredClients" :key="c.id">
+                <tr class="hover:bg-slate-50/70 dark:hover:bg-white/[0.02] transition">
+                  <!-- EMPRESA / CONTATO -->
+                  <td class="py-3 px-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-slate-900 text-white dark:bg-white/10 dark:text-white font-black text-xs flex items-center justify-center shrink-0 border border-slate-800 dark:border-white/10 shadow-2xs" x-text="getClientInitials(c)"></div>
+                      <div class="min-w-0">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs truncate max-w-[220px]" x-text="c.nome"></div>
+                        <div class="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5 truncate max-w-[220px]">
+                          <span>Contato:</span>
+                          <span class="text-slate-500 dark:text-slate-400 font-medium" x-text="c.contato || (c.tipo === 'Empresa' ? 'Diretoria / Responsável' : 'Particular')"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- CANAL / E-MAIL -->
+                  <td class="py-3 px-4">
+                    <span class="font-mono text-xs text-slate-600 dark:text-slate-300 font-medium" x-text="c.email || '—'"></span>
+                  </td>
+
+                  <!-- TELEFONE -->
+                  <td class="py-3 px-4">
+                    <span class="font-mono text-xs font-semibold text-slate-700 dark:text-slate-300" x-text="c.tel || '—'"></span>
+                  </td>
+
+                  <!-- CATEGORIA -->
+                  <td class="py-3 px-4">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider" 
+                          :class="c.categoria === 'LEAD' ? 'bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20' : 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20'" 
+                          x-text="c.categoria || 'ATIVO'"></span>
+                  </td>
+
+                  <!-- PORTAL & ORDENS RACHI -->
+                  <td class="py-3 px-4">
+                    <div class="text-xs">
+                      <span class="inline-flex items-center gap-1.5 font-bold text-blue-600 dark:text-blue-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                        <span x-text="c.portal || 'Portal Ativo'"></span>
+                      </span>
+                      <div class="text-[11px] text-slate-400 mt-0.5">
+                        <span class="font-semibold text-slate-600 dark:text-slate-300" x-text="c.tr + (c.tr === 1 ? ' pedido' : ' pedidos')"></span>
+                        <span class="text-slate-300 dark:text-slate-600">•</span>
+                        <span x-text="'Desde ' + (c.desde || 'Oct/2026')"></span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- AÇÕES (PRINT 1) -->
+                  <td class="py-3 px-4 text-center">
+                    <div class="flex items-center justify-center gap-1.5 flex-nowrap">
+                      <!-- Enviar Acesso -->
+                      <button @click="openSendAccessModal(c)" 
+                              type="button"
+                              class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-200 text-xs font-semibold transition cursor-pointer shadow-2xs whitespace-nowrap" 
+                              title="Enviar Acesso ao Portal">
+                        <i data-lucide="key" class="w-3.5 h-3.5 text-slate-500"></i>
+                        <span class="hidden xl:inline">Enviar Acesso</span>
+                      </button>
+
+                      <!-- Mover p/ Lead ou Ativo -->
+                      <button @click="toggleClientCategory(c)" 
+                              type="button"
+                              class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 text-xs font-semibold transition cursor-pointer shadow-2xs whitespace-nowrap" 
+                              :title="c.categoria === 'LEAD' ? 'Mover para Cliente Ativo' : 'Mover para Lead'">
+                        <span x-text="c.categoria === 'LEAD' ? 'Mover p/ Ativo' : 'Mover p/ Lead'"></span>
+                      </button>
+
+                      <!-- Editar -->
+                      <button @click="openEditClientModal(c)" 
+                              type="button"
+                              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-200 hover:text-blue-600 transition cursor-pointer shadow-2xs whitespace-nowrap" 
+                              title="Editar Informações">
+                        <i data-lucide="pencil" class="w-3.5 h-3.5 text-slate-500"></i>
+                        <span class="hidden xl:inline">Editar</span>
+                      </button>
+
+                      <!-- Eliminar -->
+                      <button @click="deleteClient(c)" 
+                              type="button"
+                              class="p-1.5 rounded-lg border border-rose-200 dark:border-rose-500/20 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-500 transition cursor-pointer shadow-2xs" 
+                              title="Eliminar Cliente">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               </template>
-              <tr x-show="!clients || clients.length === 0">
+
+              <tr x-show="filteredClients.length === 0">
                 <td colspan="6" class="text-center py-12">
                   <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
                     <i data-lucide="users" class="w-6 h-6"></i>
                   </div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum cliente registado</h4>
-                  <p class="text-xs text-slate-500 mt-1">Registe novos clientes ou aguarde solicitações do portal de clientes.</p>
+                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum cliente encontrado</h4>
+                  <p class="text-xs text-slate-500 mt-1">Tente ajustar a sua pesquisa ou a aba de filtro selecionada.</p>
                 </td>
               </tr>
             </tbody>
@@ -4040,7 +4200,19 @@ function adminApp() {
     coursesList: [{"id":15,"name":"Curso Especializado: Engenharia Social Institucional","slug":"engenharia-social-institucional"}],
     users: [{"id":25,"name":"Empresa Teste Luanda Lda","nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","phone":"923999888","telefone":"923999888","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:24","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"EL","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":24,"name":"Teste Ant\u00f3nio Silva","nome":"Teste Ant\u00f3nio Silva","email":"antonio.teste@empresa.ao","phone":"923000111","telefone":"923000111","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:01","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"TS","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":23,"name":"Dr. Antonio Silva","nome":"Dr. Antonio Silva","email":"antonio.silva@bfa.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":22,"name":"Dr. Ant\u00f3nio Silva","nome":"Dr. Ant\u00f3nio Silva","email":"antonio.silva@bancoteste.ao","phone":"+244 972 888 585","telefone":"+244 972 888 585","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 20:47","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":21,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"casimirogundja@outlook.com","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"04\/11\/2026 18:00","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"28\/09\/2026","data":"28\/09\/2026"},{"id":20,"name":"Aluno Teste","nome":"Aluno Teste","email":"aluno@rachi.ao","phone":"","telefone":"","tipo":"Aluno \/ Cliente","role":"Aluno \/ Cliente","role_id":7,"role_slug":"student","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"02\/10\/2026 16:42","mod":["Academy"],"av":"bg-gradient-to-br from-slate-600 to-slate-700","ini":"AT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":19,"name":"Cliente Teste","nome":"Cliente Teste","email":"cliente@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"25\/09\/2026 19:37","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"CT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":18,"name":"Gundja","nome":"Gundja","email":"user@gmail.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 01:57","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"GU","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":14,"name":"pakissipakissi","nome":"pakissipakissi","email":"pakissipakissi@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 00:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":12,"name":"teste","nome":"teste","email":"teste@outlook.com","phone":"","telefone":"","tipo":"Atendente","role":"Atendente","role_id":5,"role_slug":"attendant","tc":"bg-emerald-100 text-emerald-700 dark:bg-emerald-500\/20 dark:text-emerald-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":11,"name":"Dr. Fernando Dias Atualizado","nome":"Dr. Fernando Dias Atualizado","email":"fernando.dias@rachi.ao","phone":"+244 923 777 999","telefone":"+244 923 777 999","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:22","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"DA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":10,"name":"Pedro Alves","nome":"Pedro Alves","email":"pedro@email.com","phone":"+244 923 000 050","telefone":"+244 923 000 050","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"25\/09\/2026 14:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":7,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"gundja@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":8,"name":"Jo\u00e3o Silva","nome":"Jo\u00e3o Silva","email":"joao@rachi.ao","phone":"+244 923 000 015","telefone":"+244 923 000 015","tipo":"Especialista RH","role":"Especialista RH","role_id":9,"role_slug":"rh_specialist","tc":"bg-amber-100 text-amber-800 dark:bg-orange-500\/20 dark:text-orange-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Human Capital"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"JS","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":9,"name":"Ana Lima","nome":"Ana Lima","email":"ana@rachi.ao","phone":"+244 923 000 040","telefone":"+244 923 000 040","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AL","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":6,"name":"Aluno Teste Admin","nome":"Aluno Teste Admin","email":"alunoteste@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:04","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":5,"name":"tetetetetet@outlook.com","nome":"tetetetetet@outlook.com","email":"tetetetetetetet@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 21:46","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":4,"name":"Teste Aluno","nome":"Teste Aluno","email":"teste.aluno@example.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 15:17","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":2,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"tecnico@rachi.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Funcion\u00e1rio","role":"Funcion\u00e1rio","role_id":4,"role_slug":"employee","tc":"bg-purple-100 text-purple-700 dark:bg-purple-500\/20 dark:text-purple-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"21\/09\/2026 13:51","mod":["Gr\u00e1fica","Loja"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"CG","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":3,"name":"Inov Quimua Consultoria","nome":"Inov Quimua Consultoria","email":"cliente@empresa.ao","phone":"+244 912 345 678","telefone":"+244 912 345 678","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"IC","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":1,"name":"Super Administrador RACHI","nome":"Super Administrador RACHI","email":"admin@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"03\/10\/2026 00:44","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"SR","created_at":"21\/09\/2026","data":"21\/09\/2026"}],
     rolesList: [{"id":1,"name":"Super Administrador","slug":"super_admin","description":"Acesso irrestrito a todo o sistema e configura\u00e7\u00f5es"},{"id":2,"name":"Administrador","slug":"admin","description":"Gest\u00e3o geral da plataforma e relat\u00f3rios"},{"id":3,"name":"Gestor de Unidade","slug":"manager","description":"Gest\u00e3o operacional de uma unidade de neg\u00f3cio"},{"id":4,"name":"Funcion\u00e1rio \/ T\u00e9cnico","slug":"employee","description":"Atendimento, execu\u00e7\u00e3o de servi\u00e7os e pedidos"},{"id":5,"name":"Atendente","slug":"attendant","description":"Triagem e primeiro contacto com clientes"},{"id":6,"name":"Cliente","slug":"customer","description":"Acesso ao portal de autoatendimento e pedidos"},{"id":7,"name":"Aluno","slug":"student","description":"Acesso aos cursos da RACHI Academy"},{"id":8,"name":"Instrutor Academy","slug":"instructor","description":"Gest\u00e3o de cursos, m\u00f3dulos e turmas"},{"id":9,"name":"Especialista RH","slug":"rh_specialist","description":"Recrutamento, vagas e candidatos"}],
-    clients: [{"id":16,"nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","tipo":"Empresa","tel":"923999888","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":15,"nome":"Silva \u0026 Filhos Lda","email":"antonio.teste@empresa.ao","tipo":"Empresa","tel":"923000111","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":14,"nome":"gundja","email":"casimirogundja@outlook.com","tipo":"Empresa","tel":"1293797234927","tr":2,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":13,"nome":"Banco de Fomento Angola","email":"antonio.silva@bfa.ao","tipo":"Empresa","tel":"+244 923 111 222","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":12,"nome":"Banco de Fomento Angola Teste","email":"antonio.silva@bancoteste.ao","tipo":"Empresa","tel":"+244 972 888 585","tr":1,"status":"Ativo","sk":"ativo","desde":"Oct\/2026"},{"id":11,"nome":"Aluno Teste","email":"aluno@rachi.ao","tipo":"Particular","tel":"1232342343","tr":0,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":10,"nome":"Gundja","email":"","tipo":"Empresa","tel":"12342342342","tr":1,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":9,"nome":"Super Administrador RACHI","email":"admin@rachi.ao","tipo":"Empresa","tel":"+244 923 000 000","tr":10,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"},{"id":1,"nome":"Inov Quimua Consultoria Lda","email":"cliente@empresa.ao","tipo":"Empresa","tel":"+244 912 345 678","tr":0,"status":"Ativo","sk":"ativo","desde":"Sep\/2026"}],
+    clients: [
+      {"id":16,"nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","tipo":"Empresa","contato":"Diretoria Financeira","tel":"923999888","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"ET"},
+      {"id":15,"nome":"Silva & Filhos Lda","email":"antonio.teste@empresa.ao","tipo":"Empresa","contato":"António Silva","tel":"923000111","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"SF"},
+      {"id":14,"nome":"gundja","email":"casimirogundja@outlook.com","tipo":"Empresa","contato":"Casimiro Gundja","tel":"1293797234927","tr":2,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"GU"},
+      {"id":13,"nome":"Banco de Fomento Angola","email":"antonio.silva@bfa.ao","tipo":"Empresa","contato":"Dr. António Silva","tel":"+244 923 111 222","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"BF"},
+      {"id":12,"nome":"Banco de Fomento Angola Teste","email":"antonio.silva@bancoteste.ao","tipo":"Empresa","contato":"Dr. António Silva","tel":"+244 972 888 585","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"BF"},
+      {"id":11,"nome":"Aluno Teste","email":"aluno@rachi.ao","tipo":"Particular","contato":"Aluno Particular","tel":"1232342343","tr":0,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Sep/2026","ini":"AT"},
+      {"id":10,"nome":"Gundja","email":"","tipo":"Empresa","contato":"Administração","tel":"12342342342","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Sep/2026","ini":"GU"},
+      {"id":9,"nome":"Super Administrador RACHI","email":"admin@rachi.ao","tipo":"Empresa","contato":"Diretoria Geral","tel":"+244 923 000 000","tr":10,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Sep/2026","ini":"SR"},
+      {"id":1,"nome":"Inov Quimua Consultoria Lda","email":"cliente@empresa.ao","tipo":"Empresa","contato":"Dr. Quimua","tel":"+244 912 345 678","tr":0,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Sep/2026","ini":"IQ"}
+    ],
+    clientSearch: '',
+    clientFilterTab: 'todos',
     userSearch: '',
     userFilterRole: 'all',
     userFilterStatus: 'all',
@@ -4143,6 +4315,38 @@ function adminApp() {
           (u.email && u.email.toLowerCase().includes(q)) ||
           (u.telefone && u.telefone.toLowerCase().includes(q)) ||
           (u.tipo && u.tipo.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+
+    get clientStats() {
+      const list = this.clients || [];
+      return {
+        total: list.length,
+        ativos: list.filter(c => c.status === 'Ativo' || c.categoria === 'ATIVO').length,
+        empresas: list.filter(c => c.tipo === 'Empresa').length,
+        leads: list.filter(c => c.status === 'Lead' || c.categoria === 'LEAD' || c.tipo === 'Particular').length
+      };
+    },
+
+    get filteredClients() {
+      let list = this.clients || [];
+      if (this.clientFilterTab === 'ativos') {
+        list = list.filter(c => c.status === 'Ativo' || c.categoria === 'ATIVO');
+      } else if (this.clientFilterTab === 'empresas') {
+        list = list.filter(c => c.tipo === 'Empresa');
+      } else if (this.clientFilterTab === 'leads') {
+        list = list.filter(c => c.status === 'Lead' || c.categoria === 'LEAD' || c.tipo === 'Particular');
+      }
+      if (this.clientSearch && this.clientSearch.trim()) {
+        const q = this.clientSearch.toLowerCase().trim();
+        list = list.filter(c => 
+          (c.nome && c.nome.toLowerCase().includes(q)) ||
+          (c.email && c.email.toLowerCase().includes(q)) ||
+          (c.tel && c.tel.toLowerCase().includes(q)) ||
+          (c.tipo && c.tipo.toLowerCase().includes(q)) ||
+          (c.contato && c.contato.toLowerCase().includes(q))
         );
       }
       return list;
@@ -4755,6 +4959,63 @@ function adminApp() {
       }
     },
 
+    getClientInitials(c) {
+      if (c.ini) return c.ini;
+      if (!c.nome) return 'CL';
+      const parts = c.nome.trim().split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+      }
+      return c.nome.slice(0, 2).toUpperCase();
+    },
+
+    openSendAccessModal(c) {
+      const matched = (this.users || []).find(u => (c.email && u.email === c.email) || u.id === c.id);
+      const userObj = matched || {
+        id: c.id,
+        nome: c.nome,
+        email: c.email || 'cliente@rachi.ao',
+        telefone: c.tel || '',
+        role_slug: 'customer'
+      };
+      this.openResetPasswordModal(userObj);
+    },
+
+    toggleClientCategory(c) {
+      const isLead = (c.categoria === 'LEAD' || c.status === 'Lead');
+      c.categoria = isLead ? 'ATIVO' : 'LEAD';
+      c.status = isLead ? 'Ativo' : 'Lead';
+      c.sk = isLead ? 'ativo' : 'lead';
+      this.showAlert('info', 'Categoria Atualizada', `${c.nome} foi movido para ${c.categoria}.`);
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    openEditClientModal(c) {
+      const matched = (this.users || []).find(u => (c.email && u.email === c.email) || u.id === c.id);
+      const userObj = matched || {
+        id: c.id,
+        nome: c.nome,
+        email: c.email,
+        telefone: c.tel || '',
+        tipo: c.tipo || 'Cliente',
+        role_slug: 'customer',
+        role_id: 6,
+        status: c.status || 'Ativo',
+        raw_status: 'active'
+      };
+      this.openEditUserModal(userObj);
+    },
+
+    deleteClient(c) {
+      const matched = (this.users || []).find(u => (c.email && u.email === c.email) || u.id === c.id);
+      const userObj = matched || {
+        id: c.id,
+        nome: c.nome,
+        email: c.email
+      };
+      this.confirmDeleteUser(userObj);
+    },
+
     get pageTitle() {
       const m = {
         'dashboard': 'Visão Geral',
@@ -4975,6 +5236,12 @@ function adminApp() {
     init() {
       this.applyTheme();
       this.$watch('sidebarCollapsed', () => {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      });
+      this.$watch('clientFilterTab', () => {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      });
+      this.$watch('clientSearch', () => {
         this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
       });
       this.allRequests = [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}];
