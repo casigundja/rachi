@@ -54,7 +54,7 @@
       const next = await session();
       if (!navigating && ((external && previous === undefined) || (previous !== undefined && JSON.stringify(previous) !== JSON.stringify(next)))) {
         navigating = true;
-        const isProtected = ['/admin', '/portal', '/aluno'].some(p => location.pathname.startsWith(p));
+        const isProtected = ['/admin', '/portal', '/aluno', '/cliente'].some(p => location.pathname.startsWith(p));
         if (!next && isProtected) {
           location.replace('/login');
         } else {
@@ -124,7 +124,7 @@
       publish('logout');
       invalidate();
 
-      const isProtected = ['/admin', '/portal', '/aluno'].some(p => location.pathname.startsWith(p));
+      const isProtected = ['/admin', '/portal', '/aluno', '/cliente'].some(p => location.pathname.startsWith(p));
       if (isProtected) {
         location.replace('/login');
       } else {

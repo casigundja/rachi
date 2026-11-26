@@ -21,17 +21,25 @@ Route::get('/loja/{slug}', fn () => redirect('/loja'));
 Route::get('/solucoes/{unit}', fn (string $unit) => in_array($unit, ['tec', 'print', 'academy', 'capital'], true) ? redirect('/'.$unit) : abort(404));
 Route::get('/portal', fn () => app(CloudPageController::class)->page('portal'))->middleware('auth');
 
-foreach (['cliente/dashboard'=>'requests', 'funcionario/dashboard'=>'requests', 'cliente/cursos'=>'courses',
-    'cliente/pedidos'=>'orders', 'funcionario/pedidos'=>'orders', 'cliente/orcamentos'=>'quotes',
-    'funcionario/estoque'=>'stock', 'cliente/solicitacoes'=>'requests',
-    'cliente/solicitacoes/nova'=>'requests', 'funcionario/solicitacoes'=>'requests'] as $path => $tab) {
+foreach (['funcionario/dashboard'=>'requests', 'funcionario/pedidos'=>'orders',
+    'funcionario/estoque'=>'stock', 'funcionario/solicitacoes'=>'requests'] as $path => $tab) {
     $route = Route::get('/'.$path, fn () => redirect('/portal#'.$tab))->middleware('auth');
-    $names = ['cliente/dashboard'=>'customer.dashboard','funcionario/dashboard'=>'employee.dashboard',
-        'cliente/cursos'=>'customer.courses','cliente/pedidos'=>'customer.orders','funcionario/pedidos'=>'employee.orders',
-        'cliente/orcamentos'=>'customer.quotes','funcionario/estoque'=>'employee.stock','cliente/solicitacoes'=>'customer.requests',
-        'cliente/solicitacoes/nova'=>'customer.requests.create','funcionario/solicitacoes'=>'employee.requests'];
+    $names = ['funcionario/dashboard'=>'employee.dashboard','funcionario/pedidos'=>'employee.orders',
+        'funcionario/estoque'=>'employee.stock','funcionario/solicitacoes'=>'employee.requests'];
     $route->name($names[$path]);
 }
+
+foreach (['cliente/dashboard'=>'requests', 'cliente/cursos'=>'courses',
+    'cliente/pedidos'=>'orders', 'cliente/orcamentos'=>'quotes',
+    'cliente/solicitacoes'=>'requests', 'cliente/solicitacoes/nova'=>'requests'] as $path => $tab) {
+    $route = Route::get('/'.$path, fn () => app(CloudPageController::class)->page('portal'))->middleware('auth');
+    $names = ['cliente/dashboard'=>'customer.dashboard',
+        'cliente/cursos'=>'customer.courses','cliente/pedidos'=>'customer.orders',
+        'cliente/orcamentos'=>'customer.quotes','cliente/solicitacoes'=>'customer.requests',
+        'cliente/solicitacoes/nova'=>'customer.requests.create'];
+    $route->name($names[$path]);
+}
+Route::get('/cliente', fn () => redirect('/cliente/dashboard'))->middleware('auth');
 foreach (['utilizadores'=>'usuarios','funcionarios'=>'usuarios','clientes'=>'clientes','produtos'=>'loja-produtos',
     'servicos'=>'grafica-produtos','cursos'=>'academy-cursos','pedidos'=>'loja-pedidos','solicitacoes'=>'requests','relatorios'=>'relatorios'] as $path=>$tab) {
     Route::get('/admin/'.$path, fn () => redirect('/admin-dashboard#'.$tab))->middleware(['auth','role:admin|super_admin']);

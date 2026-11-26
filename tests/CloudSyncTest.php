@@ -42,7 +42,7 @@ final class CloudSyncTest extends TestCase
         foreach (['/login','/registro','/academy/login','/academy/matricula','/carrinho','/checkout','/academy/cursos','/tec/servicos','/print/servicos','/capital/servicos','/tec/produtos'] as $url) {
             $this->get($url)->assertOk()->assertSee('csrf-token',false);
         }
-        foreach (['/portal','/admin-dashboard','/admin/dashboard','/aluno-dashboard','/academy/dashboard'] as $url) $this->get($url)->assertRedirect('/login');
+        foreach (['/portal','/cliente/dashboard','/cliente/solicitacoes','/cliente/pedidos','/admin-dashboard','/admin/dashboard','/aluno-dashboard','/academy/dashboard'] as $url) $this->get($url)->assertRedirect('/login');
         $this->getJson('/api/orders')->assertUnauthorized();
     }
 
@@ -59,6 +59,7 @@ final class CloudSyncTest extends TestCase
         $owner = $this->account();
         $other = $this->account();
         $this->actingAs($owner)->get('/portal')->assertOk()->assertSee('portal-content',false);
+        $this->actingAs($owner)->get('/cliente/dashboard')->assertOk()->assertSee('portal-content',false);
         $response = $this->postJson('/solicitacoes/nova',['title'=>'Pedido local','description'=>'Descrição de teste','unit_id'=>BusinessUnit::first()->id,'priority'=>'normal']);
         $response->assertOk();
         $id = $response->json('request.id');

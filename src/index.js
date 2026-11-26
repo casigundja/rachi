@@ -10110,7 +10110,7 @@ commerce.post("/cliente/orcamentos/:id/aprovar", async (c) => {
 
 // worker/views.ts
 function shell(title, content) {
-  return `<!doctype html><html lang="pt"><head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} \xB7 RACHI</title><link rel="stylesheet" href="/worker.css"><script src="/worker-ui.js" defer><\/script></head><body><header><a class="brand" href="/">RACHI<span>Solu\xE7\xF5es inteligentes</span></a><nav><a href="/loja">Loja</a><a href="/academy/cursos">Academy</a><a href="/portal">Minha conta</a></nav></header><main>${content}</main><footer>RACHI \xB7 Tecnologia, forma\xE7\xE3o e servi\xE7os empresariais</footer></body></html>`;
+  return `<!doctype html><html lang="pt"><head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"><\/script><script src="/auth-session.js"><\/script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} \xB7 RACHI</title><link rel="stylesheet" href="/worker.css"><script src="/worker-ui.js" defer><\/script></head><body><header><a class="brand" href="/">RACHI<span>Solu\xE7\xF5es inteligentes</span></a><nav><a href="/loja">Loja</a><a href="/academy/cursos">Academy</a><a href="/cliente/dashboard">Minha conta</a></nav></header><main>${content}</main><footer>RACHI \xB7 Tecnologia, forma\xE7\xE3o e servi\xE7os empresariais</footer></body></html>`;
 }
 __name(shell, "shell");
 function loginPage(register = false) {
@@ -10966,8 +10966,8 @@ function loginPage(register = false) {
 </html>`;
 }
 __name(loginPage, "loginPage");
-function portalPage() {
-  return shell("Portal", `<div class="portal"><aside><p class="eyebrow">\xC1REA RESERVADA</p><h2 id="user-name">Minha conta</h2><nav id="portal-nav"><button data-tab="requests">Solicita\xE7\xF5es</button><button data-tab="orders">Pedidos</button><button data-tab="quotes">Or\xE7amentos</button><button data-tab="courses">Meus cursos</button><button data-tab="password">Palavra-passe</button></nav><form data-api="/logout" data-redirect="/"><button class="secondary">Sair</button></form></aside><section><p class="eyebrow">RACHI / PORTAL</p><h1 id="section-title">Solicita\xE7\xF5es</h1><div id="portal-content" aria-live="polite">Carregando\u2026</div></section></div>`);
+function portalPage(initialTab = "requests", areaTitle = "\xC1REA DO CLIENTE") {
+  return shell("Painel do Cliente", `<div class="portal" data-initial-tab="${initialTab}"><aside><p class="eyebrow">${areaTitle}</p><h2 id="user-name">Minha conta</h2><nav id="portal-nav"><button data-tab="requests">Solicita\xE7\xF5es</button><button data-tab="orders">Pedidos</button><button data-tab="quotes">Or\xE7amentos</button><button data-tab="courses">Meus cursos</button><button data-tab="password">Palavra-passe</button></nav><form data-api="/logout" data-redirect="/"><button class="secondary">Sair</button></form></aside><section><p class="eyebrow" id="section-eyebrow">RACHI / CLIENTE</p><h1 id="section-title">Solicita\xE7\xF5es</h1><div id="portal-content" aria-live="polite">Carregando\u2026</div></section></div>`);
 }
 __name(portalPage, "portalPage");
 function catalogPage(kind, slug = "") {
@@ -11015,6 +11015,13 @@ app.get("/health/database", async (c) => {
   return c.json({ status: "ok", engine: c.env.DB ? "cloudflare-d1" : "hyperdrive" });
 });
 app.get("/portal", (c) => c.get("user") ? c.html(portalPage()) : c.redirect("/login"));
+app.get("/cliente/dashboard", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
+app.get("/cliente", (c) => c.redirect("/cliente/dashboard", 301));
+app.get("/cliente/solicitacoes", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
+app.get("/cliente/pedidos", (c) => c.get("user") ? c.html(portalPage("orders", "PAINEL DO CLIENTE")) : c.redirect("/login"));
+app.get("/cliente/orcamentos", (c) => c.get("user") ? c.html(portalPage("quotes", "PAINEL DO CLIENTE")) : c.redirect("/login"));
+app.get("/cliente/cursos", (c) => c.get("user") ? c.html(portalPage("courses", "PAINEL DO CLIENTE")) : c.redirect("/login"));
+app.get("/cliente/solicitacoes/nova", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
 app.get("/_session-page/:page", async (c) => {
   const u = c.get("user"), page = c.req.param("page");
   if (!["admin-dashboard", "aluno-dashboard"].includes(page)) return c.notFound();
@@ -11049,7 +11056,7 @@ var pages = {
   "/admin-dashboard": "admin-dashboard", "/admin/dashboard": "admin-dashboard", "/admin-dashboard.html": "admin-dashboard",
   "/loja": "loja", "/loja.html": "loja"
 };
-var portals = { "/cliente/dashboard": "requests", "/funcionario/dashboard": "requests", "/cliente/cursos": "courses", "/cliente/pedidos": "orders", "/funcionario/pedidos": "orders", "/cliente/orcamentos": "quotes", "/admin/utilizadores": "usuarios", "/admin/funcionarios": "usuarios", "/admin/clientes": "clientes", "/admin/produtos": "loja-produtos", "/admin/servicos": "grafica-produtos", "/admin/cursos": "academy-cursos", "/admin/pedidos": "loja-pedidos", "/admin/solicitacoes": "requests", "/admin/relatorios": "relatorios", "/funcionario/estoque": "stock", "/cliente/solicitacoes": "requests", "/cliente/solicitacoes/nova": "requests", "/funcionario/solicitacoes": "requests" };
+var portals = { "/funcionario/dashboard": "requests", "/funcionario/pedidos": "orders", "/admin/utilizadores": "usuarios", "/admin/funcionarios": "usuarios", "/admin/clientes": "clientes", "/admin/produtos": "loja-produtos", "/admin/servicos": "grafica-produtos", "/admin/cursos": "academy-cursos", "/admin/pedidos": "loja-pedidos", "/admin/solicitacoes": "requests", "/admin/relatorios": "relatorios", "/funcionario/estoque": "stock", "/funcionario/solicitacoes": "requests" };
 function html(value) {
   return new Response(value, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "X-Frame-Options": "SAMEORIGIN" } });
 }
@@ -11110,7 +11117,9 @@ var index_default = {
       if (path === "/carrinho" || path === "/checkout") return html(cartPage());
       if (/^\/(tec|print|capital)\/(servicos|produtos)$/.test(path)) return html(catalogPage(path.endsWith("produtos") ? "products" : "services"));
       if (/^\/solucoes\/(tec|print|academy|capital)$/.test(path)) return Response.redirect(new URL("/" + path.split("/")[2], url).toString(), 302);
-      if (/^\/(cliente|funcionario)\/solicitacoes\/\d+$/.test(path) || /^\/cliente\/pedidos\/\d+$/.test(path)) return Response.redirect(new URL("/portal#" + (path.includes("pedidos") ? "orders" : "requests"), url).toString(), 302);
+      if (/^\/cliente\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/solicitacoes", url).toString(), 302);
+      if (/^\/cliente\/pedidos\/\d+$/.test(path)) return Response.redirect(new URL("/cliente/pedidos", url).toString(), 302);
+      if (/^\/funcionario\/solicitacoes\/\d+$/.test(path)) return Response.redirect(new URL("/portal#requests", url).toString(), 302);
       if (/^\/(images|css|build|libs)\//.test(path) || ["/auth-session.js", "/worker.css", "/worker-marketing.css", "/worker-ui.js", "/worker-public.js", "/ai-chat-widget.js", "/favicon.ico", "/robots.txt"].includes(path)) return env.ASSETS.fetch(request);
     }
     const aliases = { "/cliente/solicitacoes": "/solicitacoes/nova", "/admin/solicitacoes/conversas": "/solicitacoes/conversas" };

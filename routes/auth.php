@@ -117,7 +117,7 @@ Route::post('/login', function (Request $request) {
 
         $dashboard = $user->isAdmin()
             ? '/admin-dashboard'
-            : ($user->isEmployee() ? route('employee.dashboard') : '/portal');
+            : ($user->isEmployee() ? route('employee.dashboard') : '/cliente/dashboard');
 
         $userPayload = formatPublicUser($user);
         $cookie = cookie('rachi_session', $token, 43200 / 60, '/', null, false, false, false, 'Lax');
@@ -173,13 +173,13 @@ Route::post('/registro', function (Request $request, CustomerService $customerSe
     if ($request->expectsJson() || $request->is('api/*')) {
         return response()->json([
             'success' => true,
-            'redirect' => '/portal',
+            'redirect' => '/cliente/dashboard',
             'csrf_token' => csrf_token(),
             'user' => formatPublicUser($customer->user)
         ])->withCookie($cookie);
     }
 
-    return redirect('/portal')->withCookie($cookie)->with('success', 'Conta criada com sucesso!');
+    return redirect('/cliente/dashboard')->withCookie($cookie)->with('success', 'Conta criada com sucesso!');
 })->name('register.post');
 
 Route::match(['get', 'post'], '/logout', function (Request $request) {
