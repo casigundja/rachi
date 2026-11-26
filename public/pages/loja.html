@@ -1952,7 +1952,7 @@
             </div>
 
             <!-- Lista de Itens na Sacola -->
-            <div class="p-5 overflow-y-auto flex-1 space-y-4">
+            <div id="cart-drawer-items" class="p-5 overflow-y-auto flex-1 space-y-4" style="overscroll-behavior: contain;">
                 <template x-for="(item, index) in cart" :key="index">
                     <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 shadow-xs hover:border-amber-500/40 transition">
                         <div class="w-16 h-16 rounded-xl bg-slate-50 dark:bg-slate-900 p-1.5 border border-slate-100 dark:border-slate-700/60 flex items-center justify-center shrink-0">
@@ -2022,8 +2022,9 @@
 
                 <!-- Botão de Finalizar Compra -->
                 <button type="button" @click="handleCheckoutClick()" :disabled="isSubmittingOrder"
-                    class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f5a800]/25 transition cursor-pointer">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-[#cda851]" x-show="!isSubmittingOrder"></i>
+                    class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer border-0 shadow-md hover:scale-[1.01] active:scale-[0.99]"
+                    style="background: linear-gradient(135deg, #FFA525, #DD8F20); color: #0B0B0B; box-shadow: 0 4px 16px rgba(255, 165, 37, 0.35);">
+                    <i data-lucide="check-circle" class="w-4 h-4 stroke-[2.5]" x-show="!isSubmittingOrder"></i>
                     <span x-text="isSubmittingOrder ? 'A processar...' : 'Finalizar Pedido / Solicitar Proforma'"></span>
                 </button>
 
@@ -3923,8 +3924,11 @@
                         });
                     }
                     this.cartDrawerOpen = true;
-                    this.showToast(p.title + ' adicionado à sua sacola!', 'Produto Adicionado', 'success', 2500);
-                    this.$nextTick(() => lucide.createIcons());
+                    this.$nextTick(() => {
+                        if (window.lucide) lucide.createIcons();
+                        const list = document.getElementById('cart-drawer-items');
+                        if (list) list.scrollTop = 0;
+                    });
                 },
 
                 increaseQty(idx) {
