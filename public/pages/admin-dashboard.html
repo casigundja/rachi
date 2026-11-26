@@ -492,8 +492,36 @@ html.dark .s-block { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-
 .tldot::after { content: ''; position: absolute; top: 12px; left: 5px; width: 2px; height: calc(100% + 18px); background: var(--table-border); }
 .tl:last-child .tldot::after { display: none; }
 
-#admin-sidebar::-webkit-scrollbar { width: 5px; }
-#admin-sidebar::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.22); border-radius: 4px; }
+/* BARRA DE ROLAGEM ULTRA-FINA, DISCRETA E ELEGANTE PARA O MENU LATERAL */
+.sidebar-nav, #admin-sidebar nav, #admin-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+  overscroll-behavior: contain;
+}
+.sidebar-nav::-webkit-scrollbar, #admin-sidebar nav::-webkit-scrollbar, #admin-sidebar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-track, #admin-sidebar nav::-webkit-scrollbar-track, #admin-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb, #admin-sidebar nav::-webkit-scrollbar-thumb, #admin-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.18);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+.sidebar-nav:hover::-webkit-scrollbar-thumb, #admin-sidebar nav:hover::-webkit-scrollbar-thumb, #admin-sidebar:hover::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.38);
+}
+html.dark .sidebar-nav, html.dark #admin-sidebar nav, html.dark #admin-sidebar {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+html.dark .sidebar-nav::-webkit-scrollbar-thumb, html.dark #admin-sidebar nav::-webkit-scrollbar-thumb, html.dark #admin-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+html.dark .sidebar-nav:hover::-webkit-scrollbar-thumb, html.dark #admin-sidebar nav:hover::-webkit-scrollbar-thumb, html.dark #admin-sidebar:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+}
 
 @media (max-width: 768px) {
   #admin-sidebar { transform: translateX(-100%); width: 270px !important; }
@@ -684,7 +712,7 @@ a { text-decoration: none !important; }
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="flex-1 py-3 space-y-0.5 overflow-y-auto">
+  <nav class="sidebar-nav flex-1 py-3 space-y-0.5 overflow-y-auto">
     <div class="sg">Controlo Geral</div>
     <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" data-legend="Visão Geral" title="Visão Geral">
       <i data-lucide="layout-dashboard" class="si"></i>
@@ -827,12 +855,7 @@ a { text-decoration: none !important; }
     </div>
 
     <div class="sg">Configurações</div>
-    <div @click="setPage('notificacoes')" :class="currentPage==='notificacoes'?'active':''" class="sidebar-item" data-legend="Notificações">
-      <i data-lucide="bell" class="si"></i>
-      <span class="sl">Notificações</span>
-      <span class="sb2 badge bg-rose-500 text-white text-[10px] px-2 rounded-full ms-auto font-bold">5</span>
-    </div>
-    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Definições do Sistema">
+    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Definições do Sistema" title="Definições do Sistema">
       <i data-lucide="settings" class="si"></i>
       <span class="sl">Definições do Sistema</span>
     </div>
