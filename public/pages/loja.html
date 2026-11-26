@@ -1932,16 +1932,21 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="translate-x-0"
              x-transition:leave-end="translate-x-full"
-             class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between">
+             class="w-full max-w-md bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 h-full shadow-2xl flex flex-col justify-between border-l border-slate-200 dark:border-slate-800">
             
             <!-- Cabeçalho da Sacola -->
-            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <div class="flex items-center gap-2.5">
-                    <i data-lucide="shopping-bag" class="w-5 h-5 text-[#f5a800]"></i>
-                    <h3 class="font-bold text-base text-slate-900 font-display">Minha Sacola de Compras</h3>
-                    <span class="px-2 py-0.5 rounded-full bg-[#f5a800] text-[#071326] text-[10px] font-black" x-text="cartTotalCount"></span>
+            <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/90 sticky top-0 z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-[#f5a800] flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white font-display">Minha Sacola</h3>
+                        <p class="text-[11px] text-slate-400 font-medium">Itens selecionados para compra</p>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-[#f5a800] text-[#071326] text-[10px] font-black" x-text="cartTotalCount + ' item' + (cartTotalCount > 1 ? 's' : '')"></span>
                 </div>
-                <button @click="cartDrawerOpen = false" class="p-1 text-slate-400 hover:text-slate-700">
+                <button type="button" @click="cartDrawerOpen = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition cursor-pointer" aria-label="Fechar sacola">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -1949,26 +1954,28 @@
             <!-- Lista de Itens na Sacola -->
             <div class="p-5 overflow-y-auto flex-1 space-y-4">
                 <template x-for="(item, index) in cart" :key="index">
-                    <div class="flex items-start justify-between gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
-                        <img :src="item.image" :alt="item.title" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-1.5 border">
+                    <div class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 shadow-xs hover:border-amber-500/40 transition">
+                        <div class="w-16 h-16 rounded-xl bg-slate-50 dark:bg-slate-900 p-1.5 border border-slate-100 dark:border-slate-700/60 flex items-center justify-center shrink-0">
+                            <img :src="item.image" :alt="item.title" class="max-h-full max-w-full object-contain">
+                        </div>
                         
                         <div class="flex-1 min-w-0">
-                            <h4 class="text-xs font-bold text-slate-900 line-clamp-1" x-text="item.title"></h4>
-                            <span class="text-[10px] text-slate-400 block uppercase" x-text="item.category"></span>
+                            <span class="text-[9px] font-extrabold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded-full uppercase tracking-wider block w-fit mb-1" x-text="item.category"></span>
+                            <h4 class="text-xs font-bold text-slate-900 dark:text-white line-clamp-2 leading-tight" x-text="item.title"></h4>
                             
-                            <div class="flex items-center justify-between mt-2">
-                                <span class="text-xs font-black text-[#071326]" x-text="item.price"></span>
+                            <div class="flex items-center justify-between mt-2.5">
+                                <span class="text-xs font-black text-[#071326] dark:text-[#f5a800]" x-text="item.price"></span>
                                 
                                 <!-- Controlo de Quantidade (+ / -) -->
-                                <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden text-xs">
-                                    <button @click="decreaseQty(index)" class="px-2 py-0.5 hover:bg-slate-100">-</button>
-                                    <span class="px-2 py-0.5 font-bold" x-text="item.quantity || 1"></span>
-                                    <button @click="increaseQty(index)" class="px-2 py-0.5 hover:bg-slate-100">+</button>
+                                <div class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden text-xs bg-slate-50 dark:bg-slate-900">
+                                    <button type="button" @click="decreaseQty(index)" class="px-2.5 py-1 hover:bg-slate-200 dark:hover:bg-slate-800 font-bold transition text-slate-700 dark:text-slate-300">-</button>
+                                    <span class="px-2.5 py-1 font-black text-slate-900 dark:text-white min-w-[20px] text-center" x-text="item.quantity || 1"></span>
+                                    <button type="button" @click="increaseQty(index)" class="px-2.5 py-1 hover:bg-slate-200 dark:hover:bg-slate-800 font-bold transition text-slate-700 dark:text-slate-300">+</button>
                                 </div>
                             </div>
                         </div>
 
-                        <button @click="removeFromCart(index)" class="text-slate-300 hover:text-rose-500 p-1">
+                        <button type="button" @click="removeFromCart(index)" class="text-slate-300 hover:text-rose-500 p-1.5 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition shrink-0 cursor-pointer" title="Remover da sacola">
                             <i data-lucide="trash-2" class="w-4 h-4"></i>
                         </button>
                     </div>
@@ -1976,49 +1983,53 @@
 
                 <div x-show="cart.length === 0" class="text-center py-16 text-slate-400">
                     <i data-lucide="shopping-bag" class="w-12 h-12 text-slate-300 mx-auto mb-2"></i>
-                    <p class="text-sm font-bold text-slate-700">A sua sacola está vazia</p>
+                    <p class="text-sm font-bold text-slate-700 dark:text-slate-200">A sua sacola está vazia</p>
                     <p class="text-xs text-slate-400 mt-1">Adicione produtos do catálogo para gerar a sua proforma.</p>
                 </div>
             </div>
 
             <!-- Rodapé e Checkout da Sacola -->
-            <div x-show="cart.length > 0" class="p-5 border-t border-slate-100 bg-slate-50 space-y-4">
+            <div x-show="cart.length > 0" class="p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 space-y-4">
                 
                 <!-- Cupom de Desconto -->
                 <div class="flex items-center gap-2">
                     <input type="text" x-model="couponCode" placeholder="Possui cupom? Digite aqui"
-                        class="flex-1 px-3 py-2 text-xs border border-slate-300 rounded-xl bg-white uppercase font-bold focus:outline-none focus:border-[#f5a800]">
-                    <button @click="applyCoupon()" class="px-3.5 py-2 bg-[#071326] text-[#f5a800] border border-[#f5a800]/40 text-xs font-bold rounded-xl hover:bg-[#0d1f3d]">
+                        class="flex-1 px-3 py-2 text-xs border border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-white uppercase font-bold focus:outline-none focus:border-[#f5a800]">
+                    <button type="button" @click="applyCoupon()" class="px-3.5 py-2 bg-[#071326] text-[#f5a800] border border-[#f5a800]/40 text-xs font-bold rounded-xl hover:bg-[#0d1f3d] transition cursor-pointer">
                         Aplicar
                     </button>
                 </div>
 
                 <!-- Totais -->
                 <div class="space-y-1.5 text-xs">
-                    <div class="flex justify-between text-slate-500">
+                    <div class="flex justify-between text-slate-500 dark:text-slate-400">
                         <span>Subtotal:</span>
-                        <strong x-text="formatKz(cartTotalAmount)"></strong>
+                        <strong class="text-slate-800 dark:text-slate-200" x-text="formatKz(cartTotalAmount)"></strong>
                     </div>
                     <div x-show="discountAmount > 0" class="flex justify-between text-emerald-600 font-bold">
                         <span>Desconto Cupom (10%):</span>
                         <span x-text="'- ' + formatKz(discountAmount)"></span>
                     </div>
-                    <div class="flex justify-between text-slate-500">
+                    <div class="flex justify-between text-slate-500 dark:text-slate-400">
                         <span>Entrega em Luanda:</span>
                         <span class="text-emerald-600 font-bold">A Combinar / Grátis</span>
                     </div>
-                    <div class="border-t pt-2 flex justify-between text-sm font-black text-slate-900">
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-2 flex justify-between text-sm font-black text-slate-900 dark:text-white">
                         <span>Total Geral:</span>
-                        <span class="text-base font-black text-[#071326]" x-text="formatKz(finalTotal)"></span>
+                        <span class="text-base font-black text-[#071326] dark:text-[#f5a800]" x-text="formatKz(finalTotal)"></span>
                     </div>
                 </div>
 
                 <!-- Botão de Finalizar Compra -->
-                <button @click="handleCheckoutClick()" :disabled="isSubmittingOrder"
+                <button type="button" @click="handleCheckoutClick()" :disabled="isSubmittingOrder"
                     class="btn-comprar w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#f5a800]/25 transition cursor-pointer">
                     <i data-lucide="check-circle" class="w-4 h-4 text-[#cda851]" x-show="!isSubmittingOrder"></i>
-                    <span x-text="isSubmittingOrder ? 'A finalizar pedido...' : 'Finalizar Pedido / Solicitar Proforma'"></span>
+                    <span x-text="isSubmittingOrder ? 'A processar...' : 'Finalizar Pedido / Solicitar Proforma'"></span>
                 </button>
+
+                <p class="text-[10px] text-center text-slate-400">
+                    Conforme a Lei de Defesa do Consumidor de Angola · Garantia de 12 meses
+                </p>
             </div>
 
         </div>
@@ -3896,6 +3907,7 @@
                         this.showToast('Este produto está indisponível ou esgotado no momento.', 'Produto Indisponível', 'error', 3000);
                         return;
                     }
+                    this.quickViewOpen = false; // Fecha modal de detalhes para não conflitar visualmente
                     const existing = this.cart.find(item => item.slug === p.slug);
                     if (existing) {
                         existing.quantity = (existing.quantity || 1) + 1;
@@ -3972,20 +3984,26 @@
                         return;
                     }
 
-                    // Se estiver logado: pega as informações do utilizador autenticado e finaliza a compra direto!
-                    const loggedIn = this.userLoggedIn && this.currentUser && (this.currentUser.name || this.currentUser.email);
-                    if (loggedIn) {
-                        this.executeOrder({
-                            name: this.currentUser.name,
-                            email: this.currentUser.email,
-                            phone: this.currentUser.phone || '',
-                            nif: this.currentUser.nif || '',
-                            address: this.currentUser.address || ''
-                        });
-                    } else {
-                        // Caso NÃO tenha um utilizador autenticado: aí abre o formulário para preencher!
-                        this.checkoutModal = true;
+                    // Fecha a sacola lateral e foca no checkout em 4 fases sem atropelos
+                    this.cartDrawerOpen = false;
+
+                    // Se o cliente estiver logado, pré-preenche os dados cadastrais
+                    if (this.currentUser && (this.currentUser.name || this.currentUser.email)) {
+                        const parts = (this.currentUser.name || '').trim().split(' ');
+                        if (!this.checkoutData.firstName) this.checkoutData.firstName = parts[0] || '';
+                        if (!this.checkoutData.lastName) this.checkoutData.lastName = parts.slice(1).join(' ') || '';
+                        if (!this.checkoutData.email) this.checkoutData.email = this.currentUser.email || '';
+                        if (!this.checkoutData.phone && this.currentUser.phone) this.checkoutData.phone = this.currentUser.phone.replace(/^\+244\s*/, '');
+                        if (!this.checkoutData.personalNif && this.currentUser.nif) {
+                            this.checkoutData.personalNif = this.currentUser.nif;
+                            this.checkoutData.showPersonalNif = true;
+                        }
                     }
+
+                    // Abre o Checkout no Passo 2 (Identificação)
+                    this.checkoutStep = 2;
+                    this.checkoutModal = true;
+                    this.$nextTick(() => lucide.createIcons());
                 },
 
                 submitOrderForm() {
