@@ -437,24 +437,35 @@ html.dark .sidebar-item.active {
 
 .at { width: 100%; border-collapse: separate; border-spacing: 0; }
 .at th {
-  background-color: var(--table-th-bg);
-  padding: 11px 16px;
+  background: #f8fafc;
+  padding: 13px 18px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--table-border);
+  letter-spacing: 0.07em;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+html.dark .at th {
+  background: #091224;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(0, 80, 240, 0.16);
 }
 .at td {
-  padding: 12px 16px;
-  font-size: 13px;
-  border-bottom: 1px solid var(--table-border);
+  padding: 14px 18px;
+  font-size: 12.5px;
+  border-bottom: 1px solid #f1f5f9;
   vertical-align: middle;
-  color: var(--text-sub);
+  color: #334155;
+}
+html.dark .at td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
 }
 .at tbody tr { transition: background-color 0.15s ease; }
-.at tbody tr:hover { background-color: var(--table-hover); }
+.at tbody tr:hover { background-color: rgba(0, 80, 240, 0.035); }
+html.dark .at tbody tr:hover { background-color: rgba(0, 80, 240, 0.08); }
 
 .badge2 {
   display: inline-flex;
@@ -2586,7 +2597,7 @@ html.dark .panze-hdr-pill {
         <div class="flex items-center gap-2">
           <button @click="openCreateUserModal()" 
                   type="button"
-                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+                  class="bg-[#0050f0] hover:bg-[#0040d0] text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Novo Usuário</span>
           </button>
@@ -2599,25 +2610,25 @@ html.dark .panze-hdr-pill {
           <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="userTab = 'todos'" 
                     type="button"
-                    :class="userTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="userTab === 'todos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Todos (<span x-text="users.length"></span>)
             </button>
             <button @click="userTab = 'equipe'" 
                     type="button"
-                    :class="userTab === 'equipe' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="userTab === 'equipe' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Equipe (<span x-text="userStatsPrint4.superAdmins + userStatsPrint4.admins + userStatsPrint4.staff"></span>)
             </button>
             <button @click="userTab = 'clientes'" 
                     type="button"
-                    :class="userTab === 'clientes' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="userTab === 'clientes' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Clientes (<span x-text="userStatsPrint4.clients"></span>)
             </button>
             <button @click="userTab = 'inativos'" 
                     type="button"
-                    :class="userTab === 'inativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="userTab === 'inativos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Inativos (<span x-text="userStatsPrint4.inativos"></span>)
             </button>
@@ -2627,9 +2638,9 @@ html.dark .panze-hdr-pill {
           <div class="flex flex-col sm:flex-row items-center gap-2.5">
             <div class="relative w-full sm:w-64">
               <input type="text" x-model="userSearch" placeholder="Buscar por nome, email ou empresa..."
-                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
             </div>
-            <select x-model="userFilterRole" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+            <select x-model="userFilterRole" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
               <option value="all">Todos os papéis</option>
               <option value="super_admin">Super Admin</option>
               <option value="admin">Administrador</option>
@@ -2670,7 +2681,7 @@ html.dark .panze-hdr-pill {
                   <!-- PAPEL / FUNÇÃO -->
                   <td class="py-3.5 px-4">
                     <template x-if="u.role_slug === 'super_admin' || (u.tipo && u.tipo.includes('Master')) || u.id === 1 || u.id === 21">
-                      <span class="text-xs font-black text-[#dd8f20] dark:text-[#ffa525] uppercase tracking-wider">SUPER ADMIN</span>
+                      <span class="text-xs font-black text-[#0050f0] dark:text-[#38bdf8] uppercase tracking-wider">SUPER ADMIN</span>
                     </template>
                     <template x-if="u.role_slug === 'admin' || (u.tipo && u.tipo === 'Administrador' && u.id !== 1 && u.id !== 21)">
                       <span class="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase">ADMINISTRADOR</span>
@@ -2755,7 +2766,7 @@ html.dark .panze-hdr-pill {
           <p class="text-slate-500 dark:text-slate-400 text-sm mt-0.5">Gestão centralizada de Clientes Ativos, Leads do Site e Contatos RACHI.</p>
         </div>
         <button @click="openCreateUserModalWithRole('customer')" 
-                class="px-4 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-[#ffa525] hover:bg-[#dd8f20] shadow-sm flex items-center gap-2 transition cursor-pointer self-start sm:self-auto">
+                class="px-4 py-2.5 rounded-xl font-bold text-xs text-white bg-[#0050f0] hover:bg-[#0040d0] shadow-sm flex items-center gap-2 transition cursor-pointer self-start sm:self-auto">
           <i data-lucide="plus" class="w-4 h-4"></i>
           <span>Novo Cliente</span>
         </button>
@@ -2766,22 +2777,22 @@ html.dark .panze-hdr-pill {
           <!-- Abas de Filtros Tipo Pílula -->
           <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="clientFilterTab='todos'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
-                    :class="clientFilterTab==='todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    :class="clientFilterTab==='todos' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Todos (<span x-text="clientStats.total"></span>)
             </button>
             <button @click="clientFilterTab='ativos'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
-                    :class="clientFilterTab==='ativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    :class="clientFilterTab==='ativos' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Ativos (<span x-text="clientStats.ativos"></span>)
             </button>
             <button @click="clientFilterTab='empresas'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
-                    :class="clientFilterTab==='empresas' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    :class="clientFilterTab==='empresas' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Empresas (<span x-text="clientStats.empresas"></span>)
             </button>
             <button @click="clientFilterTab='leads'; $nextTick(() => { if (window.lucide) lucide.createIcons(); });" 
-                    :class="clientFilterTab==='leads' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
+                    :class="clientFilterTab==='leads' ? 'bg-[#0050f0] text-white font-bold shadow-2xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 font-semibold'" 
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Leads / Particulares (<span x-text="clientStats.leads"></span>)
             </button>
@@ -2790,7 +2801,7 @@ html.dark .panze-hdr-pill {
           <!-- Campo de Busca -->
           <div class="relative w-full sm:w-80">
             <input type="text" x-model="clientSearch" placeholder="Filtrar por nome, empresa, e-mail..." 
-                   class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ffa525]/30 focus:border-[#ffa525] transition">
+                   class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ffa525]/30 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] transition">
             <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
           </div>
         </div>
@@ -3036,9 +3047,9 @@ html.dark .panze-hdr-pill {
             <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-3">
               <div class="relative flex-1 w-full">
                 <input type="text" x-model="reqFilterSearch" placeholder="Buscar por protocolo, título ou cliente..."
-                       class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+                       class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
               </div>
-              <select x-model="reqFilterStatus" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+              <select x-model="reqFilterStatus" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
                 <option value="Todos">Todos os status</option>
                 <option value="Nova">Nova / Pendente</option>
                 <option value="Em Análise">Em Análise</option>
@@ -3066,7 +3077,7 @@ html.dark .panze-hdr-pill {
                     <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
                       <!-- PROTOCOLO -->
                       <td class="py-3.5 px-4 sm:px-6">
-                        <span class="font-mono font-bold text-xs text-[#dd8f20] dark:text-[#ffa525]" x-text="req.protocol || ('GNDJ-20261123-' + req.id)"></span>
+                        <span class="font-mono font-bold text-xs text-[#0050f0] dark:text-[#38bdf8]" x-text="req.protocol || ('GNDJ-20261123-' + req.id)"></span>
                       </td>
 
                       <!-- DEMANDA / TÍTULO -->
@@ -3355,34 +3366,123 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- LOJA PRODUTOS -->
-    <section x-show="currentPage==='loja-produtos'" x-cloak class="space-y-6">
+    <section x-show="currentPage==='loja-produtos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
             <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Catálogo de Produtos</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Equipamentos, computadores, consumíveis e suprimentos de TI.</p>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Equipamentos, computadores, consumíveis e suprimentos de TI com gestão em tempo real.</p>
           </div>
         </div>
-        <button type="button" @click="openCreateProductModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Adicionar Produto</button>
+        <button type="button" @click="openCreateProductModal()" class="bap cursor-pointer text-xs sm:text-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Adicionar Produto</span>
+        </button>
       </div>
 
-            <div class="sc2 p-0 overflow-hidden">
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE CATEGORIA -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="productCategoryTab = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="productCategoryTab === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="sProducts.length"></span>)
+          </button>
+          <button @click="productCategoryTab = 'Consumíveis & Escritório'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="productCategoryTab === 'Consumíveis & Escritório' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Consumíveis &amp; Escritório
+          </button>
+          <button @click="productCategoryTab = 'Material Promocional'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="productCategoryTab === 'Material Promocional' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Material Promocional
+          </button>
+          <button @click="productCategoryTab = 'Universo Otaku & Geek'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="productCategoryTab === 'Universo Otaku & Geek' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Universo Otaku &amp; Geek
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="productSearch" placeholder="Buscar por produto, SKU ou categoria..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredProducts.length + ' produtos'"></span>
+        </div>
+      </div>
+
+      <!-- TABELA DE PRODUTOS ELEVADA -->
+      <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto">
           <table class="at">
-            <thead><tr><th>Item</th><th>SKU</th><th>Categoria</th><th>Valor Unitário</th><th>Stock</th><th>Saídas</th><th>Status</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>SKU</th>
+                <th>Categoria</th>
+                <th>Valor Unitário</th>
+                <th>Stock Disponível</th>
+                <th>Saídas</th>
+                <th>Status</th>
+                <th class="text-right">Ações</th>
+              </tr>
+            </thead>
             <tbody>
-              <template x-for="p in sProducts" :key="p.id">
-                <tr>
-                  <td><div class="font-bold text-slate-900 dark:text-white text-sm" x-text="p.nome"></div><div class="text-xs text-slate-500" x-text="p.marca"></div></td>
-                  <td class="font-mono text-slate-500 text-xs font-bold" x-text="p.sku"></td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="p.cat"></td>
-                  <td class="text-emerald-600 dark:text-emerald-400 font-extrabold" x-text="p.preco"></td>
-                  <td><span class="font-bold" :class="p.est<10?'text-rose-600 dark:text-rose-400':'text-slate-900 dark:text-white'" x-text="p.est"></span><span class="text-xs text-slate-500 ml-1">unidades</span></td>
-                  <td class="text-slate-700 dark:text-slate-300 font-bold" x-text="p.vendas"></td>
-                  <td><span class="badge2" :class="p.status==='Ativo'?'s-ativo':'s-inativo'" x-text="p.status"></span></td>
+              <template x-for="p in filteredProducts" :key="p.id">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="package" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="p.nome"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="p.marca || 'RACHI Tec'"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded-md border border-slate-200/60 dark:border-white/5" x-text="p.sku"></span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-lg bg-blue-50/70 dark:bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="p.cat"></span>
+                  </td>
+                  <td>
+                    <span class="font-black text-sm text-slate-900 dark:text-white" style="font-family:Outfit" x-text="p.preco"></span>
+                  </td>
+                  <td>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold"
+                          :class="p.est < 10 ? 'bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30' : 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40'">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="p.est < 10 ? 'bg-[#f5a800]' : 'bg-emerald-500'"></span>
+                      <span x-text="p.est + ' unidades'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="text-xs font-semibold text-slate-600 dark:text-slate-400" x-text="p.vendas + ' un.'"></span>
+                  </td>
+                  <td>
+                    <span class="badge2" :class="p.status==='Ativo'?'s-ativo':'s-inativo'" x-text="p.status"></span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button" @click="toggleProductAvailability(p)" 
+                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer"
+                            :title="p.status==='Ativo'?'Pausar produto':'Ativar produto'">
+                      <span x-text="p.status==='Ativo'?'Pausar':'Ativar'"></span>
+                    </button>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -3502,7 +3602,7 @@ html.dark .panze-hdr-pill {
         <div class="flex items-center gap-2">
           <button @click="openNewServiceModal()" 
                   type="button"
-                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+                  class="bg-[#0050f0] hover:bg-[#0040d0] text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Novo Serviço</span>
           </button>
@@ -3515,19 +3615,19 @@ html.dark .panze-hdr-pill {
           <div class="flex items-center gap-1.5">
             <button @click="serviceTab = 'todos'" 
                     type="button"
-                    :class="serviceTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="serviceTab === 'todos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Todos (<span x-text="serviceStats.total"></span>)
             </button>
             <button @click="serviceTab = 'ativos'" 
                     type="button"
-                    :class="serviceTab === 'ativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="serviceTab === 'ativos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Ativos (<span x-text="serviceStats.ativos"></span>)
             </button>
             <button @click="serviceTab = 'inativos'" 
                     type="button"
-                    :class="serviceTab === 'inativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="serviceTab === 'inativos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Inativos (<span x-text="serviceStats.inativos"></span>)
             </button>
@@ -3537,7 +3637,7 @@ html.dark .panze-hdr-pill {
           <div class="flex items-center gap-2.5 w-full sm:w-auto">
             <div class="relative w-full sm:w-72">
               <input type="text" x-model="serviceSearch" placeholder="Buscar serviço por nome, categoria ou código..."
-                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
             </div>
             <button type="button" class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold transition hover:opacity-90">Filtrar</button>
           </div>
@@ -3632,7 +3732,7 @@ html.dark .panze-hdr-pill {
         <div class="flex items-center gap-2">
           <button @click="openNewInvoiceModal()" 
                   type="button"
-                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+                  class="bg-[#0050f0] hover:bg-[#0040d0] text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Nova Fatura / Lançamento</span>
           </button>
@@ -3645,25 +3745,25 @@ html.dark .panze-hdr-pill {
           <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="finTab = 'todos'" 
                     type="button"
-                    :class="finTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="finTab === 'todos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Todos (<span x-text="finStats.totalCount"></span>)
             </button>
             <button @click="finTab = 'pendentes'" 
                     type="button"
-                    :class="finTab === 'pendentes' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="finTab === 'pendentes' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Pendentes (<span x-text="finStats.pendenteCount"></span>)
             </button>
             <button @click="finTab = 'recebidos'" 
                     type="button"
-                    :class="finTab === 'recebidos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="finTab === 'recebidos' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Recebidos / Pagos (<span x-text="finStats.recebidoCount"></span>)
             </button>
             <button @click="finTab = 'cancelados'" 
                     type="button"
-                    :class="finTab === 'cancelados' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    :class="finTab === 'cancelados' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
                     class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
               Cancelados (<span x-text="finStats.canceladoCount"></span>)
             </button>
@@ -3673,9 +3773,9 @@ html.dark .panze-hdr-pill {
           <div class="flex flex-col sm:flex-row items-center gap-2.5">
             <div class="relative w-full sm:w-64">
               <input type="text" x-model="finSearch" placeholder="Buscar descrição, cliente ou NF..."
-                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
             </div>
-            <select x-model="finType" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+            <select x-model="finType" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
               <option value="all">Todos os tipos</option>
               <option value="receita">Receita / Contrato</option>
               <option value="multicaixa">Multicaixa</option>
@@ -8191,6 +8291,24 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
     tecTab: 'pedidos',
     stockSearch: '',
     stockFilter: 'all',
+    productSearch: '',
+    productCategoryTab: 'all',
+    get filteredProducts() {
+      let list = this.sProducts || [];
+      if (this.productCategoryTab && this.productCategoryTab !== 'all') {
+        list = list.filter(p => p.cat === this.productCategoryTab);
+      }
+      if (this.productSearch && this.productSearch.trim()) {
+        const q = this.productSearch.toLowerCase().trim();
+        list = list.filter(p =>
+          (p.nome && p.nome.toLowerCase().includes(q)) ||
+          (p.sku && p.sku.toLowerCase().includes(q)) ||
+          (p.cat && p.cat.toLowerCase().includes(q)) ||
+          (p.marca && p.marca.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
     showStockModal: false,
     selectedStockProduct: null,
     stockForm: {
