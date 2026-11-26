@@ -1152,6 +1152,38 @@ html.dark .panze-hdr-pill {
     </div>
 
     <div class="sg mt-2">UNIDADES RACHI</div>
+    <!-- RACHI Tec -->
+    <div>
+      <div @click="toggleMenu('loja')" 
+        :class="openMenus.loja ? 'text-[#0050f0] dark:text-[#38bdf8] font-bold' : (currentPage.startsWith('loja') || currentPage==='sites' || currentPage==='dominios' || currentPage==='trafego' ? 'text-[#0050f0] dark:text-[#38bdf8] font-bold' : '')" 
+        class="sidebar-item" 
+        data-legend="RACHI Tec">
+        <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="w-4 h-4 object-contain shrink-0" onerror="this.onerror=null; this.src='/images/rachi-symbol.svg'">
+        <span class="sl">RACHI Tec</span>
+        <i data-lucide="chevron-right" class="sa sl w-3.5 h-3.5" :class="openMenus.loja?'open':''"></i>
+      </div>
+      <div class="sidebar-sub-menu" x-show="openMenus.loja" x-transition>
+        <div @click="setPage('loja-produtos')" :class="currentPage==='loja-produtos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Catálogo &amp; Produtos</span>
+        </div>
+        <div @click="setPage('loja-pedidos')" :class="currentPage==='loja-pedidos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Pedidos de Venda</span>
+        </div>
+        <div @click="setPage('loja-estoque')" :class="currentPage==='loja-estoque'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Controlo de Stock</span>
+        </div>
+        <div @click="setPage('sites')" :class="currentPage==='sites'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Sites &amp; Portais</span>
+        </div>
+        <div @click="setPage('dominios')" :class="currentPage==='dominios'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Domínios &amp; DNS</span>
+        </div>
+        <div @click="setPage('trafego')" :class="currentPage==='trafego'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Tráfego Pago</span>
+        </div>
+      </div>
+    </div>
+
     <!-- RACHI Academy -->
     <div>
       <div @click="toggleMenu('academy')" :class="currentPage.startsWith('academy') ? 'text-blue-600 font-bold' : ''" class="sidebar-item" data-legend="RACHI Academy">
