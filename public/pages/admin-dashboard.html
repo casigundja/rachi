@@ -707,6 +707,11 @@ a { text-decoration: none !important; }
       <span class="sl">Solicitações & Ordens</span>
       <span class="sb2 badge bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="totalRequestsCount"></span>
     </div>
+    <div @click="setPage('servicos')" :class="currentPage==='servicos'?'active':''" class="sidebar-item" data-legend="Catálogo de Serviços" title="Catálogo de Serviços">
+      <i data-lucide="package" class="si"></i>
+      <span class="sl">Catálogo de Serviços</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="serviceStats.total"></span>
+    </div>
 
     <div class="sg">Unidades</div>
     <!-- RACHI Academy -->
@@ -1260,333 +1265,210 @@ a { text-decoration: none !important; }
       </div>
     </section>
 
-    <!-- USUARIOS DO SISTEMA -->
+        <!-- PERFIS / EQUIPE, COLABORADORES & USUÁRIOS (MODELO DO PRINT 4) -->
     <section x-show="currentPage==='usuarios'" x-cloak class="space-y-6">
       <!-- HEADER -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Perfis</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Gestão de perfis, permissões, formadores, clientes e utilizadores do ecossistema.</p>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Equipe, Colaboradores & Usuários</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Gestão centralizada de permissões, acessos administrativos e contas de clientes.</p>
         </div>
         <div class="flex items-center gap-2">
-          <button @click="refreshUsers()" :disabled="isRefreshingUsers"
-            class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer border border-slate-200 dark:border-white/10">
-            <i data-lucide="refresh-cw" class="w-3.5 h-3.5" :class="isRefreshingUsers ? 'animate-spin' : ''"></i>
-            <span class="hidden sm:inline">Atualizar</span>
-          </button>
-          <button @click="openCreateUserModal()" class="bap flex items-center gap-2 cursor-pointer">
-            <i data-lucide="user-plus" class="w-4 h-4"></i>
-            <span>Adicionar Utilizador</span>
+          <button @click="openCreateUserModal()" 
+                  type="button"
+                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Novo Usuário</span>
           </button>
         </div>
       </div>
 
-      <!-- KPIS RAPIDOS -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-        <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="users" class="w-5 h-5"></i>
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Super Admin</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Nível Máximo</span>
           </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.total"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Total de Contas</div>
-          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.superAdmins"></div>
         </div>
 
-        <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="shield" class="w-5 h-5"></i>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Administradores</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Admin</span>
           </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.admins"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Admins & Gestores</div>
-          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.admins"></div>
         </div>
 
-        <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="briefcase" class="w-5 h-5"></i>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Equipe Operacional</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 uppercase tracking-wider">Operacional</span>
           </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.staff"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Equipa & Instrutores</div>
-          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.staff"></div>
         </div>
 
-        <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Clientes no Portal</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Cliente</span>
           </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.clients"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Alunos & Clientes</div>
-          </div>
-        </div>
-
-        <div class="sc2 p-3.5 sm:p-4 rounded-2xl flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center font-black shrink-0">
-            <i data-lucide="user-x" class="w-5 h-5"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStats.blocked"></div>
-            <div class="text-[11px] font-semibold text-slate-400 truncate">Bloqueados</div>
-          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="userStatsPrint4.clients"></div>
         </div>
       </div>
 
-      <!-- FILTROS E BUSCA -->
-      <div class="sc2 p-3 sm:p-3.5 rounded-2xl">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-2.5">
-          <div class="relative flex-1 w-full">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input type="text" x-model="userSearch" placeholder="Pesquisar por nome, e-mail, telefone..."
-              class="w-full pl-10 pr-9 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:border-[#0050f0]">
-            <button x-show="userSearch" @click="userSearch = ''" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
-              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <!-- TOP FILTER BAR -->
+        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <!-- PILL TABS -->
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button @click="userTab = 'todos'" 
+                    type="button"
+                    :class="userTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Todos (<span x-text="users.length"></span>)
+            </button>
+            <button @click="userTab = 'equipe'" 
+                    type="button"
+                    :class="userTab === 'equipe' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Equipe (<span x-text="userStatsPrint4.superAdmins + userStatsPrint4.admins + userStatsPrint4.staff"></span>)
+            </button>
+            <button @click="userTab = 'clientes'" 
+                    type="button"
+                    :class="userTab === 'clientes' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Clientes (<span x-text="userStatsPrint4.clients"></span>)
+            </button>
+            <button @click="userTab = 'inativos'" 
+                    type="button"
+                    :class="userTab === 'inativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Inativos (<span x-text="userStatsPrint4.inativos"></span>)
             </button>
           </div>
 
-          <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full md:w-auto">
-            <select x-model="userFilterRole" class="ia w-full sm:w-auto text-xs py-2">
-              <option value="all">Todos os Perfis / Cargos</option>
-              <template x-for="r in rolesList" :key="r.id">
-                <option :value="r.slug" x-text="r.name"></option>
-              </template>
+          <!-- SEARCH & SELECT -->
+          <div class="flex flex-col sm:flex-row items-center gap-2.5">
+            <div class="relative w-full sm:w-64">
+              <input type="text" x-model="userSearch" placeholder="Buscar por nome, email ou empresa..."
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+            </div>
+            <select x-model="userFilterRole" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+              <option value="all">Todos os papéis</option>
+              <option value="super_admin">Super Admin</option>
+              <option value="admin">Administrador</option>
+              <option value="employee">Equipe Operacional</option>
+              <option value="customer">Cliente</option>
             </select>
-
-            <select x-model="userFilterStatus" class="ia w-full sm:w-auto text-xs py-2">
-              <option value="all">Todos os Status</option>
-              <option value="active">Apenas Ativos</option>
-              <option value="blocked">Apenas Bloqueados</option>
-            </select>
+            <button type="button" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold transition hover:opacity-90">Filtrar</button>
           </div>
         </div>
-      </div>
 
-      <!-- TABELA DE UTILIZADORES -->
-      <div class="sc2 p-0">
-        <div class="overflow-x-auto min-h-[460px] pb-52">
-          <table class="at">
+        <!-- TABELA -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
             <thead>
-              <tr>
-                <th>Utilizador</th>
-                <th>Perfil de Acesso</th>
-                <th>Estado</th>
-                <th>Último Acesso</th>
-                <th>Permissões / Módulos</th>
-                <th class="text-right pr-6">Ações Rápidas</th>
+              <tr class="border-b border-slate-100 dark:border-white/5 text-[10px] font-black uppercase tracking-wider text-slate-400 bg-slate-50/50 dark:bg-white/[0.01]">
+                <th class="py-3 px-4 sm:px-6">Usuário</th>
+                <th class="py-3 px-4">Papel / Função</th>
+                <th class="py-3 px-4">Contato / Empresa</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4">Cadastro</th>
+                <th class="py-3 px-4 sm:px-6 text-right">Ações</th>
               </tr>
             </thead>
-            <tbody>
-              <template x-for="(u, userIndex) in filteredUsers" :key="u.id">
-                <tr class="transition" :class="u.is_deleted ? 'opacity-50 bg-slate-50/80 dark:bg-white/[0.01]' : 'hover:bg-slate-50/60 dark:hover:bg-white/[0.02]'">
-                  <!-- UTILIZADOR -->
-                  <td>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="u in filteredUsersPrint4" :key="u.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <!-- USUÁRIO -->
+                  <td class="py-3.5 px-4 sm:px-6">
                     <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-white text-xs font-black shadow-sm shrink-0" :class="u.av" x-text="u.ini"></div>
+                      <div class="w-9 h-9 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold flex items-center justify-center text-xs shrink-0 shadow-xs" x-text="u.ini || (u.nome ? u.nome.substring(0,2).toUpperCase() : 'US')"></div>
                       <div class="min-w-0">
-                        <div class="font-bold text-sm flex items-center gap-2" :class="u.is_deleted ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-900 dark:text-white'">
-                          <span x-text="u.nome" class="truncate"></span>
-                          <template x-if="!u.is_deleted && (u.id === 1 || u.email === 'admin@rachi.ao' || u.email === 'casimirogundja@outlook.com')">
-                            <span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Master</span>
-                          </template>
-                          <template x-if="u.is_deleted">
-                            <span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-slate-200/80 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-slate-300/50 dark:border-white/10 no-underline" style="text-decoration:none">Eliminado</span>
-                          </template>
-                        </div>
-                        <div class="text-xs font-medium truncate" :class="u.is_deleted ? 'text-slate-400 dark:text-slate-500' : 'text-slate-500'" x-text="u.email"></div>
-                        <template x-if="u.is_deleted && u.deleted_at">
-                          <div class="text-[10px] text-rose-400 font-medium mt-0.5 flex items-center gap-1">
-                            <i data-lucide="trash-2" class="w-2.5 h-2.5"></i>
-                            <span x-text="'Eliminado em ' + u.deleted_at"></span>
-                          </div>
-                        </template>
-                        <template x-if="!u.is_deleted && u.telefone">
-                          <div class="text-[11px] text-slate-400 font-mono mt-0.5 flex items-center gap-1">
-                            <i data-lucide="phone" class="w-2.5 h-2.5"></i>
-                            <span x-text="u.telefone"></span>
-                          </div>
-                        </template>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs truncate" x-text="u.nome"></div>
+                        <div class="text-[11px] text-slate-400 truncate" x-text="u.email"></div>
                       </div>
                     </div>
                   </td>
 
-                  <!-- PERFIL DE ACESSO -->
-                  <td class="relative" :class="open ? 'z-40' : 'z-auto'" x-data="{ open: false }" @click.outside="open = false">
-                    <template x-if="!u.is_deleted">
-                      <div class="relative inline-block text-left w-full max-w-[210px]">
-                        <button type="button" 
-                          @click="open = !open; $nextTick(() => { if (window.lucide) lucide.createIcons(); })"
-                          class="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs hover:shadow-xs group cursor-pointer"
-                          :class="open ? 'bg-blue-50/80 dark:bg-blue-500/15 border-blue-500 text-blue-700 dark:text-blue-300 ring-2 ring-blue-500/20' : (u.tc + ' border-transparent hover:border-slate-300 dark:hover:border-white/20')">
-                          <div class="flex items-center gap-2 truncate">
-                            <span class="w-2 h-2 rounded-full shrink-0" :class="getRoleMeta(u.role_id).dot"></span>
-                            <span class="truncate" x-text="u.tipo"></span>
-                          </div>
-                          <i data-lucide="chevron-down" class="w-3.5 h-3.5 shrink-0 transition-transform duration-200 opacity-60 group-hover:opacity-100" :class="open ? 'rotate-180 opacity-100' : ''"></i>
-                        </button>
-                        <div x-show="open" 
-                          x-transition:enter="transition ease-out duration-150"
-                          x-transition:enter-start="opacity-0 translate-y-1 scale-95"
-                          x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                          x-transition:leave="transition ease-in duration-100"
-                          x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                          x-transition:leave-end="opacity-0 translate-y-1 scale-95"
-                          class="absolute left-0 top-full mt-1.5 w-64 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 shadow-2xl p-1.5 z-50 overflow-hidden"
-                          style="display: none;">
-                          <div class="px-2.5 py-1.5 mb-1 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
-                            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Atribuir Perfil</span>
-                            <span class="text-[10px] text-blue-500 font-bold" x-text="rolesList.length + ' opções'"></span>
-                          </div>
-                          <div class="space-y-0.5 max-h-56 overflow-y-auto pr-0.5 custom-role-scroll">
-                            <template x-for="r in rolesList" :key="r.id">
-                              <button type="button" 
-                                @click="quickChangeRoleDirect(u, r.id); open = false; $nextTick(() => { if (window.lucide) lucide.createIcons(); });"
-                                class="w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition-all duration-150 cursor-pointer group"
-                                :class="u.role_id == r.id ? 'bg-blue-500/10 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-black' : 'hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-semibold'">
-                                <div class="flex items-center gap-2.5 min-w-0">
-                                  <span class="w-2 h-2 rounded-full shrink-0" :class="getRoleMeta(r.id).dot"></span>
-                                  <span class="truncate" x-text="r.name"></span>
-                                </div>
-                                <template x-if="u.role_id == r.id">
-                                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0"></i>
-                                </template>
-                              </button>
-                            </template>
-                          </div>
-                          <div class="mt-1 pt-1 border-t border-slate-100 dark:border-white/5 px-0.5">
-                            <button type="button" 
-                              @click="openQuickRoleChange(u); open = false; $nextTick(() => { if (window.lucide) lucide.createIcons(); });"
-                              class="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition cursor-pointer">
-                              <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-                              <span>Ver todos os detalhes</span>
-                            </button>
-                          </div>
+                  <!-- PAPEL / FUNÇÃO -->
+                  <td class="py-3.5 px-4">
+                    <template x-if="u.role_slug === 'super_admin' || (u.tipo && u.tipo.includes('Master')) || u.id === 1 || u.id === 21">
+                      <span class="text-xs font-black text-[#dd8f20] dark:text-[#ffa525] uppercase tracking-wider">SUPER ADMIN</span>
+                    </template>
+                    <template x-if="u.role_slug === 'admin' || (u.tipo && u.tipo === 'Administrador' && u.id !== 1 && u.id !== 21)">
+                      <span class="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase">ADMINISTRADOR</span>
+                    </template>
+                    <template x-if="['employee', 'instructor', 'rh_specialist', 'attendant'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Funcionário') || u.tipo.includes('Instrutor') || u.tipo.includes('Especialista') || u.tipo.includes('Operacional')))">
+                      <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">EQUIPE OPERACIONAL</span>
+                    </template>
+                    <template x-if="['customer', 'student'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Cliente') || u.tipo.includes('Aluno')))">
+                      <span class="text-xs font-medium text-slate-500 uppercase">CLIENTE</span>
+                    </template>
+                  </td>
+
+                  <!-- CONTATO / EMPRESA -->
+                  <td class="py-3.5 px-4">
+                    <div class="font-medium text-slate-700 dark:text-slate-300 text-xs" x-text="u.empresa || u.contato || u.phone || u.telefone || '—'"></div>
+                  </td>
+
+                  <!-- STATUS -->
+                  <td class="py-3.5 px-4">
+                    <span class="text-xs font-bold uppercase tracking-wider" 
+                          :class="u.status === 'Ativo' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'"
+                          x-text="u.status"></span>
+                  </td>
+
+                  <!-- CADASTRO -->
+                  <td class="py-3.5 px-4 text-slate-500 text-xs" x-text="u.created_at || u.data || '20/11/2026'"></td>
+
+                  <!-- AÇÕES -->
+                  <td class="py-3.5 px-4 sm:px-6 text-right">
+                    <div class="flex items-center justify-end gap-1.5">
+                      <template x-if="u.id === 1 || u.email === 'admin@rachi.ao'">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-xs font-semibold text-slate-500 dark:text-slate-400">Minha Conta</span>
+                      </template>
+                      <template x-if="u.id !== 1 && u.email !== 'admin@rachi.ao'">
+                        <div class="flex items-center gap-1">
+                          <button @click="openEditUserModal(u)" 
+                                  type="button"
+                                  class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1 transition cursor-pointer">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            <span>Editar</span>
+                          </button>
+                          <button @click="openResetPasswordModal(u)" 
+                                  type="button"
+                                  class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1 transition cursor-pointer">
+                            <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                            <span>Acesso</span>
+                          </button>
+                          <button @click="toggleUserStatus(u)" 
+                                  type="button"
+                                  class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 transition cursor-pointer"
+                                  x-text="u.status === 'Ativo' ? 'Desativar' : 'Ativar'">
+                          </button>
+                          <button @click="confirmDeleteUser(u)" 
+                                  type="button"
+                                  class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                                  title="Remover Usuário">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                          </button>
                         </div>
-                      </div>
-                    </template>
-                    <template x-if="u.is_deleted">
-                      <span class="text-xs text-slate-400 italic px-3">”</span>
-                    </template>
-                  </td>
-
-                  <!-- ESTADO -->
-                  <td>
-                    <template x-if="u.is_deleted">
-                      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-black bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400">
-                        <i data-lucide="trash-2" class="w-3 h-3"></i>
-                        <span>Eliminado</span>
-                      </span>
-                    </template>
-                    <template x-if="!u.is_deleted">
-                      <button @click="toggleUserStatus(u)" title="Clique para alternar status do utilizador"
-                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-black cursor-pointer transition"
-                        :class="u.status === 'Ativo' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20'">
-                        <span class="w-1.5 h-1.5 rounded-full" :class="u.status === 'Ativo' ? 'bg-emerald-500' : 'bg-rose-500'"></span>
-                        <span x-text="u.status"></span>
-                      </button>
-                    </template>
-                  </td>
-
-                  <!-- ULTIMO ACESSO -->
-                  <td>
-                    <div class="text-xs font-medium whitespace-nowrap" :class="u.is_deleted ? 'text-slate-400 dark:text-slate-500' : 'text-slate-600 dark:text-slate-400'" x-text="u.ua"></div>
-                    <div class="text-[10px] text-slate-400 mt-0.5" x-text="'Desde ' + (u.created_at || '2026')"></div>
-                  </td>
-
-                  <!-- PERMISSOES / MODULOS -->
-                  <td>
-                    <template x-if="!u.is_deleted">
-                      <div class="flex flex-wrap gap-1 max-w-[200px]">
-                        <template x-for="m in u.mod" :key="m">
-                          <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 whitespace-nowrap" x-text="m"></span>
-                        </template>
-                      </div>
-                    </template>
-                    <template x-if="u.is_deleted">
-                      <span class="text-xs text-slate-300 dark:text-slate-600 italic">”</span>
-                    </template>
-                  </td>
-
-                  <!-- ACOES -->
-                  <td class="text-right pr-6">
-                    <div class="flex items-center justify-end gap-1">
-                      <!-- Ver Detalhes -->
-                      <button @click="openUserProfileModal(u)"
-                        class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition cursor-pointer"
-                        title="Ver Perfil Completo">
-                        <i data-lucide="eye" class="w-4 h-4"></i>
-                      </button>
-
-                      <template x-if="!u.is_deleted">
-                        <span class="flex items-center gap-1">
-                          <!-- Editar -->
-                          <button @click="openEditUserModal(u)"
-                            class="p-2 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 text-blue-600 dark:text-blue-400 transition cursor-pointer"
-                            title="Editar Informações & Perfil">
-                            <i data-lucide="pencil" class="w-4 h-4"></i>
-                          </button>
-
-                          <!-- Bloquear / Desbloquear -->
-                          <button @click="toggleUserStatus(u)"
-                            class="p-2 rounded-xl transition cursor-pointer"
-                            :class="u.status === 'Ativo' ? 'hover:bg-amber-50 dark:hover:bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'"
-                            :title="u.status === 'Ativo' ? 'Bloquear Acesso' : 'Desbloquear Acesso'">
-                            <i :data-lucide="u.status === 'Ativo' ? 'lock' : 'unlock'" class="w-4 h-4"></i>
-                          </button>
-
-                          <!-- Redefinir Palavra-passe -->
-                          <button @click="openResetPasswordModal(u)"
-                            class="p-2 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 transition cursor-pointer"
-                            title="Redefinir Palavra-passe">
-                            <i data-lucide="key" class="w-4 h-4"></i>
-                          </button>
-
-                          <!-- Excluir (se não for master) -->
-                          <template x-if="u.id !== 1 && u.email !== 'admin@rachi.ao' && u.email !== 'casimirogundja@outlook.com'">
-                            <button @click="confirmDeleteUser(u)"
-                              class="p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 transition cursor-pointer"
-                              title="Eliminar Utilizador">
-                              <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
-                          </template>
-                        </span>
                       </template>
                     </div>
                   </td>
                 </tr>
               </template>
-
-              <!-- ESTADO VAZIO -->
-              <tr x-show="filteredUsers.length === 0">
-                <td colspan="6" class="text-center py-12">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
-                    <i data-lucide="users" class="w-6 h-6"></i>
-                  </div>
-                  <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhum utilizador encontrado</h4>
-                  <p class="text-xs text-slate-500 mt-1">Nenhum resultado corresponde aos critérios de pesquisa ou filtros selecionados.</p>
-                  <button @click="userSearch = ''; userFilterRole = 'all'; userFilterStatus = 'all';"
-                    class="mt-3 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 text-xs font-bold text-slate-700 dark:text-white hover:bg-slate-200 transition cursor-pointer">
-                    Limpar Filtros
-                  </button>
+              <tr x-show="filteredUsersPrint4.length === 0">
+                <td colspan="6" class="text-center py-10 text-slate-400 text-xs italic">
+                  Nenhum usuário encontrado com os filtros selecionados.
                 </td>
               </tr>
             </tbody>
           </table>
-        </div>
-        <!-- RODAPÉ RESUMO DA TABELA -->
-        <div class="px-5 py-3 border-t border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50/50 dark:bg-white/[0.01]">
-          <div class="flex items-center gap-1.5">
-            <span>A apresentar</span>
-            <span class="font-bold text-slate-800 dark:text-slate-200" x-text="filteredUsers.length"></span>
-            <span>de</span>
-            <span class="font-bold text-slate-800 dark:text-slate-200" x-text="users.length"></span>
-            <span>utilizadores</span>
-          </div>
-          <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span>Sincronizado em tempo real</span>
-          </div>
         </div>
       </div>
     </section>
@@ -1901,26 +1783,145 @@ a { text-decoration: none !important; }
         </div>
       </template>
 
-      <template x-if="!selectedRequest">
+            <template x-if="!selectedRequest">
         <div class="space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <!-- HEADER -->
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Central de Solicitações & Ordens</h1>
-              <p class="text-slate-500 text-sm mt-0.5">Gestão ponta a ponta dos atendimentos de todas as 4 unidades.</p>
+              <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Solicitações & Pipeline de Entrada</h1>
+              <p class="text-slate-500 text-sm mt-0.5">Analise briefings de clientes, qualifique leads, converta em projetos e gere orçamentos formais.</p>
             </div>
-            <button type="button" @click="openCreateOrderModal()" class="bap cursor-pointer"><i data-lucide="plus" class="w-4 h-4"></i> Nova Ordem</button>
+            <div class="flex items-center gap-2">
+              <button @click="setPage('grafica-orcamentos')" 
+                      type="button"
+                      class="border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-bold px-3.5 py-2.5 rounded-xl text-slate-700 dark:text-slate-200 cursor-pointer transition shadow-xs">
+                Ver Orçamentos
+              </button>
+            </div>
           </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            <template x-for="s in wfStatuses" :key="s.key">
-              <div @click="reqFilterStatus = (reqFilterStatus === s.label ? 'Todos' : s.label)"
-                   class="kc text-center py-3.5 cursor-pointer transition transform hover:-translate-y-0.5 hover:shadow-md select-none"
-                   :class="reqFilterStatus === s.label ? 'ring-2 ring-blue-500 bg-blue-50/70 dark:bg-blue-500/15' : ''"
-                   :title="'Filtrar por ' + s.label">
-                <div class="text-xl font-black" :class="s.color" x-text="getStatusCount(s.key)"></div>
-                <div class="text-[11px] text-slate-500 mt-1 font-bold" x-text="s.label"></div>
+          <!-- 4 KPIS -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total no Pipeline</span>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Total</span>
               </div>
-            </template>
+              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.total"></div>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Novas / Pendentes</span>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Triagem</span>
+              </div>
+              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.novas"></div>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Em Análise / Proposta</span>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Análise</span>
+              </div>
+              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.analise"></div>
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Aprovadas / Concluídas</span>
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Aprovado</span>
+              </div>
+              <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="pipelineStats.concluidas"></div>
+            </div>
+          </div>
+
+          <!-- CARD CONTAINER COM FILTROS E TABELA -->
+          <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+            <!-- TOP FILTER BAR -->
+            <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-3">
+              <div class="relative flex-1 w-full">
+                <input type="text" x-model="reqFilterSearch" placeholder="Buscar por protocolo, título ou cliente..."
+                       class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+              </div>
+              <select x-model="reqFilterStatus" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+                <option value="Todos">Todos os status</option>
+                <option value="Nova">Nova / Pendente</option>
+                <option value="Em Análise">Em Análise</option>
+                <option value="Em Execução">Em Execução</option>
+                <option value="Concluído">Concluída</option>
+                <option value="Cancelado">Cancelada</option>
+              </select>
+              <button type="button" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold transition hover:opacity-90">Filtrar</button>
+            </div>
+
+            <!-- TABELA -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="border-b border-slate-100 dark:border-white/5 text-[10px] font-black uppercase tracking-wider text-slate-400 bg-slate-50/50 dark:bg-white/[0.01]">
+                    <th class="py-3 px-4 sm:px-6">Protocolo</th>
+                    <th class="py-3 px-4">Demanda / Título</th>
+                    <th class="py-3 px-4">Cliente / Contato</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 sm:px-6 text-right">Ações</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+                  <template x-for="req in filteredRequests" :key="req.id">
+                    <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                      <!-- PROTOCOLO -->
+                      <td class="py-3.5 px-4 sm:px-6">
+                        <span class="font-mono font-bold text-xs text-[#dd8f20] dark:text-[#ffa525]" x-text="req.protocol || ('GNDJ-20261123-' + req.id)"></span>
+                      </td>
+
+                      <!-- DEMANDA / TÍTULO -->
+                      <td class="py-3.5 px-4">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs max-w-sm truncate" x-text="req.titulo || req.title"></div>
+                      </td>
+
+                      <!-- CLIENTE / CONTATO -->
+                      <td class="py-3.5 px-4">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs" x-text="req.cliente"></div>
+                        <div class="text-[11px] text-slate-400 truncate" x-text="req.empresa || req.email || '—'"></div>
+                      </td>
+
+                      <!-- STATUS -->
+                      <td class="py-3.5 px-4">
+                        <span class="text-xs font-black uppercase tracking-wider" 
+                              :class="req.status === 'Concluído' || req.status === 'Concluída' ? 'text-emerald-600 dark:text-emerald-400' : (req.status === 'Em Execução' ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-200')" 
+                              x-text="req.status.toUpperCase()"></span>
+                      </td>
+
+                      <!-- AÇÕES -->
+                      <td class="py-3.5 px-4 sm:px-6 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                          <button @click="openReq(req)" 
+                                  type="button"
+                                  class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 transition cursor-pointer">
+                            <span>Gerenciar</span>
+                            <span class="text-xs">&rarr;</span>
+                          </button>
+                          <button @click="confirmDeleteReq(req)" 
+                                  type="button"
+                                  class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                                  title="Remover solicitação">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
+                  <tr x-show="filteredRequests.length === 0">
+                    <td colspan="5" class="text-center py-10 text-slate-400 text-xs italic">
+                      Nenhuma solicitação encontrada com os filtros selecionados.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </template>
           </div>
 
           <div class="sc2 py-4">
@@ -2412,73 +2413,386 @@ a { text-decoration: none !important; }
       </div>
     </section>
 
-    <!-- FINANCEIRO -->
-    <section x-show="currentPage==='financeiro'" x-cloak class="space-y-6">
-      <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">💰 Gestão Financeira Consolidada</h1>
-        <p class="text-slate-500 text-sm mt-0.5">Fluxo de caixa, recebimentos por unidade de negócio e saldos.</p>
-      </div>
-
-      <div class="sc2 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white border-blue-500/30 shadow-xl">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <div class="text-xs text-cyan-200 font-extrabold uppercase tracking-widest mb-1.5">Facturação Total Acumulada (2026)</div>
-            <div class="text-4xl md:text-5xl font-black text-white" style="font-family:Outfit">AOA 4.850.000,00</div>
-            <div class="text-sm text-emerald-300 font-bold flex items-center gap-1.5 mt-2">
-              <i data-lucide="trending-up" class="w-4 h-4"></i> Valores sincronizados com a base de dados
-            </div>
-          </div>
-          <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center flex-shrink-0">
-            <i data-lucide="wallet" class="text-cyan-200 w-8 h-8"></i>
-          </div>
+        <!-- CATÁLOGO DE SERVIÇOS (MODELO DO PRINT 3) -->
+    <section x-show="currentPage==='servicos'" x-cloak class="space-y-6">
+      <!-- HEADER -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Catálogo de Serviços</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Gerenciamento de pacotes, consultorias e serviços oferecidos pela RACHI.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="openNewServiceModal()" 
+                  type="button"
+                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Novo Serviço</span>
+          </button>
         </div>
       </div>
 
+      <!-- 4 KPIS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <template x-for="f in finMods" :key="f.label">
-          <div class="kc">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-xl" x-text="f.icon"></span>
-              <span class="text-xs font-bold text-slate-600 dark:text-slate-400" x-text="f.label"></span>
-            </div>
-            <div class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="'AOA '+f.value"></div>
-            <div class="mt-3">
-              <div class="pb"><div class="pbf" :class="f.bc" :style="'width:'+f.pct+'%'"></div></div>
-              <div class="text-[11px] text-slate-500 font-bold mt-1.5" x-text="f.pct+'% da receita'"></div>
-            </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total de Serviços</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Total</span>
           </div>
-        </template>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.total"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Serviços Ativos</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Ativos</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ativos"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Pausados / Inativos</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider">Pausados</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.inativos"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Ticket Médio Base</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Média</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="serviceStats.ticketMedio"></div>
+        </div>
       </div>
 
-      <div class="sc2">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Últimas Transações Registadas</h3>
-          <span class="text-xs text-slate-500 font-semibold" x-text="(txs ? txs.length : 0) + ' transações no histórico'"></span>
-        </div>
-        <div class="space-y-3">
-          <template x-for="t in txs" :key="t.id">
-            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-              <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-white dark:bg-white/10 flex items-center justify-center text-xl shadow-sm" x-text="t.icon"></div>
-                <div>
-                  <div class="text-sm font-bold text-slate-900 dark:text-white" x-text="t.desc"></div>
-                  <div class="text-xs text-slate-500 font-medium" x-text="t.cli + ' —¢ ' + t.data"></div>
-                </div>
-              </div>
-              <div class="text-right">
-                <div class="font-black text-sm" style="font-family:Outfit" :class="t.tipo==='entrada'?'text-emerald-600 dark:text-emerald-400':'text-rose-600 dark:text-rose-400'" x-text="(t.tipo==='entrada'?'+ ':'-')+' AOA '+t.valor"></div>
-                <div class="text-[10px] text-slate-500 font-bold uppercase" x-text="t.mod"></div>
-              </div>
-            </div>
-          </template>
-
-          <div x-show="!txs || txs.length === 0" class="text-center py-10">
-            <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
-              <i data-lucide="receipt" class="w-6 h-6"></i>
-            </div>
-            <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhuma transação financeira registada até ao momento</h4>
-            <p class="text-xs text-slate-500 mt-1">Os recebimentos de vendas, cursos e orçamentos aprovados da RACHI serão exibidos aqui em tempo real.</p>
+      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <!-- TOP FILTER BAR -->
+        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <!-- PILL TABS -->
+          <div class="flex items-center gap-1.5">
+            <button @click="serviceTab = 'todos'" 
+                    type="button"
+                    :class="serviceTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Todos (<span x-text="serviceStats.total"></span>)
+            </button>
+            <button @click="serviceTab = 'ativos'" 
+                    type="button"
+                    :class="serviceTab === 'ativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Ativos (<span x-text="serviceStats.ativos"></span>)
+            </button>
+            <button @click="serviceTab = 'inativos'" 
+                    type="button"
+                    :class="serviceTab === 'inativos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Inativos (<span x-text="serviceStats.inativos"></span>)
+            </button>
           </div>
+
+          <!-- SEARCH BAR -->
+          <div class="flex items-center gap-2.5 w-full sm:w-auto">
+            <div class="relative w-full sm:w-72">
+              <input type="text" x-model="serviceSearch" placeholder="Buscar serviço por nome, categoria ou código..."
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+            </div>
+            <button type="button" class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold transition hover:opacity-90">Filtrar</button>
+          </div>
+        </div>
+
+        <!-- TABELA -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-100 dark:border-white/5 text-[10px] font-black uppercase tracking-wider text-slate-400 bg-slate-50/50 dark:bg-white/[0.01]">
+                <th class="py-3 px-4 sm:px-6">Serviço</th>
+                <th class="py-3 px-4">Categoria</th>
+                <th class="py-3 px-4">Preço Base</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4 sm:px-6 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="srv in filteredServices" :key="srv.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <!-- SERVIÇO -->
+                  <td class="py-3.5 px-4 sm:px-6">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-700 dark:text-slate-300 shrink-0">
+                        <i :data-lucide="srv.icon || 'layers'" class="w-4 h-4"></i>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs truncate max-w-sm" x-text="srv.nome"></div>
+                        <div class="text-[11px] text-slate-400 truncate max-w-sm" x-text="srv.descricao || srv.codigo"></div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- CATEGORIA -->
+                  <td class="py-3.5 px-4">
+                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-white/10" x-text="srv.categoria"></span>
+                  </td>
+
+                  <!-- PREÇO BASE -->
+                  <td class="py-3.5 px-4 font-bold text-xs text-slate-900 dark:text-white" x-text="srv.precoBase"></td>
+
+                  <!-- STATUS -->
+                  <td class="py-3.5 px-4">
+                    <span class="text-xs font-bold uppercase tracking-wider" 
+                          :class="srv.status === 'Ativo' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'"
+                          x-text="srv.status"></span>
+                  </td>
+
+                  <!-- AÇÕES -->
+                  <td class="py-3.5 px-4 sm:px-6 text-right">
+                    <div class="flex items-center justify-end gap-1.5">
+                      <button @click="editService(srv)" 
+                              type="button"
+                              class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 flex items-center gap-1 transition cursor-pointer">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                        <span>Editar</span>
+                      </button>
+                      <button @click="toggleServiceStatus(srv)" 
+                              type="button"
+                              class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 transition cursor-pointer"
+                              x-text="srv.status === 'Ativo' ? 'Desativar' : 'Ativar'">
+                      </button>
+                      <button @click="deleteService(srv)" 
+                              type="button"
+                              class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                              title="Remover serviço">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+              <tr x-show="filteredServices.length === 0">
+                <td colspan="5" class="text-center py-10 text-slate-400 text-xs italic">
+                  Nenhum serviço encontrado com os filtros selecionados.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- GESTÃO FINANCEIRA & FATURAMENTO (MODELO DO PRINT 2) -->
+    <section x-show="currentPage==='financeiro'" x-cloak class="space-y-6">
+      <!-- HEADER -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão Financeira & Faturamento</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Controle de receitas de contratos, parcelas, emissão de faturas e liquidações.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="openNewInvoiceModal()" 
+                  type="button"
+                  class="bg-[#ffa525] hover:bg-[#dd8f20] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Nova Fatura / Lançamento</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Total Faturado</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 uppercase tracking-wider" x-text="finStats.totalCount + ' lanç.'"></span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.totalFormatted"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Recebido em Caixa</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Recebido</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.recebidoFormatted"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">A Receber (Pendente)</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 uppercase tracking-wider">Pendente</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.pendenteFormatted"></div>
+        </div>
+
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-4.5 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black tracking-wider text-slate-500 uppercase">Em Atraso (Vencido)</span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-600 dark:text-rose-400 uppercase tracking-wider">Vencido</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="finStats.vencidoFormatted"></div>
+        </div>
+      </div>
+
+      <!-- CARD CONTAINER COM FILTROS E TABELA -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <!-- TOP FILTER BAR -->
+        <div class="p-4 sm:p-4.5 border-b border-slate-100 dark:border-white/5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <!-- PILL TABS -->
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button @click="finTab = 'todos'" 
+                    type="button"
+                    :class="finTab === 'todos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Todos (<span x-text="finStats.totalCount"></span>)
+            </button>
+            <button @click="finTab = 'pendentes'" 
+                    type="button"
+                    :class="finTab === 'pendentes' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Pendentes (<span x-text="finStats.pendenteCount"></span>)
+            </button>
+            <button @click="finTab = 'recebidos'" 
+                    type="button"
+                    :class="finTab === 'recebidos' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Recebidos / Pagos (<span x-text="finStats.recebidoCount"></span>)
+            </button>
+            <button @click="finTab = 'cancelados'" 
+                    type="button"
+                    :class="finTab === 'cancelados' ? 'bg-[#ffa525] text-slate-950 font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 font-semibold'"
+                    class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
+              Cancelados (<span x-text="finStats.canceladoCount"></span>)
+            </button>
+          </div>
+
+          <!-- SEARCH & SELECT -->
+          <div class="flex flex-col sm:flex-row items-center gap-2.5">
+            <div class="relative w-full sm:w-64">
+              <input type="text" x-model="finSearch" placeholder="Buscar descrição, cliente ou NF..."
+                     class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-[#ffa525]">
+            </div>
+            <select x-model="finType" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 focus:outline-hidden focus:border-[#ffa525]">
+              <option value="all">Todos os tipos</option>
+              <option value="receita">Receita / Contrato</option>
+              <option value="multicaixa">Multicaixa</option>
+            </select>
+            <button type="button" class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold transition hover:opacity-90">Filtrar</button>
+          </div>
+        </div>
+
+        <!-- TABELA -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-100 dark:border-white/5 text-[10px] font-black uppercase tracking-wider text-slate-400 bg-slate-50/50 dark:bg-white/[0.01]">
+                <th class="py-3 px-4 sm:px-6">Fatura / Descrição</th>
+                <th class="py-3 px-4">Cliente</th>
+                <th class="py-3 px-4">Valor</th>
+                <th class="py-3 px-4">Vencimento</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4 sm:px-6 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="inv in filteredInvoices" :key="inv.id">
+                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                  <!-- FATURA / DESCRIÇÃO -->
+                  <td class="py-3.5 px-4 sm:px-6">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                        <i data-lucide="arrow-down-left" class="w-4 h-4"></i>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs max-w-xs truncate" x-text="inv.titulo"></div>
+                        <div class="text-[11px] text-slate-400 truncate" x-text="inv.codigo + ' · ' + inv.metodo + ' · Receita'"></div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- CLIENTE -->
+                  <td class="py-3.5 px-4">
+                    <div class="font-bold text-slate-900 dark:text-white text-xs truncate" x-text="inv.cliente"></div>
+                    <div class="text-[11px] text-slate-400 truncate" x-text="inv.email"></div>
+                  </td>
+
+                  <!-- VALOR -->
+                  <td class="py-3.5 px-4 font-bold text-xs text-slate-900 dark:text-white">
+                    <span x-text="'+ AOA ' + inv.valor.toLocaleString('pt-AO', {minimumFractionDigits: 2})"></span>
+                  </td>
+
+                  <!-- VENCIMENTO -->
+                  <td class="py-3.5 px-4 text-slate-500 text-xs" x-text="inv.vencimento"></td>
+
+                  <!-- STATUS -->
+                  <td class="py-3.5 px-4">
+                    <template x-if="inv.status === 'A RECEBER'">
+                      <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">A RECEBER</span>
+                    </template>
+                    <template x-if="inv.status === 'RECEBIDO'">
+                      <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">RECEBIDO</span>
+                    </template>
+                    <template x-if="inv.status === 'CANCELADO'">
+                      <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">CANCELADO</span>
+                    </template>
+                  </td>
+
+                  <!-- AÇÕES -->
+                  <td class="py-3.5 px-4 sm:px-6 text-right">
+                    <div class="flex items-center justify-end gap-1.5">
+                      <template x-if="inv.status === 'A RECEBER'">
+                        <div class="flex items-center gap-1.5">
+                          <button @click="receiveInvoice(inv)" 
+                                  type="button"
+                                  class="px-3 py-1.5 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold flex items-center gap-1 hover:opacity-90 transition cursor-pointer">
+                            <span>✓ Receber</span>
+                          </button>
+                          <button @click="cancelInvoice(inv)" 
+                                  type="button"
+                                  class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 transition cursor-pointer">
+                            Cancelar
+                          </button>
+                          <button @click="deleteInvoice(inv)" 
+                                  type="button"
+                                  class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                                  title="Remover lançamento">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                          </button>
+                        </div>
+                      </template>
+                      <template x-if="inv.status === 'RECEBIDO'">
+                        <div class="flex items-center gap-1.5">
+                          <button @click="downloadReceipt(inv)" 
+                                  type="button"
+                                  class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-xs font-medium text-slate-700 dark:text-slate-200 transition cursor-pointer">
+                            Recibo PDF
+                          </button>
+                          <button @click="deleteInvoice(inv)" 
+                                  type="button"
+                                  class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                                  title="Remover lançamento">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                          </button>
+                        </div>
+                      </template>
+                      <template x-if="inv.status === 'CANCELADO'">
+                        <button @click="deleteInvoice(inv)" 
+                                type="button"
+                                class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer"
+                                title="Remover lançamento">
+                          <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                      </template>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+              <tr x-show="filteredInvoices.length === 0">
+                <td colspan="6" class="text-center py-10 text-slate-400 text-xs italic">
+                  Nenhum lançamento encontrado com os filtros selecionados.
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -4198,7 +4512,18 @@ function adminApp() {
     },
     academyEnrollments: [{"id":9,"aluno_id":11,"user_id":20,"nome":"Aluno Teste","email":"aluno@rachi.ao","telefone":"1232342343","curso":"Forma\u00e7\u00e3o RACHI","curso_slug":"","curso_id":1,"status":"active","data":"25\/09\/2026 21:47","codigo":"RAC-00009"}],
     coursesList: [{"id":15,"name":"Curso Especializado: Engenharia Social Institucional","slug":"engenharia-social-institucional"}],
-    users: [{"id":25,"name":"Empresa Teste Luanda Lda","nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","phone":"923999888","telefone":"923999888","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:24","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"EL","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":24,"name":"Teste Ant\u00f3nio Silva","nome":"Teste Ant\u00f3nio Silva","email":"antonio.teste@empresa.ao","phone":"923000111","telefone":"923000111","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:01","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"TS","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":23,"name":"Dr. Antonio Silva","nome":"Dr. Antonio Silva","email":"antonio.silva@bfa.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":22,"name":"Dr. Ant\u00f3nio Silva","nome":"Dr. Ant\u00f3nio Silva","email":"antonio.silva@bancoteste.ao","phone":"+244 972 888 585","telefone":"+244 972 888 585","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 20:47","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":21,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"casimirogundja@outlook.com","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"04\/11\/2026 18:00","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"28\/09\/2026","data":"28\/09\/2026"},{"id":20,"name":"Aluno Teste","nome":"Aluno Teste","email":"aluno@rachi.ao","phone":"","telefone":"","tipo":"Aluno \/ Cliente","role":"Aluno \/ Cliente","role_id":7,"role_slug":"student","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"02\/10\/2026 16:42","mod":["Academy"],"av":"bg-gradient-to-br from-slate-600 to-slate-700","ini":"AT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":19,"name":"Cliente Teste","nome":"Cliente Teste","email":"cliente@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"25\/09\/2026 19:37","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"CT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":18,"name":"Gundja","nome":"Gundja","email":"user@gmail.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 01:57","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"GU","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":14,"name":"pakissipakissi","nome":"pakissipakissi","email":"pakissipakissi@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 00:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":12,"name":"teste","nome":"teste","email":"teste@outlook.com","phone":"","telefone":"","tipo":"Atendente","role":"Atendente","role_id":5,"role_slug":"attendant","tc":"bg-emerald-100 text-emerald-700 dark:bg-emerald-500\/20 dark:text-emerald-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":11,"name":"Dr. Fernando Dias Atualizado","nome":"Dr. Fernando Dias Atualizado","email":"fernando.dias@rachi.ao","phone":"+244 923 777 999","telefone":"+244 923 777 999","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:22","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"DA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":10,"name":"Pedro Alves","nome":"Pedro Alves","email":"pedro@email.com","phone":"+244 923 000 050","telefone":"+244 923 000 050","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"25\/09\/2026 14:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":7,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"gundja@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":8,"name":"Jo\u00e3o Silva","nome":"Jo\u00e3o Silva","email":"joao@rachi.ao","phone":"+244 923 000 015","telefone":"+244 923 000 015","tipo":"Especialista RH","role":"Especialista RH","role_id":9,"role_slug":"rh_specialist","tc":"bg-amber-100 text-amber-800 dark:bg-orange-500\/20 dark:text-orange-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Human Capital"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"JS","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":9,"name":"Ana Lima","nome":"Ana Lima","email":"ana@rachi.ao","phone":"+244 923 000 040","telefone":"+244 923 000 040","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AL","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":6,"name":"Aluno Teste Admin","nome":"Aluno Teste Admin","email":"alunoteste@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:04","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":5,"name":"tetetetetet@outlook.com","nome":"tetetetetet@outlook.com","email":"tetetetetetetet@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 21:46","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":4,"name":"Teste Aluno","nome":"Teste Aluno","email":"teste.aluno@example.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 15:17","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":2,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"tecnico@rachi.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Funcion\u00e1rio","role":"Funcion\u00e1rio","role_id":4,"role_slug":"employee","tc":"bg-purple-100 text-purple-700 dark:bg-purple-500\/20 dark:text-purple-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"21\/09\/2026 13:51","mod":["Gr\u00e1fica","Loja"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"CG","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":3,"name":"Inov Quimua Consultoria","nome":"Inov Quimua Consultoria","email":"cliente@empresa.ao","phone":"+244 912 345 678","telefone":"+244 912 345 678","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"IC","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":1,"name":"Super Administrador RACHI","nome":"Super Administrador RACHI","email":"admin@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"03\/10\/2026 00:44","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"SR","created_at":"21\/09\/2026","data":"21\/09\/2026"}],
+    users: [
+      { id: 21, name: "Casimiro Gundja", nome: "Casimiro Gundja", email: "casimirogundja@outlook.com", phone: "+244 923 000 000", telefone: "+244 923 000 000", empresa: "Diretoria Executiva", tipo: "Super Admin", role: "Super Admin", role_id: 1, role_slug: "super_admin", tc: "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "24/11/2026 18:00", mod: ["Todos os Módulos"], av: "bg-gradient-to-br from-amber-500 to-amber-700", ini: "CG", created_at: "20/11/2026", data: "20/11/2026" },
+      { id: 1, name: "Super Administrador RACHI", nome: "Super Administrador RACHI", email: "admin@rachi.ao", phone: "+244 923 000 000", telefone: "+244 923 000 000", empresa: "Diretoria Geral", tipo: "Super Admin", role: "Super Admin", role_id: 1, role_slug: "super_admin", tc: "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "24/11/2026 19:44", mod: ["Todos os Módulos"], av: "bg-gradient-to-br from-amber-500 to-amber-700", ini: "SA", created_at: "20/11/2026", data: "20/11/2026" },
+      { id: 22, name: "Dr. António Silva", nome: "Dr. António Silva", email: "antonio.silva@bancoteste.ao", phone: "+244 972 888 585", telefone: "+244 972 888 585", empresa: "Banco de Fomento Angola", tipo: "Administrador", role: "Administrador", role_id: 2, role_slug: "admin", tc: "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "24/11/2026 14:20", mod: ["Todos os Módulos"], av: "bg-gradient-to-br from-blue-600 to-indigo-700", ini: "AS", created_at: "20/11/2026", data: "20/11/2026" },
+      { id: 26, name: "Gestão Operacional RACHI", nome: "Gestão Operacional RACHI", email: "gestao@rachi.ao", phone: "+244 912 000 111", telefone: "+244 912 000 111", empresa: "Operações Luanda", tipo: "Administrador", role: "Administrador", role_id: 2, role_slug: "admin", tc: "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "24/11/2026 11:30", mod: ["Todos os Módulos"], av: "bg-gradient-to-br from-blue-600 to-indigo-700", ini: "GO", created_at: "20/11/2026", data: "20/11/2026" },
+      { id: 27, name: "Especialista Suporte & Design", nome: "Especialista Suporte & Design", email: "suporte@rachi.ao", phone: "+244 923 444 555", telefone: "+244 923 444 555", empresa: "Suporte Técnico RACHI", tipo: "Equipe Operacional", role: "Equipe Operacional", role_id: 4, role_slug: "employee", tc: "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 16:00", mod: ["Tec", "Print"], av: "bg-gradient-to-br from-purple-600 to-indigo-700", ini: "ES", created_at: "21/11/2026", data: "21/11/2026" },
+      { id: 28, name: "GundjaTech", nome: "GundjaTech", email: "admin@gundjatech.com", phone: "19953248420", telefone: "19953248420", empresa: "Diretoria GundjaTech", tipo: "Cliente", role: "Cliente", role_id: 6, role_slug: "customer", tc: "bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 10:15", mod: ["Portal Cliente"], av: "bg-gradient-to-br from-slate-700 to-slate-900", ini: "GU", created_at: "23/11/2026", data: "23/11/2026" },
+      { id: 29, name: "Cotech Contabilidade", nome: "Cotech Contabilidade", email: "comercial@cotechcontabilidade.com.br", phone: "+244 923 000 111", telefone: "+244 923 000 111", empresa: "Cotech Contabilidade", tipo: "Cliente", role: "Cliente", role_id: 6, role_slug: "customer", tc: "bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 11:40", mod: ["Portal Cliente"], av: "bg-gradient-to-br from-slate-700 to-slate-900", ini: "CO", created_at: "23/11/2026", data: "23/11/2026" },
+      { id: 30, name: "Rachi Tech", nome: "Rachi Tech", email: "rachitecnologia@gmail.com", phone: "+244 923 888 777", telefone: "+244 923 888 777", empresa: "Rodrigues Lussiate", tipo: "Cliente", role: "Cliente", role_id: 6, role_slug: "customer", tc: "bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 12:00", mod: ["Portal Cliente"], av: "bg-gradient-to-br from-slate-700 to-slate-900", ini: "RA", created_at: "23/11/2026", data: "23/11/2026" },
+      { id: 31, name: "Laurinita Distribuidora Ltda", nome: "Laurinita Distribuidora Ltda", email: "te@gmail.com", phone: "+244923333804", telefone: "+244923333804", empresa: "Laurindo Augusto Cakoyi", tipo: "Cliente", role: "Cliente", role_id: 6, role_slug: "customer", tc: "bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 14:10", mod: ["Portal Cliente"], av: "bg-gradient-to-br from-slate-700 to-slate-900", ini: "LA", created_at: "23/11/2026", data: "23/11/2026" },
+      { id: 32, name: "INSTITUTO TÉCNICO PRIVADO DE S...", nome: "INSTITUTO TÉCNICO PRIVADO DE S...", email: "eftsparaisodosaber@gmail.com", phone: "+244 930 133 850", telefone: "+244 930 133 850", empresa: "Laurindo Augusto Cakoyi", tipo: "Cliente", role: "Cliente", role_id: 6, role_slug: "customer", tc: "bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300", status: "Ativo", statusLabel: "Ativo", raw_status: "active", sk: "ativo", is_deleted: false, deleted_at: null, ua: "23/11/2026 15:30", mod: ["Portal Cliente"], av: "bg-gradient-to-br from-slate-700 to-slate-900", ini: "IN", created_at: "23/11/2026", data: "23/11/2026" }
+    ],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"EL","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":24,"name":"Teste Ant\u00f3nio Silva","nome":"Teste Ant\u00f3nio Silva","email":"antonio.teste@empresa.ao","phone":"923000111","telefone":"923000111","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"12\/10\/2026 03:01","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"TS","created_at":"12\/10\/2026","data":"12\/10\/2026"},{"id":23,"name":"Dr. Antonio Silva","nome":"Dr. Antonio Silva","email":"antonio.silva@bfa.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":22,"name":"Dr. Ant\u00f3nio Silva","nome":"Dr. Ant\u00f3nio Silva","email":"antonio.silva@bancoteste.ao","phone":"+244 972 888 585","telefone":"+244 972 888 585","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"11\/10\/2026 20:47","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"DS","created_at":"11\/10\/2026","data":"11\/10\/2026"},{"id":21,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"casimirogundja@outlook.com","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"04\/11\/2026 18:00","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"28\/09\/2026","data":"28\/09\/2026"},{"id":20,"name":"Aluno Teste","nome":"Aluno Teste","email":"aluno@rachi.ao","phone":"","telefone":"","tipo":"Aluno \/ Cliente","role":"Aluno \/ Cliente","role_id":7,"role_slug":"student","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"02\/10\/2026 16:42","mod":["Academy"],"av":"bg-gradient-to-br from-slate-600 to-slate-700","ini":"AT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":19,"name":"Cliente Teste","nome":"Cliente Teste","email":"cliente@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"25\/09\/2026 19:37","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"CT","created_at":"25\/09\/2026","data":"25\/09\/2026"},{"id":18,"name":"Gundja","nome":"Gundja","email":"user@gmail.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 01:57","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"GU","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":14,"name":"pakissipakissi","nome":"pakissipakissi","email":"pakissipakissi@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"23\/09\/2026 00:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"23\/09\/2026","data":"23\/09\/2026"},{"id":12,"name":"teste","nome":"teste","email":"teste@outlook.com","phone":"","telefone":"","tipo":"Atendente","role":"Atendente","role_id":5,"role_slug":"attendant","tc":"bg-emerald-100 text-emerald-700 dark:bg-emerald-500\/20 dark:text-emerald-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 23:23","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":11,"name":"Dr. Fernando Dias Atualizado","nome":"Dr. Fernando Dias Atualizado","email":"fernando.dias@rachi.ao","phone":"+244 923 777 999","telefone":"+244 923 777 999","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:22","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"DA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":10,"name":"Pedro Alves","nome":"Pedro Alves","email":"pedro@email.com","phone":"+244 923 000 050","telefone":"+244 923 000 050","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"25\/09\/2026 14:21","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"PA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":7,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"gundja@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"CG","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":8,"name":"Jo\u00e3o Silva","nome":"Jo\u00e3o Silva","email":"joao@rachi.ao","phone":"+244 923 000 015","telefone":"+244 923 000 015","tipo":"Especialista RH","role":"Especialista RH","role_id":9,"role_slug":"rh_specialist","tc":"bg-amber-100 text-amber-800 dark:bg-orange-500\/20 dark:text-orange-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Human Capital"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"JS","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":9,"name":"Ana Lima","nome":"Ana Lima","email":"ana@rachi.ao","phone":"+244 923 000 040","telefone":"+244 923 000 040","tipo":"Instrutora Academy","role":"Instrutora Academy","role_id":8,"role_slug":"instructor","tc":"bg-indigo-100 text-indigo-700 dark:bg-indigo-500\/20 dark:text-indigo-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"25\/09\/2026","ua":"22\/09\/2026 22:12","mod":["Academy"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AL","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":6,"name":"Aluno Teste Admin","nome":"Aluno Teste Admin","email":"alunoteste@rachi.ao","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 22:04","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"AA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":5,"name":"tetetetetet@outlook.com","nome":"tetetetetet@outlook.com","email":"tetetetetetetet@outlook.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 21:46","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TE","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":4,"name":"Teste Aluno","nome":"Teste Aluno","email":"teste.aluno@example.com","phone":"","telefone":"","tipo":"Cliente","role":"Cliente","role_id":null,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"22\/09\/2026 15:17","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"TA","created_at":"22\/09\/2026","data":"22\/09\/2026"},{"id":2,"name":"Casimiro Gundja","nome":"Casimiro Gundja","email":"tecnico@rachi.ao","phone":"+244 923 111 222","telefone":"+244 923 111 222","tipo":"Funcion\u00e1rio","role":"Funcion\u00e1rio","role_id":4,"role_slug":"employee","tc":"bg-purple-100 text-purple-700 dark:bg-purple-500\/20 dark:text-purple-300","status":"Eliminado","statusLabel":"Eliminado","raw_status":"deleted","sk":"deleted","is_deleted":true,"deleted_at":"22\/09\/2026","ua":"21\/09\/2026 13:51","mod":["Gr\u00e1fica","Loja"],"av":"bg-gradient-to-br from-slate-400 to-slate-500","ini":"CG","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":3,"name":"Inov Quimua Consultoria","nome":"Inov Quimua Consultoria","email":"cliente@empresa.ao","phone":"+244 912 345 678","telefone":"+244 912 345 678","tipo":"Cliente","role":"Cliente","role_id":6,"role_slug":"customer","tc":"bg-slate-100 text-slate-700 dark:bg-slate-500\/20 dark:text-slate-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"28\/09\/2026 01:06","mod":["Loja","Print"],"av":"bg-gradient-to-br from-slate-500 to-gray-600","ini":"IC","created_at":"21\/09\/2026","data":"21\/09\/2026"},{"id":1,"name":"Super Administrador RACHI","nome":"Super Administrador RACHI","email":"admin@rachi.ao","phone":"+244 923 000 000","telefone":"+244 923 000 000","tipo":"Admin Master","role":"Admin Master","role_id":1,"role_slug":"super_admin","tc":"bg-blue-100 text-blue-700 dark:bg-blue-500\/20 dark:text-blue-300","status":"Ativo","statusLabel":"Ativo","raw_status":"active","sk":"ativo","is_deleted":false,"deleted_at":null,"ua":"03\/10\/2026 00:44","mod":["Todos os M\u00f3dulos"],"av":"bg-gradient-to-br from-blue-600 to-indigo-700","ini":"SR","created_at":"21\/09\/2026","data":"21\/09\/2026"}],
     rolesList: [{"id":1,"name":"Super Administrador","slug":"super_admin","description":"Acesso irrestrito a todo o sistema e configura\u00e7\u00f5es"},{"id":2,"name":"Administrador","slug":"admin","description":"Gest\u00e3o geral da plataforma e relat\u00f3rios"},{"id":3,"name":"Gestor de Unidade","slug":"manager","description":"Gest\u00e3o operacional de uma unidade de neg\u00f3cio"},{"id":4,"name":"Funcion\u00e1rio \/ T\u00e9cnico","slug":"employee","description":"Atendimento, execu\u00e7\u00e3o de servi\u00e7os e pedidos"},{"id":5,"name":"Atendente","slug":"attendant","description":"Triagem e primeiro contacto com clientes"},{"id":6,"name":"Cliente","slug":"customer","description":"Acesso ao portal de autoatendimento e pedidos"},{"id":7,"name":"Aluno","slug":"student","description":"Acesso aos cursos da RACHI Academy"},{"id":8,"name":"Instrutor Academy","slug":"instructor","description":"Gest\u00e3o de cursos, m\u00f3dulos e turmas"},{"id":9,"name":"Especialista RH","slug":"rh_specialist","description":"Recrutamento, vagas e candidatos"}],
     clients: [
       {"id":16,"nome":"Empresa Teste Luanda Lda","email":"financeiro@empresa-teste.ao","tipo":"Empresa","contato":"Diretoria Financeira","tel":"923999888","tr":1,"status":"Ativo","categoria":"ATIVO","portal":"Portal Ativo","sk":"ativo","desde":"Oct/2026","ini":"ET"},
@@ -4280,6 +4605,44 @@ function adminApp() {
         9: { name: 'Especialista RH', dot: 'bg-orange-500' }
       };
       return map[id] || { name: 'Utilizador', dot: 'bg-blue-500' };
+    },
+
+    
+    userTab: 'todos',
+    get userStatsPrint4() {
+      const all = this.users || [];
+      const active = all.filter(u => !u.is_deleted);
+      return {
+        superAdmins: active.filter(u => u.role_slug === 'super_admin' || (u.tipo && u.tipo.includes('Master')) || u.id === 1 || u.id === 21).length,
+        admins: active.filter(u => (u.role_slug === 'admin' || (u.tipo && u.tipo === 'Administrador')) && u.id !== 1 && u.id !== 21).length,
+        staff: active.filter(u => ['employee', 'instructor', 'rh_specialist', 'attendant'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Funcionário') || u.tipo.includes('Instrutor') || u.tipo.includes('Especialista') || u.tipo.includes('Operacional')))).length,
+        clients: active.filter(u => ['customer', 'student'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Aluno') || u.tipo.includes('Cliente')))).length,
+        inativos: all.filter(u => u.is_deleted || u.status === 'Bloqueado' || u.status === 'Inativo').length
+      };
+    },
+    get filteredUsersPrint4() {
+      let list = this.users || [];
+      if (this.userTab === 'equipe') {
+        list = list.filter(u => !u.is_deleted && (['super_admin', 'admin', 'manager', 'employee', 'instructor', 'rh_specialist', 'attendant'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Admin') || u.tipo.includes('Funcionário') || u.tipo.includes('Especialista') || u.tipo.includes('Operacional')))));
+      } else if (this.userTab === 'clientes') {
+        list = list.filter(u => !u.is_deleted && (['customer', 'student'].includes(u.role_slug) || (u.tipo && (u.tipo.includes('Cliente') || u.tipo.includes('Aluno')))));
+      } else if (this.userTab === 'inativos') {
+        list = list.filter(u => u.is_deleted || u.status === 'Bloqueado' || u.status === 'Inativo');
+      }
+      if (this.userFilterRole && this.userFilterRole !== 'all') {
+        list = list.filter(u => u.role_slug === this.userFilterRole || (u.tipo && u.tipo.toLowerCase().includes(this.userFilterRole.toLowerCase())));
+      }
+      if (this.userSearch && this.userSearch.trim()) {
+        const q = this.userSearch.toLowerCase().trim();
+        list = list.filter(u =>
+          (u.nome && u.nome.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q)) ||
+          (u.telefone && u.telefone.toLowerCase().includes(q)) ||
+          (u.tipo && u.tipo.toLowerCase().includes(q)) ||
+          (u.empresa && u.empresa.toLowerCase().includes(q))
+        );
+      }
+      return list;
     },
 
     get userStats() {
@@ -5019,9 +5382,10 @@ function adminApp() {
     get pageTitle() {
       const m = {
         'dashboard': 'Visão Geral',
-        'usuarios': 'Perfis',
+        'usuarios': 'Equipe, Colaboradores & Usuários',
         'clientes': 'Base de Clientes',
-        'solicitacoes': 'Central de Solicitações',
+        'solicitacoes': 'Gestão de Solicitações & Pipeline de Entrada',
+        'servicos': 'Catálogo de Serviços',
         'academy-cursos': 'RACHI Academy — Cursos',
         'academy-alunos': 'RACHI Academy — Alunos',
         'academy-matriculas': 'RACHI Academy — Matrículas',
@@ -5033,7 +5397,7 @@ function adminApp() {
         'rh-candidatos': 'Human Capital — Candidatos',
         'grafica-produtos': 'RACHI Print — Produtos',
         'grafica-orcamentos': 'RACHI Print — Orçamentos',
-        'financeiro': 'Gestão Financeira',
+        'financeiro': 'Gestão Financeira & Faturamento',
         'relatorios': 'Central de Relatórios',
         'notificacoes': 'Notificações',
         'configuracoes': 'Definições do Sistema'
@@ -5369,10 +5733,301 @@ function adminApp() {
       { key: 'cancelado', label: 'Cancelado', count: 3, color: 'text-rose-600 dark:text-red-400', sc: 's-cancel', dot: 'bg-rose-500' }
     ],
 
-    allRequests: [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}],
+    allRequests: [
+      {
+        id: 101,
+        protocol: "GNDJ-20261123-N2Z3",
+        business_unit_id: 1,
+        title: "Realizar Pagamento e gerenciamento d...",
+        titulo: "Realizar Pagamento e gerenciamento de faturas e contratos",
+        cliente: "Rachi Tech",
+        empresa: "rachitecnologia@gmail.com",
+        servico: "RACHI Tec",
+        unit: "RACHI Tec",
+        unitBadge: "bg-blue-500/15 text-blue-700 border-blue-200",
+        descricao: "Realizar Pagamento e gerenciamento de faturas e contratos.",
+        description: "Realizar Pagamento e gerenciamento de faturas e contratos.",
+        data: "23/11/2026 10:00",
+        status: "Em Execução",
+        statusLabel: "Em Execução",
+        status_key: "in_progress",
+        priority: "Normal",
+        sc: "s-exec",
+        dot: "bg-cyan-500",
+        responsavel: "Casimiro Gundja",
+        technician: "Casimiro Gundja",
+        timeline: [{ data: "23/11/2026 10:00", date: "23/11/2026 10:00", desc: "Contrato em execução.", title: "Contrato em execução.", dot: "bg-cyan-500" }],
+        messages: []
+      },
+      {
+        id: 102,
+        protocol: "GNDJ-20261123-ORC8",
+        business_unit_id: 1,
+        title: "Desenvolvimento site ECOMMERCE",
+        titulo: "Desenvolvimento site ECOMMERCE",
+        cliente: "Laurinita Distribuidora Ltda",
+        empresa: "te@gmail.com",
+        servico: "RACHI Tec",
+        unit: "RACHI Tec",
+        unitBadge: "bg-blue-500/15 text-blue-700 border-blue-200",
+        descricao: "Desenvolvimento completo de plataforma e-commerce institucional.",
+        description: "Desenvolvimento completo de plataforma e-commerce institucional.",
+        data: "23/11/2026 11:30",
+        status: "Concluído",
+        statusLabel: "Concluído",
+        status_key: "completed",
+        priority: "High",
+        sc: "s-done",
+        dot: "bg-emerald-500",
+        responsavel: "Casimiro Gundja",
+        technician: "Casimiro Gundja",
+        timeline: [{ data: "23/11/2026 11:30", date: "23/11/2026 11:30", desc: "Projeto homologado e concluído.", title: "Projeto homologado e concluído.", dot: "bg-emerald-500" }],
+        messages: []
+      },
+      {
+        id: 103,
+        protocol: "GNDJ-20261123-ORC9",
+        business_unit_id: 1,
+        title: "Desenvolvimento site ecommerce",
+        titulo: "Desenvolvimento site ecommerce",
+        cliente: "Cotech Contabilidade",
+        empresa: "comercial@cotechcontabilidade.co...",
+        servico: "RACHI Tec",
+        unit: "RACHI Tec",
+        unitBadge: "bg-blue-500/15 text-blue-700 border-blue-200",
+        descricao: "Desenvolvimento site ecommerce e catálogo corporativo.",
+        description: "Desenvolvimento site ecommerce e catálogo corporativo.",
+        data: "23/11/2026 14:00",
+        status: "Em Execução",
+        statusLabel: "Em Execução",
+        status_key: "in_progress",
+        priority: "Normal",
+        sc: "s-exec",
+        dot: "bg-cyan-500",
+        responsavel: "Casimiro Gundja",
+        technician: "Casimiro Gundja",
+        timeline: [{ data: "23/11/2026 14:00", date: "23/11/2026 14:00", desc: "Em fase de desenvolvimento frontend.", title: "Em fase de desenvolvimento frontend.", dot: "bg-cyan-500" }],
+        messages: []
+      },
+      {
+        id: 104,
+        protocol: "GNDJ-20261123-ORC10",
+        business_unit_id: 1,
+        title: "Site Institucional e Painel de gerenciam...",
+        titulo: "Site Institucional e Painel de gerenciamento administrativo",
+        cliente: "INSTITUTO TÉCNICO PRIVADO D...",
+        empresa: "eftsparaisodosaber@gmail.com",
+        servico: "RACHI Tec",
+        unit: "RACHI Tec",
+        unitBadge: "bg-blue-500/15 text-blue-700 border-blue-200",
+        descricao: "Site Institucional e Painel de gerenciamento escolar e administrativo.",
+        description: "Site Institucional e Painel de gerenciamento escolar e administrativo.",
+        data: "23/11/2026 15:45",
+        status: "Em Execução",
+        statusLabel: "Em Execução",
+        status_key: "in_progress",
+        priority: "Normal",
+        sc: "s-exec",
+        dot: "bg-cyan-500",
+        responsavel: "Casimiro Gundja",
+        technician: "Casimiro Gundja",
+        timeline: [{ data: "23/11/2026 15:45", date: "23/11/2026 15:45", desc: "Setup inicial e arquitetura de dados.", title: "Setup inicial e arquitetura de dados.", dot: "bg-cyan-500" }],
+        messages: []
+      },{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}],
     reqFilterSearch: '',
     reqFilterUnit: 'Todas',
     reqFilterStatus: 'Todos',
+
+    
+    // ==========================================
+    // GETTERS & MÉTODOS PARA OS MODELOS DOS PRINTS 1, 2 E 3
+    // ==========================================
+    get pipelineStats() {
+      const all = this.allRequests || [];
+      return {
+        total: all.length,
+        novas: all.filter(r => (r.status_key === 'new' || (r.status && r.status.toLowerCase().includes('nov')))).length,
+        analise: all.filter(r => (r.status_key === 'in_analysis' || (r.status && (r.status.toLowerCase().includes('anál') || r.status.toLowerCase().includes('orçam'))))).length,
+        concluidas: all.filter(r => (r.status_key === 'completed' || (r.status && (r.status.toLowerCase().includes('conclu') || r.status.toLowerCase().includes('aprov'))))).length
+      };
+    },
+    confirmDeleteReq(req) {
+      if (!confirm('Deseja realmente remover a solicitação #' + (req.protocol || req.id) + '?')) return;
+      const idx = this.allRequests.findIndex(r => r.id === req.id);
+      if (idx !== -1) {
+        this.allRequests.splice(idx, 1);
+        this.showAlert('success', 'Solicitação Removida', 'A solicitação foi removida do pipeline.');
+      }
+    },
+
+    // FINANÇAS (PRINT 2)
+    finTab: 'todos',
+    finSearch: '',
+    finType: 'all',
+    financialInvoices: [
+      { id: 1, codigo: 'NF #ORC-20261123-3JSP', titulo: 'Contrato Aprovado: Realizar Pagamento e gerenciamento d...', cliente: 'Rachi Tech', email: 'rachitecnologia@gmail.com', metodo: 'MULTICAIXA', valor: 150000, vencimento: '01/12/2026', status: 'A RECEBER', raw_status: 'pending' },
+      { id: 2, codigo: 'NF #ORC-20261123-IER4', titulo: 'Contrato Aprovado: Site Institucional e Painel de gerenciam...', cliente: 'INSTITUTO TÉCNICO PRIVADO D...', email: 'eftsparaisodosaber@gmail.com', metodo: 'MULTICAIXA', valor: 3310000, vencimento: '30/11/2026', status: 'A RECEBER', raw_status: 'pending' },
+      { id: 3, codigo: 'NF #ORC-20261123-K3JX', titulo: 'Contrato Aprovado: Desenvolvimento site ecommerce', cliente: 'Cotech Contabilidade', email: 'comercial@cotechcontabilidade.co...', metodo: 'MULTICAIXA', valor: 1800000, vencimento: '30/11/2026', status: 'A RECEBER', raw_status: 'pending' },
+      { id: 4, codigo: 'NF #ORC-20261123-UWGG', titulo: 'Contrato Aprovado: Desenvolvimento site ECOMMERCE', cliente: 'Laurinita Distribuidora Ltda', email: 'te@gmail.com', metodo: 'MULTICAIXA', valor: 2050000, vencimento: '30/11/2026', status: 'RECEBIDO', raw_status: 'paid' }
+    ],
+    get finStats() {
+      const list = this.financialInvoices || [];
+      const total = list.reduce((acc, i) => acc + (i.status !== 'CANCELADO' ? i.valor : 0), 0);
+      const recebido = list.filter(i => i.status === 'RECEBIDO').reduce((acc, i) => acc + i.valor, 0);
+      const pendente = list.filter(i => i.status === 'A RECEBER').reduce((acc, i) => acc + i.valor, 0);
+      const vencido = 0;
+      const fmt = (v) => 'AOA ' + v.toLocaleString('pt-AO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return {
+        total,
+        totalFormatted: fmt(total),
+        recebidoFormatted: fmt(recebido),
+        pendenteFormatted: fmt(pendente),
+        vencidoFormatted: fmt(vencido),
+        totalCount: list.length,
+        pendenteCount: list.filter(i => i.status === 'A RECEBER').length,
+        recebidoCount: list.filter(i => i.status === 'RECEBIDO').length,
+        canceladoCount: list.filter(i => i.status === 'CANCELADO').length
+      };
+    },
+    get filteredInvoices() {
+      let list = this.financialInvoices || [];
+      if (this.finTab === 'pendentes') list = list.filter(i => i.status === 'A RECEBER');
+      else if (this.finTab === 'recebidos') list = list.filter(i => i.status === 'RECEBIDO');
+      else if (this.finTab === 'cancelados') list = list.filter(i => i.status === 'CANCELADO');
+
+      if (this.finSearch && this.finSearch.trim()) {
+        const q = this.finSearch.toLowerCase().trim();
+        list = list.filter(i =>
+          i.titulo.toLowerCase().includes(q) ||
+          i.codigo.toLowerCase().includes(q) ||
+          i.cliente.toLowerCase().includes(q) ||
+          i.email.toLowerCase().includes(q)
+        );
+      }
+      return list;
+    },
+    receiveInvoice(inv) {
+      inv.status = 'RECEBIDO';
+      inv.raw_status = 'paid';
+      this.showAlert('success', 'Fatura Liquidada', `Fatura ${inv.codigo} marcada como recebida com sucesso.`);
+    },
+    cancelInvoice(inv) {
+      if (!confirm('Deseja cancelar o lançamento desta fatura?')) return;
+      inv.status = 'CANCELADO';
+      inv.raw_status = 'cancelled';
+      this.showAlert('info', 'Fatura Cancelada', `A fatura ${inv.codigo} foi cancelada.`);
+    },
+    deleteInvoice(inv) {
+      if (!confirm('Remover definitivamente este registo financeiro?')) return;
+      const idx = this.financialInvoices.findIndex(i => i.id === inv.id);
+      if (idx !== -1) {
+        this.financialInvoices.splice(idx, 1);
+        this.showAlert('success', 'Registo Excluído', 'Lançamento financeiro removido com sucesso.');
+      }
+    },
+    downloadReceipt(inv) {
+      this.showAlert('info', 'A Gerar Recibo', `Download do recibo oficial da fatura ${inv.codigo}...`);
+    },
+    openNewInvoiceModal() {
+      const desc = prompt('Descrição do lançamento/fatura:');
+      if (!desc) return;
+      const val = parseFloat(prompt('Valor em AOA:', '250000')) || 250000;
+      const cli = prompt('Nome do cliente:', 'Cliente RACHI') || 'Cliente RACHI';
+      const id = Date.now();
+      this.financialInvoices.unshift({
+        id,
+        codigo: 'NF #ORC-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.random().toString(36).substring(2,6).toUpperCase(),
+        titulo: 'Contrato: ' + desc,
+        cliente: cli,
+        email: 'contato@cliente.ao',
+        metodo: 'MULTICAIXA',
+        valor: val,
+        vencimento: '30/12/2026',
+        status: 'A RECEBER',
+        raw_status: 'pending'
+      });
+      this.showAlert('success', 'Fatura Emitida', 'Novo lançamento adicionado ao faturamento.');
+    },
+
+    // CATÁLOGO DE SERVIÇOS (PRINT 3)
+    serviceTab: 'todos',
+    serviceSearch: '',
+    servicesCatalog: [
+      { id: 1, nome: 'Desenvolvimento Web & E-commerce', codigo: 'SRV-TI-01', descricao: 'Lojas virtuais, portais corporativos e plataformas sob medida.', categoria: 'TECNOLOGIA & SOFTWARE', precoBase: 'AOA 450.000,00', valorNum: 450000, status: 'Ativo', icon: 'globe' },
+      { id: 2, nome: 'Consultoria & Transformação Digital', codigo: 'SRV-TI-02', descricao: 'Diagnóstico tecnológico, automação e modernização de processos.', categoria: 'TECNOLOGIA & SOFTWARE', precoBase: 'AOA 350.000,00', valorNum: 350000, status: 'Ativo', icon: 'cpu' },
+      { id: 3, nome: 'Identidade Visual & Branding Corporativo', codigo: 'SRV-DSG-01', descricao: 'Criação de marcas, manuais de identidade e papelaria executiva.', categoria: 'DESIGN & BRANDING', precoBase: 'AOA 180.000,00', valorNum: 180000, status: 'Ativo', icon: 'palette' },
+      { id: 4, nome: 'Diagnóstico e Estruturação de Cargos & Salários', codigo: 'SRV-RH-01', descricao: 'Plano de carreiras, matriz salarial e políticas de benefícios.', categoria: 'CONSULTORIA RH', precoBase: 'AOA 280.000,00', valorNum: 280000, status: 'Ativo', icon: 'briefcase' },
+      { id: 5, nome: 'Recrutamento & Seleção Executiva', codigo: 'SRV-RH-02', descricao: 'Headhunting especializado para posições técnicas e de liderança.', categoria: 'CONSULTORIA RH', precoBase: 'AOA 150.000,00', valorNum: 150000, status: 'Ativo', icon: 'user-check' },
+      { id: 6, nome: 'Roll-up Banners & Comunicação Visual', codigo: 'SRV-PRT-01', descricao: 'Estruturas de alumínio e impressão fotográfica de alta definição.', categoria: 'IMPRESSÃO & GRÁFICA', precoBase: 'AOA 85.000,00', valorNum: 85000, status: 'Ativo', icon: 'printer' },
+      { id: 7, nome: 'Brindes & Materiais Promocionais Personalizados', codigo: 'SRV-PRT-02', descricao: 'Garrafas térmicas, agendas, crachás e kits corporativos.', categoria: 'IMPRESSÃO & GRÁFICA', precoBase: 'AOA 500.000,00', valorNum: 500000, status: 'Ativo', icon: 'gift' }
+    ],
+    get serviceStats() {
+      const list = this.servicesCatalog || [];
+      const ativos = list.filter(s => s.status === 'Ativo').length;
+      const inativos = list.filter(s => s.status !== 'Ativo').length;
+      const sum = list.reduce((acc, s) => acc + (s.valorNum || 0), 0);
+      const ticket = list.length > 0 ? Math.round(sum / list.length) : 0;
+      return {
+        total: list.length,
+        ativos,
+        inativos,
+        ticketMedio: 'AOA ' + ticket.toLocaleString('pt-AO')
+      };
+    },
+    get filteredServices() {
+      let list = this.servicesCatalog || [];
+      if (this.serviceTab === 'ativos') list = list.filter(s => s.status === 'Ativo');
+      else if (this.serviceTab === 'inativos') list = list.filter(s => s.status !== 'Ativo');
+
+      if (this.serviceSearch && this.serviceSearch.trim()) {
+        const q = this.serviceSearch.toLowerCase().trim();
+        list = list.filter(s =>
+          s.nome.toLowerCase().includes(q) ||
+          s.categoria.toLowerCase().includes(q) ||
+          s.codigo.toLowerCase().includes(q) ||
+          (s.descricao && s.descricao.toLowerCase().includes(q))
+        );
+      }
+      return list;
+    },
+    toggleServiceStatus(srv) {
+      srv.status = srv.status === 'Ativo' ? 'Inativo' : 'Ativo';
+      this.showAlert('info', 'Status Atualizado', `Serviço "${srv.nome}" agora está ${srv.status}.`);
+    },
+    editService(srv) {
+      const novoNome = prompt('Editar nome do serviço:', srv.nome);
+      if (novoNome) srv.nome = novoNome;
+      const novoPreco = prompt('Editar preço base (ex: AOA 300.000,00):', srv.precoBase);
+      if (novoPreco) srv.precoBase = novoPreco;
+      this.showAlert('success', 'Serviço Atualizado', 'As alterações foram salvas.');
+    },
+    deleteService(srv) {
+      if (!confirm(`Deseja remover o serviço "${srv.nome}"?`)) return;
+      const idx = this.servicesCatalog.findIndex(s => s.id === srv.id);
+      if (idx !== -1) {
+        this.servicesCatalog.splice(idx, 1);
+        this.showAlert('success', 'Serviço Removido', 'Serviço excluído do catálogo.');
+      }
+    },
+    openNewServiceModal() {
+      const nome = prompt('Nome do novo serviço:');
+      if (!nome) return;
+      const cat = prompt('Categoria (ex: TECNOLOGIA & SOFTWARE, CONSULTORIA RH, IMPRESSÃO & GRÁFICA):', 'TECNOLOGIA & SOFTWARE') || 'TECNOLOGIA & SOFTWARE';
+      const preco = prompt('Preço base (ex: AOA 250.000,00):', 'AOA 250.000,00') || 'AOA 250.000,00';
+      const id = Date.now();
+      this.servicesCatalog.push({
+        id,
+        nome,
+        codigo: 'SRV-NEW-' + String(this.servicesCatalog.length + 1).padStart(2, '0'),
+        descricao: 'Serviço profissional disponibilizado pela RACHI.',
+        categoria: cat.toUpperCase(),
+        precoBase: preco,
+        valorNum: parseFloat(preco.replace(/[^0-9]/g, '')) || 250000,
+        status: 'Ativo',
+        icon: 'layers'
+      });
+      this.showAlert('success', 'Serviço Criado', 'Novo serviço cadastrado no catálogo.');
+    },
 
     getStatusCount(key) {
       return (this.allRequests || []).filter(r => {
