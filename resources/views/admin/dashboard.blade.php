@@ -892,6 +892,134 @@ html.dark .gtb-grid-line {
 }
 
 a { text-decoration: none !important; }
+
+/* ==========================================================================
+   PANZE SAAS STUDIO TOKENS (REFERENCIA VISUAL EXCLUSIVA)
+   ========================================================================== */
+.panze-menu-active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(99, 102, 241, 0.08) 100%) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  border-radius: 14px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.08) !important;
+}
+html.dark .panze-menu-active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(99, 102, 241, 0.18) 100%) !important;
+  color: #c084fc !important;
+  border-color: rgba(192, 132, 252, 0.35) !important;
+  box-shadow: 0 2px 14px rgba(124, 58, 237, 0.25) !important;
+}
+
+.panze-overview-banner {
+  position: relative;
+  border-radius: 24px;
+  padding: 24px 28px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 180, 254, 0.5);
+  background: linear-gradient(125deg, #e9ddff 0%, #d4e8ff 45%, #c8f5ff 85%, #dcf9ff 100%);
+}
+html.dark .panze-overview-banner {
+  border-color: rgba(168, 85, 247, 0.25);
+  background: linear-gradient(125deg, rgba(58, 40, 105, 0.75) 0%, rgba(20, 55, 100, 0.75) 45%, rgba(15, 65, 85, 0.75) 85%);
+}
+
+.panze-stat-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  padding: 16px 18px;
+  transition: all 0.2s ease;
+}
+.panze-stat-pill:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+}
+html.dark .panze-stat-pill {
+  background: rgba(15, 23, 42, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+html.dark .panze-stat-pill:hover {
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+.panze-op-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #eef2f6;
+  padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.02);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.panze-op-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.06);
+}
+html.dark .panze-op-card {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .panze-op-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+.panze-bar-col {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 5px;
+  height: 180px;
+  justify-content: flex-start;
+  position: relative;
+  cursor: pointer;
+}
+.panze-capsule {
+  width: 9px;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+}
+.panze-capsule:hover {
+  filter: brightness(1.2);
+  transform: scaleX(1.3);
+}
+.panze-capsule.cap-green {
+  background: #00d68f;
+  box-shadow: 0 2px 8px rgba(0, 214, 143, 0.3);
+}
+.panze-capsule.cap-purple {
+  background: #8b5cf6;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+.panze-capsule.cap-orange {
+  background: #f97316;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+.panze-hdr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.15s ease;
+}
+html.dark .panze-hdr-pill {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 </style>
 </head>
 <body x-data="adminApp()">
@@ -939,152 +1067,162 @@ a { text-decoration: none !important; }
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="sidebar-nav flex-1 py-3 space-y-0.5 overflow-y-auto">
-    <div class="sg">Controlo Geral</div>
-    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" data-legend="Visão Geral" title="Visão Geral">
-      <i data-lucide="layout-dashboard" class="si"></i>
-      <span class="sl">Visão Geral</span>
+  <nav class="sidebar-nav flex-1 py-3 space-y-1 overflow-y-auto">
+    <div class="sg">MENU</div>
+    <!-- Dashboard (Visão Geral - Active Item no Modelo Panze) -->
+    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'panze-menu-active':'text-slate-600 dark:text-slate-400 hover:text-slate-900'" class="sidebar-item" data-legend="Dashboard" title="Dashboard">
+      <i data-lucide="layout-grid" class="si"></i>
+      <span class="sl font-bold">Dashboard</span>
     </div>
 
-    <div class="sg">Administração</div>
-    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" data-legend="Perfis" title="Perfis">
+    <!-- Messenger / Atendimento -->
+    <div @click="setPage('solicitacoes')" class="sidebar-item text-slate-600 dark:text-slate-400 hover:text-slate-900" data-legend="Messenger" title="Messenger">
+      <i data-lucide="message-square" class="si"></i>
+      <span class="sl">Messenger</span>
+      <span class="sb2 badge bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">3</span>
+    </div>
+
+    <div class="sg mt-2">OPERAÇÕES &amp; SERVIÇOS</div>
+    <!-- Clientes -->
+    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" data-legend="Clientes" title="Clientes">
       <i data-lucide="users" class="si"></i>
-      <span class="sl">Perfis</span>
-      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="userStats.total || users.length || 10"></span>
-    </div>
-    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" data-legend="Base de Clientes" title="Base de Clientes">
-      <i data-lucide="building-2" class="si"></i>
-      <span class="sl">Base de Clientes</span>
-      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="totalClientsCount"></span>
-    </div>
-    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" data-legend="Solicitações & Ordens" title="Solicitações & Ordens">
-      <i data-lucide="clipboard-list" class="si"></i>
-      <span class="sl">Solicitações & Ordens</span>
-      <span class="sb2 badge bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="totalRequestsCount"></span>
-    </div>
-    <div @click="setPage('servicos')" :class="currentPage==='servicos'?'active':''" class="sidebar-item" data-legend="Catálogo de Serviços" title="Catálogo de Serviços">
-      <i data-lucide="package" class="si"></i>
-      <span class="sl">Catálogo de Serviços</span>
-      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="serviceStats.total"></span>
+      <span class="sl">Clientes</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="totalClientsCount"></span>
     </div>
 
-    <div class="sg">Unidades</div>
+    <!-- Sites -->
+    <div @click="setPage('sites')" :class="currentPage==='sites'?'active':''" class="sidebar-item" data-legend="Sites" title="Sites">
+      <i data-lucide="globe" class="si"></i>
+      <span class="sl">Sites</span>
+      <span class="sb2 badge bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">87</span>
+    </div>
+
+    <!-- Domínios -->
+    <div @click="setPage('dominios')" :class="currentPage==='dominios'?'active':''" class="sidebar-item" data-legend="Domínios" title="Domínios">
+      <i data-lucide="link-2" class="si"></i>
+      <span class="sl">Domínios</span>
+      <span class="sb2 badge bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">22</span>
+    </div>
+
+    <!-- Tráfego Pago -->
+    <div @click="setPage('trafego')" :class="currentPage==='trafego'?'active':''" class="sidebar-item" data-legend="Tráfego Pago" title="Tráfego Pago">
+      <i data-lucide="trending-up" class="si"></i>
+      <span class="sl">Tráfego Pago</span>
+    </div>
+
+    <!-- Solicitações (Expansível com Árvore) -->
+    <div>
+      <div @click="toggleMenu('tickets')" 
+        :class="openMenus.tickets ? 'text-purple-600 dark:text-purple-400 font-bold' : (currentPage==='solicitacoes' ? 'active' : '')" 
+        class="sidebar-item"
+        data-legend="Solicitações">
+        <i data-lucide="ticket" class="si"></i>
+        <span class="sl">Solicitações</span>
+        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0 transition-transform" :class="openMenus.tickets?'rotate-90':''"></i>
+      </div>
+      <div class="sidebar-sub-menu" x-show="openMenus.tickets" x-transition>
+        <div @click="setPage('solicitacoes')" class="sidebar-sub-item" :class="currentPage==='solicitacoes'?'active':''">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Central de Demandas</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Nova'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Novas / Triagem</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Em Execução'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Em Andamento</span>
+        </div>
+        <div @click="setPage('solicitacoes'); reqFilterStatus='Concluída'" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span>
+          <span class="sl">Concluídas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projetos -->
+    <div @click="setPage('projetos')" :class="currentPage==='projetos'?'active':''" class="sidebar-item" data-legend="Projetos" title="Projetos">
+      <i data-lucide="folder-kanban" class="si"></i>
+      <span class="sl">Projetos</span>
+      <span class="sb2 badge bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold">12</span>
+    </div>
+
+    <div class="sg mt-2">ADMINISTRAÇÃO &amp; GESTÃO</div>
+    <!-- Financeiro -->
+    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item" data-legend="Financeiro" title="Financeiro">
+      <i data-lucide="wallet" class="si"></i>
+      <span class="sl">Financeiro</span>
+    </div>
+
+    <!-- Relatórios -->
+    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item" data-legend="Relatórios" title="Relatórios">
+      <i data-lucide="bar-chart-2" class="si"></i>
+      <span class="sl">Relatórios</span>
+    </div>
+
+    <!-- Equipe e Usuários -->
+    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" data-legend="Equipe e Usuários" title="Equipe e Usuários">
+      <i data-lucide="user-check" class="si"></i>
+      <span class="sl">Equipe e Usuários</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="users.length || 10"></span>
+    </div>
+
+    <!-- Configurações -->
+    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Configurações" title="Configurações">
+      <i data-lucide="settings" class="si"></i>
+      <span class="sl">Configurações</span>
+    </div>
+
+    <div class="sg mt-2">UNIDADES RACHI</div>
     <!-- RACHI Academy -->
     <div>
-      <div @click="toggleMenu('academy')" 
-        :class="openMenus.academy ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('academy') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item"
-        data-legend="RACHI Academy">
-        <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="w-5 h-5 object-contain shrink-0">
+      <div @click="toggleMenu('academy')" :class="currentPage.startsWith('academy') ? 'text-blue-600 font-bold' : ''" class="sidebar-item" data-legend="RACHI Academy">
+        <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="w-4 h-4 object-contain shrink-0">
         <span class="sl">RACHI Academy</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.academy?'open':''"></i>
+        <i data-lucide="chevron-right" class="sa sl w-3.5 h-3.5" :class="openMenus.academy?'open':''"></i>
       </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.academy" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+      <div class="sidebar-sub-menu" x-show="openMenus.academy" x-transition>
         <div @click="setPage('academy-cursos')" :class="currentPage==='academy-cursos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Cursos & Trilhas</span>
+          <span class="sidebar-sub-dot"></span><span class="sl">Cursos</span>
         </div>
-        <div @click="setPage('academy-alunos')" :class="currentPage==='academy-alunos'?'active':''" class="sidebar-sub-item justify-between">
-          <div class="flex items-center gap-2">
-            <span class="sidebar-sub-dot"></span>
-            <span class="sl">Alunos Matriculados</span>
-          </div>
-          <span x-show="pendingEnrollmentsCount > 0" class="badge bg-amber-500 text-slate-950 font-bold text-[9px] px-1.5 py-0.5 rounded-full animate-pulse" x-text="pendingEnrollmentsCount"></span>
-        </div>
-        <div @click="setPage('academy-matriculas')" :class="currentPage==='academy-matriculas'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Inscrições & Turmas</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- RACHI Tec -->
-    <div>
-      <div @click="toggleMenu('loja')" 
-        :class="openMenus.loja ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('loja') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item"
-        data-legend="RACHI Tec">
-        <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="w-5 h-5 object-contain shrink-0">
-        <span class="sl">RACHI Tec</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.loja?'open':''"></i>
-      </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.loja" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
-        <div @click="setPage('loja-produtos')" :class="currentPage==='loja-produtos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Catálogo de Produtos</span>
-        </div>
-        <div @click="setPage('loja-pedidos')" :class="currentPage==='loja-pedidos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Pedidos de Venda</span>
-        </div>
-        <div @click="setPage('loja-estoque')" :class="currentPage==='loja-estoque'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Controlo de Stock</span>
+        <div @click="setPage('academy-alunos')" :class="currentPage==='academy-alunos'?'active':''" class="sidebar-sub-item">
+          <span class="sidebar-sub-dot"></span><span class="sl">Alunos</span>
         </div>
       </div>
     </div>
 
     <!-- RACHI Human Capital -->
     <div>
-      <div @click="toggleMenu('rh')" 
-        :class="openMenus.rh ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('rh') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item"
-        data-legend="RACHI Human Capital">
-        <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="w-5 h-5 object-contain shrink-0">
+      <div @click="toggleMenu('rh')" :class="currentPage.startsWith('rh') ? 'text-emerald-600 font-bold' : ''" class="sidebar-item" data-legend="RACHI Human Capital">
+        <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="w-4 h-4 object-contain shrink-0">
         <span class="sl">RACHI Human Capital</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.rh?'open':''"></i>
+        <i data-lucide="chevron-right" class="sa sl w-3.5 h-3.5" :class="openMenus.rh?'open':''"></i>
       </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.rh" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+      <div class="sidebar-sub-menu" x-show="openMenus.rh" x-transition>
         <div @click="setPage('rh-solicitacoes')" :class="currentPage==='rh-solicitacoes'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span><span class="sl">Solicitações & Consultoria</span>
+          <span class="sidebar-sub-dot"></span><span class="sl">Solicitações RH</span>
         </div>
         <div @click="setPage('rh-vagas')" :class="currentPage==='rh-vagas'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Vagas Corporativas</span>
-        </div>
-        <div @click="setPage('rh-candidatos')" :class="currentPage==='rh-candidatos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Banco de Talentos</span>
+          <span class="sidebar-sub-dot"></span><span class="sl">Vagas</span>
         </div>
       </div>
     </div>
 
     <!-- RACHI Print -->
     <div>
-      <div @click="toggleMenu('grafica')" 
-        :class="openMenus.grafica ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('grafica') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item"
-        data-legend="RACHI Print">
-        <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="w-5 h-5 object-contain shrink-0">
+      <div @click="toggleMenu('grafica')" :class="currentPage.startsWith('grafica') ? 'text-amber-600 font-bold' : ''" class="sidebar-item" data-legend="RACHI Print">
+        <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="w-4 h-4 object-contain shrink-0">
         <span class="sl">RACHI Print</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.grafica?'open':''"></i>
+        <i data-lucide="chevron-right" class="sa sl w-3.5 h-3.5" :class="openMenus.grafica?'open':''"></i>
       </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.grafica" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+      <div class="sidebar-sub-menu" x-show="openMenus.grafica" x-transition>
         <div @click="setPage('grafica-produtos')" :class="currentPage==='grafica-produtos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Serviços Gráficos</span>
+          <span class="sidebar-sub-dot"></span><span class="sl">Produtos Gráficos</span>
         </div>
         <div @click="setPage('grafica-orcamentos')" :class="currentPage==='grafica-orcamentos'?'active':''" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Orçamentos & Produção</span>
+          <span class="sidebar-sub-dot"></span><span class="sl">Solicitações de Cotação</span>
         </div>
       </div>
-    </div>
-
-    <div class="sg">Performance</div>
-    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item" data-legend="Finanças & Receitas">
-      <i data-lucide="banknote" class="si"></i>
-      <span class="sl">Finanças & Receitas</span>
-    </div>
-    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item" data-legend="Relatórios & Exportação">
-      <i data-lucide="bar-chart-3" class="si"></i>
-      <span class="sl">Relatórios & Exportação</span>
-    </div>
-
-    <div class="sg">Configurações</div>
-    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Definições do Sistema" title="Definições do Sistema">
-      <i data-lucide="settings" class="si"></i>
-      <span class="sl">Definições do Sistema</span>
     </div>
   </nav>
 
@@ -1126,53 +1264,79 @@ a { text-decoration: none !important; }
 
 <!-- MAIN CONTENT -->
 <div id="admin-main" :class="{'sc': sidebarCollapsed}">
-  <header id="admin-header">
-    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 cursor-pointer">
-      <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
+  <header id="admin-header" class="px-5 py-3.5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4 flex-wrap">
+    <div class="flex items-center gap-3">
+      <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 cursor-pointer">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
 
-    <!-- Breadcrumb -->
-    <div class="flex items-center gap-2 text-sm shrink-0">
-      <span class="text-slate-400 dark:text-slate-500 font-semibold">Portal Executivo</span>
-      <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
-      <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
-    </div>
-
-    <!-- SEARCH CENTRALIZADO E ESPAÇOSO (MODELO GUNDJATECH) -->
-    <div class="flex-1 max-w-md mx-auto hidden md:block px-4">
-      <div class="relative w-full flex items-center">
-        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
-        <input type="text" placeholder="Pesquisar pedidos, clientes, demandas..." class="ia pl-10 pr-14 w-full py-2 text-xs">
-        <span class="hidden lg:inline-flex absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10 select-none">⌘ F</span>
+      <div>
+        <h1 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-tight" style="font-family:Outfit">
+          Bom dia, <span x-text="adminUser.nome.split(' ')[0] || 'John'">John</span>
+        </h1>
+        <p class="text-[11px] sm:text-xs text-slate-400 font-medium">
+          Aqui estão as atualizações mais recentes do sistema
+        </p>
       </div>
     </div>
 
-    <div class="flex-1 md:hidden"></div>
+    <!-- HORIZONTAL COMPACT CARDS & PILLS (MODELO REFERENCIA) -->
+    <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+      <!-- 1. Cron run / Sincronização -->
+      <div class="panze-hdr-pill cursor-pointer hover:border-slate-300 dark:hover:border-white/20" @click="refreshSync()" title="Executar sincronização">
+        <button class="w-6 h-6 rounded-full bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-500 hover:text-purple-600 transition" :class="isSyncing ? 'animate-spin text-purple-600' : ''">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+        </button>
+        <div class="leading-none text-left">
+          <div class="text-[11px] font-bold text-slate-900 dark:text-white">Cron run</div>
+          <div class="text-[9.5px] text-slate-400 mt-0.5" x-text="syncTimeText">Just now •</div>
+        </div>
+      </div>
 
-    <!-- AÇÕES DO CABEÇALHO -->
-    <div class="flex items-center gap-2.5">
-      <!-- BOTÃƒO TOGGLE DARK/LIGHT MODE -->
-      <button @click="toggleTheme()" 
-              class="hdr-btn"
-              :title="theme==='dark'?'Modo Claro':'Modo Escuro'">
-        <i data-lucide="sun" class="w-4 h-4 text-amber-400" x-show="theme==='dark'"></i>
-        <i data-lucide="moon" class="w-4 h-4 text-blue-500" x-show="theme==='light'"></i>
-        <span class="text-xs font-bold hidden sm:inline" x-text="theme==='dark'?'Modo Claro':'Modo Escuro'"></span>
-      </button>
+      <!-- 2. Sort By / Período -->
+      <div class="panze-hdr-pill cursor-pointer">
+        <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-slate-400"></i>
+        <div class="text-[11px] leading-none">
+          <span class="text-slate-400 text-[10px]">Sort By</span>
+          <select aria-label="Filtrar período" class="bg-transparent border-0 text-[11px] font-bold text-slate-800 dark:text-white focus:outline-none cursor-pointer block p-0">
+            <option value="all">All-Time</option>
+            <option value="30">Últimos 30 dias</option>
+            <option value="7">Últimos 7 dias</option>
+          </select>
+        </div>
+      </div>
 
-      <!-- NOTIFICAÇÕES -->
-      <button @click="setPage('notificacoes')" class="hdr-icon-btn" title="Notificações do Sistema">
-        <i data-lucide="bell" class="w-4 h-4"></i>
-        <span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full animate-ping"></span>
-        <span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full"></span>
-      </button>
+      <!-- 3. Quick Action Icons -->
+      <div class="panze-hdr-pill !py-1.5 !px-2.5 gap-2">
+        <button @click="setPage('relatorios')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Histórico">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+        </button>
+        <button @click="setPage('solicitacoes')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Tarefas e Pedidos">
+          <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
+        </button>
+        <button @click="setPage('sites')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-slate-800 transition" title="Sites & Rede">
+          <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+        </button>
+        <button @click="setPage('notificacoes')" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-purple-600 transition relative" title="Notificações">
+          <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+          <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping"></span>
+          <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
+        </button>
+        <!-- Toggle Light/Dark Mode -->
+        <button @click="toggleTheme()" class="w-7 h-7 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 transition" title="Alternar Modo Claro / Escuro">
+          <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500" x-show="theme==='dark'"></i>
+          <i data-lucide="moon" class="w-3.5 h-3.5 text-blue-600" x-show="theme==='light'"></i>
+        </button>
+      </div>
 
-      <!-- PERFIL DO USUÁRIO -->
-      <div class="flex items-center gap-2.5 pl-2.5 border-l border-slate-200 dark:border-blue-500/20">
-        <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#0050f0] to-[#00a3e0] flex items-center justify-center text-white text-xs font-black shadow-md shadow-blue-500/25 shrink-0" x-text="adminUser.initials"></div>
-        <div class="hidden sm:block">
-          <div class="text-xs font-extrabold text-slate-900 dark:text-white" x-text="adminUser.nome"></div>
-          <div class="text-[10px] text-blue-600 dark:text-[#38bdf8] font-bold uppercase tracking-wider">Super Administrador</div>
+      <!-- 4. User Profile Card -->
+      <div class="panze-hdr-pill !py-1 !pl-1.5 !pr-3.5 gap-2.5 cursor-pointer" @click="setPage('usuarios')" title="Perfil do Administrador">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-xs">
+          SA
+        </div>
+        <div class="text-left leading-tight hidden sm:block">
+          <div class="text-xs font-bold text-slate-900 dark:text-white" x-text="adminUser.nome || 'Super Administrador'">John Smith</div>
+          <div class="text-[10px] text-purple-600 dark:text-purple-400 font-semibold">@admin</div>
         </div>
       </div>
     </div>
@@ -1180,441 +1344,555 @@ a { text-decoration: none !important; }
 
   <main class="p-4 sm:p-6 lg:p-7 max-w-[1520px] mx-auto space-y-6">
 
-    <!-- DASHBOARD GERAL / HOME (MODELO GUNDJATECH EXECUTIVO COM DADOS RACHI) -->
+    <!-- DASHBOARD GERAL / HOME (MODELO FIDEDIGNO REFERENCIA VISUAL) -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- SUB-HEADER STRIP (GUNDJATECH MODEL) -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-[#8C95AA]">
-          Você tem <a href="#" @click.prevent="setPage('solicitacoes')" class="font-bold text-amber-500 dark:text-[#FFA525] hover:underline" x-text="`${totalRequestsCount} nova(s) solicitação(ões)`">14 nova(s) solicitação(ões)</a>
-          e <a href="#" @click.prevent="setPage('loja-pedidos')" class="font-bold text-amber-500 dark:text-[#FFA525] hover:underline" x-text="`${totalOrdersCount} pedido(s) em aberto`">3 pedido(s) em aberto</a>
-          <span class="text-slate-400 dark:text-[#5D667B]">• Visão Geral Executiva</span>
-        </p>
+      <!-- QUICK OVERVIEW BANNER COM GRADIENTE SUAVE E STATS EM PÍLULAS -->
+      <div class="panze-overview-banner shadow-xs">
+        <!-- Floating Ambient Glow Orbs -->
+        <div class="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-cyan-300/40 dark:bg-cyan-600/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/3 -translate-y-1/2 w-96 h-48 rounded-full bg-blue-300/35 dark:bg-blue-600/15 blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 left-12 w-64 h-64 rounded-full bg-purple-300/35 dark:bg-purple-600/20 blur-3xl pointer-events-none"></div>
 
-        <div class="flex flex-wrap items-center gap-2.5">
-          <div class="inline-flex items-center rounded-xl bg-white dark:bg-[#121623] border border-slate-200/90 dark:border-white/10 text-xs text-slate-700 dark:text-[#D5DCEB] shadow-2xs overflow-hidden">
-            <span class="px-3 py-1.5 flex items-center gap-2 border-r border-slate-200/90 dark:border-white/10">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-500 dark:text-[#FFA525]"></i>
-              <span>22 out 2026 - 21 nov 2026</span>
-            </span>
-            <select aria-label="Período do relatório" class="bg-transparent border-0 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-[#D5DCEB] focus:outline-none cursor-pointer">
-              <option value="7" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 7 dias</option>
-              <option value="30" selected class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 30 dias</option>
-              <option value="90" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 90 dias</option>
-              <option value="365" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 12 meses</option>
-            </select>
+        <div class="relative z-10">
+          <div class="mb-5">
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight" style="font-family:Outfit">
+              Visão Geral
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium mt-0.5">
+              Acompanhe os principais indicadores da Rachi em tempo real.
+            </p>
           </div>
 
-          <button @click="setPage('relatorios')" type="button" class="gtb-ctrl-btn !h-8 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-2xs flex items-center gap-2 cursor-pointer" title="Exportar relatório executivo">
-            <span>Exportar Relatório</span>
-            <i data-lucide="download" class="w-3.5 h-3.5 text-amber-500 dark:text-[#FFA525]"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- ROW 1: 4 REAL TOP KPI CARDS (PROPORÇÃO EXECUTIVA GUNDJATECH) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        <!-- KPI 1: Facturação Consolidada -->
-        <div @click="setPage('financeiro')" class="gtb-card gtb-kpi-gold !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Gestão Financeira">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <span class="gtb-icon-box !w-8 !h-8">
-                <i data-lucide="wallet" class="w-4 h-4"></i>
-              </span>
-              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-amber-500 transition-colors">Receita Recebida (30d)</span>
+          <!-- 5 STAT CARDS EM PÍLULAS FROSTED GLASS -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+            <!-- 1. Total de Clientes -->
+            <div @click="setPage('clientes')" class="panze-stat-pill cursor-pointer group" title="Ver Clientes">
+              <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-purple-600 transition-colors" style="font-family:Outfit">232</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(12 Novos)</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Total de Clientes</span>
             </div>
-            <span class="text-slate-400 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </span>
-          </div>
-          <div class="flex items-baseline justify-between gap-2 flex-wrap">
-            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
-              4.850.000,00 AOA
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
-              A receber: 1.200.000 AOA
-            </span>
-          </div>
-        </div>
 
-        <!-- KPI 2: Clientes & Leads -->
-        <div @click="setPage('clientes')" class="gtb-card gtb-kpi-blue !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Base de Clientes & Leads">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <span class="gtb-icon-box is-blue !w-8 !h-8">
-                <i data-lucide="users" class="w-4 h-4"></i>
-              </span>
-              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-blue-500 transition-colors">Clientes &amp; Leads</span>
+            <!-- 2. Sites Ativos -->
+            <div @click="setPage('sites')" class="panze-stat-pill cursor-pointer group" title="Ver Sites">
+              <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors" style="font-family:Outfit">87</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(5 Novos)</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Sites Ativos</span>
             </div>
-            <span class="text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </span>
-          </div>
-          <div class="flex items-baseline justify-between gap-2 flex-wrap">
-            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
-              <span x-text="totalClientsCount">9</span> <small class="text-xs font-semibold text-slate-500 dark:text-[#8C95AA]">(5 ativos · 4 leads)</small>
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
-              +<span x-text="totalClientsCount">9</span> em 30d
-            </span>
-          </div>
-        </div>
 
-        <!-- KPI 3: Solicitações & Ordens -->
-        <div @click="setPage('solicitacoes')" class="gtb-card gtb-kpi-petrol !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Central de Solicitações">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <span class="gtb-icon-box is-petrol !w-8 !h-8">
-                <i data-lucide="clipboard-list" class="w-4 h-4"></i>
-              </span>
-              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-emerald-500 transition-colors">Solicitações &amp; Ordens</span>
+            <!-- 3. Domínios Gerenciados -->
+            <div @click="setPage('dominios')" class="panze-stat-pill cursor-pointer group" title="Ver Domínios">
+              <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors" style="font-family:Outfit">22</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(2 Renovando)</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Domínios Gerenciados</span>
             </div>
-            <span class="text-slate-400 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </span>
-          </div>
-          <div class="flex items-baseline justify-between gap-2 flex-wrap">
-            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
-              <span x-text="totalRequestsCount">14</span> <small class="text-xs font-semibold text-amber-500 dark:text-[#FFA525]">(4 em exec. · 1 conc.)</small>
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
-              +<span x-text="totalRequestsCount">14</span> em 30d
-            </span>
-          </div>
-        </div>
 
-        <!-- KPI 4: Unidades & Loja TI -->
-        <div @click="setPage('loja-produtos')" class="gtb-card !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Loja & Catálogo TI">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <span class="gtb-icon-box is-purple !w-8 !h-8">
-                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-              </span>
-              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-purple-500 transition-colors">Pedidos TI &amp; Loja</span>
+            <!-- 4. Solicitações Recebidas -->
+            <div @click="setPage('solicitacoes')" class="panze-stat-pill cursor-pointer group" title="Ver Solicitações">
+              <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors" style="font-family:Outfit">18</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(6 Recentes)</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Solicitações Recebidas</span>
             </div>
-            <span class="text-slate-400 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-all">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </span>
-          </div>
-          <div class="flex items-baseline justify-between gap-2 flex-wrap">
-            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
-              <span x-text="totalOrdersCount">3</span> <small class="text-xs font-semibold text-slate-500 dark:text-[#8C95AA]">(24 itens em catálogo)</small>
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-emerald-600 dark:text-emerald-400">
-              SLA 100% Online
-            </span>
+
+            <!-- 5. Projetos em Andamento -->
+            <div @click="setPage('projetos')" class="panze-stat-pill cursor-pointer group col-span-2 sm:col-span-1" title="Ver Projetos">
+              <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:Outfit">3.8k</span>
+                <span class="text-[10.5px] font-bold text-slate-500 dark:text-slate-400">(1237 Novos)</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-2 block">Projetos em Andamento</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ROW 2: REAL 12-MONTH REVENUE BAR CHART (8 cols) + CATEGORY RINGS (4 cols) (GUNDJATECH MODEL) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <!-- 8 cols: Visão Geral de Receita (12 meses) -->
-        <section class="lg:col-span-8 gtb-card !p-5">
-          <details class="gt-acc" open>
-            <summary class="flex flex-wrap items-center justify-between gap-3 cursor-pointer select-none">
-              <div class="flex flex-wrap items-center gap-2.5 min-w-0">
-                <span class="gtb-icon-box !w-8 !h-8">
-                  <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                </span>
-                <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Visão Geral de Receita (12 meses)</h2>
-                <span class="text-xs text-slate-500 dark:text-[#8C95AA]">Dados reais em <strong class="text-slate-800 dark:text-white">tempo real</strong></span>
-              </div>
-              <div class="flex items-center gap-2.5 shrink-0">
-                <button @click.stop="setPage('financeiro')" type="button" class="gtb-ctrl-btn">
-                  <span>Financeiro</span>
-                  <i data-lucide="arrow-right" class="w-3 h-3"></i>
-                </button>
-                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525] shrink-0">
-                  <span class="gt-acc-open">Expandir ▾</span>
-                  <span class="gt-acc-close">Recolher ▴</span>
-                </span>
-              </div>
-            </summary>
+      <!-- MIDDLE ROW: GRÁFICO 1 (SOLICITAÇÕES POR CLIENTE) + 4 OPERATIONAL CARDS GRID 2x2 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- GRÁFICO 1: Solicitações por Cliente (Donut Chart) -->
+        <div class="lg:col-span-5 rounded-[24px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+              Solicitações por Cliente
+            </h3>
+            <span class="text-xs font-semibold text-slate-400">Atividade Geral</span>
+          </div>
 
-            <div class="mt-4 space-y-3">
-              <div class="flex items-center justify-end gap-4 text-[11px] font-semibold text-slate-500 dark:text-[#8C95AA]">
-                <span class="flex items-center gap-1.5">
-                  <i class="w-2.5 h-2.5 rounded-xs bg-[#FFA525] inline-block"></i> Recebido (AOA)
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <i class="w-2.5 h-2.5 rounded-xs bg-[#0050f0] inline-block"></i> A Receber (AOA)
-                </span>
-              </div>
-
-              <div class="gtb-paired-chart">
-                <div class="gtb-grid-line"><span>5M</span></div>
-                <div class="gtb-grid-line"><span>3.5M</span></div>
-                <div class="gtb-grid-line"><span>2M</span></div>
-                <div class="gtb-grid-line"><span>1M</span></div>
-                <div class="gtb-grid-line"><span>0</span></div>
-
-                <div class="gtb-bars-overlay">
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 18%;"></div><div class="gtb-bar-b" style="height: 12%;"></div><span class="gtb-month-lbl">Dez</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 25%;"></div><div class="gtb-bar-b" style="height: 15%;"></div><span class="gtb-month-lbl">Jan</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 32%;"></div><div class="gtb-bar-b" style="height: 20%;"></div><span class="gtb-month-lbl">Fev</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 28%;"></div><div class="gtb-bar-b" style="height: 18%;"></div><span class="gtb-month-lbl">Mar</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 40%;"></div><div class="gtb-bar-b" style="height: 22%;"></div><span class="gtb-month-lbl">Abr</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 45%;"></div><div class="gtb-bar-b" style="height: 28%;"></div><span class="gtb-month-lbl">Mai</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 52%;"></div><div class="gtb-bar-b" style="height: 30%;"></div><span class="gtb-month-lbl">Jun</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 48%;"></div><div class="gtb-bar-b" style="height: 25%;"></div><span class="gtb-month-lbl">Jul</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 58%;"></div><div class="gtb-bar-b" style="height: 34%;"></div><span class="gtb-month-lbl">Ago</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 62%;"></div><div class="gtb-bar-b" style="height: 36%;"></div><span class="gtb-month-lbl">Set</span></div>
-                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 70%;"></div><div class="gtb-bar-b" style="height: 38%;"></div><span class="gtb-month-lbl">Out</span></div>
-                  <div class="gtb-pair-group is-highlight"><div class="gtb-bar-a" style="height: 85%;"></div><div class="gtb-bar-b" style="height: 45%;"></div><span class="gtb-month-lbl">Nov</span></div>
-                </div>
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-6 my-auto">
+            <!-- SVG Donut Chart Segmented -->
+            <div class="relative w-40 h-40 shrink-0 flex items-center justify-center">
+              <svg viewBox="0 0 160 160" class="w-full h-full -rotate-90">
+                <!-- Segment 1: Cyan (GundjaTech) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#00e5ff" stroke-width="20" stroke-dasharray="75 364" stroke-dashoffset="0" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+                <!-- Segment 2: Royal Blue (Cotech) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#3b82f6" stroke-width="20" stroke-dasharray="65 364" stroke-dashoffset="-85" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+                <!-- Segment 3: Purple (Rachi Tech) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#8b5cf6" stroke-width="20" stroke-dasharray="55 364" stroke-dashoffset="-160" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+                <!-- Segment 4: Magenta/Pink (Laurinita) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#ec4899" stroke-width="20" stroke-dasharray="45 364" stroke-dashoffset="-225" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+                <!-- Segment 5: Lime (Inst. Saber) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#10b981" stroke-width="20" stroke-dasharray="40 364" stroke-dashoffset="-280" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+                <!-- Segment 6: Amber (BFA) -->
+                <circle cx="80" cy="80" r="58" fill="none" stroke="#f59e0b" stroke-width="20" stroke-dasharray="35 364" stroke-dashoffset="-330" stroke-linecap="round" class="hover:opacity-85 transition-opacity cursor-pointer"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span class="text-xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">100%</span>
+                <span class="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider">Atendidos</span>
               </div>
             </div>
-          </details>
-        </section>
 
-        <!-- 4 cols: Orçamentos & Distribuição por Unidade -->
-        <section class="lg:col-span-4 gtb-card !p-5">
-          <details class="gt-acc" open>
-            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
-              <div class="flex items-center gap-2 min-w-0">
-                <span class="gtb-icon-box !w-8 !h-8 shrink-0">
-                  <i data-lucide="pie-chart" class="w-4 h-4"></i>
-                </span>
-                <h2 class="text-sm font-bold text-slate-900 dark:text-white truncate">Distribuição por Unidade</h2>
+            <!-- Legend 2 columns -->
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs w-full">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#00e5ff] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="GundjaTech">GundjaTech</span>
               </div>
-              <div class="flex items-center gap-2 shrink-0">
-                <span class="gt-req-pill-neutral">14 demandas</span>
-                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525] shrink-0">
-                  <span class="gt-acc-open">Expandir ▾</span>
-                  <span class="gt-acc-close">Recolher ▴</span>
-                </span>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="Laurinita Ltda">Laurinita Ltda</span>
               </div>
-            </summary>
-
-            <div class="mt-3 space-y-3">
-              <div class="relative flex items-center justify-center py-1">
-                <div class="absolute left-0 top-0.5 z-10 px-2.5 py-1.5 rounded-xl bg-slate-50 dark:bg-[#0E2940] border border-slate-200 dark:border-white/10 shadow-2xs">
-                  <div class="text-xs font-extrabold text-slate-900 dark:text-white leading-tight">
-                    4,85M AOA
-                  </div>
-                  <div class="text-[9.5px] font-semibold text-slate-500 dark:text-[#8C95AA]">14 demandas</div>
-                </div>
-
-                <!-- Triple Concentric Ring SVG (GundjaTech Model) -->
-                <svg viewBox="0 0 200 200" style="width: 140px; height: 140px;" class="-rotate-90">
-                  <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
-                  <circle cx="100" cy="100" r="80" fill="none" stroke="#0050f0" stroke-width="8" stroke-linecap="round" stroke-dasharray="360 502"/>
-                  <circle cx="100" cy="100" r="64" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
-                  <circle cx="100" cy="100" r="64" fill="none" stroke="#00a3e0" stroke-width="8" stroke-linecap="round" stroke-dasharray="240 402"/>
-                  <circle cx="100" cy="100" r="48" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
-                  <circle cx="100" cy="100" r="48" fill="none" stroke="#FFA525" stroke-width="8" stroke-linecap="round" stroke-dasharray="160 301"/>
-                </svg>
-
-                <span class="absolute text-base font-extrabold text-slate-900 dark:text-white">14</span>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#3b82f6] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="Cotech Contabilidade">Cotech Contab.</span>
               </div>
-
-              <!-- 4 Unidades Footer Grid -->
-              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px;" class="pt-2 text-center border-t border-slate-100 dark:border-white/10">
-                <div>
-                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
-                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#0050f0]"></i> Academy
-                  </div>
-                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">8 reqs</div>
-                </div>
-                <div>
-                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
-                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#00a3e0]"></i> Tec
-                  </div>
-                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">14 reqs</div>
-                </div>
-                <div>
-                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
-                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-emerald-500"></i> RH
-                  </div>
-                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">6 reqs</div>
-                </div>
-                <div>
-                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
-                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#FFA525]"></i> Print
-                  </div>
-                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">12 reqs</div>
-                </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#10b981] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="Instituto Saber">Inst. Saber</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#8b5cf6] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="Rachi Tech">Rachi Tech</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ec4899] shrink-0"></span>
+                <span class="font-semibold text-slate-700 dark:text-slate-300 truncate" title="BFA Angola">BFA Angola</span>
               </div>
             </div>
-          </details>
-        </section>
-      </div>
-
-      <!-- ROW 3: ECOSSISTEMA RACHI - 4 UNIDADES OPERACIONAIS -->
-      <div>
-        <div class="flex items-center justify-between mb-3.5">
-          <h2 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <i data-lucide="layout-grid" class="w-4 h-4 text-amber-500 dark:text-[#FFA525]"></i>
-            <span>Unidades RACHI</span>
-          </h2>
-          <span class="text-xs text-slate-500 font-medium">Ecossistema integrado corporativo</span>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- 1. ACADEMY -->
-          <div @click="setPage('academy-cursos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+        <!-- 4 OPERATIONAL CARDS GRID 2x2 -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Card 1: Total de Solicitações -->
+          <div @click="setPage('solicitacoes')" class="panze-op-card cursor-pointer group" title="Ver Todas as Solicitações">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
-                  <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-7 w-auto max-w-full object-contain">
+              <div class="flex items-center justify-between">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">265</span>
+                  <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                    4% ↑
+                  </span>
                 </div>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/40">Ensino</span>
               </div>
-              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                RACHI Academy
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Capacitação, trilhas executivas e formação corporativa em tecnologia.
-              </p>
+              <h4 class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-2">
+                Total de Solicitações
+              </h4>
             </div>
-            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">12 Cursos · 48 Alunos</span>
-              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                Aceder &rarr;
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
+              <span class="text-[11px] font-medium text-slate-400">Atividade em tempo real</span>
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shadow-xs group-hover:scale-110 transition-transform">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
               </span>
             </div>
           </div>
 
-          <!-- 2. TEC -->
-          <div @click="setPage('loja-produtos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+          <!-- Card 2: Solicitações Pendentes -->
+          <div @click="setPage('solicitacoes')" class="panze-op-card cursor-pointer group" title="Ver Solicitações Pendentes">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
-                  <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-7 w-auto max-w-full object-contain">
+              <div class="flex items-center justify-between">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">256</span>
+                  <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                    4% ↑
+                  </span>
                 </div>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-800/40">TI & Loja</span>
               </div>
-              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                RACHI Tec
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Hardware empresarial, notebooks, redes e infraestrutura de TI.
-              </p>
+              <h4 class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-2">
+                Solicitações Pendentes
+              </h4>
             </div>
-            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">24 Itens · 15 Pedidos</span>
-              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                Aceder &rarr;
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
+              <span class="text-[11px] font-medium text-slate-400">Aguardando triagem</span>
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shadow-xs group-hover:scale-110 transition-transform">
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
               </span>
             </div>
           </div>
 
-          <!-- 3. HUMAN CAPITAL -->
-          <div @click="setPage('rh-vagas')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+          <!-- Card 3: Solicitações em Andamento -->
+          <div @click="setPage('solicitacoes')" class="panze-op-card cursor-pointer group" title="Ver Solicitações em Andamento">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
-                  <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-7 w-auto max-w-full object-contain">
+              <div class="flex items-center justify-between">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">43</span>
+                  <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                    0% ↑
+                  </span>
                 </div>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">RH</span>
               </div>
-              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                RACHI Human Capital
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Recrutamento especializado, consultoria de RH e legalização.
-              </p>
+              <h4 class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-2">
+                Em Andamento / Execução
+              </h4>
             </div>
-            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">6 Demandas Ativas</span>
-              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                Aceder &rarr;
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
+              <span class="text-[11px] font-medium text-slate-400">Equipe técnica ativa</span>
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shadow-xs group-hover:scale-110 transition-transform">
+                <i data-lucide="play" class="w-3.5 h-3.5"></i>
               </span>
             </div>
           </div>
 
-          <!-- 4. PRINT -->
-          <div @click="setPage('grafica-produtos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+          <!-- Card 4: Solicitações Concluídas -->
+          <div @click="setPage('solicitacoes')" class="panze-op-card cursor-pointer group" title="Ver Solicitações Concluídas">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
-                  <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-7 w-auto max-w-full object-contain">
+              <div class="flex items-center justify-between">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">12</span>
+                  <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                    0% ↑
+                  </span>
                 </div>
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50 dark:border-purple-800/40">Gráfica</span>
               </div>
-              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
-                RACHI Print
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Impressão corporativa, brindes, papelaria de luxo e sinalética.
-              </p>
+              <h4 class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-2">
+                Solicitações Concluídas
+              </h4>
             </div>
-            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700 dark:text-slate-300">18 Catálogos · AOA 450k</span>
-              <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                Aceder &rarr;
+            <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
+              <span class="text-[11px] font-medium text-slate-400">Finalizadas com sucesso</span>
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shadow-xs group-hover:scale-110 transition-transform">
+                <i data-lucide="check-check" class="w-3.5 h-3.5"></i>
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ROW 4: LIVE OPERATIONAL RECORDS (2 COLUMNS - GUNDJATECH MODEL) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-        <!-- Coluna 1: Últimas Solicitações de Clientes -->
-        <section class="gtb-card !p-5">
-          <details class="gt-acc" open>
-            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
-              <h2 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-[#8C95AA] truncate">
-                Últimas Solicitações de Clientes (<span x-text="totalRequestsCount">14</span>)
-              </h2>
-              <div class="flex items-center gap-3 shrink-0">
-                <a href="#" @click.prevent="setPage('solicitacoes')" class="text-xs font-bold text-blue-600 dark:text-[#38BDF8] hover:underline no-underline">Ver todas &rarr;</a>
-                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525]">
-                  <span class="gt-acc-open">Expandir ▾</span>
-                  <span class="gt-acc-close">Recolher ▴</span>
-                </span>
-              </div>
-            </summary>
+      <!-- LOWER MIDDLE ROW: GRÁFICO 2 (BARRAS EM CÁPSULAS 12 MESES) + GRÁFICO 3 (RADIAL NOTCHED RING) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- GRÁFICO 2: Solicitações ao Longo do Tempo (Stacked Capsule Bars) -->
+        <div class="lg:col-span-7 rounded-[24px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+              Solicitações ao Longo do Tempo
+            </h3>
+            <span class="text-xs font-semibold text-slate-400">Evolução Mensal</span>
+          </div>
 
-            <div class="mt-3 divide-y divide-slate-100 dark:divide-white/5 text-xs max-h-80 overflow-y-auto">
-              <template x-for="r in allRequests.slice(0, 6)" :key="r.id">
-                <div @click="openReq(r)" class="py-2.5 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-white/[0.02] px-1 rounded-lg transition">
-                  <div class="min-w-0">
-                    <span class="font-bold text-slate-900 dark:text-white truncate block" x-text="r.servico || r.title || 'Solicitação'"></span>
-                    <span class="text-[10.5px] text-slate-500 dark:text-[#8C95AA] truncate block">
-                      <span x-text="r.cliente || r.empresa || 'Cliente'"></span> • Prot: <span class="font-mono font-bold" x-text="'#'+r.id"></span>
-                    </span>
+          <!-- Stacked Capsule Bars 12 Months -->
+          <div class="grid grid-cols-12 gap-2 sm:gap-4 items-end px-2 pt-4 pb-2 border-b border-slate-100 dark:border-white/5">
+            <!-- Jul -->
+            <div class="panze-bar-col" title="Julho">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Jul</span>
+              <div class="panze-capsule cap-green" style="height: 38px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 22px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 48px;"></div>
+            </div>
+            <!-- Aug -->
+            <div class="panze-bar-col" title="Agosto">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Aug</span>
+              <div class="panze-capsule cap-green" style="height: 44px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 35px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 52px;"></div>
+            </div>
+            <!-- Sep -->
+            <div class="panze-bar-col" title="Setembro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Sep</span>
+              <div class="panze-capsule cap-green" style="height: 52px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 28px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 60px;"></div>
+            </div>
+            <!-- Oct -->
+            <div class="panze-bar-col" title="Outubro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Oct</span>
+              <div class="panze-capsule cap-green" style="height: 65px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 40px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 30px;"></div>
+            </div>
+            <!-- Nov -->
+            <div class="panze-bar-col" title="Novembro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Nov</span>
+              <div class="panze-capsule cap-green" style="height: 30px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 18px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 38px;"></div>
+            </div>
+            <!-- Dec -->
+            <div class="panze-bar-col" title="Dezembro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Dec</span>
+              <div class="panze-capsule cap-green" style="height: 48px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 32px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 55px;"></div>
+            </div>
+            <!-- Jan -->
+            <div class="panze-bar-col" title="Janeiro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Jan</span>
+              <div class="panze-capsule cap-green" style="height: 36px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 24px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 42px;"></div>
+            </div>
+            <!-- Feb -->
+            <div class="panze-bar-col" title="Fevereiro">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Feb</span>
+              <div class="panze-capsule cap-green" style="height: 56px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 29px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 45px;"></div>
+            </div>
+            <!-- Mar -->
+            <div class="panze-bar-col" title="Março">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Mar</span>
+              <div class="panze-capsule cap-green" style="height: 42px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 36px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 58px;"></div>
+            </div>
+            <!-- Apr -->
+            <div class="panze-bar-col" title="Abril">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Apr</span>
+              <div class="panze-capsule cap-green" style="height: 60px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 22px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 35px;"></div>
+            </div>
+            <!-- May -->
+            <div class="panze-bar-col" title="Maio">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">May</span>
+              <div class="panze-capsule cap-green" style="height: 50px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 30px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 48px;"></div>
+            </div>
+            <!-- Jun -->
+            <div class="panze-bar-col" title="Junho">
+              <span class="text-[10px] font-semibold text-slate-400 mt-2">Jun</span>
+              <div class="panze-capsule cap-green" style="height: 45px;"></div>
+              <div class="panze-capsule cap-purple" style="height: 28px;"></div>
+              <div class="panze-capsule cap-orange" style="height: 62px;"></div>
+            </div>
+          </div>
+
+          <!-- Bottom Legend -->
+          <div class="flex items-center justify-between flex-wrap gap-4 pt-4 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#00d68f]"></span>
+              <span class="font-bold text-slate-900 dark:text-white">234</span>
+              <span class="text-slate-500 dark:text-slate-400">Total Recebidas</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#8b5cf6]"></span>
+              <span class="font-bold text-slate-900 dark:text-white">16</span>
+              <span class="text-slate-500 dark:text-slate-400">Em Andamento</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#f97316]"></span>
+              <span class="font-bold text-slate-900 dark:text-white">43</span>
+              <span class="text-slate-500 dark:text-slate-400">Concluídas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GRÁFICO 3: Solicitações por Categoria (Radial Segmented Ring) -->
+        <div class="lg:col-span-5 rounded-[24px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+              Solicitações por Categoria
+            </h3>
+            <span class="text-xs font-semibold text-slate-400">Distribuição</span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-6 my-auto">
+            <!-- Radial Notched Ring Chart (28 Rounded Notches) -->
+            <div class="relative w-44 h-44 shrink-0 flex items-center justify-center">
+              <svg viewBox="0 0 200 200" class="w-full h-full">
+                <g transform="translate(100, 100)">
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#f97316" transform="rotate(0)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#ea580c" transform="rotate(13)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#f97316" transform="rotate(26)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#fb923c" transform="rotate(39)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#fdba74" transform="rotate(52)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#fed7aa" transform="rotate(65)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#fbcfe8" transform="rotate(78)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#f472b6" transform="rotate(91)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#e879f9" transform="rotate(104)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#d946ef" transform="rotate(117)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#c026d3" transform="rotate(130)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#a855f7" transform="rotate(143)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#9333ea" transform="rotate(156)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#7e22ce" transform="rotate(169)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#6b21a8" transform="rotate(182)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#581c87" transform="rotate(195)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#4338ca" transform="rotate(208)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#3b82f6" transform="rotate(221)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#0284c7" transform="rotate(234)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#06b6d4" transform="rotate(247)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#00e5ff" transform="rotate(260)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#14b8a6" transform="rotate(273)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#10b981" transform="rotate(286)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#22c55e" transform="rotate(299)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#4ade80" transform="rotate(312)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#84cc16" transform="rotate(325)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#eab308" transform="rotate(338)"/>
+                  <rect x="-3" y="-80" width="6" height="18" rx="3" fill="#f59e0b" transform="rotate(351)"/>
+                </g>
+              </svg>
+              <!-- Center Metric -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span class="text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">40</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Tickets</span>
+              </div>
+            </div>
+
+            <!-- Right Legend with Change Metrics -->
+            <div class="space-y-3.5 text-xs w-full">
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#f97316] shrink-0"></span>
+                    <span class="font-bold text-slate-800 dark:text-slate-200">Criação de Sites</span>
                   </div>
-                  <span class="gt-req-pill-neutral shrink-0" x-text="r.status || 'Ativo'"></span>
+                  <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">↑ 44.75%</span>
                 </div>
+                <div class="text-[10px] text-slate-400 pl-4.5">Portais, landing pages e e-commerce</div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#8b5cf6] shrink-0"></span>
+                    <span class="font-bold text-slate-800 dark:text-slate-200">Gestão de Domínios</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-rose-500">↓ 46.27%</span>
+                </div>
+                <div class="text-[10px] text-slate-400 pl-4.5">DNS, registros e renovações</div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#10b981] shrink-0"></span>
+                    <span class="font-bold text-slate-800 dark:text-slate-200">Tráfego Pago & Ads</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">↑ 25%</span>
+                </div>
+                <div class="text-[10px] text-slate-400 pl-4.5">Meta Ads, Google Ads e campanhas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: CENTRAL DE SOLICITAÇÕES RECENTES (TABELA RECENT PUBLICATIONS) -->
+      <div class="rounded-[24px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <!-- Table Header & Actions -->
+        <div class="p-5 sm:p-6 border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+              Solicitações Recentes
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Últimas publicações e pedidos gerados pelos clientes na plataforma.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <button @click="setPage('relatorios')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-50 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-2xs cursor-pointer" title="Exportar tabela">
+              <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>Exportar</span>
+            </button>
+
+            <div class="inline-flex items-center rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <span class="text-slate-400 mr-1.5">Período:</span>
+              <select class="bg-transparent border-0 text-xs font-bold text-slate-800 dark:text-white focus:outline-none cursor-pointer">
+                <option value="all">Todo o período</option>
+                <option value="30">Últimos 30 dias</option>
+                <option value="7">Últimos 7 dias</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter and Search Bar -->
+        <div class="p-4 bg-slate-50/60 dark:bg-white/[0.02] border-b border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <!-- Filter Tabs -->
+          <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+            <button @click="reqFilterStatus = 'all'" :class="reqFilterStatus==='all' ? 'bg-purple-600 text-white shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shrink-0">
+              Todas (<span x-text="allRequests.length">14</span>)
+            </button>
+            <button @click="reqFilterStatus = 'Nova'" :class="reqFilterStatus==='Nova' ? 'bg-purple-600 text-white shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shrink-0">
+              Pendentes
+            </button>
+            <button @click="reqFilterStatus = 'Em Execução'" :class="reqFilterStatus==='Em Execução' ? 'bg-purple-600 text-white shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shrink-0">
+              Em Andamento
+            </button>
+            <button @click="reqFilterStatus = 'Concluída'" :class="reqFilterStatus==='Concluída' ? 'bg-purple-600 text-white shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shrink-0">
+              Concluídas
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full sm:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="reqSearch" placeholder="Filtrar por protocolo, cliente ou serviço..." class="w-full pl-9 pr-3 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500">
+          </div>
+        </div>
+
+        <!-- Table Content -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+              <tr>
+                <th class="py-3 px-4 font-bold">Ticket ID</th>
+                <th class="py-3 px-4 font-bold">Cliente</th>
+                <th class="py-3 px-4 font-bold">E-mail</th>
+                <th class="py-3 px-4 font-bold">Serviço / Demanda</th>
+                <th class="py-3 px-4 font-bold">Criado em</th>
+                <th class="py-3 px-4 font-bold">Responsável</th>
+                <th class="py-3 px-4 font-bold text-center">Status</th>
+                <th class="py-3 px-4 font-bold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="r in paginatedRequests" :key="r.id">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors group">
+                  <td class="py-3.5 px-4 font-mono font-bold text-purple-600 dark:text-purple-400 whitespace-nowrap" x-text="r.protocol || ('#TKT-'+r.id)"></td>
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white whitespace-nowrap" x-text="r.cliente || r.empresa || 'Cliente'"></td>
+                  <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400 whitespace-nowrap" x-text="r.email || (r.cliente ? r.cliente.toLowerCase().replace(/\s+/g,'')+ '@cliente.ao' : 'contato@cliente.ao')"></td>
+                  <td class="py-3.5 px-4 max-w-xs truncate text-slate-700 dark:text-slate-300 font-medium" x-text="r.title || r.servico || 'Solicitação de Serviço'"></td>
+                  <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400 whitespace-nowrap" x-text="r.data || '24/11/2026'"></td>
+                  <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 whitespace-nowrap font-medium" x-text="r.responsavel || 'Casimiro Gundja'"></td>
+                  <td class="py-3.5 px-4 text-center whitespace-nowrap">
+                    <span class="px-2.5 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider inline-flex items-center gap-1"
+                          :class="r.status === 'Concluída' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40' : (r.status === 'Nova' ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800/40' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40')"
+                          x-text="r.status || 'Nova'"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                    <div class="flex items-center justify-end gap-1.5">
+                      <button @click="openReq(r)" class="p-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 text-slate-600 dark:text-slate-300 transition" title="Ver detalhes">
+                        <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <button @click="openReq(r)" class="p-1.5 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 text-blue-600 dark:text-blue-400 transition" title="Gerenciar">
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
               </template>
-            </div>
-          </details>
-        </section>
+            </tbody>
+          </table>
+        </div>
 
-        <!-- Coluna 2: Clientes & Leads Recentes -->
-        <section class="gtb-card !p-5">
-          <details class="gt-acc" open>
-            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
-              <h2 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-[#8C95AA] truncate">
-                Clientes &amp; Leads Recentes (<span x-text="totalClientsCount">9</span>)
-              </h2>
-              <div class="flex items-center gap-3 shrink-0">
-                <a href="#" @click.prevent="setPage('clientes')" class="text-xs font-bold text-blue-600 dark:text-[#38BDF8] hover:underline no-underline">Ver todos &rarr;</a>
-                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525]">
-                  <span class="gt-acc-open">Expandir ▾</span>
-                  <span class="gt-acc-close">Recolher ▴</span>
-                </span>
-              </div>
-            </summary>
-
-            <div class="mt-3 divide-y divide-slate-100 dark:divide-white/5 text-xs max-h-80 overflow-y-auto">
-              <template x-for="c in clients.slice(0, 6)" :key="c.id">
-                <div @click="setPage('clientes')" class="py-2.5 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-white/[0.02] px-1 rounded-lg transition">
-                  <div class="min-w-0">
-                    <span class="font-bold text-slate-900 dark:text-white truncate block" x-text="c.nome + (c.tipo ? ' ('+c.tipo+')' : '')"></span>
-                    <span class="text-[10.5px] text-slate-500 dark:text-[#8C95AA] truncate block" x-text="(c.email || c.tel || 'Sem contato')"></span>
-                  </div>
-                  <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase tracking-wider"
-                        :class="c.status === 'Ativo' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40'"
-                        x-text="c.status || 'Ativo'"></span>
-                </div>
-              </template>
-            </div>
-          </details>
-        </section>
+        <!-- Table Footer / Pagination -->
+        <div class="p-4 bg-slate-50/40 dark:bg-white/[0.01] border-t border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <span>Mostrando <strong>1 a 6</strong> de <strong x-text="allRequests.length">14</strong> solicitações</span>
+          <div class="flex items-center gap-1">
+            <button class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-white text-slate-600 dark:text-slate-300 font-bold transition">Anterior</button>
+            <button class="px-2.5 py-1 rounded-lg bg-purple-600 text-white font-bold shadow-2xs">1</button>
+            <button class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-white text-slate-600 dark:text-slate-300 font-bold transition">2</button>
+            <button class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-white text-slate-600 dark:text-slate-300 font-bold transition">Próxima</button>
+          </div>
+        </div>
       </div>
 
     </section>
@@ -4693,7 +4971,404 @@ a { text-decoration: none !important; }
       </template>
     </div>
 
-  </main>
+
+    <!-- =====================================================================
+         MÓDULO 1: SITES (SOLICITADO NO ITEM 8 DO BRIEFING)
+         ===================================================================== -->
+    <section x-show="currentPage==='sites'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gerenciador de Sites &amp; Aplicações</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Gestão de websites cadastrados, tecnologias, status operacional e certificados SSL.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="showAlert('info', 'Novo Site', 'Abrindo assistente de implantação de site...')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Novo Site</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">TOTAL DE SITES</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">87</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400">Cadastrados</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SITES ONLINE</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">85</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">97.7% UP</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EM MANUTENÇÃO</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit">2</div>
+            <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">STAGING</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CERTIFICADOS SSL</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">87</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">100% SEGURO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Sites -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
+          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Websites Gerenciados pela RACHI</h3>
+          <span class="text-xs text-slate-400 font-semibold">5 de 87 sites listados</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+              <tr>
+                <th class="py-3 px-4 font-bold">Plataforma / Nome</th>
+                <th class="py-3 px-4 font-bold">URL</th>
+                <th class="py-3 px-4 font-bold">Cliente Responsável</th>
+                <th class="py-3 px-4 font-bold">Tecnologia</th>
+                <th class="py-3 px-4 font-bold text-center">SSL</th>
+                <th class="py-3 px-4 font-bold text-center">Status</th>
+                <th class="py-3 px-4 font-bold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="s in sites" :key="s.id">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="s.nome"></td>
+                  <td class="py-3.5 px-4">
+                    <a :href="s.url" target="_blank" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1">
+                      <span x-text="s.url"></span>
+                      <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-300 font-medium" x-text="s.cliente"></td>
+                  <td class="py-3.5 px-4 text-slate-500 font-mono" x-text="s.tech"></td>
+                  <td class="py-3.5 px-4 text-center">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">Ativo</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-center">
+                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
+                          :class="s.status === 'Online' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'"
+                          x-text="s.status"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button @click="showAlert('success', 'Site', 'Painel técnico do site acessado com sucesso!')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition" title="Gerenciar site">
+                      <i data-lucide="settings-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         MÓDULO 2: DOMÍNIOS (SOLICITADO NO ITEM 8 DO BRIEFING)
+         ===================================================================== -->
+    <section x-show="currentPage==='dominios'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Domínios &amp; DNS</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Controle de zonas de DNS, expirações, renovações automáticas e proteção whois.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="showAlert('info', 'Registrar Domínio', 'Assistente de consulta Whois aberto.')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span>Registrar Domínio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">DOMÍNIOS GERENCIADOS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">22</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400">Total</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">STATUS ATIVO</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">20</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">DNS OK</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">RENOVAÇÃO PRÓXIMA</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-amber-500" style="font-family:Outfit">2</div>
+            <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">&lt; 30 DIAS</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">PROVEDORES DNS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">3</div>
+            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">CLOUDFLARE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Domínios -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
+          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Domínios Registrados</h3>
+          <span class="text-xs text-slate-400 font-semibold">Exibindo registros ativos</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+              <tr>
+                <th class="py-3 px-4 font-bold">Domínio</th>
+                <th class="py-3 px-4 font-bold">Cliente</th>
+                <th class="py-3 px-4 font-bold">Servidor DNS</th>
+                <th class="py-3 px-4 font-bold">Data Registro</th>
+                <th class="py-3 px-4 font-bold">Expiração</th>
+                <th class="py-3 px-4 font-bold text-center">Status</th>
+                <th class="py-3 px-4 font-bold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="d in dominios" :key="d.id">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
+                  <td class="py-3.5 px-4 font-bold font-mono text-purple-600 dark:text-purple-400" x-text="d.domain"></td>
+                  <td class="py-3.5 px-4 text-slate-800 dark:text-slate-200 font-semibold" x-text="d.cliente"></td>
+                  <td class="py-3.5 px-4 text-slate-500 font-medium" x-text="d.dns"></td>
+                  <td class="py-3.5 px-4 text-slate-500" x-text="d.registro"></td>
+                  <td class="py-3.5 px-4 font-semibold text-slate-700 dark:text-slate-300" x-text="d.expiracao"></td>
+                  <td class="py-3.5 px-4 text-center">
+                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
+                          :class="d.status === 'Ativo' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'"
+                          x-text="d.status"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button @click="showAlert('success', 'DNS', 'Zonas de DNS carregadas.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition" title="Editar DNS">
+                      <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         MÓDULO 3: TRÁFEGO PAGO (SOLICITADO NO ITEM 8 DO BRIEFING)
+         ===================================================================== -->
+    <section x-show="currentPage==='trafego'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Tráfego Pago &amp; Anúncios</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Campanhas ativas no Meta Ads, Google Ads e LinkedIn Ads com métricas de conversão e ROI.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="showAlert('info', 'Nova Campanha', 'Assistente de criação de campanha de tráfego iniciado.')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Nova Campanha</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">INVESTIMENTO MENSAL</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Kz 2.24M</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400">Total</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CLIQUES GERADOS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">37.5k</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">TRÁFEGO</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONVERSÕES TOTAIS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">771</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">LEADS</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CTR MÉDIO</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">7.98%</div>
+            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">ALTO ROI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Campanhas -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
+          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Campanhas em Execução</h3>
+          <span class="text-xs text-slate-400 font-semibold">Performance em tempo real</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+              <tr>
+                <th class="py-3 px-4 font-bold">Campanha</th>
+                <th class="py-3 px-4 font-bold">Cliente / Conta</th>
+                <th class="py-3 px-4 font-bold">Plataforma</th>
+                <th class="py-3 px-4 font-bold">Investimento</th>
+                <th class="py-3 px-4 font-bold">Cliques</th>
+                <th class="py-3 px-4 font-bold">Conversões</th>
+                <th class="py-3 px-4 font-bold">CTR</th>
+                <th class="py-3 px-4 font-bold text-center">Status</th>
+                <th class="py-3 px-4 font-bold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="cp in campanhas" :key="cp.id">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="cp.nome"></td>
+                  <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-semibold" x-text="cp.cliente"></td>
+                  <td class="py-3.5 px-4 font-bold text-blue-600 dark:text-blue-400" x-text="cp.plataforma"></td>
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="cp.invest"></td>
+                  <td class="py-3.5 px-4 font-semibold text-slate-600 dark:text-slate-400" x-text="cp.cliques.toLocaleString()"></td>
+                  <td class="py-3.5 px-4 font-bold text-emerald-600 dark:text-emerald-400" x-text="cp.conv"></td>
+                  <td class="py-3.5 px-4 font-bold text-purple-600 dark:text-purple-400" x-text="cp.ctr"></td>
+                  <td class="py-3.5 px-4 text-center">
+                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
+                          :class="cp.status === 'Ativa' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200'"
+                          x-text="cp.status"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button @click="showAlert('info', 'Análise', 'Dashboard de conversão da campanha aberto.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition">
+                      <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         MÓDULO 4: PROJETOS (SOLICITADO NO ITEM 8 DO BRIEFING)
+         ===================================================================== -->
+    <section x-show="currentPage==='projetos'" x-cloak class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">Gestão de Projetos &amp; Entregas</h1>
+          <p class="text-slate-500 text-sm mt-0.5">Acompanhamento de cronogramas, tarefas concluídas, equipes alocadas e marcos contratuais.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="showAlert('info', 'Novo Projeto', 'Assistente de criação de projeto aberto.')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-xs transition cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Novo Projeto</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 KPIS -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">PROJETOS ATIVOS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">12</div>
+            <span class="text-xs font-bold tracking-wider text-slate-400">Em curso</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">CONCLUÍDOS</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit">28</div>
+            <span class="text-xs font-bold tracking-wider text-emerald-600 uppercase">ENTREGUES</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">EM HOMOLOGAÇÃO</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400" style="font-family:Outfit">3</div>
+            <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">QA / TESTES</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 p-5 shadow-xs">
+          <div class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">SLA NO PRAZO</div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400" style="font-family:Outfit">98.4%</div>
+            <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">PRECISÃO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Projetos -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-100 dark:border-white/5 flex items-center justify-between gap-4">
+          <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Projetos em Execução</h3>
+          <span class="text-xs text-slate-400 font-semibold">Cronogramas &amp; Prazos</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 dark:bg-white/[0.02] text-slate-400 uppercase tracking-wider text-[10.5px] border-b border-slate-100 dark:border-white/5">
+              <tr>
+                <th class="py-3 px-4 font-bold">Projeto</th>
+                <th class="py-3 px-4 font-bold">Cliente</th>
+                <th class="py-3 px-4 font-bold">Responsável</th>
+                <th class="py-3 px-4 font-bold">Início</th>
+                <th class="py-3 px-4 font-bold">Entrega</th>
+                <th class="py-3 px-4 font-bold">Progresso</th>
+                <th class="py-3 px-4 font-bold text-center">Status</th>
+                <th class="py-3 px-4 font-bold text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+              <template x-for="p in projetos" :key="p.id">
+                <tr class="hover:bg-slate-50/80 dark:hover:bg-white/[0.02] transition-colors">
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="p.nome"></td>
+                  <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium" x-text="p.cliente"></td>
+                  <td class="py-3.5 px-4 text-slate-600 dark:text-slate-400" x-text="p.responsavel"></td>
+                  <td class="py-3.5 px-4 text-slate-500" x-text="p.inicio"></td>
+                  <td class="py-3.5 px-4 font-semibold text-slate-800 dark:text-slate-200" x-text="p.entrega"></td>
+                  <td class="py-3.5 px-4 w-36">
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 h-2 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full" :style="'width: ' + p.progresso + '%'"></div>
+                      </div>
+                      <span class="text-[10px] font-bold text-slate-700 dark:text-slate-300" x-text="p.progresso + '%'"></span>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4 text-center">
+                    <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase"
+                          :class="p.status === 'Concluído' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : (p.status === 'Em Testes' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-purple-50 text-purple-700 border border-purple-200')"
+                          x-text="p.status"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right">
+                    <button @click="showAlert('info', 'Projeto', 'Quadro Kanban do projeto aberto.')" class="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 transition">
+                      <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    </main>
 </div>
 
 <!-- SCRIPTS E LÓGICA ALPINE.JS + CHART.JS -->
@@ -4806,6 +5481,56 @@ function renderCharts(theme) {
 
 function adminApp() {
   return {
+    syncTimeText: 'Just now •',
+    isSyncing: false,
+    reqFilterStatus: 'all',
+    reqSearch: '',
+    refreshSync() {
+      this.isSyncing = true;
+      setTimeout(() => {
+        this.isSyncing = false;
+        this.syncTimeText = 'Atualizado agora •';
+        this.showAlert('success', 'Sincronização Concluída', 'Todos os dados e métricas foram atualizados com sucesso.', 3000);
+      }, 700);
+    },
+    get paginatedRequests() {
+      let list = this.allRequests || [];
+      if (this.reqFilterStatus && this.reqFilterStatus !== 'all') {
+        list = list.filter(r => r.status === this.reqFilterStatus);
+      }
+      if (this.reqSearch) {
+        const q = this.reqSearch.toLowerCase();
+        list = list.filter(r => (r.protocol || '').toLowerCase().includes(q) || (r.cliente || '').toLowerCase().includes(q) || (r.title || r.servico || '').toLowerCase().includes(q));
+      }
+      return list.slice(0, 7);
+    },
+    sites: [
+      { id: 1, nome: "Portal Corporativo BFA", url: "https://bfa.ao", cliente: "Banco de Fomento Angola", tech: "Laravel + Vue.js", status: "Online", ssl: "Ativo", created_at: "15/01/2026", updated_at: "24/11/2026" },
+      { id: 2, nome: "E-Commerce GundjaTech", url: "https://gundjatech.com", cliente: "GundjaTech", tech: "Next.js + Tailwind", status: "Online", ssl: "Ativo", created_at: "10/02/2026", updated_at: "25/11/2026" },
+      { id: 3, nome: "Plataforma Cotech Contábil", url: "https://cotech.ao", cliente: "Cotech Contabilidade", tech: "WordPress Headless", status: "Online", ssl: "Ativo", created_at: "05/03/2026", updated_at: "20/11/2026" },
+      { id: 4, nome: "Catálogo Digital Laurinita", url: "https://laurinita.co.ao", cliente: "Laurinita Distribuidora", tech: "React + Cloudflare", status: "Em Manutenção", ssl: "Ativo", created_at: "18/04/2026", updated_at: "22/11/2026" },
+      { id: 5, nome: "Portal Acadêmico Instituto Saber", url: "https://paraisodosaber.ao", cliente: "Instituto Técnico Saber", tech: "Laravel + Livewire", status: "Online", ssl: "Ativo", created_at: "20/05/2026", updated_at: "26/11/2026" }
+    ],
+    dominios: [
+      { id: 1, domain: "rachi.ao", cliente: "RACHI Oficial", registro: "10/01/2024", expiracao: "10/01/2027", status: "Ativo", dns: "Cloudflare", auto_renew: true },
+      { id: 2, domain: "gundjatech.com", cliente: "GundjaTech", registro: "15/03/2025", expiracao: "15/03/2027", status: "Ativo", dns: "Cloudflare", auto_renew: true },
+      { id: 3, domain: "cotechcontabilidade.com.br", cliente: "Cotech Contabilidade", registro: "02/06/2025", expiracao: "02/06/2027", status: "Ativo", dns: "Registro.br", auto_renew: true },
+      { id: 4, domain: "laurinita.co.ao", cliente: "Laurinita Distribuidora", registro: "12/12/2025", expiracao: "12/12/2026", status: "Renovando", dns: "DNS.AO", auto_renew: false },
+      { id: 5, domain: "paraisodosaber.ao", cliente: "Instituto Técnico Saber", registro: "25/11/2025", expiracao: "25/11/2027", status: "Ativo", dns: "Cloudflare", auto_renew: true }
+    ],
+    campanhas: [
+      { id: 1, nome: "Black Friday RACHI Print 2026", cliente: "RACHI Print", plataforma: "Meta Ads", invest: "Kz 450.000", cliques: 14200, impressoes: 185000, conv: 342, ctr: "7.67%", cpc: "Kz 31,69", status: "Ativa" },
+      { id: 2, nome: "Geração de Leads B2B TI", cliente: "RACHI Tec", plataforma: "Google Ads", invest: "Kz 850.000", cliques: 9800, impressoes: 120000, conv: 186, ctr: "8.16%", cpc: "Kz 86,73", status: "Ativa" },
+      { id: 3, nome: "Matrículas Cursos Executivos", cliente: "RACHI Academy", plataforma: "LinkedIn Ads", invest: "Kz 620.000", cliques: 5400, impressoes: 74000, conv: 98, ctr: "7.29%", cpc: "Kz 114,81", status: "Ativa" },
+      { id: 4, nome: "Recrutamento Executivo Luanda", cliente: "RACHI Human Capital", plataforma: "Meta Ads", invest: "Kz 320.000", cliques: 8100, impressoes: 92000, conv: 145, ctr: "8.80%", cpc: "Kz 39,50", status: "Pausada" }
+    ],
+    projetos: [
+      { id: 1, nome: "Implantação ERP Corporativo", cliente: "Banco de Fomento Angola", responsavel: "Casimiro Gundja", inicio: "01/10/2026", entrega: "15/12/2026", progresso: 75, tarefas: "18/24", status: "Em Andamento" },
+      { id: 2, nome: "Portal de Autoatendimento Web", cliente: "Cotech Contabilidade", responsavel: "Equipe Web", inicio: "15/10/2026", entrega: "30/11/2026", progresso: 90, tarefas: "19/21", status: "Em Testes" },
+      { id: 3, nome: "Reestruturação de Rede & Servidores", cliente: "Instituto Técnico Saber", responsavel: "Suporte Técnico", inicio: "01/11/2026", entrega: "10/12/2026", progresso: 45, tarefas: "9/20", status: "Em Andamento" },
+      { id: 4, nome: "Campanha Institucional & Catálogo Gráfico", cliente: "Laurinita Distribuidora", responsavel: "Diretoria Criativa", inicio: "20/09/2026", entrega: "15/11/2026", progresso: 100, tarefas: "15/15", status: "Concluído" }
+    ],
+
     currentPage: 'dashboard',
     sidebarCollapsed: false,
     mobileMenuOpen: false,
