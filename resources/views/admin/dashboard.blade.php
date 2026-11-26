@@ -670,6 +670,227 @@ html.dark .hdr-icon-btn:hover {
 .custom-role-scroll::-webkit-scrollbar { width: 4px; }
 .custom-role-scroll::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 4px; }
 
+/* ==========================================================================
+   GUNDJATECH REPLICA SYSTEM — EXECUTIVE TOKENS, ACCORDIONS, CHARTS & CARDS
+   ========================================================================== */
+.gt-acc > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.gt-acc > summary::-webkit-details-marker {
+  display: none;
+}
+.gt-acc .gt-acc-close {
+  display: none;
+}
+.gt-acc[open] > summary .gt-acc-open {
+  display: none;
+}
+.gt-acc[open] > summary .gt-acc-close {
+  display: inline;
+}
+
+.gtb-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: all 0.22s ease;
+}
+.gtb-card:hover {
+  border-color: rgba(255, 165, 37, 0.35);
+  box-shadow: 0 10px 25px -4px rgba(0, 80, 240, 0.12);
+}
+html.dark .gtb-card:hover {
+  border-color: rgba(255, 165, 37, 0.45);
+  box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.65);
+}
+
+.gtb-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 165, 37, 0.12);
+  border: 1px solid rgba(255, 165, 37, 0.25);
+  color: #FFA525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.gtb-icon-box.is-blue {
+  background: rgba(0, 80, 240, 0.12);
+  border-color: rgba(0, 80, 240, 0.25);
+  color: #0050f0;
+}
+html.dark .gtb-icon-box.is-blue {
+  color: #38bdf8;
+}
+.gtb-icon-box.is-petrol {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: #10b981;
+}
+html.dark .gtb-icon-box.is-petrol {
+  color: #6ee7b7;
+}
+.gtb-icon-box.is-purple {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.25);
+  color: #a855f7;
+}
+
+.gt-req-pill-neutral {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: rgba(140, 149, 170, 0.12);
+  border: 1px solid rgba(140, 149, 170, 0.25);
+  color: #475569;
+}
+html.dark .gt-req-pill-neutral {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+}
+
+.gtb-ctrl-btn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(140, 149, 170, 0.25);
+  font-size: 12px;
+  font-weight: 700;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.gtb-ctrl-btn:hover {
+  background: rgba(255, 165, 37, 0.08);
+  border-color: #FFA525;
+  color: #FFA525;
+}
+
+.gtb-promo-card {
+  margin: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(7, 19, 38, 0.95), rgba(0, 80, 240, 0.2));
+  border: 1px solid rgba(255, 165, 37, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+#admin-sidebar.collapsed .gtb-promo-card {
+  display: none !important;
+}
+.gtb-promo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.gtb-promo-btn:hover {
+  background: rgba(255, 165, 37, 0.2);
+  color: #FFA525;
+}
+
+.gtb-paired-chart {
+  position: relative;
+  height: 182px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 48px;
+  padding-bottom: 24px;
+}
+.gtb-grid-line {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px dashed rgba(140, 149, 170, 0.2);
+  height: 0;
+}
+html.dark .gtb-grid-line {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+.gtb-grid-line span {
+  position: absolute;
+  left: -48px;
+  top: -7px;
+  font-size: 10.5px;
+  color: #8C95AA;
+  font-weight: 600;
+}
+.gtb-bars-overlay {
+  position: absolute;
+  left: 52px;
+  right: 8px;
+  bottom: 26px;
+  top: 8px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+  gap: 8px;
+}
+.gtb-pair-group {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  position: relative;
+}
+.gtb-bar-a {
+  width: 10px;
+  border-radius: 4px 4px 1px 1px;
+  background: linear-gradient(180deg, #FFE68A 0%, #FFA525 55%, #DD8F20 100%);
+  box-shadow: 0 4px 14px rgba(255, 165, 37, 0.26), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+  transition: height 0.3s ease, filter 0.2s ease, transform 0.2s ease;
+}
+.gtb-bar-b {
+  width: 10px;
+  border-radius: 4px 4px 1px 1px;
+  background: linear-gradient(180deg, #38BDF8 0%, #0050f0 60%, #071326 100%);
+  box-shadow: 0 4px 14px rgba(0, 80, 240, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: height 0.3s ease, filter 0.2s ease, transform 0.2s ease;
+}
+.gtb-pair-group:hover .gtb-bar-a,
+.gtb-pair-group:hover .gtb-bar-b {
+  filter: brightness(1.18);
+  transform: translateY(-2px);
+}
+.gtb-month-lbl {
+  position: absolute;
+  bottom: -22px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #8C95AA;
+}
+.gtb-pair-group.is-highlight .gtb-month-lbl {
+  color: #FFA525;
+  font-weight: 800;
+}
+
 a { text-decoration: none !important; }
 </style>
 </head>
@@ -867,6 +1088,18 @@ a { text-decoration: none !important; }
     </div>
   </nav>
 
+  <!-- Promo Card (Modelo GundjaTech) -->
+  <div class="gtb-promo-card">
+    <div class="text-[10.5px] font-bold tracking-wider uppercase text-slate-800 dark:text-white/90 leading-snug">
+      GESTÃO CORPORATIVA<br />
+      <strong class="text-amber-500 dark:text-[#FFA525]">RACHI PRO ✦</strong>
+    </div>
+    <a href="#" @click.prevent="setPage('solicitacoes')" class="gtb-promo-btn">
+      <span>Ver Solicitações</span>
+      <span class="text-amber-500 dark:text-[#FFA525]">♛</span>
+    </a>
+  </div>
+
   <!-- Sidebar Footer: Toggle & Logout -->
   <div class="sidebar-footer shrink-0 border-t border-slate-200/80 dark:border-white/5 p-2 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
     <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
@@ -905,11 +1138,12 @@ a { text-decoration: none !important; }
       <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
     </div>
 
-    <!-- SEARCH CENTRALIZADO E ESPAÇOSO -->
+    <!-- SEARCH CENTRALIZADO E ESPAÇOSO (MODELO GUNDJATECH) -->
     <div class="flex-1 max-w-md mx-auto hidden md:block px-4">
-      <div class="relative w-full">
+      <div class="relative w-full flex items-center">
         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
-        <input type="text" placeholder="Pesquisar pedidos, clientes, cursos..." class="ia pl-10 w-full py-2 text-xs">
+        <input type="text" placeholder="Pesquisar pedidos, clientes, demandas..." class="ia pl-10 pr-14 w-full py-2 text-xs">
+        <span class="hidden lg:inline-flex absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10 select-none">⌘ F</span>
       </div>
     </div>
 
@@ -946,157 +1180,295 @@ a { text-decoration: none !important; }
 
   <main class="p-4 sm:p-6 lg:p-7 max-w-[1520px] mx-auto space-y-6">
 
-    <!-- DASHBOARD GERAL / HOME -->
+    <!-- DASHBOARD GERAL / HOME (MODELO GUNDJATECH EXECUTIVO COM DADOS RACHI) -->
     <section x-show="currentPage==='dashboard'" x-cloak class="space-y-6">
 
-      <!-- CABEÇALHO EXECUTIVO: ELEGANTE, DINÂMICO & SÓBRIO -->
-      <div class="relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-xs">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-          <div class="space-y-1.5 max-w-2xl">
-            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Núcleo Operacional Conectado
+      <!-- SUB-HEADER STRIP (GUNDJATECH MODEL) -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-[#8C95AA]">
+          Você tem <a href="#" @click.prevent="setPage('solicitacoes')" class="font-bold text-amber-500 dark:text-[#FFA525] hover:underline" x-text="`${totalRequestsCount} nova(s) solicitação(ões)`">14 nova(s) solicitação(ões)</a>
+          e <a href="#" @click.prevent="setPage('loja-pedidos')" class="font-bold text-amber-500 dark:text-[#FFA525] hover:underline" x-text="`${totalOrdersCount} pedido(s) em aberto`">3 pedido(s) em aberto</a>
+          <span class="text-slate-400 dark:text-[#5D667B]">• Visão Geral Executiva</span>
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div class="inline-flex items-center rounded-xl bg-white dark:bg-[#121623] border border-slate-200/90 dark:border-white/10 text-xs text-slate-700 dark:text-[#D5DCEB] shadow-2xs overflow-hidden">
+            <span class="px-3 py-1.5 flex items-center gap-2 border-r border-slate-200/90 dark:border-white/10">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-500 dark:text-[#FFA525]"></i>
+              <span>22 out 2026 - 21 nov 2026</span>
+            </span>
+            <select aria-label="Período do relatório" class="bg-transparent border-0 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-[#D5DCEB] focus:outline-none cursor-pointer">
+              <option value="7" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 7 dias</option>
+              <option value="30" selected class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 30 dias</option>
+              <option value="90" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 90 dias</option>
+              <option value="365" class="bg-white dark:bg-[#121623] text-slate-900 dark:text-white">Últimos 12 meses</option>
+            </select>
+          </div>
+
+          <button @click="setPage('relatorios')" type="button" class="gtb-ctrl-btn !h-8 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-2xs flex items-center gap-2 cursor-pointer" title="Exportar relatório executivo">
+            <span>Exportar Relatório</span>
+            <i data-lucide="download" class="w-3.5 h-3.5 text-amber-500 dark:text-[#FFA525]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 1: 4 REAL TOP KPI CARDS (PROPORÇÃO EXECUTIVA GUNDJATECH) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <!-- KPI 1: Facturação Consolidada -->
+        <div @click="setPage('financeiro')" class="gtb-card gtb-kpi-gold !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Gestão Financeira">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="gtb-icon-box !w-8 !h-8">
+                <i data-lucide="wallet" class="w-4 h-4"></i>
               </span>
-              <span class="text-slate-300 dark:text-slate-600">·</span>
-              <span>4 Unidades Ativas</span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-amber-500 transition-colors">Receita Recebida (30d)</span>
             </div>
-            
-            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-              Painel de Controlo Corporativo
-            </h1>
-            
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Consolidação executiva de operações, pedidos em loja e atendimentos técnicos da RACHI em tempo real.
-            </p>
+            <span class="text-slate-400 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
           </div>
+          <div class="flex items-baseline justify-between gap-2 flex-wrap">
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
+              4.850.000,00 AOA
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
+              A receber: 1.200.000 AOA
+            </span>
+          </div>
+        </div>
 
-          <div class="flex items-center gap-3 shrink-0">
-            <button @click="setPage('solicitacoes')" 
-                    type="button"
-                    class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-slate-50/80 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-bold transition shadow-xs flex items-center gap-2 cursor-pointer">
-              <i data-lucide="clipboard-list" class="w-4 h-4 text-slate-500"></i>
-              <span>Central de Solicitações</span>
-              <span class="px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-200/80 dark:bg-white/10 text-slate-800 dark:text-slate-200" x-text="totalRequestsCount"></span>
-            </button>
-            <button @click="openCreateOrderModal()" 
-                    type="button"
-                    class="px-4 py-2.5 rounded-xl text-slate-950 text-xs font-bold transition-all duration-200 shadow-sm flex items-center gap-2 cursor-pointer border-0 hover:scale-[1.02] active:scale-[0.98]"
-                    style="background: linear-gradient(135deg, #FFA525, #DD8F20); color: #0B0B0B; box-shadow: 0 4px 14px rgba(255, 165, 37, 0.35);">
-              <i data-lucide="plus" class="w-4 h-4 stroke-[2.5]"></i>
-              <span>Nova Ordem</span>
-            </button>
+        <!-- KPI 2: Clientes & Leads -->
+        <div @click="setPage('clientes')" class="gtb-card gtb-kpi-blue !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Base de Clientes & Leads">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="gtb-icon-box is-blue !w-8 !h-8">
+                <i data-lucide="users" class="w-4 h-4"></i>
+              </span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-blue-500 transition-colors">Clientes &amp; Leads</span>
+            </div>
+            <span class="text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+          <div class="flex items-baseline justify-between gap-2 flex-wrap">
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
+              <span x-text="totalClientsCount">9</span> <small class="text-xs font-semibold text-slate-500 dark:text-[#8C95AA]">(5 ativos · 4 leads)</small>
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
+              +<span x-text="totalClientsCount">9</span> em 30d
+            </span>
+          </div>
+        </div>
+
+        <!-- KPI 3: Solicitações & Ordens -->
+        <div @click="setPage('solicitacoes')" class="gtb-card gtb-kpi-petrol !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Central de Solicitações">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="gtb-icon-box is-petrol !w-8 !h-8">
+                <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+              </span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-emerald-500 transition-colors">Solicitações &amp; Ordens</span>
+            </div>
+            <span class="text-slate-400 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+          <div class="flex items-baseline justify-between gap-2 flex-wrap">
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
+              <span x-text="totalRequestsCount">14</span> <small class="text-xs font-semibold text-amber-500 dark:text-[#FFA525]">(4 em exec. · 1 conc.)</small>
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-slate-600 dark:text-[#8C95AA]">
+              +<span x-text="totalRequestsCount">14</span> em 30d
+            </span>
+          </div>
+        </div>
+
+        <!-- KPI 4: Unidades & Loja TI -->
+        <div @click="setPage('loja-produtos')" class="gtb-card !p-5 flex flex-col justify-between gap-3 cursor-pointer hover:-translate-y-0.5 transition-all group" title="Abrir Loja & Catálogo TI">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="gtb-icon-box is-purple !w-8 !h-8">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              </span>
+              <span class="text-xs font-semibold text-slate-600 dark:text-[#D5DCEB] group-hover:text-purple-500 transition-colors">Pedidos TI &amp; Loja</span>
+            </div>
+            <span class="text-slate-400 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-all">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+          <div class="flex items-baseline justify-between gap-2 flex-wrap">
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">
+              <span x-text="totalOrdersCount">3</span> <small class="text-xs font-semibold text-slate-500 dark:text-[#8C95AA]">(24 itens em catálogo)</small>
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10.5px] font-bold text-emerald-600 dark:text-emerald-400">
+              SLA 100% Online
+            </span>
           </div>
         </div>
       </div>
 
-      <!-- 4 KPIS ESTRATÉGICOS CONSOLIDADOS (SEM DUPLICAÇÃO DE DADOS) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- 1. Facturação Global -->
-        <div class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-slate-300 dark:hover:border-white/20 transition-all duration-200">
-          <div class="flex items-center justify-between mb-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold border border-amber-500/20">
-              <i data-lucide="wallet" class="w-5 h-5"></i>
-            </div>
-            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-              <i data-lucide="trending-up" class="w-3 h-3"></i>
-              <span>+15.8%</span>
-            </span>
-          </div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'">4,85M AOA</div>
-          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Facturação Total Consolidada</div>
-          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-            <span>Loja + Gráfica + Academy</span>
-            <span class="font-semibold text-emerald-600 dark:text-emerald-400">Em alta</span>
-          </div>
-        </div>
+      <!-- ROW 2: REAL 12-MONTH REVENUE BAR CHART (8 cols) + CATEGORY RINGS (4 cols) (GUNDJATECH MODEL) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- 8 cols: Visão Geral de Receita (12 meses) -->
+        <section class="lg:col-span-8 gtb-card !p-5">
+          <details class="gt-acc" open>
+            <summary class="flex flex-wrap items-center justify-between gap-3 cursor-pointer select-none">
+              <div class="flex flex-wrap items-center gap-2.5 min-w-0">
+                <span class="gtb-icon-box !w-8 !h-8">
+                  <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                </span>
+                <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Visão Geral de Receita (12 meses)</h2>
+                <span class="text-xs text-slate-500 dark:text-[#8C95AA]">Dados reais em <strong class="text-slate-800 dark:text-white">tempo real</strong></span>
+              </div>
+              <div class="flex items-center gap-2.5 shrink-0">
+                <button @click.stop="setPage('financeiro')" type="button" class="gtb-ctrl-btn">
+                  <span>Financeiro</span>
+                  <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                </button>
+                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525] shrink-0">
+                  <span class="gt-acc-open">Expandir ▾</span>
+                  <span class="gt-acc-close">Recolher ▴</span>
+                </span>
+              </div>
+            </summary>
 
-        <!-- 2. Solicitações & Ordens Ativas -->
-        <div @click="setPage('solicitacoes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-blue-400/50 transition-all duration-200 cursor-pointer group">
-          <div class="flex items-center justify-between mb-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold border border-blue-500/20">
-              <i data-lucide="clipboard-check" class="w-5 h-5"></i>
-            </div>
-            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/40">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              SLA 100%
-            </span>
-          </div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalRequestsCount"></div>
-          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Solicitações & Ordens</div>
-          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-            <span>Central de Atendimento</span>
-            <span class="font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Ver fila &rarr;</span>
-          </div>
-        </div>
+            <div class="mt-4 space-y-3">
+              <div class="flex items-center justify-end gap-4 text-[11px] font-semibold text-slate-500 dark:text-[#8C95AA]">
+                <span class="flex items-center gap-1.5">
+                  <i class="w-2.5 h-2.5 rounded-xs bg-[#FFA525] inline-block"></i> Recebido (AOA)
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <i class="w-2.5 h-2.5 rounded-xs bg-[#0050f0] inline-block"></i> A Receber (AOA)
+                </span>
+              </div>
 
-        <!-- 3. Pedidos da Loja (RACHI Tec) -->
-        <div @click="setPage('loja-pedidos')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-cyan-400/50 transition-all duration-200 cursor-pointer group">
-          <div class="flex items-center justify-between mb-3">
-            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/20">
-              <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-            </div>
-            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/60 dark:border-cyan-800/40">
-              <i data-lucide="trending-up" class="w-3 h-3"></i>
-              <span>+24%</span>
-            </span>
-          </div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalOrdersCount"></div>
-          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Pedidos de TI & Hardware</div>
-          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-            <span>Vendas corporativas</span>
-            <span class="font-semibold text-cyan-600 dark:text-cyan-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Gerir &rarr;</span>
-          </div>
-        </div>
+              <div class="gtb-paired-chart">
+                <div class="gtb-grid-line"><span>5M</span></div>
+                <div class="gtb-grid-line"><span>3.5M</span></div>
+                <div class="gtb-grid-line"><span>2M</span></div>
+                <div class="gtb-grid-line"><span>1M</span></div>
+                <div class="gtb-grid-line"><span>0</span></div>
 
-        <!-- 4. Base de Clientes Corporativos -->
-        <div @click="setPage('clientes')" class="kc rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-indigo-400/50 transition-all duration-200 cursor-pointer group">
-          <div class="flex items-center justify-between mb-3">
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold border border-indigo-500/20">
-              <i data-lucide="building-2" class="w-5 h-5"></i>
+                <div class="gtb-bars-overlay">
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 18%;"></div><div class="gtb-bar-b" style="height: 12%;"></div><span class="gtb-month-lbl">Dez</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 25%;"></div><div class="gtb-bar-b" style="height: 15%;"></div><span class="gtb-month-lbl">Jan</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 32%;"></div><div class="gtb-bar-b" style="height: 20%;"></div><span class="gtb-month-lbl">Fev</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 28%;"></div><div class="gtb-bar-b" style="height: 18%;"></div><span class="gtb-month-lbl">Mar</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 40%;"></div><div class="gtb-bar-b" style="height: 22%;"></div><span class="gtb-month-lbl">Abr</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 45%;"></div><div class="gtb-bar-b" style="height: 28%;"></div><span class="gtb-month-lbl">Mai</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 52%;"></div><div class="gtb-bar-b" style="height: 30%;"></div><span class="gtb-month-lbl">Jun</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 48%;"></div><div class="gtb-bar-b" style="height: 25%;"></div><span class="gtb-month-lbl">Jul</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 58%;"></div><div class="gtb-bar-b" style="height: 34%;"></div><span class="gtb-month-lbl">Ago</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 62%;"></div><div class="gtb-bar-b" style="height: 36%;"></div><span class="gtb-month-lbl">Set</span></div>
+                  <div class="gtb-pair-group"><div class="gtb-bar-a" style="height: 70%;"></div><div class="gtb-bar-b" style="height: 38%;"></div><span class="gtb-month-lbl">Out</span></div>
+                  <div class="gtb-pair-group is-highlight"><div class="gtb-bar-a" style="height: 85%;"></div><div class="gtb-bar-b" style="height: 45%;"></div><span class="gtb-month-lbl">Nov</span></div>
+                </div>
+              </div>
             </div>
-            <span class="text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/40">
-              <i data-lucide="trending-up" class="w-3 h-3"></i>
-              <span>+12.5%</span>
-            </span>
-          </div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight" style="font-family:'Plus Jakarta Sans'" x-text="totalClientsCount"></div>
-          <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">Clientes Corporativos</div>
-          <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-            <span>Contas ativas</span>
-            <span class="font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">Directório &rarr;</span>
-          </div>
-        </div>
+          </details>
+        </section>
+
+        <!-- 4 cols: Orçamentos & Distribuição por Unidade -->
+        <section class="lg:col-span-4 gtb-card !p-5">
+          <details class="gt-acc" open>
+            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="gtb-icon-box !w-8 !h-8 shrink-0">
+                  <i data-lucide="pie-chart" class="w-4 h-4"></i>
+                </span>
+                <h2 class="text-sm font-bold text-slate-900 dark:text-white truncate">Distribuição por Unidade</h2>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="gt-req-pill-neutral">14 demandas</span>
+                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525] shrink-0">
+                  <span class="gt-acc-open">Expandir ▾</span>
+                  <span class="gt-acc-close">Recolher ▴</span>
+                </span>
+              </div>
+            </summary>
+
+            <div class="mt-3 space-y-3">
+              <div class="relative flex items-center justify-center py-1">
+                <div class="absolute left-0 top-0.5 z-10 px-2.5 py-1.5 rounded-xl bg-slate-50 dark:bg-[#0E2940] border border-slate-200 dark:border-white/10 shadow-2xs">
+                  <div class="text-xs font-extrabold text-slate-900 dark:text-white leading-tight">
+                    4,85M AOA
+                  </div>
+                  <div class="text-[9.5px] font-semibold text-slate-500 dark:text-[#8C95AA]">14 demandas</div>
+                </div>
+
+                <!-- Triple Concentric Ring SVG (GundjaTech Model) -->
+                <svg viewBox="0 0 200 200" style="width: 140px; height: 140px;" class="-rotate-90">
+                  <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
+                  <circle cx="100" cy="100" r="80" fill="none" stroke="#0050f0" stroke-width="8" stroke-linecap="round" stroke-dasharray="360 502"/>
+                  <circle cx="100" cy="100" r="64" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
+                  <circle cx="100" cy="100" r="64" fill="none" stroke="#00a3e0" stroke-width="8" stroke-linecap="round" stroke-dasharray="240 402"/>
+                  <circle cx="100" cy="100" r="48" fill="none" stroke="currentColor" class="text-slate-200 dark:text-white/10" stroke-width="8"/>
+                  <circle cx="100" cy="100" r="48" fill="none" stroke="#FFA525" stroke-width="8" stroke-linecap="round" stroke-dasharray="160 301"/>
+                </svg>
+
+                <span class="absolute text-base font-extrabold text-slate-900 dark:text-white">14</span>
+              </div>
+
+              <!-- 4 Unidades Footer Grid -->
+              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px;" class="pt-2 text-center border-t border-slate-100 dark:border-white/10">
+                <div>
+                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
+                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#0050f0]"></i> Academy
+                  </div>
+                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">8 reqs</div>
+                </div>
+                <div>
+                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
+                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#00a3e0]"></i> Tec
+                  </div>
+                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">14 reqs</div>
+                </div>
+                <div>
+                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
+                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-emerald-500"></i> RH
+                  </div>
+                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">6 reqs</div>
+                </div>
+                <div>
+                  <div class="text-[10px] font-extrabold text-slate-800 dark:text-white flex items-center justify-center gap-1">
+                    <i class="w-1.5 h-1.5 rounded-full inline-block bg-[#FFA525]"></i> Print
+                  </div>
+                  <div class="text-[9.5px] text-slate-500 dark:text-[#8C95AA] mt-0.5">12 reqs</div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
       </div>
 
-      <!-- ECOSSISTEMA RACHI: 4 UNIDADES OPERACIONAIS -->
+      <!-- ROW 3: ECOSSISTEMA RACHI - 4 UNIDADES OPERACIONAIS -->
       <div>
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <i data-lucide="layout-grid" class="w-4 h-4 text-amber-500"></i>
+        <div class="flex items-center justify-between mb-3.5">
+          <h2 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="layout-grid" class="w-4 h-4 text-amber-500 dark:text-[#FFA525]"></i>
             <span>Unidades RACHI</span>
           </h2>
-          <span class="text-xs text-slate-500 font-medium">Módulos integrados de negócio</span>
+          <span class="text-xs text-slate-500 font-medium">Ecossistema integrado corporativo</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- 1. ACADEMY -->
-          <div @click="setPage('academy-cursos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+          <div @click="setPage('academy-cursos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                  <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-8 w-auto max-w-full object-contain">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
+                  <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="h-7 w-auto max-w-full object-contain">
                 </div>
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/40">Ensino</span>
               </div>
-              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
                 RACHI Academy
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 Capacitação, trilhas executivas e formação corporativa em tecnologia.
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700 dark:text-slate-300">12 Cursos · 48 Alunos</span>
               <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
                 Aceder &rarr;
@@ -1105,22 +1477,22 @@ a { text-decoration: none !important; }
           </div>
 
           <!-- 2. TEC -->
-          <div @click="setPage('loja-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+          <div @click="setPage('loja-produtos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                  <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-8 w-auto max-w-full object-contain">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
+                  <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-7 w-auto max-w-full object-contain">
                 </div>
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-800/40">TI & Loja</span>
               </div>
-              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
                 RACHI Tec
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 Hardware empresarial, notebooks, redes e infraestrutura de TI.
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700 dark:text-slate-300">24 Itens · 15 Pedidos</span>
               <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
                 Aceder &rarr;
@@ -1129,22 +1501,22 @@ a { text-decoration: none !important; }
           </div>
 
           <!-- 3. HUMAN CAPITAL -->
-          <div @click="setPage('rh-vagas')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+          <div @click="setPage('rh-vagas')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                  <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-8 w-auto max-w-full object-contain">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
+                  <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="h-7 w-auto max-w-full object-contain">
                 </div>
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">RH</span>
               </div>
-              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
                 RACHI Human Capital
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 Recrutamento especializado, consultoria de RH e legalização.
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700 dark:text-slate-300">6 Demandas Ativas</span>
               <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
                 Aceder &rarr;
@@ -1153,22 +1525,22 @@ a { text-decoration: none !important; }
           </div>
 
           <!-- 4. PRINT -->
-          <div @click="setPage('grafica-produtos')" class="kc unit-card cursor-pointer group rounded-2xl p-5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+          <div @click="setPage('grafica-produtos')" class="gtb-card cursor-pointer group !p-4 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <div class="w-12 h-12 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-2 flex items-center justify-center">
-                  <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-8 w-auto max-w-full object-contain">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-1.5 flex items-center justify-center">
+                  <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="h-7 w-auto max-w-full object-contain">
                 </div>
                 <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50 dark:border-purple-800/40">Gráfica</span>
               </div>
-              <div class="font-bold text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors" style="font-family:'Plus Jakarta Sans'">
+              <div class="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
                 RACHI Print
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 Impressão corporativa, brindes, papelaria de luxo e sinalética.
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <div class="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700 dark:text-slate-300">18 Catálogos · AOA 450k</span>
               <span class="text-amber-500 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
                 Aceder &rarr;
@@ -1178,120 +1550,73 @@ a { text-decoration: none !important; }
         </div>
       </div>
 
-      <!-- SEÇÃƒO VISUAL: GRÁFICO INTERATIVO & STATUS DAS SOLICITAÇÕES -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- GRÁFICO INTERATIVO DE FACTURAÇÃO / ATIVIDADE -->
-        <div class="sc2 lg:col-span-2">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-white/5 gap-2">
-            <div>
-              <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                <i data-lucide="line-chart" class="w-4 h-4 text-blue-600"></i> Desempenho e Facturação Mensal (AOA)
-              </h3>
-              <p class="text-xs text-slate-500 mt-0.5">Evolução de receitas consolidadas das 4 unidades em 2026</p>
-            </div>
-            <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 p-1 rounded-xl text-xs font-bold">
-              <span class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm">2026</span>
-              <span class="px-2.5 py-1 text-slate-500">Semestral</span>
-            </div>
-          </div>
+      <!-- ROW 4: LIVE OPERATIONAL RECORDS (2 COLUMNS - GUNDJATECH MODEL) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+        <!-- Coluna 1: Últimas Solicitações de Clientes -->
+        <section class="gtb-card !p-5">
+          <details class="gt-acc" open>
+            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
+              <h2 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-[#8C95AA] truncate">
+                Últimas Solicitações de Clientes (<span x-text="totalRequestsCount">14</span>)
+              </h2>
+              <div class="flex items-center gap-3 shrink-0">
+                <a href="#" @click.prevent="setPage('solicitacoes')" class="text-xs font-bold text-blue-600 dark:text-[#38BDF8] hover:underline no-underline">Ver todas &rarr;</a>
+                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525]">
+                  <span class="gt-acc-open">Expandir ▾</span>
+                  <span class="gt-acc-close">Recolher ▴</span>
+                </span>
+              </div>
+            </summary>
 
-          <div class="relative h-64 sm:h-72 w-full">
-            <canvas id="revenueChart"></canvas>
-          </div>
-        </div>
-
-        <!-- GRÁFICO DE PIZZA / DISTRIBUIÇÃƒO DAS SOLICITAÇÕES -->
-        <div class="sc2 flex flex-col justify-between">
-          <div>
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-              <i data-lucide="pie-chart" class="w-4 h-4 text-amber-500"></i> Distribuição por Serviço
-            </h3>
-            <p class="text-xs text-slate-500 mb-4">Volume de pedidos e demandas por setor</p>
-            <div class="relative h-44 w-full flex items-center justify-center">
-              <canvas id="distributionChart"></canvas>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2.5 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
-            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Academy</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">8 reqs</div>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Loja / Tec</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">14 reqs</div>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">RH Capital</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">6 reqs</div>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/50 dark:border-white/5 text-center">
-              <div class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Print</div>
-              <div class="text-sm font-bold text-slate-900 dark:text-white">12 reqs</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ÚLTIMAS SOLICITAÇÕES COM TABELA MODERNA E BADGES COLORIDAS -->
-      <div class="sc2 p-0 overflow-hidden">
-        <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-white/5">
-          <div>
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-              <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i> Últimas Solicitações em Atendimento
-            </h3>
-            <p class="text-xs text-slate-500 mt-0.5">Acompanhamento dos clientes e status das ordens</p>
-          </div>
-          <button @click="setPage('solicitacoes')" class="bap text-xs py-2 px-4 shadow-none">
-            Ver Todas as Solicitações <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="at">
-            <thead>
-              <tr>
-                <th>Protocolo</th>
-                <th>Cliente / Empresa</th>
-                <th>Unidade</th>
-                <th>Data</th>
-                <th>Estado</th>
-                <th>Responsável</th>
-                <th>Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template x-for="req in allRequests.slice(0,5)" :key="req.id">
-                <tr>
-                  <td>
-                    <span class="font-mono font-bold text-xs px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20" x-text="'#'+req.id"></span>
-                  </td>
-                  <td>
-                    <div class="font-bold text-slate-900 dark:text-white text-sm" x-text="req.cliente"></div>
-                    <div class="text-xs text-slate-500 font-medium" x-text="req.empresa"></div>
-                  </td>
-                  <td>
-                    <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300" x-text="req.servico"></span>
-                  </td>
-                  <td class="text-slate-500 text-xs font-medium" x-text="req.data"></td>
-                  <td>
-                    <span class="badge2" :class="req.sc">
-                      <span class="w-1.5 h-1.5 rounded-full" :class="req.dot || 'bg-blue-500'"></span>
-                      <span x-text="req.status"></span>
+            <div class="mt-3 divide-y divide-slate-100 dark:divide-white/5 text-xs max-h-80 overflow-y-auto">
+              <template x-for="r in allRequests.slice(0, 6)" :key="r.id">
+                <div @click="openReq(r)" class="py-2.5 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-white/[0.02] px-1 rounded-lg transition">
+                  <div class="min-w-0">
+                    <span class="font-bold text-slate-900 dark:text-white truncate block" x-text="r.servico || r.title || 'Solicitação'"></span>
+                    <span class="text-[10.5px] text-slate-500 dark:text-[#8C95AA] truncate block">
+                      <span x-text="r.cliente || r.empresa || 'Cliente'"></span> • Prot: <span class="font-mono font-bold" x-text="'#'+r.id"></span>
                     </span>
-                  </td>
-                  <td class="text-slate-700 dark:text-slate-300 text-xs font-semibold" x-text="req.responsavel"></td>
-                  <td>
-                    <button @click="openReq(req)" class="text-xs text-blue-600 dark:text-blue-400 font-bold px-3 py-1.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-500/10 transition border border-transparent hover:border-blue-200">
-                      Abrir Detalhes
-                    </button>
-                  </td>
-                </tr>
+                  </div>
+                  <span class="gt-req-pill-neutral shrink-0" x-text="r.status || 'Ativo'"></span>
+                </div>
               </template>
-            </tbody>
-          </table>
-        </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- Coluna 2: Clientes & Leads Recentes -->
+        <section class="gtb-card !p-5">
+          <details class="gt-acc" open>
+            <summary class="flex items-center justify-between gap-2 cursor-pointer select-none">
+              <h2 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-[#8C95AA] truncate">
+                Clientes &amp; Leads Recentes (<span x-text="totalClientsCount">9</span>)
+              </h2>
+              <div class="flex items-center gap-3 shrink-0">
+                <a href="#" @click.prevent="setPage('clientes')" class="text-xs font-bold text-blue-600 dark:text-[#38BDF8] hover:underline no-underline">Ver todos &rarr;</a>
+                <span class="text-[10.5px] font-bold uppercase tracking-wider text-amber-500 dark:text-[#FFA525]">
+                  <span class="gt-acc-open">Expandir ▾</span>
+                  <span class="gt-acc-close">Recolher ▴</span>
+                </span>
+              </div>
+            </summary>
+
+            <div class="mt-3 divide-y divide-slate-100 dark:divide-white/5 text-xs max-h-80 overflow-y-auto">
+              <template x-for="c in clients.slice(0, 6)" :key="c.id">
+                <div @click="setPage('clientes')" class="py-2.5 flex items-center justify-between gap-2 cursor-pointer hover:bg-slate-50/50 dark:hover:bg-white/[0.02] px-1 rounded-lg transition">
+                  <div class="min-w-0">
+                    <span class="font-bold text-slate-900 dark:text-white truncate block" x-text="c.nome + (c.tipo ? ' ('+c.tipo+')' : '')"></span>
+                    <span class="text-[10.5px] text-slate-500 dark:text-[#8C95AA] truncate block" x-text="(c.email || c.tel || 'Sem contato')"></span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-bold uppercase tracking-wider"
+                        :class="c.status === 'Ativo' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40'"
+                        x-text="c.status || 'Ativo'"></span>
+                </div>
+              </template>
+            </div>
+          </details>
+        </section>
       </div>
+
     </section>
 
         <!-- PERFIS / EQUIPE, COLABORADORES & USUÁRIOS (MODELO DO PRINT 4) -->
