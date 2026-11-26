@@ -1181,36 +1181,6 @@ html.dark .panze-hdr-pill {
       <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold" x-text="totalClientsCount"></span>
     </div>
 
-    <!-- Solicitações (Expansível com Árvore) -->
-    <div>
-      <div @click="toggleMenu('tickets')" 
-        :class="openMenus.tickets ? 'text-purple-600 dark:text-purple-400 font-bold' : (currentPage==='solicitacoes' ? 'active' : '')" 
-        class="sidebar-item"
-        data-legend="Solicitações">
-        <i data-lucide="ticket" class="si"></i>
-        <span class="sl">Solicitações</span>
-        <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0 transition-transform" :class="openMenus.tickets?'rotate-90':''"></i>
-      </div>
-      <div class="sidebar-sub-menu" x-show="openMenus.tickets" x-transition>
-        <div @click="setPage('solicitacoes')" class="sidebar-sub-item" :class="currentPage==='solicitacoes'?'active':''">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Central de Demandas</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Nova'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Novas / Triagem</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Em Execução'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Em Andamento</span>
-        </div>
-        <div @click="setPage('solicitacoes'); reqFilterStatus='Concluída'" class="sidebar-sub-item">
-          <span class="sidebar-sub-dot"></span>
-          <span class="sl">Concluídas</span>
-        </div>
-      </div>
-    </div>
-
     <!-- ==========================================
          ADMINISTRAÇÃO & GESTÃO
          ========================================== -->
