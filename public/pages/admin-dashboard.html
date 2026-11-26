@@ -2089,6 +2089,22 @@ html.dark .panze-hdr-pill {
 
             <!-- AÇÕES DO CHAT & CONTROLO IA / HUMANO -->
             <div class="flex items-center gap-2 flex-wrap">
+              <!-- STATUS LIVE SYNC -->
+              <span class="px-2.5 py-1 rounded-full text-[10.5px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40 hidden xl:inline-flex items-center gap-1.5 shadow-2xs" title="Sincronização em tempo real ativa com o Website, WhatsApp e Portal">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span>Live Sync Ativo</span>
+              </span>
+
+              <!-- BOTÕES DE SIMULAÇÃO DE DEMONSTRAÇÃO AO VIVO -->
+              <button @click="simulateLiveVisitor('livechat')" type="button" class="px-2.5 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800/40 text-[11px] font-bold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular visitante conversando no chat do site até pedir atendente humano">
+                <i data-lucide="play" class="w-3 h-3"></i>
+                <span class="hidden sm:inline">Simular Site</span>
+              </button>
+              <button @click="simulateLiveVisitor('whatsapp')" type="button" class="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 text-[11px] font-bold transition flex items-center gap-1 shadow-2xs cursor-pointer" title="Simular lead no WhatsApp pedindo proposta executiva">
+                <i data-lucide="play" class="w-3 h-3"></i>
+                <span class="hidden sm:inline">Simular WhatsApp</span>
+              </button>
+
               <!-- BOTÃO ASSUMIR ATENDIMENTO / DEVOLVER PARA A IA -->
               <template x-if="activeConversation.aiMode === 'waiting_human' || activeConversation.aiMode === 'ai_handling'">
                 <button @click="assumeChat(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-black transition flex items-center gap-1.5 shadow-xs cursor-pointer animate-pulse" title="Pausar a IA e assumir o atendimento ao vivo">
@@ -5999,6 +6015,146 @@ function adminApp() {
     get waitingHumanCount() {
       return (this.conversations || []).filter(c => c.aiMode === 'waiting_human').length;
     },
+    playAdminAudioChime(type = 'incoming') {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const now = ctx.currentTime;
+        if (type === 'incoming') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12); // G5
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        } else if (type === 'alert') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          osc.frequency.setValueAtTime(880, now + 0.16);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        }
+      } catch(e) {}
+    },
+    initLiveChatSync() {
+      try {
+        if (typeof BroadcastChannel !== 'undefined') {
+          this.liveChatChannel = new BroadcastChannel('rachi_live_chat_channel');
+          this.liveChatChannel.onmessage = (event) => {
+            this.handleIncomingLiveChat(event.data);
+          };
+        }
+      } catch(e) {}
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'rachi_live_chat_sync' && event.newValue) {
+          try {
+            const data = JSON.parse(event.newValue);
+            if (data) this.handleIncomingLiveChat(data);
+          } catch(err) {}
+        }
+      });
+    },
+    handleIncomingLiveChat(data) {
+      if (!data) return;
+      const now = new Date();
+      const time = data.time || (String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0'));
+
+      if (data.type === 'visitor_message') {
+        let conv = (this.conversations || []).find(c => c.id === data.sessionId || c.sessionId === data.sessionId);
+        if (conv) {
+          conv.messages.push({
+            sender: 'customer',
+            text: data.text,
+            time: time
+          });
+          conv.lastTime = time;
+          if (this.activeChatId !== conv.id) {
+            conv.unread = (conv.unread || 0) + 1;
+          }
+        } else {
+          conv = {
+            id: data.sessionId || ('chat_' + Date.now()),
+            sessionId: data.sessionId,
+            name: data.name || (data.channel === 'portal' ? 'Cliente do Portal' : 'Visitante do Site'),
+            company: data.channel === 'portal' ? 'Portal do Cliente' : (data.channel === 'whatsapp' ? 'WhatsApp Lead' : 'Website Oficial RACHI'),
+            channel: data.channel || 'livechat',
+            aiMode: 'ai_handling',
+            handoffReason: null,
+            phone: data.phone || '+244 972 888 585',
+            avatar: (data.name || 'VS').substring(0, 2).toUpperCase(),
+            avatarBg: data.channel === 'portal' ? 'bg-amber-600' : (data.channel === 'whatsapp' ? 'bg-emerald-600' : 'bg-blue-600'),
+            status: 'online',
+            unread: this.activeChatId === data.sessionId ? 0 : 1,
+            lastTime: time,
+            subject: 'Atendimento em Tempo Real',
+            messages: [
+              { sender: 'customer', text: data.text, time: time }
+            ]
+          };
+          this.conversations.unshift(conv);
+          this.messengerStats.today++;
+          if (data.channel && this.messengerStats[data.channel] !== undefined) {
+            this.messengerStats[data.channel]++;
+          }
+        }
+        this.playAdminAudioChime('incoming');
+        this.$nextTick(() => {
+          const chatBox = document.getElementById('chatMessagesScroll');
+          if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+          if (window.lucide) lucide.createIcons();
+        });
+      } else if (data.type === 'bot_message') {
+        const conv = (this.conversations || []).find(c => c.id === data.sessionId || c.sessionId === data.sessionId);
+        if (conv) {
+          conv.messages.push({
+            sender: 'bot',
+            text: data.replyText,
+            time: time
+          });
+          conv.lastTime = time;
+          this.$nextTick(() => {
+            const chatBox = document.getElementById('chatMessagesScroll');
+            if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+            if (window.lucide) lucide.createIcons();
+          });
+        }
+      } else if (data.type === 'bot_transbordo') {
+        const conv = (this.conversations || []).find(c => c.id === data.sessionId || c.sessionId === data.sessionId);
+        if (conv) {
+          if (data.replyText) {
+            conv.messages.push({
+              sender: 'bot',
+              text: data.replyText,
+              time: time
+            });
+          }
+          conv.messages.push({
+            sender: 'system',
+            text: '🚨 [Sistema]: Transbordo para Humano acionado. O cliente necessita de atendimento especializado.',
+            time: time
+          });
+          conv.aiMode = 'waiting_human';
+          conv.handoffReason = data.reason || 'Visitante solicitou atendimento humano';
+          conv.lastTime = time;
+          this.playAdminAudioChime('alert');
+          this.showAlert('warning', '🚨 Transbordo Humano Acionado', 'A IA direcionou a conversa com ' + conv.name + ' para um atendente humano.');
+          this.$nextTick(() => {
+            const chatBox = document.getElementById('chatMessagesScroll');
+            if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+            if (window.lucide) lucide.createIcons();
+          });
+        }
+      }
+    },
     assumeChat(conv) {
       if (!conv) return;
       conv.aiMode = 'human_handling';
@@ -6010,6 +6166,15 @@ function adminApp() {
         text: '👤 [Sistema]: Você assumiu este atendimento. A IA foi pausada para esta conversa.',
         time: time
       });
+      const payload = {
+        type: 'agent_takeover',
+        sessionId: conv.sessionId || conv.id,
+        agentName: 'Casimiro Gundja'
+      };
+      if (this.liveChatChannel) {
+        this.liveChatChannel.postMessage(payload);
+      }
+      localStorage.setItem('rachi_live_chat_sync', JSON.stringify({ ...payload, _ts: Date.now() }));
       this.showAlert('success', 'Atendimento Assumido', 'Você assumiu a conversa com ' + conv.name + '. A IA está pausada.');
       this.$nextTick(() => {
         const chatBox = document.getElementById('chatMessagesScroll');
@@ -6028,6 +6193,14 @@ function adminApp() {
         text: '🤖 [Sistema]: Atendimento devolvido ao assistente virtual de IA da RACHI.',
         time: time
       });
+      const payload = {
+        type: 'release_to_ai',
+        sessionId: conv.sessionId || conv.id
+      };
+      if (this.liveChatChannel) {
+        this.liveChatChannel.postMessage(payload);
+      }
+      localStorage.setItem('rachi_live_chat_sync', JSON.stringify({ ...payload, _ts: Date.now() }));
       this.showAlert('info', 'IA Reativada', 'O assistente virtual de IA voltou a responder automaticamente para ' + conv.name + '.');
       this.$nextTick(() => {
         const chatBox = document.getElementById('chatMessagesScroll');
@@ -6083,6 +6256,19 @@ function adminApp() {
       });
       conv.lastTime = time;
       this.chatReplyText = '';
+
+      const payload = {
+        type: 'agent_message',
+        sessionId: conv.sessionId || conv.id,
+        text: msgText,
+        agentName: 'Casimiro Gundja',
+        time: time
+      };
+      if (this.liveChatChannel) {
+        this.liveChatChannel.postMessage(payload);
+      }
+      localStorage.setItem('rachi_live_chat_sync', JSON.stringify({ ...payload, _ts: Date.now() }));
+
       this.$nextTick(() => {
         const chatBox = document.getElementById('chatMessagesScroll');
         if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
@@ -6107,6 +6293,86 @@ function adminApp() {
       if (!conv) return;
       this.showAlert('success', 'Ticket Criado', 'Conversa com ' + conv.name + ' convertida com sucesso em solicitação técnica.');
       this.setPage('solicitacoes');
+    },
+    simulateLiveVisitor(channel = 'livechat') {
+      const now = new Date();
+      const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      const simId = 'sim_' + Date.now();
+      const name = channel === 'whatsapp' ? 'Dr. Paulo Kassoma (WhatsApp)' : (channel === 'portal' ? 'Eng. Manuel Costa (Portal)' : 'Dra. Maria Fernandes (Website)');
+      const company = channel === 'whatsapp' ? 'Kassoma Investimentos' : (channel === 'portal' ? 'Costa Construções' : 'Empresa Luanda Oil');
+      const initialText = channel === 'whatsapp' 
+        ? 'Olá! Vi os serviços da RACHI no WhatsApp e gostaria de uma proposta para 50 crachás e sistema de ponto.' 
+        : (channel === 'portal' 
+            ? 'Boa tarde! Gostaria de consultar o prazo da nossa fatura proforma nº 442.' 
+            : 'Olá! A IA pode me informar como funciona a consultoria de transformação digital da RACHI?');
+
+      const conv = {
+        id: simId,
+        sessionId: simId,
+        name: name,
+        company: company,
+        channel: channel,
+        aiMode: 'ai_handling',
+        handoffReason: null,
+        phone: '+244 923 888 ' + Math.floor(100 + Math.random() * 900),
+        avatar: name.split(' ').map(n=>n[0]).slice(0,2).join(''),
+        avatarBg: channel === 'whatsapp' ? 'bg-emerald-600' : (channel === 'portal' ? 'bg-amber-600' : 'bg-blue-600'),
+        status: 'online',
+        unread: 1,
+        lastTime: time,
+        subject: 'Demanda Comercial ' + (channel === 'whatsapp' ? 'WhatsApp' : (channel === 'portal' ? 'Portal' : 'Website')),
+        messages: [
+          { sender: 'customer', text: initialText, time: time }
+        ]
+      };
+      this.conversations.unshift(conv);
+      this.activeChatId = conv.id;
+      this.messengerStats.today++;
+      if (this.messengerStats[channel] !== undefined) this.messengerStats[channel]++;
+      this.playAdminAudioChime('incoming');
+      this.showAlert('info', 'Nova Conversa Ao Vivo', `Nova conversa iniciada por ${name} via ${channel.toUpperCase()}.`);
+
+      // A IA responde automaticamente após 1.5s
+      setTimeout(() => {
+        const replyTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        conv.messages.push({
+          sender: 'bot',
+          text: `Olá ${name.split(' ')[0]}! Prazer em atendê-lo(a). A RACHI possui soluções completas e modulares para a sua empresa. Como se trata de um projeto que envolve personalização e prazos executivos, gostaria de falar diretamente com um consultor humano para receber a proposta formal?`,
+          time: replyTime
+        });
+        conv.lastTime = replyTime;
+        this.playAdminAudioChime('incoming');
+        this.$nextTick(() => {
+          const chatBox = document.getElementById('chatMessagesScroll');
+          if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+          if (window.lucide) lucide.createIcons();
+        });
+
+        // Cliente pede humano após mais 2.5s -> dispara transbordo
+        setTimeout(() => {
+          const handoffTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          conv.messages.push({
+            sender: 'customer',
+            text: 'Sim, por favor! Gostaria de falar com o consultor humano agora para fecharmos a proposta.',
+            time: handoffTime
+          });
+          conv.messages.push({
+            sender: 'system',
+            text: '🚨 [Sistema]: Transbordo para Humano acionado! O cliente solicitou atendimento humano. Clique em "Assumir Atendimento" acima para responder ao vivo.',
+            time: handoffTime
+          });
+          conv.aiMode = 'waiting_human';
+          conv.handoffReason = 'Cliente solicitou falar com consultor humano';
+          conv.lastTime = handoffTime;
+          this.playAdminAudioChime('alert');
+          this.showAlert('warning', '🚨 Transbordo Acionado!', `${name} está aguardando você assumir o atendimento!`);
+          this.$nextTick(() => {
+            const chatBox = document.getElementById('chatMessagesScroll');
+            if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+            if (window.lucide) lucide.createIcons();
+          });
+        }, 2800);
+      }, 1600);
     },
     simulateIncomingMessage() {
       const conv = this.activeConversation;
@@ -7237,6 +7503,7 @@ function adminApp() {
       this.allRequests = [{"id":14,"protocol":"TEC-2026-000014","business_unit_id":1,"title":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","titulo":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital","cliente":"Silva \u0026 Filhos Lda","empresa":"Silva \u0026 Filhos Lda","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Consultoria \u0026 Transforma\u00e7\u00e3o Digital: \ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","description":"\ud83d\udda5\ufe0f Unidade: RACHI Tec\n\ud83d\udccc Servi\u00e7o \/ Assunto: Consultoria \u0026 Transforma\u00e7\u00e3o Digital\n\ud83d\udc64 Solicitante: Teste Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Silva \u0026 Filhos Lda\n\ud83d\udcde Contacto: 923000111\n\u2709\ufe0f Email: antonio.teste@empresa.ao\n\u2b50 Plano \/ Modalidade: Enterprise Pro\n\n\ud83d\udcdd Detalhes da Demanda:\nGostar\u00edamos de agendar um diagn\u00f3stico de processos para a nossa empresa.","data":"12\/10\/2026 03:01","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 03:01","date":"12\/10\/2026 03:01","desc":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","title":"Formul\u00e1rio preenchido na p\u00e1gina RACHI Tec (Consultoria \u0026 Transforma\u00e7\u00e3o Digital)","dot":"bg-indigo-500"}],"messages":[]},{"id":13,"protocol":"SOL-2026-000013","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED","cliente":"gundja","empresa":"gundja","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Garrafas T\u00e9rmicas Inteligentes com Display LED: \ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","description":"\ud83d\udce6 Produto: Garrafas T\u00e9rmicas Inteligentes com Display LED\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Materiais promocionais \u0026 Brindes\n\ud83d\udc64 Solicitante: casimiro\n\ud83c\udfe2 Empresa: gundja\n\ud83d\udcde Telefone \/ WhatsApp: 1293797234927\n\u2709\ufe0f Email: casimirogundja@outlook.com\n\ud83d\udd22 Quantidade Estimada: 30\n\u23f1\ufe0f Prazo Desejado: Prazo Normal (3 a 5 dias \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nteste teste","data":"12\/10\/2026 02:06","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"12\/10\/2026 02:06","date":"12\/10\/2026 02:06","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Garrafas T\u00e9rmicas Inteligentes com Display LED)","dot":"bg-indigo-500"}],"messages":[]},{"id":12,"protocol":"SOL-2026-000012","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm)","cliente":"Banco de Fomento Angola","empresa":"Banco de Fomento Angola","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banner Premium (85x200cm): \ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","description":"\ud83d\udce6 Produto: Roll-up Banner Premium (85x200cm)\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Linha 1 \u2014 Grande Formato\n\ud83d\udc64 Solicitante: Dr. Antonio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola\n\ud83d\udcde Telefone \/ WhatsApp: +244 923 111 222\n\u2709\ufe0f Email: antonio.silva@bfa.ao\n\ud83d\udd22 Quantidade Estimada: 5 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nPreciso para a confer\u00eancia de sexta-feira com acabamento mate.","data":"11\/10\/2026 23:23","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 23:23","date":"11\/10\/2026 23:23","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banner Premium (85x200cm))","dot":"bg-indigo-500"}],"messages":[]},{"id":11,"protocol":"SOL-2026-000011","business_unit_id":2,"title":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","titulo":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio","cliente":"Banco de Fomento Angola Teste","empresa":"Banco de Fomento Angola Teste","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Cota\u00e7\u00e3o Gr\u00e1fica: Roll-up Banners Autoportantes em Alum\u00ednio: \ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","description":"\ud83d\udce6 Produto: Roll-up Banners Autoportantes em Alum\u00ednio\n\ud83c\udff7\ufe0f Linha Gr\u00e1fica: Gr\u00e1fica para Eventos \u0026 Feiras\n\ud83d\udc64 Solicitante: Dr. Ant\u00f3nio Silva\n\ud83c\udfe2 Empresa: Banco de Fomento Angola Teste\n\ud83d\udcde Telefone \/ WhatsApp: +244 972 888 585\n\u2709\ufe0f Email: antonio.silva@bancoteste.ao\n\ud83d\udd22 Quantidade Estimada: 15 unidades\n\u23f1\ufe0f Prazo Desejado: Urg\u00eancia Expresso (24h a 48h \u00fateis)\n\n\ud83d\udcdd Especifica\u00e7\u00f5es \u0026 Detalhes:\nLonas de alta defini\u00e7\u00e3o anti-reflexo com estojos almofadados para confer\u00eancia.","data":"11\/10\/2026 20:47","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Urgent","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"11\/10\/2026 20:47","date":"11\/10\/2026 20:47","desc":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","title":"Solicita\u00e7\u00e3o de cota\u00e7\u00e3o enviada pelo cat\u00e1logo online (Roll-up Banners Autoportantes em Alum\u00ednio)","dot":"bg-indigo-500"}],"messages":[]},{"id":10,"protocol":"SOL-2026-000010","business_unit_id":1,"title":"solici","titulo":"solici","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"solici: solici","description":"solici","data":"23\/09\/2026 03:48","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"Normal","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 02:48","date":"23\/09\/2026 02:48","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000010)","dot":"bg-indigo-500"}],"messages":[{"id":11,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false},{"id":12,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"oi","text":"oi","data":"25\/09\/2026 19:19","is_staff":true,"fromUser":false}]},{"id":9,"protocol":"SOL-2026-000009","business_unit_id":1,"title":"Teste teste","titulo":"Teste teste","cliente":"Gundja","empresa":"Gundja","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Teste teste: Testetetetetetetet Descri\u00e7\u00e3o","description":"Testetetetetetetet Descri\u00e7\u00e3o","data":"23\/09\/2026 03:35","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja (Especialista Web)","technician":"Casimiro Gundja (Especialista Web)","timeline":[{"data":"23\/09\/2026 03:38","date":"23\/09\/2026 03:38","desc":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","title":"Status alterado para \u0022Em An\u00e1lise\u0022 pelo administrador.","dot":"bg-amber-500"},{"data":"23\/09\/2026 02:35","date":"23\/09\/2026 02:35","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000009)","dot":"bg-amber-500"}],"messages":[{"id":10,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Resposta teste","text":"Resposta teste","data":"23\/09\/2026 03:37","is_staff":true,"fromUser":false}]},{"id":7,"protocol":"SOL-2026-000007","business_unit_id":2,"title":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","titulo":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Confec\u00e7\u00e3o de 500 Pastas Institucionais \u0026 Crach\u00e1s PVC: Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","description":"Impress\u00e3o em PVC 0.76mm com cord\u00e3o personalizado e pastas com acabamento especial e corte a laser.","data":"21\/09\/2026 10:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"Normal","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 12:00","date":"21\/09\/2026 12:00","desc":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","title":"Em an\u00e1lise de viabilidade de mat\u00e9ria-prima e prazo de entrega.","dot":"bg-amber-500"}],"messages":[]},{"id":4,"protocol":"SOL-2026-000004","business_unit_id":3,"title":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","titulo":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Academy","unit":"RACHI Academy","unitBadge":"bg-indigo-500\/15 text-indigo-700 border-indigo-200","descricao":"Forma\u00e7\u00e3o Executiva em Ciberseguran\u00e7a \u0026 Prote\u00e7\u00e3o de Dados: Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","description":"Solicita\u00e7\u00e3o de turma corporativa in-company para 15 gestores da \u00e1rea de infraestrutura de TI.","data":"21\/09\/2026 08:30","status":"Nova","statusLabel":"Nova","status_key":"new","priority":"High","sc":"s-novo","dot":"bg-indigo-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"21\/09\/2026 08:30","date":"21\/09\/2026 08:30","desc":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","title":"Solicita\u00e7\u00e3o Aberta (#SOL-2026-000004)","dot":"bg-indigo-500"}],"messages":[{"id":7,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","text":"Gostar\u00edamos de saber a disponibilidade de instrutores para in\u00edcio na primeira quinzena de outubro.","data":"21\/09\/2026 08:35","is_staff":false,"fromUser":true}]},{"id":1,"protocol":"SOL-2026-000001","business_unit_id":1,"title":"Desenvolvimento de Novo Website Institucional \u0026 Portal","titulo":"Desenvolvimento de Novo Website Institucional \u0026 Portal","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Desenvolvimento de Novo Website Institucional \u0026 Portal: Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","description":"Moderniza\u00e7\u00e3o do portal corporativo com \u00e1rea de agendamento de consultas, cat\u00e1logo de produtos e integra\u00e7\u00e3o de pagamentos.","data":"19\/09\/2026 09:15","status":"Em an\u00e1lise","statusLabel":"Em an\u00e1lise","status_key":"in_analysis","priority":"High","sc":"s-analise","dot":"bg-amber-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"19\/09\/2026 11:00","date":"19\/09\/2026 11:00","desc":"Em An\u00e1lise de Requisitos e Arquitetura","title":"Em An\u00e1lise de Requisitos e Arquitetura","dot":"bg-amber-500"},{"data":"19\/09\/2026 10:30","date":"19\/09\/2026 10:30","desc":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","title":"Atribu\u00edda ao T\u00e9cnico Casimiro Gundja","dot":"bg-amber-500"},{"data":"19\/09\/2026 09:15","date":"19\/09\/2026 09:15","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000001)","dot":"bg-amber-500"}],"messages":[{"id":1,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","text":"Ol\u00e1, enviamos o briefing t\u00e9cnico e a paleta da nossa marca.","data":"19\/09\/2026 11:15","is_staff":false,"fromUser":true},{"id":2,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","text":"Recebido com sucesso! Estamos finalizando a proposta or\u00e7ament\u00e1ria detalhada.","data":"19\/09\/2026 11:45","is_staff":true,"fromUser":false},{"id":6,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"Mensagem de teste do cliente via API","text":"Mensagem de teste do cliente via API","data":"23\/09\/2026 02:49","is_staff":false,"fromUser":true}]},{"id":5,"protocol":"SOL-2026-000005","business_unit_id":1,"title":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","titulo":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Implementa\u00e7\u00e3o de Servidor Local \u0026 Firewall Perimetral: Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","description":"Fornecimento e parametriza\u00e7\u00e3o de firewall com VPN corporativa, backup redundante e controle de tr\u00e1fego.","data":"18\/09\/2026 14:00","status":"Or\u00e7amentada","statusLabel":"Or\u00e7amentada","status_key":"quoted","priority":"Normal","sc":"s-analise","dot":"bg-blue-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 10:00","date":"20\/09\/2026 10:00","desc":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","title":"Proposta comercial or\u00e7amentada e enviada para aprova\u00e7\u00e3o do cliente.","dot":"bg-blue-500"},{"data":"18\/09\/2026 14:00","date":"18\/09\/2026 14:00","desc":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","title":"Solicita\u00e7\u00e3o Criada (#SOL-2026-000005)","dot":"bg-blue-500"}],"messages":[]},{"id":6,"protocol":"SOL-2026-000006","business_unit_id":4,"title":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","titulo":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Recrutamento \u0026 Hunting de 3 Engenheiros de Software: Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","description":"Triagem, aplica\u00e7\u00e3o de testes t\u00e9cnicos e entrevistas para contrata\u00e7\u00e3o imediata de 3 desenvolvedores Full Stack.","data":"17\/09\/2026 16:20","status":"Aguardando Cliente","statusLabel":"Aguardando Cliente","status_key":"waiting_customer","priority":"High","sc":"s-wait","dot":"bg-orange-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","title":"Status alterado para \u0022Ag. Cliente\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"12\/10\/2026 02:38","date":"12\/10\/2026 02:38","desc":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","title":"Status alterado para \u0022Em Execu\u00e7\u00e3o\u0022 pelo administrador.","dot":"bg-orange-500"},{"data":"21\/09\/2026 11:00","date":"21\/09\/2026 11:00","desc":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","title":"Aguardando valida\u00e7\u00e3o dos perfis finais pela Dire\u00e7\u00e3o do Cliente.","dot":"bg-orange-500"}],"messages":[]},{"id":2,"protocol":"SOL-2026-000002","business_unit_id":2,"title":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","titulo":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Print","unit":"RACHI Print","unitBadge":"bg-amber-500\/15 text-amber-700 border-amber-200","descricao":"Produ\u00e7\u00e3o de Material Gr\u00e1fico \u0026 Brindes Corporativos: Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","description":"Impress\u00e3o offset de 1.000 cat\u00e1logos com lamina\u00e7\u00e3o fosca, 2 Roll-ups retr\u00e1teis e 200 pastas institucionais com bolsa.","data":"16\/09\/2026 14:00","status":"Em execu\u00e7\u00e3o","statusLabel":"Em execu\u00e7\u00e3o","status_key":"in_progress","priority":"Normal","sc":"s-exec","dot":"bg-cyan-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"20\/09\/2026 16:30","date":"20\/09\/2026 16:30","desc":"Em Fase de Acabamento \u0026 Corte","title":"Em Fase de Acabamento \u0026 Corte","dot":"bg-cyan-500"},{"data":"17\/09\/2026 11:20","date":"17\/09\/2026 11:20","desc":"Prova de Cor e Impress\u00e3o Aprovada","title":"Prova de Cor e Impress\u00e3o Aprovada","dot":"bg-cyan-500"},{"data":"16\/09\/2026 14:00","date":"16\/09\/2026 14:00","desc":"Ordem de Produ\u00e7\u00e3o Iniciada","title":"Ordem de Produ\u00e7\u00e3o Iniciada","dot":"bg-cyan-500"}],"messages":[{"id":3,"user_id":1,"nome":"Super Administrador RACHI","sender":"Super Administrador RACHI","message":"A prova digital ficou excelente, autorizamos a tiragem completa.","text":"A prova digital ficou excelente, autorizamos a tiragem completa.","data":"16\/09\/2026 15:30","is_staff":false,"fromUser":true},{"id":4,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","text":"\u00d3timo! Previs\u00e3o de entrega do lote para quinta-feira no vosso escrit\u00f3rio.","data":"16\/09\/2026 16:00","is_staff":true,"fromUser":false}]},{"id":8,"protocol":"SOL-2026-000008","business_unit_id":1,"title":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","titulo":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Tec","unit":"RACHI Tec","unitBadge":"bg-blue-500\/15 text-blue-700 border-blue-200","descricao":"Repara\u00e7\u00e3o de Servidores Legados Fora de Garantia: Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","description":"Pedido cancelado por indisponibilidade de pe\u00e7as originais no fabricante internacional.","data":"10\/09\/2026 11:00","status":"Cancelada","statusLabel":"Cancelada","status_key":"cancelled","priority":"Low","sc":"s-cancel","dot":"bg-rose-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"12\/09\/2026 14:00","date":"12\/09\/2026 14:00","desc":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","title":"Cancelado a pedido do cliente devido \u00e0 obsolesc\u00eancia dos componentes.","dot":"bg-rose-500"}],"messages":[{"id":8,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Ola","text":"Ola","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false},{"id":9,"user_id":18,"nome":"Administra\u00e7\u00e3o","sender":"Administra\u00e7\u00e3o","message":"Bom dia","text":"Bom dia","data":"23\/09\/2026 03:34","is_staff":true,"fromUser":false}]},{"id":3,"protocol":"SOL-2026-000003","business_unit_id":4,"title":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","titulo":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios","cliente":"Super Administrador RACHI","empresa":"Super Administrador RACHI","servico":"RACHI Human Capital","unit":"RACHI Human Capital","unitBadge":"bg-emerald-500\/15 text-emerald-700 border-emerald-200","descricao":"Diagn\u00f3stico e Estrutura\u00e7\u00e3o de Cargos \u0026 Sal\u00e1rios: Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","description":"Elabora\u00e7\u00e3o de manual de cargos, matriz de compet\u00eancias e plano de cargos e sal\u00e1rios para 28 colaboradores.","data":"05\/09\/2026 10:00","status":"Conclu\u00edda","statusLabel":"Conclu\u00edda","status_key":"completed","priority":"Normal","sc":"s-done","dot":"bg-emerald-500","responsavel":"Casimiro Gundja","technician":"Casimiro Gundja","timeline":[{"data":"18\/09\/2026 17:00","date":"18\/09\/2026 17:00","desc":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","title":"Entrega do Dossi\u00ea Final e Homologa\u00e7\u00e3o","dot":"bg-emerald-500"},{"data":"12\/09\/2026 15:00","date":"12\/09\/2026 15:00","desc":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","title":"Apresenta\u00e7\u00e3o do Diagn\u00f3stico Preliminar","dot":"bg-emerald-500"},{"data":"05\/09\/2026 10:00","date":"05\/09\/2026 10:00","desc":"Contrato de Consultoria Ativado","title":"Contrato de Consultoria Ativado","dot":"bg-emerald-500"}],"messages":[{"id":5,"user_id":7,"nome":"Casimiro Gundja","sender":"Casimiro Gundja","message":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","text":"Dossi\u00ea final homologado e entregue com sucesso \u00e0 Dire\u00e7\u00e3o.","data":"18\/09\/2026 17:30","is_staff":true,"fromUser":false}]}];
       this.refreshAdminRequests();
       window.setInterval(() => this.refreshAdminRequests(), 5000);
+      this.initLiveChatSync();
 
       // Sincronização em tempo real de solicitações & chat
       try {

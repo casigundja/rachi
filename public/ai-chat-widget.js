@@ -32,15 +32,25 @@
             storageKey: 'rachi_chat_realistic_v5',
         };
 
+        // Contexto da Página & Sessão Única
+        const contextConfig = window.__RachiChatContext || {};
+        const savedSessionId = sessionStorage.getItem('rachi_chat_session_id');
+        const sessionId = savedSessionId || (contextConfig.channel === 'portal' ? 'portal_' : 'site_') + Math.random().toString(36).substring(2, 9);
+        sessionStorage.setItem('rachi_chat_session_id', sessionId);
+
         // Estado da Conversa Interativa (100% Livre e Natural)
         let state = {
             isOpen: false,
             isLoading: false,
             isGreetingPlaying: false,
+            isHumanHandling: false,
+            agentName: null,
+            sessionId: sessionId,
+            channel: contextConfig.channel || 'livechat',
             leadData: {
-                name: '',
-                phone: '',
-                company: '',
+                name: contextConfig.userName || '',
+                phone: contextConfig.userPhone || '',
+                company: contextConfig.company || '',
                 interest: ''
             },
             messages: []
@@ -410,6 +420,34 @@
                 background: #0050f0 !important;
             }
 
+            .rachi-chat-bubble.rachi-agent {
+                align-self: flex-start !important;
+                background: linear-gradient(135deg, #0050f0 0%, #1d4ed8 100%) !important;
+                color: #FFFFFF !important;
+                border-radius: 18px 18px 18px 4px !important;
+                font-weight: 500 !important;
+                box-shadow: 0 4px 14px rgba(0, 80, 240, 0.25) !important;
+            }
+
+            .rachi-chat-bubble.rachi-system {
+                align-self: center !important;
+                background: rgba(245, 168, 0, 0.12) !important;
+                color: #b45309 !important;
+                border: 1px solid rgba(245, 168, 0, 0.3) !important;
+                border-radius: 12px !important;
+                font-size: 11.5px !important;
+                padding: 8px 14px !important;
+                text-align: center !important;
+                max-width: 90% !important;
+                margin: 6px auto !important;
+            }
+
+            html.dark .rachi-chat-bubble.rachi-system {
+                background: rgba(245, 168, 0, 0.18) !important;
+                color: #fbbf24 !important;
+                border-color: rgba(245, 168, 0, 0.4) !important;
+            }
+
             /* Indicador de Digitação Realista (Bolha com 3 pontos pulsantes) */
             .rachi-typing-indicator {
                 align-self: flex-start !important;
@@ -666,7 +704,7 @@
                         </div>
                         <div class="rachi-chat-header-info">
                             <h4>RACHI</h4>
-                            <div class="rachi-chat-status">
+                            <div class="rachi-chat-status" id="rachi-chat-status-text">
                                 <span class="rachi-chat-dot"></span>
                                 <span>Online agora</span>
                             </div>
@@ -798,18 +836,148 @@
             if (ind) ind.remove();
         }
 
+        // Sintetizador de Áudio para Notificações ao Vivo (Web Audio API sem assets externos)
+        function playChatChime(type = 'incoming') {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (ctx.state === 'suspended') ctx.resume();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const now = ctx.currentTime;
+                if (type === 'incoming') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, now); // D5
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+                } else if (type === 'alert') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(880, now + 0.2);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                }
+            } catch(e) {}
+        }
+
+        // Canal de Comunicação em Tempo Real Bidirecional
+        let liveChatChannel = null;
+        try {
+            if (typeof BroadcastChannel !== 'undefined') {
+                liveChatChannel = new BroadcastChannel('rachi_live_chat_channel');
+                liveChatChannel.onmessage = (event) => {
+                    handleLiveEvent(event.data);
+                };
+            }
+        } catch(e) {}
+
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'rachi_live_chat_sync' && e.newValue) {
+                try {
+                    const data = JSON.parse(e.newValue);
+                    if (data) handleLiveEvent(data);
+                } catch(err) {}
+            }
+        });
+
+        function broadcastToAdmin(payload) {
+            try {
+                if (liveChatChannel) {
+                    liveChatChannel.postMessage(payload);
+                }
+                localStorage.setItem('rachi_live_chat_sync', JSON.stringify({
+                    ...payload,
+                    _ts: Date.now()
+                }));
+            } catch(e) {}
+        }
+
+        function handleLiveEvent(data) {
+            if (!data) return;
+            if (data.sessionId && data.sessionId !== state.sessionId && data.sessionId !== 'all') {
+                return;
+            }
+
+            if (data.type === 'agent_takeover') {
+                state.isHumanHandling = true;
+                state.agentName = data.agentName || 'Casimiro Gundja';
+                const statusText = document.getElementById('rachi-chat-status-text');
+                if (statusText) {
+                    statusText.innerHTML = `<span style="display:inline-block;width:7px;height:7px;background:#f59e0b;border-radius:50%;margin-right:5px;box-shadow:0 0 6px #f59e0b;"></span><span>Consultor Ao Vivo (${state.agentName})</span>`;
+                }
+                state.messages.push({
+                    sender: 'system',
+                    text: `👤 **[Atendimento Ao Vivo]**: O consultor **${state.agentName}** assumiu a conversa. As respostas automáticas da IA foram pausadas e você está a conversar diretamente com a nossa equipe.`
+                });
+                persistState();
+                renderMessages();
+                playChatChime('alert');
+            } else if (data.type === 'agent_message') {
+                hideTyping();
+                state.messages.push({
+                    sender: 'agent',
+                    agentName: data.agentName || 'Casimiro Gundja',
+                    text: data.text,
+                    time: data.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                });
+                persistState();
+                renderMessages();
+                playChatChime('incoming');
+            } else if (data.type === 'release_to_ai') {
+                state.isHumanHandling = false;
+                state.agentName = null;
+                const statusText = document.getElementById('rachi-chat-status-text');
+                if (statusText) {
+                    statusText.innerHTML = `<span class="rachi-chat-dot"></span><span>Online agora</span>`;
+                }
+                state.messages.push({
+                    sender: 'system',
+                    text: `🤖 **[IA Reativada]**: O atendimento foi devolvido ao assistente virtual da RACHI. Continuo disponível para ajudar!`
+                });
+                persistState();
+                renderMessages();
+                playChatChime('incoming');
+            }
+        }
+
         function renderMessages() {
             const typingNode = document.getElementById('rachi-typing-node');
             messagesEl.innerHTML = '';
             
             state.messages.forEach(msg => {
                 const bubble = document.createElement('div');
-                bubble.className = `rachi-chat-bubble ${msg.sender === 'bot' ? 'rachi-bot' : 'rachi-user'}`;
+                let bubbleClass = 'rachi-chat-bubble ';
+                if (msg.sender === 'bot') bubbleClass += 'rachi-bot';
+                else if (msg.sender === 'user') bubbleClass += 'rachi-user';
+                else if (msg.sender === 'agent') bubbleClass += 'rachi-agent';
+                else if (msg.sender === 'system') bubbleClass += 'rachi-system';
+                else bubbleClass += 'rachi-bot';
                 
-                let formatted = msg.text
+                bubble.className = bubbleClass;
+                
+                let formatted = (msg.text || '')
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                     .replace(/\n/g, '<br>');
-                bubble.innerHTML = formatted;
+
+                if (msg.sender === 'agent') {
+                    bubble.innerHTML = `
+                        <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; opacity: 0.9; display: flex; align-items: center; gap: 4px;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span>${msg.agentName || 'Consultor RACHI'} (Ao Vivo)</span>
+                        </div>
+                        <div>${formatted}</div>
+                        <div style="font-size: 9.5px; opacity: 0.8; text-align: right; margin-top: 4px;">${msg.time || ''} ✓✓</div>
+                    `;
+                } else {
+                    bubble.innerHTML = formatted;
+                }
                 messagesEl.appendChild(bubble);
 
                 if (msg.isWhatsAppCard) {
@@ -926,13 +1094,15 @@
             messagesEl.appendChild(card);
         }
 
-        // Envio e Processamento de Mensagens com a API de IA (Diálogo 100% Livre)
+        // Envio e Processamento de Mensagens com a API de IA (Diálogo 100% Livre e Conexão ao Vivo)
         async function handleSendMessage(userText) {
             const text = (userText || '').trim();
             if (!text || state.isLoading) return;
 
+            const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
             // 1. Adicionar mensagem do utilizador
-            state.messages.push({ sender: 'user', text });
+            state.messages.push({ sender: 'user', text, time: timeNow });
             renderMessages();
             input.value = '';
 
@@ -959,6 +1129,24 @@
                 state.leadData.phone = phoneMatch[0].trim();
             }
 
+            // Transmissão em tempo real para o painel de Messenger da Direção
+            broadcastToAdmin({
+                type: 'visitor_message',
+                sessionId: state.sessionId,
+                channel: state.channel,
+                name: state.leadData.name || (state.channel === 'portal' ? 'Cliente Portal RACHI' : 'Visitante do Site'),
+                phone: state.leadData.phone || '',
+                text: text,
+                time: timeNow
+            });
+
+            // SE UM HUMANO ASSUMIU O ATENDIMENTO: A IA não responde, aguarda o consultor no Messenger
+            if (state.isHumanHandling) {
+                persistState();
+                return;
+            }
+
+            // SE A IA ESTIVER ATIVA:
             showTyping();
 
             try {
@@ -985,31 +1173,63 @@
                 if (response.ok) {
                     const data = await response.json();
                     const replyText = data.reply || 'Olá! Como posso ajudar a sua empresa hoje?';
-                    const isWhatsApp = data.isWhatsAppSuggested || /humano|atendente|whatsapp|ligar/i.test(text);
+                    const isTransbordoTrigger = data.isWhatsAppSuggested || /humano|atendente|falar com pessoa|pessoa real|whatsapp|ligar|reunião|proposta formal|diretoria|reclamação|urgente/i.test(text);
 
                     state.messages.push({
                         sender: 'bot',
                         text: replyText,
-                        isWhatsAppCard: isWhatsApp,
+                        time: timeNow,
+                        isWhatsAppCard: isTransbordoTrigger,
                         whatsAppText: 'Olá! Estive a conversar no chat do site da RACHI e gostaria de falar com um consultor humano sobre os meus projetos.'
                     });
 
                     persistState();
                     renderMessages();
+
+                    // Se foi acionado transbordo, notifica o Messenger com alerta de Transbordo
+                    if (isTransbordoTrigger) {
+                        broadcastToAdmin({
+                            type: 'bot_transbordo',
+                            sessionId: state.sessionId,
+                            channel: state.channel,
+                            name: state.leadData.name || (state.channel === 'portal' ? 'Cliente Portal RACHI' : 'Visitante do Site'),
+                            phone: state.leadData.phone || '',
+                            text: text,
+                            replyText: replyText,
+                            reason: 'Visitante solicitou atendimento humano / transbordo acionado',
+                            time: timeNow
+                        });
+                    } else {
+                        broadcastToAdmin({
+                            type: 'bot_message',
+                            sessionId: state.sessionId,
+                            replyText: replyText,
+                            time: timeNow
+                        });
+                    }
                 } else {
                     throw new Error('Falha na resposta da API');
                 }
             } catch (err) {
                 hideTyping();
                 // Resposta de fallback elegante e calorosa
+                const fallbackReply = 'A **RACHI** é um ecossistema empresarial integrado em Angola, preparado para apoiar o seu negócio com soluções inovadoras e personalizadas.\n\nComo posso apoiar a sua empresa hoje? Sinta-se à vontade para me falar sobre o seu projeto ou necessidade!';
                 state.messages.push({
                     sender: 'bot',
-                    text: 'A **RACHI** é um ecossistema empresarial integrado em Angola, preparado para apoiar o seu negócio com soluções inovadoras e personalizadas.\n\nComo posso apoiar a sua empresa hoje? Sinta-se à vontade para me falar sobre o seu projeto ou necessidade!',
+                    text: fallbackReply,
+                    time: timeNow,
                     isWhatsAppCard: true,
                     whatsAppText: 'Olá! Estive a falar no chat do site da RACHI e gostaria de solicitar informações e proposta.'
                 });
                 persistState();
                 renderMessages();
+
+                broadcastToAdmin({
+                    type: 'bot_message',
+                    sessionId: state.sessionId,
+                    replyText: fallbackReply,
+                    time: timeNow
+                });
             }
         }
 
