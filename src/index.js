@@ -11015,18 +11015,12 @@ app.get("/health/database", async (c) => {
   return c.json({ status: "ok", engine: c.env.DB ? "cloudflare-d1" : "hyperdrive" });
 });
 app.get("/portal", (c) => c.get("user") ? c.html(portalPage()) : c.redirect("/login"));
-app.get("/cliente/dashboard", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
-app.get("/cliente", (c) => c.redirect("/cliente/dashboard", 301));
-app.get("/cliente/solicitacoes", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
-app.get("/cliente/pedidos", (c) => c.get("user") ? c.html(portalPage("orders", "PAINEL DO CLIENTE")) : c.redirect("/login"));
-app.get("/cliente/orcamentos", (c) => c.get("user") ? c.html(portalPage("quotes", "PAINEL DO CLIENTE")) : c.redirect("/login"));
-app.get("/cliente/cursos", (c) => c.get("user") ? c.html(portalPage("courses", "PAINEL DO CLIENTE")) : c.redirect("/login"));
-app.get("/cliente/solicitacoes/nova", (c) => c.get("user") ? c.html(portalPage("requests", "PAINEL DO CLIENTE")) : c.redirect("/login"));
 app.get("/_session-page/:page", async (c) => {
   const u = c.get("user"), page = c.req.param("page");
-  if (!["admin-dashboard", "aluno-dashboard"].includes(page)) return c.notFound();
+  if (!["admin-dashboard", "aluno-dashboard", "cliente-dashboard"].includes(page)) return c.notFound();
   if (!u) return c.redirect("/login");
-  if (page === "admin-dashboard" ? !admin(u) : !admin(u) && !student(u)) return c.redirect("/academy/cursos");
+  if (page === "admin-dashboard" && !admin(u)) return c.redirect("/cliente/dashboard");
+  if (page === "aluno-dashboard" && !admin(u) && !student(u)) return c.redirect("/academy/cursos");
   const asset = await c.env.ASSETS.fetch(new Request(new URL("/pages/" + page + ".html", c.req.url)));
   return new Response(asset.body, { status: asset.status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, no-store" } });
 });
@@ -11054,6 +11048,10 @@ var pages = {
   "/academy/login": "academy-login", "/academy-login": "academy-login", "/academy-login.html": "academy-login", "/academy/matricula": "academy-login",
   "/aluno-dashboard": "aluno-dashboard", "/aluno-dashboard.html": "aluno-dashboard", "/dashboard-aluno": "aluno-dashboard", "/aluno": "aluno-dashboard", "/academy/dashboard": "aluno-dashboard",
   "/admin-dashboard": "admin-dashboard", "/admin/dashboard": "admin-dashboard", "/admin-dashboard.html": "admin-dashboard",
+  "/cliente-dashboard": "cliente-dashboard", "/cliente-dashboard.html": "cliente-dashboard",
+  "/cliente/dashboard": "cliente-dashboard", "/cliente": "cliente-dashboard",
+  "/cliente/solicitacoes": "cliente-dashboard", "/cliente/pedidos": "cliente-dashboard",
+  "/cliente/orcamentos": "cliente-dashboard", "/cliente/cursos": "cliente-dashboard",
   "/loja": "loja", "/loja.html": "loja"
 };
 var portals = { "/funcionario/dashboard": "requests", "/funcionario/pedidos": "orders", "/admin/utilizadores": "usuarios", "/admin/funcionarios": "usuarios", "/admin/clientes": "clientes", "/admin/produtos": "loja-produtos", "/admin/servicos": "grafica-produtos", "/admin/cursos": "academy-cursos", "/admin/pedidos": "loja-pedidos", "/admin/solicitacoes": "requests", "/admin/relatorios": "relatorios", "/funcionario/estoque": "stock", "/funcionario/solicitacoes": "requests" };
@@ -11093,7 +11091,7 @@ var index_default = {
           return Response.redirect(new URL(`/${m[1]}/servicos/${m[2]}`, url).toString(), 301);
         }
       }
-      if (["admin-dashboard", "aluno-dashboard"].includes(pages[path])) {
+      if (["admin-dashboard", "aluno-dashboard", "cliente-dashboard"].includes(pages[path])) {
         url.pathname = "/_session-page/" + pages[path];
         return app.fetch(new Request(url, request), env, ctx);
       }

@@ -10,8 +10,12 @@ class CloudPageController extends Controller
 {
     public function page(string $page)
     {
-        abort_unless(in_array($page, ['login', 'register', 'portal', 'cart', 'courses', 'products', 'services', 'academy-login'], true), 404);
-        return $this->html(file_get_contents(resource_path("cloud/pages/{$page}.html")));
+        abort_unless(in_array($page, ['login', 'register', 'portal', 'cart', 'courses', 'products', 'services', 'academy-login', 'cliente-dashboard'], true), 404);
+        $path = resource_path("cloud/pages/{$page}.html");
+        if (!file_exists($path)) {
+            $path = public_path("pages/{$page}.html");
+        }
+        return $this->html(file_get_contents($path));
     }
 
     public function course(Request $request, string $slug)

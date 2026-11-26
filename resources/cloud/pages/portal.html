@@ -1,1 +1,1539 @@
-<!doctype html><html lang="pt"><head><link rel="stylesheet" href="/toast.css"><script src="/toast.js"></script><script src="/auth-session.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Painel do Cliente · RACHI</title><link rel="stylesheet" href="/worker.css"><script src="/worker-ui.js" defer></script></head><body><header><a class="brand" href="/">RACHI<span>Soluções inteligentes</span></a><nav><a href="/loja">Loja</a><a href="/academy/cursos">Academy</a><a href="/cliente/dashboard">Minha conta</a></nav></header><main><div class="portal" data-initial-tab="requests"><aside><p class="eyebrow">ÁREA DO CLIENTE</p><h2 id="user-name">Minha conta</h2><nav id="portal-nav"><button data-tab="requests">Solicitações</button><button data-tab="orders">Pedidos</button><button data-tab="quotes">Orçamentos</button><button data-tab="courses">Meus cursos</button><button data-tab="password">Palavra-passe</button></nav><form data-api="/logout" data-redirect="/"><button class="secondary">Sair</button></form></aside><section><p class="eyebrow" id="section-eyebrow">RACHI / CLIENTE</p><h1 id="section-title">Solicitações</h1><div id="portal-content" aria-live="polite">Carregando…</div></section></div></main><footer>RACHI · Tecnologia, formação e serviços empresariais</footer></body></html>
+<!DOCTYPE html>
+<html lang="pt-AO" :class="{'dark': theme === 'dark'}" :data-bs-theme="theme" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="">
+<title>RACHI — Área do Cliente & Gestão de Serviços</title>
+<meta name="description" content="Painel exclusivo do cliente RACHI: acompanhe solicitações, orçamentos, pedidos na loja e cursos executivos.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/toast.css">
+<script src="/toast.js"></script>
+<script src="/auth-session.js"></script>
+<link rel="stylesheet" href="/worker-marketing.css?v=20261030-2">
+
+<!-- Alpine.js & Lucide Icons -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Bootstrap 5 CSS & JS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif']
+      },
+      colors: {
+        rachiBlue: '#0050f0',
+        rachiCyan: '#00a3e0',
+        rachiGold: '#f5a800',
+        rachiNavy: '#071326'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+[x-cloak] { display: none !important; }
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg-app: #f4f6fb;
+  --bg-sidebar: #ffffff;
+  --border-sidebar: #e5e9f2;
+  --bg-header: rgba(255, 255, 255, 0.94);
+  --border-header: #e5e9f2;
+  --bg-card: #ffffff;
+  --border-card: #e5e9f2;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-sub: #334155;
+  --bg-input: #ffffff;
+  --border-input: #cbd5e1;
+  --table-th-bg: #f8fafc;
+  --table-border: #f1f5f9;
+  --table-hover: #f8fafc;
+  --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+}
+
+html.dark {
+  --bg-app: #060b17;
+  --bg-sidebar: #071326;
+  --border-sidebar: rgba(0, 80, 240, 0.16);
+  --bg-header: rgba(7, 19, 38, 0.92);
+  --border-header: rgba(0, 80, 240, 0.16);
+  --bg-card: #0c1527;
+  --border-card: rgba(0, 80, 240, 0.16);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-sub: #cbd5e1;
+  --bg-input: #070f1e;
+  --border-input: rgba(0, 80, 240, 0.26);
+  --table-th-bg: #071122;
+  --table-border: rgba(0, 80, 240, 0.12);
+  --table-hover: rgba(0, 80, 240, 0.05);
+  --card-shadow: 0 10px 30px -5px rgba(2, 6, 18, 0.7), 0 0 16px -3px rgba(0, 80, 240, 0.08);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  margin: 0;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html.dark body {
+  background-color: var(--bg-app);
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(0, 80, 240, 0.08) 0px, transparent 48%),
+    radial-gradient(at 90% 90%, rgba(245, 168, 0, 0.05) 0px, transparent 42%);
+  background-attachment: fixed;
+}
+
+#client-sidebar {
+  width: 270px;
+  min-height: 100vh;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-sidebar);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#client-sidebar.collapsed { width: 76px; }
+#client-sidebar.collapsed .sl,
+#client-sidebar.collapsed .sg,
+#client-sidebar.collapsed .sb2,
+#client-sidebar.collapsed .sa,
+#client-sidebar.collapsed .site-back-text,
+#client-sidebar.collapsed .brand-full {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  overflow: hidden;
+  display: none !important;
+}
+#client-sidebar.collapsed .brand-emblem-collapsed {
+  display: flex !important;
+}
+#client-sidebar.collapsed .sidebar-brand-box {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#client-sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+#client-sidebar.collapsed .sidebar-item:hover {
+  transform: none;
+}
+#client-sidebar.collapsed .sidebar-item .si {
+  margin: 0 auto;
+}
+#client-sidebar.collapsed .site-back-btn {
+  justify-content: center !important;
+  padding: 8px !important;
+  width: 42px !important;
+  height: 42px !important;
+  margin: 0 auto !important;
+}
+#client-sidebar.collapsed .site-back-btn i.ms-auto {
+  display: none !important;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin: 2px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.sidebar-item:hover {
+  background-color: rgba(245, 168, 0, 0.08);
+  color: #d97706;
+  transform: translateX(2px);
+}
+html.dark .sidebar-item:hover {
+  background-color: rgba(245, 168, 0, 0.14);
+  color: #fbbf24;
+}
+.sidebar-item.active {
+  background: linear-gradient(135deg, rgba(245, 168, 0, 0.16), rgba(0, 80, 240, 0.08));
+  color: #b45309;
+  font-weight: 700;
+  border: 1px solid rgba(245, 168, 0, 0.28);
+  box-shadow: 0 2px 10px rgba(245, 168, 0, 0.08);
+}
+html.dark .sidebar-item.active {
+  background: linear-gradient(135deg, rgba(245, 168, 0, 0.28), rgba(0, 80, 240, 0.18));
+  color: #f5a800;
+  border: 1px solid rgba(245, 168, 0, 0.45);
+  box-shadow: 0 2px 14px rgba(245, 168, 0, 0.2);
+}
+
+.si { flex-shrink: 0; width: 18px; height: 18px; }
+.sg {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 14px 18px 6px;
+  opacity: 0.7;
+}
+
+#client-main {
+  margin-left: 270px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#client-main.sc { margin-left: 76px; }
+
+#client-header {
+  height: 68px;
+  background-color: var(--bg-header);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-header);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.hdr-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.hdr-btn:hover {
+  background-color: rgba(245, 168, 0, 0.08);
+  border-color: rgba(245, 168, 0, 0.3);
+  color: #b45309;
+}
+html.dark .hdr-btn:hover {
+  background-color: rgba(245, 168, 0, 0.15);
+  color: #f5a800;
+}
+
+.card-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-custom th {
+  background-color: var(--table-th-bg);
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-card);
+  text-align: left;
+}
+.table-custom td {
+  padding: 14px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+.table-custom tr:hover td {
+  background-color: var(--table-hover);
+}
+
+.input-box {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-input);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.input-box:focus {
+  outline: none;
+  border-color: #f5a800;
+  box-shadow: 0 0 0 3px rgba(245, 168, 0, 0.15);
+}
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.badge-status.new { background-color: #e0f2fe; color: #0369a1; }
+.badge-status.in_analysis { background-color: #fef3c7; color: #92400e; }
+.badge-status.waiting_customer { background-color: #fef08a; color: #854d0e; }
+.badge-status.quoted { background-color: #ede9fe; color: #6d28d9; }
+.badge-status.approved { background-color: #dcfce7; color: #15803d; }
+.badge-status.in_progress { background-color: #e0e7ff; color: #4338ca; }
+.badge-status.completed { background-color: #d1fae5; color: #065f46; }
+.badge-status.cancelled { background-color: #fee2e2; color: #991b1b; }
+
+html.dark .badge-status.new { background-color: rgba(3, 105, 161, 0.25); color: #7dd3fc; }
+html.dark .badge-status.in_analysis { background-color: rgba(146, 64, 14, 0.25); color: #fde68a; }
+html.dark .badge-status.quoted { background-color: rgba(109, 40, 217, 0.25); color: #c4b5fd; }
+html.dark .badge-status.approved { background-color: rgba(21, 128, 61, 0.25); color: #86efac; }
+html.dark .badge-status.in_progress { background-color: rgba(67, 56, 202, 0.25); color: #a5b4fc; }
+html.dark .badge-status.completed { background-color: rgba(6, 95, 70, 0.25); color: #6ee7b7; }
+html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); color: #fca5a5; }
+
+@media (max-width: 768px) {
+  #client-sidebar {
+    transform: translateX(-100%);
+  }
+  #client-sidebar.mob {
+    transform: translateX(0);
+  }
+  #client-main, #client-main.sc {
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+
+<body x-data="clienteApp()" x-init="init()">
+
+<!-- SIDEBAR -->
+<aside id="client-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
+  <!-- Brand & Return to Site -->
+  <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
+    <div class="flex items-center justify-between min-h-[42px]">
+      <a href="/cliente/dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Área do Cliente">
+        <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
+        <div class="brand-full flex items-center gap-2">
+          <img src="/images/logo-rachi-light.png" 
+               alt="RACHI" 
+               class="h-9 w-auto max-w-[155px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
+          <img src="/images/logo-rachi-dark.png" 
+               alt="RACHI" 
+               class="h-9 w-auto max-w-[155px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
+          <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#f5a800]/20 text-[#f5a800] border border-[#f5a800]/30 shrink-0">CLIENTE</span>
+        </div>
+        <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
+        <div class="brand-emblem-collapsed hidden w-10 h-10 rounded-xl overflow-hidden items-center justify-start shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
+          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-8 max-w-none hidden dark:block" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
+          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
+        </div>
+      </a>
+    </div>
+
+    <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
+    <a href="/" 
+       class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 dark:text-amber-300 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 border border-amber-200/80 dark:border-amber-500/20 transition group shadow-sm"
+       title="Voltar ao Site RACHI">
+      <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
+      <span class="site-back-text">Voltar ao Site RACHI</span>
+      <i data-lucide="external-link" class="w-3.5 h-3.5 ms-auto opacity-70 site-back-text"></i>
+    </a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="flex-1 py-3 space-y-0.5">
+    <div class="sg">Minha Área</div>
+    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" title="Visão Geral">
+      <i data-lucide="layout-dashboard" class="si"></i>
+      <span class="sl">Visão Geral</span>
+    </div>
+
+    <div class="sg">Demandas & Serviços</div>
+    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" title="Minhas Solicitações">
+      <i data-lucide="clipboard-list" class="si"></i>
+      <span class="sl">Minhas Solicitações</span>
+      <span class="sb2 badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full ms-auto" x-text="stats.openRequests"></span>
+    </div>
+    <div @click="setPage('nova-solicitacao')" :class="currentPage==='nova-solicitacao'?'active':''" class="sidebar-item" title="Nova Solicitação">
+      <i data-lucide="plus-circle" class="si"></i>
+      <span class="sl">Solicitar Serviço</span>
+    </div>
+
+    <div class="sg">Compras & Propostas</div>
+    <div @click="setPage('pedidos')" :class="currentPage==='pedidos'?'active':''" class="sidebar-item" title="Pedidos na Loja">
+      <i data-lucide="shopping-bag" class="si"></i>
+      <span class="sl">Meus Pedidos</span>
+      <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="orders.length"></span>
+    </div>
+    <div @click="setPage('orcamentos')" :class="currentPage==='orcamentos'?'active':''" class="sidebar-item" title="Orçamentos Recebidos">
+      <i data-lucide="receipt" class="si"></i>
+      <span class="sl">Orçamentos</span>
+      <span x-show="stats.pendingQuotes > 0" class="sb2 badge bg-emerald-500 text-white font-bold text-[10px] px-2 py-0.5 rounded-full ms-auto" x-text="stats.pendingQuotes"></span>
+    </div>
+
+    <div class="sg">Capacitação</div>
+    <div @click="setPage('cursos')" :class="currentPage==='cursos'?'active':''" class="sidebar-item" title="Meus Cursos Academy">
+      <i data-lucide="graduation-cap" class="si"></i>
+      <span class="sl">Meus Cursos</span>
+      <span class="sb2 badge bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="courses.length"></span>
+    </div>
+
+    <div class="sg">Definições</div>
+    <div @click="setPage('perfil')" :class="currentPage==='perfil'?'active':''" class="sidebar-item" title="Dados da Conta & Palavra-passe">
+      <i data-lucide="user-cog" class="si"></i>
+      <span class="sl">Minha Conta & Senha</span>
+    </div>
+
+    <!-- Se for Admin, exibir atalho de retorno ao painel administrativo -->
+    <template x-if="user.role_slug === 'admin' || user.role_slug === 'super_admin'">
+      <div class="pt-2 px-2">
+        <a href="/admin-dashboard" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md transition">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span class="sl">Painel Executivo Admin</span>
+        </a>
+      </div>
+    </template>
+  </nav>
+
+  <!-- Sidebar Footer: User & Logout -->
+  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02]">
+    <div class="flex items-center gap-3 px-1.5 py-1 mb-2">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f5a800] to-[#0050f0] text-slate-950 font-black flex items-center justify-center text-xs shadow-sm shrink-0" x-text="user.name ? user.name.charAt(0).toUpperCase() : 'C'"></div>
+      <div class="min-w-0 flex-1 sl">
+        <p class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="user.name || 'Cliente'"></p>
+        <p class="text-[10px] text-slate-400 truncate" x-text="user.empresa || user.email || 'Conta Corporativa'"></p>
+      </div>
+    </div>
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors m-0" @click="logout()" title="Terminar Sessão">
+      <i data-lucide="log-out" class="si text-rose-500 group-hover:scale-110 transition-transform"></i>
+      <span class="sl text-rose-600 dark:text-rose-400 text-xs font-bold">Terminar Sessão</span>
+    </div>
+  </div>
+</aside>
+
+<div x-show="mobileMenuOpen" @click="mobileMenuOpen=false" class="fixed inset-0 bg-black/60 z-[99] md:hidden" x-cloak></div>
+
+<!-- MAIN CONTENT -->
+<div id="client-main" :class="{'sc': sidebarCollapsed}">
+  <header id="client-header">
+    <button @click="mobileMenuOpen=!mobileMenuOpen" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400">
+      <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+    <button @click="sidebarCollapsed=!sidebarCollapsed" class="hidden md:flex p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 transition">
+      <i data-lucide="panel-left-close" x-show="!sidebarCollapsed" class="w-5 h-5"></i>
+      <i data-lucide="panel-left-open" x-show="sidebarCollapsed" x-cloak class="w-5 h-5"></i>
+    </button>
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-sm shrink-0">
+      <span class="text-slate-400 dark:text-slate-500 font-semibold">Área do Cliente</span>
+      <span class="text-slate-300 dark:text-slate-600 font-bold">/</span>
+      <span class="font-extrabold text-slate-900 dark:text-white" x-text="pageTitle"></span>
+    </div>
+
+    <!-- SEARCH CENTRALIZADO -->
+    <div class="flex-1 max-w-md mx-auto hidden md:block px-4">
+      <div class="relative w-full">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+        <input type="text" x-model="searchGlobal" placeholder="Pesquisar pedidos, solicitações, orçamentos..." class="input-box pl-10 w-full py-2 text-xs">
+      </div>
+    </div>
+
+    <div class="flex-1 md:hidden"></div>
+
+    <!-- AÇÕES DO CABEÇALHO -->
+    <div class="flex items-center gap-2.5">
+      <!-- BOTÃO NOVA SOLICITAÇÃO -->
+      <button @click="setPage('nova-solicitacao')" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition shadow-sm">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        <span>Solicitar Serviço</span>
+      </button>
+
+      <!-- BOTÃO TOGGLE DARK/LIGHT MODE -->
+      <button @click="toggleTheme()" class="hdr-btn" :title="theme==='dark'?'Modo Claro':'Modo Escuro'">
+        <i data-lucide="sun" class="w-4 h-4 text-amber-400" x-show="theme==='dark'"></i>
+        <i data-lucide="moon" class="w-4 h-4 text-blue-500" x-show="theme==='light'"></i>
+        <span class="text-xs font-bold hidden sm:inline" x-text="theme==='dark'?'Modo Claro':'Modo Escuro'"></span>
+      </button>
+
+      <!-- DROPDOWN PERFIL -->
+      <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+        <button @click="open = !open" class="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 border border-slate-200/80 dark:border-white/10 transition">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f5a800] to-[#0050f0] text-slate-950 font-black flex items-center justify-center text-xs shadow-xs" x-text="user.name ? user.name.charAt(0).toUpperCase() : 'C'"></div>
+          <span class="text-xs font-bold text-slate-800 dark:text-white hidden lg:inline truncate max-w-[120px]" x-text="user.name || 'Cliente'"></span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+        </button>
+
+        <div x-show="open" x-cloak class="absolute right-0 mt-2 w-56 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 shadow-2xl p-2 z-50 text-xs space-y-1">
+          <div class="px-3 py-2 border-b border-slate-100 dark:border-white/10">
+            <p class="font-bold text-slate-900 dark:text-white truncate" x-text="user.name"></p>
+            <p class="text-[10px] text-slate-400 truncate" x-text="user.email"></p>
+            <p class="text-[10px] text-amber-500 font-semibold mt-0.5 truncate" x-text="user.empresa || 'Cliente Particular'"></p>
+          </div>
+          <a href="#" @click.prevent="setPage('perfil'); open=false;" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
+            <i data-lucide="user" class="w-4 h-4 text-slate-400"></i>
+            <span>Meus Dados</span>
+          </a>
+          <a href="#" @click.prevent="setPage('pedidos'); open=false;" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 font-medium">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-slate-400"></i>
+            <span>Histórico de Compras</span>
+          </a>
+          <div class="border-t border-slate-100 dark:border-white/10 my-1"></div>
+          <button @click="logout()" class="w-full text-left flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 text-rose-600 font-medium cursor-pointer">
+            <i data-lucide="log-out" class="w-4 h-4 text-rose-500"></i>
+            <span>Terminar Sessão</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CORPO PRINCIPAL DE CONTEÚDO -->
+  <main class="flex-1 p-6 md:p-8 space-y-8 max-w-7xl w-full mx-auto">
+    <div id="portal-content" class="sr-only" aria-hidden="true"></div>
+    
+    <!-- ========================================== -->
+    <!-- 1. ABA: VISÃO GERAL (DASHBOARD)            -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'dashboard'" x-cloak class="space-y-8">
+      <!-- Boas-vindas Banner -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#071326] via-[#0b2144] to-[#071326] p-6 sm:p-8 text-white shadow-xl border border-white/10">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-[#f5a800]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[#f5a800] text-xs font-bold border border-white/10">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Conta Verificada &bull; RACHI Angola
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Olá, <span class="text-[#f5a800]" x-text="user.name ? user.name.split(' ')[0] : 'Cliente'"></span>!
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+              Acompanhe as suas demandas tecnológicas, ordens de serviço, propostas comerciais e formações executivas num só local seguro e integrado.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <button @click="setPage('nova-solicitacao')" class="px-5 py-3 rounded-2xl bg-[#f5a800] hover:bg-[#e09800] text-slate-950 font-extrabold text-xs shadow-lg transition flex items-center gap-2">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Abrir Solicitação</span>
+            </button>
+            <a href="/loja" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs border border-white/20 transition flex items-center gap-2">
+              <i data-lucide="shopping-cart" class="w-4 h-4 text-sky-400"></i>
+              <span>Loja RACHI</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Card 1: Solicitações -->
+        <div class="card-box cursor-pointer hover:border-amber-500/40 transition group" @click="setPage('solicitacoes')">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Solicitações Ativas</span>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition">
+              <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 dark:text-white" x-text="stats.openRequests"></div>
+          <div class="flex items-center justify-between text-xs text-slate-500 mt-2">
+            <span>Em atendimento / análise</span>
+            <span class="text-amber-500 font-bold group-hover:translate-x-0.5 transition">&rarr;</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Orçamentos -->
+        <div class="card-box cursor-pointer hover:border-blue-500/40 transition group" @click="setPage('orcamentos')">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Orçamentos Pendentes</span>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-110 transition">
+              <i data-lucide="receipt" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 dark:text-white" x-text="stats.pendingQuotes"></div>
+          <div class="flex items-center justify-between text-xs text-slate-500 mt-2">
+            <span>Aguardando sua aprovação</span>
+            <span class="text-blue-500 font-bold group-hover:translate-x-0.5 transition">&rarr;</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Pedidos -->
+        <div class="card-box cursor-pointer hover:border-emerald-500/40 transition group" @click="setPage('pedidos')">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Compras na Loja</span>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition">
+              <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 dark:text-white" x-text="orders.length"></div>
+          <div class="flex items-center justify-between text-xs text-slate-500 mt-2">
+            <span>Tecnologia & Suprimentos</span>
+            <span class="text-emerald-500 font-bold group-hover:translate-x-0.5 transition">&rarr;</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Cursos -->
+        <div class="card-box cursor-pointer hover:border-purple-500/40 transition group" @click="setPage('cursos')">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cursos Academy</span>
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center group-hover:scale-110 transition">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 dark:text-white" x-text="courses.length"></div>
+          <div class="flex items-center justify-between text-xs text-slate-500 mt-2">
+            <span>Formações em andamento</span>
+            <span class="text-purple-500 font-bold group-hover:translate-x-0.5 transition">&rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ações Rápidas por Unidade de Negócio -->
+      <div class="card-box space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Soluções Rápidas RACHI</h3>
+            <p class="text-xs text-slate-500">Inicie um atendimento direto com a equipa especializada de cada área</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Tec -->
+          <div @click="openQuickRequest('tec')" class="p-4 rounded-2xl border border-slate-200 dark:border-white/10 hover:border-blue-500/50 bg-slate-50/50 dark:bg-white/[0.02] cursor-pointer transition group">
+            <div class="flex items-center gap-3 mb-2">
+              <img src="/images/areas/rachi-tec.png" alt="Tec" class="w-7 h-7 object-contain">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">RACHI Tec</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-3">Sistemas de gestão, websites, digitalização e suporte TI.</p>
+            <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline flex items-center gap-1">Solicitar TI &rarr;</span>
+          </div>
+
+          <!-- Print -->
+          <div @click="openQuickRequest('print')" class="p-4 rounded-2xl border border-slate-200 dark:border-white/10 hover:border-pink-500/50 bg-slate-50/50 dark:bg-white/[0.02] cursor-pointer transition group">
+            <div class="flex items-center gap-3 mb-2">
+              <img src="/images/areas/rachi-print.png" alt="Print" class="w-7 h-7 object-contain">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">RACHI Print</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-3">Produção gráfica, brindes empresariais e papelaria.</p>
+            <span class="text-[11px] font-bold text-pink-600 dark:text-pink-400 group-hover:underline flex items-center gap-1">Solicitar Gráfica &rarr;</span>
+          </div>
+
+          <!-- Academy -->
+          <div @click="setPage('cursos')" class="p-4 rounded-2xl border border-slate-200 dark:border-white/10 hover:border-emerald-500/50 bg-slate-50/50 dark:bg-white/[0.02] cursor-pointer transition group">
+            <div class="flex items-center gap-3 mb-2">
+              <img src="/images/areas/rachi-academy.png" alt="Academy" class="w-7 h-7 object-contain">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">RACHI Academy</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-3">Cursos executivos, capacitação de equipas e certificações.</p>
+            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 group-hover:underline flex items-center gap-1">Ver Cursos &rarr;</span>
+          </div>
+
+          <!-- Capital -->
+          <div @click="openQuickRequest('capital')" class="p-4 rounded-2xl border border-slate-200 dark:border-white/10 hover:border-amber-500/50 bg-slate-50/50 dark:bg-white/[0.02] cursor-pointer transition group">
+            <div class="flex items-center gap-3 mb-2">
+              <img src="/images/areas/rachi-human-capital.png" alt="Capital" class="w-7 h-7 object-contain">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">RACHI Capital</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-3">Consultoria de RH, contabilidade, legalização e INSS.</p>
+            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400 group-hover:underline flex items-center gap-1">Solicitar Consultoria &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duas Tabelas Lado a Lado (Últimas Solicitações e Últimos Pedidos) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Tabela 1: Solicitações Recentes -->
+        <div class="card-box space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="clipboard-list" class="w-4 h-4 text-amber-500"></i>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white">Últimas Solicitações</h3>
+            </div>
+            <button @click="setPage('solicitacoes')" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">Ver todas &rarr;</button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Protocolo</th>
+                  <th>Assunto</th>
+                  <th>Estado</th>
+                  <th class="text-right">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template x-for="req in requests.slice(0, 5)" :key="req.id">
+                  <tr>
+                    <td class="font-mono text-xs font-bold text-amber-600 dark:text-amber-400" x-text="req.protocol"></td>
+                    <td class="max-w-[180px] truncate">
+                      <p class="font-semibold text-xs truncate" x-text="req.title"></p>
+                      <span class="text-[10px] text-slate-400" x-text="req.unit || 'RACHI'"></span>
+                    </td>
+                    <td>
+                      <span class="badge-status" :class="req.status" x-text="statusLabels[req.status] || req.status"></span>
+                    </td>
+                    <td class="text-right">
+                      <button @click="openRequestDetail(req.id)" class="px-2.5 py-1 text-xs font-bold text-blue-600 hover:bg-blue-50 dark:hover:bg-white/5 rounded-lg transition">Acompanhar</button>
+                    </td>
+                  </tr>
+                </template>
+                <tr x-show="requests.length === 0">
+                  <td colspan="4" class="text-center py-8 text-slate-400 text-xs">Nenhuma solicitação aberta no momento.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tabela 2: Últimos Pedidos da Loja -->
+        <div class="card-box space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-500"></i>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white">Compras & Pedidos Recentes</h3>
+            </div>
+            <button @click="setPage('pedidos')" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">Ver todos &rarr;</button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Nº Pedido</th>
+                  <th>Valor Total</th>
+                  <th>Pagamento</th>
+                  <th class="text-right">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template x-for="ord in orders.slice(0, 5)" :key="ord.id">
+                  <tr>
+                    <td class="font-mono text-xs font-bold text-slate-800 dark:text-slate-200" x-text="ord.number"></td>
+                    <td class="font-bold text-xs" x-text="formatMoney(ord.total)"></td>
+                    <td>
+                      <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full" 
+                            :class="ord.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
+                            x-text="ord.payment_status === 'paid' ? 'Pago' : 'Pendente'"></span>
+                    </td>
+                    <td class="text-right">
+                      <button @click="setPage('pedidos')" class="px-2.5 py-1 text-xs font-bold text-blue-600 hover:bg-blue-50 dark:hover:bg-white/5 rounded-lg transition">Detalhes</button>
+                    </td>
+                  </tr>
+                </template>
+                <tr x-show="orders.length === 0">
+                  <td colspan="4" class="text-center py-8 text-slate-400 text-xs">Nenhum pedido efetuado ainda. <a href="/loja" class="text-amber-500 underline font-bold">Visitar Loja</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. ABA: MINHAS SOLICITAÇÕES                -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'solicitacoes'" x-cloak class="space-y-6">
+      <div class="card-box space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Minhas Solicitações de Serviços</h2>
+            <p class="text-xs text-slate-500">Acompanhe o status e a troca de mensagens com os especialistas da RACHI</p>
+          </div>
+          <button @click="setPage('nova-solicitacao')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Nova Solicitação</span>
+          </button>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-white/5">
+          <button @click="filterUnit = 'all'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition" :class="filterUnit === 'all' ? 'bg-[#071326] text-white dark:bg-white dark:text-slate-950' : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400'">Todas as Unidades</button>
+          <button @click="filterUnit = 'tec'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition" :class="filterUnit === 'tec' ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400'">RACHI Tec</button>
+          <button @click="filterUnit = 'print'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition" :class="filterUnit === 'print' ? 'bg-pink-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400'">RACHI Print</button>
+          <button @click="filterUnit = 'academy'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition" :class="filterUnit === 'academy' ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400'">RACHI Academy</button>
+          <button @click="filterUnit = 'capital'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition" :class="filterUnit === 'capital' ? 'bg-amber-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400'">RACHI Capital</button>
+        </div>
+
+        <!-- Tabela Completa -->
+        <div class="overflow-x-auto">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>Protocolo</th>
+                <th>Unidade</th>
+                <th>Serviço / Título</th>
+                <th>Prioridade</th>
+                <th>Estado</th>
+                <th>Abertura</th>
+                <th class="text-right">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="r in filteredRequests" :key="r.id">
+                <tr>
+                  <td class="font-mono text-xs font-extrabold text-amber-600 dark:text-amber-400" x-text="r.protocol"></td>
+                  <td>
+                    <span class="text-xs font-bold text-slate-700 dark:text-slate-300" x-text="r.unit || 'RACHI'"></span>
+                  </td>
+                  <td>
+                    <p class="font-bold text-xs text-slate-900 dark:text-white" x-text="r.title"></p>
+                    <p class="text-[11px] text-slate-400 truncate max-w-xs" x-text="r.description"></p>
+                  </td>
+                  <td>
+                    <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md" 
+                          :class="r.priority === 'urgent' ? 'bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-400' : (r.priority === 'high' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400' : 'bg-slate-100 text-slate-700 dark:bg-white/5 dark:text-slate-300')"
+                          x-text="r.priority || 'Normal'"></span>
+                  </td>
+                  <td>
+                    <span class="badge-status" :class="r.status" x-text="statusLabels[r.status] || r.status"></span>
+                  </td>
+                  <td class="text-xs text-slate-400" x-text="formatDate(r.created_at)"></td>
+                  <td class="text-right">
+                    <button @click="openRequestDetail(r.id)" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 font-bold text-xs rounded-xl transition">
+                      Acompanhar
+                    </button>
+                  </td>
+                </tr>
+              </template>
+              <tr x-show="filteredRequests.length === 0">
+                <td colspan="7" class="text-center py-12 text-slate-400 text-xs">
+                  Nenhuma solicitação encontrada com os filtros selecionados.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. ABA: NOVA SOLICITAÇÃO                   -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'nova-solicitacao'" x-cloak class="max-w-3xl mx-auto space-y-6">
+      <div class="card-box space-y-6">
+        <div class="border-b border-slate-100 dark:border-white/5 pb-4">
+          <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">Abrir Nova Solicitação</h2>
+          <p class="text-xs text-slate-500">Preencha os detalhes da sua demanda para que a nossa equipa analise e responda com agilidade</p>
+        </div>
+
+        <form @submit.prevent="submitNewRequest()" class="space-y-5">
+          <!-- Seleção da Unidade -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">Selecione a Unidade de Negócio *</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <template x-for="u in units" :key="u.id">
+                <div @click="newReq.unit_id = u.id" 
+                     class="p-3.5 rounded-2xl border text-center cursor-pointer transition select-none flex flex-col items-center justify-center gap-1.5"
+                     :class="newReq.unit_id === u.id ? 'border-amber-500 bg-amber-500/10 font-bold text-slate-900 dark:text-white shadow-sm' : 'border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 text-slate-600 dark:text-slate-400'">
+                  <span class="text-xs font-bold" x-text="u.name"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Título -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Assunto / Título do Pedido *</label>
+            <input type="text" x-model="newReq.title" required placeholder="Ex.: Consultoria em Transformação Digital / Orçamento de Brindes" class="input-box text-sm py-2.5">
+          </div>
+
+          <!-- Prioridade -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Prioridade</label>
+            <select x-model="newReq.priority" class="input-box text-xs py-2.5">
+              <option value="normal">Normal (Atendimento padrão em até 24h)</option>
+              <option value="low">Baixa (Sem urgência imediata)</option>
+              <option value="high">Alta (Demanda estratégica / prazo curto)</option>
+              <option value="urgent">Urgente (Paragem de operação / imediato)</option>
+            </select>
+          </div>
+
+          <!-- Descrição Detalhada -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Detalhada da Necessidade *</label>
+            <textarea x-model="newReq.description" required rows="5" placeholder="Explique os objetivos, prazos esperados, tecnologias ou especificações do projeto..." class="input-box text-xs resize-none"></textarea>
+          </div>
+
+          <!-- Botões -->
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-white/5">
+            <button type="button" @click="setPage('solicitacoes')" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition">Cancelar</button>
+            <button type="submit" :disabled="submitting" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs transition flex items-center gap-2 shadow-md">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span x-text="submitting ? 'A submeter...' : 'Enviar Solicitação'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. ABA: MEUS PEDIDOS NA LOJA               -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'pedidos'" x-cloak class="space-y-6">
+      <div class="card-box space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Meus Pedidos na Loja RACHI</h2>
+            <p class="text-xs text-slate-500">Histórico de compras de tecnologia, equipamentos e suprimentos com faturação legal</p>
+          </div>
+          <a href="/loja" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            <span>Comprar Mais Produtos</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <template x-for="ord in orders" :key="ord.id">
+            <div class="p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-mono text-xs font-bold text-slate-900 dark:text-white" x-text="ord.number"></span>
+                  <p class="text-[11px] text-slate-400" x-text="formatDate(ord.created_at)"></p>
+                </div>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                      :class="ord.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'"
+                      x-text="ord.payment_status === 'paid' ? 'Pagamento Confirmado' : 'Aguardando Pagamento'"></span>
+              </div>
+
+              <div class="border-t border-b border-slate-200/60 dark:border-white/5 py-2 space-y-1.5 text-xs">
+                <template x-for="item in ord.items" :key="item.id">
+                  <div class="flex items-center justify-between">
+                    <span class="truncate max-w-[200px]" x-text="item.name + ' × ' + item.quantity"></span>
+                    <span class="font-semibold" x-text="formatMoney(item.total)"></span>
+                  </div>
+                </template>
+              </div>
+
+              <div class="flex items-center justify-between pt-1">
+                <span class="text-xs text-slate-500 font-bold">Total do Pedido:</span>
+                <span class="text-base font-extrabold text-slate-900 dark:text-white" x-text="formatMoney(ord.total)"></span>
+              </div>
+
+              <!-- Instruções Multicaixa se Pendente -->
+              <div x-show="ord.payment_status !== 'paid'" class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-800 dark:text-amber-300">
+                <p class="font-bold">Pagamento Multicaixa Express ou Transferência Bancária</p>
+                <p class="text-[10px] opacity-80 mt-0.5">Envie o comprovativo via WhatsApp (+244 923 000 000) para processamento imediato.</p>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div x-show="orders.length === 0" class="text-center py-12 space-y-3">
+          <i data-lucide="shopping-bag" class="w-10 h-10 text-slate-300 mx-auto"></i>
+          <p class="text-xs text-slate-400">Você ainda não tem nenhum pedido de compra na loja.</p>
+          <a href="/loja" class="inline-block px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs">Aceder à Loja RACHI</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 5. ABA: ORÇAMENTOS RECEBIDOS               -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'orcamentos'" x-cloak class="space-y-6">
+      <div class="card-box space-y-6">
+        <div class="border-b border-slate-100 dark:border-white/5 pb-4">
+          <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Orçamentos & Propostas Comerciais</h2>
+          <p class="text-xs text-slate-500">Valide propostas técnicas e aprove orçamentos com validade jurídica</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <template x-for="q in quotes" :key="q.id">
+            <div class="p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-mono text-xs font-bold text-slate-900 dark:text-white" x-text="q.number"></span>
+                  <p class="text-[11px] text-slate-400">Válido até: <span class="font-semibold" x-text="formatDate(q.valid_until)"></span></p>
+                </div>
+                <span class="badge-status" :class="q.status" x-text="q.status === 'approved' ? 'Aprovado' : 'Aguardando Validação'"></span>
+              </div>
+
+              <div class="border-t border-b border-slate-200/60 dark:border-white/5 py-2.5 space-y-1.5 text-xs">
+                <template x-for="item in q.items" :key="item.id">
+                  <div class="flex items-center justify-between">
+                    <span class="truncate max-w-[220px]" x-text="item.description + ' (' + item.quantity + ' un)'"></span>
+                    <span class="font-semibold" x-text="formatMoney(item.total)"></span>
+                  </div>
+                </template>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] text-slate-400 uppercase font-bold">Valor Total (c/ IVA)</p>
+                  <p class="text-lg font-black text-slate-900 dark:text-white" x-text="formatMoney(q.total)"></p>
+                </div>
+                <template x-if="q.status === 'sent' || q.status === 'viewed'">
+                  <button @click="approveQuote(q.id)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <span>Aprovar Orçamento</span>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div x-show="quotes.length === 0" class="text-center py-12 text-slate-400 text-xs">
+          Nenhum orçamento pendente para aprovação no momento.
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 6. ABA: MEUS CURSOS ACADEMY                -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'cursos'" x-cloak class="space-y-6">
+      <div class="card-box space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">Meus Cursos Executivos & Formações</h2>
+            <p class="text-xs text-slate-500">Desenvolvimento profissional contínuo com certificações RACHI Academy</p>
+          </div>
+          <a href="/aluno-dashboard" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i data-lucide="play" class="w-4 h-4"></i>
+            <span>Aceder à Plataforma Aluno</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <template x-for="c in courses" :key="c.id">
+            <div class="p-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <span class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-300" x-text="c.enrollment_status === 'active' ? 'Matrícula Ativa' : c.enrollment_status"></span>
+                <h3 class="text-sm font-extrabold text-slate-900 dark:text-white leading-snug" x-text="c.name"></h3>
+                <p class="text-xs text-slate-500" x-text="c.completed_lessons + ' aulas assistidas'"></p>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200/60 dark:border-white/5">
+                <a :href="'/academy/cursos/' + c.slug" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-bold text-xs rounded-xl transition">
+                  <span>Aceder às Aulas</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div x-show="courses.length === 0" class="text-center py-12 space-y-3">
+          <i data-lucide="graduation-cap" class="w-10 h-10 text-slate-300 mx-auto"></i>
+          <p class="text-xs text-slate-400">Você não possui matrículas ativas na RACHI Academy.</p>
+          <a href="/academy/cursos" class="inline-block px-4 py-2 rounded-xl bg-purple-600 text-white font-bold text-xs">Conhecer Cursos Disponíveis</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 7. ABA: PERFIL & PALAVRA-PASSE             -->
+    <!-- ========================================== -->
+    <div x-show="currentPage === 'perfil'" x-cloak class="max-w-2xl mx-auto space-y-6">
+      <!-- Dados Cadastrais -->
+      <div class="card-box space-y-4">
+        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-white/5 pb-3">Dados Cadastrais</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div>
+            <span class="text-slate-400 font-semibold">Nome Completo:</span>
+            <p class="font-bold text-slate-900 dark:text-white text-sm" x-text="user.name || '—'"></p>
+          </div>
+          <div>
+            <span class="text-slate-400 font-semibold">E-mail:</span>
+            <p class="font-bold text-slate-900 dark:text-white text-sm" x-text="user.email || '—'"></p>
+          </div>
+          <div>
+            <span class="text-slate-400 font-semibold">Empresa / Razão Social:</span>
+            <p class="font-bold text-slate-900 dark:text-white text-sm" x-text="user.empresa || 'Conta Particular'"></p>
+          </div>
+          <div>
+            <span class="text-slate-400 font-semibold">Telefone de Contacto:</span>
+            <p class="font-bold text-slate-900 dark:text-white text-sm" x-text="user.phone || '—'"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alteração de Senha Segura -->
+      <div class="card-box space-y-5">
+        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-white/5 pb-3">Segurança da Conta</h2>
+        
+        <form @submit.prevent="updatePassword()" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Palavra-passe Atual *</label>
+            <input type="password" x-model="pwd.current_password" required class="input-box text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nova Palavra-passe (Mínimo 10 caracteres) *</label>
+            <input type="password" x-model="pwd.password" required minlength="10" class="input-box text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Confirmar Nova Palavra-passe *</label>
+            <input type="password" x-model="pwd.password_confirmation" required minlength="10" class="input-box text-sm">
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button type="submit" :disabled="submittingPwd" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-extrabold text-xs transition">
+              <span x-text="submittingPwd ? 'A atualizar...' : 'Atualizar Palavra-passe'"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ================================================================ -->
+<!-- MODAL DE ATENDIMENTO / CHAT DA SOLICITAÇÃO                       -->
+<!-- ================================================================ -->
+<div x-show="detailModalOpen" x-cloak class="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+  <div class="bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden" @click.outside="detailModalOpen = false">
+    <!-- Modal Header -->
+    <div class="p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-mono text-xs font-bold text-amber-500" x-text="activeRequest.request?.protocol"></span>
+          <span class="badge-status" :class="activeRequest.request?.status" x-text="statusLabels[activeRequest.request?.status] || activeRequest.request?.status"></span>
+        </div>
+        <h3 class="text-base font-extrabold text-slate-900 dark:text-white" x-text="activeRequest.request?.title"></h3>
+      </div>
+      <button @click="detailModalOpen = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg">&times;</button>
+    </div>
+
+    <!-- Modal Body: Chat & Histórico -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- Descrição inicial -->
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/5 space-y-1">
+        <span class="text-[10px] font-bold uppercase text-slate-400">Descrição do Pedido</span>
+        <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed" x-text="activeRequest.request?.description"></p>
+      </div>
+
+      <!-- Conversa Realtime -->
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Conversação & Histórico</h4>
+        <div class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+          <template x-for="m in activeRequest.messages" :key="m.id">
+            <div class="p-3 rounded-2xl text-xs space-y-1" :class="m.user_id === user.id ? 'bg-amber-500/10 border border-amber-500/20 ml-8 text-amber-950 dark:text-amber-100' : 'bg-slate-100 dark:bg-white/5 mr-8 text-slate-800 dark:text-slate-200'">
+              <div class="flex items-center justify-between text-[10px] opacity-70">
+                <span class="font-bold" x-text="m.name || 'Equipa RACHI'"></span>
+                <span x-text="formatDate(m.created_at)"></span>
+              </div>
+              <p class="leading-relaxed" x-text="m.message"></p>
+            </div>
+          </template>
+          <div x-show="!activeRequest.messages || activeRequest.messages.length === 0" class="text-center py-4 text-xs text-slate-400">
+            Nenhuma mensagem enviada ainda. Escreva abaixo para falar com o atendente.
+          </div>
+        </div>
+      </div>
+
+      <!-- Enviar Mensagem -->
+      <form @submit.prevent="sendMessage()" class="space-y-3 pt-2 border-t border-slate-100 dark:border-white/5">
+        <textarea x-model="newMessage" required rows="2" placeholder="Escreva a sua mensagem para a equipa da RACHI..." class="input-box text-xs resize-none"></textarea>
+        <div class="flex justify-end">
+          <button type="submit" :disabled="sendingMessage" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span x-text="sendingMessage ? 'A enviar...' : 'Enviar Mensagem'"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function clienteApp() {
+  return {
+    theme: localStorage.getItem('rachi_admin_theme') || 'dark',
+    sidebarCollapsed: false,
+    mobileMenuOpen: false,
+    currentPage: 'dashboard',
+    searchGlobal: '',
+    filterUnit: 'all',
+    submitting: false,
+    submittingPwd: false,
+    sendingMessage: false,
+    detailModalOpen: false,
+
+    user: {},
+    stats: { openRequests: 0, pendingQuotes: 0 },
+    requests: [],
+    orders: [],
+    quotes: [],
+    courses: [],
+    units: [
+      { id: 1, name: 'RACHI Tec' },
+      { id: 2, name: 'RACHI Print' },
+      { id: 3, name: 'RACHI Academy' },
+      { id: 4, name: 'RACHI Capital' }
+    ],
+
+    newReq: {
+      unit_id: 1,
+      title: '',
+      priority: 'normal',
+      description: ''
+    },
+
+    pwd: {
+      current_password: '',
+      password: '',
+      password_confirmation: ''
+    },
+
+    activeRequest: { request: {}, history: [], messages: [], files: [] },
+    newMessage: '',
+
+    statusLabels: {
+      'new': 'Novo Chamado',
+      'in_analysis': 'Em Análise',
+      'waiting_customer': 'Aguardando Cliente',
+      'quoted': 'Orçado',
+      'approved': 'Aprovado',
+      'in_progress': 'Em Execução',
+      'in_review': 'Em Revisão',
+      'completed': 'Concluído',
+      'cancelled': 'Cancelado'
+    },
+
+    get pageTitle() {
+      const titles = {
+        'dashboard': 'Visão Geral',
+        'solicitacoes': 'Minhas Solicitações',
+        'nova-solicitacao': 'Abrir Solicitação',
+        'pedidos': 'Meus Pedidos na Loja',
+        'orcamentos': 'Orçamentos & Propostas',
+        'cursos': 'Meus Cursos Academy',
+        'perfil': 'Dados da Conta & Palavra-passe'
+      };
+      return titles[this.currentPage] || 'Área do Cliente';
+    },
+
+    get filteredRequests() {
+      return this.requests.filter(r => {
+        const matchesUnit = this.filterUnit === 'all' || 
+          (r.unit && r.unit.toLowerCase().includes(this.filterUnit));
+        const matchesSearch = !this.searchGlobal || 
+          (r.title && r.title.toLowerCase().includes(this.searchGlobal.toLowerCase())) ||
+          (r.protocol && r.protocol.toLowerCase().includes(this.searchGlobal.toLowerCase()));
+        return matchesUnit && matchesSearch;
+      });
+    },
+
+    async init() {
+      this.applyTheme();
+
+      // Detect initial page from hash or path
+      const p = location.pathname;
+      if (p.includes('/solicitacoes')) this.currentPage = 'solicitacoes';
+      else if (p.includes('/pedidos')) this.currentPage = 'pedidos';
+      else if (p.includes('/orcamentos')) this.currentPage = 'orcamentos';
+      else if (p.includes('/cursos')) this.currentPage = 'cursos';
+      else if (location.hash) this.currentPage = location.hash.slice(1);
+
+      await this.loadSession();
+      await this.loadData();
+
+      this.$nextTick(() => {
+        if (window.lucide) lucide.createIcons();
+      });
+    },
+
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('rachi_admin_theme', this.theme);
+      this.applyTheme();
+      this.$nextTick(() => {
+        if (window.lucide) lucide.createIcons();
+      });
+    },
+
+    applyTheme() {
+      if (this.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    },
+
+    setPage(page) {
+      this.currentPage = page;
+      this.mobileMenuOpen = false;
+      const pathMap = {
+        'dashboard': '/cliente/dashboard',
+        'solicitacoes': '/cliente/solicitacoes',
+        'nova-solicitacao': '/cliente/solicitacoes',
+        'pedidos': '/cliente/pedidos',
+        'orcamentos': '/cliente/orcamentos',
+        'cursos': '/cliente/cursos',
+        'perfil': '/cliente/dashboard'
+      };
+      const target = pathMap[page] || '/cliente/dashboard';
+      if (location.pathname !== target && history.pushState) {
+        history.pushState({ page }, '', target);
+      }
+      this.$nextTick(() => {
+        if (window.lucide) lucide.createIcons();
+      });
+    },
+
+    openQuickRequest(unit) {
+      const map = { tec: 1, print: 2, academy: 3, capital: 4 };
+      this.newReq.unit_id = map[unit] || 1;
+      this.setPage('nova-solicitacao');
+    },
+
+    async loadSession() {
+      try {
+        const res = await fetch('/api/session');
+        if (res.ok) {
+          const d = await res.json();
+          this.user = d.user || {};
+          if (!this.user.id) {
+            location.href = '/login';
+          }
+        } else {
+          location.href = '/login';
+        }
+      } catch (err) {
+        console.error('Session load error', err);
+      }
+    },
+
+    async loadData() {
+      try {
+        // 1. Carregar solicitações
+        const reqRes = await fetch('/solicitacoes/conversas');
+        if (reqRes.ok) {
+          const d = await reqRes.json();
+          this.requests = d.requests || [];
+          this.stats.openRequests = this.requests.filter(r => !['completed', 'cancelled'].includes(r.status)).length;
+        }
+
+        // 2. Carregar pedidos
+        const ordRes = await fetch('/api/orders');
+        if (ordRes.ok) {
+          const d = await ordRes.json();
+          this.orders = d.orders || [];
+        }
+
+        // 3. Carregar orçamentos
+        const qRes = await fetch('/api/quotes');
+        if (qRes.ok) {
+          const d = await qRes.json();
+          this.quotes = d.quotes || [];
+          this.stats.pendingQuotes = this.quotes.filter(q => ['sent', 'viewed'].includes(q.status)).length;
+        }
+
+        // 4. Carregar cursos
+        const cRes = await fetch('/api/my/courses');
+        if (cRes.ok) {
+          const d = await cRes.json();
+          this.courses = d.courses || [];
+        }
+
+        // 5. Catálogo de unidades
+        const catRes = await fetch('/api/catalog');
+        if (catRes.ok) {
+          const d = await catRes.json();
+          if (d.units && d.units.length) this.units = d.units;
+        }
+      } catch (err) {
+        console.error('Data load error', err);
+      }
+    },
+
+    async openRequestDetail(id) {
+      try {
+        const res = await fetch('/api/requests/' + id);
+        if (res.ok) {
+          const d = await res.json();
+          this.activeRequest = d;
+          this.detailModalOpen = true;
+          this.$nextTick(() => {
+            if (window.lucide) lucide.createIcons();
+          });
+        }
+      } catch (err) {
+        RachiToast.error('Não foi possível carregar os detalhes do atendimento.');
+      }
+    },
+
+    async sendMessage() {
+      if (!this.newMessage.trim() || !this.activeRequest.request?.id) return;
+      this.sendingMessage = true;
+      try {
+        const res = await fetch('/solicitacoes/' + this.activeRequest.request.id + '/mensagem', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: this.newMessage })
+        });
+        const d = await res.json();
+        if (res.ok && d.success) {
+          this.newMessage = '';
+          await this.openRequestDetail(this.activeRequest.request.id);
+          RachiToast.success('Mensagem enviada com sucesso.');
+        } else {
+          RachiToast.error(d.message || 'Erro ao enviar mensagem.');
+        }
+      } catch (err) {
+        RachiToast.error('Falha de conexão.');
+      } finally {
+        this.sendingMessage = false;
+      }
+    },
+
+    async submitNewRequest() {
+      this.submitting = true;
+      try {
+        const res = await fetch('/solicitacoes/nova', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.newReq)
+        });
+        const d = await res.json();
+        if (res.ok && d.success) {
+          RachiToast.success('Solicitação criada com sucesso! Protocolo: ' + (d.request?.protocol || ''));
+          this.newReq.title = '';
+          this.newReq.description = '';
+          await this.loadData();
+          this.setPage('solicitacoes');
+        } else {
+          RachiToast.error(d.message || 'Erro ao criar solicitação.');
+        }
+      } catch (err) {
+        RachiToast.error('Erro de conexão ao enviar chamado.');
+      } finally {
+        this.submitting = false;
+      }
+    },
+
+    async approveQuote(id) {
+      if (!confirm('Deseja realmente aprovar esta proposta comercial?')) return;
+      try {
+        const res = await fetch('/cliente/orcamentos/' + id + '/aprovar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const d = await res.json();
+        if (res.ok && d.success) {
+          RachiToast.success('Orçamento aprovado com sucesso! A equipa da RACHI dará início aos trabalhos.');
+          await this.loadData();
+        } else {
+          RachiToast.error(d.message || 'Falha ao aprovar orçamento.');
+        }
+      } catch (err) {
+        RachiToast.error('Falha de rede.');
+      }
+    },
+
+    async updatePassword() {
+      if (this.pwd.password !== this.pwd.password_confirmation) {
+        RachiToast.error('A confirmação da nova palavra-passe não confere.');
+        return;
+      }
+      this.submittingPwd = true;
+      try {
+        const res = await fetch('/api/account/password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.pwd)
+        });
+        const d = await res.json();
+        if (res.ok && d.success) {
+          RachiToast.success('Palavra-passe alterada com sucesso!');
+          this.pwd = { current_password: '', password: '', password_confirmation: '' };
+        } else {
+          RachiToast.error(d.message || 'Erro ao alterar palavra-passe.');
+        }
+      } catch (err) {
+        RachiToast.error('Erro de rede.');
+      } finally {
+        this.submittingPwd = false;
+      }
+    },
+
+    async logout() {
+      if (window.RachiSession) {
+        await window.RachiSession.logout();
+      } else {
+        await fetch('/logout', { method: 'POST' });
+        location.href = '/login';
+      }
+    },
+
+    formatMoney(val) {
+      const num = Number(val) || 0;
+      return num.toLocaleString('pt-AO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kz';
+    },
+
+    formatDate(dateStr) {
+      if (!dateStr) return '—';
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('pt-AO', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      } catch {
+        return dateStr;
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
