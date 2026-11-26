@@ -125,7 +125,13 @@ html.dark body {
   overflow-x: hidden;
 }
 
-#client-sidebar.collapsed { width: 76px; }
+#client-sidebar.collapsed { 
+  width: 76px; 
+  overflow: visible !important;
+}
+#client-sidebar.collapsed nav { 
+  overflow: visible !important; 
+}
 #client-sidebar.collapsed .sl,
 #client-sidebar.collapsed .sg,
 #client-sidebar.collapsed .sb2,
@@ -149,6 +155,7 @@ html.dark body {
   align-items: center;
 }
 #client-sidebar.collapsed .sidebar-item {
+  position: relative !important;
   justify-content: center;
   padding-left: 0;
   padding-right: 0;
@@ -162,6 +169,7 @@ html.dark body {
   margin: 0 auto;
 }
 #client-sidebar.collapsed .site-back-btn {
+  position: relative !important;
   justify-content: center !important;
   padding: 8px !important;
   width: 42px !important;
@@ -170,6 +178,72 @@ html.dark body {
 }
 #client-sidebar.collapsed .site-back-btn i.ms-auto {
   display: none !important;
+}
+
+/* Legendas flutuantes profissionais para o Sidebar Recolhido (Tooltips instantâneos) */
+#client-sidebar.collapsed [data-legend] {
+  position: relative !important;
+}
+
+#client-sidebar.collapsed [data-legend]::after {
+  content: attr(data-legend);
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: #ffffff;
+  color: #0f172a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.15s ease;
+  z-index: 999999;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+#client-sidebar.collapsed [data-legend]::before {
+  content: '';
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 6px 5px 0;
+  border-style: solid;
+  border-color: transparent #ffffff transparent transparent;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.15s ease;
+  z-index: 999999;
+}
+
+html.dark #client-sidebar.collapsed [data-legend]::after {
+  background: #0d1a30;
+  color: #f8fafc;
+  border-color: rgba(0, 80, 240, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 12px rgba(0, 80, 240, 0.2);
+}
+
+html.dark #client-sidebar.collapsed [data-legend]::before {
+  border-color: transparent #0d1a30 transparent transparent;
+}
+
+#client-sidebar.collapsed [data-legend]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+#client-sidebar.collapsed [data-legend]:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 .sidebar-item {
@@ -368,7 +442,7 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
 <aside id="client-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
   <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
-    <div class="flex items-center justify-between min-h-[42px]">
+    <div class="flex items-center justify-between min-h-[42px] w-full">
       <a href="/cliente/dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Área do Cliente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center gap-2">
@@ -388,11 +462,30 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
           <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
+      <!-- Botão de Recolher no topo da Sidebar (quando expandido) -->
+      <button @click="sidebarCollapsed = !sidebarCollapsed"
+              type="button"
+              class="hidden md:flex p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/60 dark:border-white/5 brand-full"
+              title="Recolher Menu">
+        <i data-lucide="panel-left-close" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Botão de Expandir no topo da Sidebar (quando recolhido) -->
+    <div x-show="sidebarCollapsed" class="w-full flex justify-center pt-1" x-cloak>
+      <button @click="sidebarCollapsed = false"
+              type="button"
+              class="sidebar-item flex items-center justify-center w-10 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/10 shadow-sm"
+              data-legend="Expandir Menu"
+              title="Expandir Menu">
+        <i data-lucide="panel-left-open" class="w-4 h-4"></i>
+      </button>
     </div>
 
     <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
        class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 dark:text-amber-300 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 border border-amber-200/80 dark:border-amber-500/20 transition group shadow-sm"
+       data-legend="Voltar ao Site RACHI"
        title="Voltar ao Site RACHI">
       <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
       <span class="site-back-text">Voltar ao Site RACHI</span>
@@ -401,45 +494,45 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="flex-1 py-3 space-y-0.5">
+  <nav class="flex-1 py-3 space-y-0.5 overflow-y-auto">
     <div class="sg">Minha Área</div>
-    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" title="Visão Geral">
+    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" data-legend="Visão Geral" title="Visão Geral">
       <i data-lucide="layout-dashboard" class="si"></i>
       <span class="sl">Visão Geral</span>
     </div>
 
     <div class="sg">Demandas & Serviços</div>
-    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" title="Minhas Solicitações">
+    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" data-legend="Minhas Solicitações" title="Minhas Solicitações">
       <i data-lucide="clipboard-list" class="si"></i>
       <span class="sl">Minhas Solicitações</span>
       <span class="sb2 badge bg-amber-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full ms-auto" x-text="stats.openRequests"></span>
     </div>
-    <div @click="setPage('nova-solicitacao')" :class="currentPage==='nova-solicitacao'?'active':''" class="sidebar-item" title="Nova Solicitação">
+    <div @click="setPage('nova-solicitacao')" :class="currentPage==='nova-solicitacao'?'active':''" class="sidebar-item" data-legend="Solicitar Serviço" title="Nova Solicitação">
       <i data-lucide="plus-circle" class="si"></i>
       <span class="sl">Solicitar Serviço</span>
     </div>
 
     <div class="sg">Compras & Propostas</div>
-    <div @click="setPage('pedidos')" :class="currentPage==='pedidos'?'active':''" class="sidebar-item" title="Pedidos na Loja">
+    <div @click="setPage('pedidos')" :class="currentPage==='pedidos'?'active':''" class="sidebar-item" data-legend="Meus Pedidos" title="Pedidos na Loja">
       <i data-lucide="shopping-bag" class="si"></i>
       <span class="sl">Meus Pedidos</span>
       <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="orders.length"></span>
     </div>
-    <div @click="setPage('orcamentos')" :class="currentPage==='orcamentos'?'active':''" class="sidebar-item" title="Orçamentos Recebidos">
+    <div @click="setPage('orcamentos')" :class="currentPage==='orcamentos'?'active':''" class="sidebar-item" data-legend="Orçamentos" title="Orçamentos Recebidos">
       <i data-lucide="receipt" class="si"></i>
       <span class="sl">Orçamentos</span>
       <span x-show="stats.pendingQuotes > 0" class="sb2 badge bg-emerald-500 text-white font-bold text-[10px] px-2 py-0.5 rounded-full ms-auto" x-text="stats.pendingQuotes"></span>
     </div>
 
     <div class="sg">Capacitação</div>
-    <div @click="setPage('cursos')" :class="currentPage==='cursos'?'active':''" class="sidebar-item" title="Meus Cursos Academy">
+    <div @click="setPage('cursos')" :class="currentPage==='cursos'?'active':''" class="sidebar-item" data-legend="Meus Cursos" title="Meus Cursos Academy">
       <i data-lucide="graduation-cap" class="si"></i>
       <span class="sl">Meus Cursos</span>
       <span class="sb2 badge bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="courses.length"></span>
     </div>
 
     <div class="sg">Definições</div>
-    <div @click="setPage('perfil')" :class="currentPage==='perfil'?'active':''" class="sidebar-item" title="Dados da Conta & Palavra-passe">
+    <div @click="setPage('perfil')" :class="currentPage==='perfil'?'active':''" class="sidebar-item" data-legend="Minha Conta & Senha" title="Dados da Conta & Palavra-passe">
       <i data-lucide="user-cog" class="si"></i>
       <span class="sl">Minha Conta & Senha</span>
     </div>
@@ -447,24 +540,37 @@ html.dark .badge-status.cancelled { background-color: rgba(153, 27, 27, 0.25); c
     <!-- Se for Admin, exibir atalho de retorno ao painel administrativo -->
     <template x-if="user.role_slug === 'admin' || user.role_slug === 'super_admin'">
       <div class="pt-2 px-2">
-        <a href="/admin-dashboard" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md transition">
-          <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <a href="/admin-dashboard" class="sidebar-item w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md transition" data-legend="Painel Admin">
+          <i data-lucide="shield-check" class="si w-4 h-4 text-white"></i>
           <span class="sl">Painel Executivo Admin</span>
         </a>
       </div>
     </template>
   </nav>
 
-  <!-- Sidebar Footer: User & Logout -->
-  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02]">
-    <div class="flex items-center gap-3 px-1.5 py-1 mb-2">
+  <!-- Sidebar Footer: Toggle & User & Logout -->
+  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-3 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+    <div class="flex items-center gap-3 px-1.5 py-1 mb-1">
       <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f5a800] to-[#0050f0] text-slate-950 font-black flex items-center justify-center text-xs shadow-sm shrink-0" x-text="user.name ? user.name.charAt(0).toUpperCase() : 'C'"></div>
       <div class="min-w-0 flex-1 sl">
         <p class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="user.name || 'Cliente'"></p>
         <p class="text-[10px] text-slate-400 truncate" x-text="user.empresa || user.email || 'Conta Corporativa'"></p>
       </div>
     </div>
-    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors m-0" @click="logout()" title="Terminar Sessão">
+
+    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar do Cliente -->
+    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition m-0 mb-1"
+         @click="sidebarCollapsed = !sidebarCollapsed"
+         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
+         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+      <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="si"></i>
+      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"></span>
+    </div>
+
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors m-0" 
+         @click="logout()" 
+         data-legend="Terminar Sessão"
+         title="Terminar Sessão">
       <i data-lucide="log-out" class="si text-rose-500 group-hover:scale-110 transition-transform"></i>
       <span class="sl text-rose-600 dark:text-rose-400 text-xs font-bold">Terminar Sessão</span>
     </div>
@@ -1278,6 +1384,9 @@ function clienteApp() {
 
     async init() {
       this.applyTheme();
+      this.$watch('sidebarCollapsed', () => {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      });
 
       // Detect initial page from hash or path
       const p = location.pathname;

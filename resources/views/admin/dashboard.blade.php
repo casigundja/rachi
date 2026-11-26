@@ -128,7 +128,13 @@ html.dark body {
   overflow-x: hidden;
 }
 
-#admin-sidebar.collapsed { width: 76px; }
+#admin-sidebar.collapsed { 
+  width: 76px; 
+  overflow: visible !important;
+}
+#admin-sidebar.collapsed nav { 
+  overflow: visible !important; 
+}
 #admin-sidebar.collapsed .sl,
 #admin-sidebar.collapsed .sg,
 #admin-sidebar.collapsed .sb2,
@@ -152,6 +158,7 @@ html.dark body {
   align-items: center;
 }
 #admin-sidebar.collapsed .sidebar-item {
+  position: relative !important;
   justify-content: center;
   padding-left: 0;
   padding-right: 0;
@@ -169,6 +176,7 @@ html.dark body {
   padding-right: 0.5rem;
 }
 #admin-sidebar.collapsed .site-back-btn {
+  position: relative !important;
   justify-content: center !important;
   padding: 8px !important;
   width: 42px !important;
@@ -180,6 +188,72 @@ html.dark body {
 }
 #admin-sidebar.collapsed .sub-menu,
 #admin-sidebar.collapsed .sidebar-sub-menu { display: none !important; }
+
+/* Legendas flutuantes profissionais para o Sidebar Recolhido (Tooltips instantâneos) */
+#admin-sidebar.collapsed [data-legend] {
+  position: relative !important;
+}
+
+#admin-sidebar.collapsed [data-legend]::after {
+  content: attr(data-legend);
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: #ffffff;
+  color: #0f172a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.15s ease;
+  z-index: 999999;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+#admin-sidebar.collapsed [data-legend]::before {
+  content: '';
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 6px 5px 0;
+  border-style: solid;
+  border-color: transparent #ffffff transparent transparent;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.15s ease;
+  z-index: 999999;
+}
+
+html.dark #admin-sidebar.collapsed [data-legend]::after {
+  background: #0d1a30;
+  color: #f8fafc;
+  border-color: rgba(0, 80, 240, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 12px rgba(0, 80, 240, 0.2);
+}
+
+html.dark #admin-sidebar.collapsed [data-legend]::before {
+  border-color: transparent #0d1a30 transparent transparent;
+}
+
+#admin-sidebar.collapsed [data-legend]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+#admin-sidebar.collapsed [data-legend]:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
 
 .sidebar-sub-menu {
   margin-left: 28px;
@@ -568,17 +642,17 @@ a { text-decoration: none !important; }
 <aside id="admin-sidebar" :class="{'collapsed': sidebarCollapsed, 'mob': mobileMenuOpen}">
   <!-- Brand & Return to Site -->
   <div class="sidebar-brand-box p-4 border-b border-slate-200/80 dark:border-white/5 space-y-3">
-    <div class="flex items-center justify-between min-h-[42px]">
+    <div class="flex items-center justify-between min-h-[42px] w-full">
       <a href="/admin-dashboard" class="flex items-center transition group overflow-hidden" title="RACHI - Gestão Inteligente">
         <!-- Logo Oficial RACHI (Expandido: Dark & Light) -->
         <div class="brand-full flex items-center">
           <img src="/images/logo-rachi-light.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[185px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
+               class="h-9 w-auto max-w-[170px] object-contain hidden dark:block transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi-light.png'">
           <img src="/images/logo-rachi-dark.png" 
                alt="RACHI" 
-               class="h-9 w-auto max-w-[185px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
+               class="h-9 w-auto max-w-[170px] object-contain block dark:hidden transition duration-200 group-hover:scale-[1.02]"
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
@@ -587,11 +661,30 @@ a { text-decoration: none !important; }
           <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-8 max-w-none block dark:hidden" style="width: 72px; object-fit: cover; object-position: 0% 50%;">
         </div>
       </a>
+      <!-- Botão de Recolher no topo da Sidebar (quando expandido) -->
+      <button @click="sidebarCollapsed = !sidebarCollapsed"
+              type="button"
+              class="hidden md:flex p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition shrink-0 border border-slate-200/60 dark:border-white/5 brand-full"
+              title="Recolher Menu">
+        <i data-lucide="panel-left-close" class="w-4 h-4"></i>
+      </button>
     </div>
 
-    <!-- BOTÃƒO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
+    <!-- Botão de Expandir no topo da Sidebar (quando recolhido) -->
+    <div x-show="sidebarCollapsed" class="w-full flex justify-center pt-1" x-cloak>
+      <button @click="sidebarCollapsed = false"
+              type="button"
+              class="sidebar-item flex items-center justify-center w-10 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-300 transition border border-slate-200/80 dark:border-white/10 shadow-sm"
+              data-legend="Expandir Menu"
+              title="Expandir Menu">
+        <i data-lucide="panel-left-open" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- BOTÃO PROMINENTE PARA RETORNAR AO SITE PRINCIPAL -->
     <a href="/" 
        class="site-back-btn w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-500/10 dark:hover:bg-blue-500/20 border border-blue-200/80 dark:border-blue-500/20 transition group shadow-sm"
+       data-legend="Voltar ao Site RACHI"
        title="Voltar ao Site RACHI">
       <i data-lucide="arrow-left" class="w-4 h-4 flex-shrink-0 group-hover:-translate-x-1 transition duration-200"></i>
       <span class="site-back-text">Voltar ao Site RACHI</span>
@@ -600,25 +693,25 @@ a { text-decoration: none !important; }
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="flex-1 py-3 space-y-0.5">
+  <nav class="flex-1 py-3 space-y-0.5 overflow-y-auto">
     <div class="sg">Controlo Geral</div>
-    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" title="Visão Geral">
+    <div @click="setPage('dashboard')" :class="currentPage==='dashboard'?'active':''" class="sidebar-item" data-legend="Visão Geral" title="Visão Geral">
       <i data-lucide="layout-dashboard" class="si"></i>
       <span class="sl">Visão Geral</span>
     </div>
 
     <div class="sg">Administração</div>
-    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" title="Perfis">
+    <div @click="setPage('usuarios')" :class="currentPage==='usuarios'?'active':''" class="sidebar-item" data-legend="Perfis" title="Perfis">
       <i data-lucide="users" class="si"></i>
       <span class="sl">Perfis</span>
       <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="userStats.total || users.length || 10"></span>
     </div>
-    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" title="Base de Clientes">
+    <div @click="setPage('clientes')" :class="currentPage==='clientes'?'active':''" class="sidebar-item" data-legend="Base de Clientes" title="Base de Clientes">
       <i data-lucide="building-2" class="si"></i>
       <span class="sl">Base de Clientes</span>
       <span class="sb2 badge bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ms-auto font-semibold border border-slate-200/60 dark:border-white/5" x-text="totalClientsCount"></span>
     </div>
-    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" title="Solicitações & Ordens">
+    <div @click="setPage('solicitacoes')" :class="currentPage==='solicitacoes'?'active':''" class="sidebar-item" data-legend="Solicitações & Ordens" title="Solicitações & Ordens">
       <i data-lucide="clipboard-list" class="si"></i>
       <span class="sl">Solicitações & Ordens</span>
       <span class="sb2 badge bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-[10px] px-2 py-0.5 rounded-full ms-auto font-bold" x-text="totalRequestsCount"></span>
@@ -629,7 +722,8 @@ a { text-decoration: none !important; }
     <div>
       <div @click="toggleMenu('academy')" 
         :class="openMenus.academy ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('academy') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item">
+        class="sidebar-item"
+        data-legend="RACHI Academy">
         <img src="/images/areas/rachi-academy.png" alt="RACHI Academy" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Academy</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.academy?'open':''"></i>
@@ -657,7 +751,8 @@ a { text-decoration: none !important; }
     <div>
       <div @click="toggleMenu('loja')" 
         :class="openMenus.loja ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('loja') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item">
+        class="sidebar-item"
+        data-legend="RACHI Tec">
         <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Tec</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.loja?'open':''"></i>
@@ -682,7 +777,8 @@ a { text-decoration: none !important; }
     <div>
       <div @click="toggleMenu('rh')" 
         :class="openMenus.rh ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('rh') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item">
+        class="sidebar-item"
+        data-legend="RACHI Human Capital">
         <img src="/images/areas/rachi-human-capital.png" alt="RACHI Human Capital" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Human Capital</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.rh?'open':''"></i>
@@ -706,7 +802,8 @@ a { text-decoration: none !important; }
     <div>
       <div @click="toggleMenu('grafica')" 
         :class="openMenus.grafica ? 'bg-slate-100/70 dark:bg-white/[0.04] text-slate-900 dark:text-white font-bold' : (currentPage.startsWith('grafica') ? 'text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-500/10' : '')" 
-        class="sidebar-item">
+        class="sidebar-item"
+        data-legend="RACHI Print">
         <img src="/images/areas/rachi-print.png" alt="RACHI Print" class="w-5 h-5 object-contain shrink-0">
         <span class="sl">RACHI Print</span>
         <i data-lucide="chevron-right" class="sa sl w-4 h-4 flex-shrink-0" :class="openMenus.grafica?'open':''"></i>
@@ -724,30 +821,42 @@ a { text-decoration: none !important; }
     </div>
 
     <div class="sg">Performance</div>
-    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item">
+    <div @click="setPage('financeiro')" :class="currentPage==='financeiro'?'active':''" class="sidebar-item" data-legend="Finanças & Receitas">
       <i data-lucide="banknote" class="si"></i>
       <span class="sl">Finanças & Receitas</span>
     </div>
-    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item">
+    <div @click="setPage('relatorios')" :class="currentPage==='relatorios'?'active':''" class="sidebar-item" data-legend="Relatórios & Exportação">
       <i data-lucide="bar-chart-3" class="si"></i>
       <span class="sl">Relatórios & Exportação</span>
     </div>
 
     <div class="sg">Configurações</div>
-    <div @click="setPage('notificacoes')" :class="currentPage==='notificacoes'?'active':''" class="sidebar-item">
+    <div @click="setPage('notificacoes')" :class="currentPage==='notificacoes'?'active':''" class="sidebar-item" data-legend="Notificações">
       <i data-lucide="bell" class="si"></i>
       <span class="sl">Notificações</span>
       <span class="sb2 badge bg-rose-500 text-white text-[10px] px-2 rounded-full ms-auto font-bold">5</span>
     </div>
-    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item">
+    <div @click="setPage('configuracoes')" :class="currentPage==='configuracoes'?'active':''" class="sidebar-item" data-legend="Definições do Sistema">
       <i data-lucide="settings" class="si"></i>
       <span class="sl">Definições do Sistema</span>
     </div>
   </nav>
 
-  <!-- Sidebar Footer: Logout -->
-  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-2.5 bg-slate-50/50 dark:bg-white/[0.02]">
-    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors" @click="logout()" title="Encerrar Sessão">
+  <!-- Sidebar Footer: Toggle & Logout -->
+  <div class="sidebar-footer border-t border-slate-200/80 dark:border-white/5 p-2.5 bg-slate-50/50 dark:bg-white/[0.02] space-y-1">
+    <!-- Botão de Expandir / Recolher no Rodapé do Sidebar -->
+    <div class="sidebar-item cursor-pointer text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition"
+         @click="sidebarCollapsed = !sidebarCollapsed"
+         :data-legend="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"
+         :title="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'">
+      <i :data-lucide="sidebarCollapsed ? 'panel-left-open' : 'panel-left-close'" class="si"></i>
+      <span class="sl" x-text="sidebarCollapsed ? 'Expandir Menu' : 'Recolher Menu'"></span>
+    </div>
+
+    <div class="sidebar-item hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 group transition-colors" 
+         @click="logout()" 
+         data-legend="Encerrar Sessão"
+         title="Encerrar Sessão">
       <i data-lucide="log-out" class="si text-rose-500 group-hover:scale-110 transition-transform"></i>
       <span class="sl text-rose-600 dark:text-rose-400 text-xs font-bold">Encerrar Sessão</span>
     </div>
@@ -4662,7 +4771,17 @@ function adminApp() {
     },
 
     toggleMenu(m) {
-      this.openMenus[m] = !this.openMenus[m];
+      if (this.sidebarCollapsed) {
+        this.sidebarCollapsed = false;
+      }
+      const willOpen = !this.openMenus[m];
+      // Modo Acordeão: fecha todas as outras unidades para não extrapolar a tela
+      Object.keys(this.openMenus).forEach(k => {
+        this.openMenus[k] = false;
+      });
+      if (willOpen) {
+        this.openMenus[m] = true;
+      }
       this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
     },
 
@@ -4815,6 +4934,9 @@ function adminApp() {
 
     init() {
       this.applyTheme();
+      this.$watch('sidebarCollapsed', () => {
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      });
       this.allRequests = @json($allRequests ?? []);
       this.refreshAdminRequests();
       window.setInterval(() => this.refreshAdminRequests(), 5000);
