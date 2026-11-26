@@ -693,9 +693,15 @@ a { text-decoration: none !important; }
                onerror="this.onerror=null; this.src='/images/logo-rachi.png'">
         </div>
         <!-- Emblema Oficial RACHI (Recolhido / Collapsed) -->
-        <div class="brand-emblem-collapsed hidden w-9 h-9 rounded-xl overflow-hidden items-center justify-center shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
-          <img src="/images/logo-rachi-light.png" alt="RACHI" class="h-7 max-w-none hidden dark:block" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
-          <img src="/images/logo-rachi-dark.png" alt="RACHI" class="h-7 max-w-none block dark:hidden" style="width: 64px; object-fit: cover; object-position: 0% 50%;">
+        <div class="brand-emblem-collapsed hidden w-9 h-9 rounded-xl items-center justify-center shrink-0 p-1 mx-auto bg-slate-100 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-sm" title="RACHI">
+          <img src="/images/rachi-symbol-logo-rachi-light.png" 
+               alt="RACHI" 
+               class="w-6 h-6 object-contain hidden dark:block drop-shadow-xs transition duration-200 group-hover:scale-105"
+               onerror="this.onerror=null; this.src='/images/rachi-symbol.svg'">
+          <img src="/images/rachi-symbol-logo-rachi-dark.png" 
+               alt="RACHI" 
+               class="w-6 h-6 object-contain block dark:hidden drop-shadow-xs transition duration-200 group-hover:scale-105"
+               onerror="this.onerror=null; this.src='/images/rachi-symbol.svg'">
         </div>
       </a>
     </div>
