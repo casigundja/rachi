@@ -1948,21 +1948,26 @@ html.dark .panze-hdr-pill {
               <input type="text" x-model="messengerSearch" placeholder="Pesquisar conversa, cliente..." class="w-full pl-9 pr-3 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-purple-500">
             </div>
 
-            <!-- FILTROS POR CANAL -->
-            <div class="flex items-center gap-1.5 overflow-x-auto pb-1">
-              <button @click="messengerFilter = 'all'" :class="messengerFilter === 'all' ? 'bg-purple-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 cursor-pointer">
-                Todas (<span x-text="conversations.length">5</span>)
+            <!-- FILTROS POR CANAL (OMNICHANNEL: WHATSAPP, SITE, PORTAL DO CLIENTE, AGUARDANDO HUMANO) -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px]">
+              <button @click="messengerFilter = 'all'" :class="messengerFilter === 'all' ? 'bg-purple-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5 hover:bg-slate-100'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 cursor-pointer">
+                Todas (<span x-text="conversations.length">6</span>)
               </button>
-              <button @click="messengerFilter = 'whatsapp'" :class="messengerFilter === 'whatsapp' ? 'bg-emerald-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 border border-slate-200/80 dark:border-white/5 hover:bg-emerald-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+              <button @click="messengerFilter = 'waiting_human'" :class="messengerFilter === 'waiting_human' ? 'bg-rose-600 text-white font-bold shadow-2xs' : 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-800/40 hover:bg-rose-100'" class="px-2.5 py-1 rounded-lg font-bold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                Transbordo (<span x-text="waitingHumanCount">3</span>)
+              </button>
+              <button @click="messengerFilter = 'whatsapp'" :class="messengerFilter === 'whatsapp' ? 'bg-emerald-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 border border-slate-200/80 dark:border-white/5 hover:bg-emerald-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
                 <i data-lucide="phone" class="w-3 h-3"></i>
                 WhatsApp
               </button>
-              <button @click="messengerFilter = 'livechat'" :class="messengerFilter === 'livechat' ? 'bg-blue-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border border-slate-200/80 dark:border-white/5 hover:bg-blue-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+              <button @click="messengerFilter = 'livechat'" :class="messengerFilter === 'livechat' ? 'bg-blue-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border border-slate-200/80 dark:border-white/5 hover:bg-blue-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
                 <i data-lucide="globe" class="w-3 h-3"></i>
-                Site Live
+                Site
               </button>
-              <button @click="messengerFilter = 'unread'" :class="messengerFilter === 'unread' ? 'bg-amber-600 text-white font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-amber-700 dark:text-amber-400 border border-slate-200/80 dark:border-white/5 hover:bg-amber-50'" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition shrink-0 cursor-pointer">
-                Pendentes
+              <button @click="messengerFilter = 'portal'" :class="messengerFilter === 'portal' ? 'bg-amber-500 text-slate-950 font-bold shadow-2xs' : 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 border border-slate-200/80 dark:border-white/5 hover:bg-amber-50'" class="px-2.5 py-1 rounded-lg font-semibold transition shrink-0 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="user-check" class="w-3 h-3"></i>
+                Portal Cliente
               </button>
             </div>
           </div>
@@ -1981,7 +1986,10 @@ html.dark .panze-hdr-pill {
                     <i data-lucide="phone" class="w-2.5 h-2.5"></i>
                   </span>
                   <span x-show="c.channel === 'livechat'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[9px] shadow-xs" title="Live Chat Site">
-                    <i data-lucide="message-circle" class="w-2.5 h-2.5"></i>
+                    <i data-lucide="globe" class="w-2.5 h-2.5"></i>
+                  </span>
+                  <span x-show="c.channel === 'portal'" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[9px] shadow-xs font-black" title="Portal do Cliente">
+                    <i data-lucide="user-check" class="w-2.5 h-2.5"></i>
                   </span>
                 </div>
 
@@ -1990,6 +1998,27 @@ html.dark .panze-hdr-pill {
                   <div class="flex items-center justify-between gap-1">
                     <span class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="c.name"></span>
                     <span class="text-[10px] text-slate-400 shrink-0" x-text="c.lastTime"></span>
+                  </div>
+                  <!-- Indicador de Status IA vs Humano -->
+                  <div class="flex items-center gap-1.5 mt-1">
+                    <template x-if="c.aiMode === 'waiting_human'">
+                      <span class="px-1.5 py-0.5 rounded-md text-[9px] font-black bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center gap-1 animate-pulse">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                        TRANSBORDO HUMANO
+                      </span>
+                    </template>
+                    <template x-if="c.aiMode === 'human_handling'">
+                      <span class="px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-300 flex items-center gap-1">
+                        <i data-lucide="user" class="w-2.5 h-2.5"></i>
+                        EM ATENDIMENTO HUMANO
+                      </span>
+                    </template>
+                    <template x-if="c.aiMode === 'ai_handling'">
+                      <span class="px-1.5 py-0.5 rounded-md text-[9px] font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800/40 flex items-center gap-1">
+                        <i data-lucide="bot" class="w-2.5 h-2.5"></i>
+                        IA ATIVA
+                      </span>
+                    </template>
                   </div>
                   <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 truncate mt-0.5" x-text="c.company"></div>
                   <div class="text-[11px] text-slate-600 dark:text-slate-300 truncate mt-1 font-medium" x-text="c.messages[c.messages.length - 1]?.text || 'Sem mensagens'"></div>
@@ -2015,33 +2044,75 @@ html.dark .panze-hdr-pill {
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-full text-white font-bold text-xs flex items-center justify-center shadow-xs" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
               <div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
                   <h3 class="text-sm font-bold text-slate-900 dark:text-white leading-tight" x-text="activeConversation.name"></h3>
-                  <!-- Badge Canal -->
+                  
+                  <!-- Badge Canal de Origem -->
                   <span x-show="activeConversation.channel === 'whatsapp'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 flex items-center gap-1">
-                    <i data-lucide="phone" class="w-3 h-3"></i> WhatsApp
+                    <i data-lucide="phone" class="w-3 h-3"></i> WhatsApp Oficial
                   </span>
                   <span x-show="activeConversation.channel === 'livechat'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 flex items-center gap-1">
                     <i data-lucide="globe" class="w-3 h-3"></i> Chat do Site
                   </span>
+                  <span x-show="activeConversation.channel === 'portal'" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-300 flex items-center gap-1">
+                    <i data-lucide="user-check" class="w-3 h-3"></i> Portal do Cliente
+                  </span>
+
+                  <!-- Badge Estado do Atendimento IA -->
+                  <template x-if="activeConversation.aiMode === 'waiting_human'">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white shadow-xs flex items-center gap-1 animate-pulse">
+                      🚨 TRANSBORDO SOLICITADO
+                    </span>
+                  </template>
+                  <template x-if="activeConversation.aiMode === 'human_handling'">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs flex items-center gap-1">
+                      👤 ATENDIMENTO HUMANO ATIVO
+                    </span>
+                  </template>
+                  <template x-if="activeConversation.aiMode === 'ai_handling'">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 border border-purple-300 flex items-center gap-1">
+                      🤖 IA CONVERSANDO
+                    </span>
+                  </template>
                 </div>
-                <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-2">
-                  <span x-text="activeConversation.company"></span>
+
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-2">
+                  <span class="font-semibold text-slate-700 dark:text-slate-300" x-text="activeConversation.company"></span>
                   <span>•</span>
-                  <span class="font-mono text-slate-600 dark:text-slate-400" x-text="activeConversation.phone"></span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400" x-text="activeConversation.phone"></span>
+                  <template x-if="activeConversation.handoffReason">
+                    <span class="text-rose-600 dark:text-rose-400 font-semibold" x-text="'(' + activeConversation.handoffReason + ')'"></span>
+                  </template>
                 </div>
               </div>
             </div>
 
-            <!-- AÇÕES DO CHAT -->
-            <div class="flex items-center gap-2">
+            <!-- AÇÕES DO CHAT & CONTROLO IA / HUMANO -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <!-- BOTÃO ASSUMIR ATENDIMENTO / DEVOLVER PARA A IA -->
+              <template x-if="activeConversation.aiMode === 'waiting_human' || activeConversation.aiMode === 'ai_handling'">
+                <button @click="assumeChat(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-black transition flex items-center gap-1.5 shadow-xs cursor-pointer animate-pulse" title="Pausar a IA e assumir o atendimento ao vivo">
+                  <i data-lucide="hand" class="w-3.5 h-3.5"></i>
+                  <span>Assumir Atendimento</span>
+                </button>
+              </template>
+              <template x-if="activeConversation.aiMode === 'human_handling'">
+                <button @click="releaseChatToAi(activeConversation)" type="button" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer" title="Reativar respostas automáticas da IA">
+                  <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                  <span>Devolver para IA</span>
+                </button>
+              </template>
+
+              <!-- GERAR TICKET -->
               <button @click="convertChatToTicket()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-2xs" title="Transformar atendimento em Ticket">
                 <i data-lucide="ticket" class="w-3.5 h-3.5 text-purple-600"></i>
-                <span>Gerar Ticket</span>
+                <span class="hidden sm:inline">Ticket</span>
               </button>
+
+              <!-- LINK WHATSAPP -->
               <a :href="'https://wa.me/' + (activeConversation.phone ? activeConversation.phone.replace(/[^0-9]/g,'') : '')" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-2xs" title="Abrir no WhatsApp Oficial">
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                <span>WhatsApp</span>
+                <span class="hidden sm:inline">WhatsApp</span>
               </a>
             </div>
           </div>
@@ -2058,7 +2129,24 @@ html.dark .panze-hdr-pill {
 
             <template x-for="(m, idx) in activeConversation.messages" :key="idx">
               <div>
-                <!-- MENSAGEM DO CLIENTE (ESQUERDA) -->
+                <!-- MENSAGEM DO SISTEMA (CENTRALIZADA) -->
+                <div x-show="m.sender === 'system'" class="text-center my-2">
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800/40 inline-flex items-center gap-1.5" x-text="m.text"></span>
+                </div>
+
+                <!-- MENSAGEM DO BOT / IA (ESQUERDA COM BADGE ROXA) -->
+                <div x-show="m.sender === 'bot'" class="flex items-end gap-2 max-w-lg">
+                  <div class="w-7 h-7 rounded-full bg-purple-600 text-white text-[10px] font-black flex items-center justify-center shrink-0 shadow-2xs">IA</div>
+                  <div class="rounded-2xl rounded-bl-xs bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800/40 p-3 shadow-2xs text-xs text-purple-950 dark:text-purple-100 leading-relaxed">
+                    <div class="flex items-center gap-1 text-[9px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">
+                      <i data-lucide="bot" class="w-3 h-3"></i> Resposta Automática IA
+                    </div>
+                    <p x-text="m.text"></p>
+                    <span class="block text-[9.5px] text-purple-400 text-right mt-1" x-text="m.time"></span>
+                  </div>
+                </div>
+
+                <!-- MENSAGEM DO CLIENTE (ESQUERDA COM AVATAR DO CLIENTE) -->
                 <div x-show="m.sender === 'customer'" class="flex items-end gap-2 max-w-lg">
                   <div class="w-7 h-7 rounded-full text-white text-[10px] font-bold flex items-center justify-center shrink-0 shadow-2xs" :class="activeConversation.avatarBg" x-text="activeConversation.avatar"></div>
                   <div class="rounded-2xl rounded-bl-xs bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-white/10 p-3 shadow-2xs text-xs text-slate-800 dark:text-slate-100 leading-relaxed">
@@ -2067,9 +2155,12 @@ html.dark .panze-hdr-pill {
                   </div>
                 </div>
 
-                <!-- MENSAGEM DO AGENTE / SUPORTE RACHI (DIREITA) -->
+                <!-- MENSAGEM DO AGENTE HUMANO / SUPORTE RACHI (DIREITA) -->
                 <div x-show="m.sender === 'agent'" class="flex items-end justify-end gap-2 max-w-lg ml-auto">
                   <div class="rounded-2xl rounded-br-xs bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-3 shadow-2xs text-xs leading-relaxed">
+                    <div class="flex items-center gap-1 text-[9px] font-bold text-purple-200 uppercase tracking-wider mb-1">
+                      <i data-lucide="user-check" class="w-3 h-3"></i> Consultor Casimiro Gundja
+                    </div>
                     <p x-text="m.text"></p>
                     <div class="flex items-center justify-end gap-1 mt-1 text-[9.5px] text-purple-200">
                       <span x-text="m.time"></span>
@@ -5775,28 +5866,31 @@ function adminApp() {
     ],
 
     currentPage: 'dashboard',
-    messengerFilter: 'all',
+        messengerFilter: 'all',
     messengerSearch: '',
     activeChatId: 1,
     chatReplyText: '',
-    messengerStats: { today: 48, whatsapp: 31, livechat: 17 },
+    messengerStats: { today: 64, whatsapp: 38, livechat: 18, portal: 8 },
     conversations: [
       {
         id: 1,
         name: "Dr. António Silva",
         company: "Banco de Fomento Angola",
         channel: "whatsapp",
+        aiMode: "waiting_human",
+        handoffReason: "Solicitou reunião executiva de alinhamento",
         phone: "+244 972 888 585",
         avatar: "AS",
         avatarBg: "bg-emerald-600",
         status: "online",
-        unread: 1,
-        lastTime: "14:42",
+        unread: 2,
+        lastTime: "15:28",
         subject: "Implantação ERP Corporativo",
         messages: [
-          { sender: "customer", text: "Boa tarde, Dr. Casimiro! Precisamos alinhar o cronograma da entrega dos módulos financeiros do ERP.", time: "14:38" },
-          { sender: "agent", text: "Boa tarde, Dr. António! Perfeito, já estamos com o relatório da sprint pronto para validação.", time: "14:40" },
-          { sender: "customer", text: "Excelente! Consegue me mandar a prévia das telas ainda hoje por aqui?", time: "14:42" }
+          { sender: "customer", text: "Boa tarde! A IA me explicou sobre a arquitetura do ERP, mas preciso fechar os prazos de entrega e assinar o aditivo contratual com o Dr. Casimiro.", time: "15:22" },
+          { sender: "bot", text: "Com certeza, Dr. António! Como a aprovação de prazos e aditivos contratuais exige validação executiva da nossa direção, estou a transferir o seu atendimento agora mesmo para o Dr. Casimiro Gundja. Um momento!", time: "15:24" },
+          { sender: "system", text: "🚨 [Sistema]: Transbordo para Humano acionado via WhatsApp. Aguardando assunção do atendente.", time: "15:25" },
+          { sender: "customer", text: "Perfeito, fico no aguardo.", time: "15:28" }
         ]
       },
       {
@@ -5804,33 +5898,40 @@ function adminApp() {
         name: "Laurindo Augusto Cakoyi",
         company: "Instituto Técnico Saber",
         channel: "livechat",
+        aiMode: "waiting_human",
+        handoffReason: "Pediu proposta com desconto para 15 colaboradores",
         phone: "+244 930 133 850",
         avatar: "LA",
         avatarBg: "bg-blue-600",
         status: "online",
-        unread: 2,
-        lastTime: "14:25",
+        unread: 1,
+        lastTime: "15:15",
         subject: "Dúvida sobre Formação Academy",
         messages: [
-          { sender: "customer", text: "Olá, estou na página de cursos e gostaria de saber se as aulas de Cibersegurança têm certificação internacional.", time: "14:20" },
-          { sender: "customer", text: "E se temos desconto para turma fechada de 15 alunos da nossa instituição.", time: "14:25" }
+          { sender: "customer", text: "Olá! A IA já me passou o valor individual da Formação em Cibersegurança, mas nossa direção quer fechar uma turma in-company de 15 pessoas com proposta formal.", time: "15:10" },
+          { sender: "bot", text: "Excelente iniciativa! Para turmas corporativas fechadas com condições comerciais diferenciadas e fatura proforma, estou a transferir este chat diretamente para um consultor executivo da RACHI.", time: "15:12" },
+          { sender: "system", text: "🚨 [Sistema]: Transbordo para Humano acionado via Live Chat do Site.", time: "15:13" },
+          { sender: "customer", text: "Obrigado, aguardo o consultor.", time: "15:15" }
         ]
       },
       {
         id: 3,
         name: "Diretoria GundjaTech",
-        company: "GundjaTech",
-        channel: "whatsapp",
+        company: "GundjaTech (Portal do Cliente)",
+        channel: "portal",
+        aiMode: "waiting_human",
+        handoffReason: "Solicitou alteração de escopo no projeto ativo",
         phone: "+244 923 000 000",
         avatar: "GU",
         avatarBg: "bg-amber-600",
-        status: "offline",
-        unread: 0,
-        lastTime: "13:50",
-        subject: "Aprovação de Proposta Gráfica",
+        status: "online",
+        unread: 1,
+        lastTime: "14:50",
+        subject: "Alteração de Escopo no Portal",
         messages: [
-          { sender: "agent", text: "Olá, segue o espelho do pedido gráfico aprovado na plataforma RACHI Print.", time: "13:40" },
-          { sender: "customer", text: "Perfeito, já recebemos e aprovamos a tiragem de 10.000 unidades. Podem rodar!", time: "13:50" }
+          { sender: "customer", text: "Boa tarde! Estou logado no portal e notei que precisamos adicionar o módulo de faturamento em multimoedas no projeto em andamento.", time: "14:45" },
+          { sender: "bot", text: "Olá Diretoria GundjaTech! O assistente virtual registrou a sua solicitação. Como se trata de alteração de escopo em projeto ativo, transferi para o gestor técnico responsável.", time: "14:48" },
+          { sender: "system", text: "🚨 [Sistema]: Transbordo para Humano acionado a partir do Portal do Cliente.", time: "14:49" }
         ]
       },
       {
@@ -5838,36 +5939,102 @@ function adminApp() {
         name: "Cotech Contabilidade",
         company: "Cotech Contabilidade",
         channel: "livechat",
+        aiMode: "ai_handling",
+        handoffReason: null,
         phone: "+244 923 000 111",
         avatar: "CO",
         avatarBg: "bg-purple-600",
         status: "online",
         unread: 0,
-        lastTime: "11:15",
-        subject: "Manutenção do Portal do Cliente",
+        lastTime: "14:15",
+        subject: "Emissão de Guias no Portal",
         messages: [
-          { sender: "customer", text: "Bom dia! Tudo certo com a emissão das guias no portal?", time: "11:10" },
-          { sender: "agent", text: "Bom dia! Sim, sistema 100% operacional e com backup atualizado.", time: "11:15" }
+          { sender: "customer", text: "Boa tarde, onde consigo emitir a segunda via do recibo do serviço?", time: "14:12" },
+          { sender: "bot", text: "Boa tarde! Você pode emitir no Portal do Cliente acessando o menu 'Financeiro > Facturas & Recibos'. Deseja que eu gere o link direto para download?", time: "14:15" },
+          { sender: "customer", text: "Já encontrei aqui, muito obrigado!", time: "14:16" }
         ]
       },
       {
         id: 5,
-        name: "Visitante Web (Luanda)",
-        company: "Lead Comercial",
-        channel: "livechat",
+        name: "Visitante Comercial (Luanda)",
+        company: "Lead do Site",
+        channel: "whatsapp",
+        aiMode: "ai_handling",
+        handoffReason: null,
         phone: "+244 923 888 777",
         avatar: "VW",
         avatarBg: "bg-slate-600",
         status: "online",
         unread: 0,
-        lastTime: "10:05",
-        subject: "Criação de Website Institucional",
+        lastTime: "13:30",
+        subject: "Informações sobre criação de Loja Virtual",
         messages: [
-          { sender: "customer", text: "Olá! Gostaria de um orçamento para criação de portal institucional e identidade visual para minha empresa.", time: "10:00" },
-          { sender: "agent", text: "Olá! Seja muito bem-vindo à RACHI. Um dos nossos especialistas comerciais já vai entrar em contato.", time: "10:05" }
+          { sender: "customer", text: "Olá! Quanto custa criar uma loja virtual com catálogo e pagamentos Multicaixa Express?", time: "13:28" },
+          { sender: "bot", text: "Olá! A RACHI desenvolve e-commerces completos com integração de Multicaixa Express e gestão de estoque a partir de 180.000 Kz. Qual é o ramo de produtos da sua loja?", time: "13:30" }
+        ]
+      },
+      {
+        id: 6,
+        name: "Laurinita Distribuidora",
+        company: "Laurinita Distribuidora (Portal do Cliente)",
+        channel: "portal",
+        aiMode: "human_handling",
+        handoffReason: "Atendimento assumido por Casimiro Gundja",
+        phone: "+244 923 333 804",
+        avatar: "LA",
+        avatarBg: "bg-emerald-600",
+        status: "online",
+        unread: 0,
+        lastTime: "12:40",
+        subject: "Renovação de Domínio e Hospedagem",
+        messages: [
+          { sender: "customer", text: "Bom dia, o nosso domínio laurinita.co.ao vence no próximo mês.", time: "12:20" },
+          { sender: "bot", text: "O domínio laurinita.co.ao está registrado sob gestão da RACHI. Transferindo para o consultor financeiro...", time: "12:22" },
+          { sender: "system", text: "👤 [Sistema]: O consultor Casimiro Gundja assumiu o atendimento.", time: "12:25" },
+          { sender: "agent", text: "Olá, Sr. Laurindo! Já emitimos a fatura proforma da renovação anual com 10% de desconto.", time: "12:35" },
+          { sender: "customer", text: "Excelente, Casimiro! Pagamento efetuado via transferência bancária.", time: "12:40" }
         ]
       }
     ],
+    get waitingHumanCount() {
+      return (this.conversations || []).filter(c => c.aiMode === 'waiting_human').length;
+    },
+    assumeChat(conv) {
+      if (!conv) return;
+      conv.aiMode = 'human_handling';
+      conv.handoffReason = 'Atendimento assumido pelo consultor';
+      const now = new Date();
+      const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      conv.messages.push({
+        sender: 'system',
+        text: '👤 [Sistema]: Você assumiu este atendimento. A IA foi pausada para esta conversa.',
+        time: time
+      });
+      this.showAlert('success', 'Atendimento Assumido', 'Você assumiu a conversa com ' + conv.name + '. A IA está pausada.');
+      this.$nextTick(() => {
+        const chatBox = document.getElementById('chatMessagesScroll');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      });
+    },
+    releaseChatToAi(conv) {
+      if (!conv) return;
+      conv.aiMode = 'ai_handling';
+      conv.handoffReason = null;
+      const now = new Date();
+      const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      conv.messages.push({
+        sender: 'system',
+        text: '🤖 [Sistema]: Atendimento devolvido ao assistente virtual de IA da RACHI.',
+        time: time
+      });
+      this.showAlert('info', 'IA Reativada', 'O assistente virtual de IA voltou a responder automaticamente para ' + conv.name + '.');
+      this.$nextTick(() => {
+        const chatBox = document.getElementById('chatMessagesScroll');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      });
+    },
     get activeConversation() {
       return this.conversations.find(c => c.id === this.activeChatId) || this.conversations[0];
     },
@@ -5877,6 +6044,10 @@ function adminApp() {
         list = list.filter(c => c.channel === 'whatsapp');
       } else if (this.messengerFilter === 'livechat') {
         list = list.filter(c => c.channel === 'livechat');
+      } else if (this.messengerFilter === 'portal') {
+        list = list.filter(c => c.channel === 'portal');
+      } else if (this.messengerFilter === 'waiting_human') {
+        list = list.filter(c => c.aiMode === 'waiting_human');
       } else if (this.messengerFilter === 'unread') {
         list = list.filter(c => c.unread > 0);
       }
