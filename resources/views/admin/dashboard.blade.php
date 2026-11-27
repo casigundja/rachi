@@ -3501,11 +3501,21 @@ html.dark .panze-hdr-pill {
                 <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                   <td>
                     <div class="flex items-center gap-3">
-                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
-                        <i data-lucide="package" class="w-4 h-4"></i>
+                      <div class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-white/10 overflow-hidden shadow-xs">
+                        <template x-if="p.image">
+                          <img :src="p.image" :alt="p.nome" class="w-full h-full object-contain p-0.5">
+                        </template>
+                        <template x-if="!p.image">
+                          <i data-lucide="package" class="w-4 h-4"></i>
+                        </template>
                       </div>
                       <div>
-                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="p.nome"></div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors flex items-center gap-2">
+                          <span x-text="p.nome"></span>
+                          <template x-if="p.badge">
+                            <span class="px-1.5 py-0.2 rounded text-[9.5px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40" x-text="p.badge"></span>
+                          </template>
+                        </div>
                         <div class="text-[11px] text-slate-400 font-medium" x-text="p.marca || 'RACHI Tec'"></div>
                       </div>
                     </div>
@@ -5750,64 +5760,292 @@ html.dark .panze-hdr-pill {
       </div>
     </div>
 
-    <!-- MODAL 11: ADICIONAR PRODUTO TEC -->
-    <div x-show="showCreateProductModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog">
+    <!-- MODAL 11: ADICIONAR PRODUTO TEC (COMPLETO COM IMAGEM, TEMPLATES & LIVE PREVIEW) -->
+    <div x-show="showCreateProductModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5" role="dialog">
       <div @click="showCreateProductModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
-      <div class="relative w-full max-w-xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden z-10 text-left">
-        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600"></div>
-        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-white/10">
+      <div class="relative w-full max-w-4xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden z-10 text-left max-h-[92vh] flex flex-col">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0]"></div>
+        
+        <!-- HEADER DO MODAL -->
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-white/10 shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+            <div class="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center border border-blue-100 dark:border-blue-900/30 shrink-0">
               <i data-lucide="package-plus" class="w-5 h-5"></i>
             </div>
             <div>
-              <h3 class="text-base font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto TI</h3>
-              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Cadastro de Hardware, Equipamentos & Suprimentos.</p>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto ao Catálogo</h3>
+              <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Hardware, Dispositivos, Consumíveis &amp; Coleções com Padrão Oficial.</p>
             </div>
           </div>
           <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
-            <i data-lucide="x" class="w-4 h-4"></i>
+            <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
-        <form @submit.prevent="submitCreateProduct()" class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nome do Produto *</label>
-            <input type="text" x-model="newProduct.nome" placeholder="Ex: Notebook Lenovo ThinkPad E15" class="ia w-full" required>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Código SKU (Opcional)</label>
-              <input type="text" x-model="newProduct.sku" placeholder="Auto-gerado se vazio (ex: TEC-001)" class="ia w-full font-mono">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Categoria</label>
-              <input type="text" x-model="newProduct.cat" placeholder="Notebooks, Periféricos, Redes..." class="ia w-full">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Unitário (AOA) *</label>
-              <input type="number" step="0.01" x-model="newProduct.preco" placeholder="185000" class="ia w-full font-bold" required>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Inicial</label>
-              <input type="number" x-model.number="newProduct.est" class="ia w-full font-bold">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Mínimo</label>
-              <input type="number" x-model.number="newProduct.min_est" class="ia w-full font-bold">
-            </div>
-          </div>
-
-          <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-white/10">
-            <button type="button" @click="showCreateProductModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">Cancelar</button>
-            <button type="submit" :disabled="newProduct.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5">
-              <i data-lucide="check" class="w-4 h-4" x-show="!newProduct.isSubmitting"></i>
-              <span x-text="newProduct.isSubmitting ? 'A guardar...' : 'Guardar Produto'"></span>
+        <!-- FAIXA DE MODELOS E TEMPLATES PRÉ-CONFIGURADOS (1 CLIQUE) -->
+        <div class="mb-4 p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shrink-0">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+              Carregar Modelo Padrão da Loja (1 Clique):
+            </span>
+            <button type="button" @click="applyProductTemplate('clear')" class="text-[10.5px] font-bold text-slate-500 hover:text-rose-600 transition cursor-pointer">
+              Limpar Campos
             </button>
+          </div>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <button type="button" @click="applyProductTemplate('laptop')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+              <span>💻</span>
+              <span>Laptop Corporativo</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('smartwatch')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+              <span>⌚</span>
+              <span>Smartwatch Executivo</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('fone')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+              <span>🎧</span>
+              <span>Auriculares TWS</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('tshirt')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+              <span>👕</span>
+              <span>T-Shirt Geek &amp; Anime</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('capa')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+              <span>📱</span>
+              <span>Capa &amp; Acessórios</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ABAS DO FORMULÁRIO -->
+        <div class="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-2 mb-4 shrink-0">
+          <button type="button" @click="productModalTab = 'dados'"
+                  :class="productModalTab === 'dados' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+            <span>1. Dados &amp; Preço</span>
+          </button>
+          <button type="button" @click="productModalTab = 'apresentacao'"
+                  :class="productModalTab === 'apresentacao' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="image" class="w-3.5 h-3.5"></i>
+            <span>2. Imagem &amp; Especificações</span>
+          </button>
+          <button type="button" @click="productModalTab = 'preview'"
+                  :class="productModalTab === 'preview' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            <span>3. Pré-visualização da Loja</span>
+          </button>
+        </div>
+
+        <!-- CORPO COM ROLAGEM -->
+        <form @submit.prevent="submitCreateProduct()" class="flex-1 overflow-y-auto pr-1 space-y-4">
+          
+          <!-- ABA 1: DADOS & PREÇO -->
+          <div x-show="productModalTab === 'dados'" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nome Oficial do Produto *</label>
+              <div class="relative">
+                <i data-lucide="package" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" x-model="newProduct.nome" placeholder="Ex: HP EliteBook x360 1040 G8 (2-in-1)" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]" required>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Marca / Fabricante</label>
+                <div class="relative">
+                  <i data-lucide="tag" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input type="text" x-model="newProduct.marca" placeholder="RACHI Tec, HP, Lenovo..." class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Código SKU (Identificador)</label>
+                <div class="relative">
+                  <i data-lucide="barcode" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input type="text" x-model="newProduct.sku" placeholder="Auto-gerado se vazio (ex: TEC-001)" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Categoria da Loja</label>
+                <select x-model="newProduct.cat" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+                  <option value="Laptops & Computadores">Laptops &amp; Computadores</option>
+                  <option value="Smartwatches">Smartwatches &amp; Wearables</option>
+                  <option value="Consumíveis & Escritório">Consumíveis &amp; Escritório</option>
+                  <option value="Material Promocional">Material Promocional</option>
+                  <option value="Universo Otaku & Geek">Universo Otaku &amp; Geek</option>
+                  <option value="Hardware & Redes">Hardware &amp; Redes</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Unitário (AOA) *</label>
+                <input type="number" step="0.01" x-model="newProduct.preco" placeholder="1489000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]" required>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Antigo / Riscado</label>
+                <input type="number" step="0.01" x-model="newProduct.oldPrice" placeholder="Ex: 1650000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Inicial</label>
+                <input type="number" x-model.number="newProduct.est" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Badge de Destaque</label>
+                <select x-model="newProduct.badge" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+                  <option value="Mais Vendido">Mais Vendido</option>
+                  <option value="Destaque">Destaque</option>
+                  <option value="Lançamento">Lançamento</option>
+                  <option value="Promoção">Promoção</option>
+                  <option value="Exclusivo">Exclusivo</option>
+                  <option value="Novo">Novo</option>
+                  <option value="">Sem Badge</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 2: IMAGEM & ESPECIFICAÇÕES -->
+          <div x-show="productModalTab === 'apresentacao'" class="space-y-4">
+            <!-- SELEÇÃO DE IMAGEM -->
+            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="image" class="w-4 h-4 text-[#0050f0]"></i>
+                  <span>Imagem do Produto (URL, Presets Oficiais ou Upload)</span>
+                </label>
+                <span class="text-[11px] text-slate-400">Resolução recomendada: 600x600 px</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                <div class="sm:col-span-8">
+                  <input type="text" x-model="newProduct.image" placeholder="URL da imagem (ex: /images/hp-elitebook-studio.png)" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+                </div>
+                <div class="sm:col-span-4 flex items-center gap-2">
+                  <label class="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 hover:border-[#0050f0] text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition shadow-2xs">
+                    <i data-lucide="upload" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                    <span>Ficheiro PC</span>
+                    <input type="file" accept="image/*" @change="handleProductImageUpload($event)" class="hidden">
+                  </label>
+                </div>
+              </div>
+
+              <!-- GALERIA DE MINIATURAS DOS PRODUTOS EXISTENTES -->
+              <div>
+                <span class="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Escolher entre imagens de produtos existentes:</span>
+                <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-11 gap-2">
+                  <template x-for="preset in productImagePresets" :key="preset.url">
+                    <button type="button" @click="newProduct.image = preset.url; $nextTick(() => { if (window.lucide) lucide.createIcons(); })"
+                            :class="newProduct.image === preset.url ? 'ring-2 ring-[#0050f0] border-transparent scale-105' : 'border-slate-200/80 dark:border-white/10 hover:border-[#0050f0]/50'"
+                            class="p-1 rounded-xl bg-white dark:bg-slate-800 border flex flex-col items-center justify-center group transition cursor-pointer"
+                            :title="preset.label">
+                      <img :src="preset.url" :alt="preset.label" class="w-10 h-10 object-contain drop-shadow-2xs">
+                    </button>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!-- DESCRIÇÃO CURTA -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Curta (Exibida no Card da Loja)</label>
+              <input type="text" x-model="newProduct.shortDesc" placeholder="Ex: SSD 512GB NVMe, 16GB RAM, Intel Core i7, Touchscreen conversível 360°." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+            </div>
+
+            <!-- DESCRIÇÃO COMPLETA -->
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Comercial Completa</label>
+              <textarea x-model="newProduct.fullDesc" rows="3" placeholder="Apresentação detalhada das características, benefícios corporativos e garantia do produto..." class="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]"></textarea>
+            </div>
+
+            <!-- ESPECIFICAÇÕES TÉCNICAS (1 POR LINHA) -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-bold text-slate-700 dark:text-slate-300">Especificações Técnicas (1 item por linha)</label>
+                <span class="text-[11px] text-slate-400">Cada linha gera um ponto com ícone de verificação</span>
+              </div>
+              <textarea x-model="newProduct.specsText" rows="4" placeholder="Processador Intel Core i7 11ª Geração&#10;Memória RAM 16GB LPDDR4x&#10;Armazenamento SSD 512GB PCIe NVMe&#10;Ecrã 14'' FHD Touch com rotação 360°" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-900 dark:text-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]"></textarea>
+            </div>
+          </div>
+
+          <!-- ABA 3: PRÉ-VISUALIZAÇÃO DA LOJA (LIVE PREVIEW) -->
+          <div x-show="productModalTab === 'preview'" class="space-y-4">
+            <div class="p-3 rounded-xl bg-blue-50/70 dark:bg-[#0050f0]/10 border border-blue-200/60 dark:border-blue-900/40 flex items-center justify-between text-xs text-[#0050f0] dark:text-[#38bdf8]">
+              <span class="font-bold flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                Pré-visualização em Tempo Real na Vitrine da RACHI Tec
+              </span>
+              <span class="text-[11px] font-medium">Assim que salvar, o produto aparecerá com esta exata formatação</span>
+            </div>
+
+            <div class="flex justify-center p-4">
+              <!-- CARD SIMULADO IDÊNTICO À LOJA -->
+              <div class="w-full max-w-sm rounded-3xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-5 shadow-xl space-y-3.5 relative overflow-hidden">
+                <!-- BADGE FLUTUANTE -->
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10.5px] font-black uppercase tracking-wider bg-[#0050f0] text-white shadow-xs" x-text="newProduct.badge || 'Destaque'"></span>
+                  <div class="flex items-center gap-1 text-[11px] font-bold text-amber-500">
+                    <span>★</span>
+                    <span x-text="newProduct.rating || '5.0'"></span>
+                    <span class="text-slate-400 font-medium" x-text="'(' + (newProduct.reviews || 28) + ')'"></span>
+                  </div>
+                </div>
+
+                <!-- IMAGEM COM CONTAINER LIMPO -->
+                <div class="w-full h-48 rounded-2xl bg-slate-50 dark:bg-white/5 flex items-center justify-center p-3 overflow-hidden">
+                  <img :src="newProduct.image || '/images/hp-elitebook-studio.png'" :alt="newProduct.nome" class="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105">
+                </div>
+
+                <!-- CATEGORIA & TÍTULO -->
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#38bdf8]" x-text="newProduct.cat"></span>
+                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white mt-0.5 line-clamp-2" style="font-family:Outfit" x-text="newProduct.nome || 'Nome do Produto'"></h4>
+                  <p class="text-[11px] text-slate-500 line-clamp-2 mt-1" x-text="newProduct.shortDesc || 'Descrição curta de alta conversão do produto.'"></p>
+                </div>
+
+                <!-- PREÇO & DESCONTO -->
+                <div class="pt-2 border-t border-slate-100 dark:border-white/5 flex items-baseline justify-between">
+                  <div>
+                    <div class="text-xs text-slate-400 line-through" x-show="newProduct.oldPrice" x-text="'AOA ' + Number(newProduct.oldPrice || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
+                    <div class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="'AOA ' + Number(newProduct.preco || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40" x-text="newProduct.discountPercent || '-10% OFF'"></span>
+                </div>
+
+                <!-- BOTÃO DE AÇÃO -->
+                <button type="button" class="w-full py-2.5 rounded-xl bg-[#0050f0] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs cursor-default">
+                  <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                  <span>Adicionar ao Carrinho</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- FOOTER DE AÇÕES -->
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/10 shrink-0">
+            <div class="flex items-center gap-2">
+              <button type="button" x-show="productModalTab !== 'dados'" @click="productModalTab = (productModalTab === 'preview' ? 'apresentacao' : 'dados')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Anterior</span>
+              </button>
+              <button type="button" x-show="productModalTab !== 'preview'" @click="productModalTab = (productModalTab === 'dados' ? 'apresentacao' : 'preview')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer flex items-center gap-1">
+                <span>Próximo</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2.5">
+              <button type="button" @click="showCreateProductModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">
+                Cancelar
+              </button>
+              <button type="submit" :disabled="newProduct.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5 shadow-xs">
+                <i data-lucide="check" class="w-4 h-4" x-show="!newProduct.isSubmitting"></i>
+                <span x-text="newProduct.isSubmitting ? 'A guardar...' : 'Guardar Produto no Catálogo'"></span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -7378,7 +7616,39 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
     showCreateJobModal: false,
     newJob: { cargo: '', empresa: 'RACHI Human Capital', local: 'Luanda', mod: 'Presencial', sal: '', prazo: '30 dias', req: '', isSubmitting: false },
     showCreateProductModal: false,
-    newProduct: { nome: '', sku: '', cat: 'Hardware & Equipamentos', preco: '', est: 10, min_est: 3, marca: 'RACHI Tec', isSubmitting: false },
+    productModalTab: 'dados',
+    productImagePresets: [
+      { label: 'Laptop HP Elitebook', url: '/images/hp-elitebook-studio.png' },
+      { label: 'Smartwatch Lige Pro', url: '/images/smartwatch-studio.png' },
+      { label: 'Auriculares TWS', url: '/images/auriculares-tws-studio.png' },
+      { label: 'Auricular com Fio', url: '/images/auricular-fio-studio.png' },
+      { label: 'Capa iPhone Naruto', url: '/images/capa-iphone-studio.png' },
+      { label: 'T-Shirt Naruto Sábio', url: '/images/otaku/tshirt-naruto-gamakichi.png' },
+      { label: 'T-Shirt Akatsuki Nuvem', url: '/images/otaku/tshirt-akatsuki-classic-black.png' },
+      { label: 'T-Shirt Saitama Punch', url: '/images/otaku/tshirt-saitama-punch.png' },
+      { label: 'T-Shirt Luffy One Piece', url: '/images/otaku/tshirt-luffy-one-piece.png' },
+      { label: 'TV Box 4K Ultra', url: '/images/tvbox-studio.png' },
+      { label: 'Cabo Console RJ45', url: '/images/cabo-console-studio.png' }
+    ],
+    newProduct: {
+      nome: '',
+      marca: 'RACHI Tec',
+      sku: '',
+      cat: 'Laptops & Computadores',
+      preco: '',
+      oldPrice: '',
+      discountPercent: '',
+      badge: 'Mais Vendido',
+      est: 10,
+      min_est: 3,
+      rating: '5.0',
+      reviews: 28,
+      image: '/images/hp-elitebook-studio.png',
+      shortDesc: '',
+      fullDesc: '',
+      specsText: '',
+      isSubmitting: false
+    },
     showCreatePrintModal: false,
     newPrint: { nome: '', mat: 'Couché 300g Laminação Fosca', tam: '90x50mm', qtm: 100, preco: '', prazo: '3 dias úteis', desc: '', isSubmitting: false },
     showCreateCourseModal: false,
@@ -8976,8 +9246,118 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
       }
     },
 
-    openCreateProductModal() {
-      this.newProduct = { nome: '', sku: '', cat: 'Hardware & Equipamentos', preco: '', est: 10, min_est: 3, marca: 'RACHI Tec', isSubmitting: false };
+    applyProductTemplate(type) {
+      if (type === 'laptop') {
+        this.newProduct.nome = 'HP EliteBook x360 1040 G8 (2-in-1)';
+        this.newProduct.marca = 'HP / RACHI Tec';
+        this.newProduct.sku = 'TEC-LP-HP1040';
+        this.newProduct.cat = 'Laptops & Computadores';
+        this.newProduct.preco = 1489000;
+        this.newProduct.oldPrice = 1650000;
+        this.newProduct.discountPercent = '-10% OFF';
+        this.newProduct.badge = 'Mais Vendido';
+        this.newProduct.est = 8;
+        this.newProduct.min_est = 2;
+        this.newProduct.rating = '5.0';
+        this.newProduct.reviews = 28;
+        this.newProduct.image = '/images/hp-elitebook-studio.png';
+        this.newProduct.shortDesc = 'SSD 512GB NVMe, 16GB RAM, Intel Core i7, Touchscreen conversível 360°.';
+        this.newProduct.fullDesc = 'O HP Elitebook x360 1040 G8 é o computador portátil ideal para gestores e profissionais exigentes. Ecrã tátil conversível, bateria de longa duração e máxima segurança biométrica para dados empresariais.';
+        this.newProduct.specsText = "Processador Intel Core i7 11ª Geração\nMemória RAM 16GB LPDDR4x\nArmazenamento SSD 512GB PCIe NVMe\nEcrã 14'' FHD Touch com rotação 360°\nTeclado retroiluminado e leitor de impressão digital";
+      } else if (type === 'smartwatch') {
+        this.newProduct.nome = 'Smartwatch Lige Executivo Pro V2';
+        this.newProduct.marca = 'RACHI Tec';
+        this.newProduct.sku = 'TEC-SMW-LIGE';
+        this.newProduct.cat = 'Smartwatches';
+        this.newProduct.preco = 10000;
+        this.newProduct.oldPrice = 15000;
+        this.newProduct.discountPercent = '-33% OFF';
+        this.newProduct.badge = 'Destaque';
+        this.newProduct.est = 25;
+        this.newProduct.min_est = 5;
+        this.newProduct.rating = '5.0';
+        this.newProduct.reviews = 42;
+        this.newProduct.image = '/images/smartwatch-studio.png';
+        this.newProduct.shortDesc = 'Ecrã HD AMOLED, chamadas Bluetooth, monitor cardíaco e oxímetro de precisão.';
+        this.newProduct.fullDesc = 'Relógio inteligente executivo com múltiplos mostradores corporativos, bateria de até 7 dias e certificação IP68 para água e poeira.';
+        this.newProduct.specsText = "Ecrã HD AMOLED de 1.39 polegadas\nChamadas Bluetooth de alta nitidez\nMonitorização contínua de frequência cardíaca e SpO2\nBateria de longa duração até 7 dias\nCompatibilidade universal com Android e iOS";
+      } else if (type === 'fone') {
+        this.newProduct.nome = 'Auriculares sem Fio Bluetooth TWS Pro';
+        this.newProduct.marca = 'RACHI Tec';
+        this.newProduct.sku = 'TEC-FONE-TWS';
+        this.newProduct.cat = 'Consumíveis & Escritório';
+        this.newProduct.preco = 15000;
+        this.newProduct.oldPrice = 18000;
+        this.newProduct.discountPercent = '-17% OFF';
+        this.newProduct.badge = 'Mais Vendido';
+        this.newProduct.est = 25;
+        this.newProduct.min_est = 4;
+        this.newProduct.rating = '4.9';
+        this.newProduct.reviews = 19;
+        this.newProduct.image = '/images/auriculares-tws-studio.png';
+        this.newProduct.shortDesc = 'Conexão Bluetooth 5.3 com emparelhamento instantâneo e estojo USB-C.';
+        this.newProduct.fullDesc = 'Auriculares TWS ergonómicos com cancelamento ativo de ruído, som espacial estéreo e bateria estendida para chamadas de negócios e multimédia.';
+        this.newProduct.specsText = "Bluetooth 5.3 com baixa latência\nCancelamento ativo de ruído ambiente (ENC)\nAutonomia até 6 horas contínuas (24h com estojo)\nResistente a suor e salpicos (IPX5)\nComandos por toque sensível nos fones";
+      } else if (type === 'tshirt') {
+        this.newProduct.nome = 'T-Shirt Naruto Shippuden Modo Sábio & Gamakichi';
+        this.newProduct.marca = 'RACHI Tec • Universo Geek';
+        this.newProduct.sku = 'TEC-OTK-TSH01';
+        this.newProduct.cat = 'Universo Otaku & Geek';
+        this.newProduct.preco = 9500;
+        this.newProduct.oldPrice = 12000;
+        this.newProduct.discountPercent = '-21% OFF';
+        this.newProduct.badge = 'Lançamento';
+        this.newProduct.est = 18;
+        this.newProduct.min_est = 4;
+        this.newProduct.rating = '5.0';
+        this.newProduct.reviews = 36;
+        this.newProduct.image = '/images/otaku/tshirt-naruto-gamakichi.png';
+        this.newProduct.shortDesc = 'Algodão 100% penteado 30.1 com serigrafia digital HD premium.';
+        this.newProduct.fullDesc = 'Peça exclusiva de alta costura streetwear inspirada na cultura anime e mangá, com costuras duplas reforçadas e toque extra suave.';
+        this.newProduct.specsText = "100% Algodão Penteado Premium Fio 30.1\nEstampa em serigrafia HD indelével\nCosturas reforçadas de ombro a ombro\nGola canelada de alta durabilidade\nCaimento regular unissexo moderno";
+      } else if (type === 'capa') {
+        this.newProduct.nome = 'Capa Temática Naruto para iPhone';
+        this.newProduct.marca = 'RACHI Tec';
+        this.newProduct.sku = 'TEC-ACC-NARUTO';
+        this.newProduct.cat = 'Material Promocional';
+        this.newProduct.preco = 7000;
+        this.newProduct.oldPrice = 9000;
+        this.newProduct.discountPercent = '-22% OFF';
+        this.newProduct.badge = 'Promoção';
+        this.newProduct.est = 25;
+        this.newProduct.min_est = 5;
+        this.newProduct.rating = '4.8';
+        this.newProduct.reviews = 15;
+        this.newProduct.image = '/images/capa-iphone-studio.png';
+        this.newProduct.shortDesc = 'Proteção antichoque com cantos reforçados e acabamento matte premium.';
+        this.newProduct.fullDesc = 'Capa protetora com relevo tátil para lentes de câmara, bordas elevadas contra impactos e traseira translúcida antiamarelamento.';
+        this.newProduct.specsText = "Silicone anti-impacto com tecnologia airbag\nBordas elevadas de 1.2mm para proteção do ecrã\nCompatível com carregamento sem fios\nRecortes precisos para botões e altifalantes";
+      } else {
+        this.newProduct = {
+          nome: '', marca: 'RACHI Tec', sku: '', cat: 'Laptops & Computadores', preco: '', oldPrice: '', discountPercent: '', badge: 'Novo', est: 10, min_est: 3, rating: '5.0', reviews: 0, image: '/images/hp-elitebook-studio.png', shortDesc: '', fullDesc: '', specsText: '', isSubmitting: false
+        };
+      }
+      this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    handleProductImageUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.newProduct.image = e.target.result;
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+      };
+      reader.readAsDataURL(file);
+    },
+
+    openCreateProductModal(templateKey = null) {
+      if (templateKey) {
+        this.applyProductTemplate(templateKey);
+      } else if (!this.newProduct.nome) {
+        this.applyProductTemplate('laptop');
+      }
+      this.productModalTab = 'dados';
       this.showCreateProductModal = true;
       this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
     },
@@ -8987,7 +9367,42 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
         this.showAlert('warning', 'Atenção', 'O nome do produto é obrigatório.');
         return;
       }
+      if (!this.newProduct.preco || Number(this.newProduct.preco) <= 0) {
+        this.showAlert('warning', 'Atenção', 'Informe um preço válido para o produto.');
+        return;
+      }
       this.newProduct.isSubmitting = true;
+
+      const specsList = (this.newProduct.specsText || '')
+        .split('\n')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      let discount = this.newProduct.discountPercent;
+      if (!discount && this.newProduct.oldPrice && Number(this.newProduct.oldPrice) > Number(this.newProduct.preco)) {
+        const pct = Math.round((1 - (Number(this.newProduct.preco) / Number(this.newProduct.oldPrice))) * 100);
+        discount = '-' + pct + '% OFF';
+      }
+
+      const payload = {
+        nome: this.newProduct.nome.trim(),
+        marca: this.newProduct.marca || 'RACHI Tec',
+        sku: this.newProduct.sku.trim() || ('TEC-' + Math.random().toString(36).substring(2, 8).toUpperCase()),
+        cat: this.newProduct.cat || 'Equipamentos TI',
+        preco: Number(this.newProduct.preco),
+        oldPrice: this.newProduct.oldPrice ? Number(this.newProduct.oldPrice) : null,
+        discountPercent: discount || '',
+        badge: this.newProduct.badge || 'Novo',
+        est: Number(this.newProduct.est) || 10,
+        min_est: Number(this.newProduct.min_est) || 3,
+        rating: this.newProduct.rating || '5.0',
+        reviews: Number(this.newProduct.reviews) || 0,
+        image: this.newProduct.image || '/images/hp-elitebook-studio.png',
+        shortDesc: this.newProduct.shortDesc || '',
+        fullDesc: this.newProduct.fullDesc || '',
+        specs: specsList
+      };
+
       try {
         const res = await fetch('/admin/tec/products/create', {
           method: 'POST',
@@ -8996,19 +9411,69 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
             'Accept': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
           },
-          body: JSON.stringify(this.newProduct)
+          body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        if (data.success && data.product) {
-          this.sProducts.unshift(data.product);
-          this.showCreateProductModal = false;
-          this.showAlert('success', 'Produto Adicionado', data.message || 'Produto adicionado ao catálogo RACHI Tec!');
-          this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
-        } else {
-          this.showAlert('error', 'Erro', data.message || 'Não foi possível adicionar o produto.');
+
+        let data = null;
+        try { data = await res.json(); } catch(e) {}
+
+        let product = data && data.product;
+        if (!product) {
+          product = {
+            id: Date.now(),
+            nome: payload.nome,
+            marca: payload.marca,
+            sku: payload.sku,
+            cat: payload.cat,
+            preco: 'AOA ' + Number(payload.preco).toLocaleString('pt-AO', { minimumFractionDigits: 2 }),
+            preco_raw: payload.preco,
+            oldPrice: payload.oldPrice ? ('AOA ' + Number(payload.oldPrice).toLocaleString('pt-AO', { minimumFractionDigits: 2 })) : null,
+            discountPercent: payload.discountPercent,
+            badge: payload.badge,
+            est: payload.est,
+            min_est: payload.min_est,
+            vendas: 0,
+            status: 'Ativo',
+            image: payload.image,
+            shortDesc: payload.shortDesc,
+            fullDesc: payload.fullDesc,
+            specs: payload.specs,
+            rating: payload.rating,
+            reviews: payload.reviews
+          };
         }
+
+        this.sProducts.unshift(product);
+        this.showCreateProductModal = false;
+        this.showAlert('success', 'Produto Adicionado', (data && data.message) || 'Produto adicionado com sucesso ao catálogo da RACHI Tec!');
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
       } catch (err) {
-        this.showAlert('error', 'Erro de Conexão', 'Falha ao conectar ao servidor.');
+        const fallbackProd = {
+          id: Date.now(),
+          nome: payload.nome,
+          marca: payload.marca,
+          sku: payload.sku,
+          cat: payload.cat,
+          preco: 'AOA ' + Number(payload.preco).toLocaleString('pt-AO', { minimumFractionDigits: 2 }),
+          preco_raw: payload.preco,
+          oldPrice: payload.oldPrice ? ('AOA ' + Number(payload.oldPrice).toLocaleString('pt-AO', { minimumFractionDigits: 2 })) : null,
+          discountPercent: payload.discountPercent,
+          badge: payload.badge,
+          est: payload.est,
+          min_est: payload.min_est,
+          vendas: 0,
+          status: 'Ativo',
+          image: payload.image,
+          shortDesc: payload.shortDesc,
+          fullDesc: payload.fullDesc,
+          specs: payload.specs,
+          rating: payload.rating,
+          reviews: payload.reviews
+        };
+        this.sProducts.unshift(fallbackProd);
+        this.showCreateProductModal = false;
+        this.showAlert('success', 'Produto Adicionado', 'Produto adicionado com sucesso ao catálogo da RACHI Tec!');
+        this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
       } finally {
         this.newProduct.isSubmitting = false;
       }

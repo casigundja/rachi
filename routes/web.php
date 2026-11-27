@@ -483,11 +483,20 @@ Route::post('/admin/tec/products/create', function (\Illuminate\Http\Request $re
 
     $nome = trim($data['nome'] ?? '');
     $sku = trim($data['sku'] ?? '');
-    $cat = trim($data['cat'] ?? '') ?: 'Equipamentos TI';
+    $cat = trim($data['cat'] ?? '') ?: 'Laptops & Computadores';
     $preco = (float)($data['preco'] ?? 0);
-    $est = (int)($data['est'] ?? 0);
+    $oldPrice = !empty($data['oldPrice']) ? (float)$data['oldPrice'] : null;
+    $discountPercent = trim($data['discountPercent'] ?? '');
+    $badge = trim($data['badge'] ?? 'Novo');
+    $est = (int)($data['est'] ?? 10);
     $minEst = (int)($data['min_est'] ?? 3);
     $marca = trim($data['marca'] ?? '') ?: 'RACHI Tec';
+    $image = trim($data['image'] ?? '') ?: '/images/hp-elitebook-studio.png';
+    $shortDesc = trim($data['shortDesc'] ?? ($data['short_description'] ?? ''));
+    $fullDesc = trim($data['fullDesc'] ?? ($data['description'] ?? ''));
+    $specs = is_array($data['specs'] ?? null) ? $data['specs'] : [];
+    $rating = trim($data['rating'] ?? '5.0');
+    $reviews = (int)($data['reviews'] ?? 0);
 
     if (!$nome) {
         return response()->json(['success' => false, 'message' => 'O nome do produto é obrigatório.'], 422);
@@ -509,10 +518,24 @@ Route::post('/admin/tec/products/create', function (\Illuminate\Http\Request $re
         'slug' => \Illuminate\Support\Str::slug($nome . '-' . rand(100, 999)),
         'sku' => $sku,
         'price' => $preco,
+        'cost_price' => $oldPrice,
         'stock_quantity' => $est,
         'minimum_stock' => $minEst,
+        'short_description' => $shortDesc,
+        'description' => $fullDesc,
+        'featured' => in_array($badge, ['Mais Vendido', 'Destaque', 'Lançamento']),
         'status' => 'active',
     ]);
+
+    if ($image) {
+        \App\Models\ProductImage::create([
+            'product_id' => $product->id,
+            'path' => $image,
+            'alt' => $nome,
+            'is_primary' => true,
+            'sort_order' => 0,
+        ]);
+    }
 
     $formatted = [
         'id' => $product->id,
@@ -522,10 +545,19 @@ Route::post('/admin/tec/products/create', function (\Illuminate\Http\Request $re
         'cat' => $cat,
         'preco' => 'AOA ' . number_format($product->price, 2, ',', '.'),
         'preco_raw' => (float)$product->price,
+        'oldPrice' => $oldPrice ? ('AOA ' . number_format($oldPrice, 2, ',', '.')) : null,
+        'discountPercent' => $discountPercent,
+        'badge' => $badge,
         'est' => (int)$product->stock_quantity,
         'min_est' => (int)$product->minimum_stock,
         'vendas' => 0,
         'status' => 'Ativo',
+        'image' => $image,
+        'shortDesc' => $shortDesc,
+        'fullDesc' => $fullDesc,
+        'specs' => $specs,
+        'rating' => $rating,
+        'reviews' => $reviews,
     ];
 
     return response()->json([
