@@ -424,7 +424,7 @@
       gap: 0.4rem;
     }
 
-        /* COLUNA DIREITA: APRESENTAÇÃO DO PROJETO RACHI */
+            /* COLUNA DIREITA: APRESENTAÇÃO DO PROJETO RACHI */
     .showcase-col {
       display: flex;
       flex-direction: column;
@@ -434,47 +434,23 @@
       overflow-y: auto;
     }
 
+    .showcase-content {
+      max-width: 860px;
+      width: 100%;
+    }
+
     .showcase-header {
-      max-width: 760px;
-      margin-bottom: 1.5rem;
-    }
-    
-    .showcase-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 9999px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(0, 80, 240, 0.08);
-      color: var(--brand-blue);
-      border: 1px solid rgba(0, 80, 240, 0.22);
-      margin-bottom: 1.15rem;
-    }
-    html.dark .showcase-badge {
-      background: rgba(0, 163, 224, 0.12);
-      color: #38bdf8;
-      border: 1px solid rgba(0, 163, 224, 0.3);
-    }
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #00a3e0;
-      box-shadow: 0 0 8px #00a3e0;
+      margin-bottom: 2.25rem;
     }
 
     .showcase-heading {
       font-family: var(--font-heading);
-      font-size: clamp(2rem, 2.7vw, 2.85rem);
+      font-size: clamp(2rem, 2.7vw, 2.75rem);
       font-weight: 800;
-      line-height: 1.18;
+      line-height: 1.2;
       color: var(--text-main);
-      letter-spacing: -0.025em;
-      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.15rem;
     }
     .showcase-heading span {
       background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-cyan) 100%);
@@ -487,47 +463,10 @@
       -webkit-text-fill-color: transparent;
     }
     .showcase-lead {
-      font-size: 0.965rem;
+      font-size: 0.985rem;
       color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    .showcase-metrics {
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      margin-top: 1.35rem;
-      margin-bottom: 2rem;
-      padding: 0.85rem 1.25rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
-      width: fit-content;
-      box-shadow: var(--shadow-card);
-    }
-    .metric-item {
-      display: flex;
-      flex-direction: column;
-    }
-    .metric-val {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.1;
-    }
-    .metric-lbl {
-      font-size: 0.675rem;
-      font-weight: 600;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-top: 0.15rem;
-    }
-    .metric-divider {
-      width: 1px;
-      height: 28px;
-      background: var(--border-subtle);
+      line-height: 1.68;
+      max-width: 720px;
     }
 
     /* Grid das 4 Unidades RACHI */
@@ -537,10 +476,10 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.35rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
     .units-section-title::after {
       content: '';
@@ -552,260 +491,125 @@
     .units-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      max-width: 960px;
+      gap: 1.35rem;
+      max-width: 860px;
     }
 
     .unit-card {
       background: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: 20px;
-      padding: 1.5rem 1.5rem 1.25rem;
+      padding: 1.6rem 1.65rem;
       box-shadow: var(--shadow-card);
-      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
-    .unit-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      opacity: 0.35;
-      transition: opacity 0.28s ease, height 0.28s ease;
-    }
-    .unit-card.tec::before {
-      background: linear-gradient(90deg, #0050f0, #00a3e0);
-    }
-    .unit-card.print::before {
-      background: linear-gradient(90deg, #f5a800, #ffc745);
-    }
-    .unit-card.academy::before {
-      background: linear-gradient(90deg, #00a3e0, #0050f0);
-    }
-    .unit-card.capital::before {
-      background: linear-gradient(90deg, #0050f0, #38bdf8);
-    }
-
     .unit-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       border-color: var(--border-hover);
-      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.16);
-    }
-    .unit-card:hover::before {
-      opacity: 1;
-      height: 4px;
+      box-shadow: 0 14px 28px -4px rgba(0, 80, 240, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
     }
     html.dark .unit-card:hover {
-      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.5), 0 0 24px -4px rgba(0, 80, 240, 0.18);
+      box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.4), 0 0 20px -4px rgba(0, 163, 224, 0.15);
     }
 
-    .unit-card-top {
+    .unit-card-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.95rem;
+      gap: 0.95rem;
+      margin-bottom: 0.85rem;
     }
 
     .unit-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: transform 0.25s ease;
+      transition: transform 0.2s ease;
     }
     .unit-card:hover .unit-icon-box {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
     .unit-icon-box svg {
       width: 22px;
       height: 22px;
     }
 
+    /* Cores das Unidades estritamente na identidade RACHI */
     .unit-icon-box.tec {
-      background: rgba(0, 80, 240, 0.12);
+      background: rgba(0, 80, 240, 0.08);
       color: #0050f0;
-      border: 1px solid rgba(0, 80, 240, 0.24);
+      border: 1px solid rgba(0, 80, 240, 0.18);
     }
     html.dark .unit-icon-box.tec {
-      background: rgba(0, 163, 224, 0.14);
+      background: rgba(0, 163, 224, 0.12);
       color: #38bdf8;
-      border: 1px solid rgba(0, 163, 224, 0.32);
+      border: 1px solid rgba(0, 163, 224, 0.28);
     }
 
     .unit-icon-box.print {
-      background: rgba(245, 168, 0, 0.12);
+      background: rgba(245, 168, 0, 0.1);
       color: #d97706;
-      border: 1px solid rgba(245, 168, 0, 0.25);
+      border: 1px solid rgba(245, 168, 0, 0.22);
     }
     html.dark .unit-icon-box.print {
-      background: rgba(245, 168, 0, 0.15);
-      color: #f5a800;
-      border: 1px solid rgba(245, 168, 0, 0.35);
-    }
-
-    .unit-icon-box.academy {
-      background: rgba(0, 163, 224, 0.12);
-      color: #00a3e0;
-      border: 1px solid rgba(0, 163, 224, 0.25);
-    }
-    html.dark .unit-icon-box.academy {
-      background: rgba(0, 163, 224, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(0, 163, 224, 0.32);
-    }
-
-    .unit-icon-box.capital {
-      background: rgba(0, 80, 240, 0.08);
-      color: #0050f0;
-      border: 1px solid rgba(0, 80, 240, 0.2);
-    }
-    html.dark .unit-icon-box.capital {
-      background: rgba(56, 189, 248, 0.1);
-      color: #93c5fd;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .unit-badge {
-      font-size: 0.675rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-    }
-    .unit-badge.tec {
-      background: rgba(0, 80, 240, 0.08);
-      color: #0050f0;
-      border: 1px solid rgba(0, 80, 240, 0.2);
-    }
-    html.dark .unit-badge.tec {
-      background: rgba(0, 163, 224, 0.12);
-      color: #38bdf8;
-      border: 1px solid rgba(0, 163, 224, 0.25);
-    }
-    .unit-badge.print {
-      background: rgba(245, 168, 0, 0.09);
-      color: #b45309;
-      border: 1px solid rgba(245, 168, 0, 0.24);
-    }
-    html.dark .unit-badge.print {
-      background: rgba(245, 168, 0, 0.12);
+      background: rgba(245, 168, 0, 0.14);
       color: #f5a800;
       border: 1px solid rgba(245, 168, 0, 0.3);
     }
-    .unit-badge.academy {
-      background: rgba(0, 163, 224, 0.08);
+
+    .unit-icon-box.academy {
+      background: rgba(0, 163, 224, 0.09);
       color: #0284c7;
       border: 1px solid rgba(0, 163, 224, 0.2);
     }
-    html.dark .unit-badge.academy {
-      background: rgba(0, 163, 224, 0.12);
+    html.dark .unit-icon-box.academy {
+      background: rgba(0, 163, 224, 0.14);
       color: #38bdf8;
-      border: 1px solid rgba(0, 163, 224, 0.25);
-    }
-    .unit-badge.capital {
-      background: rgba(15, 23, 42, 0.06);
-      color: #334155;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-    }
-    html.dark .unit-badge.capital {
-      background: rgba(255, 255, 255, 0.06);
-      color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(0, 163, 224, 0.28);
     }
 
-    .unit-header-content {
-      margin-bottom: 0.65rem;
+    .unit-icon-box.capital {
+      background: rgba(7, 19, 38, 0.06);
+      color: #0050f0;
+      border: 1px solid rgba(0, 80, 240, 0.16);
     }
-    .unit-title {
+    html.dark .unit-icon-box.capital {
+      background: rgba(56, 189, 248, 0.08);
+      color: #93c5fd;
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .unit-name-wrap h3 {
       font-family: var(--font-heading);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--text-main);
-      line-height: 1.25;
-      letter-spacing: -0.015em;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
     .unit-tag {
       font-size: 0.725rem;
       font-weight: 600;
-      color: var(--brand-blue);
-      letter-spacing: 0.02em;
+      color: var(--text-dim);
       display: block;
       margin-top: 0.15rem;
     }
-    html.dark .unit-tag {
-      color: #38bdf8;
-    }
+    .unit-card.tec:hover .unit-tag { color: var(--brand-blue); }
+    .unit-card.print:hover .unit-tag { color: var(--brand-gold); }
+    .unit-card.academy:hover .unit-tag { color: var(--brand-cyan); }
+    .unit-card.capital:hover .unit-tag { color: var(--brand-blue); }
 
     .unit-card p {
-      font-size: 0.835rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      line-height: 1.55;
-      margin-bottom: 0.95rem;
-    }
-
-    .unit-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-    .unit-pill {
-      font-size: 0.685rem;
-      font-weight: 600;
-      padding: 0.22rem 0.55rem;
-      border-radius: 7px;
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-dim);
-    }
-    html.dark .unit-pill {
-      background: rgba(255, 255, 255, 0.04);
-      color: #94a3b8;
-    }
-
-    .unit-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border-subtle);
-      margin-top: auto;
-    }
-    .unit-link {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-dim);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .unit-link svg {
-      width: 14px;
-      height: 14px;
-      transition: transform 0.2s ease;
-    }
-    .unit-card:hover .unit-link {
-      color: var(--brand-blue);
-    }
-    html.dark .unit-card:hover .unit-link {
-      color: #38bdf8;
-    }
-    .unit-card:hover .unit-link svg {
-      transform: translateX(3px);
+      line-height: 1.58;
+      margin: 0;
     }
 
     /* RESPONSIVIDADE */
@@ -906,136 +710,77 @@
     <!-- COLUNA DIREITA: INFORMAÇÕES DO PROJETO RACHI             -->
     <!-- ======================================================== -->
     <main class="showcase-col">
-      <div>
+      <div class="showcase-content">
         <!-- Cabeçalho do Showcase -->
         <header class="showcase-header">
-          <div class="showcase-badge">
-            <span class="badge-dot"></span>
-            <span>Ecossistema Empresarial Integrado &bull; Angola</span>
-          </div>
-
           <h2 class="showcase-heading">
             Tecnologia, Indústria Gráfica, Formação e <span>Capital Humano</span>
           </h2>
           <p class="showcase-lead">
-            A <strong>RACHI &mdash; Soluções Inteligentes Lda.</strong> é uma estrutura corporativa angolana focada em inovação de ponta, eficiência operacional e capacitação executiva, integrando quatro divisões de excelência para acelerar negócios e instituições.
+            A <strong>RACHI &mdash; Soluções Inteligentes Lda.</strong> é uma estrutura empresarial angolana focada em inovação, eficiência operacional e capacitação de alto nível, integrando quatro unidades de excelência para transformar organizações.
           </p>
-
-          <!-- Micro-Métricas de Credibilidade -->
-          <div class="showcase-metrics">
-            <div class="metric-item">
-              <span class="metric-val">4</span>
-              <span class="metric-lbl">Divisões Especializadas</span>
-            </div>
-            <div class="metric-divider"></div>
-            <div class="metric-item">
-              <span class="metric-val">100%</span>
-              <span class="metric-lbl">Capital Nacional Angolano</span>
-            </div>
-            <div class="metric-divider"></div>
-            <div class="metric-item">
-              <span class="metric-val">24/7</span>
-              <span class="metric-lbl">Disponibilidade Operacional</span>
-            </div>
-          </div>
         </header>
 
         <!-- As 4 Unidades de Negócio -->
         <div class="units-section-title">
-          <span>Unidades de Negócio Estratégicas</span>
+          <span>Unidades de Negócio do Projeto RACHI</span>
         </div>
 
         <div class="units-grid">
           <!-- UNIDADE 1: TEC -->
           <article class="unit-card tec">
-            <div class="unit-card-top">
+            <div class="unit-card-header">
               <div class="unit-icon-box tec">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M10 9l-2 2 2 2m4-4l2 2-2 2"/></svg>
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               </div>
-              <span class="unit-badge tec">Software &amp; Cloud</span>
+              <div class="unit-name-wrap">
+                <h3>RACHI TEC</h3>
+                <span class="unit-tag">Tecnologia &amp; Infraestrutura</span>
+              </div>
             </div>
-            <div class="unit-header-content">
-              <h3 class="unit-title">RACHI TEC</h3>
-              <span class="unit-tag">Tecnologia &amp; Infraestrutura Corporativa</span>
-            </div>
-            <p>Soluções completas de TI: desenvolvimento de software sob medida, infraestruturas cloud de alta disponibilidade, cibersegurança, redes estruturadas e suporte corporativo gerido.</p>
-            <div class="unit-pills">
-              <span class="unit-pill">Cloud &amp; DevOps</span>
-              <span class="unit-pill">Cibersegurança</span>
-              <span class="unit-pill">ERP &amp; CRM</span>
-            </div>
-            <div class="unit-card-footer">
-              <span class="unit-link">Explorar Soluções Tecnológicas <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </div>
+            <p>Soluções completas de TI: desenvolvimento de software, infraestruturas cloud de alta disponibilidade, cibersegurança, redes estruturadas e suporte corporativo gerido.</p>
           </article>
 
           <!-- UNIDADE 2: PRINT -->
           <article class="unit-card print">
-            <div class="unit-card-top">
+            <div class="unit-card-header">
               <div class="unit-icon-box print">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
               </div>
-              <span class="unit-badge print">Gráfica &amp; Brindes</span>
-            </div>
-            <div class="unit-header-content">
-              <h3 class="unit-title">RACHI PRINT</h3>
-              <span class="unit-tag">Indústria Gráfica &amp; Merchandising</span>
+              <div class="unit-name-wrap">
+                <h3>RACHI PRINT</h3>
+                <span class="unit-tag">Indústria Gráfica &amp; Merchandising</span>
+              </div>
             </div>
             <p>Comunicação visual e produção gráfica profissional: impressão digital e offset de alta precisão, grandes formatos, sinalética, brindes personalizados e branding corporativo.</p>
-            <div class="unit-pills">
-              <span class="unit-pill">Offset HD</span>
-              <span class="unit-pill">Grandes Formatos</span>
-              <span class="unit-pill">Brindes Corporativos</span>
-            </div>
-            <div class="unit-card-footer">
-              <span class="unit-link">Ver Catálogo &amp; Orçamentos <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </div>
           </article>
 
           <!-- UNIDADE 3: ACADEMY -->
           <article class="unit-card academy">
-            <div class="unit-card-top">
+            <div class="unit-card-header">
               <div class="unit-icon-box academy">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
               </div>
-              <span class="unit-badge academy">Capacitação &amp; LMS</span>
-            </div>
-            <div class="unit-header-content">
-              <h3 class="unit-title">RACHI ACADEMY</h3>
-              <span class="unit-tag">Formação Executiva &amp; Tecnológica</span>
+              <div class="unit-name-wrap">
+                <h3>RACHI ACADEMY</h3>
+                <span class="unit-tag">Formação Profissional &amp; LMS</span>
+              </div>
             </div>
             <p>Centro de excelência em capacitação executiva e tecnológica: cursos avançados, plataforma LMS interativa, emissão de certificados e programas in-company sob medida.</p>
-            <div class="unit-pills">
-              <span class="unit-pill">Cursos TI &amp; Gestão</span>
-              <span class="unit-pill">Certificação Oficial</span>
-              <span class="unit-pill">Plataforma EAD 24/7</span>
-            </div>
-            <div class="unit-card-footer">
-              <span class="unit-link">Acessar Cursos &amp; Matrículas <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </div>
           </article>
 
           <!-- UNIDADE 4: HUMAN CAPITAL -->
           <article class="unit-card capital">
-            <div class="unit-card-top">
+            <div class="unit-card-header">
               <div class="unit-icon-box capital">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
               </div>
-              <span class="unit-badge capital">Recrutamento &amp; RH</span>
-            </div>
-            <div class="unit-header-content">
-              <h3 class="unit-title">RACHI HUMAN CAPITAL</h3>
-              <span class="unit-tag">Gestão Estratégica de Talentos</span>
+              <div class="unit-name-wrap">
+                <h3>RACHI HUMAN CAPITAL</h3>
+                <span class="unit-tag">Gestão Estratégica de Talentos</span>
+              </div>
             </div>
             <p>Recrutamento executivo especializado, outsourcing de especialistas em tecnologia, avaliação de competências e consultoria de recursos humanos para empresas.</p>
-            <div class="unit-pills">
-              <span class="unit-pill">Headhunting TI</span>
-              <span class="unit-pill">Outsourcing Estratégico</span>
-              <span class="unit-pill">Consultoria RH</span>
-            </div>
-            <div class="unit-card-footer">
-              <span class="unit-link">Requisitar Talentos &amp; RH <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </div>
           </article>
         </div>
       </div>
