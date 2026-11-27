@@ -5760,285 +5760,309 @@ html.dark .panze-hdr-pill {
       </div>
     </div>
 
-    <!-- MODAL 11: ADICIONAR PRODUTO TEC (COMPLETO COM IMAGEM, TEMPLATES & LIVE PREVIEW) -->
-    <div x-show="showCreateProductModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5" role="dialog">
-      <div @click="showCreateProductModal = false" class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"></div>
-      <div class="relative w-full max-w-4xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden z-10 text-left max-h-[92vh] flex flex-col">
+    <!-- MODAL 11: ADICIONAR PRODUTO TEC (ESTÚDIO COM LIVE STORE PREVIEW & PRESETS 1-CLIQUE) -->
+    <div x-show="showCreateProductModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:p-6" role="dialog" aria-modal="true">
+      <div @click="showCreateProductModal = false" class="fixed inset-0 bg-slate-950/75 backdrop-blur-xs transition-opacity"></div>
+      <div class="relative w-full max-w-5xl xl:max-w-6xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 shadow-2xl overflow-hidden z-10 text-left max-h-[94vh] flex flex-col">
+        <!-- Accent gradient topo -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0050f0] via-[#00a3e0] to-[#0050f0]"></div>
         
         <!-- HEADER DO MODAL -->
-        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-white/10 shrink-0">
+        <div class="flex items-center justify-between pb-4 mb-3 border-b border-slate-100 dark:border-white/10 shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center border border-blue-100 dark:border-blue-900/30 shrink-0">
+            <div class="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center border border-blue-100 dark:border-blue-900/30 shrink-0 shadow-2xs">
               <i data-lucide="package-plus" class="w-5 h-5"></i>
             </div>
             <div>
-              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto ao Catálogo</h3>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit">Adicionar Produto ao Catálogo</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] border border-blue-200/60 dark:border-blue-900/40">Estúdio RACHI</span>
+              </div>
               <p class="text-xs text-slate-500 mt-0.5">RACHI Tec — Hardware, Dispositivos, Consumíveis &amp; Coleções com Padrão Oficial.</p>
             </div>
           </div>
-          <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+          <button @click="showCreateProductModal = false" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition cursor-pointer" title="Fechar">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
-        <!-- FAIXA DE MODELOS E TEMPLATES PRÉ-CONFIGURADOS (1 CLIQUE) -->
-        <div class="mb-4 p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shrink-0">
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+        <!-- FAIXA DE MODELOS E TEMPLATES PRÉ-CONFIGURADOS (1 CLIQUE - RESPONSIVO SEM CORTE) -->
+        <div class="mb-3.5 p-3 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shrink-0">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0050f0]"></i>
-              Carregar Modelo Padrão da Loja (1 Clique):
+              Carregar Modelo da Loja (1 Clique):
             </span>
-            <button type="button" @click="applyProductTemplate('clear')" class="text-[10.5px] font-bold text-slate-500 hover:text-rose-600 transition cursor-pointer">
-              Limpar Campos
+            <button type="button" @click="applyProductTemplate('clear')" class="text-[11px] font-bold text-slate-500 hover:text-rose-600 transition cursor-pointer flex items-center gap-1">
+              <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+              <span>Limpar Campos</span>
             </button>
           </div>
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            <button type="button" @click="applyProductTemplate('laptop')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" @click="applyProductTemplate('laptop')" :class="activeProductTemplate === 'laptop' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
               <span>💻</span>
               <span>Laptop Corporativo</span>
             </button>
-            <button type="button" @click="applyProductTemplate('smartwatch')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+            <button type="button" @click="applyProductTemplate('smartwatch')" :class="activeProductTemplate === 'smartwatch' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
               <span>⌚</span>
               <span>Smartwatch Executivo</span>
             </button>
-            <button type="button" @click="applyProductTemplate('fone')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+            <button type="button" @click="applyProductTemplate('fone')" :class="activeProductTemplate === 'fone' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
               <span>🎧</span>
               <span>Auriculares TWS</span>
             </button>
-            <button type="button" @click="applyProductTemplate('tshirt')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+            <button type="button" @click="applyProductTemplate('tshirt')" :class="activeProductTemplate === 'tshirt' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
               <span>👕</span>
               <span>T-Shirt Geek &amp; Anime</span>
             </button>
-            <button type="button" @click="applyProductTemplate('capa')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:border-[#0050f0] hover:text-[#0050f0] transition cursor-pointer shrink-0 shadow-2xs flex items-center gap-1.5">
+            <button type="button" @click="applyProductTemplate('capa')" :class="activeProductTemplate === 'capa' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
               <span>📱</span>
-              <span>Capa &amp; Acessórios</span>
+              <span>Capa iPhone</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('tvbox')" :class="activeProductTemplate === 'tvbox' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
+              <span>📺</span>
+              <span>TV Box 4K</span>
+            </button>
+            <button type="button" @click="applyProductTemplate('cabo')" :class="activeProductTemplate === 'cabo' ? 'bg-[#0050f0] text-white border-[#0050f0] shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-white/10 hover:border-[#0050f0] hover:text-[#0050f0]'" class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
+              <span>🔌</span>
+              <span>Cabo de Rede / TI</span>
             </button>
           </div>
         </div>
 
-        <!-- ABAS DO FORMULÁRIO -->
-        <div class="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-2 mb-4 shrink-0">
-          <button type="button" @click="productModalTab = 'dados'"
-                  :class="productModalTab === 'dados' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
-                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
-            <i data-lucide="tag" class="w-3.5 h-3.5"></i>
-            <span>1. Dados &amp; Preço</span>
-          </button>
-          <button type="button" @click="productModalTab = 'apresentacao'"
-                  :class="productModalTab === 'apresentacao' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
-                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
-            <i data-lucide="image" class="w-3.5 h-3.5"></i>
-            <span>2. Imagem &amp; Especificações</span>
-          </button>
-          <button type="button" @click="productModalTab = 'preview'"
-                  :class="productModalTab === 'preview' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
-                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5">
-            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-            <span>3. Pré-visualização da Loja</span>
-          </button>
-        </div>
-
-        <!-- CORPO COM ROLAGEM -->
-        <form @submit.prevent="submitCreateProduct()" class="flex-1 overflow-y-auto pr-1 space-y-4">
-          
-          <!-- ABA 1: DADOS & PREÇO -->
-          <div x-show="productModalTab === 'dados'" class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Nome Oficial do Produto *</label>
-              <div class="relative">
-                <i data-lucide="package" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" x-model="newProduct.nome" placeholder="Ex: HP EliteBook x360 1040 G8 (2-in-1)" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]" required>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Marca / Fabricante</label>
-                <div class="relative">
-                  <i data-lucide="tag" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                  <input type="text" x-model="newProduct.marca" placeholder="RACHI Tec, HP, Lenovo..." class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+        <!-- FORMULÁRIO COM GRID SPLIT (COLUNA ESQUERDA FORMULÁRIO + COLUNA DIREITA LIVE STORE PREVIEW) -->
+        <form @submit.prevent="submitCreateProduct()" class="flex-1 flex flex-col min-h-0 overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 min-h-0 overflow-hidden">
+            
+            <!-- COLUNA ESQUERDA: CAMPOS DO PRODUTO (SCROLLÁVEL) -->
+            <div class="lg:col-span-7 flex flex-col min-h-0 overflow-y-auto pr-1 sm:pr-2 space-y-3.5 scrollbar-thin">
+              
+              <!-- GRUPO 1: IDENTIFICAÇÃO BÁSICA -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/10 shadow-2xs space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="tag" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                    1. Identificação do Produto
+                  </span>
+                  <span class="text-[11px] text-slate-400">* Obrigatórios</span>
                 </div>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Código SKU (Identificador)</label>
-                <div class="relative">
-                  <i data-lucide="barcode" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                  <input type="text" x-model="newProduct.sku" placeholder="Auto-gerado se vazio (ex: TEC-001)" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nome Oficial do Produto *</label>
+                  <input type="text" x-model="newProduct.nome" placeholder="Ex: HP EliteBook x360 1040 G8..." required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs font-medium focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden transition">
                 </div>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Categoria da Loja</label>
-                <select x-model="newProduct.cat" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-                  <option value="Laptops & Computadores">Laptops &amp; Computadores</option>
-                  <option value="Smartwatches">Smartwatches &amp; Wearables</option>
-                  <option value="Consumíveis & Escritório">Consumíveis &amp; Escritório</option>
-                  <option value="Material Promocional">Material Promocional</option>
-                  <option value="Universo Otaku & Geek">Universo Otaku &amp; Geek</option>
-                  <option value="Hardware & Redes">Hardware &amp; Redes</option>
-                </select>
-              </div>
-            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Unitário (AOA) *</label>
-                <input type="number" step="0.01" x-model="newProduct.preco" placeholder="1489000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]" required>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Preço Antigo / Riscado</label>
-                <input type="number" step="0.01" x-model="newProduct.oldPrice" placeholder="Ex: 1650000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Stock Inicial</label>
-                <input type="number" x-model.number="newProduct.est" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Badge de Destaque</label>
-                <select x-model="newProduct.badge" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-                  <option value="Mais Vendido">Mais Vendido</option>
-                  <option value="Destaque">Destaque</option>
-                  <option value="Lançamento">Lançamento</option>
-                  <option value="Promoção">Promoção</option>
-                  <option value="Exclusivo">Exclusivo</option>
-                  <option value="Novo">Novo</option>
-                  <option value="">Sem Badge</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- ABA 2: IMAGEM & ESPECIFICAÇÕES -->
-          <div x-show="productModalTab === 'apresentacao'" class="space-y-4">
-            <!-- SELEÇÃO DE IMAGEM -->
-            <div class="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 space-y-3">
-              <div class="flex items-center justify-between">
-                <label class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <i data-lucide="image" class="w-4 h-4 text-[#0050f0]"></i>
-                  <span>Imagem do Produto (URL, Presets Oficiais ou Upload)</span>
-                </label>
-                <span class="text-[11px] text-slate-400">Resolução recomendada: 600x600 px</span>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-                <div class="sm:col-span-8">
-                  <input type="text" x-model="newProduct.image" placeholder="URL da imagem (ex: /images/hp-elitebook-studio.png)" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-                </div>
-                <div class="sm:col-span-4 flex items-center gap-2">
-                  <label class="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 hover:border-[#0050f0] text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition shadow-2xs">
-                    <i data-lucide="upload" class="w-3.5 h-3.5 text-[#0050f0]"></i>
-                    <span>Ficheiro PC</span>
-                    <input type="file" accept="image/*" @change="handleProductImageUpload($event)" class="hidden">
-                  </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Marca / Fabricante</label>
+                    <input type="text" x-model="newProduct.marca" placeholder="RACHI Tec" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1">
+                      <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">Código SKU</label>
+                      <button type="button" @click="generateProductSku()" class="text-[10px] text-[#0050f0] font-bold hover:underline cursor-pointer">Auto</button>
+                    </div>
+                    <input type="text" x-model="newProduct.sku" placeholder="TEC-LP-1040" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs font-mono focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Categoria na Loja</label>
+                    <select x-model="newProduct.cat" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                      <option value="Laptops &amp; Computadores">Laptops &amp; Computadores</option>
+                      <option value="Smartwatches">Smartwatches</option>
+                      <option value="Consumíveis &amp; Escritório">Consumíveis &amp; Escritório</option>
+                      <option value="Material Promocional">Material Promocional</option>
+                      <option value="Universo Otaku &amp; Geek">Universo Otaku &amp; Geek</option>
+                      <option value="Acessórios &amp; Cabos">Acessórios &amp; Cabos</option>
+                      <option value="Equipamentos de Rede">Equipamentos de Rede</option>
+                      <option value="Equipamentos TI">Equipamentos TI</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
-              <!-- GALERIA DE MINIATURAS DOS PRODUTOS EXISTENTES -->
-              <div>
-                <span class="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Escolher entre imagens de produtos existentes:</span>
-                <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-11 gap-2">
-                  <template x-for="preset in productImagePresets" :key="preset.url">
-                    <button type="button" @click="newProduct.image = preset.url; $nextTick(() => { if (window.lucide) lucide.createIcons(); })"
-                            :class="newProduct.image === preset.url ? 'ring-2 ring-[#0050f0] border-transparent scale-105' : 'border-slate-200/80 dark:border-white/10 hover:border-[#0050f0]/50'"
-                            class="p-1 rounded-xl bg-white dark:bg-slate-800 border flex flex-col items-center justify-center group transition cursor-pointer"
-                            :title="preset.label">
-                      <img :src="preset.url" :alt="preset.label" class="w-10 h-10 object-contain drop-shadow-2xs">
+              <!-- GRUPO 2: IMAGEM & MÍDIA -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/10 shadow-2xs space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="image" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                    2. Imagem do Produto
+                  </span>
+                  <span class="text-[11px] text-slate-500 font-medium">1-Clique nas fotos oficiais:</span>
+                </div>
+
+                <!-- MINIATURAS DOS PRODUTOS REAIS EXISTENTES -->
+                <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                  <template x-for="(item, idx) in productImagePresets.slice(0, 11)" :key="idx">
+                    <button type="button" @click="newProduct.image = item.url" :title="item.label" :class="newProduct.image === item.url ? 'ring-2 ring-[#0050f0] border-transparent bg-blue-50/50 dark:bg-blue-950/40' : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900 hover:border-[#0050f0]'" class="h-14 rounded-xl border p-1 flex flex-col items-center justify-center transition cursor-pointer relative group">
+                      <img :src="item.url" :alt="item.label" class="h-8 w-8 object-contain drop-shadow-2xs transition-transform group-hover:scale-110">
+                      <span class="text-[9px] font-medium text-slate-600 dark:text-slate-300 truncate w-full text-center mt-0.5" x-text="item.label.split(' ')[0]"></span>
                     </button>
                   </template>
                 </div>
+
+                <!-- UPLOAD LOCAL E URL PERSONALIZADA -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 pt-1 border-t border-slate-100 dark:border-white/5 items-center">
+                  <div class="sm:col-span-5">
+                    <label class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-300 dark:border-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+                      <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                      <span>Carregar do PC</span>
+                      <input type="file" accept="image/*" @change="handleProductImageUpload($event)" class="hidden">
+                    </label>
+                  </div>
+                  <div class="sm:col-span-7">
+                    <input type="text" x-model="newProduct.image" placeholder="Ou cole URL direta (/images/...)" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <!-- DESCRIÇÃO CURTA -->
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Curta (Exibida no Card da Loja)</label>
-              <input type="text" x-model="newProduct.shortDesc" placeholder="Ex: SSD 512GB NVMe, 16GB RAM, Intel Core i7, Touchscreen conversível 360°." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
-            </div>
-
-            <!-- DESCRIÇÃO COMPLETA -->
-            <div>
-              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Comercial Completa</label>
-              <textarea x-model="newProduct.fullDesc" rows="3" placeholder="Apresentação detalhada das características, benefícios corporativos e garantia do produto..." class="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]"></textarea>
-            </div>
-
-            <!-- ESPECIFICAÇÕES TÉCNICAS (1 POR LINHA) -->
-            <div>
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-xs font-bold text-slate-700 dark:text-slate-300">Especificações Técnicas (1 item por linha)</label>
-                <span class="text-[11px] text-slate-400">Cada linha gera um ponto com ícone de verificação</span>
-              </div>
-              <textarea x-model="newProduct.specsText" rows="4" placeholder="Processador Intel Core i7 11ª Geração&#10;Memória RAM 16GB LPDDR4x&#10;Armazenamento SSD 512GB PCIe NVMe&#10;Ecrã 14'' FHD Touch com rotação 360°" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-900 dark:text-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]"></textarea>
-            </div>
-          </div>
-
-          <!-- ABA 3: PRÉ-VISUALIZAÇÃO DA LOJA (LIVE PREVIEW) -->
-          <div x-show="productModalTab === 'preview'" class="space-y-4">
-            <div class="p-3 rounded-xl bg-blue-50/70 dark:bg-[#0050f0]/10 border border-blue-200/60 dark:border-blue-900/40 flex items-center justify-between text-xs text-[#0050f0] dark:text-[#38bdf8]">
-              <span class="font-bold flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                Pré-visualização em Tempo Real na Vitrine da RACHI Tec
-              </span>
-              <span class="text-[11px] font-medium">Assim que salvar, o produto aparecerá com esta exata formatação</span>
-            </div>
-
-            <div class="flex justify-center p-4">
-              <!-- CARD SIMULADO IDÊNTICO À LOJA -->
-              <div class="w-full max-w-sm rounded-3xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-5 shadow-xl space-y-3.5 relative overflow-hidden">
-                <!-- BADGE FLUTUANTE -->
+              <!-- GRUPO 3: PREÇO & STOCK -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/10 shadow-2xs space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-0.5 rounded-full text-[10.5px] font-black uppercase tracking-wider bg-[#0050f0] text-white shadow-xs" x-text="newProduct.badge || 'Destaque'"></span>
-                  <div class="flex items-center gap-1 text-[11px] font-bold text-amber-500">
-                    <span>★</span>
-                    <span x-text="newProduct.rating || '5.0'"></span>
-                    <span class="text-slate-400 font-medium" x-text="'(' + (newProduct.reviews || 28) + ')'"></span>
-                  </div>
+                  <span class="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="coins" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                    3. Preço de Venda &amp; Gestão de Stock
+                  </span>
+                  <span x-show="newProduct.discountPercent" class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40" x-text="newProduct.discountPercent"></span>
                 </div>
 
-                <!-- IMAGEM COM CONTAINER LIMPO -->
-                <div class="w-full h-48 rounded-2xl bg-slate-50 dark:bg-white/5 flex items-center justify-center p-3 overflow-hidden">
-                  <img :src="newProduct.image || '/images/hp-elitebook-studio.png'" :alt="newProduct.nome" class="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105">
-                </div>
-
-                <!-- CATEGORIA & TÍTULO -->
-                <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#38bdf8]" x-text="newProduct.cat"></span>
-                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white mt-0.5 line-clamp-2" style="font-family:Outfit" x-text="newProduct.nome || 'Nome do Produto'"></h4>
-                  <p class="text-[11px] text-slate-500 line-clamp-2 mt-1" x-text="newProduct.shortDesc || 'Descrição curta de alta conversão do produto.'"></p>
-                </div>
-
-                <!-- PREÇO & DESCONTO -->
-                <div class="pt-2 border-t border-slate-100 dark:border-white/5 flex items-baseline justify-between">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <div class="text-xs text-slate-400 line-through" x-show="newProduct.oldPrice" x-text="'AOA ' + Number(newProduct.oldPrice || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
-                    <div class="text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="'AOA ' + Number(newProduct.preco || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Preço de Venda (AOA) *</label>
+                    <div class="relative">
+                      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">AOA</span>
+                      <input type="number" step="0.01" min="0" x-model="newProduct.preco" @input="calculateProductDiscount()" placeholder="15000" required class="w-full pl-12 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs font-bold focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                    </div>
                   </div>
-                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40" x-text="newProduct.discountPercent || '-10% OFF'"></span>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Preço Riscado / Anterior</label>
+                    <div class="relative">
+                      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">AOA</span>
+                      <input type="number" step="0.01" min="0" x-model="newProduct.oldPrice" @input="calculateProductDiscount()" placeholder="18000" class="w-full pl-12 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                    </div>
+                  </div>
                 </div>
 
-                <!-- BOTÃO DE AÇÃO -->
-                <button type="button" class="w-full py-2.5 rounded-xl bg-[#0050f0] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs cursor-default">
-                  <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                  <span>Adicionar ao Carrinho</span>
-                </button>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Stock Inicial</label>
+                    <input type="number" min="0" x-model="newProduct.est" placeholder="25" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Stock Mínimo (Alerta)</label>
+                    <input type="number" min="1" x-model="newProduct.min_est" placeholder="5" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Badge de Destaque</label>
+                    <select x-model="newProduct.badge" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                      <option value="Mais Vendido">Mais Vendido</option>
+                      <option value="Lançamento">Lançamento</option>
+                      <option value="Destaque">Destaque</option>
+                      <option value="Promoção">Promoção</option>
+                      <option value="Exclusivo">Exclusivo</option>
+                      <option value="Esgotando">Esgotando</option>
+                      <option value="Novo">Novo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GRUPO 4: DESCRIÇÃO & ESPECIFICAÇÕES TÉCNICAS -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200/80 dark:border-white/10 shadow-2xs space-y-3">
+                <span class="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                  4. Descrição &amp; Especificações
+                </span>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Descrição Curta (Aparece no Card da Loja)</label>
+                  <input type="text" x-model="newProduct.shortDesc" placeholder="Ex: Bluetooth 5.3 com estojo USB-C e cancelamento de ruído." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Especificações Técnicas (1 item por linha)</label>
+                  <textarea rows="3" x-model="newProduct.specsText" placeholder="Bluetooth 5.3&#10;Bateria de longa duração até 24h&#10;Cancelamento ativo de ruído" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-xs font-mono focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0] outline-hidden resize-none"></textarea>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- COLUNA DIREITA: LIVE STORE PREVIEW (CARD DA LOJA AO VIVO) -->
+            <div class="lg:col-span-5 bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50/30 dark:from-[#0c1527] dark:via-[#0c1527] dark:to-[#071326] p-4 sm:p-5 rounded-3xl border border-slate-200/80 dark:border-white/10 flex flex-col justify-between shrink-0">
+              <div>
+                <!-- CABEÇALHO DO PREVIEW -->
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/80 dark:border-white/10">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider">Vitrine da Loja ao Vivo</span>
+                  </div>
+                  <span class="text-[10px] text-slate-400 font-medium">Prévia em tempo real</span>
+                </div>
+
+                <!-- CARD DA LOJA (ESTILO OFICIAL LOJA.HTML) -->
+                <div class="w-full max-w-sm mx-auto bg-white dark:bg-[#071326] border border-slate-200 dark:border-white/10 rounded-2xl p-4 shadow-md space-y-3 transition-all duration-300 hover:shadow-lg">
+                  <!-- BADGE E AVALIAÇÃO -->
+                  <div class="flex items-center justify-between">
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#0050f0] text-white shadow-xs" x-text="newProduct.badge || 'Destaque'"></span>
+                    <div class="flex items-center gap-1 text-[11px] font-bold text-amber-500">
+                      <span>★</span>
+                      <span x-text="newProduct.rating || '5.0'"></span>
+                      <span class="text-slate-400 font-medium" x-text="'(' + (newProduct.reviews || 28) + ')'"></span>
+                    </div>
+                  </div>
+
+                  <!-- IMAGEM COM CONTAINER LIMPO -->
+                  <div class="w-full h-44 rounded-xl bg-slate-50 dark:bg-white/5 flex items-center justify-center p-3 overflow-hidden relative group">
+                    <img :src="newProduct.image || '/images/hp-elitebook-studio.png'" :alt="newProduct.nome || 'Produto RACHI'" class="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  </div>
+
+                  <!-- CATEGORIA & TÍTULO -->
+                  <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#0050f0] dark:text-[#38bdf8]" x-text="newProduct.cat || 'Equipamentos TI'"></span>
+                    <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-0.5 line-clamp-2" style="font-family:Outfit" x-text="newProduct.nome || 'Nome Oficial do Produto'"></h4>
+                    <p class="text-[11px] text-slate-500 line-clamp-2 mt-1" x-text="newProduct.shortDesc || 'Descrição comercial e benefícios de alta conversão do produto.'"></p>
+                  </div>
+
+                  <!-- ESPECIFICAÇÕES RÁPIDAS (PILLS) -->
+                  <div class="flex flex-wrap gap-1 pt-1" x-show="newProduct.specsText">
+                    <template x-for="(spec, i) in (newProduct.specsText || '').split('\n').filter(Boolean).slice(0, 2)" :key="i">
+                      <span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-[10px] font-medium text-slate-600 dark:text-slate-300 truncate max-w-full" x-text="spec"></span>
+                    </template>
+                  </div>
+
+                  <!-- PREÇO & DESCONTO -->
+                  <div class="pt-2 border-t border-slate-100 dark:border-white/5 flex items-baseline justify-between">
+                    <div>
+                      <div class="text-[11px] text-slate-400 line-through" x-show="newProduct.oldPrice" x-text="'AOA ' + Number(newProduct.oldPrice || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
+                      <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="'AOA ' + Number(newProduct.preco || 0).toLocaleString('pt-AO', { minimumFractionDigits: 2 })"></div>
+                    </div>
+                    <span x-show="newProduct.discountPercent" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40" x-text="newProduct.discountPercent"></span>
+                  </div>
+
+                  <!-- BOTÃO DE AÇÃO NA LOJA -->
+                  <button type="button" class="w-full py-2.5 rounded-xl bg-[#0050f0] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs cursor-default">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    <span>Adicionar ao Carrinho</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- NOTA EXECUTIVA DE SINCRONIZAÇÃO -->
+              <div class="mt-4 p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/40 flex items-center gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#0050f0] shrink-0"></i>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">
+                  Ao guardar, este produto será sincronizado instantaneamente no catálogo público e no controle de stock.
+                </p>
               </div>
             </div>
+
           </div>
 
           <!-- FOOTER DE AÇÕES -->
-          <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/10 shrink-0">
-            <div class="flex items-center gap-2">
-              <button type="button" x-show="productModalTab !== 'dados'" @click="productModalTab = (productModalTab === 'preview' ? 'apresentacao' : 'dados')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer flex items-center gap-1">
-                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-                <span>Anterior</span>
-              </button>
-              <button type="button" x-show="productModalTab !== 'preview'" @click="productModalTab = (productModalTab === 'dados' ? 'apresentacao' : 'preview')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer flex items-center gap-1">
-                <span>Próximo</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
+          <div class="flex items-center justify-between pt-3.5 mt-2 border-t border-slate-100 dark:border-white/10 shrink-0">
+            <span class="text-[11px] text-slate-400 hidden sm:inline">RACHI Tec Management Suite</span>
 
-            <div class="flex items-center gap-2.5">
-              <button type="button" @click="showCreateProductModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer">
+            <div class="flex items-center gap-2.5 ml-auto">
+              <button type="button" @click="showCreateProductModal = false" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold cursor-pointer transition">
                 Cancelar
               </button>
               <button type="submit" :disabled="newProduct.isSubmitting" class="bap px-5 py-2 cursor-pointer flex items-center gap-1.5 shadow-xs">
@@ -7616,6 +7640,7 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
     showCreateJobModal: false,
     newJob: { cargo: '', empresa: 'RACHI Human Capital', local: 'Luanda', mod: 'Presencial', sal: '', prazo: '30 dias', req: '', isSubmitting: false },
     showCreateProductModal: false,
+    activeProductTemplate: 'laptop',
     productModalTab: 'dados',
     productImagePresets: [
       { label: 'Laptop HP Elitebook', url: '/images/hp-elitebook-studio.png' },
@@ -9247,6 +9272,7 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
     },
 
     applyProductTemplate(type) {
+      this.activeProductTemplate = type;
       if (type === 'laptop') {
         this.newProduct.nome = 'HP EliteBook x360 1040 G8 (2-in-1)';
         this.newProduct.marca = 'HP / RACHI Tec';
@@ -9332,12 +9358,63 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
         this.newProduct.shortDesc = 'Proteção antichoque com cantos reforçados e acabamento matte premium.';
         this.newProduct.fullDesc = 'Capa protetora com relevo tátil para lentes de câmara, bordas elevadas contra impactos e traseira translúcida antiamarelamento.';
         this.newProduct.specsText = "Silicone anti-impacto com tecnologia airbag\nBordas elevadas de 1.2mm para proteção do ecrã\nCompatível com carregamento sem fios\nRecortes precisos para botões e altifalantes";
+      } else if (type === 'tvbox') {
+        this.newProduct.nome = 'TV Box Android 4K Ultra HD Streaming';
+        this.newProduct.marca = 'RACHI Tec';
+        this.newProduct.sku = 'TEC-TVB-4K';
+        this.newProduct.cat = 'Acessórios & Cabos';
+        this.newProduct.preco = 28000;
+        this.newProduct.oldPrice = 35000;
+        this.newProduct.discountPercent = '-20% OFF';
+        this.newProduct.badge = 'Destaque';
+        this.newProduct.est = 14;
+        this.newProduct.min_est = 3;
+        this.newProduct.rating = '4.9';
+        this.newProduct.reviews = 22;
+        this.newProduct.image = '/images/tvbox-studio.png';
+        this.newProduct.shortDesc = 'Processador Quad-Core, suporte a 4K 60fps, Wi-Fi Dual Band e Android TV.';
+        this.newProduct.fullDesc = 'Transforme qualquer ecrã numa central inteligente de entretenimento e reuniões executivas.';
+        this.newProduct.specsText = "Resolução nativa 4K Ultra HD 60fps\nConexão Wi-Fi Dual Band 2.4/5GHz\nMemória 4GB RAM + 32GB Armazenamento\nControlo remoto inteligente incluído";
+      } else if (type === 'cabo') {
+        this.newProduct.nome = 'Cabo de Rede Cat6 RJ45 Gigabit 3m Profissional';
+        this.newProduct.marca = 'RACHI Tec';
+        this.newProduct.sku = 'TEC-CAB-CAT6';
+        this.newProduct.cat = 'Equipamentos de Rede';
+        this.newProduct.preco = 4500;
+        this.newProduct.oldPrice = 6000;
+        this.newProduct.discountPercent = '-25% OFF';
+        this.newProduct.badge = 'Novo';
+        this.newProduct.est = 50;
+        this.newProduct.min_est = 10;
+        this.newProduct.rating = '5.0';
+        this.newProduct.reviews = 31;
+        this.newProduct.image = '/images/cabo-console-studio.png';
+        this.newProduct.shortDesc = 'Transmissão de alta velocidade até 1000 Mbps com conectores banhados a ouro.';
+        this.newProduct.fullDesc = 'Cabo blindado de alta durabilidade para conexões de rede corporativa e servidores com perda zero.';
+        this.newProduct.specsText = "Norma Categoria 6 (Cat6) Gigabit Ethernet\nCondutores 100% Cobre Puro\nConectores banhados a ouro\nBlindagem contra ruídos eletromagnéticos";
       } else {
         this.newProduct = {
           nome: '', marca: 'RACHI Tec', sku: '', cat: 'Laptops & Computadores', preco: '', oldPrice: '', discountPercent: '', badge: 'Novo', est: 10, min_est: 3, rating: '5.0', reviews: 0, image: '/images/hp-elitebook-studio.png', shortDesc: '', fullDesc: '', specsText: '', isSubmitting: false
         };
       }
       this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+    },
+
+    calculateProductDiscount() {
+      const preco = Number(this.newProduct.preco);
+      const oldPrice = Number(this.newProduct.oldPrice);
+      if (oldPrice > 0 && preco > 0 && oldPrice > preco) {
+        const pct = Math.round((1 - (preco / oldPrice)) * 100);
+        this.newProduct.discountPercent = '-' + pct + '% OFF';
+      } else {
+        this.newProduct.discountPercent = '';
+      }
+    },
+
+    generateProductSku() {
+      const catPrefix = (this.newProduct.cat || 'TEC').substring(0, 3).toUpperCase();
+      const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+      this.newProduct.sku = 'TEC-' + catPrefix + '-' + rand;
     },
 
     handleProductImageUpload(event) {
@@ -9357,7 +9434,6 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
       } else if (!this.newProduct.nome) {
         this.applyProductTemplate('laptop');
       }
-      this.productModalTab = 'dados';
       this.showCreateProductModal = true;
       this.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
     },
