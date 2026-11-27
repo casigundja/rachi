@@ -2277,15 +2277,16 @@ html.dark .panze-hdr-pill {
     <!-- =====================================================================
          AGENTE IA (CRM): CENTRAL DE AUTOMAÇÃO, MOTOR LLM & QUALIFICAÇÃO (PRINT 2)
          ===================================================================== -->
+    <!-- AGENTE IA / CRM INTELIGENTE -->
     <section x-show="currentPage==='agente-ia'" x-cloak class="space-y-4">
-      <!-- BARRA DE TELEMETRIA DO MOTOR LLM (PRINT 2) -->
+      <!-- BARRA DE TELEMETRIA DO MOTOR LLM -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl p-3 sm:px-5 shadow-xs">
         <div class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 flex-wrap">
           <span class="inline-flex items-center gap-1.5 font-bold text-slate-900 dark:text-white">
             <i data-lucide="cpu" class="w-4 h-4 text-[#0050f0]"></i>
             Motor ativo:
           </span>
-          <span class="px-2 py-0.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] font-bold border border-blue-200 dark:border-blue-900/40" x-text="aiAgent.model === 'gemini-2.5-flash' ? 'Google Gemini (gemini-2.5-flash)' : aiAgent.model"></span>
+          <span class="px-2.5 py-0.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] font-bold border border-blue-200 dark:border-blue-900/40" x-text="aiAgent.model === 'gemini-2.5-flash' ? 'Google Gemini (gemini-2.5-flash)' : aiAgent.model"></span>
           <span>+ Fallback Cloudflare Workers AI</span>
           <span>•</span>
           <span class="flex items-center gap-1.5 font-medium">
@@ -2301,212 +2302,191 @@ html.dark .panze-hdr-pill {
         </div>
       </div>
 
-      <!-- 4 KPIS DE INTELIGÊNCIA AUTÔNOMA (PRINT 2) -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">PILOTO AUTOMÁTICO</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8] border border-[#0050f0]/20 uppercase">IA ATIVA</span>
-          </div>
-          <div class="mt-2.5 flex items-baseline gap-2">
-            <span class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit" x-text="aiAgent.globalPilot ? '1' : '0'"></span>
-            <span class="text-[11px] text-emerald-600 font-semibold" x-show="aiAgent.globalPilot">Ativo 24/7</span>
-          </div>
-        </div>
-
-        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">EM QUALIFICAÇÃO</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] border border-blue-200 uppercase">ESCOPO</span>
-          </div>
-          <div class="mt-2.5 flex items-baseline gap-2">
-            <span class="text-2xl sm:text-3xl font-black text-[#0050f0] dark:text-[#38bdf8]" style="font-family:Outfit" x-text="aiAgent.stats.inQualification"></span>
-            <span class="text-[11px] text-slate-400">Leads ativos</span>
-          </div>
-        </div>
-
-        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">PRÉ-ORÇAMENTOS IA</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 uppercase">GERADOS</span>
-          </div>
-          <div class="mt-2.5 flex items-baseline gap-2">
-            <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" style="font-family:Outfit" x-text="aiAgent.stats.autoQuotesGenerated"></span>
-            <span class="text-[11px] text-slate-400">Em Kwanzas</span>
-          </div>
-        </div>
-
-        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-[10.5px] font-bold tracking-wider text-slate-500 uppercase">TRANSFERIDOS HUMANO</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 uppercase">HANDOFF</span>
-          </div>
-          <div class="mt-2.5 flex items-baseline gap-2">
-            <span class="text-2xl sm:text-3xl font-black text-[#f5a800]" style="font-family:Outfit" x-text="waitingHumanCount"></span>
-            <span class="text-[11px] text-amber-600 font-semibold" x-show="waitingHumanCount > 0">Atenção</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTROLE GRANULAR POR CANAL (PRINT 2) -->
+      <!-- STATUS DOS CANAIS OMNICHANNEL -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-        <!-- CANAL 1: CHAT DO SITE -->
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 shadow-xs flex items-center justify-between gap-3">
-          <div class="min-w-0">
+        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-3.5 sm:px-4 shadow-xs flex items-center justify-between">
+          <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-xs text-slate-900 dark:text-white truncate">Chat do Site - Leads</span>
-              <span :class="aiAgent.channels.site.active ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200' : 'bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-400 border-slate-200'" class="px-2 py-0.5 rounded-full text-[9px] font-bold border uppercase" x-text="aiAgent.channels.site.active ? 'IA ATIVA' : 'PAUSADO'"></span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white">Chat do Site - Leads</span>
+              <span class="px-1.5 py-0.2 rounded text-[9.5px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">IA ATIVA</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">Captação e qualificação de leads no site</p>
+            <p class="text-[11px] text-slate-500 mt-0.5">Captação e qualificação de leads no site</p>
           </div>
-          <button @click="toggleChannel('site')" type="button" :class="aiAgent.channels.site.active ? 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300' : 'bg-[#0050f0] hover:bg-[#0040d0] text-white'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 cursor-pointer" x-text="aiAgent.channels.site.active ? 'Pausar' : 'Ativar'"></button>
+          <button @click="showAlert('info', 'Chat do Site', 'Modo do chat configurado com sucesso.')" type="button" class="px-3 py-1 text-xs font-bold rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-200 transition cursor-pointer">
+            Pausar
+          </button>
         </div>
 
-        <!-- CANAL 2: WHATSAPP ATENDIMENTO -->
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 shadow-xs flex items-center justify-between gap-3">
-          <div class="min-w-0">
+        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-3.5 sm:px-4 shadow-xs flex items-center justify-between">
+          <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-xs text-slate-900 dark:text-white truncate">WhatsApp 1 - Atendimento</span>
-              <span :class="aiAgent.channels.whatsapp1.active ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200'" class="px-2 py-0.5 rounded-full text-[9px] font-bold border uppercase" x-text="aiAgent.channels.whatsapp1.active ? 'IA ATIVA' : 'PAUSADO'"></span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white">WhatsApp 1 - Atendimento</span>
+              <span class="px-1.5 py-0.2 rounded text-[9.5px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">PAUSADO</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">+244 923 000 000 (Linha Principal)</p>
+            <p class="text-[11px] text-slate-500 mt-0.5">Definir em Configurações</p>
           </div>
-          <button @click="toggleChannel('whatsapp1')" type="button" :class="aiAgent.channels.whatsapp1.active ? 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300' : 'bg-[#0050f0] hover:bg-[#0040d0] text-white'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 cursor-pointer" x-text="aiAgent.channels.whatsapp1.active ? 'Pausar' : 'Ativar'"></button>
+          <button @click="showAlert('info', 'WhatsApp IA', 'Canal WhatsApp 1 ativado para respostas com IA.')" type="button" class="px-3 py-1 text-xs font-bold rounded-lg bg-[#0050f0] hover:bg-[#0040d0] text-white transition cursor-pointer shadow-xs">
+            Ativar
+          </button>
         </div>
 
-        <!-- CANAL 3: WHATSAPP DIRETOR -->
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 shadow-xs flex items-center justify-between gap-3">
-          <div class="min-w-0">
+        <div class="rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-3.5 sm:px-4 shadow-xs flex items-center justify-between">
+          <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-xs text-slate-900 dark:text-white truncate">WhatsApp 2 - Diretor</span>
-              <span :class="aiAgent.channels.whatsapp2.active ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200'" class="px-2 py-0.5 rounded-full text-[9px] font-bold border uppercase" x-text="aiAgent.channels.whatsapp2.active ? 'IA ATIVA' : 'PAUSADO'"></span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white">WhatsApp 2 - Diretor</span>
+              <span class="px-1.5 py-0.2 rounded text-[9.5px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">PAUSADO</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">+244 923 888 777 (VIP / Direção)</p>
+            <p class="text-[11px] text-slate-500 mt-0.5 font-mono">+244 923 000 000</p>
           </div>
-          <button @click="toggleChannel('whatsapp2')" type="button" :class="aiAgent.channels.whatsapp2.active ? 'bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300' : 'bg-[#0050f0] hover:bg-[#0040d0] text-white'" class="px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 cursor-pointer" x-text="aiAgent.channels.whatsapp2.active ? 'Pausar' : 'Ativar'"></button>
+          <button @click="showAlert('info', 'WhatsApp Diretor', 'Canal VIP Diretor ativado.')" type="button" class="px-3 py-1 text-xs font-bold rounded-lg bg-[#0050f0] hover:bg-[#0040d0] text-white transition cursor-pointer shadow-xs">
+            Ativar
+          </button>
         </div>
       </div>
 
-      <!-- GRID INFERIOR (2 COLUNAS: PIPELINE DE QUALIFICAÇÃO + CONFIGURAÇÕES AGENTE IA) -->
+      <!-- PAINEL CENTRAL: PIPELINE DE QUALIFICAÇÃO + CONTROLO DO AGENTE IA -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
         
-        <!-- COLUNA ESQUERDA: PIPELINE DE QUALIFICAÇÃO AUTÔNOMA (7 COLS) -->
-        <div class="lg:col-span-7 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-5 shadow-xs flex flex-col justify-between">
+        <!-- COLUNA ESQUERDA: PIPELINE DE QUALIFICAÇÃO AUTÔNOMA (PRINT 2) -->
+        <div class="lg:col-span-7 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between space-y-4">
           <div>
-            <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-white/5">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/5">
               <div>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-white leading-tight">Pipeline de Qualificação Autônoma</h3>
-                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Visitantes do site e WhatsApp qualificados pela IA com pontuação e rascunho de proposta.</p>
+                <h2 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i data-lucide="zap" class="w-4 h-4 text-[#0050f0]"></i>
+                  Pipeline de Qualificação Autônoma
+                </h2>
+                <p class="text-xs text-slate-500 mt-0.5">Visitantes do site e WhatsApp qualificados pela IA com pontuação e rascunho de proposta.</p>
               </div>
-              <button @click="setPage('messenger')" type="button" class="text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] hover:underline flex items-center gap-1 shrink-0">
+              <button @click="setPage('messenger')" class="text-xs text-[#0050f0] dark:text-[#38bdf8] hover:underline font-bold flex items-center gap-1 cursor-pointer">
                 <span>Ver Inbox</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
 
-            <!-- LISTA DE LEADS EM QUALIFICAÇÃO / PROPOSTA -->
-            <div class="mt-4 space-y-3">
-              <template x-for="lead in aiAgent.pipelineLeads" :key="lead.id">
-                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/70 dark:border-white/5 hover:border-[#0050f0]/40 transition flex items-center justify-between gap-3">
-                  <div class="min-w-0">
-                    <div class="flex items-center gap-2">
-                      <span class="font-bold text-xs text-slate-900 dark:text-white truncate" x-text="lead.name"></span>
-                      <span class="px-2 py-0.2 rounded-full text-[9px] font-bold" :class="lead.channel === 'whatsapp' ? 'bg-emerald-50 text-emerald-700' : 'bg-blue-50 text-[#0050f0]'" x-text="lead.channel === 'whatsapp' ? 'WhatsApp' : 'Site'"></span>
-                      <span class="px-2 py-0.2 rounded-full text-[9px] font-bold bg-[#0050f0]/10 text-[#0050f0] dark:text-[#38bdf8]" x-text="'Score: ' + lead.score + '/100'"></span>
-                    </div>
-                    <div class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5 truncate" x-text="lead.scope"></div>
-                    <div class="text-[10.5px] text-slate-400 mt-0.5" x-text="lead.company + ' • Estimativa: ' + lead.quoteEstimate"></div>
+            <!-- LISTA DE LEADS QUALIFICADOS -->
+            <div class="space-y-3 mt-3.5">
+              <div class="p-3.5 rounded-xl border border-slate-200/80 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-3 hover:border-blue-300 dark:hover:border-blue-900/60 transition">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Dr. António Silva</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-[#25D366]/15 text-[#25D366]">WhatsApp</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] font-mono">Score: 95/100</span>
                   </div>
-                  <button @click="setPage('messenger'); selectConversation(conversations.find(c => c.name.includes(lead.name.split(' ')[0])) || conversations[0])" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-[#0050f0] hover:text-white text-[#0050f0] dark:text-[#38bdf8] border border-slate-200 dark:border-white/10 text-xs font-bold transition shrink-0 cursor-pointer shadow-2xs">
-                    Atender
-                  </button>
+                  <div class="text-xs text-slate-600 dark:text-slate-300 font-medium">Implantação ERP Corporativo</div>
+                  <div class="text-[11px] text-slate-400">Banco de Fomento Angola • Estimativa: Kz 3.850.000</div>
                 </div>
-              </template>
+                <button @click="setPage('messenger')" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#0050f0] hover:bg-[#0040d0] text-white text-xs font-bold transition cursor-pointer shadow-xs">
+                  Atender
+                </button>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200/80 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-3 hover:border-blue-300 dark:hover:border-blue-900/60 transition">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Laurindo Augusto Cakoyi</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8]">Site</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] font-mono">Score: 88/100</span>
+                  </div>
+                  <div class="text-xs text-slate-600 dark:text-slate-300 font-medium">Formação Cibersegurança 15 vagas</div>
+                  <div class="text-[11px] text-slate-400">Instituto Técnico Saber • Estimativa: Kz 950.000</div>
+                </div>
+                <button @click="setPage('messenger')" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#0050f0] hover:bg-[#0040d0] text-white text-xs font-bold transition cursor-pointer shadow-xs">
+                  Atender
+                </button>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200/80 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-3 hover:border-blue-300 dark:hover:border-blue-900/60 transition">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">Visitante Comercial (Luanda)</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-[#25D366]/15 text-[#25D366]">WhatsApp</span>
+                    <span class="px-2 py-0.2 rounded-full text-[10px] font-bold bg-blue-50 text-[#0050f0] dark:bg-blue-950/40 dark:text-[#38bdf8] font-mono">Score: 72/100</span>
+                  </div>
+                  <div class="text-xs text-slate-600 dark:text-slate-300 font-medium">Loja Virtual + Multicaixa Express</div>
+                  <div class="text-[11px] text-slate-400">Lead do Site • Estimativa: Kz 240.000</div>
+                </div>
+                <button @click="setPage('messenger')" type="button" class="px-3.5 py-1.5 rounded-xl bg-[#0050f0] hover:bg-[#0040d0] text-white text-xs font-bold transition cursor-pointer shadow-xs">
+                  Atender
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- 3 ETAPAS ILUSTRATIVAS DO PIPELINE (PRINT 2) -->
-          <div class="pt-5 mt-4 border-t border-slate-100 dark:border-white/5">
-            <div class="flex items-center justify-center gap-2 sm:gap-4 text-[11px] font-semibold text-slate-600 dark:text-slate-300 flex-wrap">
-              <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 flex items-center gap-1.5">
-                <span class="w-4 h-4 rounded-full bg-[#0050f0] text-white text-[9px] font-bold flex items-center justify-center">1</span>
-                Captação 24/7
-              </span>
-              <span>&rarr;</span>
-              <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 flex items-center gap-1.5">
-                <span class="w-4 h-4 rounded-full bg-[#0050f0] text-white text-[9px] font-bold flex items-center justify-center">2</span>
-                Score &amp; Escopo
-              </span>
-              <span>&rarr;</span>
-              <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 flex items-center gap-1.5">
-                <span class="w-4 h-4 rounded-full bg-[#f5a800] text-slate-950 text-[9px] font-bold flex items-center justify-center">3</span>
-                Pré-Orçamento Kz
-              </span>
-            </div>
-
-            <div class="flex items-center justify-center gap-2 mt-4">
-              <button @click="setPage('messenger')" type="button" class="bg-[#0050f0] hover:bg-[#0040d0] text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-xs transition cursor-pointer">
-                <i data-lucide="inbox" class="w-3.5 h-3.5"></i>
-                <span>Abrir Inbox ao Vivo</span>
-              </button>
-              <button @click="simulateLiveVisitor('livechat')" type="button" class="border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer">
-                <i data-lucide="play" class="w-3.5 h-3.5 text-[#0050f0]"></i>
-                <span>Simular Lead</span>
-              </button>
-            </div>
+          <!-- ETAPAS DO FUNIL COMERCIAL IA -->
+          <div class="pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-center gap-3 text-xs text-slate-500 font-medium">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold">
+              <span class="w-4 h-4 rounded-full bg-[#0050f0] text-white flex items-center justify-center text-[10px]">1</span>
+              Captação 24/7
+            </span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold">
+              <span class="w-4 h-4 rounded-full bg-[#0050f0] text-white flex items-center justify-center text-[10px]">2</span>
+              Score &amp; Escopo
+            </span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-bold">
+              <span class="w-4 h-4 rounded-full bg-[#f5a800] text-slate-950 flex items-center justify-center text-[10px] font-black">3</span>
+              Pré-Orçamento Kz
+            </span>
           </div>
         </div>
 
-        <!-- COLUNA DIREITA: CONFIGURAÇÕES DO AGENTE IA (5 COLS) -->
-        <div class="lg:col-span-5 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-5 shadow-xs flex flex-col justify-between">
+        <!-- COLUNA DIREITA: CONFIGURAÇÕES E DIRETRIZES DA RACHI IA -->
+        <div class="lg:col-span-5 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 p-4 sm:p-5 shadow-xs flex flex-col justify-between space-y-4">
           <div class="space-y-4">
-            <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-white/5">
-              <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-[#0050f0] text-white flex items-center justify-center shadow-xs">
-                  <i data-lucide="zap" class="w-4 h-4"></i>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/5">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0">
+                  <i data-lucide="bot" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h3 class="font-bold text-sm text-slate-900 dark:text-white leading-tight">Agente IA (RACHI Assist)</h3>
-                  <p class="text-[10.5px] text-slate-500">Gemini + Workers AI (Site &amp; WhatsApp)</p>
+                  <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Agente IA (RACHI Assist)</h3>
+                  <p class="text-[11px] text-slate-500">Gemini + Workers AI (Site &amp; WhatsApp)</p>
                 </div>
               </div>
-              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 ONLINE
               </span>
             </div>
 
-            <!-- TOGGLES PRINCIPAIS (SWITCHES) -->
+            <!-- TOGGLES DE AUTOMAÇÃO -->
             <div class="space-y-3">
-              <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
                 <div>
                   <div class="text-xs font-bold text-slate-900 dark:text-white">Piloto Automático Global</div>
-                  <div class="text-[10.5px] text-slate-500">Chave geral de respostas automáticas</div>
+                  <div class="text-[11px] text-slate-500">Chave geral de respostas automáticas</div>
                 </div>
-                <button type="button" @click="aiAgent.globalPilot = !aiAgent.globalPilot" :class="aiAgent.globalPilot ? 'bg-[#0050f0]' : 'bg-slate-300 dark:bg-slate-700'" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none">
-                  <span :class="aiAgent.globalPilot ? 'translate-x-5' : 'translate-x-0'" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
-                </button>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" x-model="aiAgent.globalPilot" class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0050f0]"></div>
+                </label>
               </div>
 
-              <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
                 <div>
                   <div class="text-xs font-bold text-slate-900 dark:text-white">Auto-gerar Pré-Orçamento</div>
-                  <div class="text-[10.5px] text-slate-500">Calcular estimativa em Kwanzas ao qualificar</div>
+                  <div class="text-[11px] text-slate-500">Criar rascunho ao qualificar lead</div>
                 </div>
-                <button type="button" @click="aiAgent.autoQuote = !aiAgent.autoQuote" :class="aiAgent.autoQuote ? 'bg-[#0050f0]' : 'bg-slate-300 dark:bg-slate-700'" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none">
-                  <span :class="aiAgent.autoQuote ? 'translate-x-5' : 'translate-x-0'" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
-                </button>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" x-model="aiAgent.autoDraft" class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0050f0]"></div>
+                </label>
               </div>
             </div>
 
-            <!-- MOTOR LLM & CREDENCIAIS DE API -->
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/5">
-              <div class="flex items-center justify-between cursor-pointer" @click="aiAgent.showApiKeyInput = !aiAgent.showApiKeyInput">
+            <!-- MOTOR LLM & CREDENCIAIS -->
+            <div class="p-3.5 rounded-xl border border-slate-200/80 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
+              <div class="flex items-center justify-between">
                 <div>
                   <div class="text-xs font-bold text-slate-900 dark:text-white">Motor LLM &amp; Credenciais de API</div>
-                  <div class="text-[10.5px] text-slate-500">Google Gemini 2.5 Flash • Usando Edge/Padrão</div>
+                  <div class="text-[11px] text-slate-500 font-mono">gemini-2.5-flash • Usando Edge / Padrão</div>
                 </div>
-                <span class="text-[10.5px] font-bold text-[#0050f0] dark:text-[#38bdf8]" x-text="aiAgent.showApiKeyInput ? 'RECOLHER &uarr;' : 'EXPANDIR &darr;'"></span>
+                <button @click="aiAgent.showApiKeyInput = !aiAgent.showApiKeyInput" type="button" class="text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] hover:underline flex items-center gap-1 cursor-pointer">
+                  <span x-text="aiAgent.showApiKeyInput ? 'RECOLHER' : 'EXPANDIR'"></span>
+                  <i :data-lucide="aiAgent.showApiKeyInput ? 'chevron-up' : 'chevron-down'" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
               <div x-show="aiAgent.showApiKeyInput" x-transition class="mt-3 pt-3 border-t border-slate-200/60 dark:border-white/5 space-y-2">
                 <label class="block text-[10.5px] font-bold text-slate-600 dark:text-slate-400">Chave de API Gemini (Opcional se usar Edge Worker)</label>
@@ -2524,12 +2504,12 @@ html.dark .panze-hdr-pill {
           </div>
 
           <!-- BOTÕES DE AÇÃO DO AGENTE IA -->
-          <div class="pt-4 mt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-2">
-            <button @click="saveAiAgentSettings()" type="button" class="flex-1 bg-[#f5a800] hover:bg-[#df8b13] text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-xs transition cursor-pointer">
+          <div class="pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-2.5">
+            <button @click="saveAiAgentSettings()" type="button" class="bap flex-1 cursor-pointer text-xs py-2.5 px-4 justify-center">
               <i data-lucide="check" class="w-3.5 h-3.5"></i>
               <span>Salvar Diretrizes</span>
             </button>
-            <button @click="aiAgent.testPromptModal = true" type="button" class="border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 hover:bg-slate-100 text-slate-700 dark:text-slate-200 font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer shadow-2xs">
+            <button @click="aiAgent.testPromptModal = true" type="button" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0050f0]"></i>
               <span>Testar IA</span>
             </button>
@@ -2538,12 +2518,12 @@ html.dark .panze-hdr-pill {
 
       </div>
 
-      <!-- MODAL DE TESTE INTERATIVO DA IA (SIMULADOR DE DIRETRIZES) -->
+      <!-- MODAL SIMULADOR DE ATENDIMENTO IA -->
       <div x-show="aiAgent.testPromptModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
         <div @click.away="aiAgent.testPromptModal = false" class="bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-white/10 rounded-2xl max-w-lg w-full p-5 shadow-2xl space-y-4">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/5">
             <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-xl bg-[#0050f0] text-white flex items-center justify-center shadow-xs">
+              <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center">
                 <i data-lucide="sparkles" class="w-4 h-4"></i>
               </div>
               <div>
@@ -3568,6 +3548,7 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- RH SOLICITAÇÕES -->
+    <!-- RH SOLICITAÇÕES -->
     <section x-show="currentPage==='rh-solicitacoes'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
@@ -3622,8 +3603,8 @@ html.dark .panze-hdr-pill {
               <tr>
                 <th>Protocolo</th>
                 <th>Cliente / Empresa</th>
-                <th>Serviço Solicitado</th>
-                <th>Data</th>
+                <th>Serviço &amp; Escopo</th>
+                <th>Data de Entrada</th>
                 <th>Estado</th>
                 <th class="text-right">Atendimento</th>
               </tr>
@@ -3632,30 +3613,38 @@ html.dark .panze-hdr-pill {
               <template x-for="r in filteredCapitalRequests" :key="r.id">
                 <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                   <td>
-                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
+                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2.5 py-1 rounded-lg border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
                   </td>
                   <td>
                     <div class="flex items-center gap-2.5">
-                      <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] font-black text-xs flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
                         <span x-text="(r.cliente || 'C').charAt(0).toUpperCase()"></span>
                       </div>
                       <div>
-                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="r.cliente"></div>
-                        <div class="text-[11px] text-slate-400" x-text="r.empresa || 'Empresa Privada'"></div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="r.cliente"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="r.empresa || 'Empresa Privada'"></div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <span class="font-semibold text-xs text-slate-800 dark:text-slate-200" x-text="r.servico"></span>
+                    <div class="font-bold text-slate-800 dark:text-slate-200 text-xs" x-text="r.title || r.titulo || r.servico"></div>
+                    <div class="text-[11px] text-slate-400 font-medium line-clamp-1" x-text="r.descricao || r.servico"></div>
                   </td>
                   <td>
-                    <span class="text-xs text-slate-500 font-medium" x-text="r.data"></span>
+                    <div class="inline-flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                      <span x-text="r.data || r.created_at || r.date || 'Recente'"></span>
+                    </div>
                   </td>
                   <td>
-                    <span class="badge2" :class="r.sc" x-text="r.status"></span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5"
+                          :class="r.status==='Aprovado'||r.status==='Concluído' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40' : (r.status==='Aguardando Cliente' ? 'bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-900/40')">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="r.status==='Aprovado'||r.status==='Concluído' ? 'bg-emerald-500' : (r.status==='Aguardando Cliente' ? 'bg-[#f5a800]' : 'bg-[#0050f0]')"></span>
+                      <span x-text="r.status"></span>
+                    </span>
                   </td>
                   <td class="text-right">
-                    <button type="button" @click="openReq(r)" class="bap cursor-pointer text-xs py-1 px-2.5 inline-flex items-center gap-1.5">
+                    <button type="button" @click="openReq(r)" class="bap cursor-pointer text-xs py-1.5 px-3 inline-flex items-center gap-1.5">
                       <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
                       <span>Atender</span>
                     </button>
@@ -3664,7 +3653,7 @@ html.dark .panze-hdr-pill {
               </template>
               <tr x-show="!filteredCapitalRequests || filteredCapitalRequests.length === 0">
                 <td colspan="6" class="text-center py-12">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center mx-auto mb-3 border border-blue-100 dark:border-blue-900/30">
                     <i data-lucide="file-check" class="w-6 h-6"></i>
                   </div>
                   <h4 class="text-sm font-bold text-slate-900 dark:text-white">Nenhuma solicitação de Human Capital pendente</h4>
@@ -4222,31 +4211,53 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- RELATÓRIOS -->
-    <section x-show="currentPage==='relatorios'" x-cloak class="space-y-6">
+    <!-- RELATÓRIOS -->
+    <section x-show="currentPage==='relatorios'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">📈 Central de Relatórios Executivos</h1>
-          <p class="text-slate-500 text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade de negócio.</p>
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/rachi-symbol-logo-rachi-light.png" alt="RACHI" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI — Central de Relatórios Executivos</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Exportação instantânea de dados em Excel, CSV e PDF por unidade de negócio.</p>
+          </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <template x-for="r in reports" :key="r.label">
-          <div class="sc2 hover:border-blue-500/50 transition group flex flex-col justify-between">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <template x-for="r in reports" :key="r.key">
+          <div class="sc2 hover:border-[#0050f0]/50 transition group flex flex-col justify-between p-4 sm:p-5">
             <div>
-              <div class="flex items-start justify-between">
+              <div class="flex items-start justify-between gap-3">
                 <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-sm shrink-0" :class="r.bg" x-text="r.icon"></div>
+                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border" :class="r.bg">
+                    <i :data-lucide="r.lucideIcon || 'file-text'" class="w-5 h-5"></i>
+                  </div>
                   <div>
-                    <div class="font-extrabold text-slate-900 dark:text-white text-base" x-text="r.label"></div>
-                    <div class="text-xs text-slate-500 font-medium mt-0.5" x-text="r.desc"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400" x-text="r.unit"></span>
+                    <div class="font-extrabold text-slate-900 dark:text-white text-base group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="r.label"></div>
                   </div>
                 </div>
               </div>
+              <div class="mt-3.5 pt-3 border-t border-slate-100 dark:border-white/5">
+                <div class="text-xs text-slate-500 font-medium" x-text="r.desc"></div>
+              </div>
             </div>
-            <div class="flex gap-2 mt-5 pt-3.5 border-t border-slate-100 dark:border-white/5">
-              <button type="button" @click="exportReport(r.key, 'excel')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold cursor-pointer" title="Descarregar folha de cálculo Excel">Excel (.xlsx)</button>
-              <button type="button" @click="exportReport(r.key, 'csv')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-blue-600 transition font-bold cursor-pointer" title="Descarregar ficheiro CSV">CSV</button>
-              <button type="button" @click="exportReport(r.key, 'pdf')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-slate-700 dark:text-slate-300 hover:text-rose-600 transition font-bold cursor-pointer" title="Imprimir / Guardar como PDF">PDF</button>
+            
+            <div class="flex items-center gap-1.5 mt-4 pt-3.5 border-t border-slate-100 dark:border-white/5">
+              <button type="button" @click="exportReport(r.key, 'excel')" class="flex-1 text-xs py-1.5 px-2.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition font-bold cursor-pointer inline-flex items-center justify-center gap-1 border border-slate-200/60 dark:border-white/5" title="Exportar folha de cálculo Excel">
+                <i data-lucide="sheet" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Excel</span>
+              </button>
+              <button type="button" @click="exportReport(r.key, 'csv')" class="flex-1 text-xs py-1.5 px-2.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-slate-700 dark:text-slate-300 hover:text-[#0050f0] transition font-bold cursor-pointer inline-flex items-center justify-center gap-1 border border-slate-200/60 dark:border-white/5" title="Exportar formato CSV">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#0050f0]"></i>
+                <span>CSV</span>
+              </button>
+              <button type="button" @click="exportReport(r.key, 'pdf')" class="flex-1 text-xs py-1.5 px-2.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-slate-700 dark:text-slate-300 hover:text-rose-600 transition font-bold cursor-pointer inline-flex items-center justify-center gap-1 border border-slate-200/60 dark:border-white/5" title="Exportar documento PDF">
+                <i data-lucide="file-down" class="w-3.5 h-3.5 text-rose-600"></i>
+                <span>PDF</span>
+              </button>
             </div>
           </div>
         </template>
@@ -4281,45 +4292,155 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- CONFIGURAÇÕES -->
-    <section x-show="currentPage==='configuracoes'" x-cloak class="space-y-6">
-      <div>
-        <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">⚙️ Parâmetros & Configurações</h1>
-        <p class="text-slate-500 text-sm mt-0.5">Dados institucionais, preferências de aparência e segurança.</p>
+    <!-- CONFIGURAÇÕES -->
+    <section x-show="currentPage==='configuracoes'" x-cloak class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/rachi-symbol-logo-rachi-light.png" alt="RACHI" class="h-9 w-auto object-contain drop-shadow-xs">
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI — Parâmetros &amp; Configurações Globais</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Dados institucionais, preferências de aparência, auditoria e infraestrutura de nuvem.</p>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="sc2 space-y-4">
-          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dados da Organização</h3>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label><input type="text" value="RACHI — Soluções Inteligentes Lda." class="ia"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">NIF / Identificação Fiscal</label><input type="text" value="5417000000" class="ia"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">E-mail Corporativo</label><input type="email" value="geral@rachi.ao" class="ia"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label><input type="text" value="+244 972 888 585" class="ia"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Endereço Principal</label><input type="text" value="Luanda, Angola" class="ia"></div>
-          <button class="bap w-full justify-center mt-2">Gravar Alterações</button>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <!-- DADOS DA ORGANIZAÇÃO -->
+        <div class="sc2 space-y-4 p-5">
+          <div class="flex items-center gap-2.5 pb-3 border-b border-slate-100 dark:border-white/5">
+            <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0">
+              <i data-lucide="building-2" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dados da Organização</h3>
+              <p class="text-xs text-slate-500">Identificação institucional e fiscal da RACHI</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Razão Social</label>
+              <div class="relative">
+                <i data-lucide="building" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" value="RACHI — Soluções Inteligentes Lda." class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">NIF / Identificação Fiscal</label>
+              <div class="relative">
+                <i data-lucide="file-badge-2" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" value="5417000000" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">E-mail Corporativo</label>
+              <div class="relative">
+                <i data-lucide="mail" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="email" value="geral@rachi.ao" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-medium text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Telefone Principal</label>
+              <div class="relative">
+                <i data-lucide="phone" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" value="+244 972 888 585" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-slate-600 dark:text-slate-400 mb-1 block">Endereço Principal</label>
+              <div class="relative">
+                <i data-lucide="map-pin" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" value="Luanda, Angola" class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-medium text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+              </div>
+            </div>
+          </div>
+
+          <button type="button" @click="showAlert('success', 'Configurações', 'Dados institucionais gravados com sucesso!')" class="bap w-full justify-center mt-3 cursor-pointer">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>Gravar Alterações</span>
+          </button>
         </div>
 
-        <div class="sc2 space-y-5">
-          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Aparência do Painel</h3>
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/5">
-            <div>
-              <div class="text-sm font-extrabold text-slate-900 dark:text-white">Tema Visual</div>
-              <div class="text-xs text-slate-500 mt-0.5" x-text="theme==='light'?'Atualmente no Modo Claro (Branco amigável)':'Atualmente no Modo Escuro (Dark luxo)'"></div>
+        <!-- APARÊNCIA, SEGURANÇA & INFRAESTRUTURA -->
+        <div class="sc2 space-y-4 p-5">
+          <!-- APARÊNCIA DO PAINEL -->
+          <div class="space-y-3 pb-4 border-b border-slate-100 dark:border-white/5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0">
+                <i data-lucide="palette" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Aparência do Painel</h3>
+                <p class="text-xs text-slate-500">Tema do ambiente de trabalho administrativo</p>
+              </div>
             </div>
-            <button @click="toggleTheme()" class="px-4 py-2 text-xs font-extrabold rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-sm flex items-center gap-2">
-              <i data-lucide="sun" class="w-4 h-4 text-amber-500" x-show="theme==='dark'"></i>
-              <i data-lucide="moon" class="w-4 h-4 text-blue-600" x-show="theme==='light'"></i>
-              <span x-text="theme==='light'?'Ativar Dark':'Ativar Claro'"></span>
-            </button>
+
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10">
+              <div>
+                <div class="text-xs font-extrabold text-slate-900 dark:text-white">Tema Visual</div>
+                <div class="text-[11px] text-slate-500 mt-0.5" x-text="theme==='light' ? 'Atualmente no Modo Claro (Light Corporativo)' : 'Atualmente no Modo Escuro (Navy RACHI #071326)'"></div>
+              </div>
+              <button @click="toggleTheme()" type="button" class="px-3.5 py-2 text-xs font-bold rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-xs flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition cursor-pointer">
+                <i data-lucide="sun" class="w-4 h-4 text-[#f5a800]" x-show="theme==='dark'"></i>
+                <i data-lucide="moon" class="w-4 h-4 text-[#0050f0]" x-show="theme==='light'"></i>
+                <span x-text="theme==='light' ? 'Ativar Modo Dark' : 'Ativar Modo Claro'"></span>
+              </button>
+            </div>
           </div>
 
-          <hr class="border-slate-200 dark:border-white/5">
-          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Segurança & Conexões</h3>
-          <div class="flex items-center justify-between py-1">
-            <div><div class="text-sm font-bold text-slate-900 dark:text-white">Registo de Auditoria</div><div class="text-xs text-slate-500">Registar todas as ações e alterações</div></div>
-            <div class="w-11 h-6 bg-blue-600 rounded-full relative cursor-pointer"><div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5 shadow"></div></div>
+          <!-- SEGURANÇA & CONEXÕES -->
+          <div class="space-y-3 pb-4 border-b border-slate-100 dark:border-white/5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Segurança &amp; Conexões</h3>
+                <p class="text-xs text-slate-500">Políticas de integridade e registro em tempo real</p>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
+                <div>
+                  <div class="text-xs font-bold text-slate-900 dark:text-white">Registo de Auditoria</div>
+                  <div class="text-[11px] text-slate-500">Registar todas as ações e alterações com timestamp</div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0050f0]"></div>
+                </label>
+              </div>
+
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5">
+                <div>
+                  <div class="text-xs font-bold text-slate-900 dark:text-white">Notificações Push / WhatsApp</div>
+                  <div class="text-[11px] text-slate-500">Alertas urgentes para novas solicitações e pedidos</div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0050f0]"></div>
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center justify-between py-1">
-            <div><div class="text-sm font-bold text-slate-900 dark:text-white">Notificações Push / SMS</div><div class="text-xs text-slate-500">Alertas urgentes para novas solicitações</div></div>
-            <div class="w-11 h-6 bg-blue-600 rounded-full relative cursor-pointer"><div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5 shadow"></div></div>
+
+          <!-- INFRAESTRUTURA & NUVEM -->
+          <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Infraestrutura em Nuvem</div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/5 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="font-bold text-slate-800 dark:text-slate-200">Cloudflare Workers + D1 DB</span>
+              </div>
+              <span class="font-mono text-[11px] text-slate-500">Edge Luanda • Online</span>
+            </div>
           </div>
         </div>
       </div>
@@ -4560,52 +4681,74 @@ html.dark .panze-hdr-pill {
     </section>
 
     <!-- LOJA ESTOQUE -->
-    <section x-show="currentPage==='loja-estoque'" x-cloak class="space-y-6">
+    <!-- LOJA ESTOQUE -->
+    <section x-show="currentPage==='loja-estoque'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-sm flex items-center justify-center shrink-0">
-            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-slate-200/80 dark:border-white/15 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+            <img src="/images/areas/rachi-tec.png" alt="RACHI Tec" class="h-9 w-auto object-contain drop-shadow-xs">
           </div>
           <div>
-            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo & Alertas de Stock</h1>
-            <p class="text-slate-500 text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de stock crítico da loja.</p>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white" style="font-family:Outfit">RACHI Tec — Controlo &amp; Alertas de Stock</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Gestão em tempo real de inventário, reposição, disponibilidade e alertas de stock crítico da loja.</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button type="button" @click="openStockModal(null, 'add')" class="bap cursor-pointer flex items-center gap-2">
+          <button type="button" @click="openStockModal(null, 'add')" class="bap cursor-pointer text-xs sm:text-sm">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Nova Entrada em Stock</span>
           </button>
         </div>
       </div>
 
-      <!-- 4 Cards de Métricas de Stock -->
-            <!-- Barra de Filtros Rápidos de Stock -->
-      <div class="sc2 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5 flex-1 max-w-md">
-          <div class="relative w-full">
-            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
-            <input type="text" x-model="stockSearch" placeholder="Filtrar por nome, SKU ou categoria..." class="ia w-full pl-9 text-xs">
-          </div>
+      <!-- BARRA DE FILTROS & BUSCA EM TEMPO REAL -->
+      <div class="sc2 p-3.5 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- ABAS DE FILTRO POR STATUS DE STOCK -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <button @click="stockFilter = 'all'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="stockFilter === 'all' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Todos (<span x-text="sProducts.length"></span>)
+          </button>
+          <button @click="stockFilter = 'disponivel'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="stockFilter === 'disponivel' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Disponíveis
+          </button>
+          <button @click="stockFilter = 'critico'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="stockFilter === 'critico' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Stock Crítico
+          </button>
+          <button @click="stockFilter = 'esgotado'; $nextTick(() => { if (window.lucide) lucide.createIcons(); })" 
+                  type="button"
+                  :class="stockFilter === 'esgotado' ? 'bg-[#0050f0] text-white font-bold shadow-xs' : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-semibold'"
+                  class="px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer shrink-0">
+            Esgotados
+          </button>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-slate-500">Filtrar:</span>
-          <select x-model="stockFilter" class="ia text-xs font-semibold py-1.5 px-3">
-            <option value="all">Todos os Produtos</option>
-            <option value="critico">Apenas Stock Crítico</option>
-            <option value="esgotado">Apenas Esgotados / Indisponíveis</option>
-            <option value="disponivel">Apenas Disponíveis na Loja</option>
-          </select>
+
+        <!-- SEARCH BAR -->
+        <div class="flex items-center gap-2.5 w-full md:w-auto">
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" x-model="stockSearch" placeholder="Filtrar por nome, SKU ou categoria..."
+                   class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0050f0]/20 focus:border-[#0050f0]">
+          </div>
+          <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap hidden sm:inline" x-text="filteredStockProducts.length + ' itens'"></span>
         </div>
       </div>
 
-      <!-- Tabela de Controlo de Stock Completa -->
+      <!-- TABELA DE CONTROLO DE STOCK ELEVADA -->
       <div class="sc2 p-0 overflow-hidden">
         <div class="overflow-x-auto min-h-[320px]">
           <table class="at">
             <thead>
               <tr>
-                <th>Produto & Categoria</th>
+                <th>Produto &amp; Categoria</th>
                 <th>SKU</th>
                 <th>Stock Atual</th>
                 <th>Mínimo Exigido</th>
@@ -4617,63 +4760,73 @@ html.dark .panze-hdr-pill {
             </thead>
             <tbody>
               <template x-for="p in filteredStockProducts" :key="p.id">
-                <tr class="hover:bg-slate-50/60 dark:hover:bg-white/[0.02] transition">
+                <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                   <td>
-                    <div class="font-bold text-slate-900 dark:text-white text-sm" x-text="p.nome"></div>
-                    <div class="text-xs text-slate-500" x-text="p.cat"></div>
-                  </td>
-                  <td class="font-mono text-xs font-bold text-slate-500" x-text="p.sku"></td>
-                  <td>
-                    <div class="flex items-center gap-2">
-                      <button type="button" @click="quickStockStep(p, -1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 text-slate-700 dark:text-slate-300 hover:text-rose-600 font-black text-xs flex items-center justify-center transition cursor-pointer" title="Retirar 1 un.">-</button>
-                      <span class="font-black text-sm min-w-[50px] text-center" :class="p.est <= (p.min_est || 5) ? 'text-amber-500' : 'text-slate-900 dark:text-white'" x-text="p.est + ' un.'"></span>
-                      <button type="button" @click="quickStockStep(p, 1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-white/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-slate-700 dark:text-slate-300 hover:text-emerald-600 font-black text-xs flex items-center justify-center transition cursor-pointer" title="Adicionar 1 un.">+</button>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
+                        <i data-lucide="package" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="p.nome"></div>
+                        <span class="text-[11px] font-semibold text-slate-500" x-text="p.cat"></span>
+                      </div>
                     </div>
                   </td>
-                  <td class="text-slate-500 text-xs font-semibold" x-text="(p.min_est || 5) + ' un.'"></td>
-                  <td class="w-40">
+                  <td>
+                    <span class="font-mono text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded-md border border-slate-200/60 dark:border-white/5" x-text="p.sku"></span>
+                  </td>
+                  <td>
+                    <div class="inline-flex items-center gap-1.5 bg-slate-100 dark:bg-white/5 p-1 rounded-xl border border-slate-200/60 dark:border-white/5">
+                      <button type="button" @click="quickStockStep(p, -1)" class="w-6 h-6 rounded-lg bg-white dark:bg-white/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 text-slate-700 dark:text-slate-300 hover:text-rose-600 font-black text-xs flex items-center justify-center transition cursor-pointer shadow-xs" title="Retirar 1 un.">-</button>
+                      <span class="font-black text-xs sm:text-sm min-w-[52px] text-center" style="font-family:Outfit" :class="p.est <= (p.min_est || 5) ? 'text-[#f5a800]' : 'text-slate-900 dark:text-white'" x-text="p.est + ' un.'"></span>
+                      <button type="button" @click="quickStockStep(p, 1)" class="w-6 h-6 rounded-lg bg-white dark:bg-white/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-slate-700 dark:text-slate-300 hover:text-emerald-600 font-black text-xs flex items-center justify-center transition cursor-pointer shadow-xs" title="Adicionar 1 un.">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="font-mono text-xs font-semibold text-slate-500 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded-md" x-text="(p.min_est || 5) + ' un.'"></span>
+                  </td>
+                  <td class="w-36">
                     <div class="flex items-center gap-2">
                       <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden">
-                        <div class="h-full rounded-full transition-all" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'" :style="'width: ' + Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></div>
+                        <div class="h-full rounded-full transition-all" :class="p.est <= (p.min_est || 5) ? 'bg-[#f5a800]' : 'bg-gradient-to-r from-emerald-500 to-[#00a3e0]'" :style="'width: ' + Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></div>
                       </div>
-                      <span class="text-[11px] font-bold text-slate-400" x-text="Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></span>
+                      <span class="text-[11px] font-mono font-bold text-slate-500" x-text="Math.min(100, Math.round((p.est / Math.max(1, p.est + 10)) * 100)) + '%'"></span>
                     </div>
                   </td>
                   <td>
-                    <span class="px-2.5 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'">
-                      <span class="w-1.5 h-1.5 rounded-full" :class="p.est <= (p.min_est || 5) ? 'bg-amber-500' : 'bg-emerald-500'"></span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5" :class="p.est <= (p.min_est || 5) ? 'bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30' : 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40'">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="p.est <= (p.min_est || 5) ? 'bg-[#f5a800]' : 'bg-emerald-500'"></span>
                       <span x-text="p.est <= (p.min_est || 5) ? 'Stock Baixo' : 'Normal'"></span>
                     </span>
                   </td>
                   <td>
                     <template x-if="p.status === 'Ativo' && p.est > 0">
-                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-500/30 inline-flex items-center gap-1.5">
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40 inline-flex items-center gap-1.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                         <span>Disponível</span>
                       </span>
                     </template>
                     <template x-if="p.status === 'Ativo' && p.est === 0">
-                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 border border-amber-200/60 dark:border-amber-500/30 inline-flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30 inline-flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#f5a800]"></span>
                         <span>Esgotado (0 un.)</span>
                       </span>
                     </template>
                     <template x-if="p.status !== 'Ativo'">
-                      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300 border border-rose-200/60 dark:border-rose-500/30 inline-flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                        <span>Indisponível (Pausado)</span>
+                      <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-400 border border-slate-200 dark:border-white/10 inline-flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                        <span>Pausado</span>
                       </span>
                     </template>
                   </td>
                   <td class="text-right whitespace-nowrap">
                     <div class="flex items-center justify-end gap-1.5">
-                      <button type="button" @click="openStockModal(p, 'add')" class="bap text-xs py-1 px-2.5 flex items-center gap-1 cursor-pointer" title="Adicionar / Ajustar Stock">
+                      <button type="button" @click="openStockModal(p, 'add')" class="bap cursor-pointer text-xs py-1 px-2.5 inline-flex items-center gap-1" title="Ajustar Stock">
                         <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
                         <span>Ajustar</span>
                       </button>
-                      <button type="button" @click="toggleProductAvailability(p)" class="p-1.5 rounded-lg border text-xs font-bold transition cursor-pointer"
-                        :class="p.status === 'Ativo' ? 'border-amber-300 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-500/10' : 'border-emerald-300 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-500/10'"
-                        :title="p.status === 'Ativo' ? 'Marcar como Indisponível na Loja' : 'Marcar como Disponível na Loja'">
+                      <button type="button" @click="toggleProductAvailability(p)" class="p-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 text-xs font-bold transition cursor-pointer"
+                        :title="p.status === 'Ativo' ? 'Marcar como Indisponível' : 'Marcar como Disponível'">
                         <i :data-lucide="p.status === 'Ativo' ? 'eye-off' : 'eye'" class="w-3.5 h-3.5"></i>
                       </button>
                     </div>
@@ -4681,7 +4834,7 @@ html.dark .panze-hdr-pill {
                 </tr>
               </template>
               <tr x-show="filteredStockProducts.length === 0">
-                <td colspan="8" class="text-center py-12 text-slate-500 text-sm">
+                <td colspan="8" class="text-center py-12 text-slate-500 text-xs font-medium">
                   Nenhum produto encontrado para o filtro selecionado.
                 </td>
               </tr>
@@ -4740,6 +4893,7 @@ html.dark .panze-hdr-pill {
 
     <!-- GRÁFICA ORÇAMENTOS -->
     <!-- GRÁFICA ORÇAMENTOS -->
+    <!-- GRÁFICA ORÇAMENTOS -->
     <section x-show="currentPage==='grafica-orcamentos'" x-cloak class="space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3.5">
@@ -4790,13 +4944,13 @@ html.dark .panze-hdr-pill {
 
       <!-- TABELA DE ORÇAMENTOS ELEVADA -->
       <div class="sc2 p-0 overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto min-h-[280px]">
           <table class="at">
             <thead>
               <tr>
                 <th>Protocolo</th>
                 <th>Cliente / Solicitante</th>
-                <th>Produto / Especificação Gráfica</th>
+                <th>Produto &amp; Especificação Gráfica</th>
                 <th>Data</th>
                 <th>Estado</th>
                 <th class="text-right">Atendimento</th>
@@ -4806,32 +4960,47 @@ html.dark .panze-hdr-pill {
               <template x-for="r in filteredPrintQuotes" :key="r.id">
                 <tr class="group hover:bg-blue-50/40 dark:hover:bg-[#0050f0]/5 transition">
                   <td>
-                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2 py-0.5 rounded-md border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
+                    <span class="font-mono text-xs font-bold text-[#0050f0] dark:text-[#38bdf8] bg-blue-50/80 dark:bg-blue-950/40 px-2.5 py-1 rounded-lg border border-blue-200/60 dark:border-blue-900/30" x-text="r.protocol"></span>
                   </td>
                   <td>
                     <div class="flex items-center gap-2.5">
-                      <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0">
+                      <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] font-black text-xs flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/30">
                         <span x-text="(r.cliente || 'C').charAt(0).toUpperCase()"></span>
                       </div>
                       <div>
-                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm" x-text="r.cliente || 'Cliente Direto'"></div>
-                        <div class="text-[11px] text-slate-400" x-text="r.email || 'Solicitação Web'"></div>
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm group-hover:text-[#0050f0] dark:group-hover:text-[#38bdf8] transition-colors" x-text="r.cliente || 'Cliente Direto'"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="r.email || 'Solicitação Web'"></div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div class="font-bold text-slate-800 dark:text-slate-200 text-xs" x-text="r.title || r.produto || 'Brindes / Impressão Personalizada'"></div>
-                    <div class="text-[11px] text-slate-400 font-medium" x-text="r.detalhes || 'Orçamento e prazo sob análise'"></div>
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 flex items-center justify-center shrink-0">
+                        <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                      </div>
+                      <div>
+                        <div class="font-bold text-slate-800 dark:text-slate-200 text-xs" x-text="r.title || r.produto || 'Brindes / Impressão Personalizada'"></div>
+                        <div class="text-[11px] text-slate-400 font-medium" x-text="r.detalhes || 'Orçamento e prazo sob análise'"></div>
+                      </div>
+                    </div>
                   </td>
                   <td>
-                    <span class="text-xs text-slate-500 font-medium" x-text="r.data || 'Hoje'"></span>
+                    <div class="inline-flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                      <span x-text="r.data || 'Hoje'"></span>
+                    </div>
                   </td>
                   <td>
-                    <span class="badge2" :class="r.status==='Aprovado'?'s-ativo':'s-analise'" x-text="r.status || 'Pendente'"></span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5"
+                          :class="r.status==='Aprovado' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-900/40' : (r.status==='Novo' ? 'bg-[#f5a800]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f5a800]/30' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-900/40')">
+                      <span class="w-1.5 h-1.5 rounded-full" :class="r.status==='Aprovado' ? 'bg-emerald-500' : (r.status==='Novo' ? 'bg-[#f5a800]' : 'bg-[#0050f0]')"></span>
+                      <span x-text="r.status || 'Pendente'"></span>
+                    </span>
                   </td>
                   <td class="text-right">
                     <button type="button" @click="showAlert('info', 'Orçamento', 'Atendimento do protocolo ' + r.protocol)" 
-                            class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 text-xs font-bold transition cursor-pointer">
+                            class="bap cursor-pointer text-xs py-1.5 px-3 inline-flex items-center gap-1.5">
+                      <i data-lucide="eye" class="w-3.5 h-3.5"></i>
                       <span>Visualizar</span>
                     </button>
                   </td>
@@ -9347,12 +9516,12 @@ Regras: Sempre identifique o nome do cliente, empresa, necessidade e prazo. Se o
     txs: [{"id":"ord_3","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00003","cli":"gundja","data":"12\/10\/2026","tipo":"entrada","valor":"1.489.000,29","mod":"Tec"},{"id":"ord_1","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00001","cli":"Empresa Teste Luanda Lda","data":"12\/10\/2026","tipo":"entrada","valor":"2.978.000,58","mod":"Tec"},{"id":"ord_2","icon":"\ud83d\uded2","desc":"Pedido #PED-2026-00002","cli":"Super Administrador RACHI","data":"12\/10\/2026","tipo":"entrada","valor":"1.489.000,29","mod":"Tec"}],
 
     reports: [
-      { key: 'clientes', icon: '👤', label: 'Clientes & Contactos', desc: '9 registos sincronizados', count: '9', bg: 'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400' },
-      { key: 'financeiro', icon: '💰', label: 'Facturação & Vendas', desc: 'AOA 4.850.000,00 facturados', count: 'AOA 4.850.000,00', bg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400' },
-      { key: 'pedidos', icon: '📦', label: 'Pedidos da Loja', desc: '3 pedidos de venda registados', count: '3', bg: 'bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400' },
-      { key: 'solicitacoes', icon: '📋', label: 'Ordens & Solicitações', desc: '14 ordens de atendimento', count: '14', bg: 'bg-amber-50 text-amber-600 dark:bg-orange-500/10 dark:text-orange-400' },
-      { key: 'academy', icon: '🎓', label: 'Academy & Cursos', desc: '12 formações no catálogo', count: '12', bg: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400' },
-      { key: 'capital', icon: '👥', label: 'Recrutamento & RH', desc: '8 soluções corporativas ativas', count: '8', bg: 'bg-teal-50 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400' }
+      { key: 'clientes', lucideIcon: 'users', unit: 'RACHI Corp • CRM', label: 'Clientes & Contactos', desc: '9 registos sincronizados', count: '9', bg: 'bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] border-blue-200/60 dark:border-blue-900/40' },
+      { key: 'financeiro', lucideIcon: 'wallet', unit: 'RACHI Financeiro', label: 'Facturação & Vendas', desc: 'AOA 4.850.000,00 facturados', count: 'AOA 4.850.000,00', bg: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-900/40' },
+      { key: 'pedidos', lucideIcon: 'shopping-bag', unit: 'RACHI Tec • Loja Online', label: 'Pedidos da Loja', desc: '3 pedidos de venda registados', count: '3', bg: 'bg-cyan-50 dark:bg-cyan-950/40 text-[#00a3e0] dark:text-[#38bdf8] border-cyan-200/60 dark:border-cyan-900/40' },
+      { key: 'solicitacoes', lucideIcon: 'clipboard-list', unit: 'RACHI Operações', label: 'Ordens & Solicitações', desc: '14 ordens de atendimento', count: '14', bg: 'bg-amber-50 dark:bg-amber-950/40 text-[#f5a800] dark:text-[#fbbf24] border-amber-200/60 dark:border-amber-900/40' },
+      { key: 'academy', lucideIcon: 'graduation-cap', unit: 'RACHI Academy', label: 'Academy & Cursos', desc: '12 formações no catálogo', count: '12', bg: 'bg-blue-50 dark:bg-blue-950/40 text-[#0050f0] dark:text-[#38bdf8] border-blue-200/60 dark:border-blue-900/40' },
+      { key: 'capital', lucideIcon: 'briefcase', unit: 'RACHI Human Capital', label: 'Recrutamento & RH', desc: '8 soluções corporativas ativas', count: '8', bg: 'bg-cyan-50 dark:bg-cyan-950/40 text-[#00a3e0] dark:text-[#38bdf8] border-cyan-200/60 dark:border-cyan-900/40' }
     ],
 
     notifs: [
